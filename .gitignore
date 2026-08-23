@@ -1,0 +1,27 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# build / deps
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# Vercel
+.vercel
+
+# segreti / ambiente — MAI committare chiavi private
+*.key
+*.pem
+.env
+.env.*
+!.env.example
+!.env.production
+secrets*.json

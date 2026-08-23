@@ -1,0 +1,36 @@
+{
+  "name": "giocaconmizi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Gioca con Mizi — giochi educativi, storie, coding e biglietti per bambini 3–12 anni. Gratis, senza pubblicità.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "sync-content": "tsx scripts/sync-content-to-db.ts",
+    "export-pdf": "tsx scripts/export-pdf.ts"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.47.10",
+    "gray-matter": "^4.0.3",
+    "marked": "^15.0.6",
+    "next": "^15.1.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "eslint": "^9.17.0",
+    "eslint-config-next": "^15.1.3",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

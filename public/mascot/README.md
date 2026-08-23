@@ -1,0 +1,3 @@
+Qui vanno i PNG trasparenti 2048×2048 di Mizi prodotti con ChatGPT (vedi docs/piano-progetto.md §12):
+mizi-saluta.png · mizi-festa.png · mizi-pensa.png · mizi-indica-destra.png · mizi-indica-sinistra.png · mizi-applaude.png · mizi-riprova.png · mizi-lettera-a.png · mizi-numero-10.png · mizi-legge.png · mizi-dorme.png · mizi-coding.png · mizi-pennarello.png · mizi-festa-palloncino.png · mizi-zainetto.png · mizi-cuore.png · mizi-lente.png · mizi-calcio.png · mizi-testa.png · mizi-occhiolino.png · mizi-lineart.png · mizi-silhouette.png · mizi-hero.png (1920×1080) · mizi-reel.png (1080×1920)
+Riferimento stile: mizi-ref.png (l'immagine originale con il logo).
