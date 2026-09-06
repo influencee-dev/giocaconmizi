@@ -63,7 +63,8 @@ export async function creaContatto(contatto: ContattoBrevo) {
     email: contatto.email,
     updateEnabled: true,
     attributes: {
-      NOME: contatto.nomeGenitore,
+      // FIRSTNAME è l'attributo standard già presente nell'account Brevo.
+      FIRSTNAME: contatto.nomeGenitore,
       CITTA: contatto.citta,
       PROFESSIONE: contatto.professione,
       ETA_FIGLIO: contatto.etaFiglio,
