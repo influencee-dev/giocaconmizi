@@ -7,6 +7,19 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["@supabase/supabase-js"],
   },
+  async redirects() {
+    // L'indirizzo canonico è uno solo: gli alias vecchi del progetto Vercel
+    // reindirizzano lì in modo permanente (SEO + niente doppioni).
+    // Quando il dominio giocaconmizi.com sarà attivo, aggiungere qui anche
+    // "giocaconmizi.vercel.app" e cambiare destinazione.
+    const vecchiHost = ["giocaconmizi-influencees-projects.vercel.app"];
+    return vecchiHost.map((host) => ({
+      source: "/:path*",
+      has: [{ type: "host" as const, value: host }],
+      destination: "https://giocaconmizi.vercel.app/:path*",
+      permanent: true,
+    }));
+  },
   async headers() {
     return [
       {
