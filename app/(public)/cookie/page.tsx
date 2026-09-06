@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Contenitore } from "@/components/ui";
 import { FacciaMizi } from "@/games/_engine/arte";
+import { ScegliDiNuovo } from "@/components/legal/ScegliDiNuovo";
 import { AGGIORNATA, REGISTRO, TITOLARE } from "@/lib/legal";
 
 export const metadata: Metadata = {
@@ -28,22 +29,22 @@ export default function CookiePage() {
           <FacciaMizi emozione="felice" />
         </span>
         <div className="flex flex-col gap-2 text-notte">
-          <p className="font-extrabold">Perché non vedi il banner dei cookie</p>
+          <p className="font-extrabold">Cosa ti chiede il banner, in breve</p>
           <p className="text-notte-tenue">
-            Perché non serve: il banner è obbligatorio per i cookie di profilazione e di
-            terze parti, e qui non ce ne sono. Questo sito salva nel tuo browser solo le
-            poche cose tecniche elencate sotto, che servono a farlo funzionare e non
-            escono dal tuo dispositivo se non per l&apos;accesso all&apos;area genitori.
+            Una cosa sola: se possiamo usare le statistiche anonime di Google Analytics
+            per capire quali giochi piacciono. Se rifiuti, non parte nulla e il sito
+            funziona identico. Tutto il resto — le poche voci tecniche elencate sotto —
+            serve solo al funzionamento e per legge non richiede consenso. Niente
+            pubblicità, niente profilazione, mai.
           </p>
         </div>
       </div>
 
       <section className="mt-8">
-        <h2 className="mb-2 text-xl font-extrabold text-notte sm:text-2xl">
-          Cookie (tecnici, solo se accedi)
-        </h2>
+        <h2 className="mb-2 text-xl font-extrabold text-notte sm:text-2xl">Cookie</h2>
         <p className="mb-4 leading-relaxed text-notte-tenue">
-          Navigando e giocando senza account, questo sito non imposta nessun cookie.
+          Senza account e senza accettare le statistiche, questo sito non imposta nessun
+          cookie. Ogni voce dice quando compare davvero.
         </p>
         <div className="flex flex-col gap-4">
           {cookieVeri.map((v) => (
@@ -80,13 +81,18 @@ export default function CookiePage() {
         </div>
       </section>
 
+      <section className="mt-8">
+        <ScegliDiNuovo />
+      </section>
+
       <section className="mt-8 flex flex-col gap-3 leading-relaxed text-notte-tenue">
         <h2 className="text-xl font-extrabold text-notte sm:text-2xl">Cosa NON c&apos;è</h2>
         <p>
           Nessun cookie pubblicitario, nessun cookie di profilazione, nessun pixel di
-          social network, nessuno strumento di statistica di terze parti. I biglietti di
-          compleanno e i giochi creati con l&apos;editor si salvano dentro il link che
-          generi tu: non li conserviamo noi.
+          social network. L&apos;unico strumento di terze parti è Google Analytics, parte
+          solo col tuo consenso ed è configurato al minimo (niente Google Signals, niente
+          personalizzazione degli annunci). I biglietti di compleanno e i giochi creati
+          con l&apos;editor si salvano dentro il link che generi tu: non li conserviamo noi.
         </p>
         <h2 className="mt-4 text-xl font-extrabold text-notte sm:text-2xl">Come cancellare tutto</h2>
         <p>

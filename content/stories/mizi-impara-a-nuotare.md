@@ -4,10 +4,10 @@ slug: mizi-impara-a-nuotare
 age: 6
 theme: coraggio
 minutes: 5
-summary: "Mizi è un pinguino ma ha paura dell'acqua profonda. Ci arriva un passo per volta."
+summary: "Mizi è una pinguina ma ha paura dell'acqua profonda. Ci arriva un passo per volta."
 ---
 
-Mizi è un pinguino.
+Mizi è una pinguina.
 
 Tutti i pinguini nuotano.
 

@@ -1,6 +1,6 @@
 # Gioca con Mizi
 
-> Giochi educativi, storie da leggere, coding e biglietti di compleanno per bambini dai 3 ai 12 anni. In italiano, gratis, senza pubblicità e senza timer. Mascotte: Mizi il pinguino.
+> Giochi educativi, storie da leggere, coding e biglietti di compleanno per bambini dai 3 ai 12 anni. In italiano, gratis, senza pubblicità e senza timer. Mascotte: Mizi, una pinguina.
 
 Il sito è organizzato su tre assi: età (3–12 anni), competenza (lettere, numeri, colori, forme, memoria, logica, matematica, lettura, inglese, emozioni, coding) e modalità (online, da stampare, per la classe).
 

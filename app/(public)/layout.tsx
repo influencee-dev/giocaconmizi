@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Contenitore } from "@/components/ui";
 import { JsonLd, jsonLdSito } from "@/components/seo/JsonLd";
 import { FormGenitore } from "@/components/form/FormGenitore";
+import { BannerCookie } from "@/components/legal/BannerCookie";
 
 export default function PublicLayout({
   children,
@@ -33,6 +34,8 @@ export default function PublicLayout({
       </header>
 
       <main>{children}</main>
+
+      <BannerCookie />
 
       <footer className="mt-16 border-t-2 border-crema-scuro bg-white py-10">
         <Contenitore className="flex flex-col gap-6">

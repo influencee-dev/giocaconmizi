@@ -57,7 +57,9 @@ export function GameShell({
   const ripeti = useCallback(() => parla(istruzione, linguaIstruzione), [istruzione, linguaIstruzione]);
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-crema">
+    // z-50: lo schermo di gioco copre tutto, banner informativo compreso —
+    // l'avviso è per i genitori, non deve comparire sopra un gioco.
+    <div className="fixed inset-0 z-50 flex flex-col bg-crema">
       <header className="flex items-center justify-between gap-3 px-4 py-3">
         <Link
           href="/giochi"

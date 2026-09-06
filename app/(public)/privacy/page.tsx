@@ -39,10 +39,11 @@ export default function PrivacyPage() {
           <p className="font-extrabold">In parole semplici</p>
           <p className="text-notte-tenue">
             Si gioca senza registrazione e senza dare nessun dato. Non c&apos;è pubblicità,
-            non ci sono tracciatori di terze parti e non vendiamo niente a nessuno.
-            Chiediamo un&apos;email solo se vuoi tu — per entrare nell&apos;area genitori o per
-            ricevere le novità — e dei bambini non raccogliamo mai il nome né una foto:
-            al massimo la fascia d&apos;età e un soprannome, se il genitore vuole.
+            non c&apos;è profilazione e non vendiamo niente a nessuno. Le statistiche di
+            visita partono solo se le accetti dal banner. Chiediamo un&apos;email solo se
+            vuoi tu — per entrare nell&apos;area genitori o per ricevere le novità — e dei
+            bambini non raccogliamo mai il nome né una foto: al massimo la fascia
+            d&apos;età e un soprannome, se il genitore vuole.
           </p>
         </div>
       </div>
@@ -80,9 +81,17 @@ export default function PrivacyPage() {
           in fondo a ogni email.
         </p>
         <p>
+          <strong className="text-notte">4. Statistiche (solo col tuo consenso).</strong>{" "}
+          Se accetti dal banner, usiamo Google Analytics per capire quante persone
+          visitano il sito e quali giochi piacciono. È configurato al minimo: niente
+          Google Signals, niente personalizzazione degli annunci. Base giuridica: il tuo
+          consenso (art. 6.1.a); se rifiuti, lo strumento non viene proprio caricato e
+          puoi cambiare idea in ogni momento dalla cookie policy.
+        </p>
+        <p>
           <strong className="text-notte">Cosa non facciamo:</strong> niente pubblicità,
-          niente profilazione, niente analytics di terze parti, niente vendita o cessione
-          di dati, niente social network incorporati.
+          niente profilazione, niente vendita o cessione di dati, niente social network
+          incorporati.
         </p>
       </Sezione>
 
@@ -139,9 +148,9 @@ export default function PrivacyPage() {
 
       <Sezione titolo="Cookie e dati salvati nel browser">
         <p>
-          Il sito non usa cookie di profilazione né di terze parti: per questo non trovi
-          nessun banner. L&apos;elenco completo e aggiornato di quello che salviamo nel tuo
-          browser è nella{" "}
+          Il banner del primo ingresso ti chiede una cosa sola: il consenso per le
+          statistiche. Tutto il resto è tecnico e non ne richiede. L&apos;elenco completo
+          e aggiornato di quello che salviamo nel tuo browser è nella{" "}
           <Link href="/cookie" className="font-bold text-viola underline underline-offset-4">
             cookie policy
           </Link>
