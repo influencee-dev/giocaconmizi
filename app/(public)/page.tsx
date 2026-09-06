@@ -128,7 +128,7 @@ export default function Home() {
       {/* ---------- HERO su crema, con mascotte nel blob ---------- */}
       <div className="relative overflow-hidden">
         <Stelline />
-        <Contenitore className="pb-6 pt-10 sm:pb-10">
+        <Contenitore largo className="pb-6 pt-10 sm:pb-10">
           <div className="flex flex-col-reverse items-center gap-8 sm:flex-row sm:justify-between">
             <div className="flex max-w-xl flex-col items-center gap-5 text-center sm:items-start sm:text-left">
               <span className="rounded-bolla bg-giallo/40 px-4 py-1.5 text-sm font-extrabold text-notte">
@@ -172,22 +172,26 @@ export default function Home() {
 
       {/* ---------- Banda bianca: competenze + età ---------- */}
       <div className="bg-white">
-        <Contenitore className="py-10">
+        <Contenitore largo className="py-10">
           <TitoloSezione>Cosa vuole imparare oggi?</TitoloSezione>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {/* Tessere verticali: icona sopra e testo centrato che può andare
+              a capo — "Matematica" non deve mai sbordare dal box. */}
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {COMPETENZE.map((c) => (
               <Link
                 key={c.slug}
                 href={`/giochi/competenza/${c.slug}`}
                 data-tap
-                className="flex items-center gap-3 rounded-morbido border-2 border-crema-scuro bg-white p-3 transition-transform hover:-translate-y-0.5 hover:border-viola"
+                className="flex min-w-0 flex-col items-center gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-4 text-center transition-transform hover:-translate-y-0.5 hover:border-viola"
               >
-                <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${c.colore}`}>
-                  <span className="h-8 w-8">
+                <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full ${c.colore}`}>
+                  <span className="h-9 w-9">
                     <Disegno id={c.figura} />
                   </span>
                 </span>
-                <span className="font-extrabold text-notte">{c.nome}</span>
+                <span className="w-full break-words font-extrabold leading-tight text-notte">
+                  {c.nome}
+                </span>
               </Link>
             ))}
           </div>
@@ -217,7 +221,7 @@ export default function Home() {
 
       {/* ---------- Banda crema: come funziona ---------- */}
       <div>
-        <Contenitore className="py-10">
+        <Contenitore largo className="py-10">
           <TitoloSezione>Come funziona</TitoloSezione>
           <div className="grid gap-4 sm:grid-cols-3">
             {PASSI.map((p) => (
@@ -237,7 +241,7 @@ export default function Home() {
 
       {/* ---------- Banda bianca: giochi in evidenza ---------- */}
       <div className="bg-white">
-        <Contenitore className="py-10">
+        <Contenitore largo className="py-10">
           <TitoloSezione>Prova subito un gioco</TitoloSezione>
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             {inVetrina.map((g) => (
@@ -280,7 +284,7 @@ export default function Home() {
 
       {/* ---------- Banda viola: i valori ---------- */}
       <div className="bg-viola">
-        <Contenitore className="py-8">
+        <Contenitore largo className="py-8">
           <div className="grid grid-cols-2 gap-4 text-center sm:grid-cols-4">
             {[
               ["0", "pubblicità"],
@@ -299,7 +303,7 @@ export default function Home() {
       </div>
 
       {/* ---------- Bande alternate: le sezioni ---------- */}
-      <Contenitore className="py-10">
+      <Contenitore largo className="py-10">
         <div className="flex flex-col gap-10">
           {SEZIONI.map((s, i) => (
             <div
@@ -326,7 +330,7 @@ export default function Home() {
       </Contenitore>
 
       {/* ---------- CTA finale ---------- */}
-      <Contenitore className="pb-12">
+      <Contenitore largo className="pb-12">
         <div className="relative overflow-hidden rounded-morbido bg-giallo/30 p-8 text-center sm:p-12">
           <Stelline />
           <div className="relative mx-auto mb-4 h-24 w-24">

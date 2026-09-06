@@ -43,11 +43,12 @@ export function Blob({
 }) {
   return (
     <div className={`relative ${className}`}>
-      <div aria-hidden className="absolute inset-0 rounded-full bg-azzurro/20" />
+      {/* Anello e cerchio DENTRO i confini del box: niente sbordi. */}
       <div
         aria-hidden
-        className="absolute -inset-3 rounded-full border-4 border-dashed border-giallo/60"
+        className="absolute inset-0 rounded-full border-4 border-dashed border-giallo/60"
       />
+      <div aria-hidden className="absolute inset-2 rounded-full bg-azzurro/20" />
       <div className="relative flex h-full w-full items-center justify-center">{children}</div>
     </div>
   );
@@ -63,7 +64,7 @@ export function Stelline({ className = "" }: { className?: string }) {
     { x: "78%", y: "85%", colore: "#F9C846", scala: 0.5 },
   ];
   return (
-    <div aria-hidden className={`pointer-events-none absolute inset-0 ${className}`}>
+    <div aria-hidden className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
       {voci.map((v, i) => (
         <svg
           key={i}

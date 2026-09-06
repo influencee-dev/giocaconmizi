@@ -1,16 +1,23 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-/** Contenitore centrato, largo al massimo quanto una lettura comoda. */
+/**
+ * Contenitore centrato. `largo` (vetrina, header, footer) occupa quasi tutta
+ * la pagina; il default resta a misura di lettura per i testi lunghi.
+ */
 export function Contenitore({
   children,
   className = "",
+  largo = false,
 }: {
   children: ReactNode;
   className?: string;
+  largo?: boolean;
 }) {
   return (
-    <div className={`mx-auto w-full max-w-4xl px-4 sm:px-6 ${className}`}>
+    <div
+      className={`mx-auto w-full ${largo ? "max-w-6xl px-4 sm:px-8" : "max-w-4xl px-4 sm:px-6"} ${className}`}
+    >
       {children}
     </div>
   );

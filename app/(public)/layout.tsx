@@ -20,7 +20,7 @@ export default function PublicLayout({
       <JsonLd data={jsonLdSito()} />
 
       <header className="sticky top-0 z-30 border-b-2 border-crema-scuro bg-white/95 backdrop-blur">
-        <Contenitore className="flex items-center justify-between gap-3 py-2.5">
+        <Contenitore largo className="flex items-center justify-between gap-3 py-2.5">
           <Link href="/" className="flex items-center gap-2 text-xl font-extrabold text-notte">
             {logo ? (
               <Image src={logo} alt="" width={40} height={40} className="h-10 w-10 object-contain" priority />
@@ -59,7 +59,7 @@ export default function PublicLayout({
       <footer className="mt-16">
         <Onda colore="#FFFFFF" />
         <div className="bg-white pb-10 pt-4">
-          <Contenitore className="flex flex-col gap-6">
+          <Contenitore largo className="flex flex-col gap-6">
             <div className="max-w-md">
               <FormGenitore
                 origine="footer"
