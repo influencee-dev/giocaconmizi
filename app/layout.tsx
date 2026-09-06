@@ -18,6 +18,8 @@ const lexend = Lexend({
 
 export const metadata: Metadata = {
   metadataBase: new URL(url("/")),
+  // Verifica della proprieta su Google Search Console (tag HTML).
+  verification: { google: "n759tXs0ypLjV_uHMPFzt7MCbk6v6-3vA-5Sam42l_0" },
   title: {
     default: site.titoloDefault,
     template: `%s — ${site.nome}`,
