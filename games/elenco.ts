@@ -34,6 +34,9 @@ export const slugGiocabili = [
   "tartaruga",
   "crea-il-tuo-gioco",
   "sequenze-logiche",
+  "dove-arriva-mizi",
+  "salto-di-mizi",
+  "missione-ghiaccio",
 ] as const;
 
 export const giocabile = (slug: string): boolean =>

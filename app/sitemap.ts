@@ -24,6 +24,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/biglietti/crea",
     "/biglietti/esempi",
     "/metodo",
+    "/privacy",
+    "/cookie",
     "/perche-lo-facciamo",
     "/chi-siamo",
     "/per-insegnanti",

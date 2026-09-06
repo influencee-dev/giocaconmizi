@@ -122,7 +122,10 @@ export function GrigliaCoding({
   const esegui = useCallback(() => {
     if (inEsecuzione || programma.length === 0) return;
     setInEsecuzione(true);
-    setTentativi((n) => n + 1);
+    // `tentativi` nello stato non è ancora aggiornato dentro questa chiusura:
+    // il valore vero di questo tentativo va calcolato a mano per le stelle.
+    const tentativoCorrente = tentativi + 1;
+    setTentativi(tentativoCorrente);
 
     let x = livello.partenza[0];
     let y = livello.partenza[1];
@@ -171,7 +174,7 @@ export function GrigliaCoding({
                   const prossimo = indice + 1;
                   if (prossimo >= totale) {
                     setFinito(true);
-                    onComplete?.({ score: nuoviPunti, stars: stelle(totale - Math.max(0, tentativi - totale), totale) });
+                    onComplete?.({ score: nuoviPunti, stars: stelle(totale - Math.max(0, tentativoCorrente - totale), totale) });
                     return;
                   }
                   setIndice(prossimo);

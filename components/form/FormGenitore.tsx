@@ -155,8 +155,16 @@ export function FormGenitore({
           className="mt-1 h-6 w-6 shrink-0 accent-[#9B6DD6]"
         />
         <span>
-          Acconsento a ricevere email da Gioca con Mizi e ho letto come trattiamo
-          i dati. Posso cancellarmi quando voglio.
+          Acconsento a ricevere email da Gioca con Mizi e ho letto{" "}
+          <a
+            href="/privacy"
+            target="_blank"
+            rel="noopener"
+            className="font-bold text-viola underline underline-offset-4"
+          >
+            come trattiamo i dati
+          </a>
+          . Posso cancellarmi quando voglio.
         </span>
       </label>
 

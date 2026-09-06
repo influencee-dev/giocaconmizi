@@ -46,5 +46,8 @@ export const componenti: Record<string, ComponentType<GameProps>> = {
   tartaruga: dynamic(() => import("@/games/tartaruga/Game"), { ssr: false }),
   "crea-il-tuo-gioco": dynamic(() => import("@/games/crea-il-tuo-gioco/Game"), { ssr: false }),
   "sequenze-logiche": dynamic(() => import("@/games/sequenze-logiche/Game"), { ssr: false }),
+  "dove-arriva-mizi": dynamic(() => import("@/games/dove-arriva-mizi/Game"), { ssr: false }),
+  "salto-di-mizi": dynamic(() => import("@/games/salto-di-mizi/Game"), { ssr: false }),
+  "missione-ghiaccio": dynamic(() => import("@/games/missione-ghiaccio/Game"), { ssr: false }),
 };
 

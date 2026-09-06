@@ -52,6 +52,8 @@ export default function PublicLayout({
             <Link href="/perche-lo-facciamo" className="hover:text-viola">Perché lo facciamo</Link>
             <Link href="/chi-siamo" className="hover:text-viola">Chi siamo</Link>
             <Link href="/per-insegnanti" className="hover:text-viola">Per insegnanti</Link>
+            <Link href="/privacy" className="hover:text-viola">Privacy</Link>
+            <Link href="/cookie" className="hover:text-viola">Cookie</Link>
             <Link href="/accedi" className="hover:text-viola">Accedi</Link>
           </nav>
           <p className="text-sm text-notte-tenue">
