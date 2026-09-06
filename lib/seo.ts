@@ -16,7 +16,9 @@ export const site = {
 
 /** URL assoluto per canonical, sitemap e Open Graph. */
 export function url(percorso = "/"): string {
-  const base = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? site.dominio;
+  // "|| " e non "??": su Vercel la variabile può esistere ma essere vuota,
+  // e new URL("") fa fallire la build.
+  const base = (process.env.NEXT_PUBLIC_SITE_URL || site.dominio).replace(/\/$/, "");
   return percorso === "/" ? base : `${base}${percorso.startsWith("/") ? percorso : `/${percorso}`}`;
 }
 
