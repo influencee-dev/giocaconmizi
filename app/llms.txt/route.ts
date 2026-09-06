@@ -65,6 +65,7 @@ ${storie}
 - [Metodo](${url("/metodo")}): come scegliamo e costruiamo i giochi.
 - [Perché lo facciamo](${url("/perche-lo-facciamo")}): perché è gratis e senza pubblicità.
 - [Per insegnanti](${url("/per-insegnanti")}): uso in classe, senza registrazione.
+- [Per le mamme](${url("/per-le-mamme")}): la rete delle mamme — associazioni, community locali, gruppi d'ascolto e locali family-friendly con nursery o area giochi. Inserimento gratuito su segnalazione.
 - [Chi siamo](${url("/chi-siamo")})
 - [Privacy](${url("/privacy")}) · [Cookie](${url("/cookie")})
 `;

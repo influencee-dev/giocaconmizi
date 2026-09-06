@@ -29,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/perche-lo-facciamo",
     "/chi-siamo",
     "/per-insegnanti",
+    "/per-le-mamme",
   ];
 
   const competenze = [

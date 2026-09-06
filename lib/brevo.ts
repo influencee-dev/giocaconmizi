@@ -58,10 +58,14 @@ async function chiama(percorso: string, body: unknown) {
 /** Crea o aggiorna il contatto alla conferma della registrazione. */
 export async function creaContatto(contatto: ContattoBrevo) {
   const listId = listaPer(contatto.professione);
-
-  return chiama("/contacts", {
+  const base = {
     email: contatto.email,
     updateEnabled: true,
+    listIds: listId ? [listId] : undefined,
+  };
+
+  const esito = await chiama("/contacts", {
+    ...base,
     attributes: {
       // FIRSTNAME è l'attributo standard già presente nell'account Brevo.
       FIRSTNAME: contatto.nomeGenitore,
@@ -71,8 +75,19 @@ export async function creaContatto(contatto: ContattoBrevo) {
       CLASSE: contatto.classe,
       ORIGINE: contatto.origine,
     },
-    listIds: listId ? [listId] : undefined,
   });
+
+  // Se l'account non ha ancora uno degli attributi (PROFESSIONE, ETA_FIGLIO,
+  // CLASSE, ORIGINE vanno creati a mano in Brevo), meglio un contatto con
+  // meno campi che un'iscrizione fallita: si riprova col minimo garantito.
+  if (!esito.ok && /attribute/i.test(esito.motivo ?? "")) {
+    return chiama("/contacts", {
+      ...base,
+      attributes: { FIRSTNAME: contatto.nomeGenitore, CITTA: contatto.citta },
+    });
+  }
+
+  return esito;
 }
 
 /** Evento "gioco_completato": alimenta le automazioni Brevo (§4.4). */
