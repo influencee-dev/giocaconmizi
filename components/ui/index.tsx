@@ -70,19 +70,27 @@ export function CardGioco({
   descrizione,
   eta,
   minuti,
+  illustrazione,
 }: {
   slug: string;
   titolo: string;
   descrizione: string;
   eta: string;
   minuti: number;
+  /** Scenetta SVG in testa alla card (components/illustrazioni). */
+  illustrazione?: ReactNode;
 }) {
   return (
     <Link
       href={`/giochi/${slug}`}
       data-tap
-      className="flex flex-col gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-5 transition-colors hover:border-viola"
+      className="flex flex-col gap-2 overflow-hidden rounded-morbido border-2 border-crema-scuro bg-white p-5 transition-colors hover:border-viola"
     >
+      {illustrazione && (
+        <span aria-hidden className="-mx-5 -mt-5 mb-1 flex h-24 items-center justify-center bg-crema p-2">
+          {illustrazione}
+        </span>
+      )}
       <span className="text-xl font-extrabold text-notte">{titolo}</span>
       <span className="text-notte-tenue">{descrizione}</span>
       <span className="mt-auto pt-2 text-sm font-bold text-viola">

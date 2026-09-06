@@ -40,7 +40,7 @@ export interface Round {
   /** Detta a voce all'inizio del round. */
   istruzione: string;
   linguaIstruzione?: Lingua;
-  /** Il testo dell'istruzione compare a schermo solo dai 6 anni in su. */
+  /** Ignorato: il guscio mostra sempre l'istruzione nel fumetto di Mizi. */
   mostraTesto?: boolean;
   /** Cosa sta al centro, sopra le opzioni. */
   centro?: ReactNode;
@@ -62,7 +62,6 @@ export function SceltaMultipla({
   titolo,
   round,
   colonne,
-  age,
   onProgress,
   onComplete,
   demo = false,
@@ -84,8 +83,6 @@ export function SceltaMultipla({
   const corrente = round[Math.min(indice, round.length - 1)];
   const totale = round.length;
 
-  // Dai 6 anni l'istruzione compare anche scritta; sotto, solo voce e icone.
-  const mostraTesto = corrente.mostraTesto ?? age >= 6;
 
   const prossimoRound = useCallback(
     (giusto: boolean) => {
@@ -164,12 +161,6 @@ export function SceltaMultipla({
       <div className="flex h-full w-full max-w-3xl flex-col items-center justify-center gap-6">
         {corrente.centro && (
           <div className="flex items-center justify-center">{corrente.centro}</div>
-        )}
-
-        {mostraTesto && (
-          <p className="text-center text-xl font-bold text-notte sm:text-2xl">
-            {corrente.istruzione}
-          </p>
         )}
 
         <div

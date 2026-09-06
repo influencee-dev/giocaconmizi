@@ -3,12 +3,17 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { parla, zittisci, type Lingua } from "@/lib/audio";
+import { FacciaMizi } from "@/games/_engine/arte";
 
 /**
  * Guscio comune a tutti i giochi (piano §7, prompt "Template gioco").
  * Regole non negoziabili della checklist: niente timer, niente game over,
  * istruzione vocale con icona ripeti, "Esci" piccolo in alto a sinistra,
  * "Ancora" sempre visibile alla fine, festa con coriandoli CSS.
+ *
+ * L'istruzione è SEMPRE anche scritta, nel fumetto di Mizi: la voce può non
+ * partire (telefono muto, browser senza sintesi) e senza testo lo schermo
+ * sembra rotto. Il fumetto è il piano A, la voce il piano B.
  */
 
 export interface GameShellProps {
@@ -36,6 +41,7 @@ export function GameShell({
   children,
 }: GameShellProps) {
   const [vocePronta, setVocePronta] = useState(false);
+  const livello = Math.min(round + 1, totaleRound);
 
   useEffect(() => {
     setVocePronta(true);
@@ -52,7 +58,7 @@ export function GameShell({
 
   return (
     <div className="fixed inset-0 flex flex-col bg-crema">
-      <header className="flex items-center justify-between gap-4 px-4 py-3">
+      <header className="flex items-center justify-between gap-3 px-4 py-3">
         <Link
           href="/giochi"
           aria-label="Esci dal gioco"
@@ -62,13 +68,19 @@ export function GameShell({
           ✕
         </Link>
 
-        <Progresso round={round} totale={totaleRound} />
+        <div className="flex flex-col items-center gap-1">
+          <span className="rounded-bolla bg-viola px-4 py-1 text-sm font-extrabold text-white">
+            Livello {livello} di {totaleRound}
+          </span>
+          <Progresso round={round} totale={totaleRound} />
+        </div>
 
         <button
           type="button"
           onClick={ripeti}
           aria-label="Ripeti l'istruzione"
-          className="flex items-center justify-center rounded-full bg-white text-3xl"
+          className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-2xl shadow-sm"
+          style={{ minHeight: "2.75rem", minWidth: "2.75rem" }}
         >
           🔊
         </button>
@@ -76,8 +88,27 @@ export function GameShell({
 
       <h1 className="sr-only">{titolo}</h1>
 
-      <main className="flex flex-1 items-center justify-center overflow-hidden p-4">
-        {children}
+      {/* Mizi dice l'istruzione: sempre scritta, un tocco la ripete a voce. */}
+      <button
+        type="button"
+        onClick={ripeti}
+        aria-label="Ripeti l'istruzione a voce"
+        className="mx-4 flex items-center gap-3 text-left"
+      >
+        <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+          <FacciaMizi emozione="felice" className="h-11 w-11" />
+        </span>
+        <span className="fumetto relative flex-1 rounded-morbido border-2 border-crema-scuro bg-white px-4 py-3">
+          <span className="block text-lg font-extrabold leading-snug text-notte">
+            {istruzione}
+          </span>
+        </span>
+      </button>
+
+      {/* Se il gioco è più alto dello schermo si scorre: un bottone
+          irraggiungibile è un gioco che "non funziona". */}
+      <main className="flex-1 overflow-y-auto p-4">
+        <div className="flex min-h-full items-center justify-center">{children}</div>
       </main>
 
       {finito && <Festa stelle={stelle} onAncora={onAncora} />}
@@ -85,21 +116,27 @@ export function GameShell({
   );
 }
 
-/** Pallini di avanzamento. Nessun numero, nessun tempo: solo "quanto manca". */
+/** Pallini di avanzamento: fatti brillare quello corrente, spenti i futuri. */
 export function Progresso({ round, totale }: { round: number; totale: number }) {
   return (
     <div
-      className="flex items-center gap-2"
+      className="flex items-center gap-1.5"
       role="progressbar"
       aria-valuenow={round}
       aria-valuemin={0}
       aria-valuemax={totale}
-      aria-label={`Round ${round} di ${totale}`}
+      aria-label={`Livello ${Math.min(round + 1, totale)} di ${totale}`}
     >
       {Array.from({ length: totale }, (_, i) => (
         <span
           key={i}
-          className={`h-3 w-3 rounded-full ${i < round ? "bg-viola" : "bg-crema-scuro"}`}
+          className={`rounded-full ${
+            i < round
+              ? "h-2.5 w-2.5 bg-viola"
+              : i === round
+                ? "h-3 w-3 bg-giallo ring-2 ring-arancione"
+                : "h-2.5 w-2.5 bg-crema-scuro"
+          }`}
         />
       ))}
     </div>
@@ -128,6 +165,9 @@ function Festa({ stelle, onAncora }: { stelle: number; onAncora: () => void }) {
         ))}
       </div>
 
+      <span className="relative h-24 w-24">
+        <FacciaMizi emozione="felice" />
+      </span>
       <p className="relative text-5xl" aria-hidden>
         {"⭐".repeat(Math.max(1, Math.min(3, stelle)))}
       </p>

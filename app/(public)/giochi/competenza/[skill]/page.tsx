@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { games, type Skill } from "@/games/registry";
 import { CardGioco, Contenitore, Griglia } from "@/components/ui";
+import { IllustrazioneSkill } from "@/components/illustrazioni";
 import { JsonLd, jsonLdBreadcrumb } from "@/components/seo/JsonLd";
 
 type Params = { params: Promise<{ skill: string }> };
@@ -81,6 +82,7 @@ export default async function HubCompetenzaPage({ params }: Params) {
               descrizione={g.subskill}
               eta={`${g.ageMin}–${g.ageMax}`}
               minuti={g.minutes}
+              illustrazione={<IllustrazioneSkill skill={g.skill} />}
             />
           ))}
         </Griglia>

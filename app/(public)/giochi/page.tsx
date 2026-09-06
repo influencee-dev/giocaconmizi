@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { games } from "@/games/registry";
 import { CardGioco, Contenitore, Griglia, TitoloSezione } from "@/components/ui";
+import { IllustrazioneSkill } from "@/components/illustrazioni";
 
 export const metadata: Metadata = {
   title: "Tutti i giochi educativi",
@@ -38,6 +39,7 @@ export default function GiochiPage() {
                 descrizione={g.subskill}
                 eta={`${g.ageMin}–${g.ageMax}`}
                 minuti={g.minutes}
+              illustrazione={<IllustrazioneSkill skill={g.skill} />}
               />
             ))}
           </Griglia>

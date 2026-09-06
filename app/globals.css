@@ -77,6 +77,18 @@ a[role="button"],
   }
 }
 
+/* Coda del fumetto di Mizi nel guscio dei giochi: punta verso la faccia a sinistra */
+.fumetto::before {
+  content: "";
+  position: absolute;
+  left: -0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 0.55rem solid transparent;
+  border-bottom: 0.55rem solid transparent;
+  border-right: 0.7rem solid var(--color-crema-scuro, #f3ddc4);
+}
+
 /* Coriandoli della festa finale: CSS puro, nessuna libreria (checklist di design) */
 .coriandolo {
   position: absolute;
