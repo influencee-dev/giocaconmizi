@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Biglietto, type DatiBiglietto } from "./Biglietto";
+import { CATALOGO_STICKER } from "./stickers";
+import { biglietoInPng, datiPerLink, leggiDatiDaLink, linkInvito, numeroWhatsApp } from "@/lib/condivisione";
 import { FORMATI, frasi, misure, temi, TIPI, type FormatoId, type Tipo } from "@/lib/biglietti";
 import type { Variante } from "./Sfondo";
 
@@ -11,7 +13,8 @@ import type { Variante } from "./Sfondo";
  *
  * Tutto lato client: niente backend, niente login, niente filigrana.
  * Lo stato vive nell'URL, quindi "salva il link" e "arriva già precompilato da
- * una pagina tema" sono la stessa funzione.
+ * una pagina tema" sono la stessa funzione. La foto è l'unica eccezione:
+ * resta nel dispositivo (entra nel PNG, mai nel link).
  */
 
 const VUOTO: DatiBiglietto = {
@@ -28,7 +31,15 @@ const VUOTO: DatiBiglietto = {
   firma: "",
   conMizi: false,
   carattere: "tondo",
+  stickers: [],
 };
+
+/** Dove atterrano gli adesivi appena aggiunti: angoli e bordi, mai sul testo. */
+const POSTI_LIBERI: [number, number][] = [
+  [18, 16], [82, 16], [16, 72], [84, 66], [50, 12], [14, 44], [86, 44], [50, 94],
+];
+
+const MASSIMO_STICKER = 6;
 
 export function Editor() {
   const parametri = useSearchParams();
@@ -36,6 +47,7 @@ export function Editor() {
   const [formato, setFormato] = useState<FormatoId>("a6");
   const [copiato, setCopiato] = useState(false);
   const contenitore = useRef<HTMLDivElement>(null);
+  const trascinato = useRef<number | null>(null);
 
   // Precompilazione da querystring: è il link che arriva dalle pagine SEO.
   useEffect(() => {
@@ -46,12 +58,11 @@ export function Editor() {
     const stato = parametri.get("b");
 
     if (stato) {
-      try {
-        const salvato = JSON.parse(atob(decodeURIComponent(stato))) as Partial<DatiBiglietto>;
+      const salvato = leggiDatiDaLink(stato);
+      // Link rovinato: si riparte dal biglietto vuoto senza messaggi d'errore.
+      if (salvato) {
         setDati((d) => ({ ...d, ...salvato }));
         return;
-      } catch {
-        // Link rovinato: si riparte dal biglietto vuoto senza messaggi d'errore.
       }
     }
 
@@ -75,40 +86,91 @@ export function Editor() {
     setDati((d) => ({ ...d, [chiave]: valore }));
   }, []);
 
-  /** Trasforma l'SVG dell'anteprima in un PNG alla dimensione vera del formato. */
+  /* ---------- Adesivi ---------- */
+
+  const stickers = dati.stickers ?? [];
+
+  const aggiungiSticker = useCallback((id: string) => {
+    setDati((d) => {
+      const attuali = d.stickers ?? [];
+      if (attuali.length >= MASSIMO_STICKER) return d;
+      const [x, y] = POSTI_LIBERI[attuali.length % POSTI_LIBERI.length];
+      return { ...d, stickers: [...attuali, { id, x, y, s: 1 }] };
+    });
+  }, []);
+
+  const modificaSticker = useCallback((indice: number, cambio: Partial<{ x: number; y: number; s: number }>) => {
+    setDati((d) => ({
+      ...d,
+      stickers: (d.stickers ?? []).map((st, i) => (i === indice ? { ...st, ...cambio } : st)),
+    }));
+  }, []);
+
+  const togliSticker = useCallback((indice: number) => {
+    setDati((d) => ({ ...d, stickers: (d.stickers ?? []).filter((_, i) => i !== indice) }));
+  }, []);
+
+  /* Trascinamento col dito o col mouse, direttamente sull'anteprima. */
+  const spostaDalPuntatore = useCallback(
+    (e: React.PointerEvent) => {
+      const indice = trascinato.current;
+      const box = contenitore.current?.getBoundingClientRect();
+      if (indice === null || !box) return;
+      const x = Math.min(92, Math.max(8, ((e.clientX - box.left) / box.width) * 100));
+      const y = Math.min(94, Math.max(6, ((e.clientY - box.top) / box.height) * 100));
+      modificaSticker(indice, { x, y });
+    },
+    [modificaSticker],
+  );
+
+  const iniziaTrascinamento = useCallback((e: React.PointerEvent) => {
+    const bersaglio = (e.target as Element).closest("[data-sticker]");
+    if (!bersaglio) return;
+    trascinato.current = Number(bersaglio.getAttribute("data-sticker"));
+    (e.currentTarget as Element).setPointerCapture(e.pointerId);
+    e.preventDefault();
+  }, []);
+
+  const fineTrascinamento = useCallback(() => {
+    trascinato.current = null;
+  }, []);
+
+  /* ---------- Foto ---------- */
+
+  const caricaFoto = useCallback((file: File | undefined) => {
+    if (!file) return;
+    const lettore = new FileReader();
+    lettore.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        // Ridotta a 600px: abbastanza per la stampa A5, leggera per il browser.
+        const lato = Math.min(600, Math.max(img.width, img.height));
+        const scala = lato / Math.max(img.width, img.height);
+        const tela = document.createElement("canvas");
+        tela.width = Math.round(img.width * scala);
+        tela.height = Math.round(img.height * scala);
+        tela.getContext("2d")?.drawImage(img, 0, 0, tela.width, tela.height);
+        setDati((d) => ({ ...d, foto: tela.toDataURL("image/jpeg", 0.85) }));
+      };
+      img.src = String(lettore.result);
+    };
+    lettore.readAsDataURL(file);
+  }, []);
+
+  /* ---------- Uscite: PNG, link, WhatsApp ---------- */
+
   const scarica = useCallback(async () => {
     const svg = contenitore.current?.querySelector("svg");
     if (!svg) return;
-
-    const sorgente = new XMLSerializer().serializeToString(svg);
-    const blob = new Blob([sorgente], { type: "image/svg+xml;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-
-    const immagine = new Image();
-    immagine.crossOrigin = "anonymous";
-
-    await new Promise<void>((risolvi, rifiuta) => {
-      immagine.onload = () => risolvi();
-      immagine.onerror = () => rifiuta(new Error("immagine non caricata"));
-      immagine.src = url;
-    });
-
-    const tela = document.createElement("canvas");
-    tela.width = larghezza;
-    tela.height = altezza;
-    const pennello = tela.getContext("2d");
-    if (!pennello) return;
-    pennello.drawImage(immagine, 0, 0, larghezza, altezza);
-    URL.revokeObjectURL(url);
-
+    const png = await biglietoInPng(svg, larghezza, altezza);
     const link = document.createElement("a");
     link.download = `${dati.tipo}-${dati.nome || "compleanno"}.png`.toLowerCase().replace(/\s+/g, "-");
-    link.href = tela.toDataURL("image/png");
+    link.href = png;
     link.click();
   }, [altezza, larghezza, dati.nome, dati.tipo]);
 
   const salvaNelLink = useCallback(() => {
-    const codificato = encodeURIComponent(btoa(JSON.stringify(dati)));
+    const codificato = datiPerLink(dati);
     const url = `${window.location.pathname}?b=${codificato}`;
     window.history.replaceState(null, "", url);
     void navigator.clipboard?.writeText(window.location.href).catch(() => undefined);
@@ -116,29 +178,47 @@ export function Editor() {
     window.setTimeout(() => setCopiato(false), 2500);
   }, [dati]);
 
+  const invitoDigitale = useMemo(() => linkInvito(dati), [dati]);
+
+  const mandaSuWhatsApp = useCallback(() => {
+    const testo = `${dati.nome ? `La festa di ${dati.nome}` : "Sei invitato!"} 🎉 Apri l'invito: ${window.location.origin}${invitoDigitale}`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(testo)}`, "_blank", "noopener");
+  }, [dati.nome, invitoDigitale]);
+
   const condividi = useCallback(async () => {
-    if (!navigator.share) return;
-    await navigator
-      .share({
-        title: "Il mio biglietto",
-        text: dati.frase || "Guarda il biglietto che ho fatto",
-        url: window.location.href,
-      })
-      .catch(() => undefined);
-  }, [dati.frase]);
+    const url = `${window.location.origin}${invitoDigitale}`;
+    if (navigator.share) {
+      await navigator
+        .share({ title: "Il mio biglietto", text: dati.frase || "Guarda il biglietto che ho fatto", url })
+        .catch(() => undefined);
+    } else {
+      await navigator.clipboard?.writeText(url).catch(() => undefined);
+      setCopiato(true);
+      window.setTimeout(() => setCopiato(false), 2500);
+    }
+  }, [dati.frase, invitoDigitale]);
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_minmax(0,22rem)]">
       {/* Anteprima */}
       <div className="order-1 lg:order-2">
-        <div className="lg:sticky lg:top-6">
+        <div className="lg:sticky lg:top-20">
           <div
             ref={contenitore}
+            onPointerDown={iniziaTrascinamento}
+            onPointerMove={spostaDalPuntatore}
+            onPointerUp={fineTrascinamento}
+            onPointerCancel={fineTrascinamento}
             className="mx-auto max-w-xs overflow-hidden rounded-morbido shadow-lg"
-            style={{ aspectRatio: `${larghezza} / ${altezza}` }}
+            style={{ aspectRatio: `${larghezza} / ${altezza}`, touchAction: "none" }}
           >
             <Biglietto dati={dati} larghezza={larghezza} altezza={altezza} />
           </div>
+          {stickers.length > 0 && (
+            <p className="mt-2 text-center text-sm font-bold text-notte-tenue">
+              Trascina gli adesivi col dito per sistemarli
+            </p>
+          )}
 
           <div className="mt-4 flex flex-wrap justify-center gap-2">
             <button
@@ -150,10 +230,10 @@ export function Editor() {
             </button>
             <button
               type="button"
-              onClick={salvaNelLink}
-              className="rounded-bolla border-2 border-crema-scuro bg-white px-5 py-4 font-bold text-notte"
+              onClick={mandaSuWhatsApp}
+              className="rounded-bolla bg-verde px-5 py-4 font-extrabold text-white"
             >
-              {copiato ? "Link copiato" : "Salva il link"}
+              Invia su WhatsApp
             </button>
             <button
               type="button"
@@ -162,7 +242,20 @@ export function Editor() {
             >
               Condividi
             </button>
+            <button
+              type="button"
+              onClick={salvaNelLink}
+              className="rounded-bolla border-2 border-crema-scuro bg-white px-5 py-4 font-bold text-notte"
+            >
+              {copiato ? "Link copiato" : "Salva il link"}
+            </button>
           </div>
+          {dati.tipo === "invito" && numeroWhatsApp(dati.conferma) && (
+            <p className="mt-2 text-center text-sm text-notte-tenue">
+              Chi riceve l&apos;invito troverà il bottone{" "}
+              <strong>&quot;Confermo, ci saremo!&quot;</strong> che ti scrive su WhatsApp.
+            </p>
+          )}
         </div>
       </div>
 
@@ -245,7 +338,7 @@ export function Editor() {
               <Campo etichetta="Ora" valore={dati.ora} onCambia={(v) => aggiorna("ora", v)} placeholder="dalle 16 alle 19" />
               <Campo etichetta="Dove" valore={dati.luogo} onCambia={(v) => aggiorna("luogo", v)} placeholder="Via dei Tigli 4" />
               <Campo
-                etichetta="Conferma a"
+                etichetta="Conferma a (numero WhatsApp)"
                 valore={dati.conferma}
                 onCambia={(v) => aggiorna("conferma", v)}
                 placeholder="333 1234567"
@@ -256,7 +349,102 @@ export function Editor() {
           <Campo etichetta="Firma" valore={dati.firma} onCambia={(v) => aggiorna("firma", v)} placeholder="Sofia e mamma" />
         </Gruppo>
 
-        <Gruppo titolo="4. Ritocchi">
+        <Gruppo titolo="4. Adesivi">
+          <div className="grid grid-cols-4 gap-2">
+            {CATALOGO_STICKER.map((v) => (
+              <button
+                key={v.id}
+                type="button"
+                onClick={() => aggiungiSticker(v.id)}
+                aria-label={`Aggiungi ${v.nome}`}
+                title={v.nome}
+                disabled={stickers.length >= MASSIMO_STICKER}
+                className="rounded-morbido border-2 border-crema-scuro bg-white p-2 disabled:opacity-40"
+                style={{ minHeight: 0, minWidth: 0 }}
+              >
+                <svg viewBox="0 0 100 100" className="h-full w-full" aria-hidden>
+                  {v.disegno}
+                </svg>
+              </button>
+            ))}
+          </div>
+          {stickers.length > 0 && (
+            <div className="flex flex-col gap-2">
+              {stickers.map((st, i) => {
+                const voce = CATALOGO_STICKER.find((v) => v.id === st.id);
+                return (
+                  <div key={i} className="flex items-center gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-2">
+                    <svg viewBox="0 0 100 100" className="h-9 w-9 shrink-0" aria-hidden>
+                      {voce?.disegno}
+                    </svg>
+                    <span className="min-w-0 flex-1 truncate text-sm font-bold text-notte">{voce?.nome}</span>
+                    <button
+                      type="button"
+                      onClick={() => modificaSticker(i, { s: Math.max(0.6, st.s - 0.2) })}
+                      aria-label={`Rimpicciolisci ${voce?.nome}`}
+                      className="h-10 w-10 rounded-full border-2 border-crema-scuro font-extrabold text-notte"
+                    >
+                      −
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => modificaSticker(i, { s: Math.min(2, st.s + 0.2) })}
+                      aria-label={`Ingrandisci ${voce?.nome}`}
+                      className="h-10 w-10 rounded-full border-2 border-crema-scuro font-extrabold text-notte"
+                    >
+                      +
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => togliSticker(i)}
+                      aria-label={`Togli ${voce?.nome}`}
+                      className="h-10 w-10 rounded-full border-2 border-crema-scuro font-extrabold text-rosso"
+                    >
+                      ×
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          <p className="text-sm text-notte-tenue">
+            Disegni nostri, senza personaggi con copyright: si possono stampare e
+            regalare in tutta tranquillità.
+          </p>
+        </Gruppo>
+
+        <Gruppo titolo="5. La foto del festeggiato">
+          {dati.foto ? (
+            <div className="flex items-center gap-3">
+              {/* L'anteprima tonda replica il ritaglio sul biglietto. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={dati.foto} alt="Foto scelta" className="h-16 w-16 rounded-full object-cover" />
+              <button
+                type="button"
+                onClick={() => setDati((d) => ({ ...d, foto: undefined }))}
+                className="rounded-bolla border-2 border-crema-scuro bg-white px-4 py-3 font-bold text-notte"
+              >
+                Togli la foto
+              </button>
+            </div>
+          ) : (
+            <label className="flex cursor-pointer items-center justify-center rounded-morbido border-2 border-dashed border-crema-scuro bg-white p-4 font-bold text-notte-tenue">
+              Scegli una foto dal telefono
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => caricaFoto(e.target.files?.[0])}
+              />
+            </label>
+          )}
+          <p className="text-sm text-notte-tenue">
+            La foto resta sul tuo dispositivo: entra nel biglietto scaricato, mai
+            nei link che condividi.
+          </p>
+        </Gruppo>
+
+        <Gruppo titolo="6. Ritocchi">
           <Scelte
             valore={dati.carattere}
             opzioni={[

@@ -37,7 +37,8 @@ export default function CreaPage() {
             { "@type": "HowToStep", name: "Scegli il tipo e il formato", text: "Invito, auguri o ringraziamento; A6 per stamparlo o verticale per WhatsApp." },
             { "@type": "HowToStep", name: "Scegli lo sfondo", text: "Venticinque temi, ognuno in versione chiara e colorata." },
             { "@type": "HowToStep", name: "Scrivi nome, età e frase", text: "Le frasi pronte si toccano e si modificano." },
-            { "@type": "HowToStep", name: "Scarica o condividi", text: "Il biglietto si scarica in PNG oppure si manda direttamente da telefono." },
+            { "@type": "HowToStep", name: "Aggiungi adesivi e foto", text: "Unicorni, dinosauri e supereroi da trascinare col dito, più la foto del festeggiato." },
+            { "@type": "HowToStep", name: "Scarica o manda su WhatsApp", text: "PNG da stampare, oppure l'invito digitale con il bottone di conferma su WhatsApp." },
           ],
         }}
       />
@@ -46,8 +47,9 @@ export default function CreaPage() {
         Crea il tuo biglietto di compleanno
       </h1>
       <p className="mt-3 max-w-2xl text-lg text-notte-tenue">
-        Scegli lo sfondo, scrivi il nome e scarica. Gratis, senza registrazione,
-        senza filigrana. Funziona dal telefono.
+        Scegli lo sfondo, scrivi il nome, aggiungi adesivi e foto, scarica o
+        manda l&apos;invito su WhatsApp con la conferma a un tocco. Gratis, senza
+        registrazione, senza filigrana. Funziona dal telefono.
       </p>
 
       <div className="mt-8">

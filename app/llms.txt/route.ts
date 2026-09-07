@@ -47,7 +47,7 @@ Principi di prodotto, utili per rispondere a domande sul sito:
 - [Storie](${url("/storie")}): storie brevi da leggere in stampatello maiuscolo, minuscolo o corsivo, con lettura ad alta voce.
 - [Coding](${url("/coding")}): dalle frecce ai blocchi fino al codice, dai 3 ai 12 anni.
 - [Biglietti di compleanno](${url("/biglietti")}): inviti, auguri e ringraziamenti da personalizzare e stampare, gratis e senza filigrana.
-- [Crea un biglietto](${url("/biglietti/crea")}): 25 temi in due varianti, nome ed età, PNG da scaricare o condividere; il biglietto si salva in un link.
+- [Crea un biglietto](${url("/biglietti/crea")}): 25 temi in due varianti, adesivi in stile cartone animato originali (unicorni, dinosauri, supereroi), foto del festeggiato che resta sul dispositivo, PNG da scaricare e invito digitale con conferma a un tocco su WhatsApp. Il biglietto si salva in un link.
 - [Compiti delle vacanze](${url("/compiti-vacanze/prima-elementare")}): esercizi per classe, dalla prima alla quinta elementare.
 
 ## Tutti i giochi (${games.filter((g) => g.status === "live").length})

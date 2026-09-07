@@ -1,5 +1,6 @@
 import { Disegno } from "@/games/_engine/arte";
 import { Sfondo, inchiostro, type Variante } from "./Sfondo";
+import { StickerDisegno, type StickerSulBiglietto } from "./stickers";
 
 /**
  * Il biglietto disegnato. È un solo SVG: la stessa cosa che si vede in anteprima
@@ -21,6 +22,10 @@ export interface DatiBiglietto {
   firma: string;
   conMizi: boolean;
   carattere: "tondo" | "stampatello";
+  /** Adesivi appoggiati sul biglietto (facoltativi: i link vecchi non li hanno). */
+  stickers?: StickerSulBiglietto[];
+  /** Foto del festeggiato come data URL. Resta nel dispositivo: non va nei link. */
+  foto?: string;
 }
 
 /**
@@ -73,6 +78,26 @@ export function Biglietto({
       aria-label={`Biglietto per ${dati.nome || "il compleanno"}`}
     >
       <Sfondo tema={dati.tema} variante={dati.variante} larghezza={larghezza} altezza={altezza} />
+
+      {dati.foto && (
+        <>
+          <defs>
+            <clipPath id="clip-foto">
+              <circle cx={centroX} cy={u * 14} r={u * 8.5} />
+            </clipPath>
+          </defs>
+          <circle cx={centroX} cy={u * 14} r={u * 9.3} fill="#FFFFFF" opacity="0.9" />
+          <image
+            href={dati.foto}
+            x={centroX - u * 8.5}
+            y={u * 5.5}
+            width={u * 17}
+            height={u * 17}
+            preserveAspectRatio="xMidYMid slice"
+            clipPath="url(#clip-foto)"
+          />
+        </>
+      )}
 
       <text
         x={centroX}
@@ -181,6 +206,24 @@ export function Biglietto({
           <Disegno id="pinguino" className="" />
         </g>
       )}
+
+      {/* Adesivi: x/y in percentuale, così restano al loro posto in ogni formato.
+          data-sticker permette all'editor di trascinarli col dito. */}
+      {(dati.stickers ?? []).map((st, i) => {
+        const lato = altezza * 0.1 * st.s;
+        return (
+          <g
+            key={i}
+            data-sticker={i}
+            transform={`translate(${(st.x / 100) * larghezza - lato / 2} ${(st.y / 100) * altezza - lato / 2}) scale(${lato / 100})`}
+            style={{ cursor: "grab" }}
+          >
+            {/* Zona di presa generosa: col dito serve. */}
+            <rect x="-10" y="-10" width="120" height="120" fill="transparent" />
+            <StickerDisegno id={st.id} />
+          </g>
+        );
+      })}
     </svg>
   );
 }

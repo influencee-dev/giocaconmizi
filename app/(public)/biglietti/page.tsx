@@ -2,8 +2,39 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { cardTypes } from "@/cards/registry";
 import { Biglietto } from "@/components/biglietti/Biglietto";
-import { Contenitore, TitoloSezione } from "@/components/ui";
+import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
+import { JsonLd, jsonLdFaq } from "@/components/seo/JsonLd";
 import { ETA_BIGLIETTI, linkAlTool, temi } from "@/lib/biglietti";
+
+/* Le domande che le mamme fanno davvero: testo visibile + FAQPage JSON-LD,
+   così motori e assistenti AI possono citare la risposta (AEO). */
+const FAQ_BIGLIETTI = [
+  {
+    domanda: "Come creo un invito di compleanno gratis senza registrarmi?",
+    risposta:
+      "Apri il creatore, scegli uno dei 25 sfondi, scrivi nome ed età, scarica il PNG o manda l'invito su WhatsApp. Non serve nessun account e non c'è filigrana.",
+  },
+  {
+    domanda: "Posso mandare l'invito su WhatsApp con la conferma?",
+    risposta:
+      "Sì: se scrivi il tuo numero nel campo \"Conferma a\", chi riceve il link dell'invito trova il bottone \"Confermo, ci saremo!\" che ti scrive direttamente su WhatsApp.",
+  },
+  {
+    domanda: "Posso mettere la foto di mio figlio sul biglietto?",
+    risposta:
+      "Sì, dal telefono o dal computer. La foto resta sul tuo dispositivo: entra nel biglietto che scarichi ma non viene mai caricata su internet né inserita nei link.",
+  },
+  {
+    domanda: "Ci sono Peppa Pig, Paw Patrol o i personaggi Disney?",
+    risposta:
+      "No, e nessun sito gratuito può offrirli legalmente: sono personaggi protetti da copyright. Qui trovi adesivi disegnati da noi — unicorni, dinosauri, supereroi, principesse — che si possono stampare e regalare in tutta tranquillità.",
+  },
+  {
+    domanda: "In che formati posso scaricare il biglietto?",
+    risposta:
+      "A6 e A5 da stampare, verticale per WhatsApp e le storie, quadrato per i social. Sempre in PNG ad alta risoluzione, gratis.",
+  },
+];
 
 export const metadata: Metadata = {
   title: "Inviti e biglietti di compleanno per bambini, gratis",
@@ -134,6 +165,9 @@ export default function BigliettiPage() {
           serve quando gli inviti sono venti.
         </p>
       </section>
+
+      <JsonLd data={jsonLdFaq(FAQ_BIGLIETTI)} />
+      <Faq voci={FAQ_BIGLIETTI} />
     </Contenitore>
   );
 }
