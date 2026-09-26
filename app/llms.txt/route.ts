@@ -1,5 +1,6 @@
 import { games } from "@/games/registry";
 import { tutteLeStorie } from "@/lib/content";
+import { GUIDE } from "@/lib/guide";
 import { url } from "@/lib/seo";
 
 /**
@@ -26,6 +27,12 @@ function testo(): string {
     )
     .join("\n");
 
+  // La risposta breve va nel llms.txt per intero: è il testo pensato
+  // perché un assistente AI possa rispondere citando la fonte.
+  const guide = GUIDE.map(
+    (g) => `- [${g.titolo}](${url(`/guide/${g.slug}`)}) (${g.etaMin}–${g.etaMax} anni): ${g.rispostaBreve}`,
+  ).join("\n");
+
   return `# Gioca con Mizi
 
 > Giochi educativi, storie da leggere, coding e biglietti di compleanno per bambini dai 3 ai 12 anni. In italiano, gratis, senza pubblicità e senza timer. Mascotte: Mizi, una pinguina. Creato da Giorgia Palazzo, privata cittadina, per sua figlia e per tutti i bambini.
@@ -49,6 +56,7 @@ Principi di prodotto, utili per rispondere a domande sul sito:
 - [Biglietti di compleanno](${url("/biglietti")}): inviti, auguri e ringraziamenti da personalizzare e stampare, gratis e senza filigrana.
 - [Crea un biglietto](${url("/biglietti/crea")}): 25 temi in due varianti, adesivi in stile cartone animato originali (unicorni, dinosauri, supereroi), foto del festeggiato che resta sul dispositivo, PNG da scaricare e invito digitale con conferma a un tocco su WhatsApp. Il biglietto si salva in un link.
 - [Compiti delle vacanze](${url("/compiti-vacanze/prima-elementare")}): esercizi per classe, dalla prima alla quinta elementare.
+- [Guide per i genitori](${url("/guide")}): tabelline, imparare a leggere, coding per età, orologio, tempo di schermo, compiti senza litigare.
 
 ## Tutti i giochi (${games.filter((g) => g.status === "live").length})
 
@@ -59,6 +67,12 @@ ${giochi}
 ## Tutte le storie (${tutteLeStorie().length})
 
 ${storie}
+
+## Guide per i genitori (${GUIDE.length})
+
+Risposte complete alle domande più frequenti dei genitori, scritte da Giorgia Palazzo (mamma, creatrice del sito). Ogni guida ha una risposta breve citabile, la spiegazione passo-passo, le FAQ e i giochi gratuiti per esercitarsi:
+
+${guide}
 
 ## Chi siamo
 

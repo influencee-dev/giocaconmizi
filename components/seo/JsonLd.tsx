@@ -52,6 +52,37 @@ export function jsonLdGioco(gioco: {
   };
 }
 
+/** Una guida per i genitori: Article con autrice reale (E-E-A-T per motori e AI). */
+export function jsonLdArticolo(guida: {
+  slug: string;
+  titolo: string;
+  descrizione: string;
+  aggiornata: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: guida.titolo,
+    description: guida.descrizione,
+    url: url(`/guide/${guida.slug}`),
+    inLanguage: site.lingua,
+    isAccessibleForFree: true,
+    datePublished: guida.aggiornata,
+    dateModified: guida.aggiornata,
+    author: {
+      "@type": "Person",
+      name: "Giorgia Palazzo",
+      description: "Mamma e creatrice di Gioca con Mizi",
+      url: url("/chi-siamo"),
+    },
+    publisher: {
+      "@type": "Organization",
+      name: site.nome,
+      url: url("/"),
+    },
+  };
+}
+
 /** Le FAQ in fondo agli hub e alle pagine gioco. */
 export function jsonLdFaq(faq: { domanda: string; risposta: string }[]) {
   return {

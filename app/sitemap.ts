@@ -3,6 +3,7 @@ import { games } from "@/games/registry";
 import { tutteLeStorie } from "@/lib/content";
 import { tutteLePagine } from "@/lib/biglietti";
 import { esempiPubblicati } from "@/lib/esempi";
+import { GUIDE } from "@/lib/guide";
 import { classi, eta, url } from "@/lib/seo";
 
 /**
@@ -23,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/biglietti",
     "/biglietti/crea",
     "/biglietti/esempi",
+    "/guide",
     "/metodo",
     "/privacy",
     "/cookie",
@@ -66,6 +68,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: aggiornato,
       changeFrequency: "monthly" as const,
       priority: 0.7,
+    })),
+
+    // Le guide per i genitori: contenuto evergreen, priorità alta (AEO)
+    ...GUIDE.map((g) => ({
+      url: url(`/guide/${g.slug}`),
+      lastModified: new Date(g.aggiornata),
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
     })),
 
     ...[5, 6, 7].map((anni) => ({

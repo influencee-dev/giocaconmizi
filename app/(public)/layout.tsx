@@ -72,6 +72,7 @@ export default function PublicLayout({
               Giochi gratis, senza pubblicità, senza timer.
             </p>
             <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2 font-bold text-notte-tenue">
+              <Link href="/guide" className="hover:text-viola">Guide per i genitori</Link>
               <Link href="/metodo" className="hover:text-viola">Metodo</Link>
               <Link href="/perche-lo-facciamo" className="hover:text-viola">Perché lo facciamo</Link>
               <Link href="/chi-siamo" className="hover:text-viola">Chi siamo</Link>
