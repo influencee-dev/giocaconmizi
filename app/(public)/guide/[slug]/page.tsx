@@ -69,9 +69,17 @@ export default async function GuidaPage({
         / {voce.titoloBreve}
       </nav>
 
-      <h1 className="mt-3 text-3xl font-extrabold text-notte sm:text-4xl">
-        {voce.titolo}
-      </h1>
+      <div className="mt-4 flex items-start gap-4">
+        <span
+          aria-hidden
+          className="hidden h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-morbido bg-crema p-2 sm:flex"
+        >
+          <IllustrazioneSkill skill={voce.skill} />
+        </span>
+        <h1 className="min-w-0 text-3xl font-extrabold text-notte sm:text-4xl">
+          {voce.titolo}
+        </h1>
+      </div>
       <p className="mt-2 text-sm font-bold text-notte-tenue">
         {voce.etaMin}–{voce.etaMax} anni · {voce.minutiLettura} minuti di lettura ·
         di Giorgia Palazzo, mamma e creatrice del sito

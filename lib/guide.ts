@@ -1,3 +1,5 @@
+import type { Skill } from "@/games/registry";
+
 // Le guide per i genitori — Gioca con Mizi.
 // Rispondono alle domande che le mamme fanno davvero (a Google e alle AI):
 // ogni guida è una risposta completa, onesta e senza fuffa, con i giochi
@@ -23,6 +25,8 @@ export interface Guida {
   minutiLettura: number;
   /** Data ISO di pubblicazione/revisione, per l'Article JSON-LD. */
   aggiornata: string;
+  /** La scenetta di Mizi in testa alla guida (components/illustrazioni). */
+  skill: Skill;
   sezioni: SezioneGuida[];
   faq: { domanda: string; risposta: string }[];
   /** Slug dei giochi del sito citati come "per esercitarsi". */
@@ -32,6 +36,7 @@ export interface Guida {
 export const GUIDE: Guida[] = [
   {
     slug: "tabelline-senza-lacrime",
+    skill: "matematica",
     titolo: "Come insegnare le tabelline senza lacrime",
     titoloBreve: "Le tabelline",
     descrizione:
@@ -99,6 +104,7 @@ export const GUIDE: Guida[] = [
   },
   {
     slug: "coding-per-bambini",
+    skill: "coding",
     titolo: "Coding per bambini: a che età iniziare e come",
     titoloBreve: "Il coding",
     descrizione:
@@ -182,6 +188,7 @@ export const GUIDE: Guida[] = [
   },
   {
     slug: "imparare-a-leggere-l-orologio",
+    skill: "tempo",
     titolo: "Come insegnare ai bambini a leggere l'orologio",
     titoloBreve: "L'orologio",
     descrizione:
@@ -242,6 +249,7 @@ export const GUIDE: Guida[] = [
   },
   {
     slug: "imparare-a-leggere-giocando",
+    skill: "lettura",
     titolo: "Imparare a leggere: il percorso dai suoni alle prime frasi",
     titoloBreve: "Imparare a leggere",
     descrizione:
@@ -307,6 +315,7 @@ export const GUIDE: Guida[] = [
   },
   {
     slug: "tempo-davanti-allo-schermo",
+    skill: "emozioni",
     titolo: "Schermi e bambini: quanto tempo va bene davvero?",
     titoloBreve: "Il tempo di schermo",
     descrizione:
@@ -372,6 +381,7 @@ export const GUIDE: Guida[] = [
   },
   {
     slug: "compiti-senza-litigare",
+    skill: "comprensione",
     titolo: "Compiti a casa senza litigare: cosa funziona davvero",
     titoloBreve: "I compiti",
     descrizione:

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDE } from "@/lib/guide";
 import { Contenitore, TitoloSezione } from "@/components/ui";
+import { IllustrazioneSkill } from "@/components/illustrazioni";
 import { JsonLd, jsonLdBreadcrumb } from "@/components/seo/JsonLd";
 import { url } from "@/lib/seo";
 
@@ -51,8 +52,11 @@ export default function GuidePage() {
               key={g.slug}
               href={`/guide/${g.slug}`}
               data-tap
-              className="flex flex-col gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-5 transition-colors hover:border-viola"
+              className="flex flex-col gap-2 overflow-hidden rounded-morbido border-2 border-crema-scuro bg-white p-5 transition-colors hover:border-viola"
             >
+              <span aria-hidden className="-mx-5 -mt-5 mb-1 flex h-24 items-center justify-center bg-crema p-2">
+                <IllustrazioneSkill skill={g.skill} />
+              </span>
               <span className="text-xl font-extrabold text-notte">{g.titolo}</span>
               <span className="text-notte-tenue">{g.descrizione}</span>
               <span className="mt-auto pt-2 text-sm font-bold text-viola">
