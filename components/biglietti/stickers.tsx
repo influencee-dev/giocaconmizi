@@ -136,7 +136,9 @@ interface VoceCatalogo {
 const dallArte = (id: NomeFigura, nome: string): VoceCatalogo => ({
   id,
   nome,
-  disegno: <Disegno id={id} className="" />,
+  // lato esplicito: dentro un altro SVG, un <svg> senza misure vale "100%"
+  // del riquadro esterno e sfonda il layout della pagina.
+  disegno: <Disegno id={id} className="" lato={100} />,
 });
 
 export const CATALOGO_STICKER: VoceCatalogo[] = [

@@ -32,6 +32,7 @@ const VUOTO: DatiBiglietto = {
   conMizi: false,
   carattere: "tondo",
   stickers: [],
+  conQr: false,
 };
 
 /** Dove atterrano gli adesivi appena aggiunti: angoli e bordi, mai sul testo. */
@@ -251,10 +252,26 @@ export function Editor() {
             </button>
           </div>
           {dati.tipo === "invito" && numeroWhatsApp(dati.conferma) && (
-            <p className="mt-2 text-center text-sm text-notte-tenue">
-              Chi riceve l&apos;invito troverà il bottone{" "}
-              <strong>&quot;Confermo, ci saremo!&quot;</strong> che ti scrive su WhatsApp.
-            </p>
+            <div className="mt-2 flex flex-col gap-2">
+              <p className="text-center text-sm text-notte-tenue">
+                Chi riceve l&apos;invito troverà il bottone{" "}
+                <strong>&quot;Confermo, ci saremo!&quot;</strong> che ti scrive su WhatsApp.
+              </p>
+              {/* Il ponte tra carta e WhatsApp: la funzione che i tool a
+                  pagamento vendono come "QR RSVP". */}
+              <label className="mx-auto flex items-start gap-3 rounded-morbido border-2 border-crema-scuro bg-white p-3 font-bold text-notte">
+                <input
+                  type="checkbox"
+                  checked={dati.conQr ?? false}
+                  onChange={(e) => aggiorna("conQr", e.target.checked)}
+                  className="mt-0.5 h-6 w-6 shrink-0 accent-[#9B6DD6]"
+                />
+                <span className="text-sm">
+                  Metti il QR sul biglietto: chi lo riceve <em>stampato</em> conferma
+                  inquadrandolo col telefono
+                </span>
+              </label>
+            </div>
           )}
         </div>
       </div>
@@ -372,12 +389,16 @@ export function Editor() {
             <div className="flex flex-col gap-2">
               {stickers.map((st, i) => {
                 const voce = CATALOGO_STICKER.find((v) => v.id === st.id);
+                // flex-wrap: sugli schermi stretti i bottoni scendono sotto
+                // il nome invece di sfondare il bordo.
                 return (
-                  <div key={i} className="flex items-center gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-2">
-                    <svg viewBox="0 0 100 100" className="h-9 w-9 shrink-0" aria-hidden>
-                      {voce?.disegno}
-                    </svg>
-                    <span className="min-w-0 flex-1 truncate text-sm font-bold text-notte">{voce?.nome}</span>
+                  <div key={i} className="flex flex-wrap items-center gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-2">
+                    <span className="flex min-w-0 flex-1 items-center gap-2">
+                      <svg viewBox="0 0 100 100" className="h-9 w-9 shrink-0" aria-hidden>
+                        {voce?.disegno}
+                      </svg>
+                      <span className="min-w-0 truncate text-sm font-bold text-notte">{voce?.nome}</span>
+                    </span>
                     <button
                       type="button"
                       onClick={() => modificaSticker(i, { s: Math.max(0.6, st.s - 0.2) })}

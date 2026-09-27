@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Biglietto, type DatiBiglietto } from "./Biglietto";
 import { biglietoInPng, leggiDatiDaLink, numeroWhatsApp } from "@/lib/condivisione";
-import { misure } from "@/lib/biglietti";
+import { linkConferma, misure } from "@/lib/biglietti";
 
 /**
  * L'invito digitale: la pagina che riceve chi apre il link dell'invito.
@@ -28,6 +28,7 @@ const VUOTO: DatiBiglietto = {
   conMizi: false,
   carattere: "tondo",
   stickers: [],
+  conQr: false,
 };
 
 export function Invito() {
@@ -47,8 +48,8 @@ export function Invito() {
   if (!dati) return null;
 
   const conferma = () => {
-    const testo = `Confermo, ci saremo! 🎉${dati.nome ? ` (festa di ${dati.nome})` : ""}`;
-    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(testo)}`, "_blank", "noopener");
+    // Stesso link del QR sul biglietto: un solo posto dove vive il messaggio.
+    if (numero) window.open(linkConferma(numero, dati.nome), "_blank", "noopener");
   };
 
   const scarica = async () => {

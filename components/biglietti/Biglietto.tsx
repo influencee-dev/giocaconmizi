@@ -1,4 +1,6 @@
+import qrcode from "qrcode-generator";
 import { Disegno } from "@/games/_engine/arte";
+import { linkConferma, numeroWhatsApp } from "@/lib/biglietti";
 import { Sfondo, inchiostro, type Variante } from "./Sfondo";
 import { StickerDisegno, type StickerSulBiglietto } from "./stickers";
 
@@ -26,6 +28,55 @@ export interface DatiBiglietto {
   stickers?: StickerSulBiglietto[];
   /** Foto del festeggiato come data URL. Resta nel dispositivo: non va nei link. */
   foto?: string;
+  /** QR di conferma sul biglietto: chi lo stampa può confermare inquadrandolo. */
+  conQr?: boolean;
+}
+
+/**
+ * Il QR della conferma: codifica il link wa.me con il messaggio già scritto,
+ * così anche il biglietto STAMPATO ha la conferma a un tocco (basta inquadrare).
+ * Il contenuto è un URL corto e tutto ASCII: il QR resta piccolo e leggibile.
+ */
+function QrConferma({ url, x, y, lato }: { url: string; x: number; y: number; lato: number }) {
+  const qr = qrcode(0, "M");
+  qr.addData(url);
+  qr.make();
+  const moduli = qr.getModuleCount();
+  let percorso = "";
+  for (let r = 0; r < moduli; r++) {
+    for (let c = 0; c < moduli; c++) {
+      if (qr.isDark(r, c)) percorso += `M${c} ${r}h1v1h-1z`;
+    }
+  }
+  const margine = lato * 0.09; // zona quieta: serve ai lettori QR
+  return (
+    <g data-qr transform={`translate(${x} ${y})`}>
+      <rect
+        x={-margine}
+        y={-margine}
+        width={lato + margine * 2}
+        height={lato + margine * 2 + lato * 0.3}
+        rx={lato * 0.08}
+        fill="#FFFFFF"
+        stroke="#F6E3CF"
+        strokeWidth={lato * 0.02}
+      />
+      <g transform={`scale(${lato / moduli})`}>
+        <path d={percorso} fill="#1F2430" />
+      </g>
+      <text
+        x={lato / 2}
+        y={lato + margine + lato * 0.16}
+        textAnchor="middle"
+        fontFamily="Nunito, system-ui, sans-serif"
+        fontSize={lato * 0.115}
+        fontWeight="800"
+        fill="#1F2430"
+      >
+        Inquadra e conferma
+      </text>
+    </g>
+  );
 }
 
 /**
@@ -203,7 +254,7 @@ export function Biglietto({
 
       {dati.conMizi && (
         <g transform={`translate(${larghezza * 0.06} ${altezza * 0.78}) scale(${(altezza * 0.14) / 100})`}>
-          <Disegno id="pinguino" className="" />
+          <Disegno id="pinguino" className="" lato={100} />
         </g>
       )}
 
@@ -224,6 +275,21 @@ export function Biglietto({
           </g>
         );
       })}
+
+      {/* QR sopra a tutto: se un adesivo ci finisce sotto, resta leggibile. */}
+      {dati.tipo === "invito" && dati.conQr && numeroWhatsApp(dati.conferma) && (() => {
+        const lato = altezza * 0.13;
+        const margine = lato * 0.09;
+        const bordo = altezza * 0.035;
+        return (
+          <QrConferma
+            url={linkConferma(numeroWhatsApp(dati.conferma) as string, dati.nome)}
+            x={larghezza - bordo - lato - margine}
+            y={altezza - bordo - lato - margine - lato * 0.3}
+            lato={lato}
+          />
+        );
+      })()}
     </svg>
   );
 }

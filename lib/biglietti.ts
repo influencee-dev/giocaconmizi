@@ -169,3 +169,24 @@ export function tutteLePagine(): { slug: string; pagina: Pagina }[] {
 
 export const paginaPerSlug = (slug: string): Pagina | undefined =>
   tutteLePagine().find((p) => p.slug === slug)?.pagina;
+
+/**
+ * Dal campo "Conferma a" al numero per wa.me: solo cifre, con il prefisso 39
+ * aggiunto ai cellulari italiani scritti senza. Null se non pare un numero.
+ */
+export function numeroWhatsApp(conferma: string): string | null {
+  const cifre = conferma.replace(/[^\d+]/g, "").replace(/^\+/, "").replace(/^00/, "");
+  if (!/^\d{8,15}$/.test(cifre)) return null;
+  if (/^3\d{8,9}$/.test(cifre)) return `39${cifre}`;
+  return cifre;
+}
+
+/** Il messaggio di conferma già scritto: lo stesso per bottone e QR. */
+export function messaggioConferma(nome: string): string {
+  return `Confermo, ci saremo! 🎉${nome ? ` (festa di ${nome})` : ""}`;
+}
+
+/** Il link wa.me completo che il QR codifica e il bottone apre. */
+export function linkConferma(numero: string, nome: string): string {
+  return `https://wa.me/${numero}?text=${encodeURIComponent(messaggioConferma(nome))}`;
+}

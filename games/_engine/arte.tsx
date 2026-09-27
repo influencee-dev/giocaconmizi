@@ -355,11 +355,18 @@ export function Disegno({
   colore,
   className = "h-full w-full",
   titolo,
+  lato,
 }: {
   id: NomeFigura;
   colore?: string;
   className?: string;
   titolo?: string;
+  /**
+   * Taglia esplicita in unità utente: OBBLIGATORIA quando il disegno sta
+   * dentro un altro SVG. Un <svg> annidato senza width/height vale "100%"
+   * del riquadro esterno: si disegna enorme e gonfia il layout della pagina.
+   */
+  lato?: number;
 }) {
   const figura = FIGURE[id];
   if (!figura) return null;
@@ -367,6 +374,8 @@ export function Disegno({
   return (
     <svg
       viewBox="0 0 100 100"
+      width={lato}
+      height={lato}
       className={className}
       style={colore ? { color: colore } : undefined}
       role={titolo ? "img" : "presentation"}

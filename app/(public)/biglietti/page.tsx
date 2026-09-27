@@ -30,6 +30,11 @@ const FAQ_BIGLIETTI = [
       "No, e nessun sito gratuito può offrirli legalmente: sono personaggi protetti da copyright. Qui trovi adesivi disegnati da noi — unicorni, dinosauri, supereroi, principesse — che si possono stampare e regalare in tutta tranquillità.",
   },
   {
+    domanda: "Posso mettere un QR sul biglietto stampato per avere le conferme?",
+    risposta:
+      "Sì: se scrivi il tuo numero WhatsApp, puoi aggiungere sul biglietto un QR con scritto \"Inquadra e conferma\". Chi riceve l'invito di carta lo inquadra col telefono e ti arriva il messaggio di conferma su WhatsApp, già scritto.",
+  },
+  {
     domanda: "In che formati posso scaricare il biglietto?",
     risposta:
       "A6 e A5 da stampare, verticale per WhatsApp e le storie, quadrato per i social. Sempre in PNG ad alta risoluzione, gratis.",

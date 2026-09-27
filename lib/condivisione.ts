@@ -58,13 +58,7 @@ export function linkInvito(dati: DatiBiglietto): string {
   return `/biglietti/vedi?b=${datiPerLink(dati)}`;
 }
 
-/**
- * Dal campo "Conferma a" al numero per wa.me: solo cifre, con il prefisso 39
- * aggiunto ai cellulari italiani scritti senza. Null se non pare un numero.
- */
-export function numeroWhatsApp(conferma: string): string | null {
-  const cifre = conferma.replace(/[^\d+]/g, "").replace(/^\+/, "").replace(/^00/, "");
-  if (!/^\d{8,15}$/.test(cifre)) return null;
-  if (/^3\d{8,9}$/.test(cifre)) return `39${cifre}`;
-  return cifre;
-}
+// numeroWhatsApp vive in lib/biglietti.ts (serve anche al Biglietto, che
+// disegna il QR ed è usato da pagine server); da qui si riesporta per i
+// componenti che già la importavano.
+export { numeroWhatsApp } from "@/lib/biglietti";
