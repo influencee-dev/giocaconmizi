@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { games } from "@/games/registry";
 import { CardGioco, Contenitore, Faq, Griglia, TitoloSezione } from "@/components/ui";
-import { IllustrazioneSkill } from "@/components/illustrazioni";
+import { IconaGioco } from "@/components/icone";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { classi, etichettaClasse, type Classe } from "@/lib/seo";
 
@@ -100,7 +100,7 @@ export default async function CompitiVacanzePage({ params }: Params) {
               descrizione={g.subskill}
               eta={`${g.ageMin}–${g.ageMax}`}
               minuti={g.minutes}
-              illustrazione={<IllustrazioneSkill skill={g.skill} />}
+              illustrazione={<IconaGioco slug={g.slug} skill={g.skill} />}
             />
           ))}
         </Griglia>

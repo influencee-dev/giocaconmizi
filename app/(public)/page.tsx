@@ -5,7 +5,6 @@ import { games } from "@/games/registry";
 import { BottoneLink, Contenitore, TitoloSezione } from "@/components/ui";
 import { Blob, Onda, Stelline } from "@/components/decor";
 import {
-  IllustrazioneSkill,
   MiziIntero,
   ScenaBiglietti,
   ScenaCoding,
@@ -15,6 +14,7 @@ import {
   ScenaSenzaFretta,
   ScenaStorie,
 } from "@/components/illustrazioni";
+import { IconaGioco } from "@/components/icone";
 import { immagineMizi } from "@/lib/immagini";
 import { Disegno, type NomeFigura } from "@/games/_engine/arte";
 import { tutteLeStorie } from "@/lib/content";
@@ -252,7 +252,7 @@ export default function Home() {
                 className="group flex flex-col overflow-hidden rounded-morbido border-2 border-crema-scuro bg-white transition-transform hover:-translate-y-1 hover:border-viola"
               >
                 <div className="flex h-24 items-center justify-center bg-crema p-2 sm:h-28" aria-hidden>
-                  <IllustrazioneSkill skill={g.skill} />
+                  <IconaGioco slug={g.slug} skill={g.skill} />
                 </div>
                 <div className="flex grow flex-col gap-1 p-3">
                   <span className="font-extrabold leading-tight text-notte">{g.title}</span>

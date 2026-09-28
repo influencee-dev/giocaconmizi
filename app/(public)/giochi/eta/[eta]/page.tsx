@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { byAge, games } from "@/games/registry";
 import { hub } from "@/lib/content";
 import { CardGioco, Contenitore, Griglia, Prosa, TitoloSezione } from "@/components/ui";
-import { IllustrazioneSkill } from "@/components/illustrazioni";
+import { IconaGioco } from "@/components/icone";
 import { JsonLd, jsonLdBreadcrumb } from "@/components/seo/JsonLd";
 import { eta as etaCoperte } from "@/lib/seo";
 
@@ -79,7 +79,7 @@ export default async function HubEtaPage({ params }: Params) {
               descrizione={g.subskill}
               eta={`${g.ageMin}–${g.ageMax}`}
               minuti={g.minutes}
-              illustrazione={<IllustrazioneSkill skill={g.skill} />}
+              illustrazione={<IconaGioco slug={g.slug} skill={g.skill} />}
             />
           ))}
         </Griglia>

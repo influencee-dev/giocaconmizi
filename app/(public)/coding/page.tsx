@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { games } from "@/games/registry";
 import { CardGioco, Contenitore, Griglia, TitoloSezione } from "@/components/ui";
-import { IllustrazioneSkill } from "@/components/illustrazioni";
+import { IconaGioco } from "@/components/icone";
 
 export const metadata: Metadata = {
   title: "Coding per bambini e ragazzi",
@@ -36,7 +36,7 @@ export default function CodingPage() {
               descrizione={g.subskill}
               eta={`${g.ageMin}–${g.ageMax}`}
               minuti={g.minutes}
-              illustrazione={<IllustrazioneSkill skill={g.skill} />}
+              illustrazione={<IconaGioco slug={g.slug} skill={g.skill} />}
             />
           ))}
         </Griglia>
@@ -53,7 +53,7 @@ export default function CodingPage() {
               descrizione={g.subskill}
               eta={`${g.ageMin}–${g.ageMax}`}
               minuti={g.minutes}
-              illustrazione={<IllustrazioneSkill skill={g.skill} />}
+              illustrazione={<IconaGioco slug={g.slug} skill={g.skill} />}
             />
           ))}
         </Griglia>

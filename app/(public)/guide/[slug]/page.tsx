@@ -5,6 +5,7 @@ import { GUIDE, guida } from "@/lib/guide";
 import { games } from "@/games/registry";
 import { CardGioco, Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { IllustrazioneSkill } from "@/components/illustrazioni";
+import { IconaGioco } from "@/components/icone";
 import {
   JsonLd,
   jsonLdArticolo,
@@ -114,7 +115,7 @@ export default async function GuidaPage({
                 descrizione={g.subskill}
                 eta={`${g.ageMin}–${g.ageMax}`}
                 minuti={g.minutes}
-                illustrazione={<IllustrazioneSkill skill={g.skill} />}
+                illustrazione={<IconaGioco slug={g.slug} skill={g.skill} />}
               />
             ))}
           </div>

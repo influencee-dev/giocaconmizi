@@ -1,0 +1,7 @@
+Le icone in questa cartella provengono da Twemoji
+(https://github.com/jdecked/twemoji), copyright Twitter, Inc. e altri
+collaboratori, e sono usate secondo la licenza CC-BY 4.0
+(https://creativecommons.org/licenses/by/4.0/).
+
+I file sono rinominati con nomi italiani leggibili ma non modificati
+nel contenuto. Il credito è indicato nel footer del sito.

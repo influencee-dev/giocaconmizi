@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { COLORI, Disegno, FacciaMizi, Secchiello } from "@/games/_engine/arte";
+import { IconaGioco } from "@/components/icone";
+import { COLORI, Disegno, FacciaMizi } from "@/games/_engine/arte";
 import type { Skill } from "@/games/registry";
 
 /**
@@ -159,160 +160,13 @@ export function ScenaSenzaFretta({ className = "h-full w-full" }: { className?: 
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* Mini-scene per competenza: le card visive dei giochi                */
-/* ------------------------------------------------------------------ */
-
-function Cornice({ children }: { children: ReactNode }) {
-  return (
-    <svg viewBox="0 0 120 90" className="h-full w-full" aria-hidden>
-      {children}
-    </svg>
-  );
-}
-
-function Lettera({ x, y, ch, colore }: { x: number; y: number; ch: string; colore: string }) {
-  return (
-    <g>
-      <rect x={x - 17} y={y - 24} width="34" height="40" rx="10" fill={colore} />
-      <text x={x} y={y + 6} textAnchor="middle" fontSize="26" fontWeight="800" fill={COLORI.bianco} fontFamily="inherit">
-        {ch}
-      </text>
-    </g>
-  );
-}
-
-const SCENE_SKILL: Record<Skill, ReactNode> = {
-  numeri: (
-    <Cornice>
-      <g transform="translate(6 8) scale(0.36)"><Disegno id="pesce" className="" /></g>
-      <g transform="translate(44 8) scale(0.36)"><Disegno id="pesce" className="" /></g>
-      <g transform="translate(82 8) scale(0.36)"><Disegno id="pesce" className="" /></g>
-      <text x="60" y="82" textAnchor="middle" fontSize="30" fontWeight="800" fill="#1F2430" fontFamily="inherit">1 2 3</text>
-    </Cornice>
-  ),
-  colori: (
-    <Cornice>
-      <g transform="translate(8 14) scale(0.62)"><Secchiello colore="#F28AB2" className="" /></g>
-      <g transform="translate(48 14) scale(0.62)"><Secchiello colore="#3DB5E6" className="" /></g>
-      <g transform="translate(86 14) scale(0.62)"><Secchiello colore="#F9C846" className="" /></g>
-    </Cornice>
-  ),
-  forme: (
-    <Cornice>
-      <g transform="translate(4 20) scale(0.5)"><Disegno id="stella" colore="#F9C846" className="" /></g>
-      <g transform="translate(44 20) scale(0.5)"><Disegno id="cerchio" colore="#3DB5E6" className="" /></g>
-      <g transform="translate(82 20) scale(0.5)"><Disegno id="triangolo" colore="#F28AB2" className="" /></g>
-    </Cornice>
-  ),
-  memoria: (
-    <Cornice>
-      <rect x="10" y="12" width="44" height="64" rx="10" fill="#9B6DD6" />
-      <text x="32" y="55" textAnchor="middle" fontSize="30" fill={COLORI.bianco} fontFamily="inherit">?</text>
-      <rect x="64" y="12" width="44" height="64" rx="10" fill={COLORI.bianco} stroke="#F6E3CF" strokeWidth="3" />
-      <g transform="translate(68 18) scale(0.36)"><Disegno id="gatto" className="" /></g>
-    </Cornice>
-  ),
-  ascolto: (
-    <Cornice>
-      <g transform="translate(12 10) scale(0.7)"><Disegno id="gallo" className="" /></g>
-      <text x="92" y="36" textAnchor="middle" fontSize="30" fontFamily="inherit">🎵</text>
-    </Cornice>
-  ),
-  logica: (
-    <Cornice>
-      <g transform="translate(2 26) scale(0.34)"><Disegno id="cerchio" colore="#3DB5E6" className="" /></g>
-      <g transform="translate(32 26) scale(0.34)"><Disegno id="quadrato" colore="#F28AB2" className="" /></g>
-      <g transform="translate(62 26) scale(0.34)"><Disegno id="cerchio" colore="#3DB5E6" className="" /></g>
-      <text x="102" y="56" textAnchor="middle" fontSize="34" fontWeight="800" fill="#9B6DD6" fontFamily="inherit">?</text>
-    </Cornice>
-  ),
-  emozioni: (
-    <Cornice>
-      <g transform="translate(8 10) scale(0.7)"><FacciaMizi emozione="felice" className="" /></g>
-      <g transform="translate(62 10) scale(0.7)"><FacciaMizi emozione="sorpreso" className="" /></g>
-    </Cornice>
-  ),
-  fonetica: (
-    <Cornice>
-      <Lettera x={34} y={46} ch="B" colore="#3DB5E6" />
-      <g transform="translate(66 22) scale(0.44)"><Disegno id="barca" className="" /></g>
-    </Cornice>
-  ),
-  alfabeto: (
-    <Cornice>
-      <Lettera x={26} y={44} ch="A" colore="#F28AB2" />
-      <Lettera x={62} y={44} ch="B" colore="#3DB5E6" />
-      <Lettera x={98} y={44} ch="C" colore="#F9C846" />
-    </Cornice>
-  ),
-  lettura: (
-    <Cornice>
-      <g transform="translate(22 6) scale(0.78)"><Disegno id="libro" className="" /></g>
-    </Cornice>
-  ),
-  attenzione: (
-    <Cornice>
-      <circle cx="46" cy="40" r="24" fill="none" stroke="#9B6DD6" strokeWidth="6" />
-      <path d="M63 58 L84 78" stroke="#9B6DD6" strokeWidth="8" strokeLinecap="round" />
-      <g transform="translate(32 26) scale(0.28)"><Disegno id="ape" className="" /></g>
-    </Cornice>
-  ),
-  matematica: (
-    <Cornice>
-      <text x="60" y="56" textAnchor="middle" fontSize="34" fontWeight="800" fill="#1F2430" fontFamily="inherit">2 + 3</text>
-    </Cornice>
-  ),
-  ortografia: (
-    <Cornice>
-      <Lettera x={40} y={44} ch="C" colore="#9B6DD6" />
-      <Lettera x={78} y={44} ch="H" colore="#F59A23" />
-    </Cornice>
-  ),
-  inglese: (
-    <Cornice>
-      <g transform="translate(6 16) scale(0.6)"><Disegno id="gatto" className="" /></g>
-      <text x="86" y="52" textAnchor="middle" fontSize="24" fontWeight="800" fill="#3DB5E6" fontFamily="inherit">CAT</text>
-    </Cornice>
-  ),
-  comprensione: (
-    <Cornice>
-      <g transform="translate(4 10) scale(0.64)"><Disegno id="libro" className="" /></g>
-      <text x="92" y="52" textAnchor="middle" fontSize="34" fontWeight="800" fill="#9B6DD6" fontFamily="inherit">?</text>
-    </Cornice>
-  ),
-  coding: (
-    <Cornice>
-      {[0, 1, 2].map((c) =>
-        [0, 1].map((r) => (
-          <rect key={`${c}-${r}`} x={10 + c * 36} y={10 + r * 36} width="30" height="30" rx="7" fill={COLORI.bianco} stroke="#F6E3CF" strokeWidth="2.5" />
-        )),
-      )}
-      <g transform="translate(12 12) scale(0.26)"><Disegno id="pinguino" className="" /></g>
-      <text x="61" y="33" textAnchor="middle" fontSize="20" fontWeight="800" fill="#9B6DD6" fontFamily="inherit">→</text>
-      <text x="97" y="33" textAnchor="middle" fontSize="20" fontWeight="800" fill="#9B6DD6" fontFamily="inherit">↓</text>
-      <g transform="translate(84 48) scale(0.26)"><Disegno id="pesce" className="" /></g>
-    </Cornice>
-  ),
-  tempo: (
-    <Cornice>
-      <circle cx="60" cy="45" r="34" fill={COLORI.bianco} stroke="#F6E3CF" strokeWidth="4" />
-      <circle cx="60" cy="45" r="3" fill="#1F2430" />
-      <path d="M60 45 L60 24" stroke="#1F2430" strokeWidth="5" strokeLinecap="round" />
-      <path d="M60 45 L76 53" stroke="#F59A23" strokeWidth="5" strokeLinecap="round" />
-    </Cornice>
-  ),
-  spazio: (
-    <Cornice>
-      <path d="M14 14 h38 v18 a10 10 0 0 0 0 20 v18 h-38 z" fill="#3DB5E6" />
-      <path d="M56 14 h38 v56 h-38 v-18 a10 10 0 0 1 0 -20 z" fill="#F9C846" transform="translate(12 0)" />
-    </Cornice>
-  ),
-};
-
-/** La mini-scena illustrata di un gioco, scelta per competenza. */
+/**
+ * La mini-illustrazione di un gioco per competenza. Le scenette disegnate a
+ * mano (SCENE_SKILL, sopra) risultavano poco leggibili: ora si delega alla
+ * libreria di icone Twemoji in components/icone.tsx, molto più chiara.
+ */
 export function IllustrazioneSkill({ skill }: { skill: Skill }) {
-  return SCENE_SKILL[skill] ?? SCENE_SKILL.forme;
+  return <IconaGioco skill={skill} />;
 }
 
 /* ------------------------------------------------------------------ */

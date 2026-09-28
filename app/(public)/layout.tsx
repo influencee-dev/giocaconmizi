@@ -83,7 +83,9 @@ export default function PublicLayout({
               <Link href="/accedi" className="hover:text-viola">Accedi</Link>
             </nav>
             <p className="text-sm text-notte-tenue">
-              Gioca con Mizi — giocaconmizi.com
+              Gioca con Mizi — giocaconmizi.com · Icone di{" "}
+              <a href="https://github.com/jdecked/twemoji" target="_blank" rel="noopener" className="underline underline-offset-2 hover:text-viola">Twemoji</a>{" "}
+              (CC-BY 4.0)
             </p>
           </Contenitore>
         </div>
