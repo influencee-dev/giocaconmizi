@@ -1,7 +1,9 @@
-Le icone in questa cartella provengono da Twemoji
-(https://github.com/jdecked/twemoji), copyright Twitter, Inc. e altri
-collaboratori, e sono usate secondo la licenza CC-BY 4.0
-(https://creativecommons.org/licenses/by/4.0/).
+I file .png in questa cartella provengono da Fluent Emoji di Microsoft
+(https://github.com/microsoft/fluentui-emoji, stile 3D), licenza MIT:
+uso, copia e distribuzione liberi, anche commerciali.
 
-I file sono rinominati con nomi italiani leggibili ma non modificati
-nel contenuto. Il credito è indicato nel footer del sito.
+bandiera-uk.svg proviene da Twemoji (https://github.com/jdecked/twemoji),
+copyright Twitter, Inc. e collaboratori, licenza CC-BY 4.0
+(https://creativecommons.org/licenses/by/4.0/), credito nel footer.
+
+I file sono rinominati con nomi italiani leggibili ma non modificati.

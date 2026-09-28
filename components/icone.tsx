@@ -1,9 +1,10 @@
 import type { Skill } from "@/games/registry";
 
 /**
- * La libreria di icone del sito: Twemoji (CC-BY 4.0, credito nel footer),
- * vettoriali e colorate, copiate in public/icone/ con nomi italiani da
- * @twemoji/svg (vedi public/icone/LICENZA.txt).
+ * La libreria di icone del sito: Fluent Emoji di Microsoft (licenza MIT),
+ * lo stile lucido e tridimensionale scelto da Giorgia, copiate in
+ * public/icone/ con nomi italiani (vedi public/icone/LICENZA.txt).
+ * Solo la bandiera UK resta di Twemoji (Fluent non ha le bandiere).
  *
  * Un'icona nuova = un file copiato in public/icone/ + un nome qui sotto.
  * Le card dei giochi usano IconaGioco: prima cerca l'icona specifica del
@@ -72,13 +73,22 @@ export const ICONE_GIOCO: Record<string, NomeIcona[]> = {
   "crea-il-tuo-gioco": ["gamepad", "ingranaggio"],
 };
 
+/** Le poche icone rimaste in SVG Twemoji (Fluent non ha le bandiere). */
+const ANCORA_TWEMOJI = new Set<NomeIcona>(["bandiera-uk"]);
+
 /** Una fila di icone dentro il banner crema delle card. */
 export function Icone({ nomi, lato = "h-12 w-12" }: { nomi: NomeIcona[]; lato?: string }) {
   return (
     <span aria-hidden className="flex items-center justify-center gap-2">
       {nomi.map((n) => (
-        // eslint-disable-next-line @next/next/no-img-element -- SVG statici locali, niente da ottimizzare
-        <img key={n} src={`/icone/${n}.svg`} alt="" className={lato} loading="lazy" />
+        // eslint-disable-next-line @next/next/no-img-element -- file statici locali, niente da ottimizzare
+        <img
+          key={n}
+          src={`/icone/${n}.${ANCORA_TWEMOJI.has(n) ? "svg" : "png"}`}
+          alt=""
+          className={lato}
+          loading="lazy"
+        />
       ))}
     </span>
   );
