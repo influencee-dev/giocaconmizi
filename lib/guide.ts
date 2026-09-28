@@ -451,6 +451,80 @@ export const GUIDE: Guida[] = [
     ],
     giochi: ["tabelline", "unisci-le-sillabe", "leggi-e-rispondi", "l-orologio"],
   },
+  {
+    slug: "inglese-per-bambini",
+    titolo: "Inglese per bambini: a che et\u00e0 iniziare e come farlo bene",
+    titoloBreve: "L'inglese",
+    descrizione:
+      "Da che et\u00e0 un bambino pu\u00f2 imparare l'inglese, perch\u00e9 prima si inizia meglio \u00e8 (ma solo in un modo), cosa funziona a casa e i falsi miti da lasciar perdere.",
+    rispostaBreve:
+      "Non \u00e8 mai troppo presto: l'orecchio per i suoni di una lingua si forma nei primi anni, quindi canzoncine e cartoni in inglese vanno bene gi\u00e0 a 2-3 anni. Fino ai 7-8 anni l'inglese si assorbe ascoltando e giocando, non si studia: niente regole, niente traduzioni, niente correzioni. La grammatica arriva dopo, a scuola, su un orecchio gi\u00e0 allenato.",
+    etaMin: 3,
+    etaMax: 10,
+    minutiLettura: 6,
+    aggiornata: "2026-09-28",
+    skill: "inglese",
+    sezioni: [
+      {
+        titolo: "Perch\u00e9 prima si inizia meglio \u00e8 (ma non come pensi)",
+        paragrafi: [
+          "Nei primi anni di vita l'orecchio \u00e8 una spugna: un bambino piccolo distingue e riproduce suoni che a un adulto costano anni di fatica \u2014 il th inglese, la differenza fra ship e sheep. Questa finestra non si chiude di colpo a una certa et\u00e0, ma \u00e8 pi\u00f9 spalancata prima dei 7-8 anni. Per questo iniziare presto conviene.",
+          "Attenzione per\u00f2 al malinteso: iniziare presto NON significa mettere un bambino di 4 anni a studiare l'inglese. Significa fargli sentire l'inglese \u2014 canzoni, cartoni, giochi, filastrocche \u2014 come un suono familiare della sua giornata. \u00c8 la differenza fra assorbire una lingua e studiarla: e prima dei 7-8 anni funziona solo la prima.",
+        ],
+      },
+      {
+        titolo: "Il falso mito: \u00abcos\u00ec si confonde con l'italiano\u00bb",
+        paragrafi: [
+          "\u00c8 la paura pi\u00f9 diffusa ed \u00e8 infondata: decenni di studi sui bambini bilingui dicono che il cervello dei piccoli gestisce due lingue senza danneggiare nessuna delle due. Il mescolare le parole (\u00abvoglio il ball\u00bb) \u00e8 una fase normale e transitoria, non confusione: sta usando tutto il vocabolario che ha, da entrambe le scatole.",
+          "Semmai vale il contrario: chi cresce con due lingue allena flessibilit\u00e0 e attenzione. E no, non \u00e8 troppo tardi nemmeno se il tuo bambino ha gi\u00e0 8 o 10 anni: la finestra d'oro dell'orecchio si restringe, ma la capacit\u00e0 di imparare resta enorme per tutta l'infanzia.",
+        ],
+      },
+      {
+        titolo: "Cosa funziona a casa, et\u00e0 per et\u00e0",
+        paragrafi: [
+          "Dai 2 ai 5 anni: canzoncine inglesi (le stesse, tante volte: la ripetizione \u00e8 il motore), cartoni brevi in inglese \u2014 se un cartone lo guarda comunque, tanto vale che parli inglese \u2014 e giochi di parole singole: colori, animali, numeri. Dieci minuti al giorno cos\u00ec valgono pi\u00f9 di un'ora di corso a settimana.",
+          "Dai 6 agli 8: giochi dove sente la parola e tocca la figura giusta, prime frasi fatte (\u00abHow are you?\u00bb come rituale del mattino), libri illustrati semplicissimi. Il bambino capisce molto pi\u00f9 di quello che dice: \u00e8 normale, la comprensione arriva sempre prima della produzione, come in italiano.",
+          "Dai 9 in su: cartoni e video in inglese coi sottotitoli, primi videogiochi in inglese, e \u2014 se la passione c'\u00e8 \u2014 un corso fatto bene o uno scambio con bambini stranieri. Qui la grammatica della scuola inizia ad avere senso, perch\u00e9 si aggancia a suoni gi\u00e0 sentiti mille volte.",
+        ],
+      },
+      {
+        titolo: "Gli errori da evitare",
+        paragrafi: [
+          "Non tradurre tutto: se dici \u00abdog, che vuol dire cane\u00bb ogni volta, il bambino impara ad aspettare la traduzione. Meglio la figura, il gesto, l'oggetto: dog con la foto del cane, e basta. \u00c8 cos\u00ec che ha imparato anche l'italiano.",
+          "Non correggere la pronuncia: si aggiusta da sola con l'ascolto, mentre la correzione insegna solo che parlare inglese \u00e8 rischioso. E non forzare la performance: il \u00abdi' ciao in inglese alla zia!\u00bb davanti a tutti \u00e8 il modo pi\u00f9 rapido per far odiare la lingua. L'inglese deve restare un gioco, non un saggio.",
+          "Ultima cosa, sui genitori che l'inglese non lo sanno: non serve. Le canzoni e i cartoni la pronuncia ce l'hanno gi\u00e0 giusta; a te tocca solo la parte che sai fare \u2014 sederti vicino, ridere insieme e fare il tifo.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        domanda: "A che et\u00e0 un bambino pu\u00f2 iniziare con l'inglese?",
+        risposta:
+          "Anche a 2-3 anni, ma solo per esposizione: canzoni, cartoni e giochi in inglese. Lo studio vero e proprio, con regole e scrittura, ha senso dagli 8-9 anni su un orecchio gi\u00e0 abituato.",
+      },
+      {
+        domanda: "Imparare l'inglese da piccoli confonde con l'italiano?",
+        risposta:
+          "No: gli studi sui bambini bilingui mostrano che due lingue convivono benissimo. Mescolare le parole nelle frasi \u00e8 una fase normale e passeggera, non un segnale di confusione.",
+      },
+      {
+        domanda: "I cartoni in inglese funzionano davvero?",
+        risposta:
+          "S\u00ec, soprattutto tra i 2 e i 7 anni e ancora di pi\u00f9 se un adulto guarda insieme e riprende le parole nel gioco. Un cartone breve al giorno in inglese vale pi\u00f9 di una lezione a settimana.",
+      },
+      {
+        domanda: "Serve un corso o un insegnante madrelingua?",
+        risposta:
+          "Prima dei 6-7 anni di solito no: bastano esposizione quotidiana e giochi, gratis. Un corso ben fatto aggiunge valore dopo, quando il bambino \u00e8 curioso e pu\u00f2 usare la lingua con altri bambini.",
+      },
+      {
+        domanda: "Ho gi\u00e0 aspettato troppo? Mio figlio ha 9 anni.",
+        risposta:
+          "No: la finestra migliore per la pronuncia \u00e8 la prima infanzia, ma la capacit\u00e0 di imparare una lingua resta altissima per tutta l'infanzia e oltre. Si parte oggi, con ascolto quotidiano e zero ansia.",
+      },
+    ],
+    giochi: ["prime-parole-inglese", "il-suono-dell-animale", "memory-animali"],
+  },
 ];
 
 export function guida(slug: string): Guida | undefined {
