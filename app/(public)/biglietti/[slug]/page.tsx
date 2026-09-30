@@ -102,8 +102,8 @@ function descrivi(pagina: Pagina): {
   return {
     h1: `${maiuscola(nomi.plurale)} di compleanno per bambini`,
     titolo: `${maiuscola(nomi.plurale)} di compleanno per bambini`,
-    descrizione: `${maiuscola(nomi.plurale)} di compleanno per bambini da creare gratis online: 25 temi, personalizzabili con nome ed età. Senza registrazione.`,
-    risposta: `Puoi creare gratis ${nomi.plurale} di compleanno per bambini scegliendo fra venticinque temi, scriverci nome ed età e scaricarli subito. Non serve registrarsi e non c'è nessuna filigrana.`,
+    descrizione: `${maiuscola(nomi.plurale)} di compleanno per bambini da creare gratis online: 26 temi, personalizzabili con nome ed età. Senza registrazione.`,
+    risposta: `Puoi creare gratis ${nomi.plurale} di compleanno per bambini scegliendo fra ventisei temi, scriverci nome ed età e scaricarli subito. Non serve registrarsi e non c'è nessuna filigrana.`,
   };
 }
 

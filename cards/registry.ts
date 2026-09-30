@@ -27,6 +27,7 @@ const themes: [string, string, Gender, number, number, string[]][] = [
   ["fate", "Fate", "f", 3, 8, ["fate", "fatina", "bacchetta"]],
   ["ballerina", "Ballerina", "f", 3, 9, ["ballerina", "danza", "tutù"]],
   ["mattoncini", "Mattoncini", "n", 3, 10, ["mattoncini", "costruzioni", "lego"]],
+  ["halloween", "Halloween", "n", 3, 12, ["halloween", "zucca", "fantasmi", "pipistrelli", "dolcetto o scherzetto"]],
   ["stelle-luna", "Stelle e luna", "n", 1, 3, ["stelle", "luna", "primo compleanno", "nanna"]],
 ];
 

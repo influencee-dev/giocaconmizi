@@ -44,7 +44,7 @@ const FAQ_BIGLIETTI = [
 export const metadata: Metadata = {
   title: "Inviti e biglietti di compleanno per bambini, gratis",
   description:
-    "Crea gratis inviti, biglietti di auguri e ringraziamenti per il compleanno dei bambini: 25 temi, personalizzabili con nome ed età. Senza registrazione.",
+    "Crea gratis inviti, biglietti di auguri e ringraziamenti per il compleanno dei bambini: 26 temi, personalizzabili con nome ed età. Senza registrazione.",
   alternates: { canonical: "/biglietti" },
 };
 
@@ -64,7 +64,7 @@ export default function BigliettiPage() {
       </h1>
       <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
         Scegli lo sfondo, scrivi il nome e l&apos;età, scarica. Gratis, senza
-        registrazione e senza filigrana. Venticinque temi, ognuno in versione
+        registrazione e senza filigrana. Ventisei temi, ognuno in versione
         chiara e colorata.
       </p>
 

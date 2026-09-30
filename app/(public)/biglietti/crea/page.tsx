@@ -35,7 +35,7 @@ export default function CreaPage() {
           totalTime: "PT2M",
           step: [
             { "@type": "HowToStep", name: "Scegli il tipo e il formato", text: "Invito, auguri o ringraziamento; A6 per stamparlo o verticale per WhatsApp." },
-            { "@type": "HowToStep", name: "Scegli lo sfondo", text: "Venticinque temi, ognuno in versione chiara e colorata." },
+            { "@type": "HowToStep", name: "Scegli lo sfondo", text: "Ventisei temi, Halloween compreso, ognuno in versione chiara e colorata." },
             { "@type": "HowToStep", name: "Scrivi nome, età e frase", text: "Le frasi pronte si toccano e si modificano." },
             { "@type": "HowToStep", name: "Aggiungi adesivi e foto", text: "Unicorni, dinosauri e supereroi da trascinare col dito, più la foto del festeggiato." },
             { "@type": "HowToStep", name: "Scarica o manda su WhatsApp", text: "PNG da stampare, oppure l'invito digitale con il bottone di conferma su WhatsApp." },

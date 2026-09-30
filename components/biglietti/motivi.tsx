@@ -230,6 +230,26 @@ export const MOTIVI: Record<string, Tema> = {
       </>
     ),
   },
+  halloween: {
+    tinte: ["#F59A23", "#9B6DD6", "#1F2430"],
+    motivo: (t) => (
+      <>
+        {/* zucca sorridente */}
+        <ellipse cx="14" cy="28" rx="9" ry="7.5" fill={c(t, 0)} />
+        <path d="M11 28 Q14 24 17 28 Q14 32 11 28" fill="none" stroke={c(t, 2)} strokeWidth="0" />
+        <rect x="12.6" y="18.5" width="2.8" height="4" rx="1.2" fill={c(t, 1)} />
+        <circle cx="10.5" cy="26.5" r="1.2" fill={c(t, 2)} />
+        <circle cx="17.5" cy="26.5" r="1.2" fill={c(t, 2)} />
+        <path d="M10 30.5 Q14 33.5 18 30.5" fill="none" stroke={c(t, 2)} strokeWidth="1.4" strokeLinecap="round" />
+        {/* pipistrello buffo */}
+        <path d="M27 10 Q30 6 33 10 Q34 7 36 9 Q38 7 39 10 Q42 6 45 10 Q42 14 36 13 Q30 14 27 10" fill={c(t, 1)} transform="translate(-8 -2) scale(0.9)" />
+        {/* fantasmino */}
+        <path d="M28 24 Q28 18 33 18 Q38 18 38 24 L38 32 L36 30 L34 32 L32 30 L30 32 Z" fill="#FFFFFF" opacity="0.95" />
+        <circle cx="31.5" cy="23" r="1" fill={c(t, 2)} />
+        <circle cx="34.5" cy="23" r="1" fill={c(t, 2)} />
+      </>
+    ),
+  },
   palloncini: {
     tinte: ["#E8474B", "#3DB5E6", "#F9C846"],
     motivo: (t) => (

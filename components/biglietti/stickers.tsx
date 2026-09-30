@@ -133,6 +133,41 @@ interface VoceCatalogo {
   disegno: ReactNode;
 }
 
+const Zucca = (
+  <g>
+    <ellipse cx="50" cy="58" rx="34" ry="28" fill="#F59A23" stroke="#D97706" strokeWidth="2" />
+    <ellipse cx="30" cy="58" rx="12" ry="26" fill="none" stroke="#D97706" strokeWidth="2" opacity="0.6" />
+    <ellipse cx="70" cy="58" rx="12" ry="26" fill="none" stroke="#D97706" strokeWidth="2" opacity="0.6" />
+    <rect x="45" y="18" width="10" height="16" rx="4" fill="#4CAF6D" />
+    <path d="M55 24 Q68 18 72 28" fill="none" stroke="#4CAF6D" strokeWidth="4" strokeLinecap="round" />
+    <circle cx="38" cy="52" r="4.5" fill="#1F2430" />
+    <circle cx="62" cy="52" r="4.5" fill="#1F2430" />
+    <path d="M36 68 Q50 78 64 68" fill="none" stroke="#1F2430" strokeWidth="4" strokeLinecap="round" />
+  </g>
+);
+
+const Fantasmino = (
+  <g>
+    <path d="M26 52 Q26 20 50 20 Q74 20 74 52 L74 84 L66 76 L58 84 L50 76 L42 84 L34 76 L26 84 Z" fill="#FFFFFF" stroke="#D7D3F0" strokeWidth="2.5" />
+    <circle cx="41" cy="46" r="4.5" fill="#1F2430" />
+    <circle cx="59" cy="46" r="4.5" fill="#1F2430" />
+    <ellipse cx="50" cy="58" rx="5" ry="6.5" fill="#1F2430" opacity="0.85" />
+    <circle cx="33" cy="53" r="4" fill="#F8BBD0" opacity="0.8" />
+    <circle cx="67" cy="53" r="4" fill="#F8BBD0" opacity="0.8" />
+  </g>
+);
+
+const Pipistrello = (
+  <g>
+    <path d="M8 46 Q20 28 34 40 Q30 30 40 32 Q38 24 46 28 L54 28 Q62 24 60 32 Q70 30 66 40 Q80 28 92 46 Q78 42 74 50 Q66 44 60 52 Q56 46 50 52 Q44 46 40 52 Q34 44 26 50 Q22 42 8 46" fill="#9B6DD6" stroke="#7C4FC0" strokeWidth="2" />
+    <circle cx="44" cy="38" r="3.5" fill="#FFFFFF" />
+    <circle cx="56" cy="38" r="3.5" fill="#FFFFFF" />
+    <circle cx="44" cy="38" r="1.6" fill="#1F2430" />
+    <circle cx="56" cy="38" r="1.6" fill="#1F2430" />
+    <path d="M46 46 Q50 49 54 46" fill="none" stroke="#1F2430" strokeWidth="2" strokeLinecap="round" />
+  </g>
+);
+
 const dallArte = (id: NomeFigura, nome: string): VoceCatalogo => ({
   id,
   nome,
@@ -150,6 +185,9 @@ export const CATALOGO_STICKER: VoceCatalogo[] = [
   { id: "coccinella", nome: "Coccinella", disegno: Coccinella },
   { id: "corona", nome: "Corona", disegno: Corona },
   { id: "supereroe", nome: "Supereroe", disegno: Supereroe },
+  { id: "zucca", nome: "Zucca", disegno: Zucca },
+  { id: "fantasmino", nome: "Fantasmino", disegno: Fantasmino },
+  { id: "pipistrello", nome: "Pipistrello", disegno: Pipistrello },
   dallArte("torta", "Torta"),
   dallArte("razzo", "Razzo"),
   dallArte("gatto", "Gattino"),
