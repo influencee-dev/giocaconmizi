@@ -525,6 +525,76 @@ export const GUIDE: Guida[] = [
     ],
     giochi: ["prime-parole-inglese", "il-suono-dell-animale", "memory-animali"],
   },
+  {
+    slug: "memorizzare-le-poesie",
+    titolo: "Come far memorizzare una poesia senza ripeterla cento volte",
+    titoloBreve: "Le poesie",
+    descrizione:
+      "Il metodo per imparare una poesia a memoria in pochi giorni: a pezzi, con le immagini, col ritmo e con le ripetizioni distanziate. E gli errori che allungano la fatica.",
+    rispostaBreve:
+      "Una poesia non si impara ripetendola tutta di fila: si spezza in blocchi di 2-4 versi, si lega ogni blocco a un'immagine o a un gesto, la si recita col suo ritmo (quasi cantata) e la si ripassa poco ma spesso \u2014 5 minuti oggi, 5 domani, 5 dopodomani. Tre giorni cos\u00ec battono una serata intera di ripetizioni, perch\u00e9 la memoria si fissa negli intervalli, non nello sforzo.",
+    etaMin: 6,
+    etaMax: 11,
+    minutiLettura: 5,
+    aggiornata: "2026-10-02",
+    skill: "memoria",
+    sezioni: [
+      {
+        titolo: "Perch\u00e9 ripetere cento volte non funziona",
+        paragrafi: [
+          "La scena classica: \u00e8 sera, la poesia va sapere per domani, e si ripete da capo ogni volta che ci si inceppa. Risultato: i primi versi diventano di ferro, gli ultimi restano di nebbia, e la frustrazione sale. \u00c8 l'effetto di due errori insieme: studiare tutto in blocco e studiare tutto in una volta.",
+          "La memoria funziona al contrario: fissa nei momenti di pausa, non durante lo sforzo. Per questo cinque minuti al giorno per tre giorni valgono pi\u00f9 di un'ora la sera prima \u2014 \u00e8 la stessa regola delle tabelline, e vale per qualunque cosa da imparare a memoria.",
+        ],
+      },
+      {
+        titolo: "Il metodo in quattro mosse",
+        paragrafi: [
+          "1) Capire prima di memorizzare: leggete la poesia insieme una volta e fatevi raccontare cosa succede, con parole sue. Una parola che non capisce \u00e8 un buco in cui si incepper\u00e0 sempre.",
+          "2) Spezzare: 2-4 versi alla volta, mai di pi\u00f9. Si impara il primo blocco, poi il secondo, poi si attaccano (primo+secondo), poi il terzo, e cos\u00ec via. L'ultimo verso di un blocco \u00e8 l'aggancio del successivo.",
+          "3) Dare un'immagine a ogni blocco: \u00abqui c'\u00e8 il gregge, qui arriva la sera, qui la campana\u00bb. I bambini ricordano per scene, non per righe: un disegnino a margine per ogni blocco fa miracoli. Anche un gesto per blocco funziona (le mani che si chiudono per la sera, il dito che dondola per la campana).",
+          "4) Usare il ritmo: le poesie hanno una musica, ed \u00e8 la musica che la memoria aggancia. Recitarla quasi cantata, esagerando il ritmo, o batterla con le mani: sembra un gioco, \u00e8 il trucco pi\u00f9 antico del mondo \u2014 \u00e8 cos\u00ec che si tramandavano i poemi prima della scrittura.",
+        ],
+      },
+      {
+        titolo: "I trucchi in pi\u00f9 che costano zero",
+        paragrafi: [
+          "Registrarla: il bambino la recita (anche leggendola) sul telefono e la riascolta in macchina o prima di dormire. L'ascolto passivo ripassa senza fatica. Funziona anche la staffetta: un verso tu, un verso lui, poi si invertono \u2014 trasforma il ripasso in gioco e costringe a tenere il filo.",
+          "Il suggerimento giusto quando si blocca non \u00e8 dire il verso: \u00e8 dare la prima sillaba, o l'immagine del blocco (\u00absiamo alla campana...\u00bb). Cos\u00ec il recupero lo fa lui, ed \u00e8 il recupero che fissa il ricordo \u2014 non il risentire.",
+          "E la sera prima della recita: un solo ripasso completo e poi a dormire. \u00c8 nel sonno che la memoria consolida; l'ultima ora di ripetizioni strappate toglie sonno e aggiunge ansia, non versi.",
+        ],
+      },
+      {
+        titolo: "Quanto tempo serve (e quando non \u00e8 pigrizia)",
+        paragrafi: [
+          "Una poesia da 12-16 versi, col metodo a blocchi e 5-10 minuti al giorno, entra in 3-4 giorni per la maggior parte dei bambini di seconda-quinta. Quindi il segreto vero \u00e8 uno solo: iniziare quando la maestra la assegna, non la vigilia.",
+          "Se invece la fatica \u00e8 sproporzionata sempre \u2014 settimane per pochi versi, parole che si perdono dal giorno prima, stessa fatica enorme con le tabelline e le sequenze \u2014 parlatene con l'insegnante: una difficolt\u00e0 specifica di memoria verbale si pu\u00f2 riconoscere e aggirare con strategie su misura, e prima lo si fa meglio \u00e8.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        domanda: "Qual \u00e8 il modo pi\u00f9 veloce per imparare una poesia a memoria?",
+        risposta:
+          "Spezzarla in blocchi di 2-4 versi, legare ogni blocco a un'immagine o a un gesto, recitarla col suo ritmo e ripassarla 5-10 minuti al giorno per 3-4 giorni. Le ripetizioni distanziate battono sempre la serata unica.",
+      },
+      {
+        domanda: "Mio figlio la sa la sera e la dimentica la mattina: perch\u00e9?",
+        risposta:
+          "Perch\u00e9 l'ha imparata in una sola sessione: quella memoria \u00e8 fragile. Serve almeno una notte di sonno e un ripasso il giorno dopo perch\u00e9 si consolidi. \u00c8 il motivo per cui si inizia qualche giorno prima.",
+      },
+      {
+        domanda: "\u00c8 utile far copiare la poesia?",
+        risposta:
+          "Copiarla una volta aiuta chi ha memoria visiva, ma \u00e8 lento: meglio spendere lo stesso tempo recitando a blocchi col ritmo. Un buon compromesso \u00e8 far disegnare una piccola scena per ogni blocco.",
+      },
+      {
+        domanda: "Imparare a memoria serve ancora, con internet?",
+        risposta:
+          "S\u00ec: allenare la memoria verbale \u00e8 come allenare un muscolo, e il ritmo e il lessico delle poesie restano per sempre. Il punto non \u00e8 la poesia in s\u00e9: \u00e8 imparare COME si impara qualcosa a memoria.",
+      },
+    ],
+    giochi: ["memory-animali", "sequenze-logiche", "leggi-e-rispondi"],
+  },
 ];
 
 export function guida(slug: string): Guida | undefined {
