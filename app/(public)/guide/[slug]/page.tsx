@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { GUIDE, guida } from "@/lib/guide";
+import { GUIDE, guida, guideCorrelate } from "@/lib/guide";
 import { games } from "@/games/registry";
 import { CardGioco, Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { IllustrazioneSkill } from "@/components/illustrazioni";
@@ -123,6 +123,25 @@ export default async function GuidaPage({
       )}
 
       <Faq voci={voce.faq} />
+
+      <section className="mt-12">
+        <TitoloSezione>Leggi anche</TitoloSezione>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {guideCorrelate(voce.slug).map((g) => (
+            <Link
+              key={g.slug}
+              href={`/guide/${g.slug}`}
+              data-tap
+              className="flex flex-col gap-1 rounded-morbido border-2 border-crema-scuro bg-white p-4 transition-colors hover:border-viola"
+            >
+              <span className="font-extrabold text-notte">{g.titolo}</span>
+              <span className="mt-auto pt-1 text-sm font-bold text-viola">
+                {g.etaMin}–{g.etaMax} anni · {g.minutiLettura} minuti
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <section className="mt-10 flex flex-wrap items-center gap-4 rounded-morbido bg-crema p-6">
         <p className="min-w-0 flex-1 text-lg font-bold text-notte">

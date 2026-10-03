@@ -600,3 +600,17 @@ export const GUIDE: Guida[] = [
 export function guida(slug: string): Guida | undefined {
   return GUIDE.find((g) => g.slug === slug);
 }
+
+/**
+ * Le guide da leggere dopo questa: le più vicine per fascia d'età.
+ * Link interni veri su ogni pagina — per le mamme e per i motori (SEO/AEO).
+ */
+export function guideCorrelate(slug: string, quante = 3): Guida[] {
+  const questa = guida(slug);
+  if (!questa) return [];
+  const sovrapposizione = (g: Guida) =>
+    Math.min(g.etaMax, questa.etaMax) - Math.max(g.etaMin, questa.etaMin);
+  return GUIDE.filter((g) => g.slug !== slug)
+    .sort((a, b) => sovrapposizione(b) - sovrapposizione(a))
+    .slice(0, quante);
+}
