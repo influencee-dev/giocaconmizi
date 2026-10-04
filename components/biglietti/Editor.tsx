@@ -79,8 +79,8 @@ export function Editor() {
   const [larghezza, altezza] = misure(formato);
 
   const fraseSuggerite = useMemo(
-    () => frasi(dati.tipo, dati.nome || "{nome}", dati.eta || "{eta}"),
-    [dati.tipo, dati.nome, dati.eta],
+    () => frasi(dati.tipo, dati.nome || "{nome}", dati.eta || "{eta}", dati.tema),
+    [dati.tipo, dati.nome, dati.eta, dati.tema],
   );
 
   const aggiorna = useCallback(<K extends keyof DatiBiglietto>(chiave: K, valore: DatiBiglietto[K]) => {

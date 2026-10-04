@@ -65,6 +65,11 @@ await page.waitForTimeout(400);
 ok("invito digitale con bottone conferma",
   (await page.getByRole("button", { name: /Confermo, ci saremo/ }).count()) === 1);
 
+// Frasi a tema: col tema halloween la prima frase proposta è a tema
+await page.goto(`${BASE}/biglietti/crea?tema=halloween`, { waitUntil: "networkidle" });
+await page.waitForTimeout(400);
+ok("frasi a tema (halloween)", await page.locator("button:has-text('Dolcetto o scherzetto')").count());
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("biglietti") ? 0 : 1);

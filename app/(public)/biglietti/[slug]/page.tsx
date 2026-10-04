@@ -137,7 +137,7 @@ export default async function PaginaBiglietti({ params }: Params) {
   const anteprime = (temaFisso ? temi.filter((t) => t.theme === temaFisso) : temiPer(eta, genere))
     .slice(0, temaFisso ? 1 : 8);
 
-  const frasiPronte = frasi(tipo, "Sofia", eta ?? 5).slice(0, 3);
+  const frasiPronte = frasi(tipo, "Sofia", eta ?? 5, temaFisso).slice(0, 3);
 
   const faq = [
     {

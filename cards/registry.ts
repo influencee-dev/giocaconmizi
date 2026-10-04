@@ -41,6 +41,54 @@ export const cardBackgrounds: CardBg[] = themes.flatMap(([theme, label, gender, 
 export const cardTypes = ["invito", "auguri", "ringraziamento"] as const;
 export const cardFormats = { a6: [1240, 1748], a5: [1748, 2480], story: [1080, 1920], square: [1080, 1080] } as const;
 
+/**
+ * Frasi d'invito su misura del tema: compaiono PRIMA di quelle generiche
+ * quando nel creatore è scelto il tema. Due per tema, solo per i temi
+ * dove la frase a tema suona davvero meglio di quella generica.
+ */
+export const phrasesPerTema: Record<string, string[]> = {
+  halloween: [
+    "Dolcetto o scherzetto? {nome} compie {eta} anni: festa da brivido!",
+    "Streghette e fantasmini, siete invitati: {nome} festeggia {eta} anni!",
+  ],
+  unicorno: [
+    "{nome} compie {eta} anni: una festa magica ti aspetta!",
+    "Unicorni e arcobaleni per i {eta} anni di {nome}: vieni a festeggiare?",
+  ],
+  dinosauri: [
+    "ROAARRR! {nome} compie {eta} anni: festa giurassica in arrivo!",
+    "Caccia al dinosauro per i {eta} anni di {nome}: ti aspettiamo!",
+  ],
+  calcio: [
+    "Fischio d'inizio! {nome} compie {eta} anni: vieni a giocare con noi?",
+    "{nome} ti convoca per la festa dei suoi {eta} anni: non mancare!",
+  ],
+  principessa: [
+    "Il castello è in festa: la principessa {nome} compie {eta} anni!",
+    "Sei invitato a corte: {nome} festeggia {eta} anni da vera principessa!",
+  ],
+  supereroe: [
+    "Serve il tuo superpotere: {nome} compie {eta} anni, vieni a salvarci la festa!",
+    "Missione compleanno: {nome} spegne {eta} candeline. Accetti l'incarico?",
+  ],
+  spazio: [
+    "3, 2, 1... decollo! {nome} compie {eta} anni: festa spaziale!",
+    "Destinazione festa: {nome} ti aspetta per i suoi {eta} anni tra le stelle.",
+  ],
+  sirena: [
+    "In fondo al mar si festeggia: {nome} compie {eta} anni!",
+    "Tuffati alla festa di {nome}: {eta} anni tra onde e conchiglie!",
+  ],
+  pirati: [
+    "All'arrembaggio! {nome} compie {eta} anni: la ciurma ti aspetta!",
+    "C'è un tesoro alla festa di {nome}: vieni a cercarlo per i suoi {eta} anni!",
+  ],
+  "mondo-a-cubetti": [
+    "Nuova missione sbloccata: la festa dei {eta} anni di {nome}!",
+    "{nome} compie {eta} anni: vieni a costruire la festa blocco su blocco?",
+  ],
+};
+
 export const phrases = {
   invito: [
     "{nome} compie {eta} anni e vuole festeggiare con te!",
