@@ -595,6 +595,80 @@ export const GUIDE: Guida[] = [
     ],
     giochi: ["memory-animali", "sequenze-logiche", "leggi-e-rispondi"],
   },
+  {
+    slug: "ansia-da-verifica",
+    titolo: "Ansia da verifica: aiutare un bambino che va nel panico in classe",
+    titoloBreve: "L'ansia da verifica",
+    descrizione:
+      "\u00abA casa la sapeva, in classe \u00e8 andato nel pallone\u00bb: perch\u00e9 succede, cosa fare prima e dopo la verifica, le frasi che aiutano e quelle che peggiorano.",
+    rispostaBreve:
+      "Il vuoto di memoria durante la verifica non \u00e8 scarso impegno: \u00e8 l'ansia che spegne proprio la parte del cervello che recupera i ricordi. Si combatte prima, non durante: preparazione a piccole dosi nei giorni precedenti, una \u00absimulazione\u00bb a casa senza voto per abituarsi alla situazione, una tecnica di respirazione imparata quando si \u00e8 tranquilli, e commenti dei genitori sul percorso (\u00abti sei preparato bene\u00bb) invece che sul voto.",
+    etaMin: 7,
+    etaMax: 11,
+    minutiLettura: 6,
+    aggiornata: "2026-10-05",
+    skill: "emozioni",
+    sezioni: [
+      {
+        titolo: "\u00abA casa la sapeva\u00bb: cosa succede davvero",
+        paragrafi: [
+          "\u00c8 la frase che ogni genitore ha detto almeno una volta: a casa rispondeva a tutto, davanti al foglio si \u00e8 bloccato. Non \u00e8 una scusa e non \u00e8 pigrizia: quando l'ansia sale oltre un certo punto, il corpo entra in modalit\u00e0 allarme e dirotta le energie via dalla parte del cervello che serve per recuperare i ricordi. Il \u00abvuoto\u00bb \u00e8 un effetto fisico, non un difetto di studio.",
+          "I segnali tipici nei giorni prima: mal di pancia la mattina della verifica, sonno agitato, \u00abnon sono capace\u00bb detto spesso, e quel perfezionismo che continua a ripassare la cosa che sa gi\u00e0 perch\u00e9 ripassare le cose nuove fa paura.",
+        ],
+      },
+      {
+        titolo: "La preparazione \u00e8 l'ansiolitico migliore (se fatta cos\u00ec)",
+        paragrafi: [
+          "Il cuore del problema spesso non \u00e8 la verifica: \u00e8 arrivarci con tutto da studiare all'ultimo. Le piccole dosi distribuite nei giorni (la stessa regola di tabelline e poesie: poco, ma spesso) tolgono all'ansia il suo carburante principale, il \u00abnon ce la far\u00f2 mai\u00bb.",
+          "Poi c'\u00e8 il trucco che i ricercatori chiamano esposizione e che a casa si chiama gioco: fare una finta verifica. Stesso tempo, foglio, silenzio \u2014 ma senza voto e con sdrammatizzazione finale. Il cervello impara che la situazione \u00abfoglio + tempo\u00bb non \u00e8 pericolosa, e in classe la riconosce invece di temerla. Due o tre simulazioni valgono pi\u00f9 di dieci ripassi.",
+          "La sera prima: ripasso leggero, zaino pronto, nanna presto. La mattina: colazione e una frase di fiducia concreta \u2014 non \u00abandr\u00e0 benissimo\u00bb (che \u00e8 una pressione travestita) ma \u00abti sei preparato, qualunque cosa esca te la cavi\u00bb.",
+        ],
+      },
+      {
+        titolo: "Le armi da dare al bambino (da imparare quando \u00e8 tranquillo)",
+        paragrafi: [
+          "La respirazione lenta funziona davvero, ma solo se \u00e8 gi\u00e0 automatica: insegnarla durante il panico \u00e8 inutile. Si impara giocando nei giorni tranquilli \u2014 \u00abgonfia la pancia come un palloncino, 4 secondi dentro, 4 fuori, 3 volte\u00bb \u2014 e si prova insieme prima della finta verifica.",
+          "Poi la strategia del \u00absalta e torna\u00bb: se una domanda ti blocca, passa alla successiva e torna dopo. I bambini ansiosi si incagliano sulla prima difficolt\u00e0 e bruciano il tempo; sapere che \u00absaltare \u00e8 permesso\u00bb \u00e8 liberatorio. E un gesto-ancora deciso insieme (toccare il banco, stringere la matita) come segnale di \u00abrespiro e riparto\u00bb.",
+        ],
+      },
+      {
+        titolo: "Dopo la verifica: dove si vince o si perde tutto",
+        paragrafi: [
+          "Il commento al voto costruisce (o smonta) l'ansia della verifica successiva. Funziona lodare il processo \u2014 \u00abavevi preparato bene, si \u00e8 visto\u00bb \u2014 e trattare gli errori come informazioni: \u00abquesta non l'avevi capita, la riguardiamo\u00bb. Non funzionano i confronti (\u00abtuo fratello...\u00bb), i premi in denaro sul voto, e nemmeno l'esagerare la festa per il voto alto: dice al bambino che \u00e8 il voto a misurare quanto vale.",
+          "E se \u00e8 andata male dopo tanta preparazione, la frase giusta \u00e8 una sola: \u00ab\u00e8 un voto, non sei tu. Vediamo cosa ci dice.\u00bb",
+        ],
+      },
+      {
+        titolo: "Quando serve un aiuto in pi\u00f9",
+        paragrafi: [
+          "Un po' di tensione prima di una verifica \u00e8 normale e perfino utile. I campanelli sono altri: mal di pancia o vomito sistematici nei giorni di verifica, pianti o rifiuto di andare a scuola, blackout che capitano sempre nonostante una preparazione vera. In quei casi parlatene prima con l'insegnante (spesso pu\u00f2 aiutare con piccoli accorgimenti in classe) e, se il quadro non migliora, con il pediatra: l'ansia scolastica si tratta bene, soprattutto se presa presto.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        domanda: "Perch\u00e9 mio figlio sa tutto a casa e si blocca in classe?",
+        risposta:
+          "Perch\u00e9 l'ansia alta interferisce fisicamente col recupero dei ricordi: il \u00abvuoto\u00bb \u00e8 un effetto dello stress, non un segno di studio insufficiente. Si previene con la preparazione distribuita e abituandolo alla situazione con finte verifiche senza voto.",
+      },
+      {
+        domanda: "Cosa dire a un bambino la mattina della verifica?",
+        risposta:
+          "Una fiducia concreta: \u00abti sei preparato, qualunque cosa esca te la cavi\u00bb. Meglio evitare \u00abandr\u00e0 benissimo\u00bb e \u00abmi raccomando\u00bb: alzano l'asticella proprio nel momento sbagliato.",
+      },
+      {
+        domanda: "Le tecniche di respirazione funzionano con i bambini?",
+        risposta:
+          "S\u00ec, ma solo se imparate e provate nei momenti tranquilli, finch\u00e9 diventano automatiche: insegnate durante il panico non servono. Il formato che funziona: pancia che si gonfia, 4 secondi dentro, 4 fuori, tre volte.",
+      },
+      {
+        domanda: "Devo premiare i voti belli?",
+        risposta:
+          "Meglio di no: i premi sul voto insegnano che conta il risultato, ed \u00e8 esattamente il pensiero che alimenta l'ansia. Funziona riconoscere l'impegno \u2014 \u00abhai lavorato bene tutta la settimana\u00bb \u2014 che dipende da lui, a differenza del voto.",
+      },
+    ],
+    giochi: ["le-emozioni-di-mizi", "tabelline", "leggi-e-rispondi"],
+  },
 ];
 
 export function guida(slug: string): Guida | undefined {
