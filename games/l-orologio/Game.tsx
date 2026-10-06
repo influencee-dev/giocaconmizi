@@ -7,7 +7,9 @@ import type { GameProps } from "@/games/_engine/tipi";
 
 /**
  * Che ore sono? (6–9 anni).
- * Livello 1 ore esatte, livello 2 mezz'ore, livello 3 i quarti. L'orologio è
+ * Livello 1 ore esatte, livello 2 mezz'ore, livello 3 i quarti in cifre,
+ * livello 4 l'ora detta a voce ("le tre e un quarto", "le nove meno un
+ * quarto"): è così che l'orologio si usa davvero in Italia. L'orologio è
  * un SVG: le lancette sono davvero all'angolo giusto, minuti compresi, così
  * la lancetta delle ore avanza fra un'ora e l'altra come su un orologio vero.
  */
@@ -64,13 +66,51 @@ function scrivi(ore: number, minuti: number): string {
   return `${ore}:${String(minuti).padStart(2, "0")}`;
 }
 
+const NOMI_ORE = [
+  "dodici", "una", "due", "tre", "quattro", "cinque",
+  "sei", "sette", "otto", "nove", "dieci", "undici",
+];
+
+/** "3:15" come lo si dice a voce: "le tre e un quarto". */
+function aParole(ore: number, minuti: number): string {
+  const nome = (quale: number) => {
+    const n = NOMI_ORE[quale % 12];
+    return n === "una" ? "l'una" : `le ${n}`;
+  };
+  if (minuti === 0) return `${nome(ore)} in punto`;
+  if (minuti === 15) return `${nome(ore)} e un quarto`;
+  if (minuti === 30) return `${nome(ore)} e mezza`;
+  return `${nome(ore + 1)} meno un quarto`;
+}
+
 export default function Game(props: GameProps) {
   const round = useMemo<Round[]>(() => {
-    return Array.from({ length: 6 }, (_, i) => {
-      // Ore esatte, poi mezz'ore, poi i quarti.
+    return Array.from({ length: 8 }, (_, i) => {
+      // Ore esatte, poi mezz'ore, poi i quarti in cifre, infine a parole.
       const passo = i < 2 ? [0] : i < 4 ? [0, 30] : [0, 15, 30, 45];
       const ore = numero(1, 12);
-      const minuti = passo[numero(0, passo.length - 1)];
+      // Negli ultimi round niente ore esatte: il punto sono le frasi dei quarti.
+      const minuti = i < 6 ? passo[numero(0, passo.length - 1)] : [15, 30, 45][numero(0, 2)];
+
+      if (i >= 6) {
+        const giusta = aParole(ore, minuti);
+        const alternative = new Set<string>();
+        while (alternative.size < 3) {
+          const testo = aParole(numero(1, 12), passo[numero(0, passo.length - 1)]);
+          if (testo !== giusta) alternative.add(testo);
+        }
+        return {
+          istruzione: "Guarda l'orologio. Come la dici a voce?",
+          mostraTesto: true,
+          colonne: 1,
+          opzioni: mescola([giusta, ...alternative]).map((testo) => ({
+            id: testo,
+            etichetta: testo,
+          })),
+          correttaId: giusta,
+          centro: <Orologio ore={ore} minuti={minuti} />,
+        };
+      }
 
       const alternative = new Set<string>();
       while (alternative.size < 3) {
@@ -86,7 +126,11 @@ export default function Game(props: GameProps) {
         opzioni: mescola([scrivi(ore, minuti), ...alternative]).map((testo) => ({
           id: testo,
           etichetta: testo,
-          descrizione: `Le ${testo}`,
+          // La voce legge l'ora come la si dice, non le cifre.
+          descrizione: aParole(
+            Number(testo.split(":")[0]),
+            Number(testo.split(":")[1]),
+          ),
         })),
         correttaId: scrivi(ore, minuti),
         centro: <Orologio ore={ore} minuti={minuti} />,

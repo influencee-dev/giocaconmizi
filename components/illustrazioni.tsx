@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import { IconaGioco } from "@/components/icone";
 import { COLORI, Disegno, FacciaMizi } from "@/games/_engine/arte";
 import type { Skill } from "@/games/registry";

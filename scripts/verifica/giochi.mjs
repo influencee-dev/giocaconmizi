@@ -24,8 +24,24 @@ for (let i = 0; i < 8; i++) {
 }
 ok("inglese: partita completa 8/8", round === 8, `${round}/8`);
 
+// Partita completa a "Che ore sono?" (8 round, due finali con l'ora a parole).
+// La risposta giusta non si legge dall'istruzione, quindi si prova finché il
+// round avanza: gli errori spengono il bottone, max 4 tocchi per round.
+const primaOrologio = erroriJs;
+await page.goto(`${BASE}/giochi/l-orologio/gioca`, { waitUntil: "networkidle" });
+await page.waitForTimeout(800);
+let vinta = false;
+for (let tocchi = 0; tocchi < 40 && !vinta; tocchi++) {
+  const libero = page.locator("main div.grid > button:enabled").first();
+  if (!(await libero.count().catch(() => 0))) break;
+  await libero.tap().catch(() => {});
+  await page.waitForTimeout(1300);
+  vinta = await page.locator("text=Bravissimo!").isVisible().catch(() => false);
+}
+ok("orologio: partita completa fino alla festa", vinta && erroriJs === primaOrologio);
+
 // Le pagine /gioca dei giochi più complessi si aprono senza errori JS
-for (const slug of ["labirinto-a-blocchi", "tartaruga", "crea-il-tuo-gioco", "missione-ghiaccio", "l-orologio"]) {
+for (const slug of ["labirinto-a-blocchi", "tartaruga", "crea-il-tuo-gioco", "missione-ghiaccio"]) {
   const prima = erroriJs;
   await page.goto(`${BASE}/giochi/${slug}/gioca`, { waitUntil: "networkidle" });
   await page.waitForTimeout(1200);

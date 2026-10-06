@@ -46,6 +46,8 @@ export interface Round {
   centro?: ReactNode;
   opzioni: Opzione[];
   correttaId: string;
+  /** Colonne solo per questo round: vince sulle colonne del gioco. */
+  colonne?: number;
 }
 
 export interface SceltaMultiplaProps extends GameProps {
@@ -145,7 +147,9 @@ export function SceltaMultipla({
   }, []);
 
   const colonneEffettive =
-    colonne ?? (corrente.opzioni.length <= 3 ? corrente.opzioni.length : corrente.opzioni.length <= 4 ? 2 : 3);
+    corrente.colonne ??
+    colonne ??
+    (corrente.opzioni.length <= 3 ? corrente.opzioni.length : corrente.opzioni.length <= 4 ? 2 : 3);
 
   return (
     <GameShell
@@ -227,9 +231,13 @@ function BottoneOpzione({
         </div>
       );
     }
-    return (
-      <span className="text-3xl font-extrabold text-notte sm:text-4xl">{opzione.etichetta}</span>
-    );
+    // Le frasi intere ("le nove meno un quarto") a corpo pieno sbrodolano
+    // dai bottoni sui telefoni: oltre le 10 lettere il corpo scende.
+    const corpo =
+      (opzione.etichetta?.length ?? 0) > 10
+        ? "text-xl sm:text-2xl"
+        : "text-3xl sm:text-4xl";
+    return <span className={`font-extrabold text-notte ${corpo}`}>{opzione.etichetta}</span>;
   }, [opzione]);
 
   return (
