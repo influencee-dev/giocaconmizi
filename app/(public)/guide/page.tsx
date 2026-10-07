@@ -3,8 +3,7 @@ import Link from "next/link";
 import { GUIDE } from "@/lib/guide";
 import { Contenitore, TitoloSezione } from "@/components/ui";
 import { IllustrazioneSkill } from "@/components/illustrazioni";
-import { JsonLd, jsonLdBreadcrumb } from "@/components/seo/JsonLd";
-import { url } from "@/lib/seo";
+import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "Guide per i genitori: tabelline, lettura, coding, compiti",
@@ -13,25 +12,15 @@ export const metadata: Metadata = {
   alternates: { canonical: "/guide" },
 };
 
-/** ItemList: dice ai motori e alle AI che questo è l'indice delle guide. */
-function jsonLdElenco() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Guide per i genitori — Gioca con Mizi",
-    itemListElement: GUIDE.map((g, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: g.titolo,
-      url: url(`/guide/${g.slug}`),
-    })),
-  };
-}
-
 export default function GuidePage() {
   return (
     <Contenitore className="py-10">
-      <JsonLd data={jsonLdElenco()} />
+      <JsonLd
+        data={jsonLdElenco(
+          "Guide per i genitori — Gioca con Mizi",
+          GUIDE.map((g) => ({ nome: g.titolo, percorso: `/guide/${g.slug}` })),
+        )}
+      />
       <JsonLd data={jsonLdBreadcrumb([{ nome: "Guide", percorso: "/guide" }])} />
 
       <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">

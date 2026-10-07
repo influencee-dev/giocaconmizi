@@ -31,17 +31,24 @@ export function jsonLdSito() {
   };
 }
 
-/** Una singola pagina di gioco. */
+/**
+ * Una singola pagina di gioco. Doppio tipo Game + LearningResource: per i
+ * motori è un gioco, per le AI è una risorsa didattica con scritto cosa
+ * insegna (teaches), a chi (audience) e quanto dura.
+ */
 export function jsonLdGioco(gioco: {
   slug: string;
   title: string;
   description: string;
   ageMin: number;
   ageMax: number;
+  skill: string;
+  subskill: string;
+  minutes: number;
 }) {
   return {
     "@context": "https://schema.org",
-    "@type": "Game",
+    "@type": ["Game", "LearningResource"],
     name: gioco.title,
     description: gioco.description,
     url: url(`/giochi/${gioco.slug}`),
@@ -49,6 +56,37 @@ export function jsonLdGioco(gioco: {
     isAccessibleForFree: true,
     typicalAgeRange: `${gioco.ageMin}-${gioco.ageMax}`,
     genre: "Gioco educativo",
+    teaches: gioco.subskill,
+    about: gioco.skill,
+    learningResourceType: "gioco interattivo",
+    educationalUse: "esercitazione",
+    interactivityType: "active",
+    timeRequired: `PT${gioco.minutes}M`,
+    audience: {
+      "@type": "PeopleAudience",
+      suggestedMinAge: gioco.ageMin,
+      suggestedMaxAge: gioco.ageMax,
+    },
+    provider: {
+      "@type": "Organization",
+      name: site.nome,
+      url: url("/"),
+    },
+  };
+}
+
+/** Indice di una sezione (hub età, competenza, guide): l'elenco dei contenuti. */
+export function jsonLdElenco(nome: string, voci: { nome: string; percorso: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: nome,
+    itemListElement: voci.map((voce, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: voce.nome,
+      url: url(voce.percorso),
+    })),
   };
 }
 

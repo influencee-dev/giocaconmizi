@@ -53,6 +53,9 @@ export default async function GiocoPage({ params }: Params) {
           description: descrizione,
           ageMin: gioco.ageMin,
           ageMax: gioco.ageMax,
+          skill: gioco.skill,
+          subskill: gioco.subskill,
+          minutes: gioco.minutes,
         })}
       />
       {/* Le stesse FAQ che il lettore vede in fondo alla pagina */}

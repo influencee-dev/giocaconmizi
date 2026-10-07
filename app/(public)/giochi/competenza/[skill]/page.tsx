@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { games, type Skill } from "@/games/registry";
 import { CardGioco, Contenitore, Griglia } from "@/components/ui";
 import { IconaGioco } from "@/components/icone";
-import { JsonLd, jsonLdBreadcrumb } from "@/components/seo/JsonLd";
+import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 
 type Params = { params: Promise<{ skill: string }> };
 
@@ -67,6 +67,13 @@ export default async function HubCompetenzaPage({ params }: Params) {
           { nome: "Giochi", percorso: "/giochi" },
           { nome: voce.nome, percorso: `/giochi/competenza/${skill}` },
         ])}
+      />
+      {/* L'elenco dei giochi di questa competenza, leggibile dai motori e dalle AI. */}
+      <JsonLd
+        data={jsonLdElenco(
+          `${voce.nome} — giochi educativi`,
+          selezione.map((g) => ({ nome: g.title, percorso: `/giochi/${g.slug}` })),
+        )}
       />
 
       <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">{voce.nome}</h1>

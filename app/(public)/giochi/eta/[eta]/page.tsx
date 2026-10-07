@@ -4,7 +4,7 @@ import { byAge, games } from "@/games/registry";
 import { hub } from "@/lib/content";
 import { CardGioco, Contenitore, Griglia, Prosa, TitoloSezione } from "@/components/ui";
 import { IconaGioco } from "@/components/icone";
-import { JsonLd, jsonLdBreadcrumb } from "@/components/seo/JsonLd";
+import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 import { eta as etaCoperte } from "@/lib/seo";
 
 type Params = { params: Promise<{ eta: string }> };
@@ -58,6 +58,13 @@ export default async function HubEtaPage({ params }: Params) {
           { nome: "Giochi", percorso: "/giochi" },
           { nome: `${anni} anni`, percorso: `/giochi/eta/${eta}` },
         ])}
+      />
+      {/* L'elenco dei giochi di questa età, leggibile dai motori e dalle AI. */}
+      <JsonLd
+        data={jsonLdElenco(
+          `Giochi educativi per bambini di ${anni} anni`,
+          selezione.map((g) => ({ nome: g.title, percorso: `/giochi/${g.slug}` })),
+        )}
       />
 
       {contenuto ? (

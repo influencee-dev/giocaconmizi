@@ -48,6 +48,23 @@ for (const slug of ["labirinto-a-blocchi", "tartaruga", "crea-il-tuo-gioco", "mi
   ok(`${slug} apre pulito`, erroriJs === prima);
 }
 
+// Dati strutturati: la scheda gioco dichiara cosa insegna, gli hub l'elenco
+async function jsonLdDi(percorso) {
+  await page.goto(`${BASE}${percorso}`, { waitUntil: "domcontentloaded" });
+  const blocchi = await page.locator("script[type='application/ld+json']").allTextContents();
+  return blocchi.join("\n");
+}
+const schedaGioco = await jsonLdDi("/giochi/l-orologio");
+ok(
+  "scheda gioco: JSON-LD LearningResource con teaches",
+  schedaGioco.includes("LearningResource") && schedaGioco.includes("teaches"),
+);
+ok("hub età: JSON-LD ItemList", (await jsonLdDi("/giochi/eta/5-anni")).includes("ItemList"));
+ok(
+  "hub competenza: JSON-LD ItemList",
+  (await jsonLdDi("/giochi/competenza/matematica")).includes("ItemList"),
+);
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("giochi") ? 0 : 1);
