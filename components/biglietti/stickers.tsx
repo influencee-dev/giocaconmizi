@@ -168,6 +168,47 @@ const Pipistrello = (
   </g>
 );
 
+const Alberello = (
+  <g>
+    <path d="M50 8 L66 32 L58 32 L72 54 L62 54 L78 80 L22 80 L38 54 L28 54 L42 32 L34 32 Z" fill="#4CAF6D" stroke="#3B8A55" strokeWidth="2" />
+    <rect x="44" y="80" width="12" height="12" rx="3" fill="#8B5A2B" />
+    <path d="M50 2 L52.4 7.6 L58.5 8.2 L54 12.2 L55.3 18 L50 15 L44.7 18 L46 12.2 L41.5 8.2 L47.6 7.6 Z" fill="#F9C846" />
+    <circle cx="40" cy="44" r="4" fill="#E8474B" />
+    <circle cx="58" cy="62" r="4" fill="#F9C846" />
+    <circle cx="44" cy="70" r="4" fill="#3DB5E6" />
+  </g>
+);
+
+const PupazzoDiNeve = (
+  <g>
+    <circle cx="50" cy="66" r="24" fill="#FFFFFF" stroke="#D7E3F0" strokeWidth="2.5" />
+    <circle cx="50" cy="34" r="16" fill="#FFFFFF" stroke="#D7E3F0" strokeWidth="2.5" />
+    <rect x="38" y="12" width="24" height="7" rx="2" fill="#1F2430" />
+    <rect x="43" y="2" width="14" height="12" rx="2" fill="#1F2430" />
+    <circle cx="44" cy="31" r="2.2" fill="#1F2430" />
+    <circle cx="56" cy="31" r="2.2" fill="#1F2430" />
+    <path d="M50 35 L58 38 L50 40 Z" fill="#F59A23" />
+    <path d="M44 44 Q50 48 56 44" stroke="#E8474B" strokeWidth="5" fill="none" strokeLinecap="round" />
+    <circle cx="50" cy="60" r="2.4" fill="#1F2430" />
+    <circle cx="50" cy="70" r="2.4" fill="#1F2430" />
+  </g>
+);
+
+const FioccoDiNeve = (
+  <g stroke="#3DB5E6" strokeWidth="5" strokeLinecap="round" fill="none">
+    <path d="M50 10 V90" />
+    <path d="M15 30 L85 70" />
+    <path d="M85 30 L15 70" />
+    <path d="M50 10 L42 20 M50 10 L58 20" />
+    <path d="M50 90 L42 80 M50 90 L58 80" />
+    <path d="M15 30 L28 32 M15 30 L17 43" />
+    <path d="M85 70 L72 68 M85 70 L83 57" />
+    <path d="M85 30 L72 32 M85 30 L83 43" />
+    <path d="M15 70 L28 68 M15 70 L17 57" />
+    <circle cx="50" cy="50" r="7" fill="#FFFFFF" strokeWidth="4" />
+  </g>
+);
+
 const dallArte = (id: NomeFigura, nome: string): VoceCatalogo => ({
   id,
   nome,
@@ -188,6 +229,9 @@ export const CATALOGO_STICKER: VoceCatalogo[] = [
   { id: "zucca", nome: "Zucca", disegno: Zucca },
   { id: "fantasmino", nome: "Fantasmino", disegno: Fantasmino },
   { id: "pipistrello", nome: "Pipistrello", disegno: Pipistrello },
+  { id: "alberello", nome: "Alberello", disegno: Alberello },
+  { id: "pupazzo-di-neve", nome: "Pupazzo di neve", disegno: PupazzoDiNeve },
+  { id: "fiocco-di-neve", nome: "Fiocco di neve", disegno: FioccoDiNeve },
   dallArte("torta", "Torta"),
   dallArte("razzo", "Razzo"),
   dallArte("gatto", "Gattino"),

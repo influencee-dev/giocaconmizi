@@ -64,7 +64,7 @@ export default function BigliettiPage() {
       </h1>
       <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
         Scegli lo sfondo, scrivi il nome e l&apos;età, scarica. Gratis, senza
-        registrazione e senza filigrana. Ventisei temi, ognuno in versione
+        registrazione e senza filigrana. Ventisette temi, ognuno in versione
         chiara e colorata.
       </p>
 

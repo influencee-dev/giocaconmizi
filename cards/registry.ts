@@ -1,4 +1,4 @@
-// Sfondi biglietti — 25 temi × 2 varianti. File in public/cards/bg-{tema}-{chiaro|colorato}.png (1240×1748)
+// Sfondi biglietti — un tema × 2 varianti; i motivi sono SVG (components/biglietti/motivi.tsx)
 export type Gender = "f" | "m" | "n";
 export interface CardBg { id: string; theme: string; label: string; variant: "chiaro" | "colorato"; gender: Gender; ageMin: number; ageMax: number; keywords: string[]; file: string; }
 
@@ -28,6 +28,7 @@ const themes: [string, string, Gender, number, number, string[]][] = [
   ["ballerina", "Ballerina", "f", 3, 9, ["ballerina", "danza", "tutù"]],
   ["mattoncini", "Mattoncini", "n", 3, 10, ["mattoncini", "costruzioni", "lego"]],
   ["halloween", "Halloween", "n", 3, 12, ["halloween", "zucca", "fantasmi", "pipistrelli", "dolcetto o scherzetto"]],
+  ["natale", "Natale", "n", 1, 12, ["natale", "albero", "neve", "renne", "feste di dicembre"]],
   ["stelle-luna", "Stelle e luna", "n", 1, 3, ["stelle", "luna", "primo compleanno", "nanna"]],
 ];
 
@@ -50,6 +51,10 @@ export const phrasesPerTema: Record<string, string[]> = {
   halloween: [
     "Dolcetto o scherzetto? {nome} compie {eta} anni: festa da brivido!",
     "Streghette e fantasmini, siete invitati: {nome} festeggia {eta} anni!",
+  ],
+  natale: [
+    "Un compleanno sotto l'albero: {nome} compie {eta} anni, vieni a festeggiare?",
+    "Campanelline e cioccolata calda: festeggiamo i {eta} anni di {nome}!",
   ],
   unicorno: [
     "{nome} compie {eta} anni: una festa magica ti aspetta!",

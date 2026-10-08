@@ -70,6 +70,15 @@ await page.goto(`${BASE}/biglietti/crea?tema=halloween`, { waitUntil: "networkid
 await page.waitForTimeout(400);
 ok("frasi a tema (halloween)", await page.locator("button:has-text('Dolcetto o scherzetto')").count());
 
+// Tema natale: frase dedicata e i tre adesivi nuovi a catalogo
+await page.goto(`${BASE}/biglietti/crea?tema=natale`, { waitUntil: "networkidle" });
+await page.waitForTimeout(400);
+ok("frasi a tema (natale)", await page.getByRole("button", { name: /sotto l'albero/ }).count());
+ok("adesivi di natale a catalogo",
+  (await page.getByRole("button", { name: "Aggiungi Pupazzo di neve" }).count()) &&
+  (await page.getByRole("button", { name: "Aggiungi Alberello" }).count()) &&
+  (await page.getByRole("button", { name: "Aggiungi Fiocco di neve" }).count()));
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("biglietti") ? 0 : 1);

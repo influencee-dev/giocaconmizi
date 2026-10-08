@@ -250,6 +250,30 @@ export const MOTIVI: Record<string, Tema> = {
       </>
     ),
   },
+  natale: {
+    tinte: ["#4CAF6D", "#E8474B", "#F9C846"],
+    motivo: (t) => (
+      <>
+        {/* abete a tre balze con la stella */}
+        <path d="M14 10 L20 18 L17 18 L22 25 L18.5 25 L24 33 L4 33 L9.5 25 L6 25 L11 18 L8 18 Z" fill={c(t, 0)} />
+        <rect x="12" y="33" width="4" height="4" rx="1" fill="#8B5A2B" />
+        <path d="M14 4 L15.3 7 L18.5 7.3 L16 9.4 L16.8 12.5 L14 10.8 L11.2 12.5 L12 9.4 L9.5 7.3 L12.7 7 Z" fill={c(t, 2)} />
+        <circle cx="10" cy="27" r="1.6" fill={c(t, 1)} />
+        <circle cx="18" cy="21" r="1.6" fill={c(t, 1)} />
+        {/* pallina appesa */}
+        <path d="M33 14 V18" stroke={c(t, 2)} strokeWidth="1.2" />
+        <circle cx="33" cy="23" r="5" fill={c(t, 1)} />
+        <path d="M28.5 21.5 Q33 19.5 37.5 21.5" stroke="#FFFFFF" strokeWidth="1.4" fill="none" opacity="0.8" />
+        {/* fiocco di neve */}
+        <g stroke="#FFFFFF" strokeWidth="1.4" strokeLinecap="round" opacity="0.95">
+          <path d="M31 32 L35 40" />
+          <path d="M35 32 L31 40" />
+          <path d="M33 31 V41" />
+          <path d="M29 36 H37" />
+        </g>
+      </>
+    ),
+  },
   palloncini: {
     tinte: ["#E8474B", "#3DB5E6", "#F9C846"],
     motivo: (t) => (
