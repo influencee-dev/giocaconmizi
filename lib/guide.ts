@@ -669,6 +669,81 @@ export const GUIDE: Guida[] = [
     ],
     giochi: ["le-emozioni-di-mizi", "tabelline", "leggi-e-rispondi"],
   },
+  {
+    slug: "scrittura-in-corsivo",
+    skill: "ortografia",
+    titolo: "Il corsivo: quando si impara e come aiutare a casa",
+    titoloBreve: "Il corsivo",
+    descrizione:
+      "A che età si impara il corsivo, come preparare la mano prima ancora di scrivere, gli errori di impugnatura da correggere subito e cosa fare se la scrittura resta faticosa.",
+    rispostaBreve:
+      "Il corsivo si impara in prima e seconda elementare (6-7 anni), ma la mano si prepara molto prima con plastilina, mollette, ritagli e cornicette: è motricità fine, non scrittura. A casa servono sessioni brevi e senza fretta, un'impugnatura corretta fin dall'inizio — correggerla dopo è molto più difficile — e tanta lettura del corsivo, che è un'abilità a parte e si allena leggendo storie scritte in corsivo.",
+    etaMin: 5,
+    etaMax: 8,
+    minutiLettura: 6,
+    aggiornata: "2026-10-09",
+    sezioni: [
+      {
+        titolo: "Quando si inizia (e perché non serve anticipare)",
+        paragrafi: [
+          "In Italia il corsivo arriva di solito fra la fine della prima e la seconda elementare, dopo stampato maiuscolo e minuscolo. Non è un ritardo né una moda: il corsivo chiede movimenti continui e piccolissimi, e la mano di un bambino di cinque anni semplicemente non li ha ancora. Anticiparlo a tavolino non crea un vantaggio, crea un'impostazione sbagliata da smontare dopo.",
+          "Quello che si può anticipare, invece, è la preparazione della mano. Un bambino che a cinque anni taglia con le forbici, appallottola la plastilina e colora dentro i bordi sta già facendo il lavoro che gli servirà per il corsivo, senza saperlo e divertendosi.",
+        ],
+      },
+      {
+        titolo: "Prima del corsivo: mani forti e gesti sciolti",
+        paragrafi: [
+          "La scrittura è un gesto sportivo in miniatura: servono spalla stabile, polso sciolto e dita forti. Gli esercizi migliori non sembrano esercizi: stendere e tagliare la pasta di sale, raccogliere ceci con le dita o con una molletta, strappare carta in pezzetti piccoli, avvitare e svitare tappi, infilare perline.",
+          "Poi ci sono i tracciati: onde, ponti, anelli e cornicette disegnati grandi, prima col dito nell'aria o nella farina, poi col pennarello su fogli grandi, infine piccoli sul quaderno. Sono le \"palestre\" dei movimenti che diventeranno le, la, li. Cinque minuti quando capita valgono più di mezz'ora imposta la domenica.",
+        ],
+      },
+      {
+        titolo: "L'impugnatura: l'unica cosa da correggere subito",
+        paragrafi: [
+          "Sulla maggior parte degli errori di scrittura conviene chiudere un occhio: la grafia si sistema con il tempo. L'impugnatura no. Il modo in cui un bambino tiene la matita nei primi mesi diventa automatico in fretta, e un'impugnatura storta a sette anni è dura da cambiare a dieci. Quella corretta è la \"pinza a tre dita\": pollice e indice tengono, il medio appoggia, e la matita riposa nell'incavo fra pollice e indice.",
+          "Un trucco che funziona: fategli tenere un fazzoletto appallottolato sotto anulare e mignolo mentre scrive. Quelle due dita restano occupate e le altre tre si sistemano quasi da sole. E controllate la postura: piedi a terra, foglio leggermente inclinato — verso sinistra per i destrimani, verso destra per i mancini.",
+          "Per i mancini due attenzioni in più: il foglio spostato a sinistra del centro del corpo, e mai pretendere che la mano stia sotto la riga \"come gli altri\": il mancino vede quello che scrive inclinando il foglio, non torcendo il polso.",
+        ],
+      },
+      {
+        titolo: "Leggere il corsivo è un'altra abilità (e si allena)",
+        paragrafi: [
+          "Scrivere in corsivo e leggere il corsivo sono due abilità diverse: ci sono bambini che lo scrivono e poi non riescono a rileggere il quaderno, né il biglietto della nonna. La lettura del corsivo si allena da sola, con poco: basta avere sotto gli occhi testi in corsivo, brevi e dal contenuto piacevole.",
+          "Su Gioca con Mizi le storie si possono leggere in stampato maiuscolo, minuscolo o corsivo con un tocco: la stessa storia che il bambino conosce già, nel carattere nuovo. Rileggere in corsivo una storia già letta in stampato è il gradino perfetto: il contenuto è noto, tutta l'attenzione va sulle lettere.",
+        ],
+      },
+      {
+        titolo: "Se la scrittura resta una fatica",
+        paragrafi: [
+          "C'è il bambino a cui il corsivo \"non piace\" e c'è quello per cui scrivere è una fatica vera: mano che duole dopo tre righe, lettere di dimensioni molto diverse fra loro, parole che salgono e scendono dalla riga, lentezza che non migliora con i mesi. Se in terza elementare scrivere è ancora così costoso, parlatene con l'insegnante: a volte dietro c'è una disgrafia, che non è pigrizia e si affronta tanto meglio quanto prima la si riconosce.",
+          "Nel frattempo, a casa, togliete pressione: meno copiati lunghi, più scritte brevi e sensate (la lista della spesa, il biglietto per la nonna), e il permesso esplicito di essere lenti. Un bambino che scrive poco ma volentieri recupera; uno che scrive tanto odiando ogni riga no.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        domanda: "A che età si impara il corsivo?",
+        risposta:
+          "In prima e seconda elementare, quindi fra i 6 e i 7 anni, dopo lo stampato. Prima si prepara la mano con giochi di motricità fine: plastilina, forbici, perline, cornicette.",
+      },
+      {
+        domanda: "Mio figlio tiene male la matita: devo correggerlo?",
+        risposta:
+          "Sì, ed è una delle poche cose da correggere subito: l'impugnatura diventa automatica in fretta. Quella giusta è la pinza a tre dita; aiuta far tenere un fazzoletto appallottolato sotto anulare e mignolo mentre scrive.",
+      },
+      {
+        domanda: "Il bambino è mancino: cambia qualcosa?",
+        risposta:
+          "Cambiano foglio e posizione, non l'obiettivo: foglio a sinistra del centro del corpo e inclinato verso destra, polso dritto sotto la riga mai forzato. Mancino non significa grafia peggiore.",
+      },
+      {
+        domanda: "Scrive in corsivo ma non riesce a leggerlo: è normale?",
+        risposta:
+          "Sì: scrivere e leggere il corsivo sono abilità separate. Si allena leggendo testi brevi in corsivo, meglio se storie che il bambino già conosce in stampato, così l'attenzione va tutta sulle lettere.",
+      },
+    ],
+    giochi: ["tocca-la-lettera", "ortografia-c-ch-g-gh", "leggi-e-rispondi"],
+  },
 ];
 
 export function guida(slug: string): Guida | undefined {
