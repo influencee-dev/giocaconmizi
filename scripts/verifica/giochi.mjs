@@ -5,24 +5,28 @@ const servito = await conServer();
 const b = await apriBrowser();
 const { ok, chiudi } = contatore();
 
-// Partita completa a "Prime parole in inglese" (8 round, risposte lette dall'istruzione)
+// Partita completa a "Prime parole in inglese": 10 round, risposte lette
+// dall'istruzione — "Where is the cat?" (parole e cerchi colorati) oppure
+// "Where are three fish?" (numeri, aria-label "three fish").
 const page = await b.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 let erroriJs = 0;
 page.on("pageerror", () => erroriJs++);
 await page.goto(`${BASE}/giochi/prime-parole-inglese/gioca`, { waitUntil: "networkidle" });
 await page.waitForTimeout(800);
 let round = 0;
-for (let i = 0; i < 8; i++) {
-  const istruzione = await page.locator("text=/Where is the/").first().textContent({ timeout: 5000 }).catch(() => null);
+for (let i = 0; i < 10; i++) {
+  const istruzione = await page.locator("text=/Where (is|are)/").first().textContent({ timeout: 5000 }).catch(() => null);
   if (!istruzione) break;
-  const attesa = istruzione.match(/Where is the (\w+)/)[1];
-  const giusta = page.locator(`button[aria-label='${attesa}'], button[aria-label='${attesa} circle']`).first();
+  const parola = istruzione.match(/Where is the (\w+)/)?.[1];
+  const numero = istruzione.match(/Where (?:is|are) (\w+ \w+)\?/)?.[1];
+  const attese = parola ? [parola, `${parola} circle`] : [numero];
+  const giusta = page.locator(attese.map((a) => `button[aria-label='${a}']`).join(", ")).first();
   if (!(await giusta.count())) break;
   await giusta.tap();
   round++;
   await page.waitForTimeout(1400);
 }
-ok("inglese: partita completa 8/8", round === 8, `${round}/8`);
+ok("inglese: partita completa 10/10", round === 10, `${round}/10`);
 
 // Partita completa a "Che ore sono?" (8 round, due finali con l'ora a parole).
 // La risposta giusta non si legge dall'istruzione, quindi si prova finché il

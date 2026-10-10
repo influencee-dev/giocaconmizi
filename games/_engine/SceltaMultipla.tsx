@@ -32,6 +32,8 @@ export interface Opzione {
   emozione?: Emozione;
   /** Fattore di scala 0–1, per i confronti di grandezza. */
   scala?: number;
+  /** Quante copie della figura: per i round di conteggio ("three fish"). */
+  ripeti?: number;
   /** Letto dallo screen reader al posto dell'etichetta. */
   descrizione?: string;
 }
@@ -221,6 +223,15 @@ function BottoneOpzione({
     }
     if (opzione.tipo === "faccia" && opzione.emozione) {
       return <FacciaMizi emozione={opzione.emozione} className="h-20 w-20" />;
+    }
+    if (opzione.disegno && opzione.ripeti) {
+      return (
+        <span className="flex max-w-full flex-wrap items-center justify-center gap-1">
+          {Array.from({ length: opzione.ripeti }, (_, i) => (
+            <Disegno key={i} id={opzione.disegno!} colore={opzione.colore} className="h-9 w-9" />
+          ))}
+        </span>
+      );
     }
     if (opzione.disegno) {
       return (

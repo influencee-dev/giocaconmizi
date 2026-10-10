@@ -10,8 +10,9 @@ import type { GameProps } from "@/games/_engine/tipi";
  * Prime parole in inglese (5–8 anni).
  * L'istruzione è in inglese (Web Speech en-GB), le opzioni sono immagini: si
  * ascolta e si riconosce, senza tradurre. Il tasto 🔊 del guscio ripete.
- * Otto round: sei di parole (catalogo di 24, cambia a ogni partita) e due
- * di colori, con i cerchi colorati — "Where is the red circle?".
+ * Dieci round: sei di parole (catalogo di 24, cambia a ogni partita), due
+ * di colori coi cerchi ("Where is the red circle?") e due di numeri coi
+ * gruppetti da contare ("Where are three fish?").
  */
 
 const PAROLE: { id: string; en: string; figura: NomeFigura; colore?: string }[] = [
@@ -53,6 +54,31 @@ const TINTE: { id: string; en: string; colore: string }[] = [
   { id: "pink", en: "pink", colore: COLORI.rosa },
 ];
 
+/** I numeri da uno a sei, detti a voce: si conta il gruppetto giusto. */
+const NUMERI = ["one", "two", "three", "four", "five", "six"];
+
+/** Un round di conteggio: "Where are three fish?" e quattro gruppetti. */
+function roundNumeri(voce: { en: string; plurale: string; figura: NomeFigura; colore?: string }): Round {
+  // Quattro quantità diverse pescate da 1..6; la prima è quella giusta.
+  const quantita = mescola([1, 2, 3, 4, 5, 6]).slice(0, 4);
+  const giusta = quantita[0];
+  const verbo = giusta === 1 ? "is" : "are";
+  const nome = (n: number) => (n === 1 ? voce.en : voce.plurale);
+
+  return {
+    istruzione: `Where ${verbo} ${NUMERI[giusta - 1]} ${nome(giusta)}?`,
+    linguaIstruzione: "en-GB" as const,
+    opzioni: mescola(quantita).map((n) => ({
+      id: String(n),
+      disegno: voce.figura,
+      colore: voce.colore,
+      ripeti: n,
+      descrizione: `${NUMERI[n - 1]} ${nome(n)}`,
+    })),
+    correttaId: String(giusta),
+  };
+}
+
 export default function Game(props: GameProps) {
   const round = useMemo<Round[]>(() => {
     const scelte = mescola(PAROLE).slice(0, 6);
@@ -91,8 +117,17 @@ export default function Game(props: GameProps) {
         };
       });
 
-    // I colori spezzano il ritmo a metà e in chiusura.
-    return [...diParole.slice(0, 3), diColori[0], ...diParole.slice(3), diColori[1]];
+    const diNumeri: Round[] = [
+      roundNumeri({ en: "fish", plurale: "fish", figura: "pesce" }),
+      roundNumeri({ en: "star", plurale: "stars", figura: "stella", colore: COLORI.giallo }),
+    ];
+
+    // Colori e numeri spezzano il ritmo delle parole, mai due uguali di fila.
+    return [
+      ...diParole.slice(0, 2), diColori[0], diNumeri[0],
+      ...diParole.slice(2, 4), diColori[1],
+      ...diParole.slice(4), diNumeri[1],
+    ];
   }, []);
 
   return <SceltaMultipla titolo="Prime parole in inglese" round={round} {...props} />;
