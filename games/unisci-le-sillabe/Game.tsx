@@ -39,6 +39,7 @@ export default function Game(props: GameProps) {
         istruzione: "Metti le sillabe in ordine per formare la parola.",
         soluzione: voce.sillabe.map((sillaba, i) => ({
           id: `${sillaba}-${i}`,
+          valore: sillaba,
           etichetta: sillaba,
           descrizione: `Sillaba ${sillaba}`,
         })),

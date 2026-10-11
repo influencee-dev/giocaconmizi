@@ -52,6 +52,30 @@ for (const slug of ["labirinto-a-blocchi", "tartaruga", "crea-il-tuo-gioco", "mi
   ok(`${slug} apre pulito`, erroriJs === prima);
 }
 
+// Il robot ballerino: 6 coreografie lette dall'istruzione, toccando sempre
+// la PRIMA tessera con quel nome. Con le mosse doppie (due "batti le mani")
+// è il caso che scoprì il bug dei gemelli: la mossa giusta rifiutata
+// perché toccata sull'altra tessera identica.
+await page.goto(`${BASE}/giochi/robot-ballerino/gioca`, { waitUntil: "networkidle" });
+await page.waitForTimeout(800);
+let coreografie = 0;
+for (let r = 0; r < 6; r++) {
+  const istruzione = await page
+    .locator("text=/Guarda la coreografia/")
+    .first()
+    .textContent({ timeout: 5000 })
+    .catch(() => null);
+  if (!istruzione) break;
+  const mosse = istruzione.replace(/^.*rifalla: /, "").replace(/\.$/, "").split(", poi ");
+  for (const mossa of mosse) {
+    await page.locator(`button[aria-label='${mossa}']`).first().tap();
+    await page.waitForTimeout(150);
+  }
+  coreografie++;
+  await page.waitForTimeout(2400);
+}
+ok("robot: sei coreografie, gemelli compresi", coreografie === 6, `${coreografie}/6`);
+
 // Unisci i puntini: tutte e 5 le figure, toccando i punti in ordine.
 // Due punti troppo vicini si rubano il tocco a vicenda (bersaglio r=9):
 // se succede, la sequenza si blocca e la partita non arriva alla festa.

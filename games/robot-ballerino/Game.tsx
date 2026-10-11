@@ -33,6 +33,8 @@ export default function Game(props: GameProps) {
       istruzione: `Guarda la coreografia e rifalla: ${coreografia.map((m) => MOSSE[m].nome).join(", poi ")}.`,
       soluzione: coreografia.map((mossa, i) => ({
         id: `${mossa}-${i}`,
+        // Due 👏 sono intercambiabili: conta la mossa, non quale gemello tocchi.
+        valore: mossa,
         etichetta: MOSSE[mossa].icona,
         descrizione: MOSSE[mossa].nome,
       })),

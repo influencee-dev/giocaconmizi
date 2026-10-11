@@ -21,6 +21,13 @@ export interface Pezzo {
   etichetta?: string;
   contenuto?: ReactNode;
   descrizione?: string;
+  /**
+   * Valore ai fini della correttezza: due pezzi con lo stesso valore sono
+   * intercambiabili. Serve quando la soluzione contiene pezzi identici alla
+   * vista (due "batti le mani", due sillabe uguali): senza, il bambino che
+   * tocca "l'altro" gemello si sente dire che ha sbagliato.
+   */
+  valore?: string;
 }
 
 export interface RoundOrdina {
@@ -58,7 +65,8 @@ export function Ordina({ titolo, round, age, onProgress, onComplete, demo = fals
 
   const completa = useCallback(
     (ordine: Pezzo[]) => {
-      const giusto = ordine.every((p, i) => p.id === corrente.soluzione[i].id);
+      const chiave = (p: Pezzo) => p.valore ?? p.id;
+      const giusto = ordine.every((p, i) => chiave(p) === chiave(corrente.soluzione[i]));
 
       if (!giusto) {
         setPrimoTentativo(false);
