@@ -31,24 +31,26 @@ const FIGURE: FiguraPuntini[] = [
     chiusa: true,
     punti: [
       [20, 50], [35, 32], [58, 28], [74, 42], [88, 26],
-      [88, 74], [74, 58], [58, 72], [35, 68],
+      [88, 74], [72, 60], [58, 72], [35, 68],
     ],
   },
   {
+    // Ridisegnata: la vecchia aveva l'albero sovrapposto allo scafo
+    // (punti 2 e 9 a distanza 4: etichette accavallate e tocchi ambigui).
+    // Regola: mai due punti a meno di 14 unità (il bersaglio ha raggio 9).
     nome: "una barca",
     chiusa: true,
     punti: [
-      [50, 10], [50, 55], [82, 55], [88, 72], [72, 88],
-      [28, 88], [12, 72], [18, 55], [46, 55], [46, 18],
-      [76, 40], [50, 40],
+      [50, 6], [66, 26], [80, 44], [90, 56], [74, 84],
+      [50, 90], [26, 84], [10, 56], [20, 44], [34, 26],
     ],
   },
   {
     nome: "un razzo",
     chiusa: true,
     punti: [
-      [50, 8], [64, 30], [64, 62], [80, 78], [64, 76],
-      [58, 92], [42, 92], [36, 76], [20, 78], [36, 62],
+      [50, 8], [64, 30], [64, 62], [82, 80], [64, 78],
+      [58, 92], [42, 92], [36, 78], [18, 80], [36, 62],
       [36, 30],
     ],
   },

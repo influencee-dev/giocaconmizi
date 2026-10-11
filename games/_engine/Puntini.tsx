@@ -51,7 +51,7 @@ export function Puntini({ titolo, figure, onProgress, onComplete, demo = false }
 
       if (nuoviFatti >= figura.punti.length) {
         window.setTimeout(() => {
-          parla(`È ${figura.nome === "una stella" || figura.nome === "una casa" ? figura.nome : figura.nome}!`);
+          parla(`È ${figura.nome}!`);
         }, 500);
 
         const nuoviPunti = punti + 1;

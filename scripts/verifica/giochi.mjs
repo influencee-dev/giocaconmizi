@@ -52,6 +52,26 @@ for (const slug of ["labirinto-a-blocchi", "tartaruga", "crea-il-tuo-gioco", "mi
   ok(`${slug} apre pulito`, erroriJs === prima);
 }
 
+// Unisci i puntini: tutte e 5 le figure, toccando i punti in ordine.
+// Due punti troppo vicini si rubano il tocco a vicenda (bersaglio r=9):
+// se succede, la sequenza si blocca e la partita non arriva alla festa.
+await page.goto(`${BASE}/giochi/unisci-i-puntini/gioca`, { waitUntil: "networkidle" });
+await page.waitForTimeout(800);
+for (let f = 0; f < 5; f++) {
+  const gruppi = page.locator("svg[viewBox='-6 -6 112 112'] g");
+  const quanti = await gruppi.count();
+  for (let i = 0; i < quanti; i++) {
+    await gruppi.nth(i).tap().catch(() => {});
+    await page.waitForTimeout(100);
+  }
+  // 2200ms è l'attesa del motore prima della figura successiva.
+  await page.waitForTimeout(2700);
+}
+ok(
+  "puntini: cinque figure completate fino alla festa",
+  await page.locator("text=Bravissimo!").isVisible().catch(() => false),
+);
+
 // Il catalogo dei giochi: il filtro per competenza restringe la griglia
 await page.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
 await page.waitForTimeout(400);
