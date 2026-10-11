@@ -3,6 +3,7 @@ import Link from "next/link";
 import { tutteLeStorie } from "@/lib/content";
 import { Contenitore, Griglia, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
+import { CardStoria } from "@/components/storie/CardStoria";
 
 export const metadata: Metadata = {
   title: "Storie per bambini da leggere",
@@ -78,19 +79,16 @@ export default function StoriePage() {
           </p>
         ) : (
           <Griglia>
-            {storie.map((s) => (
-              <Link
+            {storie.map((s, i) => (
+              <CardStoria
                 key={s.slug}
-                href={`/storie/${s.slug}`}
-                data-tap
-                className="flex flex-col gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-5 hover:border-viola"
-              >
-                <span className="text-xl font-extrabold text-notte">{s.title}</span>
-                {s.summary && <span className="text-notte-tenue">{s.summary}</span>}
-                <span className="mt-auto pt-2 text-sm font-bold text-viola">
-                  {s.age} anni · {s.minutes} minuti
-                </span>
-              </Link>
+                slug={s.slug}
+                titolo={s.title}
+                sommario={s.summary}
+                eta={`${s.age} anni`}
+                minuti={s.minutes}
+                indice={i}
+              />
             ))}
           </Griglia>
         )}

@@ -52,6 +52,19 @@ for (const slug of ["labirinto-a-blocchi", "tartaruga", "crea-il-tuo-gioco", "mi
   ok(`${slug} apre pulito`, erroriJs === prima);
 }
 
+// Il catalogo dei giochi: il filtro per competenza restringe la griglia
+await page.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
+await page.waitForTimeout(400);
+const tutteLeCard = await page.locator("main a[href^='/giochi/']").count();
+await page.getByRole("button", { name: "coding", exact: true }).tap();
+await page.waitForTimeout(400);
+const soloCoding = await page.locator("main a[href^='/giochi/']").count();
+ok(
+  "catalogo giochi: filtro competenza",
+  soloCoding > 0 && soloCoding < tutteLeCard,
+  `${soloCoding}/${tutteLeCard}`,
+);
+
 // Dati strutturati: la scheda gioco dichiara cosa insegna, gli hub l'elenco
 async function jsonLdDi(percorso) {
   await page.goto(`${BASE}${percorso}`, { waitUntil: "domcontentloaded" });

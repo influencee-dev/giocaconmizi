@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { tutteLeStorie } from "@/lib/content";
+import { CardStoria } from "@/components/storie/CardStoria";
 import { Contenitore, Griglia } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 
@@ -80,18 +80,15 @@ export function HubCarattere({ carattere }: { carattere: Carattere }) {
           </p>
         ) : (
           <Griglia>
-            {storie.map((s) => (
-              <Link
+            {storie.map((s, i) => (
+              <CardStoria
                 key={s.slug}
-                href={`/storie/${s.slug}`}
-                data-tap
-                className="flex flex-col gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-5 hover:border-viola"
-              >
-                <span className="text-xl font-extrabold text-notte">{s.title}</span>
-                <span className="mt-auto pt-2 text-sm font-bold text-viola">
-                  {s.age} anni · {s.minutes} minuti
-                </span>
-              </Link>
+                slug={s.slug}
+                titolo={s.title}
+                eta={`${s.age} anni`}
+                minuti={s.minutes}
+                indice={i}
+              />
             ))}
           </Griglia>
         )}

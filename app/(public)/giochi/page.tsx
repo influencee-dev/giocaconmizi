@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { games } from "@/games/registry";
-import { CardGioco, Contenitore, Griglia, TitoloSezione } from "@/components/ui";
-import { IconaGioco } from "@/components/icone";
+import { Contenitore } from "@/components/ui";
+import { CatalogoGiochi } from "@/components/giochi/CatalogoGiochi";
+import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "Tutti i giochi educativi",
@@ -11,14 +12,16 @@ export const metadata: Metadata = {
 };
 
 export default function GiochiPage() {
-  const perEta = [
-    { titolo: "Dai 3 ai 5 anni", giochi: games.filter((g) => g.ageMin <= 5) },
-    { titolo: "Dai 6 agli 8 anni", giochi: games.filter((g) => g.ageMin >= 6 && g.ageMin <= 8) },
-    { titolo: "Dai 9 anni in su", giochi: games.filter((g) => g.ageMin >= 9) },
-  ];
-
   return (
     <Contenitore className="py-10">
+      <JsonLd data={jsonLdBreadcrumb([{ nome: "Giochi", percorso: "/giochi" }])} />
+      <JsonLd
+        data={jsonLdElenco(
+          "Tutti i giochi educativi — Gioca con Mizi",
+          games.map((g) => ({ nome: g.title, percorso: `/giochi/${g.slug}` })),
+        )}
+      />
+
       <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
         Tutti i giochi
       </h1>
@@ -27,24 +30,17 @@ export default function GiochiPage() {
         si gioca finché si ha voglia.
       </p>
 
-      {perEta.map((gruppo) => (
-        <section key={gruppo.titolo} className="mt-10">
-          <TitoloSezione>{gruppo.titolo}</TitoloSezione>
-          <Griglia>
-            {gruppo.giochi.map((g) => (
-              <CardGioco
-                key={g.slug}
-                slug={g.slug}
-                titolo={g.title}
-                descrizione={g.subskill}
-                eta={`${g.ageMin}–${g.ageMax}`}
-                minuti={g.minutes}
-              illustrazione={<IconaGioco slug={g.slug} skill={g.skill} />}
-              />
-            ))}
-          </Griglia>
-        </section>
-      ))}
+      <CatalogoGiochi
+        giochi={games.map((g) => ({
+          slug: g.slug,
+          title: g.title,
+          subskill: g.subskill,
+          ageMin: g.ageMin,
+          ageMax: g.ageMax,
+          minutes: g.minutes,
+          skill: g.skill,
+        }))}
+      />
     </Contenitore>
   );
 }

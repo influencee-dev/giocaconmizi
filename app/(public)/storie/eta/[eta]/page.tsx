@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { tutteLeStorie } from "@/lib/content";
 import { Contenitore, Griglia } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
+import { CardStoria } from "@/components/storie/CardStoria";
 
 type Params = { params: Promise<{ eta: string }> };
 
@@ -71,18 +71,14 @@ export default async function HubStorieEtaPage({ params }: Params) {
           </p>
         ) : (
           <Griglia>
-            {storie.map((s) => (
-              <Link
+            {storie.map((s, i) => (
+              <CardStoria
                 key={s.slug}
-                href={`/storie/${s.slug}`}
-                data-tap
-                className="flex flex-col gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-5 hover:border-viola"
-              >
-                <span className="text-xl font-extrabold text-notte">{s.title}</span>
-                <span className="mt-auto pt-2 text-sm font-bold text-viola">
-                  {s.minutes} minuti
-                </span>
-              </Link>
+                slug={s.slug}
+                titolo={s.title}
+                minuti={s.minutes}
+                indice={i}
+              />
             ))}
           </Griglia>
         )}

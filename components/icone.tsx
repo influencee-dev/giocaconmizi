@@ -95,7 +95,7 @@ export function Icone({ nomi, lato = "h-12 w-12" }: { nomi: NomeIcona[]; lato?: 
 }
 
 /** L'illustrazione di una card gioco: icona del gioco, o della competenza. */
-export function IconaGioco({ slug, skill }: { slug?: string; skill: Skill }) {
+export function IconaGioco({ slug, skill, lato }: { slug?: string; skill: Skill; lato?: string }) {
   const nomi = (slug && ICONE_GIOCO[slug]) || ICONE_SKILL[skill] || ICONE_SKILL.forme;
-  return <Icone nomi={nomi} />;
+  return <Icone nomi={nomi} lato={lato} />;
 }

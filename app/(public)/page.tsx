@@ -143,7 +143,9 @@ export default function Home() {
                 compleanno: tutto qui, tutto gratis.
               </p>
               <div className="flex flex-wrap justify-center gap-3 sm:justify-start">
-                <BottoneLink href="/giochi">Gioca ora</BottoneLink>
+                <BottoneLink href="/giochi" className="px-9 py-5 text-xl">
+                  Gioca ora
+                </BottoneLink>
                 <BottoneLink href="/storie" variante="chiaro">
                   Leggi una storia
                 </BottoneLink>
@@ -152,7 +154,7 @@ export default function Home() {
                 {[`${games.length} giochi`, `${storie} storie`, "3–12 anni"].map((v) => (
                   <span
                     key={v}
-                    className="rounded-bolla border-2 border-crema-scuro bg-white px-4 py-1.5 text-sm font-extrabold text-notte-tenue"
+                    className="rounded-bolla border-2 border-crema-scuro bg-white px-4 py-1.5 text-base font-extrabold text-notte"
                   >
                     {v}
                   </span>

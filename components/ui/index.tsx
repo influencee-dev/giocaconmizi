@@ -78,6 +78,7 @@ export function CardGioco({
   eta,
   minuti,
   illustrazione,
+  compatta = false,
 }: {
   slug: string;
   titolo: string;
@@ -86,7 +87,28 @@ export function CardGioco({
   minuti: number;
   /** Scenetta SVG in testa alla card (components/illustrazioni). */
   illustrazione?: ReactNode;
+  /** Variante stretta per il catalogo: 2 colonne anche sul telefono. */
+  compatta?: boolean;
 }) {
+  if (compatta) {
+    return (
+      <Link
+        href={`/giochi/${slug}`}
+        data-tap
+        className="flex flex-col gap-1 overflow-hidden rounded-morbido border-2 border-crema-scuro bg-white p-3 transition-colors hover:border-viola"
+      >
+        {illustrazione && (
+          <span aria-hidden className="-mx-3 -mt-3 mb-1 flex h-16 items-center justify-center bg-crema p-1.5">
+            {illustrazione}
+          </span>
+        )}
+        <span className="text-base font-extrabold leading-tight text-notte">{titolo}</span>
+        <span className="mt-auto pt-1 text-xs font-bold text-viola">
+          {eta} anni · {minuti} min
+        </span>
+      </Link>
+    );
+  }
   return (
     <Link
       href={`/giochi/${slug}`}

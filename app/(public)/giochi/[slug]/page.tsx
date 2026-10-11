@@ -71,60 +71,70 @@ export default async function GiocoPage({ params }: Params) {
         ])}
       />
 
-      <nav aria-label="Percorso" className="mb-4 text-sm font-bold text-notte-tenue">
-        <Link href="/giochi" className="hover:text-viola">Giochi</Link>
-        {" · "}
-        <Link href={`/giochi/eta/${gioco.ageMin}-anni`} className="hover:text-viola">
-          {gioco.ageMin} anni
-        </Link>
-      </nav>
+      {/* Su desktop il testo lungo sta a sinistra e la card "Gioca" resta
+          sticky a destra; sul telefono l'ordine è quello di sempre. */}
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start lg:gap-x-10">
+        <div className="lg:col-start-1">
+          <nav aria-label="Percorso" className="mb-4 text-sm font-bold text-notte-tenue">
+            <Link href="/giochi" className="hover:text-viola">Giochi</Link>
+            {" · "}
+            <Link href={`/giochi/eta/${gioco.ageMin}-anni`} className="hover:text-viola">
+              {gioco.ageMin} anni
+            </Link>
+          </nav>
 
-      <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">{gioco.title}</h1>
-      <p className="mt-3 text-lg text-notte-tenue">{descrizione}</p>
+          <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">{gioco.title}</h1>
+          <p className="mt-3 text-lg text-notte-tenue">{descrizione}</p>
+        </div>
 
-      <p className="mt-2 font-bold text-viola">
-        {gioco.ageMin}–{gioco.ageMax} anni · {gioco.minutes} minuti · {gioco.skill}
-      </p>
+        <aside className="mt-6 lg:col-start-2 lg:row-span-2 lg:mt-0">
+          <div className="lg:sticky lg:top-6 lg:rounded-morbido lg:border-2 lg:border-crema-scuro lg:bg-white lg:p-5">
+            <p className="font-bold text-viola">
+              {gioco.ageMin}–{gioco.ageMax} anni · {gioco.minutes} minuti · {gioco.skill}
+            </p>
 
-      {gioco.status === "live" ? (
-        <div className="mt-6 flex flex-col gap-4">
-          <Link
-            href={`/giochi/${gioco.slug}/gioca`}
-            data-tap
-            className="inline-flex w-full items-center justify-center rounded-bolla bg-rosa px-10 py-5 text-2xl font-extrabold text-white sm:w-auto"
-          >
-            Gioca
-          </Link>
-
-          {/* Lo stesso gioco si adatta all'età: qui la si sceglie prima di entrare. */}
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="font-bold text-notte-tenue">Gioca come se avesse</span>
-            {Array.from({ length: gioco.ageMax - gioco.ageMin + 1 }, (_, i) => gioco.ageMin + i).map(
-              (anni) => (
+            {gioco.status === "live" ? (
+              <div className="mt-4 flex flex-col gap-4">
                 <Link
-                  key={anni}
-                  href={`/giochi/${gioco.slug}/gioca?eta=${anni}`}
-                  className="flex items-center justify-center rounded-bolla border-2 border-crema-scuro bg-white px-4 py-2 font-bold text-notte hover:border-viola"
-                  style={{ minHeight: "2.75rem", minWidth: "2.75rem" }}
+                  href={`/giochi/${gioco.slug}/gioca`}
+                  data-tap
+                  className="inline-flex w-full items-center justify-center rounded-bolla bg-rosa px-10 py-5 text-2xl font-extrabold text-white sm:w-auto lg:w-full"
                 >
-                  {anni}
+                  Gioca
                 </Link>
-              ),
-            )}
-            <span className="font-bold text-notte-tenue">anni</span>
-          </div>
-        </div>
-      ) : (
-        <p className="mt-6 rounded-morbido border-2 border-crema-scuro bg-white p-5 text-notte-tenue">
-          Questo gioco è in costruzione. Meccanica prevista: {gioco.mechanic}
-        </p>
-      )}
 
-      {testo && (
-        <div className="mt-10">
-          <Prosa html={testo.html} />
-        </div>
-      )}
+                {/* Lo stesso gioco si adatta all'età: qui la si sceglie prima di entrare. */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-bold text-notte-tenue">Gioca come se avesse</span>
+                  {Array.from({ length: gioco.ageMax - gioco.ageMin + 1 }, (_, i) => gioco.ageMin + i).map(
+                    (anni) => (
+                      <Link
+                        key={anni}
+                        href={`/giochi/${gioco.slug}/gioca?eta=${anni}`}
+                        className="flex items-center justify-center rounded-bolla border-2 border-crema-scuro bg-white px-4 py-2 font-bold text-notte hover:border-viola"
+                        style={{ minHeight: "2.75rem", minWidth: "2.75rem" }}
+                      >
+                        {anni}
+                      </Link>
+                    ),
+                  )}
+                  <span className="font-bold text-notte-tenue">anni</span>
+                </div>
+              </div>
+            ) : (
+              <p className="mt-4 rounded-morbido border-2 border-crema-scuro bg-white p-5 text-notte-tenue lg:border-0 lg:p-0">
+                Questo gioco è in costruzione. Meccanica prevista: {gioco.mechanic}
+              </p>
+            )}
+          </div>
+        </aside>
+
+        {testo && (
+          <div className="mt-10 lg:col-start-1">
+            <Prosa html={testo.html} />
+          </div>
+        )}
+      </div>
     </Contenitore>
   );
 }
