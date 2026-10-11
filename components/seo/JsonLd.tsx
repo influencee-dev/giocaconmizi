@@ -166,5 +166,10 @@ export function jsonLdStoria(storia: {
     isAccessibleForFree: true,
     typicalAgeRange: `${storia.age}-${storia.age + 1}`,
     timeRequired: `PT${storia.minutes}M`,
+    publisher: {
+      "@type": "Organization",
+      name: site.nome,
+      url: url("/"),
+    },
   };
 }

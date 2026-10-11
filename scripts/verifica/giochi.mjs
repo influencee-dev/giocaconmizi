@@ -68,6 +68,12 @@ ok(
   "hub competenza: JSON-LD ItemList",
   (await jsonLdDi("/giochi/competenza/matematica")).includes("ItemList"),
 );
+ok("hub storie: JSON-LD ItemList", (await jsonLdDi("/storie")).includes("ItemList"));
+const hubCorsivo = await jsonLdDi("/storie/corsivo");
+ok(
+  "hub corsivo: ItemList e breadcrumb",
+  hubCorsivo.includes("ItemList") && hubCorsivo.includes("BreadcrumbList"),
+);
 
 await b.close();
 if (servito) process.kill(-servito.pid);

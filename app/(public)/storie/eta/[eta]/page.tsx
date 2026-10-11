@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { tutteLeStorie } from "@/lib/content";
 import { Contenitore, Griglia } from "@/components/ui";
-import { JsonLd, jsonLdBreadcrumb } from "@/components/seo/JsonLd";
+import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 
 type Params = { params: Promise<{ eta: string }> };
 
@@ -47,6 +47,14 @@ export default async function HubStorieEtaPage({ params }: Params) {
           { nome: `${anni} anni`, percorso: `/storie/eta/${eta}` },
         ])}
       />
+      {storie.length > 0 && (
+        <JsonLd
+          data={jsonLdElenco(
+            `Storie per bambini di ${anni} anni`,
+            storie.map((s) => ({ nome: s.title, percorso: `/storie/${s.slug}` })),
+          )}
+        />
+      )}
 
       <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
         Storie per bambini di {anni} anni

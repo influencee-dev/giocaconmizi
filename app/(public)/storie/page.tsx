@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { tutteLeStorie } from "@/lib/content";
 import { Contenitore, Griglia, TitoloSezione } from "@/components/ui";
+import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "Storie per bambini da leggere",
@@ -21,6 +22,13 @@ export default function StoriePage() {
 
   return (
     <Contenitore className="py-10">
+      <JsonLd data={jsonLdBreadcrumb([{ nome: "Storie", percorso: "/storie" }])} />
+      <JsonLd
+        data={jsonLdElenco(
+          "Storie per bambini da leggere — Gioca con Mizi",
+          storie.map((s) => ({ nome: s.title, percorso: `/storie/${s.slug}` })),
+        )}
+      />
       <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
         Storie da leggere
       </h1>

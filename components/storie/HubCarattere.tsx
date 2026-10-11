@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { tutteLeStorie } from "@/lib/content";
 import { Contenitore, Griglia } from "@/components/ui";
-import { JsonLd, jsonLdBreadcrumb } from "@/components/seo/JsonLd";
+import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 
 /**
  * Hub /storie/{carattere}: intercetta le ricerche "storie in stampatello",
@@ -54,6 +54,14 @@ export function HubCarattere({ carattere }: { carattere: Carattere }) {
           { nome: carattere.titolo, percorso: `/storie/${carattere.slug}` },
         ])}
       />
+      {storie.length > 0 && (
+        <JsonLd
+          data={jsonLdElenco(
+            carattere.titolo,
+            storie.map((s) => ({ nome: s.title, percorso: `/storie/${s.slug}` })),
+          )}
+        />
+      )}
 
       <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
         {carattere.titolo}
