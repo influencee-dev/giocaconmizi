@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Biglietto, type DatiBiglietto } from "./Biglietto";
-import { CATALOGO_STICKER } from "./stickers";
+import { CATALOGO_STICKER, catalogoPerTema } from "./stickers";
 import { biglietoInPng, datiPerLink, leggiDatiDaLink, linkInvito, numeroWhatsApp } from "@/lib/condivisione";
 import { FORMATI, frasi, misure, temi, TIPI, type FormatoId, type Tipo } from "@/lib/biglietti";
 import type { Variante } from "./Sfondo";
@@ -368,7 +368,7 @@ export function Editor() {
 
         <Gruppo titolo="4. Adesivi">
           <div className="grid grid-cols-4 gap-2">
-            {CATALOGO_STICKER.map((v) => (
+            {catalogoPerTema(dati.tema).map((v) => (
               <button
                 key={v.id}
                 type="button"

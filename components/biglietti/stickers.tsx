@@ -242,6 +242,41 @@ export const CATALOGO_STICKER: VoceCatalogo[] = [
   dallArte("barca", "Barca"),
 ];
 
+/**
+ * Gli adesivi che "appartengono" a un tema: col tema scelto salgono in cima
+ * al catalogo, così il biglietto a tema si compone in due tocchi. Gli altri
+ * temi mostrano il catalogo nell'ordine di sempre.
+ */
+const STICKER_PER_TEMA: Record<string, string[]> = {
+  halloween: ["zucca", "fantasmino", "pipistrello"],
+  natale: ["alberello", "pupazzo-di-neve", "fiocco-di-neve"],
+  unicorno: ["unicorno", "arcobaleno"],
+  dinosauri: ["dinosauro"],
+  calcio: ["pallone"],
+  principessa: ["corona"],
+  supereroe: ["supereroe"],
+  spazio: ["razzo"],
+  "farfalle-fiori": ["farfalla", "fiore", "coccinella"],
+  "dolci-torta": ["torta"],
+  cuccioli: ["cane", "gatto"],
+  "animali-foresta": ["orso"],
+  "mare-estate": ["barca", "sole"],
+  fate: ["farfalla", "fiore"],
+  arcobaleno: ["arcobaleno", "sole"],
+};
+
+/** Il catalogo con gli adesivi del tema in testa (e l'ordine solito dopo). */
+export function catalogoPerTema(tema: string): VoceCatalogo[] {
+  const inTesta = STICKER_PER_TEMA[tema] ?? [];
+  if (inTesta.length === 0) return CATALOGO_STICKER;
+  return [
+    ...inTesta
+      .map((id) => CATALOGO_STICKER.find((v) => v.id === id))
+      .filter((v): v is VoceCatalogo => v !== undefined),
+    ...CATALOGO_STICKER.filter((v) => !inTesta.includes(v.id)),
+  ];
+}
+
 export function StickerDisegno({ id }: { id: string }) {
   const voce = CATALOGO_STICKER.find((v) => v.id === id);
   if (!voce) return null;

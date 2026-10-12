@@ -78,6 +78,8 @@ ok("adesivi di natale a catalogo",
   (await page.getByRole("button", { name: "Aggiungi Pupazzo di neve" }).count()) &&
   (await page.getByRole("button", { name: "Aggiungi Alberello" }).count()) &&
   (await page.getByRole("button", { name: "Aggiungi Fiocco di neve" }).count()));
+ok("adesivi del tema in testa (natale)",
+  (await page.locator("button[aria-label^='Aggiungi ']").first().getAttribute("aria-label")) === "Aggiungi Alberello");
 
 await b.close();
 if (servito) process.kill(-servito.pid);
