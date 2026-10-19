@@ -744,6 +744,80 @@ export const GUIDE: Guida[] = [
     ],
     giochi: ["tocca-la-lettera", "ortografia-c-ch-g-gh", "leggi-e-rispondi"],
   },
+  {
+    slug: "festa-di-compleanno-semplice",
+    skill: "emozioni",
+    titolo: "Come organizzare una festa di compleanno semplice (e viverla bene)",
+    titoloBreve: "La festa di compleanno",
+    descrizione:
+      "Quanti bambini invitare, quanto deve durare, il programma che regge davvero, inviti e conferme senza rincorrere nessuno, e un budget onesto senza sensi di colpa.",
+    rispostaBreve:
+      "La festa riuscita non \u00e8 quella con pi\u00f9 attrazioni: \u00e8 due ore al massimo, pochi invitati (per i piccoli vale la regola degli anni del bambino pi\u00f9 uno), tre giochi semplici guidati da un adulto e una torta. Decidete il budget prima, mettete il programma per iscritto e chiedete le conferme con una scadenza: il resto \u2014 inviti, conferme e ringraziamenti \u2014 oggi si prepara gratis in dieci minuti.",
+    etaMin: 3,
+    etaMax: 10,
+    minutiLettura: 6,
+    aggiornata: "2026-10-19",
+    sezioni: [
+      {
+        titolo: "Quanto grande deve essere (meno di cos\u00ec)",
+        paragrafi: [
+          "La domanda giusta non \u00e8 \u00abcosa manca?\u00bb ma \u00abcosa posso togliere?\u00bb. Per i bambini piccoli funziona la vecchia regola degli anni pi\u00f9 uno: quattro invitati per un bimbo di tre anni, cinque per uno di quattro. Un bambino di tre anni a una festa con venti coetanei non si diverte di pi\u00f9: si perde. Crescendo il gruppo si allarga da solo, ma fino alle elementari una festa piccola \u00e8 quasi sempre una festa migliore.",
+          "Anche la durata va al ribasso: due ore bastano a qualunque et\u00e0, e per i pi\u00f9 piccoli ne avanzano. Il pomeriggio tra le 16 e le 18 \u00e8 la fascia che regge meglio: niente pisolino saltato, niente cena da gestire, e un orario di fine dichiarato nell'invito \u00e8 un regalo che fate a tutti i genitori.",
+        ],
+      },
+      {
+        titolo: "Il programma che regge: tre giochi e una torta",
+        paragrafi: [
+          "La scaletta che non tradisce \u00e8 sempre la stessa: venti minuti di arrivi e gioco libero, due o tre giochi guidati, la merenda, la torta con le candeline, i regali. I giochi di sempre funzionano perch\u00e9 sono di sempre: le belle statuine, la caccia al tesoro con tre indizi, i balli da copiare. Serve per\u00f2 un adulto che li guidi davvero: un gioco semplice condotto con energia batte qualunque gonfiabile.",
+          "Tenete sempre un gioco di riserva in tasca per il momento in cui l'attenzione cala \u2014 succede, non \u00e8 un fallimento. E sotto i cinque anni mettete in conto che i genitori restano: contateli nelle sedie e nel caff\u00e8.",
+        ],
+      },
+      {
+        titolo: "Inviti e conferme senza rincorrere nessuno",
+        paragrafi: [
+          "Un buon invito risponde a tutto senza che nessuno debba scrivervi: giorno, orario di inizio e di fine, indirizzo, un numero per confermare e una riga per le allergie. La scadenza per le conferme \u2014 \u00abfateci sapere entro luned\u00ec\u00bb \u2014 non \u00e8 scortesia: \u00e8 quello che vi evita di comprare trenta pizzette per dodici bambini.",
+          "Qui su Gioca con Mizi gli inviti si fanno gratis nel creatore di biglietti: scegliete il tema, scrivete nome ed et\u00e0, e chi riceve l'invito conferma con un tocco su WhatsApp; sul biglietto stampato si pu\u00f2 mettere il QR \u00abInquadra e conferma\u00bb. Le conferme arrivano da sole, senza inseguire nessuno nelle chat.",
+        ],
+      },
+      {
+        titolo: "Il budget onesto",
+        paragrafi: [
+          "Il grosso della spesa \u00e8 quasi sempre la location: casa, cortile o il parco con un telo e due tavolini riportano la festa vicino allo zero. Si taglia senza che i bambini se ne accorgano su gadget e sacchettini costosi (una bolla di sapone vale quanto un giocattolo da tre euro) e sull'animatore sotto i quattro anni, et\u00e0 a cui i bambini spesso ne hanno paura.",
+          "Non si taglia invece su due cose: la torta, che \u00e8 il centro simbolico della festa, e l'adulto \u2014 voi, un nonno, un'amica \u2014 che tiene i giochi. Se il pensiero dei trenta regali vi pesa, la proposta del regalo collettivo nell'invito \u00e8 ormai normale e quasi tutti i genitori la accolgono con sollievo.",
+        ],
+      },
+      {
+        titolo: "Il giorno dopo: i grazie (e le foto)",
+        paragrafi: [
+          "Il biglietto di ringraziamento scritto insieme al festeggiato \u00e8 il modo pi\u00f9 semplice di chiudere bene: cinque minuti, un grazie per il regalo ricevuto, e un piccolo esercizio di gratitudine che vale pi\u00f9 di una lezione. Anche questi si preparano gratis nel creatore del sito.",
+          "Sulle foto, una sola regola: prima di condividere immagini in cui compaiono i bambini degli altri, chiedete ai loro genitori. Un messaggio nel gruppo \u2014 \u00abposso mandare le foto della festa?\u00bb \u2014 costa dieci secondi e evita dispiaceri veri.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        domanda: "Quanti bambini conviene invitare?",
+        risposta:
+          "Per i pi\u00f9 piccoli, gli anni del festeggiato pi\u00f9 uno: quattro invitati a tre anni, sei a cinque. Dalle elementari il gruppo cresce, ma una festa piccola resta quasi sempre pi\u00f9 riuscita di una affollata.",
+      },
+      {
+        domanda: "Quanto deve durare una festa di compleanno?",
+        risposta:
+          "Due ore al massimo, a qualunque et\u00e0; la fascia 16\u201318 \u00e8 la pi\u00f9 comoda per tutti. Scrivere l'orario di fine nell'invito aiuta i genitori e d\u00e0 alla festa un confine chiaro.",
+      },
+      {
+        domanda: "Devo invitare tutta la classe?",
+        risposta:
+          "No, non \u00e8 un obbligo: vale il buon senso. Se invitate quasi tutti, meglio tutti; se invitate pochi amici stretti, consegnate gli inviti fuori da scuola per non ferire nessuno.",
+      },
+      {
+        domanda: "Come gestisco le conferme che non arrivano?",
+        risposta:
+          "Mettete nell'invito una scadenza (\u00abentro luned\u00ec\u00bb) e un modo per confermare a un tocco: col nostro invito digitale la conferma parte da WhatsApp gi\u00e0 scritta. Chi non risponde entro la data, contatelo come assente e vivete sereni.",
+      },
+    ],
+    giochi: ["le-emozioni-di-mizi", "memory-animali", "robot-ballerino"],
+  },
 ];
 
 export function guida(slug: string): Guida | undefined {
