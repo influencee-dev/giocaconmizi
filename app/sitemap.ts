@@ -4,6 +4,7 @@ import { tutteLeStorie } from "@/lib/content";
 import { tutteLePagine } from "@/lib/biglietti";
 import { esempiPubblicati } from "@/lib/esempi";
 import { GUIDE } from "@/lib/guide";
+import { CITTA_FESTE } from "@/lib/feste";
 import { classi, eta, url } from "@/lib/seo";
 
 /**
@@ -25,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/biglietti/crea",
     "/biglietti/esempi",
     "/guide",
+    "/feste",
     "/metodo",
     "/privacy",
     "/cookie",
@@ -68,6 +70,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: aggiornato,
       changeFrequency: "monthly" as const,
       priority: 0.7,
+    })),
+
+    // Le pagine locali delle feste: una per città, keyword locale (GEO)
+    ...CITTA_FESTE.map((c) => ({
+      url: url(`/feste/${c.slug}`),
+      lastModified: new Date(c.aggiornata),
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
     })),
 
     // Le guide per i genitori: contenuto evergreen, priorità alta (AEO)

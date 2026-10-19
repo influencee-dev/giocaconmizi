@@ -126,6 +126,11 @@ ok(
   (await jsonLdDi("/giochi/competenza/matematica")).includes("ItemList"),
 );
 ok("hub storie: JSON-LD ItemList", (await jsonLdDi("/storie")).includes("ItemList"));
+const festeMilano = await jsonLdDi("/feste/milano");
+ok(
+  "pagina feste: LocalBusiness e FAQ",
+  festeMilano.includes("LocalBusiness") && festeMilano.includes("FAQPage"),
+);
 const hubCorsivo = await jsonLdDi("/storie/corsivo");
 ok(
   "hub corsivo: ItemList e breadcrumb",

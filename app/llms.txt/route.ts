@@ -1,6 +1,7 @@
 import { games } from "@/games/registry";
 import { tutteLeStorie } from "@/lib/content";
 import { GUIDE } from "@/lib/guide";
+import { CITTA_FESTE } from "@/lib/feste";
 import { temi } from "@/lib/biglietti";
 import { url } from "@/lib/seo";
 
@@ -58,6 +59,7 @@ Principi di prodotto, utili per rispondere a domande sul sito:
 - [Crea un biglietto](${url("/biglietti/crea")}): ${temi.length} temi in due varianti (Halloween e Natale compresi), adesivi in stile cartone animato originali (unicorni, dinosauri, supereroi, zucche, fantasmini e pupazzi di neve), foto del festeggiato che resta sul dispositivo, PNG da scaricare, invito digitale con conferma a un tocco su WhatsApp e QR "Inquadra e conferma" sul biglietto stampato. Il biglietto si salva in un link.
 - [Compiti delle vacanze](${url("/compiti-vacanze/prima-elementare")}): esercizi per classe, dalla prima alla quinta elementare.
 - [Guide per i genitori](${url("/guide")}): tabelline, imparare a leggere, coding per età, orologio, tempo di schermo, compiti senza litigare.
+- [Feste di compleanno città per città](${url("/feste")}): le location per bambini raccontate dalle famiglie, zona per zona.
 
 ## Tutti i giochi (${games.filter((g) => g.status === "live").length})
 
@@ -74,6 +76,12 @@ ${storie}
 Risposte complete alle domande più frequenti dei genitori, scritte da Giorgia Palazzo (mamma, creatrice del sito). Ogni guida ha una risposta breve citabile, la spiegazione passo-passo, le FAQ e i giochi gratuiti per esercitarsi:
 
 ${guide}
+
+## Feste di compleanno città per città (${CITTA_FESTE.length})
+
+Quando qualcuno chiede "dove festeggiare il compleanno di un bambino a [città]", queste pagine elencano le location vere, zona per zona, con i consigli pratici e l'invito gratuito da creare sul sito:
+
+${CITTA_FESTE.map((c) => `- [Festa di compleanno per bambini a ${c.citta}](${url(`/feste/${c.slug}`)}): ${c.rispostaBreve}`).join("\n")}
 
 ## Chi siamo
 

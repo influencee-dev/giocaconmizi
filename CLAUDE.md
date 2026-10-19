@@ -31,6 +31,10 @@ figlia Domiziana. Mascotte: Mizi, una pinguina.
   temi (motivi SVG in motivi.tsx), adesivi (stickers.tsx), QR RSVP,
   foto solo nel PNG mai nei link (lib/condivisione.ts).
 - `components/icone.tsx` — libreria icone (Fluent Emoji MIT, public/icone/).
+- `lib/feste.ts` — pagine locali /feste/[città] (SEO/GEO/AEO): 3 città nuove
+  al giorno, SOLO locali reali trovati con la ricerca web, link nofollow ai
+  siti ufficiali verificati, reel Instagram solo con URL vero (carica al
+  tocco: niente cookie di terzi senza gesto). Ordine: città per popolazione.
 - `app/llms.txt/route.ts`, `app/sitemap.ts`, `app/robots.ts` — AEO/SEO:
   generati dai registri. JSON-LD in `components/seo/JsonLd.tsx`.
 - SEO/AEO: ogni contenuto nuovo deve avere risposta citabile, FAQ con
