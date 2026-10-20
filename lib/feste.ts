@@ -302,6 +302,252 @@ export const CITTA_FESTE: CittaFeste[] = [
       },
     ],
   },
+  {
+    slug: "torino",
+    citta: "Torino",
+    aggiornata: "2026-10-20",
+    rispostaBreve:
+      "A Torino le feste di compleanno per bambini si fanno nelle ludoteche e sale giochi della citt\u00e0 e della prima cintura \u2014 da via Bardonecchia a Nichelino, Collegno e Beinasco \u2014 con pacchetti che spesso comprendono sala riservata, gonfiabili, cibo e allestimento. Le formule con animazione durano in genere due ore e mezza; i prezzi partono da circa 150 euro nei giorni feriali e l'affitto di una sala attrezzata si aggira tra i 200 e i 300 euro.",
+    intro:
+      "A Torino l'offerta vera \u00e8 met\u00e0 in citt\u00e0 e met\u00e0 in prima cintura: Nichelino, Collegno e Beinasco sono a un quarto d'ora e hanno gli spazi pi\u00f9 grandi. Ecco i posti di cui parlano le famiglie torinesi.",
+    locali: [
+      {
+        nome: "1000 Salti",
+        zona: "Nichelino",
+        tipo: "ludoteca con gonfiabili",
+        descrizione:
+          "Scivoli gonfiabili, playground, calciobalilla e una sala riservata per le feste: il pacchetto comprende cibo, bibite e allestimento.",
+        sito: "https://1000salti.it/",
+      },
+      {
+        nome: "Mela Spasso",
+        zona: "Collegno",
+        tipo: "sala giochi inclusiva",
+        descrizione:
+          "Sala giochi pensata per essere inclusiva, con sala esclusiva per feste ed eventi privati e laboratori tenuti da esperti.",
+        sito: "https://melaspasso.it/",
+      },
+      {
+        nome: "Kidsland",
+        zona: "via Bardonecchia",
+        tipo: "ludoteca",
+        descrizione:
+          "400 mq con palestra, area giochi e feste di compleanno, in citt\u00e0.",
+        sito: "https://www.kidsland.to.it/",
+      },
+      {
+        nome: "CH4 Sporting Club",
+        zona: "Torino",
+        tipo: "centro sportivo con animazione",
+        descrizione:
+          "Feste con animazione per tutte le et\u00e0: due ore e mezza con un animatore ogni 12 bambini presenti.",
+        sito: "https://ch4sportingclub.it/servizi/feste-compleanno/",
+      },
+      {
+        nome: "Baby Luna Park",
+        zona: "Torino",
+        tipo: "luna park al chiuso",
+        descrizione:
+          "Giostre, gonfiabili e animazione; le tariffe indicate partono da 150 euro per 10 bambini nei giorni feriali, con un extra per ogni bambino in pi\u00f9.",
+        sito: "https://baby-lunapark.it/",
+      },
+      {
+        nome: "K1 Speed",
+        zona: "Beinasco",
+        tipo: "kart per bambini",
+        descrizione:
+          "La festa in pista coi kart, per i bambini pi\u00f9 grandi: il pacchetto richiede un minimo di 6 partecipanti.",
+        sito: "https://www.k1speed.com/it/torino/festa-di-compleanno-per-bambini.html",
+      },
+      {
+        nome: "+Spazio4",
+        zona: "Torino",
+        tipo: "salone per feste",
+        descrizione:
+          "Un salone al chiuso di oltre 200 mq: la scelta per le feste d'inverno coi gruppi numerosi.",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Quanto costa una festa di compleanno per bambini a Torino?",
+        risposta:
+          "Dalle fonti pubbliche: i pacchetti al chiuso partono da circa 150 euro per 10 bambini nei giorni feriali, mentre l'affitto di una sala attrezzata per la giornata si aggira tra i 200 e i 300 euro. Il preventivo scritto con l'elenco di cosa \u00e8 incluso resta la regola d'oro.",
+      },
+      {
+        domanda: "Meglio in citt\u00e0 o in prima cintura?",
+        risposta:
+          "Nichelino, Collegno e Beinasco hanno spazi pi\u00f9 grandi e parcheggio facile, la citt\u00e0 vince per chi si muove coi mezzi. Scegliete in base a dove abitano gli invitati.",
+      },
+      {
+        domanda: "Quanto dura la festa con animazione?",
+        risposta:
+          "La formula pi\u00f9 diffusa dura due ore e mezza, con un animatore ogni 10\u201312 bambini. Due ore bastano a qualunque et\u00e0: l'orario di fine scritto nell'invito aiuta tutti.",
+      },
+      {
+        domanda: "Come gestisco inviti e conferme?",
+        risposta:
+          "Invito con giorno, orario di inizio e fine, indirizzo e una scadenza per confermare. Su Gioca con Mizi si crea gratis, con la conferma WhatsApp a un tocco e il QR sul biglietto stampato.",
+      },
+    ],
+  },
+  {
+    slug: "palermo",
+    citta: "Palermo",
+    aggiornata: "2026-10-20",
+    rispostaBreve:
+      "A Palermo le feste di compleanno per bambini si organizzano nelle ludoteche e sale feste della citt\u00e0 \u2014 da via Resuttana a via Di Marzo fino alla Favorita \u2014 con pacchetti che spesso comprendono animazione, gonfiabili, feste a tema con scenografia e perfino la torta personalizzata. Molte strutture lavorano su prenotazione con preventivo gratuito: chiedetelo scritto, con l'elenco di cosa comprende davvero.",
+    intro:
+      "A Palermo la festa a tema \u00e8 la specialit\u00e0 della casa: scenografie, mascotte e staff che segue i bambini dall'inizio alla fine. Queste sono le strutture di cui le famiglie palermitane parlano di pi\u00f9.",
+    locali: [
+      {
+        nome: "LudoArt",
+        zona: "Palermo",
+        tipo: "ludoteca e sala feste",
+        descrizione:
+          "Sala feste che \u00e8 anche ludoteca, con uno staff di educatori professionisti, animatori e insegnanti e spazi colorati e accoglienti.",
+        sito: "https://www.festeperbambini.palermo.it/",
+      },
+      {
+        nome: "Party Time Kid's",
+        zona: "via Di Marzo",
+        tipo: "ludoteca",
+        descrizione:
+          "Feste a tema e laboratori creativi in spazi ampi, con giochi pensati per tutti.",
+        sito: "http://www.partytimekids.it/",
+      },
+      {
+        nome: "Hula Hoop",
+        zona: "Palermo",
+        tipo: "sala feste a tema",
+        descrizione:
+          "Feste a tema con scenografia e torta personalizzata: balli, canti, cucina, gonfiabili e laboratori seguiti da uno staff professionale.",
+        sito: "https://hulahoopalermo.it/",
+      },
+      {
+        nome: "Che Festa",
+        zona: "via Resuttana",
+        tipo: "sala feste con baby parking",
+        descrizione:
+          "Feste di compleanno per bambini da 1 a 10 anni, battesimi e comunioni, con servizio di baby parking.",
+      },
+      {
+        nome: "Toy Park",
+        zona: "Palermo",
+        tipo: "parco divertimenti",
+        descrizione:
+          "Il pacchetto festa del parco: gioco nel padiglione, sala feste dedicata e una coordinatrice in sala che segue il gruppo.",
+        sito: "https://www.toypark-palermo.com/feste-a-tema-per-compleanni-parco-divertimenti-a-palermo-toy-park-dettaglio.asp?ID=3",
+      },
+      {
+        nome: "Holiday Party House",
+        zona: "Palermo",
+        tipo: "location con animazione",
+        descrizione:
+          "Animazione, parco gonfiabili e mascotte comprese nel pacchetto.",
+        sito: "https://www.holidayanimazione.com/organizzazione-feste-palermo",
+      },
+      {
+        nome: "Dueffe Animazione",
+        zona: "Favorita e Villabate",
+        tipo: "animazione con sale convenzionate",
+        descrizione:
+          "Agenzia di animazione con sale convenzionate, tra cui la caffetteria dentro il bowling della Favorita e la sala feste con gonfiabili di Villabate; preventivo gratuito.",
+        sito: "https://dueffeanimazione.it/sale-feste-bambini-palermo/",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Dove si festeggia un compleanno per bambini a Palermo?",
+        risposta:
+          "Nelle ludoteche e sale feste della citt\u00e0 (via Resuttana, via Di Marzo, zona Favorita) o nelle sale convenzionate con le agenzie di animazione, fino a Villabate. Quasi tutte lavorano su prenotazione con preventivo gratuito.",
+      },
+      {
+        domanda: "Cosa comprende il pacchetto festa a tema?",
+        risposta:
+          "Nelle strutture pi\u00f9 complete: scenografia del tema scelto, animazione, gonfiabili, laboratori e a volte la torta personalizzata e le mascotte. Verificate per iscritto cosa \u00e8 incluso e cosa si paga a parte.",
+      },
+      {
+        domanda: "C'\u00e8 un posto adatto ai pi\u00f9 piccoli?",
+        risposta:
+          "S\u00ec: diverse sale seguono feste dal primo compleanno (da 1 a 10 anni) e alcune offrono anche il baby parking. Per i piccolissimi contano pi\u00f9 gli spazi morbidi e un orario corto che le attrazioni.",
+      },
+      {
+        domanda: "Come mando gli inviti?",
+        risposta:
+          "Con un biglietto che dica giorno, orario di inizio e fine, indirizzo e come confermare. Su Gioca con Mizi si crea gratis, con la conferma WhatsApp a un tocco e il QR \u00abInquadra e conferma\u00bb sul biglietto stampato.",
+      },
+    ],
+  },
+  {
+    slug: "genova",
+    citta: "Genova",
+    aggiornata: "2026-10-20",
+    rispostaBreve:
+      "A Genova il compleanno dei bambini si festeggia in ludoteca \u2014 dal centro a Sampierdarena \u2014 o nelle sale di quartiere e parrocchiali, molto usate e pi\u00f9 economiche: la sala di via Donghi a San Fruttuoso \u00e8 tra le pi\u00f9 richieste. I pacchetti delle strutture attrezzate partono da circa 220 euro nei giorni feriali (260 nel weekend) per la fascia 15:30\u201318:30, spesso con addobbi e pulizie inclusi.",
+    intro:
+      "Genova \u00e8 la citt\u00e0 delle due vie: la ludoteca attrezzata con gonfiabili e playground, oppure la sala di quartiere o parrocchiale da allestire in proprio, che costa meno e lascia fare a modo vostro. Qui trovate entrambe.",
+    locali: [
+      {
+        nome: "Ludoteca Bim Bum Bam",
+        zona: "centro (via Santa Maria in Via Lata)",
+        tipo: "ludoteca",
+        descrizione:
+          "Ampio playground, gonfiabili colorati e zone per i giochi di movimento, con personale che organizza le feste di compleanno.",
+      },
+      {
+        nome: "Giocomondo",
+        zona: "Sampierdarena",
+        tipo: "ludoteca con baby parking",
+        descrizione:
+          "Ludoteca di via Nicol\u00f2 Daste dove la festa si organizza direttamente in struttura, con servizio di baby parking.",
+      },
+      {
+        nome: "L'isola che c'\u00e8",
+        zona: "Genova",
+        tipo: "sala feste",
+        descrizione:
+          "Tra le poche con prezzi pubblici: pacchetto feriale da 220 euro e weekend da 260, fascia 15:30\u201318:30, con tovaglie, frigorifero, addobbi, pulizie e smaltimento inclusi; 5 euro per ogni bambino oltre i compresi, fino a 30.",
+        sito: "https://www.lisolachecegenova.it/feste/",
+      },
+      {
+        nome: "Capriole sulle Nuvole",
+        zona: "centro storico, San Fruttuoso e Voltri",
+        tipo: "animazione con sale in pi\u00f9 quartieri",
+        descrizione:
+          "Servizio di feste e animazione attivo in diversi quartieri della citt\u00e0, con sale appoggiate per ogni zona.",
+        sito: "https://www.compleannogenova.it/",
+      },
+      {
+        nome: "Festolandia",
+        zona: "Genova",
+        tipo: "location per feste",
+        descrizione: "Location dedicata alle feste per bambini con area giochi attrezzata.",
+        sito: "https://www.festolandia.it/",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Quanto costa una festa di compleanno per bambini a Genova?",
+        risposta:
+          "Dalle fonti pubbliche: una sala feste attrezzata parte da circa 220 euro nei feriali e 260 nel weekend per tre ore, addobbi e pulizie inclusi. Le sale di quartiere e parrocchiali costano sensibilmente meno ma vanno allestite in proprio.",
+      },
+      {
+        domanda: "Le sale parrocchiali si possono affittare?",
+        risposta:
+          "S\u00ec, ed \u00e8 una tradizione genovese molto viva: l'affitto si concorda direttamente con la parrocchia. La sala di via Donghi a San Fruttuoso \u00e8 tra le pi\u00f9 richieste; a Voltri c'\u00e8 una saletta attrezzata in via Montanella.",
+      },
+      {
+        domanda: "Ludoteca o sala da allestire?",
+        risposta:
+          "La ludoteca include giochi, personale e pulizie; la sala libera costa meno e lascia a voi merenda e giochi. Sotto i 5 anni una festa semplice in sala piccola, con pochi invitati, funziona benissimo.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp gi\u00e0 scritta, e sul biglietto stampato c'\u00e8 il QR \u00abInquadra e conferma\u00bb.",
+      },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

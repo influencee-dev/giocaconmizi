@@ -52,6 +52,29 @@ for (const slug of ["labirinto-a-blocchi", "tartaruga", "crea-il-tuo-gioco", "mi
   ok(`${slug} apre pulito`, erroriJs === prima);
 }
 
+// C o CH?: partita completa. Il buco può stare in mezzo alla parola
+// (FO___A): la risposta si ricava da istruzione + pezzi visibili, e un
+// buco mostrato nel punto sbagliato farebbe fallire il conto.
+await page.goto(`${BASE}/giochi/ortografia-c-ch-g-gh/gioca`, { waitUntil: "networkidle" });
+await page.waitForTimeout(800);
+let buchi = 0;
+for (let r = 0; r < 8; r++) {
+  const istruzione = await page
+    .locator("text=/Come si scrive\\?/")
+    .first()
+    .textContent({ timeout: 5000 })
+    .catch(() => null);
+  if (!istruzione) break;
+  const parola = istruzione.split(".")[0].trim().toUpperCase();
+  const centro = (await page.locator("main span.tracking-widest").first().textContent()).trim();
+  const [prima, dopo] = centro.split("___");
+  const buco = parola.slice(prima.length, parola.length - dopo.length);
+  await page.locator(`button[aria-label='${buco}']`).first().tap();
+  buchi++;
+  await page.waitForTimeout(1400);
+}
+ok("ortografia: partita completa 8/8", buchi === 8, `${buchi}/8`);
+
 // Il robot ballerino: 6 coreografie lette dall'istruzione, toccando sempre
 // la PRIMA tessera con quel nome. Con le mosse doppie (due "batti le mani")
 // è il caso che scoprì il bug dei gemelli: la mossa giusta rifiutata

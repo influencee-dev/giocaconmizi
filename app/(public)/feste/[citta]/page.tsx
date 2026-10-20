@@ -195,7 +195,7 @@ export default async function FestaCittaPage({
 
       {altre.length > 0 && (
         <section className="mt-10 flex flex-wrap items-center gap-3 rounded-morbido bg-crema p-6">
-          <p className="min-w-0 flex-1 font-bold text-notte">Le altre città:</p>
+          <p className="w-full font-bold text-notte">Le altre città:</p>
           {altre.map((c) => (
             <Link
               key={c.slug}
