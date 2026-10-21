@@ -548,6 +548,246 @@ export const CITTA_FESTE: CittaFeste[] = [
       },
     ],
   },
+  {
+    slug: "bologna",
+    citta: "Bologna",
+    aggiornata: "2026-10-21",
+    rispostaBreve:
+      "A Bologna le feste di compleanno per bambini si fanno nei parchi gioco al coperto e nelle ludoteche \u2014 da Casteldebole al centro \u2014 oppure, per chi preferisce l'aria aperta, negli agriturismi con animazione alle porte della citt\u00e0. Dalle fonti pubbliche, una festa in ludoteca costa in genere tra i 100 e i 200 euro, mentre gli spazi pi\u00f9 grandi con pacchetto completo arrivano a 200\u2013500 euro per due\u2013tre ore: per i weekend conviene prenotare almeno quattro settimane prima.",
+    intro:
+      "Bologna ha due anime anche nelle feste: i grandi spazi al coperto con gonfiabili per l'inverno, e il verde appena fuori porta per la bella stagione. Ecco i posti di cui parlano le famiglie bolognesi.",
+    locali: [
+      {
+        nome: "Il Borgo dei Piccoli",
+        zona: "Casteldebole",
+        tipo: "parco giochi al coperto",
+        descrizione:
+          "Parco al coperto dedicato al gioco libero con gonfiabili, per bambini da 1 a 9 anni, con una sala allestita apposta per i compleanni.",
+        sito: "https://ilborgodeipiccoli.it/",
+      },
+      {
+        nome: "Magic World",
+        zona: "Bologna",
+        tipo: "sale feste al chiuso",
+        descrizione:
+          "Ambiente climatizzato con due sale al piano terra per bambini da 1 a 10 anni e una sala dedicata ai piccolissimi (1\u20135).",
+        sito: "https://magicworldaps.it/",
+      },
+      {
+        nome: "Ludovillage",
+        zona: "Bologna",
+        tipo: "ludoteca",
+        descrizione:
+          "Ludoteca ampia con giochi interattivi, gonfiabili, spazi a tema e animazione: indicata soprattutto per i bambini dai 2 ai 6 anni.",
+      },
+      {
+        nome: "Il Mondo di Makam\u00f2",
+        zona: "via San Rocco",
+        tipo: "ludoteca in affitto",
+        descrizione:
+          "Gli spazi della ludoteca si affittano per feste ed eventi privati, con formule diverse a seconda delle esigenze.",
+        sito: "https://www.ilmondodimakamo.it/ludoteca-bologna/",
+      },
+      {
+        nome: "Casa Matilda",
+        zona: "Bologna",
+        tipo: "ludoteca",
+        descrizione:
+          "La ludoteca si riserva per compleanni anche a tema, per la fascia 3\u201310 anni.",
+      },
+      {
+        nome: "Spazio Verde",
+        zona: "fuori porta",
+        tipo: "agriturismo con animazione",
+        descrizione:
+          "Ampi spazi verdi con area giochi, animazione, laboratori didattici e passeggiate con gli asinelli: la festa all'aperto.",
+      },
+      {
+        nome: "Luna Farm",
+        zona: "zona FICO",
+        tipo: "parco divertimenti",
+        descrizione:
+          "Il parco divertimenti al coperto con pacchetti festa all inclusive, per i gruppi numerosi.",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Quanto costa una festa di compleanno per bambini a Bologna?",
+        risposta:
+          "Dalle fonti pubbliche: una festa in ludoteca costa in genere 100\u2013200 euro, mentre gli spazi pi\u00f9 grandi con pacchetto completo (animazione, buffet, pulizie) vanno dai 200 ai 500 euro per due\u2013tre ore.",
+      },
+      {
+        domanda: "Con quanto anticipo prenotare?",
+        risposta:
+          "Per ludoteche e spazi privati nel weekend, almeno quattro settimane prima. Per le feste infrasettimanali i margini sono molto pi\u00f9 morbidi.",
+      },
+      {
+        domanda: "C'\u00e8 un'alternativa alla ludoteca classica?",
+        risposta:
+          "S\u00ec: nella bella stagione gli agriturismi con animazione alle porte della citt\u00e0, e per gruppi numerosi i parchi divertimento con pacchetti all inclusive. Anche il museo pu\u00f2 essere una festa: alcuni propongono percorsi e laboratori su prenotazione.",
+      },
+      {
+        domanda: "Come gestisco inviti e conferme?",
+        risposta:
+          "Invito con giorno, orario di inizio e fine, indirizzo e una scadenza per confermare. Su Gioca con Mizi si crea gratis, con la conferma WhatsApp a un tocco e il QR \u00abInquadra e conferma\u00bb sul biglietto stampato.",
+      },
+    ],
+  },
+  {
+    slug: "firenze",
+    citta: "Firenze",
+    aggiornata: "2026-10-21",
+    rispostaBreve:
+      "A Firenze le feste di compleanno per bambini si organizzano nelle ludoteche \u2014 dall'Oltrarno a via Pisana \u2014 nei saloni attrezzati in citt\u00e0 o nei grandi spazi con gonfiabili della piana, come Calenzano e Campi Bisenzio. Dalle fonti pubbliche i pacchetti partono da circa 150 euro nei feriali per 10 bambini; le sale pi\u00f9 richieste lavorano il sabato e la domenica pomeriggio e vanno prenotate con almeno una settimana d'anticipo.",
+    intro:
+      "A Firenze la festa si divide tra centro e piana: le ludoteche storiche dentro la citt\u00e0, i capannoni climatizzati con gonfiabili appena fuori. Ecco i posti di cui parlano le famiglie fiorentine.",
+    locali: [
+      {
+        nome: "Ludoteca Nidiaci",
+        zona: "Oltrarno (Santo Spirito)",
+        tipo: "ludoteca con giardino",
+        descrizione:
+          "La ludoteca dell'Oltrarno, ristrutturata di recente, con sale interne e un ampio giardino per le feste a tema: i compleanni si festeggiano di sabato, su prenotazione.",
+      },
+      {
+        nome: "WePlayLab",
+        zona: "Firenze",
+        tipo: "ludoteca",
+        descrizione:
+          "Pacchetto festa con allestimento, animatori e due ore e mezza ad accesso riservato: sala, area 0\u20135 anni e playground.",
+        sito: "https://www.weplaylab.com/festa-in-ludoteca",
+      },
+      {
+        nome: "La Mondolfiera",
+        zona: "via Pisana",
+        tipo: "ludoteca",
+        descrizione:
+          "Ludoteca gestita dalla cooperativa L'Abbaino, open space di circa 200 mq per bambini dai 3 agli 11 anni.",
+      },
+      {
+        nome: "Klab Kids",
+        zona: "Firenze",
+        tipo: "saloni per feste",
+        descrizione:
+          "Due ampi saloni (uno con spazio attrezzato a pavimento antitrauma) per oltre 70 persone, con cucina e pulizie incluse nel noleggio; sabato e domenica pomeriggio, da prenotare con almeno una settimana d'anticipo.",
+        sito: "https://www.klabkids.it/feste/",
+      },
+      {
+        nome: "Fantasyland",
+        zona: "Calenzano",
+        tipo: "parco giochi al coperto",
+        descrizione:
+          "Oltre 700 mq climatizzati con gonfiabili e playground: pacchetto festa da 150 euro nei feriali (170 nel weekend) per 10 bambini, 8\u201310 euro per ogni bambino in pi\u00f9; il buffet si porta da casa o lo prepara la struttura.",
+        sito: "https://www.fantasylandpark.it/",
+      },
+      {
+        nome: "Stargate Lasergame",
+        zona: "Firenze e Prato",
+        tipo: "lasergame",
+        descrizione:
+          "La festa per i pi\u00f9 grandi: sala giochi e lasergame fino a 24 giocatori per partita.",
+        sito: "https://www.lasergamefirenze.com/compleanni-cxrn",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Quanto costa una festa di compleanno per bambini a Firenze?",
+        risposta:
+          "Dalle fonti pubbliche: i pacchetti nei grandi spazi della piana partono da circa 150 euro nei feriali e 170 nel weekend per 10 bambini, con 8\u201310 euro per ogni bambino in pi\u00f9. In citt\u00e0 il noleggio dei saloni attrezzati include spesso cucina e pulizie.",
+      },
+      {
+        domanda: "Quando si fanno le feste nelle ludoteche fiorentine?",
+        risposta:
+          "Quasi sempre nel weekend: diverse sale lavorano solo il sabato e la domenica pomeriggio, su prenotazione. Muovetevi con almeno una settimana d'anticipo, di pi\u00f9 nei mesi di punta.",
+      },
+      {
+        domanda: "E per i ragazzi pi\u00f9 grandi?",
+        risposta:
+          "Il lasergame \u00e8 il classico degli 8\u201312 anni: partite fino a 24 giocatori e festa in sala dedicata. Funziona bene anche come festa mista con i genitori.",
+      },
+      {
+        domanda: "Come mando gli inviti?",
+        risposta:
+          "Con un biglietto che dica giorno, orario di inizio e fine, indirizzo e come confermare. Su Gioca con Mizi si crea gratis, con la conferma WhatsApp a un tocco e il QR \u00abInquadra e conferma\u00bb sul biglietto stampato.",
+      },
+    ],
+  },
+  {
+    slug: "bari",
+    citta: "Bari",
+    aggiornata: "2026-10-21",
+    rispostaBreve:
+      "A Bari le feste di compleanno per bambini si fanno nelle ludoteche e sale feste della citt\u00e0 \u2014 da Poggiofranco a via Amendola \u2014 e nei comuni alle porte, come Valenzano: i pacchetti comprendono in genere animazione, buffet a fasce di prezzo e spesso anche addobbi e pulizie. Molte strutture seguono anche battesimi e feste a tema: chiedete un preventivo scritto con l'elenco di cosa \u00e8 incluso.",
+    intro:
+      "A Bari la sala feste \u00e8 un'istituzione: animazione, buffet e addobbi arrivano quasi sempre in pacchetto, e il passaparola pesa pi\u00f9 di qualunque pubblicit\u00e0. Ecco i posti di cui parlano le famiglie baresi.",
+    locali: [
+      {
+        nome: "Ludoteca Il Cappellaio Matto",
+        zona: "via Nicola Angelini",
+        tipo: "ludoteca",
+        descrizione:
+          "Feste con animazione, pi\u00f9 campi estivi e baby parking durante l'anno.",
+      },
+      {
+        nome: "Playhouse",
+        zona: "Bari",
+        tipo: "organizzazione feste",
+        descrizione:
+          "Feste a tema con buffet a pacchetti in tre fasce di prezzo per bambino, da confermare col preventivo.",
+      },
+      {
+        nome: "Giardino dei Bimbi",
+        zona: "via Amendola",
+        tipo: "sala feste",
+        descrizione:
+          "Locali per compleanni, battesimi e carnevale, con buffet per 25 bambini, addobbi, palloncini e animazione.",
+        sito: "https://www.scuolagiardinodeibimbi.net/feste-gallery",
+      },
+      {
+        nome: "Baby Stars",
+        zona: "Poggiofranco",
+        tipo: "ludoteca",
+        descrizione:
+          "Struttura interna di 400 mq per bambini da 0 a 10 anni, con compleanni e feste a tema.",
+      },
+      {
+        nome: "Play Planet",
+        zona: "Bari",
+        tipo: "sala feste",
+        descrizione:
+          "Tra le sale pi\u00f9 spaziose della guida cittadina, con animatore e spesso catering e pulizie inclusi.",
+      },
+      {
+        nome: "Fuori di Festa",
+        zona: "Valenzano",
+        tipo: "sala feste con baby parking",
+        descrizione:
+          "Sala per compleanni e feste a tema alle porte della citt\u00e0, con servizio di baby parking.",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Dove si festeggia un compleanno per bambini a Bari?",
+        risposta:
+          "Nelle ludoteche e sale feste della citt\u00e0 (Poggiofranco, via Amendola, via Nicola Angelini) o nei comuni alle porte come Valenzano. Quasi tutte propongono il pacchetto completo con animazione e buffet.",
+      },
+      {
+        domanda: "Cosa comprende il pacchetto festa a Bari?",
+        risposta:
+          "In genere animazione, buffet a fasce di prezzo per bambino e spesso addobbi, palloncini e pulizie. I prezzi pubblicati online invecchiano in fretta: fate sempre confermare tutto nel preventivo scritto.",
+      },
+      {
+        domanda: "Le sale fanno anche battesimi e altre feste?",
+        risposta:
+          "S\u00ec, \u00e8 la norma: molte strutture seguono battesimi, comunioni e feste a tema oltre ai compleanni, con gli stessi spazi e lo stesso staff.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp gi\u00e0 scritta, e sul biglietto stampato c'\u00e8 il QR \u00abInquadra e conferma\u00bb.",
+      },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

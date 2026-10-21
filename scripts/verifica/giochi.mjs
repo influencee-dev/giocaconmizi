@@ -160,6 +160,21 @@ ok(
   hubCorsivo.includes("ItemList") && hubCorsivo.includes("BreadcrumbList"),
 );
 
+// Open Graph: la pagina dichiara l'anteprima e l'immagine viene servita
+// davvero (il metadataBase punta al dominio di produzione: si riscrive
+// il percorso sul server locale).
+async function ogServita(percorso) {
+  const html = await (await page.request.get(`${BASE}${percorso}`)).text();
+  const m = html.match(/property="og:image"[^>]*content="([^"]+)"/) || html.match(/content="([^"]+)"[^>]*property="og:image"/);
+  if (!m) return false;
+  const u = new URL(m[1], BASE);
+  const img = await page.request.get(`${BASE}${u.pathname}${u.search}`);
+  return img.ok() && (img.headers()["content-type"] || "").includes("image");
+}
+ok("og:image della home", await ogServita("/"));
+ok("og:image di una guida", await ogServita("/guide/tabelline-senza-lacrime"));
+ok("og:image di una città", await ogServita("/feste/milano"));
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("giochi") ? 0 : 1);
