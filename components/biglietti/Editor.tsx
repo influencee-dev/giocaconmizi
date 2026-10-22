@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Biglietto, type DatiBiglietto } from "./Biglietto";
 import { CATALOGO_STICKER, catalogoPerTema } from "./stickers";
-import { biglietoInPng, datiPerLink, leggiDatiDaLink, linkInvito, numeroWhatsApp } from "@/lib/condivisione";
+import { biglietoInPng, datiPerLink, foglioA4, leggiDatiDaLink, linkInvito, numeroWhatsApp } from "@/lib/condivisione";
 import { FORMATI, frasi, misure, temi, TIPI, type FormatoId, type Tipo } from "@/lib/biglietti";
 import type { Variante } from "./Sfondo";
 
@@ -170,6 +170,17 @@ export function Editor() {
     link.click();
   }, [altezza, larghezza, dati.nome, dati.tipo]);
 
+  /* Solo per l'A6, il formato di carta: 4 copie su un foglio A4 da ritagliare. */
+  const scaricaFoglio = useCallback(async () => {
+    const svg = contenitore.current?.querySelector("svg");
+    if (!svg) return;
+    const png = await foglioA4(svg, larghezza, altezza);
+    const link = document.createElement("a");
+    link.download = `foglio-a4-${dati.tipo}-${dati.nome || "compleanno"}.png`.toLowerCase().replace(/\s+/g, "-");
+    link.href = png;
+    link.click();
+  }, [altezza, larghezza, dati.nome, dati.tipo]);
+
   const salvaNelLink = useCallback(() => {
     const codificato = datiPerLink(dati);
     const url = `${window.location.pathname}?b=${codificato}`;
@@ -229,6 +240,15 @@ export function Editor() {
             >
               Scarica
             </button>
+            {formato === "a6" && (
+              <button
+                type="button"
+                onClick={scaricaFoglio}
+                className="rounded-bolla bg-viola px-5 py-4 font-extrabold text-white"
+              >
+                Foglio A4 (4 copie)
+              </button>
+            )}
             <button
               type="button"
               onClick={mandaSuWhatsApp}
@@ -251,6 +271,11 @@ export function Editor() {
               {copiato ? "Link copiato" : "Salva il link"}
             </button>
           </div>
+          {formato === "a6" && (
+            <p className="mt-2 text-center text-sm text-notte-tenue">
+              Il foglio A4 ha quattro copie coi segni di taglio: stampa e ritaglia.
+            </p>
+          )}
           {dati.tipo === "invito" && numeroWhatsApp(dati.conferma) && (
             <div className="mt-2 flex flex-col gap-2">
               <p className="text-center text-sm text-notte-tenue">

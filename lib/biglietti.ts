@@ -103,7 +103,7 @@ export const MODALITA: Record<string, { nome: string; risposta: string }> = {
   "da-stampare": {
     nome: "da stampare",
     risposta:
-      "Il formato A6 è quello classico dell'invito di carta: ne entrano quattro in un foglio A4, da tagliare lungo i bordi.",
+      "Il formato A6 è quello classico dell'invito di carta: il bottone «Foglio A4 (4 copie)» scarica quattro inviti su un foglio solo, già coi segni di taglio.",
   },
   digitali: {
     nome: "digitali",

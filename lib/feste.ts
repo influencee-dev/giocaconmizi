@@ -788,6 +788,236 @@ export const CITTA_FESTE: CittaFeste[] = [
       },
     ],
   },
+  {
+    slug: "catania",
+    citta: "Catania",
+    aggiornata: "2026-10-22",
+    rispostaBreve:
+      "A Catania la festa di compleanno per bambini si fa quasi sempre in una sala feste o ludoteca con playground: in citt\u00e0 ci sono spazi grandi con area baby e sala per i genitori, e appena fuori \u2014 San Gregorio, Misterbianco, Acireale \u2014 parchi giochi al chiuso e ville con spazi all'aperto. I pacchetti comprendono spesso allestimento e catering: fatevi dare un preventivo scritto con l'elenco di cosa \u00e8 incluso.",
+    intro:
+      "A Catania la sala feste \u00e8 una cosa seria: playground, gonfiabili e buffet arrivano quasi sempre in pacchetto, e molte famiglie scelgono tra citt\u00e0 e hinterland soprattutto in base al parcheggio. Ecco i posti di cui si parla di pi\u00f9.",
+    locali: [
+      {
+        nome: "Nila Party Family",
+        zona: "via Ingegnere",
+        tipo: "sala feste con playground",
+        descrizione:
+          "Circa 400 mq con playground, area baby per i bimbi da 0 a 3 anni, sala relax per i genitori e spazi per i laboratori creativi.",
+        sito: "https://nilapartyfamily.it",
+      },
+      {
+        nome: "La Bacchetta Magica",
+        zona: "via Quieta",
+        tipo: "ludoteca e sala feste",
+        descrizione:
+          "Ludoteca con sala feste ampia, sala dance con palco e animazione; durante l'anno anche doposcuola e nido.",
+        sito: "https://www.labacchettamagicact.it",
+      },
+      {
+        nome: "Party Time",
+        zona: "via Generale Cascino",
+        tipo: "sala feste",
+        descrizione:
+          "Cinquecento metri quadri con due sale per le feste, gonfiabili, playground e un'area con animazione anche per i pi\u00f9 grandi.",
+      },
+      {
+        nome: "PoWow",
+        zona: "San Gregorio di Catania",
+        tipo: "ludoteca e sala eventi",
+        descrizione:
+          "Gonfiabili, playground, calcetto e sala esterna, con pacchetti festa che comprendono allestimento e catering.",
+        sito: "https://powow.it",
+      },
+      {
+        nome: "Funny Island",
+        zona: "Misterbianco",
+        tipo: "parco giochi al chiuso",
+        descrizione: "Parco giochi al coperto con sale a tema dedicate ai compleanni.",
+        sito: "https://www.funny-island.com",
+      },
+      {
+        nome: "Villa Anzalone",
+        zona: "Acireale (Capomulini)",
+        tipo: "parco con spazi all'aperto",
+        descrizione:
+          "Parco divertimenti e ludoteca con spazi all'aperto e una pista ciclabile privata; feste per bambini da 1 a 12 anni.",
+        sito: "https://villaanzalone.it",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Dove si festeggia un compleanno per bambini a Catania?",
+        risposta:
+          "In citt\u00e0 nelle sale feste con playground (via Ingegnere, via Quieta, via Generale Cascino) oppure nell'hinterland: San Gregorio, Misterbianco e Acireale hanno parchi giochi al chiuso e spazi all'aperto, in genere pi\u00f9 comodi col parcheggio.",
+      },
+      {
+        domanda: "Cosa comprende il pacchetto festa a Catania?",
+        risposta:
+          "Quasi sempre lo spazio giochi con l'animazione, e spesso allestimento e catering. Le aree baby per i piccolissimi e la sala per i genitori sono frequenti: chiedete il preventivo scritto con l'elenco completo.",
+      },
+      {
+        domanda: "Meglio in citt\u00e0 o fuori?",
+        risposta:
+          "In citt\u00e0 si arriva senza macchina ma gli spazi sono pi\u00f9 contesi; fuori (Misterbianco, San Gregorio, Acireale) si trovano parchi pi\u00f9 grandi, spazi all'aperto e parcheggio. Col bel tempo, che a Catania \u00e8 la norma, l'aperto vince spesso.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp gi\u00e0 scritta, e sul biglietto stampato c'\u00e8 il QR \u00abInquadra e conferma\u00bb.",
+      },
+    ],
+  },
+  {
+    slug: "verona",
+    citta: "Verona",
+    aggiornata: "2026-10-22",
+    rispostaBreve:
+      "A Verona si pu\u00f2 scegliere tra la sala feste privata per i pi\u00f9 piccoli, il bowling in zona Fiera con pacchetti da circa 25 \u20ac a bambino e perfino il compleanno al museo: il Children's Museum e il Museo Archeologico Nazionale organizzano feste su prenotazione (al museo archeologico 190 \u20ac fino a 20 bambini). Verso il lago di Garda ci sono trattorie con ludoteca dove i grandi mangiano e i bimbi giocano.",
+    intro:
+      "Verona \u00e8 una delle poche citt\u00e0 dove il compleanno si pu\u00f2 fare al museo. Tra Fiera, San Marco e il lago le formule sono molto diverse tra loro: conviene partire da che festa volete \u2014 scatenata, per piccolissimi o \u00abda grandi\u00bb \u2014 e poi scegliere il posto.",
+    locali: [
+      {
+        nome: "121 Bimbi",
+        zona: "via San Marco",
+        tipo: "sala feste privata",
+        descrizione:
+          "Sala riservata pensata per i bambini dai 2 ai 6 anni, con gonfiabili e giochi: si festeggia un compleanno alla volta e la data si blocca con un acconto.",
+        sito: "https://www.csssport.com/121bimbi",
+      },
+      {
+        nome: "Bowling Verona",
+        zona: "viale della Fiera",
+        tipo: "bowling con sala feste",
+        descrizione:
+          "Feste di compleanno da circa 25 \u20ac a bambino con un minimo di 8 invitati; nel weekend conviene prenotare presto.",
+        sito: "https://www.bowlingverona.com/birthday",
+      },
+      {
+        nome: "Children's Museum Verona",
+        zona: "via Santa Teresa",
+        tipo: "museo per bambini",
+        descrizione:
+          "Il museo pensato per i bambini, con area esperienziale e laboratorio ThinkLab, organizza il \u00abCompleanno al museo\u00bb su prenotazione.",
+        sito: "https://www.cmverona.it/famiglie/compleanno/",
+      },
+      {
+        nome: "Museo Archeologico Nazionale",
+        zona: "centro storico",
+        tipo: "museo",
+        descrizione:
+          "\u00abCompleanno al museo\u00bb per bambini dai 5 ai 12 anni: 190 \u20ac fino a 20 bambini, con l'ingresso di due adulti compreso, da prenotare con almeno una settimana di anticipo.",
+        sito: "https://manverona.cultura.gov.it",
+      },
+      {
+        nome: "Trattoria da Maick",
+        zona: "Castelnuovo del Garda",
+        tipo: "trattoria con ludoteca",
+        descrizione:
+          "Trattoria con ludoteca e spazi dedicati ai pi\u00f9 piccoli: la formula dove i grandi stanno a tavola e i bimbi giocano accanto.",
+        sito: "https://www.trattoriadamaick.it",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Dove si festeggia un compleanno per bambini a Verona?",
+        risposta:
+          "In una sala feste privata (via San Marco), al bowling in zona Fiera, al museo \u2014 il Children's Museum e il Museo Archeologico fanno i compleanni su prenotazione \u2014 oppure verso il lago, nelle trattorie con ludoteca.",
+      },
+      {
+        domanda: "Quanto costa una festa di compleanno a Verona?",
+        risposta:
+          "Il bowling parte da circa 25 \u20ac a bambino con almeno 8 invitati; il Museo Archeologico Nazionale chiede 190 \u20ac fino a 20 bambini. Per le sale private il prezzo dipende dal pacchetto: fatevi dare un preventivo scritto.",
+      },
+      {
+        domanda: "Come funziona il compleanno al museo?",
+        risposta:
+          "Si prenota con anticipo (al Museo Archeologico almeno una settimana prima) e il museo organizza attivit\u00e0 e giochi a tema per il gruppo; l'archeologico accoglie bambini dai 5 ai 12 anni, fino a 20 per festa.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp gi\u00e0 scritta, e sul biglietto stampato c'\u00e8 il QR \u00abInquadra e conferma\u00bb.",
+      },
+    ],
+  },
+  {
+    slug: "venezia",
+    citta: "Venezia",
+    aggiornata: "2026-10-22",
+    rispostaBreve:
+      "A Venezia la maggior parte delle feste di compleanno per bambini si fa in terraferma, tra Mestre e dintorni: trampoline park con sala privata (pacchetto base 120 \u20ac nei feriali, 150 \u20ac nel weekend), ristoranti per eventi con area giochi e perfino il compleanno in fattoria. In centro storico gli spazi sono pochi \u2014 una ludoteca a Castello \u00e8 l'opzione pi\u00f9 citata \u2014 quindi chi abita in laguna spesso festeggia oltre il ponte.",
+    intro:
+      "Venezia \u00e8 un caso a parte: in laguna gli spazi per le feste sono rari e piccoli, cos\u00ec il grosso dei compleanni si festeggia a Mestre e dintorni, dove c'\u00e8 di tutto \u2014 dal trampoline park alla fattoria. Ecco le opzioni di cui parlano le famiglie veneziane.",
+    locali: [
+      {
+        nome: "Joy Zone Jump",
+        zona: "Mestre (Porte di Mestre)",
+        tipo: "trampoline park",
+        descrizione:
+          "Sala privata per tre ore fino a 25 persone: il pacchetto base per 4\u20139 invitati costa 120 \u20ac nei feriali e 150 \u20ac nel weekend, e c'\u00e8 una sala doppia fino a 50 persone.",
+        sito: "https://www.joyzone-jump.com/sale_feste/feste.html",
+      },
+      {
+        nome: "Mida Eventi",
+        zona: "Mestre",
+        tipo: "ristorante per eventi",
+        descrizione:
+          "Sala divisibile in area giochi e area tavoli, cucina interna e men\u00f9 a tema; il prezzo dipende dalla sala, dall'animazione e dal numero di invitati.",
+        sito: "https://www.midaevents.it",
+      },
+      {
+        nome: "Il Selgaro",
+        zona: "Mestre",
+        tipo: "agriturismo",
+        descrizione:
+          "Il compleanno in fattoria: truccabimbi, bolle di sapone e caccia al tesoro, in sala interna o all'aperto a seconda della stagione.",
+        sito: "https://www.ilselgaro.com",
+      },
+      {
+        nome: "Bimbiland",
+        zona: "Mestre (via Don Luigi Peron)",
+        tipo: "ludoteca",
+        descrizione: "Ludoteca con sala eventi dedicata alle feste di compleanno.",
+      },
+      {
+        nome: "La Luna nel Pozzo",
+        zona: "Castello (centro storico)",
+        tipo: "ludoteca",
+        descrizione:
+          "Una delle poche opzioni in laguna: ludoteca a Castello, segnalata dalle guide veneziane per le feste in centro storico.",
+      },
+      {
+        nome: "Il Giardino delle Ciliegie",
+        zona: "Cazzago di Pianiga",
+        tipo: "spazio per l'infanzia",
+        descrizione:
+          "Affitta le sale per le feste nel weekend, quattro ore dalle 15 alle 19, fino a 15 bambini con i loro adulti; va prenotato con qualche settimana di anticipo.",
+        sito: "https://www.ilgiardinodelleciliegie.it",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Dove si festeggia un compleanno per bambini a Venezia?",
+        risposta:
+          "Quasi sempre in terraferma: a Mestre e dintorni ci sono trampoline park, ristoranti per eventi, ludoteche e perfino un agriturismo per il compleanno in fattoria. In centro storico l'opzione pi\u00f9 citata \u00e8 la ludoteca a Castello.",
+      },
+      {
+        domanda: "Quanto costa una festa di compleanno a Venezia?",
+        risposta:
+          "Il trampoline park di Mestre pubblica i prezzi del pacchetto base: 120 \u20ac nei feriali e 150 \u20ac nel weekend per 4\u20139 invitati, con la sala privata per tre ore. Altrove il prezzo dipende da sala, men\u00f9 e animazione: chiedete il preventivo scritto.",
+      },
+      {
+        domanda: "E se abito in centro storico?",
+        risposta:
+          "Gli spazi in laguna sono pochi e piccoli, quindi molte famiglie attraversano il ponte: Mestre si raggiunge in pochi minuti di treno o tram, e quasi tutte le location sono vicine alle fermate.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp gi\u00e0 scritta, e sul biglietto stampato c'\u00e8 il QR \u00abInquadra e conferma\u00bb.",
+      },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

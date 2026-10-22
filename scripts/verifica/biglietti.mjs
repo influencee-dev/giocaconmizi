@@ -54,6 +54,23 @@ const percorso = giu ? await giu.path() : null;
 ok("download PNG valido", percorso && statSync(percorso).size > 5000 &&
   readFileSync(percorso).subarray(0, 4).toString("hex") === "89504e47");
 
+// Foglio A4: quattro copie A6 coi segni di taglio, un PNG 2480×3508 (300 dpi)
+const attesaFoglio = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
+await page.getByRole("button", { name: "Foglio A4 (4 copie)" }).tap();
+const foglio = await attesaFoglio;
+const percorsoFoglio = foglio ? await foglio.path() : null;
+const testaFoglio = percorsoFoglio ? readFileSync(percorsoFoglio) : null;
+ok("foglio A4 da 4 copie: PNG 2480×3508",
+  testaFoglio && testaFoglio.readUInt32BE(16) === 2480 && testaFoglio.readUInt32BE(20) === 3508);
+
+// Nei formati digitali il foglio A4 non ha senso: il bottone sparisce
+await page.getByRole("button", { name: "WhatsApp e storie" }).tap();
+await page.waitForTimeout(300);
+ok("foglio A4 nascosto nel formato storia",
+  (await page.getByRole("button", { name: "Foglio A4 (4 copie)" }).count()) === 0);
+await page.getByRole("button", { name: "A6 da stampare" }).tap();
+await page.waitForTimeout(300);
+
 // Link salvato: senza foto, con tutto il resto; l'invito digitale funziona
 await page.getByRole("button", { name: "Salva il link" }).tap();
 await page.waitForTimeout(300);
