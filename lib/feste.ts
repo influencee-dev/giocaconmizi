@@ -1018,6 +1018,227 @@ export const CITTA_FESTE: CittaFeste[] = [
       },
     ],
   },
+  {
+    slug: "messina",
+    citta: "Messina",
+    aggiornata: "2026-10-23",
+    rispostaBreve:
+      "A Messina la festa di compleanno per bambini si fa nei parchi giochi con gonfiabili e playground \u2014 i pi\u00f9 grandi sono lungo la costa, da Galati Marina a Torre Faro \u2014 oppure in ludoteca in centro citt\u00e0. Per i pi\u00f9 grandi c'\u00e8 anche il lasergame con la caccia al tesoro. Quasi tutti propongono pacchetti con animazione e sale a tema: fatevi elencare per iscritto cosa \u00e8 compreso.",
+    intro:
+      "A Messina le feste si dividono tra la costa \u2014 dove stanno i parchi giochi grandi, col giardino e le strutture sportive \u2014 e il centro, con le ludoteche storiche. Ecco i posti di cui parlano le famiglie messinesi.",
+    locali: [
+      {
+        nome: "Festilandia",
+        zona: "Galati Marina",
+        tipo: "sala feste con giardino",
+        descrizione:
+          "Sale a tema e animatori al centro sportivo Il Limoneto, sulla statale 114: oltre 100 mq per le feste, con giardino, spettacoli di magia e mascotte.",
+        sito: "https://festilandia.it",
+      },
+      {
+        nome: "Neverland Park",
+        zona: "Messina",
+        tipo: "parco giochi con gonfiabili",
+        descrizione:
+          "Si presenta col playground pi\u00f9 grande della provincia: gonfiabili, strutture sportive per calcio, basket e pallavolo, salterelli e area baby.",
+        sito: "https://www.neverlandpark.it",
+      },
+      {
+        nome: "Ludoteca Anima e Corpo",
+        zona: "centro citt\u00e0",
+        tipo: "ludoteca",
+        descrizione:
+          "Feste di compleanno con animazione, gonfiabili e mascotte; il sabato anche feste a tema.",
+      },
+      {
+        nome: "Baby Planet (Mister Alex)",
+        zona: "via Croce Rossa",
+        tipo: "area giochi",
+        descrizione:
+          "L'area giochi al coperto di Mister Alex, che d'estate si sposta anche a Torre Faro con la sede estiva; fanno pure gli allestimenti per le feste.",
+        sito: "https://misteralex.it",
+      },
+      {
+        nome: "Underworld Lasergame",
+        zona: "Messina",
+        tipo: "lasergame ed escape room",
+        descrizione:
+          "Per i pi\u00f9 grandi: pacchetto compleanno con partita al lasergame, caccia al tesoro e animazione su richiesta.",
+        sito: "https://www.lasergamemessina.it/compleanni-eventi/",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Dove si festeggia un compleanno per bambini a Messina?",
+        risposta:
+          "Nei parchi giochi con gonfiabili lungo la costa (Galati Marina, e d'estate Torre Faro) o nelle ludoteche del centro. Dai 7-8 anni in su piace molto anche il lasergame con la caccia al tesoro.",
+      },
+      {
+        domanda: "Cosa comprende il pacchetto festa a Messina?",
+        risposta:
+          "Di solito la sala o l'area riservata, l'animazione e spesso gli allestimenti a tema; gonfiabili e mascotte sono frequenti. I dettagli cambiano molto da locale a locale: chiedete il preventivo scritto.",
+      },
+      {
+        domanda: "E per i bambini pi\u00f9 grandi, verso i 10 anni?",
+        risposta:
+          "Il lasergame \u00e8 l'opzione che funziona quasi sempre: partita, caccia al tesoro e, volendo, animazione. In alternativa i parchi con strutture sportive, dove la festa diventa un torneo.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp gi\u00e0 scritta, e sul biglietto stampato c'\u00e8 il QR \u00abInquadra e conferma\u00bb.",
+      },
+    ],
+  },
+  {
+    slug: "padova",
+    citta: "Padova",
+    aggiornata: "2026-10-23",
+    rispostaBreve:
+      "A Padova si festeggia in playroom in citt\u00e0 \u2014 con l'area giochi riservata e la sala buffet separata \u2014 ma il grosso delle feste si fa nella cintura: Legnaro, Albignasego, Maser\u00e0, Limena e Curtarolo hanno ludoteche e parchi con gonfiabili, sale fino a 50 invitati e perfino un castello a tema medievale. Molte strutture offrono anche catering e feste a domicilio: fatevi mettere tutto nel preventivo.",
+    intro:
+      "A Padova la mappa delle feste \u00e8 a cerchi: in citt\u00e0 le playroom raccolte, nella cintura i capannoni coi gonfiabili e i parchi a tema. In mezzo c'\u00e8 di tutto, dal castello medievale al parco spaziale: ecco i posti di cui parlano le famiglie padovane.",
+    locali: [
+      {
+        nome: "Blank Space",
+        zona: "via Belzoni",
+        tipo: "playroom",
+        descrizione:
+          "La playroom si riserva per l'intera festa: area giochi con scivolo pensata per i bambini dai 2 agli 8 anni e sala separata per il buffet.",
+        sito: "https://www.blankspacepadova.it/feste-di-compleanno-a-blank-space/",
+      },
+      {
+        nome: "Gi\u00f2 Party",
+        zona: "Legnaro",
+        tipo: "sala feste",
+        descrizione:
+          "Sala interna fino a 50 invitati e spazi esterni che arrivano a 100 persone; aperto tutto l'anno.",
+        sito: "https://gioparty.com/sala-feste/",
+      },
+      {
+        nome: "La Valle Incantata",
+        zona: "Albignasego",
+        tipo: "ludoteca",
+        descrizione:
+          "Gonfiabili, animazione, baby parking e serate a tema; organizza anche feste a domicilio con servizio catering.",
+        sito: "https://valleincantata.it",
+      },
+      {
+        nome: "All'Arrembaggio",
+        zona: "Maser\u00e0 di Padova",
+        tipo: "ludoteca e parco giochi",
+        descrizione:
+          "Feste di compleanno con giochi gonfiabili, servizio catering e baby sitting dai 3 anni in su.",
+        sito: "https://www.allarrembaggio.com",
+      },
+      {
+        nome: "Castello di Cavilot",
+        zona: "Limena",
+        tipo: "parco a tema medievale",
+        descrizione:
+          "Seicento metri quadri a tema medievale con castello gonfiabile e aree divise per fasce d'et\u00e0, dai 3 ai 10 anni.",
+      },
+      {
+        nome: "Danilandia",
+        zona: "Curtarolo",
+        tipo: "parco a tema spazio",
+        descrizione:
+          "Parco a tema spaziale con zona baby dedicata ai bimbi da 0 a 3 anni, gonfiabili e pacchetti festa personalizzabili.",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Dove si festeggia un compleanno per bambini a Padova?",
+        risposta:
+          "In citt\u00e0 nelle playroom con sala riservata (zona Portello/via Belzoni), oppure nella cintura: Legnaro, Albignasego, Maser\u00e0, Limena e Curtarolo hanno ludoteche, parchi a tema e sale fino a 50 invitati.",
+      },
+      {
+        domanda: "Quanti invitati pu\u00f2 ospitare una sala a Padova?",
+        risposta:
+          "Le playroom cittadine sono pensate per gruppi raccolti; nella cintura si sale: a Legnaro la sala interna arriva a 50 invitati e gli spazi esterni a 100 persone.",
+      },
+      {
+        domanda: "Si pu\u00f2 fare la festa a casa con l'animazione?",
+        risposta:
+          "S\u00ec: alcune ludoteche della cintura, come quella di Albignasego, portano a domicilio animazione e catering. Per i gonfiabili in giardino serve solo lo spazio (e un piano B al coperto se piove).",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp gi\u00e0 scritta, e sul biglietto stampato c'\u00e8 il QR \u00abInquadra e conferma\u00bb.",
+      },
+    ],
+  },
+  {
+    slug: "trieste",
+    citta: "Trieste",
+    aggiornata: "2026-10-23",
+    rispostaBreve:
+      "A Trieste per la festa di compleanno si affitta la sala: la citt\u00e0 funziona pi\u00f9 a sale per feste \u2014 da 50 a 200 mq, spesso con animazione da aggiungere \u2014 che a ludoteche col pacchetto tutto compreso. Le eccezioni ci sono: una ludoteca da circa mille metri quadri in via Capodistria e la sala della parrocchia con l'area esterna, che resta l'opzione pi\u00f9 economica. Prenotate presto: le sale buone nel weekend vanno via settimane prima.",
+    intro:
+      "Trieste ha un suo modo di fare le feste: si affitta la sala \u2014 grande, media o parrocchiale \u2014 e ci si costruisce sopra la festa, con l'animazione scelta a parte. Ecco gli spazi di cui parlano le famiglie triestine.",
+    locali: [
+      {
+        nome: "Ludoteca Piccole Canaglie",
+        zona: "via Capodistria",
+        tipo: "ludoteca",
+        descrizione:
+          "Circa mille metri quadri, tra gli spazi pi\u00f9 grandi della citt\u00e0: feste in sede o a domicilio con gonfiabili e catering, per bambini da 1 a 10 anni.",
+      },
+      {
+        nome: "Stock a Party",
+        zona: "via Lionello Stock",
+        tipo: "sala feste",
+        descrizione:
+          "Sala per compleanni con animazione personalizzabile: tema, decorazioni e men\u00f9 si scelgono col locale.",
+        sito: "https://www.stockaparty.it",
+      },
+      {
+        nome: "Villa Rinascita (parrocchia San Marco)",
+        zona: "via dei Modiano",
+        tipo: "sala parrocchiale con esterno",
+        descrizione:
+          "La sala compleanni della parrocchia, con area esterna: l'opzione semplice ed economica, da prenotare per tempo.",
+        sito: "https://feste.parrocchiasanmarco.trieste.it",
+      },
+      {
+        nome: "Sala Magicoloso",
+        zona: "via Milano",
+        tipo: "sala feste",
+        descrizione:
+          "Circa 200 mq con percorso ludo-didattico per i bambini e zona relax per i genitori.",
+      },
+      {
+        nome: "Sala SpaceLab",
+        zona: "Trieste",
+        tipo: "sala feste",
+        descrizione:
+          "Open space con giochi e pavimento interattivo, climatizzato; su richiesta arriva gi\u00e0 allestito.",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Dove si festeggia un compleanno per bambini a Trieste?",
+        risposta:
+          "Quasi sempre in una sala affittata \u2014 via Lionello Stock, via Milano, la sala parrocchiale di via dei Modiano \u2014 oppure nella grande ludoteca di via Capodistria, che fa anche feste a domicilio.",
+      },
+      {
+        domanda: "Qual \u00e8 l'opzione pi\u00f9 economica a Trieste?",
+        risposta:
+          "La sala parrocchiale con area esterna: si affitta lo spazio e si porta il resto da casa. In generale a Trieste conviene separare le voci \u2014 sala, torta, animazione \u2014 e aggiungere solo quello che serve.",
+      },
+      {
+        domanda: "L'animazione \u00e8 compresa nella sala?",
+        risposta:
+          "Spesso no: a Trieste molte sale si affittano vuote o semi-allestite e l'animazione si sceglie a parte. Chiedete sempre cosa \u00e8 compreso: allestimento, pulizie finali e kit per il taglio della torta fanno la differenza.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp gi\u00e0 scritta, e sul biglietto stampato c'\u00e8 il QR \u00abInquadra e conferma\u00bb.",
+      },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

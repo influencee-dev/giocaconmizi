@@ -818,6 +818,79 @@ export const GUIDE: Guida[] = [
     ],
     giochi: ["le-emozioni-di-mizi", "memory-animali", "robot-ballerino"],
   },
+  {
+    slug: "memoria-e-concentrazione",
+    titolo: "Memoria e concentrazione nei bambini: come si allenano davvero",
+    titoloBreve: "Memoria e concentrazione",
+    descrizione:
+      "«Non sta attento», «dopo due minuti molla tutto»: quanto dura davvero l'attenzione a ogni età, cosa la allena (e cosa la brucia), e i giochi che fanno palestra senza sembrare esercizi.",
+    rispostaBreve:
+      "L'attenzione di un bambino dura pochi minuti per anno d'età: pretendere mezz'ora filata da un bambino di cinque anni è chiedere l'impossibile, non educarlo. Memoria e concentrazione si allenano come muscoli, con sessioni corte e giochi che le fanno lavorare — memory, trova le differenze, sequenze da ricordare — e con tre condizioni di contorno che pesano più di ogni esercizio: sonno a sufficienza, movimento ogni giorno e una cosa alla volta, senza televisione di sottofondo.",
+    etaMin: 3,
+    etaMax: 10,
+    minutiLettura: 6,
+    aggiornata: "2026-10-23",
+    skill: "memoria",
+    sezioni: [
+      {
+        titolo: "Quanto dura davvero l'attenzione (le aspettative giuste)",
+        paragrafi: [
+          "La regola pratica usata da insegnanti e pediatri: pochi minuti di attenzione guidata per ogni anno d'età. Un bambino di 4 anni regge 8-12 minuti su un'attività scelta da altri, uno di 8 anni una ventina. Non è pigrizia: è lo sviluppo del cervello, e in particolare della corteccia prefrontale, che matura fino ai vent'anni.",
+          "Il paradosso che inganna tutti: lo stesso bambino «che non sta attento» passa un'ora sui mattoncini o sui cartoni. L'attenzione su ciò che scegliamo e ci piace è un altro circuito, molto più facile. La capacità che va allenata — ed è quella che serve a scuola — è restare su un compito anche quando non è la cosa più scintillante della stanza.",
+        ],
+      },
+      {
+        titolo: "Le tre condizioni che valgono più di ogni esercizio",
+        paragrafi: [
+          "Prima di qualunque gioco di memoria, tre cose di contorno fanno la differenza vera. Il sonno: è di notte che il cervello archivia quello che ha imparato di giorno, e un bambino di 6-12 anni ha bisogno di 9-12 ore; mezz'ora di nanna in più si vede sui compiti più di mezz'ora di ripasso in più. Il movimento: correre, saltare e arrampicarsi ossigenano e «scaricano» — un bambino che si è mosso si concentra meglio di uno rimasto fermo tutto il giorno.",
+          "La terza è la più difficile in casa: una cosa alla volta. La televisione accesa di sottofondo, le notifiche, un fratello che gioca accanto al tavolo dei compiti frammentano l'attenzione proprio mentre si sta allenando. Non serve il silenzio assoluto: serve che l'attività in corso sia l'unica sul tavolo.",
+        ],
+      },
+      {
+        titolo: "I giochi che allenano la memoria (senza sembrare esercizi)",
+        paragrafi: [
+          "Il memory è l'attrezzo classico e funziona a qualunque età: ricordare dove si nasconde la carta gemella è memoria di lavoro pura. In casa funzionano anche il «gioco del vassoio» (sei oggetti, li guarda, ne togliete uno di nascosto: cosa manca?), il «sono andato al mercato e ho comprato...» dove ognuno ripete la lista e aggiunge una cosa, e le sequenze da rifare: battete un ritmo di mani, il bambino lo ripete, poi si allunga.",
+          "Anche le poesie e le canzoncine sono palestra di memoria — e per quelle c'è la guida dedicata. Il principio è sempre lo stesso: poco, spesso, e a difficoltà che sale piano. Un gioco troppo facile annoia, uno troppo difficile frustra: quello giusto riesce quasi sempre, ma non sempre.",
+        ],
+      },
+      {
+        titolo: "E la concentrazione? Si allena restando, non resistendo",
+        paragrafi: [
+          "La concentrazione si allena finendo cose brevi, non sopportando cose lunghe. Meglio tre sessioni da dieci minuti completate che una da trenta subita: ogni attività portata a termine insegna al cervello che «restare» ha un premio. Trova le differenze, i puzzle, unire i puntini numerati, cercare tutti gli oggetti rossi della stanza: sono tutti giochi dove l'occhio deve restare sul compito fino alla fine.",
+          "Due accorgimenti che aiutano: dire in anticipo quanto durerà («facciamo questo, poi merenda» — il traguardo visibile allunga la tenuta) e rispettare le pause vere tra un'attività e l'altra: cinque minuti di salti valgono più di cinque minuti di video, perché il video non riposa l'attenzione, la consuma.",
+        ],
+      },
+      {
+        titolo: "Quando parlarne con qualcuno",
+        paragrafi: [
+          "Un bambino che si distrae è un bambino: la distrazione da sola non è un campanello. I segnali da osservare sono altri, e contano se durano da mesi e compaiono dappertutto (a scuola, a casa, nel gioco): non riesce a finire nemmeno le attività che ama, perde continuamente le sue cose, sembra non ascoltare anche nel faccia a faccia, e la scuola segnala le stesse difficoltà che vedete voi. In quel caso parlatene col pediatra, senza ansia: se c'è qualcosa, prima si inquadra e meglio si gestisce; molto più spesso la risposta è semplicemente che serviva tempo.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        domanda: "Quanto dura l'attenzione di un bambino?",
+        risposta:
+          "La regola pratica: pochi minuti per ogni anno d'età, su attività guidate da altri. A 4 anni 8-12 minuti, a 8 anni una ventina. Sulle attività che sceglie e che ama può durare molto di più: è un circuito diverso, e non è quello che serve a scuola.",
+      },
+      {
+        domanda: "Come migliorare la concentrazione di un bambino?",
+        risposta:
+          "Sessioni corte portate a termine (meglio tre da dieci minuti finite che una da trenta subita), un traguardo annunciato prima («questo, poi merenda»), una cosa sola sul tavolo senza TV di sottofondo, e pause di movimento vero tra un'attività e l'altra.",
+      },
+      {
+        domanda: "Quali giochi allenano la memoria?",
+        risposta:
+          "Il memory, il gioco del vassoio (cosa manca?), le liste da ripetere e allungare («sono andato al mercato...»), i ritmi di mani da rifare, le poesie e le canzoncine. Poco e spesso, con difficoltà che sale piano.",
+      },
+      {
+        domanda: "Mio figlio si distrae sempre: devo preoccuparmi?",
+        risposta:
+          "Quasi sempre no: la distrazione è normale, soprattutto sotto i 7 anni. I segnali diversi sono difficoltà che durano da mesi, compaiono dappertutto (anche nei giochi che ama) e vengono notate anche dalla scuola: in quel caso se ne parla col pediatra.",
+      },
+    ],
+    giochi: ["memory-animali", "trova-le-differenze", "unisci-i-puntini", "sequenze-logiche"],
+  },
 ];
 
 export function guida(slug: string): Guida | undefined {
