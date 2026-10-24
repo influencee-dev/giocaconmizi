@@ -889,7 +889,7 @@ export const GUIDE: Guida[] = [
           "Quasi sempre no: la distrazione è normale, soprattutto sotto i 7 anni. I segnali diversi sono difficoltà che durano da mesi, compaiono dappertutto (anche nei giochi che ama) e vengono notate anche dalla scuola: in quel caso se ne parla col pediatra.",
       },
     ],
-    giochi: ["memory-animali", "trova-le-differenze", "unisci-i-puntini", "sequenze-logiche"],
+    giochi: ["cosa-manca", "memory-animali", "trova-le-differenze", "sequenze-logiche"],
   },
 ];
 

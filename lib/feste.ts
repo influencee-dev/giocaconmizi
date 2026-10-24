@@ -1239,6 +1239,214 @@ export const CITTA_FESTE: CittaFeste[] = [
       },
     ],
   },
+  {
+    slug: "brescia",
+    citta: "Brescia",
+    aggiornata: "2026-10-24",
+    rispostaBreve:
+      "A Brescia la festa di compleanno per bambini si fa in ludoteca o in una sala affittata: in centro c'\u00e8 perfino il parco scientifico con la sala da 100 \u20ac per la mezza giornata (animazione esclusa, fino a una trentina di bambini), e per i pi\u00f9 grandi il lasergame da 17 \u20ac a partecipante. In Valtrompia, a Concesio, la ludoteca col ristorante fa stare comodi anche i genitori.",
+    intro:
+      "Brescia alterna due formule: la sala da riempire a modo vostro \u2014 come quella del parco scientifico in centro \u2014 e il pacchetto completo delle ludoteche. Ecco i posti di cui parlano le famiglie bresciane.",
+    locali: [
+      {
+        nome: "AmbienteParco",
+        zona: "Largo Torrelunga (centro)",
+        tipo: "parco scientifico con sala feste",
+        descrizione:
+          "La sala feste del parco ambientale in centro: fino a una trentina di bambini con gli accompagnatori, 100 \u20ac per la mezza giornata dal luned\u00ec al sabato. L'animazione non c'\u00e8: si organizza in autonomia.",
+        sito: "https://ambienteparco.it/giochi-nel-verde/",
+      },
+      {
+        nome: "LaserGame Brescia",
+        zona: "Brescia",
+        tipo: "lasergame",
+        descrizione:
+          "Feste per bambini e ragazzi dai 7 ai 17 anni, con pacchetti da 17 \u20ac a partecipante e un minimo di 6 giocatori.",
+        sito: "https://lasergame-brescia.com/compleanni/",
+      },
+      {
+        nome: "Ape e Maia",
+        zona: "Concesio",
+        tipo: "ludoteca con ristorante",
+        descrizione:
+          "Ludoteca con ristorante e area bar per i genitori; nei feriali l'ingresso \u00e8 7 \u20ac con la merenda inclusa.",
+        sito: "https://www.apeemaia.it",
+      },
+      {
+        nome: "Mago Mim\u00f9",
+        zona: "San Zeno Naviglio",
+        tipo: "parco giochi al chiuso",
+        descrizione:
+          "Zone playground, pista di macchinine, campo di calcetto e salette dedicate ai compleanni.",
+      },
+      {
+        nome: "Ludoteca Gatto Matto",
+        zona: "via Manara",
+        tipo: "ludoteca",
+        descrizione:
+          "La ludoteca gestita da ArciRagazzi, tra gli indirizzi storici segnalati dalla guida cittadina per le feste dei bambini.",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Dove si festeggia un compleanno per bambini a Brescia?",
+        risposta:
+          "In centro nella sala del parco scientifico (da riempire a modo proprio), nelle ludoteche in citt\u00e0 e nell'hinterland \u2014 San Zeno Naviglio, Concesio \u2014 o al lasergame per i pi\u00f9 grandi.",
+      },
+      {
+        domanda: "Quanto costa una festa di compleanno a Brescia?",
+        risposta:
+          "La sala di AmbienteParco parte da 100 \u20ac per la mezza giornata senza animazione; il lasergame da 17 \u20ac a partecipante con minimo 6. Nelle ludoteche il prezzo dipende dal pacchetto: fatevi dare un preventivo scritto.",
+      },
+      {
+        domanda: "Sala vuota o pacchetto completo?",
+        risposta:
+          "La sala da autogestire costa meno e lascia scegliere tutto, ma torta, animazione e pulizie restano a voi. Il pacchetto della ludoteca costa di pi\u00f9 e pensa a tutto. Con tanti invitati piccoli, il pacchetto di solito vince.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp gi\u00e0 scritta, e sul biglietto stampato c'\u00e8 il QR \u00abInquadra e conferma\u00bb.",
+      },
+    ],
+  },
+  {
+    slug: "taranto",
+    citta: "Taranto",
+    aggiornata: "2026-10-24",
+    rispostaBreve:
+      "A Taranto la festa di compleanno per bambini si fa in sala feste: tra viale Jonio, il Rinascimento e la zona Lama ci sono sale con gonfiabili, playground e animatori, quasi sempre con buffet su ordinazione e formule da concordare di persona. Molte lavorano solo su appuntamento e i prezzi non sono pubblicati: telefonate presto e fatevi scrivere il preventivo.",
+    intro:
+      "A Taranto le sale feste funzionano col passaparola e il primo appuntamento: si va, si vede la sala, si concorda tutto \u2014 animazione s\u00ec o no, buffet s\u00ec o no. Ecco gli indirizzi di cui parlano le famiglie tarantine.",
+    locali: [
+      {
+        nome: "Magic Park",
+        zona: "via Livio Andronico",
+        tipo: "sala feste con playground",
+        descrizione:
+          "Due sale feste con zona gonfiabili e playground, animatori per i bambini e buffet su ordinazione, con men\u00f9 anche per gli adulti.",
+      },
+      {
+        nome: "Tata Susina",
+        zona: "viale del Rinascimento",
+        tipo: "sala feste e ludoteca",
+        descrizione:
+          "Sala feste e ludoteca che durante l'anno fa anche doposcuola e babysitting.",
+      },
+      {
+        nome: "Joya's Party",
+        zona: "viale Jonio",
+        tipo: "sala feste",
+        descrizione: "Sala feste per bambini con parcheggio esterno e pacchetti buffet.",
+      },
+      {
+        nome: "Nuvolandia Party",
+        zona: "via Fogazzaro",
+        tipo: "sala feste",
+        descrizione:
+          "Feste con o senza animazione e con o senza buffet: tutto si concorda al primo appuntamento, e si riceve solo su appuntamento.",
+      },
+      {
+        nome: "Il Paese dei Balocchi",
+        zona: "zona Lama",
+        tipo: "ludoteca",
+        descrizione: "Ludoteca in zona Lama, tra gli indirizzi segnalati dalle guide cittadine.",
+      },
+      {
+        nome: "Mam\u00e0",
+        zona: "Leporano",
+        tipo: "spazio per l'infanzia",
+        descrizione:
+          "Alle porte della citt\u00e0: playroom, spazio verde per il taglio della torta e una terrazza, nella sala eventi di uno spazio per l'infanzia.",
+        sito: "https://mamainfanzia.it/sala-eventi",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Dove si festeggia un compleanno per bambini a Taranto?",
+        risposta:
+          "Nelle sale feste della citt\u00e0 \u2014 viale Jonio, viale del Rinascimento, via Livio Andronico, zona Lama \u2014 o appena fuori, a Leporano. Quasi tutte uniscono gonfiabili, animazione e buffet su ordinazione.",
+      },
+      {
+        domanda: "Quanto costa una festa di compleanno a Taranto?",
+        risposta:
+          "I prezzi quasi mai sono pubblicati online: si concordano al primo appuntamento in base a invitati, animazione e buffet. Fatevi mettere tutto per iscritto, pulizie e torta comprese.",
+      },
+      {
+        domanda: "Serve prenotare molto prima?",
+        risposta:
+          "S\u00ec, specie per i weekend: molte sale ricevono solo su appuntamento e le date buone partono settimane prima. Meglio muoversi con un mese d'anticipo.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp gi\u00e0 scritta, e sul biglietto stampato c'\u00e8 il QR \u00abInquadra e conferma\u00bb.",
+      },
+    ],
+  },
+  {
+    slug: "prato",
+    citta: "Prato",
+    aggiornata: "2026-10-24",
+    rispostaBreve:
+      "A Prato la festa di compleanno per bambini si fa nel grande parco al coperto dell'Omnia Center \u2014 oltre 1000 mq climatizzati e cinque salette, col prezzo della sala che include l'ingresso per 10 bambini \u2014 oppure in una sala in centro: ce n'\u00e8 una da 100 mq da 150 \u20ac per 5 ore e una associativa in autogestione con un contributo. Prenotate il weekend con anticipo.",
+    intro:
+      "A Prato la scelta \u00e8 tra il parco giochi al coperto, dove la festa si aggancia agli scivoli e ai gonfiabili, e la sala in centro da allestire a modo vostro. Ecco i posti di cui parlano le famiglie pratesi.",
+    locali: [
+      {
+        nome: "Il Paese dei Saltas\u00f9",
+        zona: "Omnia Center",
+        tipo: "parco giochi al coperto",
+        descrizione:
+          "Oltre 1000 mq interamente al coperto e climatizzati, per bambini fino a 10 anni: cinque salette per le feste, col prezzo della sala che include l'ingresso al parco per 10 bambini, e servizio catering. Nei feriali il biglietto \u00e8 9 \u20ac.",
+        sito: "https://www.ilpaesedeisaltasu.it/il-paese-dei-saltasu.php",
+      },
+      {
+        nome: "Happy Party Space",
+        zona: "via Tiepolo (centro)",
+        tipo: "sala feste",
+        descrizione:
+          "Sala da 100 mq in centro, da 150 \u20ac per 5 ore, con attivit\u00e0 per bambini come il laboratorio di cupcake.",
+        sito: "https://www.happypartyplanner.it/happy-party-space-la-location-per-feste-a-prato/",
+      },
+      {
+        nome: "Centro Ideale",
+        zona: "centro",
+        tipo: "sala associativa",
+        descrizione:
+          "Associazione culturale che mette a disposizione una sala in autogestione con un contributo alle spese, oppure attivit\u00e0 ludico-educative curate dal centro.",
+      },
+      {
+        nome: "Parco Giocagi\u00f2",
+        zona: "Prato",
+        tipo: "parco giochi",
+        descrizione:
+          "Parco giochi con spazio gioco e ludoteca, cucina, bar e gelateria artigianale.",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Dove si festeggia un compleanno per bambini a Prato?",
+        risposta:
+          "Al parco al coperto dell'Omnia Center, con le salette dedicate, oppure in una sala in centro \u2014 da 150 \u20ac per 5 ore quella privata, con un contributo associativo quella in autogestione.",
+      },
+      {
+        domanda: "Quanto costa una festa di compleanno a Prato?",
+        risposta:
+          "La sala privata in centro parte da 150 \u20ac per 5 ore; al parco coperto il prezzo della saletta include l'ingresso per 10 bambini (biglietto feriale 9 \u20ac). La sala associativa chiede un contributo alle spese.",
+      },
+      {
+        domanda: "Meglio il parco coperto o la sala?",
+        risposta:
+          "Col gruppo vivace e sotto i 10 anni vince il parco: i giochi sono gi\u00e0 l\u00ec e la saletta serve solo per torta e regali. La sala conviene per le feste a tema, dove volete scegliere voi attivit\u00e0 e allestimento.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp gi\u00e0 scritta, e sul biglietto stampato c'\u00e8 il QR \u00abInquadra e conferma\u00bb.",
+      },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

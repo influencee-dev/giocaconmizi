@@ -119,6 +119,36 @@ ok(
   await page.locator("text=Bravissimo!").isVisible().catch(() => false),
 );
 
+// Cosa manca?: partita completa. Il mancante non è scritto da nessuna parte:
+// si deduce confrontando il vassoio prima e dopo "Ho guardato!", che è
+// esattamente quello che deve fare il bambino.
+await page.goto(`${BASE}/giochi/cosa-manca/gioca`, { waitUntil: "networkidle" });
+await page.waitForTimeout(800);
+let vassoi = 0;
+for (let r = 0; r < 8; r++) {
+  const bottone = page.getByRole("button", { name: "Ho guardato!" });
+  await bottone.waitFor({ timeout: 5000 }).catch(() => null);
+  if (!(await bottone.count())) break;
+  const prima = await page
+    .locator("[data-vassoio] [data-oggetto]")
+    .evaluateAll((els) => els.map((e) => e.getAttribute("data-oggetto")));
+  await bottone.tap();
+  await page.waitForTimeout(400);
+  const dopo = await page
+    .locator("[data-vassoio] [data-oggetto]")
+    .evaluateAll((els) => els.map((e) => e.getAttribute("data-oggetto")));
+  const mancante = prima.find((n) => !dopo.includes(n));
+  if (!mancante) break;
+  await page.locator(`button[aria-label='${mancante}']`).tap();
+  vassoi++;
+  await page.waitForTimeout(1400);
+}
+ok("cosa manca: otto vassoi risolti", vassoi === 8, `${vassoi}/8`);
+ok(
+  "cosa manca: festa finale",
+  await page.locator("text=Bravissimo!").isVisible().catch(() => false),
+);
+
 // Il catalogo dei giochi: il filtro per competenza restringe la griglia
 await page.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
 await page.waitForTimeout(400);

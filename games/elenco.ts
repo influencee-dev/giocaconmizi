@@ -20,6 +20,7 @@ export const slugGiocabili = [
   "trova-le-differenze",
   "unisci-i-puntini",
   "cosa-viene-dopo",
+  "cosa-manca",
   "prime-parole-inglese",
   "addizioni-entro-20",
   "l-orologio",
