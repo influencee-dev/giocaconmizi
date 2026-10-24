@@ -1,6 +1,6 @@
 # Sito giochi educativi + letture — Piano di progetto (3 giorni)
 
-Nome: **Gioca con Mizi** — dominio **giocaconmizi.com** (Vercel) + giocaconmizi.it (Register.it, redirect). Title: "Gioca con Mizi — giochi educativi per bambini dai 3 ai 12 anni". Target: genitori italiani di bambini e ragazzi **3–12 anni** (infanzia → quinta primaria → prima/seconda media), insegnanti. Quattro pilastri: **giochi educativi, letture, coding, compiti delle vacanze**.
+Nome: **Gioca con Mizi** — dominio **giocamizi.it** (Vercel; comprato il 24/10/2026, prima il piano prevedeva giocaconmizi.com). Title: "Gioca con Mizi — giochi educativi per bambini dai 3 ai 12 anni". Target: genitori italiani di bambini e ragazzi **3–12 anni** (infanzia → quinta primaria → prima/seconda media), insegnanti. Quattro pilastri: **giochi educativi, letture, coding, compiti delle vacanze**.
 
 ---
 

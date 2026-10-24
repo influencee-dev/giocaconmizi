@@ -1,7 +1,7 @@
 # Gioca con Mizi — canone del progetto
 
 Sito italiano di giochi educativi gratuiti per bambini 3–12 anni, live su
-https://giocaconmizi.vercel.app (dominio futuro: giocaconmizi.com).
+https://giocaconmizi.vercel.app (dominio di produzione: giocamizi.it, comprato il 24/10/2026, da collegare su Vercel).
 Progetto personale senza scopo di lucro di Giorgia Palazzo, nato per la
 figlia Domiziana. Mascotte: Mizi, una pinguina.
 
@@ -58,6 +58,6 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 ## In attesa (cose ferme lato Giorgia)
 - Immagini AI di Mizi per gli 11 slot in `public/mizi/` (lib/immagini.ts)
   e foto per Chi siamo (`public/foto-giorgia-domiziana.jpg`).
-- BREVO_API_KEY nelle env Vercel; email ciao@giocaconmizi.com da attivare
-  o cambiare in lib/legal.ts; dominio giocaconmizi.com da collegare
+- BREVO_API_KEY nelle env Vercel; email ciao@giocamizi.it da attivare
+  in lib/legal.ts; dominio giocamizi.it da collegare su Vercel (Giorgia)
   (poi: next.config vecchiHost, redirect Supabase, etichetta stream GA).

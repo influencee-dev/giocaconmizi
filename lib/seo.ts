@@ -1,11 +1,13 @@
 /**
  * Configurazione SEO condivisa — Gioca con Mizi.
- * Il dominio di produzione è giocaconmizi.com (Vercel); giocaconmizi.it fa redirect.
+ * Il dominio di produzione è giocamizi.it (Vercel). Finché non è collegato,
+ * VERCEL_PROJECT_PRODUCTION_URL tiene canonical e sitemap sul dominio che
+ * serve davvero le pagine: appena giocamizi.it è attivo, passa da solo.
  */
 
 export const site = {
   nome: "Gioca con Mizi",
-  dominio: "https://giocaconmizi.com",
+  dominio: "https://giocamizi.it",
   titoloDefault:
     "Gioca con Mizi — giochi educativi per bambini dai 3 ai 12 anni",
   descrizioneDefault:
@@ -17,8 +19,15 @@ export const site = {
 /** URL assoluto per canonical, sitemap e Open Graph. */
 export function url(percorso = "/"): string {
   // "|| " e non "??": su Vercel la variabile può esistere ma essere vuota,
-  // e new URL("") fa fallire la build.
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || site.dominio).replace(/\/$/, "");
+  // e new URL("") fa fallire la build. VERCEL_PROJECT_PRODUCTION_URL è il
+  // dominio di produzione del progetto (il custom più corto, o il vercel.app):
+  // così il canonical punta sempre a un dominio che risponde davvero.
+  const produzione = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  const base = (
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (produzione && `https://${produzione}`) ||
+    site.dominio
+  ).replace(/\/$/, "");
   return percorso === "/" ? base : `${base}${percorso.startsWith("/") ? percorso : `/${percorso}`}`;
 }
 

@@ -73,8 +73,8 @@ docs/            piano-progetto, CONTENT-GUIDE, GAME-DESIGN-CHECKLIST
 
 1. Importa il repository su Vercel. Il framework viene riconosciuto da `vercel.json` (`nextjs`, regione `fra1`).
 2. Imposta le variabili d'ambiente di `.env.example` in Project Settings → Environment Variables.
-3. Dominio: `giocaconmizi.com` come primario, `giocaconmizi.it` in redirect (piano §0).
-4. In Supabase → Authentication → URL Configuration aggiungi `https://giocaconmizi.com/auth/callback` fra i Redirect URL, insieme a `http://localhost:3000/auth/callback` per lo sviluppo.
+3. Dominio: `giocamizi.it` come primario (comprato il 24/10/2026).
+4. In Supabase → Authentication → URL Configuration aggiungi `https://giocamizi.it/auth/callback` fra i Redirect URL, insieme a `http://localhost:3000/auth/callback` per lo sviluppo.
 
 `sitemap.xml`, `robots.txt` e `llms.txt` sono generati automaticamente dal registry e dai contenuti: un gioco nuovo entra in sitemap con il commit.
 

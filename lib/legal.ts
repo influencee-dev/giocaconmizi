@@ -14,8 +14,8 @@ export const TITOLARE = {
   nome: "Giorgia Palazzo",
   ruolo:
     "privata cittadina: questo sito è un progetto personale, senza scopo di lucro, nato per sua figlia e aperto a tutti i bambini",
-  // NOTA: casella da attivare quando il dominio giocaconmizi.com è collegato.
-  email: "ciao@giocaconmizi.com",
+  // NOTA: casella da attivare sul dominio giocamizi.it (comprato il 24/10/2026).
+  email: "ciao@giocamizi.it",
 } as const;
 
 /** Data dell'ultima revisione delle informative (si aggiorna a ogni modifica). */
