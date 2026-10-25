@@ -6,7 +6,7 @@ import { conServer } from "./comune.mjs";
 
 const servito = await conServer(); // un server per tutte e tre
 const esiti = {};
-for (const nome of ["biglietti", "giochi", "sbordi"]) {
+for (const nome of ["biglietti", "giochi", "sbordi", "seo"]) {
   const r = spawnSync("node", [`scripts/verifica/${nome}.mjs`], { encoding: "utf8" });
   esiti[nome] = r.status === 0;
   // in caso di guaio si stampa tutto, altrimenti solo l'ultima riga

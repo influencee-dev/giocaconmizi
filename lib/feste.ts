@@ -1447,6 +1447,195 @@ export const CITTA_FESTE: CittaFeste[] = [
       },
     ],
   },
+  {
+    slug: 'reggio-calabria',
+    citta: 'Reggio Calabria',
+    aggiornata: "2026-10-25",
+    rispostaBreve:
+      'A Reggio Calabria la festa di compleanno per bambini si fa in una sala feste con gonfiabili e playground — ce ne sono in città e verso nord, fino a Catona — oppure in un locale col parco giochi dove i grandi mangiano e i bambini giocano. Molte sale propongono temi a scelta e il catering su richiesta: fatevi elencare per iscritto cosa è compreso.',
+    intro:
+      'A Reggio le feste si dividono tra le sale con gonfiabili, dove si sceglie il tema, e i locali col parco giochi, dove la festa diventa anche una cena per i grandi. Ecco i posti di cui parlano le famiglie reggine.',
+    locali: [
+      {
+        nome: 'Funny Club',
+        zona: 'via Tirrenica',
+        tipo: 'locale con parco giochi e sala feste',
+        descrizione:
+          "Ludoteca e locale con sala principale, terrazza per le sere d'estate e una sala riservata per le feste private.",
+        sito: 'https://ludotecafunnyclub.it/feste-eventi/',
+      },
+      {
+        nome: 'Space Party',
+        zona: 'via Caserma',
+        tipo: 'sala feste',
+        descrizione:
+          'Sala di 150 mq con playground e gonfiabili: si sceglie fra diversi temi e si può chiedere il catering.',
+      },
+      {
+        nome: "L'Oasi del Divertimento",
+        zona: 'Catona',
+        tipo: 'ludoteca e sala eventi',
+        descrizione:
+          'Gonfiabili, ludoteca e baby parking, con la sala da affittare per le feste private.',
+      },
+      {
+        nome: 'Neverland Parco Giochi Ludoteca Party',
+        zona: 'via Nazionale',
+        tipo: 'parco giochi e ludoteca',
+        descrizione:
+          'Parco giochi e ludoteca che ospita le feste dei bambini e anche eventi per gli adulti.',
+      },
+    ],
+    faq: [
+      {
+        domanda: 'Dove si festeggia un compleanno per bambini a Reggio Calabria?',
+        risposta:
+          'Nelle sale feste con gonfiabili e playground (via Caserma, verso nord fino a Catona) o nei locali col parco giochi come quello di via Tirrenica, dove i grandi possono anche cenare.',
+      },
+      {
+        domanda: 'Cosa comprende una festa in sala a Reggio Calabria?',
+        risposta:
+          "Di solito la sala, i gonfiabili e il playground; temi, catering e animazione si aggiungono su richiesta. I prezzi online sono rari: chiedete un preventivo scritto con l'elenco completo.",
+      },
+      {
+        domanda: "Si può festeggiare all'aperto?",
+        risposta:
+          "Sì, e col clima di Reggio succede spesso: alcuni locali hanno terrazze e spazi esterni per le sere d'estate. Tenete comunque una sala al coperto come piano B.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma».",
+      },
+    ],
+  },
+  {
+    slug: 'modena',
+    citta: 'Modena',
+    aggiornata: "2026-10-25",
+    rispostaBreve:
+      "A Modena la festa di compleanno per bambini si fa nella grande ludoteca al coperto di Modena Est — 1.300 mq di gonfiabili e playground per i bambini fino a 10 anni — oppure in posti diversi dal solito: l'ippodromo ha una sala compleanni con gonfiabili e spazio all'aperto, e a Campogalliano il Museo della Bilancia organizza le feste per i bambini dai 6 ai 10 anni.",
+    intro:
+      "Modena ha una delle ludoteche al coperto più grandi della zona, ma anche alternative originali per chi vuole una festa diversa: il compleanno all'ippodromo o al museo. Ecco i posti di cui parlano le famiglie modenesi.",
+    locali: [
+      {
+        nome: 'Oplà',
+        zona: 'Modena Est (via Gasparini)',
+        tipo: 'ludoteca al coperto',
+        descrizione:
+          '1.300 mq con gonfiabili, playground e area ristoro per i bambini da 0 a 10 anni: zona baby 0–3 e area 4–10 con campo da calcio e basket indoor.',
+        sito: 'https://www.oplamodena.it/feste-di-compleanno',
+      },
+      {
+        nome: 'Ippodromo Ghirlandina',
+        zona: 'Modena',
+        tipo: "sala compleanni all'ippodromo",
+        descrizione:
+          "Sala interna per i compleanni dei bambini attrezzata con gonfiabili, con area esterna e attività all'aperto.",
+        sito: 'https://ippodromoghirlandina.it/location-per-compleanni-modena/',
+      },
+      {
+        nome: 'Museo della Bilancia',
+        zona: 'Campogalliano',
+        tipo: 'museo',
+        descrizione:
+          'Il museo degli strumenti di misura organizza compleanni e feste per i bambini dai 6 ai 10 anni.',
+        sito: 'https://www.museodellabilancia.it/annuncio.php?ida=175&idarg=106',
+      },
+      {
+        nome: 'Casa Matilda Ludoteca',
+        zona: 'Modena',
+        tipo: 'ludoteca e baby parking',
+        descrizione:
+          'Ludoteca e baby parking per i bambini dai 3 ai 10 anni, che si può riservare per le feste a tema.',
+      },
+    ],
+    faq: [
+      {
+        domanda: 'Dove si festeggia un compleanno per bambini a Modena?',
+        risposta:
+          "Nella grande ludoteca al coperto di Modena Est, in una ludoteca più raccolta, oppure in un posto insolito: la sala compleanni dell'ippodromo o il Museo della Bilancia a Campogalliano.",
+      },
+      {
+        domanda: "Qual è l'opzione per i più piccoli?",
+        risposta:
+          "La ludoteca al coperto con la zona baby da 0 a 3 anni: i piccolissimi giocano in un'area separata dai grandi, e la festa resta tranquilla per tutti.",
+      },
+      {
+        domanda: 'Esiste una festa di compleanno diversa dal solito?',
+        risposta:
+          "Sì: il compleanno al museo (dai 6 ai 10 anni) o all'ippodromo, con la sala attrezzata e lo spazio all'aperto. Sono formule da prenotare con anticipo.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma».",
+      },
+    ],
+  },
+  {
+    slug: 'parma',
+    citta: 'Parma',
+    aggiornata: "2026-10-25",
+    rispostaBreve:
+      'A Parma la festa di compleanno per bambini si fa nei parchi giochi al coperto — il più grande supera i 1.600 mq, con pacchetti tutto compreso o sale da noleggiare — o nelle ludoteche con playground e laboratori creativi, dove si può personalizzare il pacchetto. Ci sono anche sale più raccolte per le feste a tema: chiedete un preventivo scritto con tutto incluso.',
+    intro:
+      "Parma offre un po' di tutto: il parco indoor enorme per le feste scatenate, la ludoteca coi laboratori per chi preferisce fare, e la sala a tema per i più piccoli. Ecco i posti di cui parlano le famiglie parmigiane.",
+    locali: [
+      {
+        nome: 'Divertilandia',
+        zona: 'via Anselmi',
+        tipo: 'parco giochi al coperto',
+        descrizione:
+          'Parco indoor di circa 1.600 mq: si sceglie tra il pacchetto tutto compreso e il noleggio delle sale riservate già allestite.',
+      },
+      {
+        nome: 'Sofiland',
+        zona: 'via Rastelli',
+        tipo: 'ludoteca con playground',
+        descrizione:
+          'Pacchetti festa personalizzabili con playground, laboratori creativi e animazione; nel playground scivoli e una mini città per il gioco di ruolo.',
+        sito: 'https://ludotecasofiland.it',
+      },
+      {
+        nome: 'La Bacchetta Magica',
+        zona: 'via Rubini',
+        tipo: 'sala feste e ludoteca',
+        descrizione:
+          'Sala per feste di compleanno e feste a tema, con baby parking e ludoteca.',
+      },
+      {
+        nome: 'Magicomondo',
+        zona: 'Parma',
+        tipo: 'parco giochi con gonfiabili',
+        descrizione:
+          "Gonfiabili, playground e feste di compleanno, con un'area dedicata ai bimbi da 0 a 3 anni.",
+        instagram: 'https://www.instagram.com/magicomondoparma/',
+      },
+    ],
+    faq: [
+      {
+        domanda: 'Dove si festeggia un compleanno per bambini a Parma?',
+        risposta:
+          'Nei parchi giochi al coperto (il più grande in via Anselmi), nelle ludoteche con laboratori creativi come quella di via Rastelli, o nelle sale feste a tema più raccolte.',
+      },
+      {
+        domanda: 'Pacchetto tutto compreso o sala in affitto?',
+        risposta:
+          'Il pacchetto toglie ogni pensiero ma costa di più; il noleggio della sala allestita costa meno e lascia a voi buffet e torta. Molti parchi offrono entrambe le formule.',
+      },
+      {
+        domanda: 'Ci sono feste adatte ai più piccoli?',
+        risposta:
+          "Sì: diverse strutture hanno un'area dedicata ai bimbi da 0 a 3 anni, separata dai giochi dei più grandi.",
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta:
+          "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma».",
+      },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

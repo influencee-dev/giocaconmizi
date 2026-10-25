@@ -17,6 +17,10 @@ figlia Domiziana. Mascotte: Mizi, una pinguina.
   2. `npm run verifica` (batterie Playwright da mobile, scripts/verifica/)
   3. gli sbordi sono inclusi nella batteria; se tocchi pagine nuove,
      aggiungile a scripts/verifica/sbordi.mjs PRIMA di verificare.
+     La batteria seo.mjs controlla dominio unico (giocamizi.it) su robots,
+     sitemap, canonical, og:url e JSON-LD, e che ogni URL della sitemap
+     risponda 200 col canonical su sé stesso: se cambia il dominio,
+     aggiornalo lì insieme a lib/seo.ts.
 - Push su `main` → deploy automatico Vercel. Controlla che arrivi READY
   (progetto prj_O3AzIDL7AdXBzBW5Ui4fN4i44PJo, team team_rd3X8YlvlxgVMoQxo1AUXJB6).
   Se il deploy è READY sul commit appena pushato e le verifiche locali sono
