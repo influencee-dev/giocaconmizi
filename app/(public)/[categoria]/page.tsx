@@ -6,12 +6,14 @@ import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco, jsonLdFaq } from "@/components/seo/JsonLd";
 import { Briciole, CtaAttivita, InBreve } from "@/components/directory/Briciole";
 import { CardAttivita } from "@/components/directory/CardAttivita";
+import { conModifiche, pubblicate } from "@/lib/directory-db";
 import { CercaCitta } from "@/components/directory/CercaCitta";
 import { Illustrazione } from "@/components/directory/Illustrazione";
 
 /** Pagina categoria nazionale della directory (Figma 07–09). */
 
 export const dynamicParams = false;
+export const revalidate = 600;
 
 export function generateStaticParams() {
   return CATEGORIE_ATTIVE.map((c) => ({ categoria: c.slug }));
@@ -33,14 +35,15 @@ export default async function CategoriaPage({ params }: { params: Promise<{ cate
   const cat = categoria((await params).categoria);
   if (!cat) notFound();
   const citta = cittaDi(cat.slug);
-  const schede = schedeDi(cat.slug);
+  const p = await pubblicate();
+  const schede = schedeDi(cat.slug).map((s) => conModifiche(s, p)).filter((s): s is NonNullable<typeof s> => s !== null);
   const hrefCitta = (slug: string) => {
     if (haListing(cat.slug, slug)) return `/${cat.slug}/${slug}`;
-    const unica = schede.find((s) => s.cittaSlug === slug)!;
+    const unica = schede.find((s) => s.cittaSlug === slug) ?? schedeDi(cat.slug).find((s) => s.cittaSlug === slug)!;
     return percorsoScheda(unica);
   };
   const regioni = [...new Set(citta.map((c) => REGIONE[c.slug]).filter(Boolean))].sort();
-  const evidenza = citta.slice(0, 3).map((c) => schede.find((s) => s.cittaSlug === c.slug)!);
+  const evidenza = citta.slice(0, 3).map((c) => schede.find((s) => s.cittaSlug === c.slug)).filter((s) => s !== undefined);
 
   return (
     <>

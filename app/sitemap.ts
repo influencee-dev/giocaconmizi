@@ -7,12 +7,18 @@ import { GUIDE } from "@/lib/guide";
 import { CITTA_FESTE } from "@/lib/feste";
 import { CATEGORIE_ATTIVE, LISTING, SCHEDE, percorsoScheda } from "@/lib/directory";
 import { classi, eta, url } from "@/lib/seo";
+import { chiaveScheda, pubblicate } from "@/lib/directory-db";
 
 /**
  * Sitemap generata dal registry e dai contenuti: un nuovo gioco o una nuova
  * storia entrano in sitemap con il commit, senza passaggi manuali (§4.4).
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+// Si rigenera ogni 10 minuti: una scheda tolta dal titolare esce anche da qui.
+export const revalidate = 600;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const risposte = await pubblicate();
+  const tolta = (s: (typeof SCHEDE)[number]) => risposte.get(chiaveScheda(s))?.tipo === "rimuovi";
   const aggiornato = new Date();
 
   const statiche = [
@@ -93,7 +99,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
-    ...SCHEDE.map((s) => ({
+    ...SCHEDE.filter((s) => !tolta(s)).map((s) => ({
       url: url(percorsoScheda(s)),
       lastModified: new Date(CITTA_FESTE.find((c) => c.slug === s.cittaSlug)?.aggiornata ?? Date.now()),
       changeFrequency: "monthly" as const,

@@ -70,8 +70,9 @@ ok(
 );
 
 // 4. Le pagine private restano fuori da Google: l'accesso e gli inviti dei
-// bambini (/biglietti/vedi porta nome, data e indirizzo della festa).
-for (const percorso of ["/accedi", "/biglietti/vedi"]) {
+// bambini (/biglietti/vedi porta nome, data e indirizzo della festa), il
+// link personale dei locali e il pannello di approvazione.
+for (const percorso of ["/accedi", "/biglietti/vedi", "/la-tua-scheda/link-di-prova-non-valido-000", "/admin/codice-di-prova-non-valido-0000"]) {
   const html = await testo(percorso);
   ok(`${percorso}: noindex e fuori dalla sitemap`,
     /<meta name="robots" content="[^"]*noindex/.test(html) && !locs.some((l) => new URL(l).pathname === percorso));

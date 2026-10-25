@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CITTA_FESTE, cittaFeste } from "@/lib/feste";
 import { categoriaDi, slugify } from "@/lib/directory";
+import { pubblicate } from "@/lib/directory-db";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { ReelInstagram } from "@/components/feste/ReelInstagram";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
@@ -14,6 +15,8 @@ import { site } from "@/lib/seo";
  * breve citabile + FAQ con JSON-LD (AEO), e i link interni che trasformano la
  * ricerca locale in utenti del sito: guida festa e creatore di biglietti.
  */
+
+export const revalidate = 600;
 
 export function generateStaticParams() {
   return CITTA_FESTE.map((c) => ({ citta: c.slug }));
@@ -64,6 +67,9 @@ export default async function FestaCittaPage({
   if (!voce) notFound();
 
   const altre = CITTA_FESTE.filter((c) => c.slug !== voce.slug);
+  // I locali che hanno chiesto di non comparire spariscono anche da qui.
+  const p = await pubblicate();
+  const locali = voce.locali.filter((l) => p.get(`${voce.slug}/${slugify(l.nome)}`)?.tipo !== "rimuovi");
 
   return (
     <Contenitore className="py-10">
@@ -74,7 +80,7 @@ export default async function FestaCittaPage({
         ])}
       />
       <JsonLd data={jsonLdFaq(voce.faq)} />
-      <JsonLd data={jsonLdLocali(voce)} />
+      <JsonLd data={jsonLdLocali({ ...voce, locali })} />
 
       <nav aria-label="Percorso" className="text-sm font-bold text-notte-tenue">
         <Link href="/feste" className="text-viola hover:underline">
@@ -102,7 +108,7 @@ export default async function FestaCittaPage({
       <section className="mt-10">
         <TitoloSezione>Le location, zona per zona</TitoloSezione>
         <div className="grid gap-4 sm:grid-cols-2">
-          {voce.locali.map((l) => (
+          {locali.map((l) => (
             <div
               key={l.nome}
               className="flex flex-col gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-5"

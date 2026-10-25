@@ -45,6 +45,14 @@ figlia Domiziana. Mascotte: Mizi, una pinguina.
   MAI foto prese dai siti o dai social dei locali: solo illustrazioni
   nostre finché l'attività non carica le sue. Email e telefoni dei locali
   NON vanno nel repo (è pubblico): stanno nel foglio privato di Giorgia.
+- Area attività (fase 1): `/la-tua-scheda/[codice]` (link personale: il
+  locale approva, modifica o chiede di togliere la scheda) e
+  `/admin/[codice]` (Giorgia decide). Database in `supabase/directory.sql`,
+  incollato a mano da Giorgia nel SQL Editor: il sito usa solo la chiave
+  pubblica e funzioni RPC; nel DB solo impronte SHA-256 dei codici. I
+  codici veri non vanno MAI nel repo. Le pagine pubbliche leggono le
+  risposte accettate con `pubblicate()` (lib/directory-db.ts) e si
+  rigenerano ogni 10 minuti o subito dopo una decisione.
 - `app/llms.txt/route.ts`, `app/sitemap.ts`, `app/robots.ts` — AEO/SEO:
   generati dai registri. JSON-LD in `components/seo/JsonLd.tsx`.
 - SEO/AEO: ogni contenuto nuovo deve avere risposta citabile, FAQ con
@@ -54,7 +62,9 @@ figlia Domiziana. Mascotte: Mizi, una pinguina.
 - Playwright: Chromium in `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`
   (o env CHROMIUM); `playwright-core` è nelle devDependencies.
 - `npm run verifica` avvia da solo `next start -p 3100` se serve
-  (richiede una build fresca).
+  (richiede una build fresca). Un `next-server` rimasto acceso da prima
+  tiene la porta e fa testare la build VECCHIA: trovalo con
+  `ps -eo pid,args | grep next-server` (lsof qui non lo vede) e uccidilo.
 - Trappola nota: un `<svg>` annidato senza width/height vale "100%" del
   riquadro esterno e sfonda il layout — `Disegno` ha il prop `lato` apposta.
 - Trappola nota: commenti JSX mai prima dell'elemento radice di un return.

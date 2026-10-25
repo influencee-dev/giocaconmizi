@@ -3,7 +3,7 @@ import { url } from "@/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
   // Pagine di servizio: nulla da indicizzare, e niente sessioni nei log.
-  const privati = ["/api/", "/auth/", "/accedi", "/account"];
+  const privati = ["/api/", "/auth/", "/accedi", "/account", "/la-tua-scheda/", "/admin/"];
 
   return {
     rules: [

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SCHEDE, datiCard, haListing, percorsoScheda, scheda, schedeDi } from "@/lib/directory";
+import { conModifiche, pubblicate, type DatiModifica } from "@/lib/directory-db";
 import { url } from "@/lib/seo";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
@@ -13,6 +14,8 @@ import { ReelInstagram } from "@/components/feste/ReelInstagram";
 /** La scheda di un'attività (Figma 04–06). */
 
 export const dynamicParams = false;
+// Le risposte approvate dei locali arrivano dal database: rigenerazione ogni 10 minuti.
+export const revalidate = 600;
 
 export function generateStaticParams() {
   return SCHEDE.map((s) => ({ categoria: s.categoria.slug, citta: s.cittaSlug, attivita: s.slug }));
@@ -35,13 +38,29 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   };
 }
 
-function Contatti({ sito, instagram }: { sito?: string; instagram?: string }) {
+const numero = (t: string) => t.replace(/[^\d+]/g, "");
+const wa = (t: string) => {
+  const n = numero(t).replace(/^\+/, "").replace(/^00/, "");
+  return `https://wa.me/${/^3\d{8,9}$/.test(n) ? `39${n}` : n}`;
+};
+
+function Contatti({ sito, instagram, extra }: { sito?: string; instagram?: string; extra: DatiModifica }) {
   return (
     <div className="flex flex-col gap-3 rounded-morbido border-2 border-crema-scuro bg-white p-5 shadow-[0_10px_30px_rgba(31,36,48,0.08)]">
       <p className="text-xl font-extrabold text-notte">Contatta l&apos;attività</p>
       <p className="text-sm font-semibold text-notte-tenue">
         Prezzi, disponibilità e pacchetti festa si chiedono direttamente al locale: noi non prendiamo commissioni.
       </p>
+      {extra.whatsapp && (
+        <a href={wa(extra.whatsapp)} target="_blank" rel="nofollow noopener" className="rounded-bolla bg-verde px-5 py-3 text-center font-extrabold text-white">
+          Scrivi su WhatsApp
+        </a>
+      )}
+      {extra.telefono && (
+        <a href={`tel:${numero(extra.telefono)}`} className="rounded-bolla border-2 border-crema-scuro bg-white px-5 py-3 text-center font-extrabold text-notte">
+          Chiama {extra.telefono}
+        </a>
+      )}
       {sito && (
         <a href={sito} target="_blank" rel="nofollow noopener" className="rounded-bolla bg-rosa px-5 py-3 text-center font-extrabold text-white">
           Vai al sito ufficiale
@@ -52,7 +71,14 @@ function Contatti({ sito, instagram }: { sito?: string; instagram?: string }) {
           Profilo Instagram
         </a>
       )}
-      {!sito && !instagram && (
+      {[["Facebook", extra.facebook], ["TikTok", extra.tiktok]].map(([n, u]) =>
+        u ? (
+          <a key={n} href={u} target="_blank" rel="nofollow noopener" className="rounded-bolla border-2 border-crema-scuro bg-white px-5 py-3 text-center font-extrabold text-notte">
+            {n}
+          </a>
+        ) : null,
+      )}
+      {!sito && !instagram && !extra.whatsapp && !extra.telefono && (
         <p className="rounded-xl bg-crema px-4 py-3 text-sm font-bold text-notte">
           I contatti arrivano quando l&apos;attività completa la scheda.
         </p>
@@ -65,12 +91,19 @@ function Contatti({ sito, instagram }: { sito?: string; instagram?: string }) {
 }
 
 export default async function SchedaPage({ params }: P) {
-  const s = await trova(params);
+  const base = await trova(params);
+  if (!base) notFound();
+  const p = await pubblicate();
+  const s = conModifiche(base, p);
   if (!s) notFound();
   const cat = s.categoria;
   const listing = haListing(cat.slug, s.cittaSlug);
   const hrefCitta = listing ? `/${cat.slug}/${s.cittaSlug}` : `/feste/${s.cittaSlug}`;
-  const simili = schedeDi(cat.slug, s.cittaSlug).filter((x) => x.slug !== s.slug).slice(0, 3);
+  const simili = schedeDi(cat.slug, s.cittaSlug)
+    .filter((x) => x.slug !== s.slug)
+    .map((x) => conModifiche(x, p))
+    .filter((x): x is NonNullable<typeof x> => x !== null)
+    .slice(0, 3);
   const faq = cat.faq.map((f) => ({ ...f }));
 
   return (
@@ -91,8 +124,9 @@ export default async function SchedaPage({ params }: P) {
             name: s.nome,
             description: s.descrizione,
             url: url(percorsoScheda(s)),
-            address: { "@type": "PostalAddress", addressLocality: s.citta, addressRegion: s.zona, addressCountry: "IT" },
-            ...(s.sito || s.instagram ? { sameAs: [s.sito, s.instagram].filter(Boolean) } : {}),
+            address: { "@type": "PostalAddress", ...(s.extra.indirizzo ? { streetAddress: s.extra.indirizzo } : {}), addressLocality: s.citta, addressRegion: s.zona, addressCountry: "IT" },
+            ...(s.extra.telefono ? { telephone: s.extra.telefono } : {}),
+            ...(s.sito || s.instagram || s.extra.facebook ? { sameAs: [s.sito, s.instagram, s.extra.facebook].filter(Boolean) } : {}),
           }}
         />
 
@@ -108,10 +142,14 @@ export default async function SchedaPage({ params }: P) {
         <div className="mt-6 flex flex-col gap-3">
           <h1 className="text-3xl font-extrabold text-notte sm:text-5xl">{s.nome}</h1>
           <p className="font-bold text-notte-tenue">
-            {s.zona}, {s.citta} · {s.tipo}
+            {s.extra.indirizzo || `${s.zona}, ${s.citta}`} · {s.tipo}
           </p>
           <div className="flex flex-wrap gap-2">
-            <span className="rounded-bolla bg-[#E3F4E8] px-3 py-1 text-xs font-extrabold text-[#2E7D4A]">Scheda da reclamare</span>
+            {s.verificata ? (
+              <span className="rounded-bolla bg-[#E3F4E8] px-3 py-1 text-xs font-extrabold text-[#2E7D4A]">✓ Verificata dal titolare</span>
+            ) : (
+              <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte-tenue">Scheda da reclamare</span>
+            )}
             <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">Fa feste di compleanno</span>
             <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">{cat.nome}</span>
           </div>
@@ -133,13 +171,30 @@ export default async function SchedaPage({ params }: P) {
                 ))}
               </ul>
             </section>
+            {(s.extra.orari || s.extra.pacchetti) && (
+              <section className="grid gap-4 sm:grid-cols-2">
+                {[["Orari", s.extra.orari], ["Pacchetti festa", s.extra.pacchetti]].map(([t, v]) =>
+                  v ? (
+                    <div key={t} className="rounded-morbido border-2 border-crema-scuro bg-white p-5">
+                      <p className="text-lg font-extrabold text-notte">{t}</p>
+                      <p className="mt-2 whitespace-pre-line text-notte-tenue">{v}</p>
+                    </div>
+                  ) : null,
+                )}
+              </section>
+            )}
+            {s.extra.video && (
+              <a href={s.extra.video} target="_blank" rel="nofollow noopener" className="self-start rounded-bolla border-2 border-crema-scuro bg-white px-5 py-3 font-extrabold text-notte">
+                ▶ Guarda il video della struttura
+              </a>
+            )}
             {s.reel && <ReelInstagram url={s.reel} nome={s.nome} />}
             <div className="lg:hidden">
-              <Contatti sito={s.sito} instagram={s.instagram} />
+              <Contatti sito={s.sito} instagram={s.instagram} extra={s.extra} />
             </div>
           </div>
           <aside className="hidden lg:sticky lg:top-24 lg:block">
-            <Contatti sito={s.sito} instagram={s.instagram} />
+            <Contatti sito={s.sito} instagram={s.instagram} extra={s.extra} />
           </aside>
         </div>
 

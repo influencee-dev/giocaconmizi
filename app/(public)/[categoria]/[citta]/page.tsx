@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CATEGORIE_ATTIVE, LISTING, categoria, datiCard, haListing, percorsoScheda, rispostaListing, schedeDi } from "@/lib/directory";
 import { cittaFeste } from "@/lib/feste";
+import { conModifiche, pubblicate } from "@/lib/directory-db";
 import { url } from "@/lib/seo";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
@@ -12,6 +13,7 @@ import { ListingFiltrato } from "@/components/directory/ListingFiltrato";
 /** Listing categoria + città, la pagina che conta per la SEO locale (Figma 01–03). */
 
 export const dynamicParams = false;
+export const revalidate = 600;
 
 export function generateStaticParams() {
   return LISTING.map((l) => ({ categoria: l.categoria.slug, citta: l.cittaSlug }));
@@ -40,7 +42,9 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
 export default async function ListingPage({ params }: P) {
   const d = await dati(params);
   if (!d) notFound();
-  const { cat, schede, nomeCitta, citta } = d;
+  const { cat, nomeCitta, citta } = d;
+  const p = await pubblicate();
+  const schede = d.schede.map((s) => conModifiche(s, p)).filter((s): s is NonNullable<typeof s> => s !== null);
   const altre = CATEGORIE_ATTIVE.filter((c) => c.slug !== cat.slug && haListing(c.slug, citta));
   const vicine = LISTING.filter((l) => l.categoria.slug === cat.slug && l.cittaSlug !== citta).slice(0, 6);
   const faq = [
