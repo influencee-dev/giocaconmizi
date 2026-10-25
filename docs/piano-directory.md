@@ -213,6 +213,49 @@ La fase 1 viene prima perché le attività si iscrivono molto più volentieri a
 una directory che esiste già e che le mostra, e perché ogni giorno di pagine
 online è un giorno di anzianità in più su Google.
 
+## 6-bis. Area delle attività (richieste di Giorgia del 25/10/2026)
+
+Decisione presa: le schede restano pubbliche (strada A); il locale approva,
+modifica o chiede la rimozione dal suo link personale.
+
+**Ingresso.** Email con link personale (codice segreto, valido 30 giorni) →
+anteprima della scheda così com'è → tre bottoni: «Approvo», «Voglio
+modificarla», «Non voglio comparire». Approvando accetta termini e
+condizioni (licenza foto e testi, arricchimento dati, impegno a
+ricondividere) e riceve l'accesso con la sua email (magic link Supabase).
+
+**Dashboard «La mia attività».**
+- Profilo: descrizione, indirizzo, orari, pacchetti festa con prezzi.
+- Contatti: WhatsApp (diventa il bottone «Scrivi su WhatsApp»), telefono,
+  sito, Instagram, Facebook, TikTok.
+- Foto: da 3 a 15, compresse nel browser, testo alternativo obbligatorio.
+- Video della struttura: link YouTube, Instagram o TikTok, caricato al
+  tocco come i reel di /feste (niente cookie di terzi senza gesto).
+- Guida al completamento: barra «profilo completo al N%» e una lista di
+  passi con il perché di ognuno («le schede con almeno 3 foto ricevono più
+  clic»), più un promemoria email se il profilo resta incompleto.
+- Statistiche: visualizzazioni della scheda e clic su WhatsApp, telefono,
+  sito e social, per giorno e per mese. SOLO numeri aggregati: il GDPR non
+  permette di mostrare chi sono le famiglie che hanno guardato. Le famiglie
+  compaiono per nome solo quando inviano loro una richiesta di informazioni.
+  Conteggio senza cookie, nel nostro database.
+- Eventi e articoli: il locale pubblica un evento (titolo, data, foto,
+  testo) che diventa un articolo su /articoli e compare nella sua scheda
+  sotto «Prossimi eventi», con dati strutturati Event per Google.
+
+**Tutto passa da Giorgia.** Ogni modifica, foto e articolo va in coda nel
+pannello /admin; la scheda si aggiorna sul sito pochi minuti dopo
+l'approvazione (ISR) e mostra «Verificata dal titolare».
+
+**Ordine di costruzione.** 1) link personale, anteprima, tre bottoni,
+pannello admin; 2) dashboard profilo, contatti, foto, video, guida al
+completamento; 3) statistiche; 4) eventi e articoli.
+
+**Prerequisito bloccante (25/10).** Il database del sito (progetto
+Supabase wrkderhcbzlppkveknyd) non è accessibile dal connettore Supabase
+collegato a Claude: servono l'accesso a quel progetto e la chiave di
+servizio (SUPABASE_SERVICE_ROLE_KEY) nelle variabili di Vercel.
+
 ## 7. Cosa decide Giorgia
 - Testo legale di termini e condizioni (licenza contenuti, arricchimento dati,
   ricondivisione): si prepara una bozza, va validato.
