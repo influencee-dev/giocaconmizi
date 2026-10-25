@@ -40,13 +40,13 @@ export const CITTA_FESTE: CittaFeste[] = [
     citta: "Milano",
     aggiornata: "2026-10-19",
     rispostaBreve:
-      "A Milano una festa di compleanno per bambini si organizza in ludoteca o in una sala feste di zona: ce ne sono in quasi ogni quartiere, da Lambrate a Porta Romana alla zona Ripamonti, con formule da circa due ore e mezza che spesso comprendono spazio giochi, buffet e animazione. Conviene prenotare con qualche settimana di anticipo, chiedere un preventivo scritto e verificare cosa è incluso: torta, allestimento e pulizie fanno la differenza sul prezzo finale.",
+      "A Milano una festa di compleanno per bambini si organizza in ludoteca o in una sala feste di zona: ce ne sono in quasi ogni quartiere, da Lambrate al Sempione alla zona Ripamonti, con formule da circa due ore e mezza che spesso comprendono spazio giochi, buffet e animazione. Conviene prenotare con qualche settimana di anticipo, chiedere un preventivo scritto e verificare cosa è incluso: torta, allestimento e pulizie fanno la differenza sul prezzo finale.",
     intro:
       "Milano è piena di spazi pensati per i compleanni dei bambini, e il problema di solito non è trovarne uno: è sceglierlo senza girare venti profili Instagram. Qui sotto ci sono le location di cui le famiglie milanesi parlano di più, con la zona e il tipo di spazio, così parti dalla tua fermata di metro e non dal fondo della lista.",
     locali: [
       {
         nome: "Il Nano Gigante",
-        zona: "Lambrate",
+        zona: "via Bistolfi",
         tipo: "ludoteca e playground",
         descrizione:
           "Un open space di circa 500 mq con playground, gonfiabili, labirinti e un gioco interattivo a pavimento: lo spazio grande per le feste movimentate.",
@@ -67,14 +67,14 @@ export const CITTA_FESTE: CittaFeste[] = [
       },
       {
         nome: "MiniMeG Ludoteca",
-        zona: "Porta Romana",
+        zona: "Sempione",
         tipo: "ludoteca",
         descrizione:
           "Feste a tema progettate su misura, con educatrici che possono prendersi cura dei bambini dai 3 anni in su.",
       },
       {
         nome: "Effetto Magia",
-        zona: "centro",
+        zona: "via Morosini",
         tipo: "sala feste con ludoteca",
         descrizione:
           "Una sala da 165 mq con ludoteca interna di oltre 50 mq, nel cuore della città.",
@@ -517,13 +517,6 @@ export const CITTA_FESTE: CittaFeste[] = [
           "Servizio di feste e animazione attivo in diversi quartieri della citt\u00e0, con sale appoggiate per ogni zona.",
         sito: "https://www.compleannogenova.it/",
       },
-      {
-        nome: "Festolandia",
-        zona: "Genova",
-        tipo: "location per feste",
-        descrizione: "Location dedicata alle feste per bambini con area giochi attrezzata.",
-        sito: "https://www.festolandia.it/",
-      },
     ],
     faq: [
       {
@@ -567,18 +560,11 @@ export const CITTA_FESTE: CittaFeste[] = [
       },
       {
         nome: "Magic World",
-        zona: "Bologna",
+        zona: "Budrio",
         tipo: "sale feste al chiuso",
         descrizione:
           "Ambiente climatizzato con due sale al piano terra per bambini da 1 a 10 anni e una sala dedicata ai piccolissimi (1\u20135).",
         sito: "https://magicworldaps.it/",
-      },
-      {
-        nome: "Ludovillage",
-        zona: "Bologna",
-        tipo: "ludoteca",
-        descrizione:
-          "Ludoteca ampia con giochi interattivi, gonfiabili, spazi a tema e animazione: indicata soprattutto per i bambini dai 2 ai 6 anni.",
       },
       {
         nome: "Il Mondo di Makam\u00f2",
@@ -587,20 +573,6 @@ export const CITTA_FESTE: CittaFeste[] = [
         descrizione:
           "Gli spazi della ludoteca si affittano per feste ed eventi privati, con formule diverse a seconda delle esigenze.",
         sito: "https://www.ilmondodimakamo.it/ludoteca-bologna/",
-      },
-      {
-        nome: "Casa Matilda",
-        zona: "Bologna",
-        tipo: "ludoteca",
-        descrizione:
-          "La ludoteca si riserva per compleanni anche a tema, per la fascia 3\u201310 anni.",
-      },
-      {
-        nome: "Spazio Verde",
-        zona: "fuori porta",
-        tipo: "agriturismo con animazione",
-        descrizione:
-          "Ampi spazi verdi con area giochi, animazione, laboratori didattici e passeggiate con gli asinelli: la festa all'aperto.",
       },
       {
         nome: "Luna Farm",
@@ -648,14 +620,6 @@ export const CITTA_FESTE: CittaFeste[] = [
         tipo: "ludoteca con giardino",
         descrizione:
           "La ludoteca dell'Oltrarno, ristrutturata di recente, con sale interne e un ampio giardino per le feste a tema: i compleanni si festeggiano di sabato, su prenotazione.",
-      },
-      {
-        nome: "WePlayLab",
-        zona: "Firenze",
-        tipo: "ludoteca",
-        descrizione:
-          "Pacchetto festa con allestimento, animatori e due ore e mezza ad accesso riservato: sala, area 0\u20135 anni e playground.",
-        sito: "https://www.weplaylab.com/festa-in-ludoteca",
       },
       {
         nome: "La Mondolfiera",
@@ -1544,7 +1508,7 @@ export const CITTA_FESTE: CittaFeste[] = [
       },
       {
         nome: 'Casa Matilda Ludoteca',
-        zona: 'Modena',
+        zona: 'Piumazzo (Castelfranco Emilia)',
         tipo: 'ludoteca e baby parking',
         descrizione:
           'Ludoteca e baby parking per i bambini dai 3 ai 10 anni, che si può riservare per le feste a tema.',
