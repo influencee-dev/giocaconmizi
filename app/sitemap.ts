@@ -5,6 +5,7 @@ import { tutteLePagine } from "@/lib/biglietti";
 import { esempiPubblicati } from "@/lib/esempi";
 import { GUIDE } from "@/lib/guide";
 import { CITTA_FESTE } from "@/lib/feste";
+import { CATEGORIE_ATTIVE, LISTING, SCHEDE, percorsoScheda } from "@/lib/directory";
 import { classi, eta, url } from "@/lib/seo";
 
 /**
@@ -78,6 +79,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(c.aggiornata),
       changeFrequency: "monthly" as const,
       priority: 0.9,
+    })),
+
+    // La directory: categoria → città → scheda (docs/piano-directory.md)
+    ...CATEGORIE_ATTIVE.map((c) => ({
+      url: url(`/${c.slug}`),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
+    ...LISTING.map((l) => ({
+      url: url(`/${l.categoria.slug}/${l.cittaSlug}`),
+      lastModified: new Date(CITTA_FESTE.find((c) => c.slug === l.cittaSlug)?.aggiornata ?? Date.now()),
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    })),
+    ...SCHEDE.map((s) => ({
+      url: url(percorsoScheda(s)),
+      lastModified: new Date(CITTA_FESTE.find((c) => c.slug === s.cittaSlug)?.aggiornata ?? Date.now()),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
 
     // Le guide per i genitori: contenuto evergreen, priorità alta (AEO)

@@ -184,6 +184,11 @@ ok(
   "pagina feste: LocalBusiness e FAQ",
   festeMilano.includes("LocalBusiness") && festeMilano.includes("FAQPage"),
 );
+const listingDir = await jsonLdDi("/ludoteche/milano");
+ok("directory: listing con ItemList, breadcrumb e FAQ",
+  listingDir.includes("ItemList") && listingDir.includes("BreadcrumbList") && listingDir.includes("FAQPage"));
+const schedaDir = await jsonLdDi("/ludoteche/milano/il-nano-gigante");
+ok("directory: scheda col tipo di attività e indirizzo", schedaDir.includes('"ChildCare"') && schedaDir.includes("PostalAddress"));
 const hubCorsivo = await jsonLdDi("/storie/corsivo");
 ok(
   "hub corsivo: ItemList e breadcrumb",

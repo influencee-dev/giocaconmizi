@@ -2,7 +2,7 @@
 import { apriBrowser, conServer, BASE, B_PIENO } from "./comune.mjs";
 
 const PAGINE = [
-  "/", "/giochi", "/guide", "/guide/memorizzare-le-poesie", "/guide/memoria-e-concentrazione", "/coding", "/feste", "/feste/milano", "/biglietti", "/biglietti/inviti-compleanno-natale", "/giochi/eta/5-anni",
+  "/", "/giochi", "/guide", "/guide/memorizzare-le-poesie", "/guide/memoria-e-concentrazione", "/coding", "/feste", "/feste/milano", "/ludoteche", "/ludoteche/milano", "/ludoteche/milano/il-nano-gigante", "/sale-feste/roma", "/biglietti", "/biglietti/inviti-compleanno-natale", "/giochi/eta/5-anni",
   `/biglietti/crea?b=${B_PIENO}`, `/biglietti/vedi?b=${B_PIENO}`,
 ];
 const LARGHEZZE = [340, 375, 414, 768, 1024, 1440];

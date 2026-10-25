@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CITTA_FESTE } from "@/lib/feste";
+import { CATEGORIE_ATTIVE } from "@/lib/directory";
 import { Contenitore, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 
@@ -34,6 +35,21 @@ export default function FestePage() {
         quando hai scelto il posto, l&apos;invito lo fai gratis qui, con la
         conferma WhatsApp a un tocco.
       </p>
+
+      <section className="mt-8">
+        <TitoloSezione>Cerca per tipo di posto</TitoloSezione>
+        <div className="flex flex-wrap gap-2">
+          {CATEGORIE_ATTIVE.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/${c.slug}`}
+              className="rounded-bolla border-2 border-crema-scuro bg-white px-4 py-2 font-bold text-notte hover:border-viola"
+            >
+              {c.nome}
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <section className="mt-10">
         <TitoloSezione>Scegli la città</TitoloSezione>

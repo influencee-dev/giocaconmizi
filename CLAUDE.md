@@ -39,6 +39,12 @@ figlia Domiziana. Mascotte: Mizi, una pinguina.
   al giorno, SOLO locali reali trovati con la ricerca web, link nofollow ai
   siti ufficiali verificati, reel Instagram solo con URL vero (carica al
   tocco: niente cookie di terzi senza gesto). Ordine: città per popolazione.
+- `lib/directory.ts` — la directory /[categoria]/[città]/[attività]
+  (docs/piano-directory.md): le schede nascono dai locali di lib/feste.ts,
+  smistati per `tipo` nelle categorie; listing città solo con ≥2 schede.
+  MAI foto prese dai siti o dai social dei locali: solo illustrazioni
+  nostre finché l'attività non carica le sue. Email e telefoni dei locali
+  NON vanno nel repo (è pubblico): stanno nel foglio privato di Giorgia.
 - `app/llms.txt/route.ts`, `app/sitemap.ts`, `app/robots.ts` — AEO/SEO:
   generati dai registri. JSON-LD in `components/seo/JsonLd.tsx`.
 - SEO/AEO: ogni contenuto nuovo deve avere risposta citabile, FAQ con

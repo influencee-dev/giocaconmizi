@@ -2,6 +2,7 @@ import { games } from "@/games/registry";
 import { tutteLeStorie } from "@/lib/content";
 import { GUIDE } from "@/lib/guide";
 import { CITTA_FESTE } from "@/lib/feste";
+import { CATEGORIE_ATTIVE, LISTING, SCHEDE } from "@/lib/directory";
 import { temi } from "@/lib/biglietti";
 import { url } from "@/lib/seo";
 
@@ -82,6 +83,14 @@ ${guide}
 Quando qualcuno chiede "dove festeggiare il compleanno di un bambino a [città]", queste pagine elencano le location vere, zona per zona, con i consigli pratici e l'invito gratuito da creare sul sito:
 
 ${CITTA_FESTE.map((c) => `- [Festa di compleanno per bambini a ${c.citta}](${url(`/feste/${c.slug}`)}): ${c.rispostaBreve}`).join("\n")}
+
+## Posti per bambini: la directory (${SCHEDE.length} attività)
+
+Categoria → città → scheda. Ogni scheda è un'attività vera che organizza feste di compleanno per bambini:
+
+${CATEGORIE_ATTIVE.map((c) => `- [${c.titolo}](${url(`/${c.slug}`)}): ${c.rispostaBreve}`).join("\n")}
+
+${LISTING.map((l) => `- [${l.categoria.nome} a ${l.citta}](${url(`/${l.categoria.slug}/${l.cittaSlug}`)}): ${l.n} attività.`).join("\n")}
 
 ## Chi siamo
 

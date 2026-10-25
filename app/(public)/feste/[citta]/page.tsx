@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CITTA_FESTE, cittaFeste } from "@/lib/feste";
+import { categoriaDi, slugify } from "@/lib/directory";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { ReelInstagram } from "@/components/feste/ReelInstagram";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
@@ -139,6 +140,12 @@ export default async function FestaCittaPage({
                 </p>
               )}
               {l.reel && <ReelInstagram url={l.reel} nome={l.nome} />}
+              <Link
+                href={`/${categoriaDi(l).slug}/${voce.slug}/${slugify(l.nome)}`}
+                className="mt-1 self-start text-sm font-extrabold text-viola"
+              >
+                Vedi la scheda ›
+              </Link>
             </div>
           ))}
         </div>
