@@ -1,7 +1,7 @@
 import qrcode from "qrcode-generator";
 import { Disegno } from "@/games/_engine/arte";
 import { linkConferma, numeroWhatsApp } from "@/lib/biglietti";
-import { Sfondo, inchiostro, type Variante } from "./Sfondo";
+import { CSS_DA_COLORARE, Sfondo, inchiostro, type Variante } from "./Sfondo";
 import { StickerDisegno, type StickerSulBiglietto } from "./stickers";
 
 /**
@@ -119,6 +119,11 @@ export function Biglietto({
   // Il testo non deve mai toccare la cornice decorata.
   const larghezzaUtile = larghezza * 0.8;
   const rigaQuando = [dati.data, dati.ora].filter(Boolean).join("  ·  ");
+  // Da colorare: nome ed età diventano lettere vuote col contorno, il resto
+  // del testo resta pieno perché si deve leggere.
+  const daColorare = dati.variante === "colorare";
+  const lettereVuote = (spessore: number) =>
+    daColorare ? { fill: "#FFFFFF", stroke: testo, strokeWidth: spessore, strokeLinejoin: "round" as const } : { fill: testo };
 
   return (
     <svg
@@ -128,6 +133,7 @@ export function Biglietto({
       role="img"
       aria-label={`Biglietto per ${dati.nome || "il compleanno"}`}
     >
+      {daColorare && <style>{CSS_DA_COLORARE}</style>}
       <Sfondo tema={dati.tema} variante={dati.variante} larghezza={larghezza} altezza={altezza} />
 
       {dati.foto && (
@@ -172,7 +178,7 @@ export function Biglietto({
           fontFamily={famiglia}
           fontSize={corpoCheEntra(dati.nome, u * 9.5, larghezzaUtile)}
           fontWeight="800"
-          fill={testo}
+          {...lettereVuote(u * 0.35)}
         >
           {stampatello ? dati.nome.toUpperCase() : dati.nome}
         </text>
@@ -180,7 +186,15 @@ export function Biglietto({
 
       {dati.eta && (
         <>
-          <circle cx={centroX} cy={u * 51} r={u * 7.5} fill="#FFFFFF" opacity="0.85" />
+          <circle
+            cx={centroX}
+            cy={u * 51}
+            r={u * 7.5}
+            fill="#FFFFFF"
+            opacity={daColorare ? 1 : 0.85}
+            stroke={daColorare ? testo : undefined}
+            strokeWidth={daColorare ? u * 0.3 : undefined}
+          />
           <text
             x={centroX}
             y={u * 54.6}
@@ -188,7 +202,7 @@ export function Biglietto({
             fontFamily={famiglia}
             fontSize={u * 10}
             fontWeight="800"
-            fill={testo}
+            {...lettereVuote(u * 0.35)}
           >
             {dati.eta}
           </text>
@@ -254,7 +268,9 @@ export function Biglietto({
 
       {dati.conMizi && (
         <g transform={`translate(${larghezza * 0.06} ${altezza * 0.78}) scale(${(altezza * 0.14) / 100})`}>
-          <Disegno id="pinguino" className="" lato={100} />
+          <g className={daColorare ? "dc-linea dc-disegno" : undefined}>
+            <Disegno id="pinguino" className="" lato={100} />
+          </g>
         </g>
       )}
 
@@ -271,7 +287,9 @@ export function Biglietto({
           >
             {/* Zona di presa generosa: col dito serve. */}
             <rect x="-10" y="-10" width="120" height="120" fill="transparent" />
-            <StickerDisegno id={st.id} />
+            <g className={daColorare ? "dc-linea dc-disegno" : undefined}>
+              <StickerDisegno id={st.id} />
+            </g>
           </g>
         );
       })}

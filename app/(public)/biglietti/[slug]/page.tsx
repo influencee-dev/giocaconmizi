@@ -43,9 +43,9 @@ function descrivi(pagina: Pagina): {
       h1: "Biglietti di compleanno da colorare",
       titolo: "Biglietti di compleanno da colorare",
       descrizione:
-        "Biglietti di compleanno da stampare e colorare, gratis. Scegli lo sfondo chiaro e lascia che sia il bambino a finirlo.",
+        "Biglietti di compleanno da stampare e colorare, gratis: disegni a contorni neri, il nome a lettere vuote e il testo già scritto. Pronti in due minuti.",
       risposta:
-        "Puoi creare gratis un biglietto da colorare: scegli un tema e la variante chiara, scrivi il nome e stampalo. I contorni restano leggeri e il bambino può colorarlo come vuole.",
+        "Puoi creare gratis un biglietto di compleanno da colorare: scegli un tema, scrivi il nome e stampalo. I disegni della cornice, gli adesivi e il nome a lettere vuote escono a soli contorni neri, mentre data e luogo restano scritti pieni e leggibili.",
     };
   }
 
@@ -132,6 +132,7 @@ export default async function PaginaBiglietti({ params }: Params) {
   const eta = "eta" in pagina ? pagina.eta : undefined;
   const genere = pagina.genere === "eta-genere" ? (pagina.sesso === "bambina" ? "f" : "m") : undefined;
   const temaFisso = pagina.genere === "tema" ? pagina.tema : undefined;
+  const variante = pagina.genere === "colorare" ? "colorare" : "chiaro";
 
   // Le anteprime sono biglietti veri, fatti con lo stesso componente del tool.
   const anteprime = (temaFisso ? temi.filter((t) => t.theme === temaFisso) : temiPer(eta, genere))
@@ -191,7 +192,7 @@ export default async function PaginaBiglietti({ params }: Params) {
       <p className="mt-4 max-w-2xl text-lg text-notte-tenue">{testi.risposta}</p>
 
       <Link
-        href={linkAlTool({ tipo, eta, genere, tema: temaFisso })}
+        href={linkAlTool({ tipo, eta, genere, tema: temaFisso, variante: variante === "colorare" ? variante : undefined })}
         data-tap
         className="mt-6 inline-flex items-center justify-center rounded-bolla bg-rosa px-8 py-5 text-xl font-extrabold text-white"
       >
@@ -204,7 +205,7 @@ export default async function PaginaBiglietti({ params }: Params) {
           {anteprime.map((t) => (
             <Link
               key={t.theme}
-              href={linkAlTool({ tipo, eta, genere, tema: t.theme })}
+              href={linkAlTool({ tipo, eta, genere, tema: t.theme, variante: variante === "colorare" ? variante : undefined })}
               className="overflow-hidden rounded-morbido border-4 border-transparent transition-colors hover:border-viola"
               style={{ minHeight: 0, minWidth: 0 }}
             >
@@ -212,7 +213,7 @@ export default async function PaginaBiglietti({ params }: Params) {
                 dati={{
                   tipo,
                   tema: t.theme,
-                  variante: "chiaro",
+                  variante,
                   nome: "Sofia",
                   eta: eta ? String(eta) : "",
                   frase: "",

@@ -98,6 +98,48 @@ ok("adesivi di natale a catalogo",
 ok("adesivi del tema in testa (natale)",
   (await page.locator("button[aria-label^='Aggiungi ']").first().getAttribute("aria-label")) === "Aggiungi Alberello");
 
+// Da colorare: dal link della pagina SEO il tool si apre già in modalità
+// contorni; il PNG scaricato deve essere bianco e nero (quasi nessun pixel
+// colorato), con il nome a lettere vuote.
+await page.goto(`${BASE}/biglietti/crea?variante=colorare&tema=dinosauri`, { waitUntil: "networkidle" });
+await page.getByLabel("Nome", { exact: true }).fill("Domiziana");
+await page.waitForTimeout(300);
+ok("da colorare: modalità scelta dal link",
+  (await page.getByRole("button", { name: "Da colorare" }).getAttribute("aria-pressed")) === "true" &&
+  (await page.locator("svg .dc-linea").count()) > 10);
+const attesaColorare = page.waitForEvent("download", { timeout: 8000 }).catch(() => null);
+await page.getByRole("button", { name: "Scarica", exact: true }).tap();
+const daColorare = await attesaColorare;
+const pngColorare = daColorare ? readFileSync(await daColorare.path()).toString("base64") : "";
+const colori = await page.evaluate(async (b64) => {
+  if (!b64) return null;
+  const img = new Image();
+  img.src = `data:image/png;base64,${b64}`;
+  await img.decode();
+  const c = document.createElement("canvas");
+  c.width = img.width; c.height = img.height;
+  const x = c.getContext("2d");
+  x.drawImage(img, 0, 0);
+  const d = x.getImageData(0, 0, c.width, c.height).data;
+  let colorati = 0, scuri = 0;
+  for (let i = 0; i < d.length; i += 4) {
+    const max = Math.max(d[i], d[i + 1], d[i + 2]), min = Math.min(d[i], d[i + 1], d[i + 2]);
+    if (max - min > 60) colorati++;
+    if (max < 90) scuri++;
+  }
+  const tot = d.length / 4;
+  return { colorati: colorati / tot, scuri: scuri / tot };
+}, pngColorare);
+ok("da colorare: PNG a contorni, senza colori",
+  colori && colori.colorati < 0.01 && colori.scuri > 0.01 && colori.scuri < 0.25,
+  colori ? `colorati ${(colori.colorati * 100).toFixed(2)}%, scuri ${(colori.scuri * 100).toFixed(1)}%` : "nessun download");
+await page.goto(`${BASE}/biglietti/biglietti-compleanno-da-colorare`, { waitUntil: "networkidle" });
+ok("pagina da colorare: anteprime a contorni e link al tool in modalità colorare",
+  (await page.locator("main svg .dc-linea").count()) > 10 &&
+  (await page.locator("main a[href*='variante=colorare']").count()) > 3);
+await page.goto(`${BASE}/biglietti/inviti-compleanno-bambini`, { waitUntil: "networkidle" });
+ok("le altre pagine restano a colori", (await page.locator("svg .dc-linea").count()) === 0);
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("biglietti") ? 0 : 1);

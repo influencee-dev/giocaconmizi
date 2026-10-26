@@ -6,7 +6,7 @@ import { Biglietto, type DatiBiglietto } from "./Biglietto";
 import { CATALOGO_STICKER, catalogoPerTema } from "./stickers";
 import { biglietoInPng, datiPerLink, foglioA4, leggiDatiDaLink, linkInvito, numeroWhatsApp } from "@/lib/condivisione";
 import { FORMATI, frasi, misure, temi, TIPI, type FormatoId, type Tipo } from "@/lib/biglietti";
-import type { Variante } from "./Sfondo";
+import { VARIANTI, type Variante } from "./Sfondo";
 
 /**
  * Il tool dei biglietti (piano §14.3).
@@ -56,6 +56,7 @@ export function Editor() {
     const tema = parametri.get("tema");
     const eta = parametri.get("eta");
     const formatoUrl = parametri.get("formato") as FormatoId | null;
+    const varianteUrl = parametri.get("variante") as Variante | null;
     const stato = parametri.get("b");
 
     if (stato) {
@@ -72,6 +73,7 @@ export function Editor() {
       tipo: tipo && TIPI.includes(tipo) ? tipo : d.tipo,
       tema: tema && temi.some((t) => t.theme === tema) ? tema : d.tema,
       eta: eta ?? d.eta,
+      variante: varianteUrl && VARIANTI.some((v) => v.id === varianteUrl) ? varianteUrl : d.variante,
     }));
     if (formatoUrl && FORMATI.some((f) => f.id === formatoUrl)) setFormato(formatoUrl);
   }, [parametri]);
@@ -339,10 +341,7 @@ export function Editor() {
           </div>
           <Scelte
             valore={dati.variante}
-            opzioni={[
-              { id: "chiaro", etichetta: "Chiaro" },
-              { id: "colorato", etichetta: "Colorato" },
-            ]}
+            opzioni={VARIANTI}
             onCambia={(v) => aggiorna("variante", v as Variante)}
           />
         </Gruppo>

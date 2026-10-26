@@ -1600,6 +1600,134 @@ export const CITTA_FESTE: CittaFeste[] = [
       },
     ],
   },
+  {
+    slug: "reggio-emilia",
+    citta: "Reggio Emilia",
+    aggiornata: "2026-10-26",
+    rispostaBreve: "A Reggio Emilia una festa di compleanno per bambini si fa al Bowling 2000 di Cella, che organizza feste con bowling e laser game per bambini e ragazzi dai 4 ai 18 anni, oppure in fattoria: con gli asini dell'Asineria al Mauriziano o tra gli animali di Fattoria Alex a Quattro Castella. Se scegliete una festa all'aperto, chiedete sempre qual è il piano B in caso di pioggia: all'Asineria, per esempio, con il maltempo l'attività con gli asini viene annullata.",
+    intro: "Reggio Emilia è una città a misura di bambino, con una lunga tradizione educativa e una campagna che comincia a pochi minuti dal centro. Per il compleanno si può scegliere tra una sfida al laser game o un pomeriggio in fattoria con gli animali.",
+    locali: [
+      { nome: "Bowling 2000 – Laser Game Revolution", zona: "Cella (Reggio Emilia)", tipo: "lasergame", descrizione: "Centro con piste da bowling, sala giochi e laser game, che organizza feste di compleanno per bambini e ragazzi dai 4 ai 18 anni con formule che uniscono gioco e pizza.", sito: "https://www.bowling2000.it/" },
+      { nome: "Asineria Asini di Reggio Emilia", zona: "Mauriziano (Reggio Emilia)", tipo: "fattoria didattica, spazi all'aperto", descrizione: "Nella fattoria «L'asino dell'Ariosto» e nel vicino Palazzo Vecchio del Mauriziano ci sono aree verdi recintate e sale a uso esclusivo per i compleanni; su richiesta si aggiungono circa due ore di animazione con gli asini, nella stagione del «Compleanno con raglio» (in primavera-estate e da settembre a fine ottobre). Servono scarpe chiuse e, se piove, l'attività con gli asini viene annullata.", sito: "https://www.asinidireggioemilia.it/" },
+      { nome: "Fattoria Alex", zona: "Quattro Castella", tipo: "fattoria didattica, spazi all'aperto", descrizione: "Fattoria sulle colline reggiane che organizza compleanni all'aperto con animazione, contatto con gli animali e laboratori a scelta, come le erbe aromatiche o la caccia al tesoro. Per i mesi freddi c'è un salone riscaldato da circa 35 persone.", sito: "https://fattoriaalex.it/" },
+    ],
+    faq: [
+      { domanda: "Dove festeggiare a Reggio Emilia con bambini piccoli?", risposta: "Per i più piccoli la fattoria è la scelta più tranquilla: l'Asineria al Mauriziano e Fattoria Alex a Quattro Castella propongono compleanni con il contatto diretto con gli animali, in spazi verdi e con una sala per quando fa freddo o piove." },
+      { domanda: "Che cosa proporre a una festa per ragazzi più grandi?", risposta: "Bowling e laser game piacciono molto anche ai ragazzi delle medie: il Bowling 2000 di Cella organizza feste per bambini e ragazzi dai 4 ai 18 anni, unendo gioco e pizza. Chiedete al momento della prenotazione quanto dura la partita di laser game e da che età è consigliata." },
+      { domanda: "Si può fare una festa in fattoria anche in autunno o in inverno?", risposta: "Dipende dalla struttura: all'Asineria il «Compleanno con raglio» segue un calendario stagionale e con la pioggia l'attività con gli asini salta, mentre Fattoria Alex mette a disposizione un salone riscaldato per i mesi freddi. In ogni caso conviene concordare prima un'alternativa al coperto." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "perugia",
+    citta: "Perugia",
+    aggiornata: "2026-10-26",
+    rispostaBreve: "A Perugia la festa di compleanno per bambini si fa nei parchi giochi al coperto e nelle sale feste, come Partyland a Balanzano (330 mq, feste di quattro ore) o la sala a tema sport di FestePerugia (450 mq, dai 3 ai 12 anni); nella bella stagione c'è la Città della Domenica, con pacchetti compleanno all'aperto. Alcune sale lavorano a turni fissi e il weekend si riempie presto: bloccate la data qualche settimana prima e chiedete subito se pulizie, buffet e uso esclusivo sono inclusi.",
+    intro: "Perugia è una città a misura di famiglia, con sale feste e parchi giochi al coperto sparsi tra i quartieri e le frazioni lungo la E45. Per i mesi caldi c'è poi la Città della Domenica, uno dei parchi divertimenti per famiglie più antichi d'Italia, aperto negli anni Cinquanta.",
+    locali: [
+      {
+        nome: "Partyland",
+        zona: "Balanzano (Perugia)",
+        tipo: "parco giochi al coperto",
+        descrizione: "Parco giochi al coperto di 330 mq a circa 2 km dalle uscite E45 di Balanzano e Ponte San Giovanni, con parcheggio gratuito. Le feste durano quattro ore a turni fissi, con pulizie incluse; nell'area giochi si entra senza scarpe.",
+        sito: "https://partyland.fun/",
+      },
+      {
+        nome: "FestePerugia – All Music Hall",
+        zona: "Perugia, via Ruggero D'Andreotto",
+        tipo: "sala feste",
+        descrizione: "La Sala Stadium, pensata per bambini dai 3 ai 12 anni, è di 450 mq a tema sport, con mini calcio, mini volley, mini basket, un tappeto elastico e un grande calciobalilla. La Sala Party (320 mq) ha un'area baby con cavalcabili e scivolo e una zona mini-disco.",
+        sito: "https://www.festeperugia.it/",
+      },
+      {
+        nome: "Città della Domenica",
+        zona: "Perugia, a circa 6 km dal centro",
+        tipo: "parco divertimenti",
+        descrizione: "Parco storico immerso nel verde a pochi chilometri dal centro, con aree a tema fiabesco e western. Propone pacchetti compleanno con area riservata e, in alcune formule, animazione pomeridiana con giochi e caccia al tesoro; il parco apre solo in alcuni mesi dell'anno, quindi verifica le date della stagione.",
+        sito: "https://www.cittadelladomenica.it/",
+      },
+      {
+        nome: "Etoile Baby Play Room",
+        zona: "Torgiano, località Signoria",
+        tipo: "ludoteca e sala feste",
+        descrizione: "Ludoteca di circa 200 mq per bambini da 0 a 12 anni, con pavimento antitrauma, che organizza compleanni e feste a tema. Le feste si fanno in esclusiva dal venerdì alla domenica, mentre negli altri giorni è aperta al pubblico con ludoteca, baby parking e aiuto compiti.",
+        sito: "https://etoilebaby.it/",
+      },
+    ],
+    faq: [
+      {
+        domanda: "Quali sono i posti più adatti per una festa di compleanno per bambini a Perugia?",
+        risposta: "Per l'inverno funzionano bene i parchi giochi al coperto e le sale feste, come Partyland a Balanzano o FestePerugia; nella bella stagione la Città della Domenica offre pacchetti compleanno all'aperto. Se cerchi uno spazio raccolto per i più piccoli, a Torgiano c'è la ludoteca Etoile Baby."
+      },
+      {
+        domanda: "Con quanto anticipo conviene prenotare la sala?",
+        risposta: "Per il sabato e la domenica è meglio muoversi con qualche settimana di anticipo, perché alcune sale, come Partyland, lavorano a turni fissi e le date del weekend vanno via in fretta. In settimana di solito c'è più scelta."
+      },
+      {
+        domanda: "Cosa chiedere prima di confermare la location?",
+        risposta: "Chiedi quante ore dura la festa, se le pulizie e il buffet sono inclusi, se la sala è in uso esclusivo e quali regole valgono nell'area giochi (per esempio se si entra senza scarpe). Così eviti sorprese il giorno della festa."
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»."
+      },
+    ],
+  },
+  {
+    slug: "livorno",
+    citta: "Livorno",
+    aggiornata: "2026-10-26",
+    rispostaBreve: "A Livorno una festa di compleanno per bambini si fa volentieri all'Acquario, con formule per 4-6 e 7-12 anni e un'attività guidata di un'ora e mezza, o al Museo di Storia Naturale del Mediterraneo, con un laboratorio scientifico per gruppi fino a 30 persone. Per giocare e muoversi c'è il fun center di Porta a Mare con sale feste e playground, e sulle colline una fattoria didattica affitta aula, giardino e parco giochi. Al museo le feste si fanno solo il giovedì e la domenica da settembre a maggio: fissate la data con anticipo.",
+    intro: "Livorno offre alle famiglie un mix raro: feste educative tra acquario e museo di scienze naturali, un grande centro di divertimento al porto e spazi verdi in collina. Che il festeggiato ami il mare, gli esperimenti o correre all'aria aperta, c'è un posto adatto a ogni età e a ogni stagione.",
+    locali: [
+      {
+        nome: "Acquario di Livorno",
+        zona: "Terrazza Mascagni",
+        tipo: "museo",
+        descrizione: "Propone feste di compleanno per bambini dai 4 ai 12 anni, con due formule divise per fascia d'età: una guida accompagna il gruppo in un'attività educativa di circa un'ora e mezza lungo il percorso espositivo, poi si passa in una sala dedicata per il taglio della torta. Il gruppo va da un minimo di 12 a un massimo di 40 bambini.",
+        sito: "https://www.acquariodilivorno.it"
+      },
+      {
+        nome: "Museo di Storia Naturale del Mediterraneo",
+        zona: "Via Roma (Villa Henderson)",
+        tipo: "museo",
+        descrizione: "Ospita feste di compleanno il giovedì e la domenica pomeriggio, da settembre a maggio, con un'ora di attività scientifica curata dagli educatori della cooperativa Itinera: visita ad alcune sale del museo e un laboratorio in cui ogni bambino realizza un piccolo lavoretto da portare a casa. Il limite è di 30 persone tra bambini e adulti, con spazi interni ed esterni a disposizione.",
+        sito: "https://musmed.provincia.livorno.it"
+      },
+      {
+        nome: "Wappy Livorno",
+        zona: "Porta a Mare",
+        tipo: "sala feste con playground",
+        descrizione: "Centro di divertimento per famiglie nel complesso di Porta a Mare, con playground, bowling, autoscontri, realtà virtuale e sale per feste ed eventi pensate per bambini, ragazzi e adulti. La festa si può scegliere e prenotare direttamente online.",
+        sito: "https://wappy.fun/livorno/"
+      },
+      {
+        nome: "Limone nel Verde",
+        zona: "Colline di Livorno",
+        tipo: "fattoria didattica, spazi all'aperto",
+        descrizione: "Fattoria didattica biologica che affitta i suoi spazi per le feste: un'aula di 120 mq ricavata da un'antica stalla, un parco giochi attrezzato, un campetto di calcetto, un grande gazebo e un giardino fiorito. Tavoli, sedie e riscaldamento in inverno sono compresi, mentre animazione e rinfresco restano a cura della famiglia.",
+        sito: "https://limonenelverde.it"
+      }
+    ],
+    faq: [
+      {
+        domanda: "Dove festeggio a Livorno se il tempo è brutto?",
+        risposta: "L'Acquario, il Museo di Storia Naturale del Mediterraneo e Wappy a Porta a Mare sono al coperto; anche Limone nel Verde, pur essendo in campagna, ha un'aula di 120 mq riscaldata in inverno, così la festa non dipende dal meteo."
+      },
+      {
+        domanda: "Qual è la soluzione più adatta in base all'età?",
+        risposta: "L'Acquario ha formule separate per 4-6 anni e 7-12 anni, mentre il laboratorio del Museo funziona bene con i bambini che amano scoprire e costruire. Per i più grandi che vogliono muoversi, Wappy unisce playground e attrazioni come bowling e autoscontri; per i più piccoli è prezioso il giardino recintato di una fattoria didattica."
+      },
+      {
+        domanda: "Quanto prima devo prenotare?",
+        risposta: "Il prima possibile, soprattutto per sabato e domenica. Al Museo le feste si tengono solo il giovedì e la domenica da settembre a maggio e la data si concorda via email; all'Acquario serve un gruppo di almeno 12 bambini, quindi conviene contare gli invitati prima di fissare."
+      },
+      {
+        domanda: "Come raccolgo le conferme?",
+        risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»."
+      }
+    ]
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

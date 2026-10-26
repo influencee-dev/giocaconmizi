@@ -67,6 +67,7 @@ export function linkAlTool(opzioni: {
   genere?: Gender;
   tema?: string;
   formato?: FormatoId;
+  variante?: "chiaro" | "colorato" | "colorare";
 }): string {
   const parametri = new URLSearchParams();
   if (opzioni.tipo) parametri.set("tipo", opzioni.tipo);
@@ -74,6 +75,7 @@ export function linkAlTool(opzioni: {
   if (opzioni.genere) parametri.set("genere", opzioni.genere);
   if (opzioni.tema) parametri.set("tema", opzioni.tema);
   if (opzioni.formato) parametri.set("formato", opzioni.formato);
+  if (opzioni.variante) parametri.set("variante", opzioni.variante);
   const query = parametri.toString();
   return query ? `/biglietti/crea?${query}` : "/biglietti/crea";
 }
