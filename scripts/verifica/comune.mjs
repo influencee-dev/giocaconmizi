@@ -1,9 +1,14 @@
 // Attrezzi comuni delle verifiche: browser, server e un biglietto pieno.
 import { chromium } from "playwright-core";
 import { spawn } from "node:child_process";
+import { existsSync } from "node:fs";
 
 export const BASE = "http://localhost:3100";
-export const CHROMIUM = process.env.CHROMIUM ?? "/opt/pw-browsers/chromium-1194/chrome-linux/chrome";
+// Il Chromium cambia versione fra un ambiente e l'altro: si prende il primo
+// che esiste (/opt/pw-browsers/chromium è il collegamento alla versione attuale).
+export const CHROMIUM =
+  process.env.CHROMIUM ??
+  ["/opt/pw-browsers/chromium", "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"].find((p) => existsSync(p));
 
 /** Un biglietto con tutto dentro: il caso peggiore per layout e link. */
 export const DATI_PIENI = {

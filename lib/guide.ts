@@ -891,6 +891,79 @@ export const GUIDE: Guida[] = [
     ],
     giochi: ["cosa-manca", "memory-animali", "trova-le-differenze", "sequenze-logiche"],
   },
+  {
+    slug: "bambino-non-sa-perdere",
+    titolo: "Il bambino non sa perdere: come aiutarlo (senza farlo vincere sempre)",
+    titoloBreve: "Imparare a perdere",
+    descrizione:
+      "Piange, lancia le carte, «non gioco più»: perché a 3-7 anni perdere è così difficile, cosa dire prima, durante e dopo la partita, e i giochi giusti per allenarsi a perdere bene.",
+    rispostaBreve:
+      "Fino a 6-7 anni non saper perdere è normale: il bambino vive la sconfitta come «sono meno bravo», e la capacità di gestire la delusione si sta ancora formando. Non serve farlo vincere sempre né schiacciarlo: si sceglie un gioco adatto all'età, si annuncia prima che si può perdere, l'adulto mostra ad alta voce come si perde bene, e dopo si accoglie la delusione ma non i gesti — le carte non si lanciano.",
+    etaMin: 3,
+    etaMax: 10,
+    minutiLettura: 6,
+    aggiornata: "2026-10-27",
+    skill: "emozioni",
+    sezioni: [
+      {
+        titolo: "Perché perdere è così difficile (ed è normale)",
+        paragrafi: [
+          "Per un bambino piccolo una partita persa non è un risultato: è un giudizio su di sé. «Ho perso» diventa in fretta «sono meno bravo», e da lì «non gioco più». È lo stesso meccanismo per cui a quattro anni si vuole essere sempre i primi in fila o i primi a finire la merenda.",
+          "In più, la capacità di tenere a bada una delusione forte — aspettare, respirare, rimandare la reazione — è tra le ultime a maturare: si costruisce piano piano negli anni della scuola primaria. Un bambino di quattro o cinque anni che piange dopo aver perso a memory non è viziato: sta facendo i conti con un'emozione grande con gli strumenti che ha. Il compito dell'adulto è prestargliene altri, una partita alla volta.",
+        ],
+      },
+      {
+        titolo: "Farlo vincere sempre? No. Ma nemmeno stravincere",
+        paragrafi: [
+          "Lasciarlo vincere ogni volta sembra gentile, ma toglie l'allenamento: il giorno che perderà con un compagno, la botta sarà più forte. All'opposto, l'adulto che gioca sempre al massimo trasforma ogni partita in una lezione di sconfitta, e il bambino smette di voler giocare. La via di mezzo esiste ed è semplice.",
+          "Con i più piccoli scegliete giochi dove conta la fortuna — il gioco dell'oca, la tombola, i giochi di carte con le regole più semplici: lì l'adulto perde davvero, senza fingere, e il bambino vede che succede a tutti. Nei giochi di abilità date un vantaggio dichiarato («io parto da tre caselle indietro», «io gioco con una mano sola»): è una regola, non un trucco, e potete toglierlo man mano che cresce.",
+        ],
+      },
+      {
+        titolo: "Prima, durante e dopo: cosa dire",
+        paragrafi: [
+          "Prima della partita mettete le cose in chiaro con una frase sola: «Si può vincere e si può perdere. Se perdi puoi essere arrabbiato, ma le pedine restano sul tavolo». Detto prima, a mente fredda, funziona molto meglio che detto dopo, in piena crisi.",
+          "Durante, perdete voi ad alta voce, e fatelo bene: «Uffa, ho perso! Mi dispiace un po'. Mi è piaciuto giocare, facciamo la rivincita?». I bambini imparano a perdere guardando come perdono i grandi, non ascoltando prediche. Dopo, se la sconfitta è sua, accogliete l'emozione e fermate il gesto: «Sei deluso, lo capisco. Le carte però non si lanciano». Evitate il classico «è solo un gioco»: per lui in quel momento non lo è, e la frase gli dice che sta sbagliando a sentirsi così.",
+        ],
+      },
+      {
+        titolo: "I giochi giusti per allenarsi",
+        paragrafi: [
+          "Tre caratteristiche aiutano: partite brevi (una sconfitta da cinque minuti si recupera subito con la rivincita, una da un'ora no), un po' di fortuna (così non è sempre colpa sua) e, per i più sensibili, i giochi cooperativi dove si vince o si perde tutti insieme contro il gioco: si allena la delusione senza un avversario da odiare.",
+          "Anche i giochi da soli contano: un puzzle che non viene, un labirinto da rifare, una differenza che non si trova. Sui giochi di Gioca con Mizi non c'è il timer né la scritta «hai perso»: un errore non chiude la partita, si riprova e basta. È una palestra tranquilla per il passo più importante, quello che viene prima di saper perdere con gli altri: sbagliare e riprovare senza crollare.",
+        ],
+      },
+      {
+        titolo: "Quando parlarne con qualcuno",
+        paragrafi: [
+          "Le scenate dopo una sconfitta si diradano di solito tra i sei e gli otto anni, e a fasi alterne: una settimana va meglio, poi arriva la partita di calcio persa e sembra di essere tornati indietro. È normale. Vale la pena parlarne con le maestre o col pediatra se dopo i sette-otto anni le reazioni restano molto forti e frequenti, se compaiono in tutte le situazioni (scuola, sport, giochi in casa) o se il bambino arriva a evitare qualunque attività dove potrebbe non riuscire: in quel caso conviene capire insieme che cosa c'è dietro.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        domanda: "È normale che un bambino non sappia perdere?",
+        risposta:
+          "Sì, fino a 6-7 anni è normale: il bambino vive la sconfitta come un giudizio su di sé e la capacità di gestire la delusione si sta ancora formando. Migliora con gli anni e con l'esempio degli adulti, a fasi alterne.",
+      },
+      {
+        domanda: "Devo lasciarlo vincere?",
+        risposta:
+          "Non sempre. Meglio scegliere giochi di fortuna, dove anche l'adulto perde davvero, e nei giochi di abilità dare un vantaggio dichiarato («io parto tre caselle indietro»), da togliere man mano che il bambino cresce.",
+      },
+      {
+        domanda: "Cosa dire quando piange perché ha perso?",
+        risposta:
+          "Accogliete l'emozione e fermate il gesto: «Sei deluso, lo capisco. Le carte però non si lanciano». Evitate «è solo un gioco», che gli dice che sbaglia a sentirsi così, e proponete la rivincita quando si è calmato.",
+      },
+      {
+        domanda: "Quali giochi aiutano a imparare a perdere?",
+        risposta:
+          "Partite brevi, con un po' di fortuna (gioco dell'oca, tombola, carte semplici) e i giochi cooperativi, dove si vince o si perde tutti insieme. Anche i giochi da soli senza timer, come puzzle e labirinti, allenano a sbagliare e riprovare.",
+      },
+    ],
+    giochi: ["memory-animali", "le-emozioni-di-mizi", "puzzle-facile", "labirinto-a-blocchi"],
+  },
 ];
 
 export function guida(slug: string): Guida | undefined {

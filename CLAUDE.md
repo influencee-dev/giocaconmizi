@@ -59,8 +59,8 @@ figlia Domiziana. Mascotte: Mizi, una pinguina.
   JSON-LD e link interni ai giochi pertinenti.
 
 ## Ambiente di lavoro (sessioni Claude)
-- Playwright: Chromium in `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`
-  (o env CHROMIUM); `playwright-core` è nelle devDependencies.
+- Playwright: Chromium in `/opt/pw-browsers/chromium` (collegamento alla
+  versione installata; o env CHROMIUM); `playwright-core` è nelle devDependencies.
 - `npm run verifica` avvia da solo `next start -p 3100` se serve
   (richiede una build fresca). Un `next-server` rimasto acceso da prima
   tiene la porta e fa testare la build VECCHIA: trovalo con

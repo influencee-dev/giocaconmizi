@@ -2,7 +2,7 @@
 import { apriBrowser, conServer, BASE, B_PIENO } from "./comune.mjs";
 
 const PAGINE = [
-  "/", "/giochi", "/guide", "/guide/memorizzare-le-poesie", "/guide/memoria-e-concentrazione", "/coding", "/feste", "/feste/milano", "/ludoteche", "/ludoteche/milano", "/ludoteche/milano/il-nano-gigante", "/sale-feste/roma", "/feste/perugia", "/biglietti/biglietti-compleanno-da-colorare", "/biglietti/crea?variante=colorare", "/termini-attivita", "/la-tua-scheda/link-di-prova-non-valido-000", "/biglietti", "/biglietti/inviti-compleanno-natale", "/giochi/eta/5-anni",
+  "/", "/giochi", "/guide", "/guide/memorizzare-le-poesie", "/guide/memoria-e-concentrazione", "/guide/bambino-non-sa-perdere", "/coding", "/feste", "/feste/milano", "/ludoteche", "/ludoteche/milano", "/ludoteche/milano/il-nano-gigante", "/sale-feste/roma", "/feste/perugia", "/feste/foggia", "/biglietti/biglietti-compleanno-da-colorare", "/biglietti/crea?variante=colorare", "/termini-attivita", "/la-tua-scheda/link-di-prova-non-valido-000", "/biglietti", "/biglietti/inviti-compleanno-natale", "/giochi/eta/5-anni",
   `/biglietti/crea?b=${B_PIENO}`, `/biglietti/vedi?b=${B_PIENO}`,
 ];
 const LARGHEZZE = [340, 375, 414, 768, 1024, 1440];

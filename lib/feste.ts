@@ -1728,6 +1728,61 @@ export const CITTA_FESTE: CittaFeste[] = [
       }
     ]
   },
+  {
+    slug: "ravenna",
+    citta: "Ravenna",
+    aggiornata: "2026-10-27",
+    rispostaBreve: "A Ravenna la festa di compleanno per bambini si fa nei parchi giochi al coperto con gonfiabili, come Neverland Park alle Bassette (700 mq, con un'area per i bimbi da 0 a 3 anni), nelle sale feste con playground in città e a Marina Romea, oppure per i più grandi con il pacchetto compleanno di Mirabilandia. Molti pacchetti arrivano a circa 20 bambini fratelli compresi: fate la lista degli invitati prima di prenotare.",
+    intro: "Ravenna unisce una città raccolta e i lidi a pochi minuti, e questo si vede anche nelle feste: si sceglie tra i parchi gioco coperti della periferia, le sale feste vicino al mare e il grande parco divertimenti a Savio.",
+    locali: [
+      { nome: "Neverland Park", zona: "Ravenna, zona commerciale Le Bassette", tipo: "parco giochi al coperto", descrizione: "Parco giochi coperto di 700 mq con gonfiabili, labirinti, tappeti elastici, un piccolo campo da calcio e un'area dedicata ai bimbi da 0 a 3 anni. Ha una sala feste e organizza compleanni di mattina, di pomeriggio o di sera; il pacchetto comprende fino a 20 bambini, fratelli inclusi.", sito: "https://www.neverlandparkravenna.it/" },
+      { nome: "Cucina Retrò", zona: "Marina Romea (Ravenna)", tipo: "sala feste con playground", descrizione: "Locale dedicato esclusivamente ai compleanni dei bambini, con sale per le feste e circa 200 mq di aree gioco, tra cui una ludoteca coperta con playground, piscina di palline e scivolo; i genitori possono seguire i bimbi dal tavolo grazie ai monitor. Il buffet è preparato in giornata dalla cucina e in stagione si gioca anche all'aperto.", sito: "https://cucinaretro.it/" },
+      { nome: "L'isola di Sophie", zona: "Ravenna, via Agro Pontino", tipo: "sala feste con playground", descrizione: "Spazio per le feste di compleanno aperto nel 2026, pensato per riunire in un unico ambiente l'area gioco dei bambini e uno spazio riservato ai genitori. Le due aree principali accolgono una ventina di bambini, con gonfiabili, un playground di sei metri, scivoli e un'area baby per i più piccoli." },
+      { nome: "Mirabilandia", zona: "Savio di Ravenna", tipo: "parco divertimenti", descrizione: "Il parco propone un pacchetto compleanno per gruppi di almeno 10 persone, con ingresso omaggio per il festeggiato, ingresso scontato per gli invitati e un pasto con torta di compleanno; d'estate c'è una formula simile anche al parco acquatico Mirabeach. Il pacchetto va prenotato almeno 3 giorni prima.", sito: "https://www.mirabilandia.it/" },
+    ],
+    faq: [
+      { domanda: "Quanti bambini posso invitare in un parco giochi al coperto?", risposta: "Dipende dal locale, ma a Ravenna è frequente un pacchetto fino a circa 20 bambini: a Neverland Park, per esempio, il conteggio comprende anche i fratelli. Fai la lista completa prima di prenotare e chiedi come vengono contati i più piccoli." },
+      { domanda: "Si può festeggiare al mare anche fuori stagione?", risposta: "In buona parte dell'anno sì: a Marina Romea Cucina Retrò ha sale e aree gioco al coperto dedicate ai compleanni ed è aperto da febbraio a novembre, con il gioco all'aperto nella bella stagione. Verificate sempre date e orari con il locale prima di fissare." },
+      { domanda: "Che cosa conviene per i bambini più grandi?", risposta: "Per chi ama le attrazioni c'è Mirabilandia, che offre un pacchetto compleanno per gruppi di almeno 10 persone, da prenotare almeno 3 giorni prima. Ricorda che il parco è stagionale: controlla il calendario di apertura prima di fissare la data." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "cagliari",
+    citta: "Cagliari",
+    aggiornata: "2026-10-27",
+    rispostaBreve: "A Cagliari la festa di compleanno per bambini si fa soprattutto nelle sale feste con playground e gonfiabili, in città e nell'hinterland: a Sestu c'è una sala di circa 200 mq con uno scivolo gonfiabile alto 6 metri, a Monserrato una sala di 160 mq con un giardino di 200 mq. Le sale lavorano spesso a turni pomeridiani: fissate la data con qualche settimana d'anticipo, soprattutto per il weekend.",
+    intro: "Cagliari e i comuni vicini hanno diverse sale feste pensate per i più piccoli, con playground, gonfiabili e spazi per il buffet, e alcune hanno anche un giardino per le giornate di sole. Ecco qualche indirizzo da cui partire per organizzare una festa serena, dentro la città o a pochi minuti di strada.",
+    locali: [
+      { nome: "Edoland", zona: "Cagliari", tipo: "sala feste con playground", descrizione: "Sala feste per bambini con playground gigante, gonfiabile, scivoli e un trono per il taglio della torta; c'è un'assistente di sala che aiuta con catering, bevande e buffet. La sala è climatizzata e c'è un ampio parcheggio.", sito: "https://edoland.it/" },
+      { nome: "Il Castello Incantato", zona: "Monserrato", tipo: "sala feste con playground", descrizione: "Sala di 160 mq con zona buffet, trono per il festeggiato, playground con vasca di palline e zona discoteca. All'esterno c'è un giardino di 200 mq con un grande castello gonfiabile e un tappeto elastico.", sito: "https://ilcastelloincantatocagliari.it/" },
+      { nome: "Happy", zona: "Sestu", tipo: "sala feste con playground", descrizione: "Sala feste di circa 200 mq con playground, salterello, piscina di palline e scivolo gonfiabile alto 6 metri. È attrezzata per il catering con due frigoriferi e un forno a microonde.", sito: "https://www.happysalafestesestu.com/" },
+    ],
+    faq: [
+      { domanda: "Meglio una sala in città o nell'hinterland?", risposta: "Dipende da dove abitano gli invitati: in città c'è per esempio Edoland, mentre a Monserrato e Sestu si trovano spazi ampi con playground e gonfiabili. Guardate soprattutto il parcheggio e i tempi di strada per le famiglie." },
+      { domanda: "Ci sono sale con uno spazio all'aperto?", risposta: "Sì: Il Castello Incantato a Monserrato ha un giardino di 200 mq con castello gonfiabile e tappeto elastico. Con il clima di Cagliari uno spazio esterno è prezioso da primavera all'autunno, ma chiedete sempre cosa succede in caso di maltempo." },
+      { domanda: "Posso portare il mio buffet?", risposta: "Molte sale sono attrezzate per accogliere il catering: Happy a Sestu, per esempio, mette a disposizione frigoriferi e microonde. Le regole su cibo, torta e bevande cambiano da sala a sala, quindi chiedetele al momento della prenotazione." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "foggia",
+    citta: "Foggia",
+    aggiornata: "2026-10-27",
+    rispostaBreve: "A Foggia la festa di compleanno per bambini si fa soprattutto nelle ludoteche con sala feste di città, oppure in spazi con giardino come l'Officina del Gioco, che ha 1000 mq all'aperto con gonfiabili e aree salto. Ogni ludoteca ha le sue regole (in una l'area giochi è fino ai 9 anni): chiedete subito quanti bambini comprende la formula e prenotate con largo anticipo.",
+    intro: "Foggia ha una rete vivace di ludoteche di quartiere che d'inverno diventano il punto di riferimento per i compleanni dei più piccoli. Con la bella stagione, invece, si cercano spazi con giardino dove i bambini possano correre e saltare all'aperto.",
+    locali: [
+      { nome: "Ludoteca I Sogni di Luca", zona: "Foggia, via Paolo Telesforo", tipo: "ludoteca e sala feste", descrizione: "Ludoteca con area giochi per bambini fino ai 9 anni, che organizza feste con allestimento personalizzato sul tema scelto, buffet merenda e torta. Le prenotazioni delle feste si fanno solo per telefono o WhatsApp.", sito: "https://ludotecaisognidiluca.it/" },
+      { nome: "La Città dei Giochi", zona: "Foggia, viale Manfredi", tipo: "ludoteca e sala feste", descrizione: "Si presenta come sala feste dedicata ai bambini e alle loro famiglie, con compleanni, spazi per il gioco libero e laboratori creativi. Le formule più complete includono la sala per due ore, animazione e buffet.", sito: "https://lacittadeigiochi.it/" },
+      { nome: "L'Officina del Gioco (As.So.Ri.)", zona: "Foggia, via Benedetto Biagi", tipo: "ludoteca e sala feste", descrizione: "Ludoteca con un giardino di 1000 mq all'aperto con giochi, aree salto e gonfiabili, dove si organizzano feste personalizzate con allestimento e catering. Per i più grandi c'è un formato a parte con arena laser, sfide di ballo e calcetto al coperto.", sito: "https://asdassoriets.it/officina-del-gioco/" },
+    ],
+    faq: [
+      { domanda: "Dove fare una festa di compleanno per bambini a Foggia?", risposta: "Le scelte più comuni sono le ludoteche con sala feste in città, ad esempio in via Paolo Telesforo e in viale Manfredi. Se la festa è nella bella stagione, l'Officina del Gioco in via Benedetto Biagi ha un ampio giardino con gonfiabili." },
+      { domanda: "Fino a che età vanno bene le ludoteche di Foggia?", risposta: "Dipende dal locale: ai Sogni di Luca, per esempio, l'area giochi è riservata ai bambini fino ai 9 anni. Per i più grandi alcune strutture propongono formati dedicati, come l'arena laser e il calcetto al coperto dell'Officina del Gioco." },
+      { domanda: "Cosa chiedere prima di prenotare la sala?", risposta: "Quanti bambini sono compresi nella formula e come si contano quelli in più, cosa include il buffet (e se è pensato anche per gli adulti), quanto dura la festa e se l'allestimento a tema è compreso. Meglio fissare la data con qualche settimana di anticipo, soprattutto nei fine settimana." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {
