@@ -149,6 +149,43 @@ ok(
   await page.locator("text=Bravissimo!").isVisible().catch(() => false),
 );
 
+// Il salvadanaio: partita completa. Il prezzo sta in data-prezzo (centesimi);
+// nel primo round si sbaglia apposta (troppo), si toglie una moneta e si paga:
+// è il percorso di autocorrezione che il gioco deve permettere.
+await page.goto(`${BASE}/giochi/salvadanaio/gioca`, { waitUntil: "networkidle" });
+await page.waitForTimeout(800);
+const NOMI_MONETA = { 200: "2 euro", 100: "1 euro", 50: "50 centesimi" };
+let pagamenti = 0;
+let autocorretto = false;
+for (let r = 0; r < 8; r++) {
+  const banco = page.locator("[data-prezzo]");
+  await banco.waitFor({ timeout: 5000 }).catch(() => null);
+  if (!(await banco.count())) break;
+  let resto = Number(await banco.getAttribute("data-prezzo"));
+  if (r === 0) {
+    await page.getByRole("button", { name: "Aggiungi 2 euro" }).tap();
+    await page.getByRole("button", { name: "Aggiungi 1 euro" }).tap();
+    await page.getByRole("button", { name: "Paga" }).tap();
+    await page.waitForTimeout(300);
+    const troppo = await page.locator("text=È troppo!").isVisible().catch(() => false);
+    await page.getByRole("button", { name: "Togli 1 euro" }).first().tap();
+    resto -= 200;
+    autocorretto = troppo;
+  }
+  for (const m of [200, 100, 50]) {
+    while (resto >= m) {
+      await page.getByRole("button", { name: `Aggiungi ${NOMI_MONETA[m]}` }).tap();
+      resto -= m;
+    }
+  }
+  await page.getByRole("button", { name: "Paga" }).tap();
+  pagamenti++;
+  await page.waitForTimeout(1700);
+}
+ok("salvadanaio: troppo → togli una moneta → paga", autocorretto);
+ok("salvadanaio: otto acquisti fino alla festa",
+  pagamenti === 8 && (await page.locator("text=Bravissimo!").isVisible().catch(() => false)), `${pagamenti}/8`);
+
 // Il catalogo dei giochi: il filtro per competenza restringe la griglia
 await page.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
 await page.waitForTimeout(400);

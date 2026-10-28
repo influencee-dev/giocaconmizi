@@ -909,7 +909,7 @@ export const CITTA_FESTE: CittaFeste[] = [
     citta: "Venezia",
     aggiornata: "2026-10-22",
     rispostaBreve:
-      "A Venezia la maggior parte delle feste di compleanno per bambini si fa in terraferma, tra Mestre e dintorni: trampoline park con sala privata (pacchetto base 120 \u20ac nei feriali, 150 \u20ac nel weekend), ristoranti per eventi con area giochi e perfino il compleanno in fattoria. In centro storico gli spazi sono pochi \u2014 una ludoteca a Castello \u00e8 l'opzione pi\u00f9 citata \u2014 quindi chi abita in laguna spesso festeggia oltre il ponte.",
+      "A Venezia la maggior parte delle feste di compleanno per bambini si fa in terraferma, tra Mestre e dintorni: trampoline park con sala privata (pacchetto base 120 \u20ac nei feriali, 150 \u20ac nel weekend), ristoranti per eventi con area giochi e perfino il compleanno in fattoria. In centro storico gli spazi sono pochissimi (la ludoteca comunale di Castello \u00e8 chiusa dal 2022), quindi chi abita in laguna di solito festeggia oltre il ponte.",
     intro:
       "Venezia \u00e8 un caso a parte: in laguna gli spazi per le feste sono rari e piccoli, cos\u00ec il grosso dei compleanni si festeggia a Mestre e dintorni, dove c'\u00e8 di tutto \u2014 dal trampoline park alla fattoria. Ecco le opzioni di cui parlano le famiglie veneziane.",
     locali: [
@@ -944,13 +944,6 @@ export const CITTA_FESTE: CittaFeste[] = [
         descrizione: "Ludoteca con sala eventi dedicata alle feste di compleanno.",
       },
       {
-        nome: "La Luna nel Pozzo",
-        zona: "Castello (centro storico)",
-        tipo: "ludoteca",
-        descrizione:
-          "Una delle poche opzioni in laguna: ludoteca a Castello, segnalata dalle guide veneziane per le feste in centro storico.",
-      },
-      {
         nome: "Il Giardino delle Ciliegie",
         zona: "Cazzago di Pianiga",
         tipo: "spazio per l'infanzia",
@@ -963,7 +956,7 @@ export const CITTA_FESTE: CittaFeste[] = [
       {
         domanda: "Dove si festeggia un compleanno per bambini a Venezia?",
         risposta:
-          "Quasi sempre in terraferma: a Mestre e dintorni ci sono trampoline park, ristoranti per eventi, ludoteche e perfino un agriturismo per il compleanno in fattoria. In centro storico l'opzione pi\u00f9 citata \u00e8 la ludoteca a Castello.",
+          "Quasi sempre in terraferma: a Mestre e dintorni ci sono trampoline park, ristoranti per eventi, ludoteche e perfino un agriturismo per il compleanno in fattoria. In centro storico gli spazi sono pochissimi: la ludoteca comunale di Castello è chiusa dal 2022.",
       },
       {
         domanda: "Quanto costa una festa di compleanno a Venezia?",
@@ -1780,6 +1773,60 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Dove fare una festa di compleanno per bambini a Foggia?", risposta: "Le scelte più comuni sono le ludoteche con sala feste in città, ad esempio in via Paolo Telesforo e in viale Manfredi. Se la festa è nella bella stagione, l'Officina del Gioco in via Benedetto Biagi ha un ampio giardino con gonfiabili." },
       { domanda: "Fino a che età vanno bene le ludoteche di Foggia?", risposta: "Dipende dal locale: ai Sogni di Luca, per esempio, l'area giochi è riservata ai bambini fino ai 9 anni. Per i più grandi alcune strutture propongono formati dedicati, come l'arena laser e il calcetto al coperto dell'Officina del Gioco." },
       { domanda: "Cosa chiedere prima di prenotare la sala?", risposta: "Quanti bambini sono compresi nella formula e come si contano quelli in più, cosa include il buffet (e se è pensato anche per gli adulti), quanto dura la festa e se l'allestimento a tema è compreso. Meglio fissare la data con qualche settimana di anticipo, soprattutto nei fine settimana." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "rimini",
+    citta: "Rimini",
+    aggiornata: "2026-10-28",
+    rispostaBreve: "A Rimini la festa di compleanno per bambini si fa soprattutto nelle ludoteche con sala feste e nei parchi giochi al coperto tra Marina Centro e Viserba, mentre nei dintorni ci sono un bowling con play park a Cerasolo di Coriano e un parco giochi all'aperto a Igea Marina. Molte formule durano circa tre ore: Tiny Rimini propone pacchetti fino a 20 bambini, Chibia ha uno spazio coperto di circa 1000 mq con un'area baby per i bimbi da 0 a 3 anni. Prenota con qualche settimana di anticipo, soprattutto per il weekend, e chiedi subito cosa è compreso tra buffet, torta e animazione.",
+    intro: "Rimini non è solo spiaggia d'estate: tutto l'anno ci sono spazi pensati per far festa con i bambini, dalle ludoteche vicino al mare ai grandi parchi gonfiabili al coperto. E se cerchi qualcosa di diverso, a pochi chilometri trovi anche bowling e parchi giochi all'aperto nei comuni vicini.",
+    locali: [
+      { nome: "Tiny Rimini", zona: "Rimini, Marina Centro", tipo: "ludoteca e sala feste", descrizione: "Ludoteca e spazio feste in viale Flavio Gioia con laboratori e bar interno: le feste durano tre ore, con formule che vanno dal solo spazio fino al pacchetto completo per un massimo di 20 bambini, e gli adulti accompagnatori entrano gratis. Su richiesta c'è anche l'animazione, dal truccabimbi ai giochi musicali e alla baby dance.", sito: "https://www.tinyriminikids.it/" },
+      { nome: "Chibia Parco Giochi", zona: "Rimini, Viserba", tipo: "parco giochi al coperto", descrizione: "Area coperta di circa 1000 mq con gonfiabili, uno scivolo alto 7 metri, percorsi a ostacoli e un'area baby recintata per i bimbi da 0 a 3 anni. Per le feste allestisce uno spazio dedicato, prepara il buffet e include l'accesso a tutti i giochi del parco.", sito: "https://www.chibiaparcogiochirimini.it/" },
+      { nome: "Bowling Seventies", zona: "Cerasolo (Coriano)", tipo: "sala feste con playground", descrizione: "Bowling a pochi minuti da Rimini con pacchetti compleanno divisi per età (0–6, 7–10 e 11–17 anni), che comprendono decorazioni, animatori e torta della pasticceria interna. I più piccoli hanno il Play Park, e c'è uno short bowling con piste più corte e palle leggere pensato per i bambini dai 4 anni.", sito: "https://bowling-seventies.com/" },
+      { nome: "Parcogiochi Paperopolis", zona: "Igea Marina (Bellaria Igea Marina)", tipo: "parco divertimenti", descrizione: "Storico parco giochi per famiglie all'aperto, in un'area verde, con gonfiabili, reti elastiche e piccole attrazioni. Organizza feste di tre ore al pomeriggio oppure la sera; conviene verificare il calendario di apertura prima di fissare la data.", sito: "https://paperopolis.it/" },
+    ],
+    faq: [
+      { domanda: "Qual è il posto giusto in base all'età?", risposta: "Per i più piccoli funzionano bene i parchi giochi al coperto con un'area baby dedicata, come quello di Viserba con lo spazio per i bimbi da 0 a 3 anni. Dai 4–5 anni in su piacciono gonfiabili e short bowling, mentre per i ragazzi più grandi alcuni locali propongono pacchetti teen con bowling o biliardo." },
+      { domanda: "Cosa è compreso di solito nel pacchetto festa?", risposta: "Dipende dalla formula: alcuni spazi offrono solo la sala e i giochi, e buffet, torta e decorazioni li porti tu; altri includono buffet, bevande, allestimento e animazione. Prima di prenotare chiedi sempre per quanti bambini vale il pacchetto, quanto dura e se lo spazio è riservato solo a voi." },
+      { domanda: "Quanto prima conviene prenotare?", risposta: "Per il sabato e la domenica è meglio muoversi con qualche settimana di anticipo, perché le fasce del pomeriggio sono le più richieste. Se hai una data fissa, blocca prima il locale e poi manda gli inviti." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "salerno",
+    citta: "Salerno",
+    aggiornata: "2026-10-28",
+    rispostaBreve: "A Salerno la festa di compleanno per bambini si fa soprattutto in ludoteche con sala feste e playground al coperto, tra il centro e la zona orientale della città. Il Dipark, per esempio, ha un playground diviso in due aree separate (1–4 e 5–11 anni) e cinque sale attrezzate per le feste, e Marachella in centro ha un parco giochi coperto e una sala per le feste a tema. Prenota con qualche settimana di anticipo, soprattutto per il weekend, e chiedi sempre cosa è compreso nella formula.",
+    intro: "Salerno è una città a misura di famiglia, dove tra il lungomare e i quartieri più nuovi non mancano spazi coperti pensati per far giocare i bambini anche quando il tempo non aiuta. Ecco i posti da cui partire per una festa al coperto, dai più piccoli fino ai ragazzi.",
+    locali: [
+      { nome: "Dipark", zona: "Salerno, zona orientale", tipo: "ludoteca e sala feste", descrizione: "Si presenta come la ludoteca più grande di Salerno: ha un playground per bambini da 1 a 11 anni con due aree separate (1–4 e 5–11 anni) e cinque sale attrezzate per i compleanni. Propone oltre 20 formule tutto compreso, con animazione, spettacolo dal vivo o a tema, e organizza anche feste a domicilio.", sito: "https://www.dipark.it" },
+      { nome: "Marachella", zona: "Salerno, centro", tipo: "ludoteca e sala feste", descrizione: "Nido e ludoteca nel centro di Salerno con un parco giochi al coperto interamente rivestito per la sicurezza dei più piccoli e una sala feste per compleanni e feste a tema. Il servizio di ludoteca accoglie bambini dai 5 ai 12 anni.", sito: "https://www.marachellaludoteca.it" },
+    ],
+    faq: [
+      { domanda: "Che tipo di locale scelgo in base all'età?", risposta: "Per i bambini fino a 10–11 anni le ludoteche con playground sono la scelta più comoda: al Dipark, per esempio, piccoli e grandi giocano in aree separate. Marachella accoglie in ludoteca i bambini dai 5 ai 12 anni: chiedete sempre fino a che età è pensata la formula festa." },
+      { domanda: "Si può fare la festa a casa con l'animazione di una ludoteca?", risposta: "Sì, alcune strutture lo prevedono: il Dipark, ad esempio, propone anche feste a domicilio con animazione e laboratori creativi. Chiedi in anticipo di quanto spazio hanno bisogno gli animatori e cosa portano loro." },
+      { domanda: "Con quanto anticipo conviene prenotare?", risposta: "Per sabato e domenica meglio muoversi con qualche settimana di anticipo, perché le sale feste si riempiono presto. Prima di confermare chiedi quanti bambini sono previsti nella formula, quanto dura la festa e se torta e merenda sono comprese." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "ferrara",
+    citta: "Ferrara",
+    aggiornata: "2026-10-28",
+    rispostaBreve: "A Ferrara una festa di compleanno per bambini si organizza soprattutto in ludoteche e sale feste di quartiere, e nei parchi giochi al coperto. Per esempio, la sala del Bosco delle Meraviglie in via dell'Aeroporto ospita circa 60 persone tra adulti e bambini per 4 ore in esclusiva, mentre alla Nuova Darsena ha aperto nel 2026 Youngo, con sale riservate per le feste. Per i fine settimana conviene prenotare con largo anticipo e chiedere sempre cosa è incluso: animazione, gonfiabili e buffet spesso si aggiungono a parte.",
+    intro: "Ferrara è una città a misura di bambino, raccolta e pianeggiante, dove spostarsi tra un quartiere e l'altro è semplice anche con tanti piccoli invitati. Per i compleanni si può scegliere tra ludoteche con sala feste, parchi giochi coperti con gonfiabili e il nuovo spazio giochi della Nuova Darsena.",
+    locali: [
+      { nome: "Il Bosco delle Meraviglie", zona: "Ferrara, via dell'Aeroporto", tipo: "ludoteca e sala feste", descrizione: "Ludoteca con sala compleanni pensata per bambini da 1 a 10 anni, allestita a tema bosco con giochi e tappetone morbido. La sala si affitta in esclusiva per 4 ore e accoglie circa 60 persone tra adulti e bambini, con tavoli buffet e bagno con fasciatoio.", sito: "https://www.boscomeraviglie.it/" },
+      { nome: "Youngo Nuova Darsena", zona: "Ferrara, centro commerciale Nuova Darsena (via Darsena)", tipo: "sala feste con playground", descrizione: "Spazio di divertimento inaugurato a febbraio 2026, con videogiochi, biliardo e un'area dedicata ai più piccoli. Per i compleanni propone sale ampie e personalizzabili, con spazio festa riservato, accesso alle attrazioni e assistenza dello staff.", sito: "https://youngoshop.it/portfolios/nuova-darsena-ferrara/" },
+      { nome: "Baby Park Happy Days", zona: "Ferrara, via del Commercio", tipo: "parco giochi al coperto", descrizione: "Centro ricreativo al coperto con gonfiabili, saltarelli, un playground e un campetto da calcio. Organizza feste a tema e compleanni.", sito: "https://babyparkhappydays.it/" },
+    ],
+    faq: [
+      { domanda: "Quali sono i posti più adatti per una festa di compleanno per bambini a Ferrara?", risposta: "Dipende dall'età: per i più piccoli funzionano bene le ludoteche con sala feste, per chi ha voglia di muoversi i parchi giochi al coperto con gonfiabili, e per i più grandi gli spazi con videogiochi e sale riservate come quello alla Nuova Darsena." },
+      { domanda: "Con quanto anticipo conviene prenotare la sala?", risposta: "Per sabato e domenica è meglio muoversi con qualche settimana di anticipo, soprattutto nei mesi freddi, quando le sale al chiuso sono le più richieste. Nei giorni feriali di solito c'è più disponibilità." },
+      { domanda: "Cosa conviene chiedere prima di confermare la festa?", risposta: "Quante ore dura l'affitto, quante persone può ospitare lo spazio, se animazione, gonfiabili e buffet sono inclusi o a parte, se si possono portare torta e cibo da casa e se c'è parcheggio vicino per le famiglie." },
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
