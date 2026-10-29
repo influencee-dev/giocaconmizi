@@ -1830,6 +1830,44 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "latina",
+    citta: "Latina",
+    aggiornata: "2026-10-29",
+    rispostaBreve: "A Latina la festa di compleanno per bambini si fa soprattutto nei parchi giochi al coperto con gonfiabili e trampolini, nelle ludoteche con sala feste del centro e, con la bella stagione, negli spazi verdi dei borghi come Borgo Bainsizza. Ci sono anche formule di nicchia, come le feste a tema moda e spa dai 5 ai 12 anni, o pacchetti con area riservata in esclusiva e torta inclusa. Per le feste nel fine settimana conviene prenotare con qualche settimana di anticipo e chiedere subito cosa comprende il pacchetto (buffet, animazione, aree incluse nel gioco libero).",
+    intro: "Latina è una città giovane e a misura di famiglia, dove tra centro, borghi e litorale non mancano gli spazi pensati per far festa con i più piccoli. Si va dai grandi parchi giochi al coperto, perfetti nei mesi freddi, ai giardini e alle piscine della campagna pontina per le feste all'aperto.",
+    locali: [
+      { nome: "Crazy Park", zona: "Latina, via Coletta", tipo: "parco giochi al coperto", descrizione: "Parco al coperto con un'area dedicata ai gonfiabili di diverse grandezze, un trampoline park per bambini più grandi e ragazzi e una zona di realtà virtuale; dal 2025 c'è anche il laser game. Il pacchetto compleanno prevede un'area scelta in esclusiva con assistenza, tovagliato colorato, torta scenografica e gioco libero nell'area comune, con extra su richiesta come animazione, truccabimbi e spettacolo di magia.", sito: "https://www.crazypark.it/" },
+      { nome: "Tutti Giù per Terra", zona: "Latina, via dei Marruccini", tipo: "ludoteca e sala feste", descrizione: "Associazione con ludoteca che affitta una sala per i compleanni dei bambini, personalizzabile con tema, decorazioni e animazione. Organizza anche feste a tema con giochi gonfiabili e teatrini.", sito: "https://www.ludotecatuttigiuperterra.com/" },
+      { nome: "Angolo Verde Mini Park", zona: "Borgo Bainsizza (Latina)", tipo: "sala feste con playground", descrizione: "Azienda agrituristica con ampi spazi verdi, parco giochi per bambini, campi da calcetto e pallavolo, postazioni barbecue e una piscina all'aperto, più una sala interna per le feste nei mesi più freddi. Su richiesta si possono noleggiare gonfiabili e avere il buffet.", sito: "https://www.miniparklangoloverde.it/" },
+      { nome: "La Petite", zona: "Latina, via Garigliano", tipo: "sala feste", descrizione: "Sala in stile parigino dedicata alle feste delle bambine dai 5 ai 12 anni, con formule come lo Spa & Fashion Party con piccola sfilata e l'Afternoon Tea Party con merenda elegante e giochi tra amiche. Propone anche una festa pensata per mamma e figlia.", sito: "https://www.lapetite.it/" },
+    ],
+    faq: [
+      { domanda: "Dove si può fare una festa di compleanno al chiuso a Latina?", risposta: "Le scelte più comuni sono i parchi giochi al coperto con gonfiabili, trampolini e aree riservate per la festa, oppure le ludoteche con sala in affitto, che spesso includono anche animazione e decorazioni a tema. Sono le soluzioni più comode tra l'autunno e la primavera, quando il meteo è incerto." },
+      { domanda: "Si può festeggiare all'aperto?", risposta: "Sì: nella campagna intorno a Latina, ad esempio a Borgo Bainsizza, ci sono strutture con prati, parco giochi, barbecue e piscina, che in genere hanno anche una sala interna di riserva. È una buona idea per le feste di fine primavera e d'estate, magari con un piano B al coperto." },
+      { domanda: "Cosa conviene chiedere prima di prenotare?", risposta: "Chiedi quante ore dura la festa, se l'area è riservata solo al vostro gruppo, quali giochi sono inclusi nel gioco libero e cosa comprende il pacchetto tra torta, buffet e animazione. Verifica anche quanto tempo c'è per allestire se porti il rinfresco da casa." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "monza",
+    citta: "Monza",
+    aggiornata: "2026-10-29",
+    rispostaBreve: "A Monza la festa di compleanno per bambini si fa nelle sale dei centri sportivi in città; appena fuori città ci sono il trampoline park di Lissone, i parchi giochi al coperto di Bellusco e la fattoria di Concorezzo. Qualche esempio: il trampoline park di Lissone ha 1.200 m² con un'area feste riservata, mentre il parco al coperto di Bellusco offre 650 m² di gioco per bambini da 0 a 12 anni e un'area party di 150 m² divisa in salette. Prenota con anticipo i weekend d'autunno e d'inverno, quando le feste si spostano al chiuso, e metti i calzini antiscivolo nello zaino.",
+    intro: "Monza unisce il verde del Parco e della Villa Reale a una Brianza ricca di spazi pensati per i bambini, tutti a pochi minuti d'auto. Per la festa si può restare in città oppure spostarsi nei comuni vicini, scegliendo tra gioco libero, salti, natura e animali.",
+    locali: [
+      { nome: "Sport Village Monza", zona: "Monza (zona Binario 7)", tipo: "sala feste", descrizione: "Centro sportivo che affitta per le feste la Sala Arancio, 170 m² con parquet e aria condizionata, e in primavera ed estate un giardino attrezzato con salottini e gazebo. Su richiesta propone allestimenti a tema con un partner.", sito: "https://www.sportvillagemonza.it/" },
+      { nome: "Space Jump", zona: "Lissone", tipo: "trampoline park", descrizione: "Trampoline park di 1.200 m² con un'area riservata ai compleanni e la sala Space Party per eventi privati. C'è anche il Baby Space dedicato ai più piccoli; per saltare servono i calzini antiscivolo.", sito: "https://www.spacejump.it/" },
+      { nome: "La Foresta Incantata", zona: "Bellusco", tipo: "parco giochi al coperto", descrizione: "Parco giochi al coperto a tema foresta: 650 m² di gioco per bambini da 0 a 12 anni, con un grande playground-labirinto e un angolo per i bimbi sotto i 3 anni. L'area party di 150 m² si divide in sei salette singole o tre doppie.", sito: "https://www.laforestaincantataparcogiochi.com/" },
+      { nome: "La Camilla", zona: "Concorezzo", tipo: "fattoria didattica, spazi all'aperto", descrizione: "Agriturismo con 8 ettari di terreno e una fattoria con animali da cortile e cavalli, dove si organizza il compleanno in fattoria con merenda e giochi di gruppo all'aperto. Il pomeriggio è disponibile dal martedì al venerdì, il weekend su prenotazione.", sito: "https://www.lacamilla.it/" },
+    ],
+    faq: [
+      { domanda: "Che posto scegliere in base all'età?", risposta: "Fino ai 5-6 anni funzionano bene ludoteche e parchi al coperto con un angolo baby e giochi morbidi, dove anche i piccolissimi sono al sicuro. Dai 6-7 anni in su piacciono gli spazi dove ci si muove tanto, come i trampolini, o le feste all'aperto con giochi di gruppo." },
+      { domanda: "Posso portare merenda e torta da casa?", risposta: "Dipende dal locale: alcuni propongono formule con sala riservata in cui si porta tutto da casa, altri pacchetti con la merenda già inclusa, e c'è chi non ammette cibo esterno fuori dalle sale. Chiedilo al momento della prenotazione, insieme a eventuali allergie degli invitati." },
+      { domanda: "Si può festeggiare all'aperto vicino a Monza?", risposta: "Sì, soprattutto in primavera ed estate: intorno a Monza ci sono fattorie con animali e centri sportivi con giardino che ospitano le feste. Tieni sempre un piano B al coperto, perché il meteo in Brianza cambia in fretta." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

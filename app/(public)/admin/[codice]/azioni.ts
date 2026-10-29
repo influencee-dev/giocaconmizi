@@ -12,6 +12,7 @@ export async function decidi(scelta: "accettata" | "rifiutata", form: FormData) 
   if (ok) {
     revalidatePath("/", "layout");
     revalidatePath("/sitemap.xml");
+    revalidatePath("/llms-full.txt");
   }
   revalidatePath(`/admin/${codice}`);
 }

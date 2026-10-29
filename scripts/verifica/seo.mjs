@@ -78,6 +78,16 @@ for (const percorso of ["/accedi", "/biglietti/vedi", "/la-tua-scheda/link-di-pr
     /<meta name="robots" content="[^"]*noindex/.test(html) && !locs.some((l) => new URL(l).pathname === percorso));
 }
 
+// 4-bis. llms-full.txt: testo intero (guide, città, giochi), link sul dominio,
+// e i locali citati sono gli stessi delle pagine città (nessun locale tolto).
+const pieno = await testo("/llms-full.txt");
+const linkPieno = [...pieno.matchAll(/https?:\/\/[^\s)]+/g)].map((m) => m[0].replace(/[.,;:]+$/, ""));
+ok("llms-full.txt: guide intere, città e giochi",
+  pieno.length > 50000 && pieno.includes("### Domande frequenti") && pieno.includes("Il salvadanaio di Mizi") && pieno.includes("Festa di compleanno per bambini a Milano"),
+  `${Math.round(pieno.length / 1000)} kB`);
+ok("llms-full.txt: link sul dominio", linkPieno.length > 100 && linkPieno.every((l) => new URL(l).origin === dominio), `${linkPieno.length} link`);
+ok("llms.txt rimanda a llms-full.txt", (await testo("/llms.txt")).includes("/llms-full.txt"));
+
 // 5. llms.txt: i link citati stanno sul dominio.
 const llms = await testo("/llms.txt");
 const linkLlms = [...llms.matchAll(/https?:\/\/[^\s)]+/g)].map((m) => m[0])
