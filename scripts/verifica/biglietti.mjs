@@ -63,6 +63,27 @@ const testaFoglio = percorsoFoglio ? readFileSync(percorsoFoglio) : null;
 ok("foglio A4 da 4 copie: PNG 2480×3508",
   testaFoglio && testaFoglio.readUInt32BE(16) === 2480 && testaFoglio.readUInt32BE(20) === 3508);
 
+// Etichette per i sacchettini: senza nomi il bottone è spento; con tre nomi
+// (più una riga vuota da ignorare) il foglio A4 ha tre cartellini, e i nomi
+// degli invitati non finiscono nel link del biglietto.
+const bottoneEtichette = page.getByRole("button", { name: "Scarica le etichette (A4)" });
+ok("etichette: bottone spento senza nomi", await bottoneEtichette.isDisabled());
+await page.getByLabel("Nomi degli invitati (uno per riga)").fill("Martina\n\nLeo\nAurora");
+await page.waitForTimeout(300);
+const quanteEtichette = await page.locator("[data-etichette]").getAttribute("data-etichette");
+const attesaEtichette = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
+await bottoneEtichette.tap();
+const etichette = await attesaEtichette;
+const pngEtichette = etichette ? readFileSync(await etichette.path()) : null;
+ok("etichette: tre cartellini su un PNG A4 2480×3508",
+  quanteEtichette === "3" && pngEtichette && pngEtichette.readUInt32BE(16) === 2480 && pngEtichette.readUInt32BE(20) === 3508,
+  `cartellini ${quanteEtichette}`);
+await page.getByRole("button", { name: /Salva il link|Link copiato/ }).tap();
+await page.waitForTimeout(200);
+const codiceLink = new URL(page.url()).searchParams.get("b") ?? "";
+const nelLink = Buffer.from(decodeURIComponent(codiceLink), "base64").toString("utf8");
+ok("etichette: i nomi degli invitati non vanno nel link", codiceLink.length > 0 && !nelLink.includes("Martina") && !nelLink.includes("Aurora"));
+
 // Nei formati digitali il foglio A4 non ha senso: il bottone sparisce
 await page.getByRole("button", { name: "WhatsApp e storie" }).tap();
 await page.waitForTimeout(300);

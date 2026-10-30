@@ -1868,6 +1868,43 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "bergamo",
+    citta: "Bergamo",
+    aggiornata: "2026-10-30",
+    rispostaBreve: "A Bergamo la festa di compleanno per bambini si fa soprattutto nei parchi giochi al coperto in città e nei locali per famiglie con playground della provincia, mentre per chi vuole muoversi di più ci sono il parco trampolini di via Guzzanica e, a Capriate San Gervasio, Leolandia. Fantabosco accoglie bambini da 1 a 10 anni, e le feste a Leolandia sono pensate dai 3 anni in su con formule fino a 20 partecipanti. Prenotate con almeno due o tre settimane di anticipo, soprattutto se puntate al sabato o alla domenica.",
+    intro: "Bergamo è una città a misura di famiglia, con spazi gioco al coperto a due passi dal centro e tante alternative nei comuni della provincia, dalla Bassa alla zona dei laghi. Che si cerchi un pomeriggio di scivoli e palline per i più piccoli o qualcosa di più movimentato per i grandi, le distanze sono brevi e le opzioni non mancano.",
+    locali: [
+      { nome: "Fantabosco", zona: "Bergamo, via Tadini", tipo: "parco giochi al coperto", descrizione: "Parco giochi al coperto per bambini da 1 a 10 anni: per le feste lo staff si occupa di addobbi, gadget e torte a tema, con tavolo riservato; animazione e intrattenimento si possono aggiungere su richiesta.", sito: "https://www.fantaboscobergamo.com/" },
+      { nome: "Mi gioco la pizza", zona: "Chiuduno (BG)", tipo: "sala feste con playground", descrizione: "Ristorante per famiglie con parco giochi coperto, tra percorso a ostacoli, piscina di palline e un'area dedicata ai bambini da 0 a 6 anni; il parco si può usare durante le feste di compleanno, proposte in diversi pacchetti con animazione dello staff.", sito: "https://www.migiocolapizza.com/" },
+      { nome: "Zero-Gravity Bergamo", zona: "Bergamo, via Guzzanica", tipo: "trampoline park", descrizione: "Parco trampolini con formula festa privata pensata per bambini e ragazzi: comprende assistente dedicato, sala privata, allestimento e accesso alle aree trampolini, con calze antiscivolo per ogni partecipante.", sito: "https://www.zero-gravity.it/" },
+      { nome: "Leolandia", zona: "Capriate San Gervasio (BG)", tipo: "parco divertimenti", descrizione: "Parco divertimenti con pacchetti compleanno per bambini dai 3 anni, che includono torta e tavolo riservato per il taglio; le formule sono pensate per gruppi di diverse dimensioni, fino a 20 partecipanti.", sito: "https://www.leolandia.it/" },
+    ],
+    faq: [
+      { domanda: "Con quanto anticipo conviene prenotare?", risposta: "Almeno due o tre settimane prima, come suggerisce anche Leolandia per i suoi pacchetti; per i weekend e i periodi di festa è meglio muoversi ancora prima, perché sale e fasce orarie sono limitate." },
+      { domanda: "Dove festeggiare con bambini molto piccoli?", risposta: "Meglio un parco giochi al coperto con spazi dedicati ai piccoli: Fantabosco accoglie bambini da 1 a 10 anni e Mi gioco la pizza a Chiuduno ha un'area riservata alla fascia 0–6 anni. Leolandia propone le feste dai 3 anni e invita a contattarla per festeggiati più piccoli." },
+      { domanda: "E per i bambini più grandi o i ragazzi?", risposta: "Un parco trampolini come Zero-Gravity in via Guzzanica, con sala privata e assistente dedicato, o una giornata a Leolandia sono scelte che piacciono anche ai più grandi. Prima di confermare chiedete sempre le condizioni per spostare o annullare la festa." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "trento",
+    citta: "Trento",
+    aggiornata: "2026-10-30",
+    rispostaBreve: "A Trento la festa di compleanno per bambini si fa soprattutto in uno spazio giochi al coperto come Oki Doki a Trento Sud, che ha una sala apposta per le feste, oppure al museo: il MUSE propone cacce al tesoro e misteri scientifici, e il Mart di Rovereto organizza compleanni creativi il sabato per bambini dai 4 ai 12 anni, fino a 25 invitati. Prenotate per tempo: il MUSE chiede almeno tre settimane di anticipo, e anche per gli altri posti il weekend si riempie presto.",
+    intro: "Trento è una città a misura di famiglia, dove la scienza e l'arte sono di casa e si trasformano volentieri in una festa. Tra uno spazio giochi in città e due grandi musei, uno a Trento e uno a Rovereto, c'è la formula giusta sia per i più piccoli sia per chi ama esplorare.",
+    locali: [
+      { nome: "Oki Doki Family Club", zona: "Trento Sud (via Gramsci)", tipo: "parco giochi al coperto", descrizione: "Area divertimento di circa 300 mq per bambini da 1 a 10 anni, con gonfiabili e una sala compleanni: la festa base dura circa tre ore e accoglie in media 30 persone. Organizza anche feste a domicilio, con animazione, giochi di gruppo e trucca bimbi.", sito: "https://www.okidokitrento.it" },
+      { nome: "MUSE – Museo delle Scienze", zona: "Trento (quartiere Le Albere)", tipo: "museo", descrizione: "Compleanni in museo tra animali, dinosauri, stelle e pianeti, con cacce al tesoro, percorsi a tappe e misteri da risolvere, come il «compleanno da detective» per 8–10 anni; per i più piccoli c'è una formula nel Maxi Ooh!, lo spazio sensoriale dedicato a 0–5 anni. Si prenota per telefono con almeno tre settimane di anticipo.", sito: "https://www.muse.it" },
+      { nome: "Mart – Museo di arte moderna e contemporanea", zona: "Rovereto", tipo: "museo", descrizione: "Il «compleanno ad arte» si prenota il sabato per gruppi fino a 25 bambini dai 4 ai 12 anni: due o tre ore di attività ludiche e creative guidate dagli operatori dell'Area educazione. Merenda e addobbi sono a cura delle famiglie.", sito: "https://www.mart.tn.it" },
+    ],
+    faq: [
+      { domanda: "Quali sono i posti più adatti ai bambini piccoli?", risposta: "Per i più piccoli funzionano bene gli spazi pensati per la loro età: Oki Doki accoglie bambini da 1 a 10 anni, e al MUSE c'è una formula di compleanno nel Maxi Ooh!, lo spazio sensoriale dedicato alla fascia 0–5 anni." },
+      { domanda: "Si può festeggiare in un museo?", risposta: "Sì, ed è una delle specialità della zona: il MUSE di Trento propone feste con cacce al tesoro e attività scientifiche, mentre il Mart di Rovereto organizza il sabato compleanni creativi per bambini dai 4 ai 12 anni, fino a 25 invitati." },
+      { domanda: "Con quanto anticipo conviene prenotare?", risposta: "Meglio non aspettare l'ultimo momento: il MUSE chiede almeno tre settimane di anticipo, e per gli spazi giochi conviene muoversi con qualche settimana di anticipo, ancora prima se volete una data precisa nel weekend." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

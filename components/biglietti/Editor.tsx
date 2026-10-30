@@ -7,6 +7,7 @@ import { CATALOGO_STICKER, catalogoPerTema } from "./stickers";
 import { biglietoInPng, datiPerLink, foglioA4, leggiDatiDaLink, linkInvito, numeroWhatsApp } from "@/lib/condivisione";
 import { FORMATI, frasi, misure, temi, TIPI, type FormatoId, type Tipo } from "@/lib/biglietti";
 import { VARIANTI, type Variante } from "./Sfondo";
+import { Etichette, FOGLIO_A4, MAX_ETICHETTE, nomiOspiti } from "./Etichette";
 
 /**
  * Il tool dei biglietti (piano §14.3).
@@ -47,6 +48,10 @@ export function Editor() {
   const [dati, setDati] = useState<DatiBiglietto>(VUOTO);
   const [formato, setFormato] = useState<FormatoId>("a6");
   const [copiato, setCopiato] = useState(false);
+  // I nomi degli invitati per le etichette: restano qui, mai nel link.
+  const [ospiti, setOspiti] = useState("");
+  const foglioEtichette = useRef<HTMLDivElement>(null);
+  const nomi = useMemo(() => nomiOspiti(ospiti), [ospiti]);
   const contenitore = useRef<HTMLDivElement>(null);
   const trascinato = useRef<number | null>(null);
 
@@ -182,6 +187,16 @@ export function Editor() {
     link.href = png;
     link.click();
   }, [altezza, larghezza, dati.nome, dati.tipo]);
+
+  const scaricaEtichette = useCallback(async () => {
+    const svg = foglioEtichette.current?.querySelector("svg");
+    if (!svg) return;
+    const png = await biglietoInPng(svg, FOGLIO_A4.larghezza, FOGLIO_A4.altezza);
+    const link = document.createElement("a");
+    link.download = `etichette-${dati.nome || "festa"}.png`.toLowerCase().replace(/\s+/g, "-");
+    link.href = png;
+    link.click();
+  }, [dati.nome]);
 
   const salvaNelLink = useCallback(() => {
     const codificato = datiPerLink(dati);
@@ -507,6 +522,41 @@ export function Editor() {
             />
             Metti Mizi nell&apos;angolo
           </label>
+        </Gruppo>
+
+        <Gruppo titolo="7. Etichette per i sacchettini">
+          <p className="text-sm text-notte-tenue">
+            Un foglio A4 con un cartellino &quot;Grazie&quot; per ogni invitato, nello stesso
+            tema del biglietto: stampa, ritaglia sul tratteggio e lega al sacchetto.
+          </p>
+          <label className="flex flex-col gap-1">
+            <span className="font-bold text-notte">Nomi degli invitati (uno per riga)</span>
+            <textarea
+              value={ospiti}
+              onChange={(e) => setOspiti(e.target.value)}
+              rows={5}
+              placeholder={"Martina\nLeo\nAurora"}
+              className="rounded-morbido border-2 border-crema-scuro px-4 py-3 text-lg text-notte"
+            />
+          </label>
+          <p className="text-sm text-notte-tenue">
+            {nomi.length}/{MAX_ETICHETTE} etichette. I nomi restano sul tuo dispositivo: non
+            finiscono nel link del biglietto.
+          </p>
+          <button
+            type="button"
+            onClick={scaricaEtichette}
+            disabled={nomi.length === 0}
+            className="rounded-bolla bg-viola px-5 py-4 font-extrabold text-white disabled:opacity-50"
+          >
+            Scarica le etichette (A4)
+          </button>
+          {/* Il foglio vero, fuori dallo schermo: serve solo per generare il PNG. */}
+          <div ref={foglioEtichette} aria-hidden className="hidden">
+            {nomi.length > 0 && (
+              <Etichette nomi={nomi} tema={dati.tema} variante={dati.variante} festeggiato={dati.nome} />
+            )}
+          </div>
         </Gruppo>
       </div>
     </div>
