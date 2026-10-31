@@ -77,10 +77,11 @@ export function FormGenitore({
   if (stato.tipo === "fatto") {
     return (
       <div className="rounded-morbido border-2 border-verde bg-white p-6">
-        <p className="text-lg font-bold text-notte">Fatto, grazie.</p>
+        <p className="text-lg font-bold text-notte">Quasi fatto: controlla la tua email.</p>
         <p className="mt-2 text-notte-tenue">
-          Ti scriveremo solo quando c&apos;è qualcosa di nuovo che vale la pena
-          guardare. Puoi cancellarti da ogni email con un clic.
+          Ti abbiamo mandato un messaggio con il bottone «Confermo l&apos;iscrizione»:
+          finché non lo tocchi non ti scriviamo nulla. Se non lo trovi, guarda nella
+          posta indesiderata.
         </p>
         {onChiudi && (
           <button

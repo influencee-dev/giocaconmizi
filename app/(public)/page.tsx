@@ -82,7 +82,7 @@ export default function Home() {
     { domanda: "I giochi funzionano sul telefono?", risposta: "Sì, su telefono, tablet, computer e LIM, direttamente dal browser: non c'è nessuna app da installare." },
     { domanda: "Come funziona l'invito di compleanno?", risposta: "Scegli il tema, scrivi nome, età, data e luogo, e lo mandi su WhatsApp o lo stampi. Gli invitati confermano con un tocco o inquadrando il QR." },
     { domanda: "Dove festeggiare un compleanno per bambini nella mia città?", risposta: `Nelle pagine Feste trovi ludoteche, parchi giochi al coperto, musei e sale feste di ${citta} città italiane, verificati uno per uno con il link al sito ufficiale.` },
-    { domanda: "Chi c'è dietro Giocamizi?", risposta: "Giorgia Palazzo, mamma di Domiziana: è un progetto personale senza scopo di lucro. Mizi, la pinguina, porta un pezzetto del nome di sua figlia." },
+    { domanda: "Chi c'è dietro Giocamizi?", risposta: "Giorgia Palazzo, mamma di Domiziana e founder di Influencee, che l'ha ideato; il sito è gestito da Partidea SRL. Mizi, la pinguina, porta un pezzetto del nome di sua figlia." },
   ];
 
   const ALTRO = [
@@ -103,6 +103,12 @@ export default function Home() {
           url: url("/"),
           description: "Giochi educativi, storie, inviti di compleanno e guide per genitori di bambini dai 3 ai 12 anni: gratis e senza pubblicità.",
           founder: { "@type": "Person", name: "Giorgia Palazzo", url: url("/chi-siamo") },
+          parentOrganization: {
+            "@type": "Organization",
+            name: "Partidea SRL",
+            vatID: "IT04405500408",
+            address: { "@type": "PostalAddress", streetAddress: "Via Antonio Beltramelli 13", postalCode: "47923", addressLocality: "Rimini", addressCountry: "IT" },
+          },
           knowsAbout: ["giochi educativi per bambini", "feste di compleanno per bambini", "apprendimento attraverso il gioco"],
         }}
       />

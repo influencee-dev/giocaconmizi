@@ -6,6 +6,7 @@ import { BannerCookie } from "@/components/legal/BannerCookie";
 import { MiziIntero } from "@/components/illustrazioni";
 import { Freccia } from "@/components/vetrina";
 import { immagineMizi } from "@/lib/immagini";
+import { SOCIETA } from "@/lib/legal";
 
 const MENU = [
   { href: "/giochi", nome: "Giochi" },
@@ -165,7 +166,8 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         </div>
         <div className="border-t border-notte/10">
           <p className="mx-auto max-w-6xl px-4 py-5 text-sm text-notte-tenue sm:px-8">
-            © 2026 Giocamizi · Gioca con Mizi, un progetto di Giorgia Palazzo · Icone:{" "}
+            © 2026 Giocamizi, un&apos;idea di Giorgia Palazzo · Gestito da {SOCIETA.ragioneSociale}, {SOCIETA.sede} · P.IVA{" "}
+            {SOCIETA.piva} · REA {SOCIETA.rea} · Capitale sociale {SOCIETA.capitale} · Icone:{" "}
             <a href="https://github.com/microsoft/fluentui-emoji" target="_blank" rel="noopener" className="underline underline-offset-2 hover:text-viola">
               Fluent Emoji
             </a>{" "}

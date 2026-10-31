@@ -10,10 +10,18 @@
  * di consenso preventivo: al momento non c'è perché non serve.
  */
 
+/** Dati societari del gestore (D.Lgs. 70/2003 art. 7, art. 2250 c.c.). */
+export const SOCIETA = {
+  ragioneSociale: "Partidea SRL",
+  sede: "Via Antonio Beltramelli 13, 47923 Rimini (RN)",
+  piva: "04405500408",
+  rea: "RN-411743",
+  capitale: "€ 1.000",
+} as const;
+
 export const TITOLARE = {
-  nome: "Giorgia Palazzo",
-  ruolo:
-    "privata cittadina: questo sito è un progetto personale, senza scopo di lucro, nato per sua figlia e aperto a tutti i bambini",
+  nome: "Partidea SRL",
+  ruolo: `con sede in ${SOCIETA.sede}, P.IVA ${SOCIETA.piva}. Giocamizi è un'idea di Giorgia Palazzo, founder di Partidea e Influencee e mamma di Domiziana, da cui viene il nome di Mizi`,
   // NOTA: casella da attivare sul dominio giocamizi.it (comprato il 24/10/2026).
   email: "ciao@giocamizi.it",
 } as const;

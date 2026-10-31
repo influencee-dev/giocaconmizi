@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Contenitore } from "@/components/ui";
-import { AGGIORNATA, TITOLARE } from "@/lib/legal";
+import { AGGIORNATA, SOCIETA, TITOLARE } from "@/lib/legal";
 
 export const metadata: Metadata = {
   title: "Note legali",
@@ -33,10 +33,13 @@ export default function NoteLegaliPage() {
 
       <Sezione titolo="Chi gestisce il sito">
         <p>
-          Giocamizi (giocamizi.it), chiamato anche Gioca con Mizi, è gestito da {TITOLARE.nome},{" "}
-          {TITOLARE.ruolo}. Il sito non vende nulla, non ospita pubblicità e non ha accordi
-          commerciali con le attività citate. Contatto unico per ogni comunicazione, anche da
-          parte delle autorità: <Email />.
+          Giocamizi (giocamizi.it), chiamato anche Gioca con Mizi, è gestito da{" "}
+          {SOCIETA.ragioneSociale}, sede legale {SOCIETA.sede}, P.IVA e codice fiscale{" "}
+          {SOCIETA.piva}, iscritta al Registro delle imprese della Romagna (REA {SOCIETA.rea}),
+          capitale sociale {SOCIETA.capitale}. Il sito è un&apos;idea di Giorgia Palazzo, founder
+          di Partidea e Influencee e mamma di Domiziana. I contenuti sono gratuiti, il sito non
+          ospita pubblicità e non ha accordi commerciali con le attività citate. Contatto unico
+          per ogni comunicazione, anche da parte delle autorità: <Email />.
         </p>
         <p>
           Come trattiamo i dati personali è spiegato nella{" "}

@@ -78,7 +78,11 @@ export default function PrivacyPage() {
           iscrivi salviamo l&apos;email e i campi facoltativi che scegli di darci (nome,
           città, professione, età del bambino). Base giuridica: il tuo consenso
           (art. 6.1.a), che non è mai pre-spuntato e puoi revocare quando vuoi con il link
-          in fondo a ogni email.
+          in fondo a ogni email. L&apos;iscrizione funziona con il doppio opt-in: ti mandiamo
+          un&apos;email di conferma e ti scriviamo solo dopo il tuo clic. Insieme al contatto
+          conserviamo la data e la fonte del consenso, come prova (art. 7 GDPR). Le email
+          partono da Brevo, che ne misura aperture e clic per farci capire quali
+          contenuti interessano; non usiamo questi dati per altro.
         </p>
         <p>
           <strong className="text-notte">4. Statistiche (solo col tuo consenso).</strong>{" "}

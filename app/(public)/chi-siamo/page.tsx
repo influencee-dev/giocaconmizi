@@ -31,7 +31,7 @@ const REGOLE: [Tono, string][] = [
 ];
 
 const FAQ = [
-  { domanda: "Chi ha creato Giocamizi?", risposta: "Giorgia Palazzo, mamma di Domiziana. È un progetto personale, non un'azienda, nato perché la figlia non voleva fare i compiti." },
+  { domanda: "Chi ha creato Giocamizi?", risposta: "Giorgia Palazzo, mamma di Domiziana. Giocamizi è nato perché la figlia non voleva fare i compiti. Il sito è gestito da Partidea SRL, la società di cui Giorgia è founder." },
   { domanda: "Chi è Mizi?", risposta: "Una piccola pinguina con i capelli di Domiziana: il suo nome è un pezzetto del nome della bambina. Nei giochi spiega a voce cosa fare e non sgrida mai." },
   { domanda: "Come posso proporre un'idea o segnalare un errore?", risposta: "Scrivendo a ciao@giocamizi.it: le segnalazioni dei genitori e delle maestre sono la fonte principale dei giochi nuovi." },
 ];
@@ -57,8 +57,9 @@ export default function ChiSiamoPage() {
       </TestataPagina>
 
       <InBreve className="mx-auto max-w-4xl">
-        Giocamizi è un progetto personale di Giorgia Palazzo, nato per la figlia Domiziana. Mizi, la pinguina dei
-        giochi, porta un pezzetto del suo nome. Il sito è gratis, senza pubblicità e senza scopo di lucro.
+        Giocamizi è un&apos;idea di Giorgia Palazzo, founder di Influencee, nata per la figlia Domiziana: Mizi, la
+        pinguina dei giochi, porta un pezzetto del suo nome. Il sito è gestito da Partidea SRL ed è gratis e senza
+        pubblicità.
       </InBreve>
 
       <div className="mx-auto mt-12 flex max-w-5xl flex-col items-start gap-8 md:flex-row">
@@ -100,8 +101,8 @@ export default function ChiSiamoPage() {
             spiega a voce, non mette fretta e non sgrida mai.
           </p>
           <p>
-            Non voglio guadagnare da questo sito e non sono una marketer: sono
-            una mamma che ha voglia di aiutare le altre mamme. Il mio impegno è
+            Nella vita ho fondato Influencee, un&apos;agenzia di comunicazione, ma
+            qui faccio la mamma che ha voglia di aiutare le altre mamme. Il mio impegno è
             migliorarlo un pezzo alla volta e riempirlo di cose{" "}
             <em>davvero utili e credibili</em> — quelle che arrivano segnalate
             direttamente da voi.
@@ -135,8 +136,7 @@ export default function ChiSiamoPage() {
         <h2 className="text-3xl font-black tracking-tight text-notte">Quanto costa</h2>
         <p className="mt-3 text-lg text-notte-tenue">
           Niente. I giochi sono gratis, senza pubblicità e senza acquisti
-          nascosti, e resteranno così: questo è un progetto personale, non
-          un&apos;azienda. Se vuoi restare aggiornata sulle novità c&apos;è solo
+          nascosti, e resteranno così. Se vuoi restare aggiornata sulle novità c&apos;è solo
           una newsletter facoltativa, e i tuoi dati restano tuoi (
           <Link href="/privacy" className="font-bold text-viola underline underline-offset-4">
             come li trattiamo
