@@ -34,7 +34,7 @@ export function ListingFiltrato({ schede, nome }: { schede: DatiCard[]; nome: st
   return (
     <div className="lg:grid lg:grid-cols-[17.5rem_minmax(0,1fr)] lg:items-start lg:gap-8">
       {/* Desktop: filtri a sinistra */}
-      <aside className="hidden rounded-morbido border-2 border-crema-scuro bg-white p-5 lg:sticky lg:top-24 lg:block">
+      <aside className="hidden rounded-[1.4rem] border border-notte/10 bg-white p-5 lg:sticky lg:top-24 lg:block">
         <div className="flex items-center justify-between">
           <span className="text-lg font-extrabold text-notte">Filtri</span>
           <button type="button" onClick={azzera} className="text-sm font-bold text-viola">

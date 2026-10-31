@@ -149,7 +149,7 @@ export function CatalogoGiochi({ giochi }: { giochi: GiocoInCatalogo[] }) {
           {filtrati.length > 0 ? (
             <GrigliaCompatta giochi={filtrati} />
           ) : (
-            <p className="rounded-morbido border-2 border-crema-scuro bg-white p-5 text-notte-tenue">
+            <p className="rounded-[1.4rem] border border-notte/10 bg-white p-5 text-notte-tenue">
               Con questi filtri non c&apos;è ancora nessun gioco: prova a
               togliere la competenza o a cambiare fascia d&apos;età.
             </p>

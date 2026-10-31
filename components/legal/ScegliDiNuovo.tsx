@@ -16,7 +16,7 @@ export function ScegliDiNuovo() {
   }, []);
 
   return (
-    <div className="rounded-morbido border-2 border-crema-scuro bg-white p-5">
+    <div className="rounded-[1.4rem] border border-notte/10 bg-white p-5">
       <p className="font-extrabold text-notte">La tua scelta sulle statistiche</p>
       <p className="mt-1 text-notte-tenue">
         {scelta === "si" && "Hai accettato le statistiche anonime."}

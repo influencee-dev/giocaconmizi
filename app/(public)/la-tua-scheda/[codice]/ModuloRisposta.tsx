@@ -79,7 +79,7 @@ export function ModuloRisposta({ codice, valori, nome }: { codice: string; valor
             const dati = new FormData(e.currentTarget);
             avvia(() => invia(dati));
           }}
-          className="flex flex-col gap-4 rounded-morbido border-2 border-crema-scuro bg-white p-5"
+          className="flex flex-col gap-4 rounded-[1.4rem] border border-notte/10 bg-white p-5"
         >
           <input type="hidden" name="codice" value={codice} />
           <input type="hidden" name="tipo" value={scelta} />
@@ -133,7 +133,7 @@ export function ModuloRisposta({ codice, valori, nome }: { codice: string; valor
             <p role="alert" className="rounded-xl bg-rosso/10 px-4 py-3 text-sm font-bold text-rosso">{esito.messaggio}</p>
           )}
 
-          <button type="submit" disabled={inCorso} className="self-start rounded-bolla bg-rosa px-6 py-3 font-extrabold text-white disabled:opacity-60">
+          <button type="submit" disabled={inCorso} className="self-start rounded-2xl bg-viola px-6 py-3 font-extrabold text-white disabled:opacity-60">
             {inCorso ? "Invio…" : scelta === "rimuovi" ? "Toglietela dal sito" : scelta === "approva" ? "Approvo la scheda" : "Invia le modifiche"}
           </button>
         </form>

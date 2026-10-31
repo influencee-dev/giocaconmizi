@@ -1,3 +1,5 @@
+import { TestataPagina } from "@/components/vetrina";
+import { ScenaBiglietti } from "@/components/illustrazioni";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CITTA_FESTE } from "@/lib/feste";
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function FestePage() {
   return (
-    <Contenitore className="py-10">
+    <Contenitore largo className="pb-10 pt-8">
       <JsonLd data={jsonLdBreadcrumb([{ nome: "Feste", percorso: "/feste" }])} />
       <JsonLd
         data={jsonLdElenco(
@@ -26,15 +28,17 @@ export default function FestePage() {
         )}
       />
 
-      <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
-        Feste di compleanno per bambini, città per città
-      </h1>
-      <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
-        Le location di cui le famiglie parlano davvero — ludoteche, sale feste,
-        parchi gioco — raccolte zona per zona, senza accordi commerciali. E
-        quando hai scelto il posto, l&apos;invito lo fai gratis qui, con la
-        conferma WhatsApp a un tocco.
-      </p>
+      <TestataPagina occhiello="Compleanni città per città" tono="rosa" foto="F-01" ripiego={<ScenaBiglietti />}>
+        <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
+          Feste di compleanno per bambini, città per città
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
+          Le location di cui le famiglie parlano davvero — ludoteche, sale feste,
+          parchi gioco — raccolte zona per zona, senza accordi commerciali. E
+          quando hai scelto il posto, l&apos;invito lo fai gratis qui, con la
+          conferma WhatsApp a un tocco.
+        </p>
+      </TestataPagina>
 
       <section className="mt-8">
         <TitoloSezione>Cerca per tipo di posto</TitoloSezione>
@@ -59,7 +63,7 @@ export default function FestePage() {
               key={c.slug}
               href={`/feste/${c.slug}`}
               data-tap
-              className="flex flex-col gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-5 transition-colors hover:border-viola"
+              className="flex flex-col gap-2 rounded-[1.4rem] border border-notte/10 bg-white p-5 transition-colors hover:border-viola"
             >
               <span className="text-xl font-extrabold text-notte">{c.citta}</span>
               <span className="text-sm text-notte-tenue">
@@ -86,7 +90,7 @@ export default function FestePage() {
         <Link
           href="/biglietti/crea"
           data-tap
-          className="rounded-bolla bg-rosa px-6 py-4 font-extrabold text-white"
+          className="rounded-2xl bg-viola px-6 py-4 font-extrabold text-white"
         >
           Crea l&apos;invito
         </Link>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { Freccia } from "@/components/vetrina/freccia";
 
 /**
  * Contenitore centrato. `largo` (vetrina, header, footer) occupa quasi tutta
@@ -24,11 +25,11 @@ export function Contenitore({
 }
 
 const varianti = {
-  rosa: "bg-rosa text-white hover:bg-rosa/90",
-  azzurro: "bg-azzurro text-white hover:bg-azzurro/90",
-  viola: "bg-viola text-white hover:bg-viola/90",
-  giallo: "bg-giallo text-notte hover:bg-giallo/90",
-  chiaro: "bg-white text-notte border-2 border-crema-scuro hover:border-viola",
+  rosa: "bg-viola text-white hover:bg-notte",
+  azzurro: "bg-notte text-white hover:bg-viola",
+  viola: "bg-viola text-white hover:bg-notte",
+  giallo: "bg-giallo text-notte hover:bg-arancione hover:text-white",
+  chiaro: "bg-white text-notte border-2 border-notte/12 hover:border-viola",
 } as const;
 
 export type VarianteBottone = keyof typeof varianti;
@@ -49,9 +50,10 @@ export function BottoneLink({
     <Link
       href={href}
       data-tap
-      className={`inline-flex items-center justify-center gap-2 rounded-bolla px-6 py-4 text-lg font-bold transition-colors ${varianti[variante]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2.5 rounded-2xl px-6 py-4 text-lg font-extrabold transition-colors ${varianti[variante]} ${className}`}
     >
       {children}
+      <Freccia />
     </Link>
   );
 }
@@ -59,7 +61,7 @@ export function BottoneLink({
 /** Titolo di sezione con la stessa impaginazione ovunque. */
 export function TitoloSezione({ children }: { children: ReactNode }) {
   return (
-    <h2 className="mb-4 text-2xl font-extrabold text-notte sm:text-3xl">
+    <h2 className="mb-5 text-[1.75rem] font-black leading-tight tracking-tight text-notte sm:text-4xl">
       {children}
     </h2>
   );
@@ -95,15 +97,15 @@ export function CardGioco({
       <Link
         href={`/giochi/${slug}`}
         data-tap
-        className="flex flex-col gap-1 overflow-hidden rounded-morbido border-2 border-crema-scuro bg-white p-3 transition-colors hover:border-viola"
+        className="flex flex-col gap-1 overflow-hidden rounded-[1.3rem] border-2 border-azzurro/40 bg-[#E2F2FB] p-2 transition-transform hover:-translate-y-0.5 hover:border-viola"
       >
         {illustrazione && (
-          <span aria-hidden className="-mx-3 -mt-3 mb-1 flex h-16 items-center justify-center bg-crema p-1.5">
+          <span aria-hidden className="mb-1 flex h-16 items-center justify-center rounded-[0.9rem] bg-white p-1.5">
             {illustrazione}
           </span>
         )}
-        <span className="text-base font-extrabold leading-tight text-notte">{titolo}</span>
-        <span className="mt-auto pt-1 text-xs font-bold text-viola">
+        <span className="px-1 text-base font-extrabold leading-tight text-notte">{titolo}</span>
+        <span className="mt-auto px-1 pb-1 pt-1 text-xs font-bold text-notte-tenue">
           {eta} anni · {minuti} min
         </span>
       </Link>
@@ -113,17 +115,22 @@ export function CardGioco({
     <Link
       href={`/giochi/${slug}`}
       data-tap
-      className="flex flex-col gap-2 overflow-hidden rounded-morbido border-2 border-crema-scuro bg-white p-5 transition-colors hover:border-viola"
+      className="group flex flex-col gap-2 overflow-hidden rounded-[1.6rem] border-2 border-azzurro/40 bg-[#E2F2FB] p-2.5 transition-transform hover:-translate-y-1 hover:border-viola"
     >
       {illustrazione && (
-        <span aria-hidden className="-mx-5 -mt-5 mb-1 flex h-24 items-center justify-center bg-crema p-2">
+        <span aria-hidden className="mb-1 flex h-28 items-center justify-center rounded-[1.1rem] bg-white p-2">
           {illustrazione}
         </span>
       )}
-      <span className="text-xl font-extrabold text-notte">{titolo}</span>
-      <span className="text-notte-tenue">{descrizione}</span>
-      <span className="mt-auto pt-2 text-sm font-bold text-viola">
-        {eta} anni · {minuti} minuti
+      <span className="px-2 pt-1 text-xl font-extrabold leading-tight text-notte">{titolo}</span>
+      <span className="px-2 text-[15px] text-notte-tenue">{descrizione}</span>
+      <span className="mt-auto flex items-center justify-between gap-2 px-2 pb-1 pt-3">
+        <span className="rounded-lg border border-notte/15 bg-white px-2.5 py-1 text-xs font-bold text-notte">
+          {eta} anni · {minuti} min
+        </span>
+        <span className="rounded-xl bg-notte px-3.5 py-2 text-sm font-extrabold text-white transition-colors group-hover:bg-viola">
+          Gioca
+        </span>
       </span>
     </Link>
   );
@@ -138,9 +145,9 @@ export function Faq({ voci }: { voci: { domanda: string; risposta: string }[] })
         {voci.map((voce) => (
           <div
             key={voce.domanda}
-            className="rounded-morbido border-2 border-crema-scuro bg-white p-5"
+            className="rounded-[1.2rem] border border-notte/10 bg-white p-5"
           >
-            <dt className="font-extrabold text-notte">{voce.domanda}</dt>
+            <dt className="text-lg font-extrabold text-notte">{voce.domanda}</dt>
             <dd className="mt-1 text-notte-tenue">{voce.risposta}</dd>
           </div>
         ))}

@@ -39,7 +39,7 @@ export function CtaAttivita() {
           La scheda è gratuita: presto potrai reclamarla, aggiungere foto, orari e pacchetti festa.
         </p>
       </div>
-      <Link href="/chi-siamo" className="shrink-0 rounded-bolla bg-rosa px-5 py-3 text-center font-extrabold text-white">
+      <Link href="/chi-siamo" className="shrink-0 rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
         Scrivici
       </Link>
     </section>

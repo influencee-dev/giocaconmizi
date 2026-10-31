@@ -132,7 +132,7 @@ export default async function GuidaPage({
               key={g.slug}
               href={`/guide/${g.slug}`}
               data-tap
-              className="flex flex-col gap-1 rounded-morbido border-2 border-crema-scuro bg-white p-4 transition-colors hover:border-viola"
+              className="flex flex-col gap-1 rounded-[1.4rem] border border-notte/10 bg-white p-4 transition-colors hover:border-viola"
             >
               <span className="font-extrabold text-notte">{g.titolo}</span>
               <span className="mt-auto pt-1 text-sm font-bold text-viola">
@@ -150,7 +150,7 @@ export default async function GuidaPage({
         <Link
           href="/guide"
           data-tap
-          className="rounded-bolla bg-rosa px-6 py-4 font-extrabold text-white"
+          className="rounded-2xl bg-viola px-6 py-4 font-extrabold text-white"
         >
           Tutte le guide
         </Link>

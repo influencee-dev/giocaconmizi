@@ -92,7 +92,7 @@ export function FormGenitore({
   }
 
   return (
-    <form onSubmit={invia} className="flex flex-col gap-4 rounded-morbido border-2 border-crema-scuro bg-white p-6">
+    <form onSubmit={invia} className="flex flex-col gap-4 rounded-[1.4rem] border border-notte/10 bg-white p-6">
       <div>
         <p className="text-xl font-extrabold text-notte">{titolo}</p>
         <p className="mt-1 text-notte-tenue">{sottotitolo}</p>
@@ -130,7 +130,7 @@ export function FormGenitore({
             <select
               value={etaFiglio}
               onChange={(e) => setEtaFiglio(e.target.value)}
-              className="rounded-morbido border-2 border-crema-scuro bg-white px-4 py-3 text-lg text-notte"
+              className="rounded-[1.4rem] border border-notte/10 bg-white px-4 py-3 text-lg text-notte"
               style={{ minHeight: "3.25rem" }}
             >
               <option value="">Preferisco non dirlo</option>
@@ -178,7 +178,7 @@ export function FormGenitore({
         <button
           type="submit"
           disabled={stato.tipo === "invio"}
-          className="rounded-bolla bg-rosa px-8 py-4 text-lg font-extrabold text-white disabled:opacity-60"
+          className="rounded-2xl bg-viola px-8 py-4 text-lg font-extrabold text-white disabled:opacity-60"
         >
           {stato.tipo === "invio" ? "Un attimo…" : "Va bene"}
         </button>

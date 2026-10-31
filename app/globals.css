@@ -176,3 +176,23 @@ a[role="button"],
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
+
+/* Testata delle pagine interne (components/vetrina TestataPagina): l'H1 e
+   l'introduzione della pagina prendono il carattere del template vetrina. */
+.testata h1 {
+  font-size: 2.1rem;
+  font-weight: 900;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.testata > p {
+  margin-top: 0;
+  font-size: 1.08rem;
+}
+@media (min-width: 640px) {
+  .testata h1 { font-size: 2.9rem; }
+}
+@media (min-width: 1024px) {
+  .testata h1 { font-size: 3.3rem; }
+}

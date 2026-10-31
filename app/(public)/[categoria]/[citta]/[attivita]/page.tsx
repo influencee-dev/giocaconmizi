@@ -46,7 +46,7 @@ const wa = (t: string) => {
 
 function Contatti({ sito, instagram, extra }: { sito?: string; instagram?: string; extra: DatiModifica }) {
   return (
-    <div className="flex flex-col gap-3 rounded-morbido border-2 border-crema-scuro bg-white p-5 shadow-[0_10px_30px_rgba(31,36,48,0.08)]">
+    <div className="flex flex-col gap-3 rounded-[1.4rem] border border-notte/10 bg-white p-5 shadow-[0_10px_30px_rgba(31,36,48,0.08)]">
       <p className="text-xl font-extrabold text-notte">Contatta l&apos;attività</p>
       <p className="text-sm font-semibold text-notte-tenue">
         Prezzi, disponibilità e pacchetti festa si chiedono direttamente al locale: noi non prendiamo commissioni.
@@ -62,7 +62,7 @@ function Contatti({ sito, instagram, extra }: { sito?: string; instagram?: strin
         </a>
       )}
       {sito && (
-        <a href={sito} target="_blank" rel="nofollow noopener" className="rounded-bolla bg-rosa px-5 py-3 text-center font-extrabold text-white">
+        <a href={sito} target="_blank" rel="nofollow noopener" className="rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
           Vai al sito ufficiale
         </a>
       )}
@@ -175,7 +175,7 @@ export default async function SchedaPage({ params }: P) {
               <section className="grid gap-4 sm:grid-cols-2">
                 {[["Orari", s.extra.orari], ["Pacchetti festa", s.extra.pacchetti]].map(([t, v]) =>
                   v ? (
-                    <div key={t} className="rounded-morbido border-2 border-crema-scuro bg-white p-5">
+                    <div key={t} className="rounded-[1.4rem] border border-notte/10 bg-white p-5">
                       <p className="text-lg font-extrabold text-notte">{t}</p>
                       <p className="mt-2 whitespace-pre-line text-notte-tenue">{v}</p>
                     </div>
@@ -219,11 +219,11 @@ export default async function SchedaPage({ params }: P) {
       {/* Telefono e tablet: l'azione principale sempre a portata di pollice. */}
       <div className="fixed inset-x-0 bottom-0 z-20 border-t-2 border-crema-scuro bg-white px-4 py-3 lg:hidden">
         {s.sito ? (
-          <a href={s.sito} target="_blank" rel="nofollow noopener" className="block rounded-bolla bg-rosa px-5 py-3 text-center font-extrabold text-white">
+          <a href={s.sito} target="_blank" rel="nofollow noopener" className="block rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
             Vai al sito ufficiale
           </a>
         ) : (
-          <Link href="/biglietti/crea" className="block rounded-bolla bg-rosa px-5 py-3 text-center font-extrabold text-white">
+          <Link href="/biglietti/crea" className="block rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
             Prepara l&apos;invito, gratis
           </Link>
         )}

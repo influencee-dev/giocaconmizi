@@ -1,3 +1,4 @@
+import { TestataPagina } from "@/components/vetrina";
 import type { Metadata } from "next";
 import { Contenitore, TitoloSezione } from "@/components/ui";
 import { FacciaMizi } from "@/games/_engine/arte";
@@ -25,20 +26,22 @@ const corpo = encodeURIComponent(
 
 export default function PerLeMammePage() {
   return (
-    <Contenitore className="py-10">
-      <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
-        La rete delle mamme
-      </h1>
-      <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
-        Gioca con Mizi è fatto da una mamma, e questo è lo spazio delle altre:
-        associazioni, community locali, gruppi d&apos;ascolto e locali dove i
-        bambini sono davvero benvenuti. L&apos;inserimento è{" "}
-        <strong className="text-notte">gratuito</strong>: non è pubblicità a
-        pagamento, e ogni realtà viene verificata una per una prima di entrare.
-      </p>
+    <Contenitore largo className="pb-10 pt-8">
+      <TestataPagina occhiello="Gratis e verificato" tono="arancione" foto="I-05">
+        <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
+          La rete delle mamme
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
+          Gioca con Mizi è fatto da una mamma, e questo è lo spazio delle altre:
+          associazioni, community locali, gruppi d&apos;ascolto e locali dove i
+          bambini sono davvero benvenuti. L&apos;inserimento è{" "}
+          <strong className="text-notte">gratuito</strong>: non è pubblicità a
+          pagamento, e ogni realtà viene verificata una per una prima di entrare.
+        </p>
+      </TestataPagina>
 
       {/* Invito a farsi inserire */}
-      <div className="mt-6 flex items-start gap-4 rounded-morbido border-2 border-crema-scuro bg-white p-5">
+      <div className="mt-6 flex items-start gap-4 rounded-[1.4rem] border border-notte/10 bg-white p-5">
         <span className="h-14 w-14 shrink-0" aria-hidden>
           <FacciaMizi emozione="felice" />
         </span>
@@ -52,7 +55,7 @@ export default function PerLeMammePage() {
           <a
             href={`mailto:${TITOLARE.email}?subject=${oggetto}&body=${corpo}`}
             data-tap
-            className="mt-1 inline-flex w-fit items-center justify-center rounded-bolla bg-rosa px-6 py-3 font-extrabold text-white"
+            className="mt-1 inline-flex w-fit items-center justify-center rounded-2xl bg-viola px-6 py-3 font-extrabold text-white"
           >
             Scrivi a Giorgia
           </a>
@@ -87,7 +90,7 @@ export default function PerLeMammePage() {
                 {voci.map((v) => (
                   <div
                     key={v.nome}
-                    className="flex flex-col gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-5"
+                    className="flex flex-col gap-2 rounded-[1.4rem] border border-notte/10 bg-white p-5"
                   >
                     <p className="text-xl font-extrabold text-notte">{v.nome}</p>
                     <p className="text-sm font-bold text-viola">{v.dove}</p>

@@ -1,3 +1,4 @@
+import { TestataPagina } from "@/components/vetrina";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { games } from "@/games/registry";
@@ -15,16 +16,18 @@ export default function PerInsegnantiPage() {
   const perCompetenza = [...new Set(games.map((g) => g.skill))].sort();
 
   return (
-    <Contenitore className="py-10">
-      <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
-        Per insegnanti
-      </h1>
+    <Contenitore largo className="pb-10 pt-8">
+      <TestataPagina occhiello="Per la classe e la LIM" tono="verde" foto="I-04">
+        <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
+          Per insegnanti
+        </h1>
 
-      <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
-        I giochi si aprono con un link, senza registrazione e senza pubblicità.
-        Funzionano sulla LIM, sui tablet della classe e sui telefoni. Nessun
-        timer: nessun bambino resta indietro davanti a tutti.
-      </p>
+        <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
+          I giochi si aprono con un link, senza registrazione e senza pubblicità.
+          Funzionano sulla LIM, sui tablet della classe e sui telefoni. Nessun
+          timer: nessun bambino resta indietro davanti a tutti.
+        </p>
+      </TestataPagina>
 
       <section className="mt-10">
         <TitoloSezione>Per competenza</TitoloSezione>

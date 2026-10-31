@@ -62,7 +62,7 @@ export function BannerCookie() {
           <button
             type="button"
             onClick={() => scegli("si")}
-            className="rounded-bolla bg-rosa px-4 py-2 text-sm font-extrabold text-white"
+            className="rounded-2xl bg-viola px-4 py-2 text-sm font-extrabold text-white"
             style={{ minHeight: "2.75rem" }}
           >
             Accetta

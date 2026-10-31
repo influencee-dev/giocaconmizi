@@ -31,7 +31,7 @@ export function ReelInstagram({ url, nome }: { url: string; nome: string }) {
     <iframe
       src={incorporo}
       title={`Reel Instagram di ${nome}`}
-      className="aspect-[9/16] w-full max-w-xs rounded-morbido border-2 border-crema-scuro bg-white"
+      className="aspect-[9/16] w-full max-w-xs rounded-[1.4rem] border border-notte/10 bg-white"
       loading="lazy"
       allowFullScreen
     />

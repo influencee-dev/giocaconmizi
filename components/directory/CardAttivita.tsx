@@ -8,7 +8,7 @@ export function CardAttivita({ s }: { s: DatiCard }) {
     <Link
       href={s.href}
       data-tap
-      className="flex flex-col overflow-hidden rounded-morbido border-2 border-crema-scuro bg-white transition-colors hover:border-viola"
+      className="flex flex-col overflow-hidden rounded-[1.4rem] border border-notte/10 bg-white transition-colors hover:border-viola"
     >
       <div className="relative">
         <Illustrazione colore={s.colore} icona={s.icona} />

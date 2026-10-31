@@ -69,7 +69,7 @@ export default async function EsempioPage({ params }: Params) {
           <Link
             href={linkAlTool({ tipo: esempio.tipo, tema: esempio.tema, eta: esempio.eta })}
             data-tap
-            className="mt-8 inline-flex items-center justify-center rounded-bolla bg-rosa px-8 py-5 text-xl font-extrabold text-white"
+            className="mt-8 inline-flex items-center justify-center rounded-2xl bg-viola px-8 py-5 text-xl font-extrabold text-white"
           >
             Crealo tu con il tema {tema?.label.toLowerCase() ?? esempio.tema}
           </Link>

@@ -75,6 +75,16 @@ Un miglioramento al giorno, piccolo e finito, a rotazione:
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 
+## Template vetrina (31/10/2026)
+- Stile dal riferimento di Giorgia: header bianco arrotondato che galleggia,
+  hero a foto piena, card pastello con foto incassata, carte impilate,
+  collage, fascia finale blu notte con cerchi. Mattoni in `components/vetrina/`
+  (TestataPagina per le pagine interne, PaginaHub per i markdown di content/hubs).
+- Foto: registro in `lib/foto.ts` (codici H/G/F/P/S/I, gli stessi del doc
+  "00 PROMPT UNICO · Foto sito Giocamizi" su Drive). I WebP vanno in
+  `public/immagini/<file>-<larghezza>.webp`; finché mancano si vede Mizi
+  su fondo pastello. Brand: "Giocamizi" (tagline Gioca con Mizi).
+
 ## In attesa (cose ferme lato Giorgia)
 - Immagini AI di Mizi per gli 11 slot in `public/mizi/` (lib/immagini.ts)
   e foto per Chi siamo (`public/foto-giorgia-domiziana.jpg`).

@@ -30,7 +30,7 @@ export function CardStoria({
     <Link
       href={`/storie/${slug}`}
       data-tap
-      className="flex flex-col gap-2 overflow-hidden rounded-morbido border-2 border-crema-scuro bg-white p-5 transition-colors hover:border-viola"
+      className="flex flex-col gap-2 overflow-hidden rounded-[1.4rem] border border-notte/10 bg-white p-5 transition-colors hover:border-viola"
     >
       <span aria-hidden className="-mx-5 -mt-5 mb-1 flex h-16 items-center justify-center bg-crema p-2">
         <Icone nomi={[GIOSTRA[indice % GIOSTRA.length]]} lato="h-10 w-10" />

@@ -1,3 +1,5 @@
+import { TestataPagina } from "@/components/vetrina";
+import { ScenaBiglietti } from "@/components/illustrazioni";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { cardTypes } from "@/cards/registry";
@@ -58,20 +60,22 @@ const SEZIONI = [
 
 export default function BigliettiPage() {
   return (
-    <Contenitore className="py-10">
-      <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
-        Inviti e biglietti di compleanno da personalizzare
-      </h1>
-      <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
-        Scegli lo sfondo, scrivi il nome e l&apos;età, scarica. Gratis, senza
-        registrazione e senza filigrana. Ventisette temi, ognuno in versione
-        chiara e colorata.
-      </p>
+    <Contenitore largo className="pb-10 pt-8">
+      <TestataPagina occhiello="Gratis, senza filigrana" tono="rosa" foto="F-02" ripiego={<ScenaBiglietti />}>
+        <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
+          Inviti e biglietti di compleanno da personalizzare
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
+          Scegli lo sfondo, scrivi il nome e l&apos;età, scarica. Gratis, senza
+          registrazione e senza filigrana. Ventisette temi, ognuno in versione
+          chiara e colorata.
+        </p>
+      </TestataPagina>
 
       <Link
         href={linkAlTool({ tipo: "invito" })}
         data-tap
-        className="mt-6 inline-flex items-center justify-center rounded-bolla bg-rosa px-8 py-5 text-xl font-extrabold text-white"
+        className="mt-6 inline-flex items-center justify-center rounded-2xl bg-viola px-8 py-5 text-xl font-extrabold text-white"
       >
         Crea il tuo, gratis
       </Link>
@@ -84,7 +88,7 @@ export default function BigliettiPage() {
               key={s.href}
               href={s.href}
               data-tap
-              className="flex flex-col gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-5 hover:border-viola"
+              className="flex flex-col gap-2 rounded-[1.4rem] border border-notte/10 bg-white p-5 hover:border-viola"
             >
               <span className="text-xl font-extrabold text-notte">{s.nome}</span>
               <span className="text-notte-tenue">{s.testo}</span>

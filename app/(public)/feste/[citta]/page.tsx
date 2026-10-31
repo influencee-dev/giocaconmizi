@@ -111,7 +111,7 @@ export default async function FestaCittaPage({
           {locali.map((l) => (
             <div
               key={l.nome}
-              className="flex flex-col gap-2 rounded-morbido border-2 border-crema-scuro bg-white p-5"
+              className="flex flex-col gap-2 rounded-[1.4rem] border border-notte/10 bg-white p-5"
             >
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-xl font-extrabold text-notte">{l.nome}</span>
@@ -172,7 +172,7 @@ export default async function FestaCittaPage({
           <Link
             href="/guide/festa-di-compleanno-semplice"
             data-tap
-            className="flex flex-col gap-1 rounded-morbido border-2 border-crema-scuro bg-white p-4 transition-colors hover:border-viola"
+            className="flex flex-col gap-1 rounded-[1.4rem] border border-notte/10 bg-white p-4 transition-colors hover:border-viola"
           >
             <span className="font-extrabold text-notte">
               La guida: organizzare una festa semplice
@@ -184,7 +184,7 @@ export default async function FestaCittaPage({
           <Link
             href="/biglietti/crea"
             data-tap
-            className="flex flex-col gap-1 rounded-morbido border-2 border-crema-scuro bg-white p-4 transition-colors hover:border-viola"
+            className="flex flex-col gap-1 rounded-[1.4rem] border border-notte/10 bg-white p-4 transition-colors hover:border-viola"
           >
             <span className="font-extrabold text-notte">L&apos;invito, gratis</span>
             <span className="text-sm text-notte-tenue">
@@ -194,7 +194,7 @@ export default async function FestaCittaPage({
           <Link
             href="/biglietti/inviti-compleanno-bambini"
             data-tap
-            className="flex flex-col gap-1 rounded-morbido border-2 border-crema-scuro bg-white p-4 transition-colors hover:border-viola"
+            className="flex flex-col gap-1 rounded-[1.4rem] border border-notte/10 bg-white p-4 transition-colors hover:border-viola"
           >
             <span className="font-extrabold text-notte">Tutti gli inviti</span>
             <span className="text-sm text-notte-tenue">

@@ -92,7 +92,7 @@ export default function EsempiPage() {
       <Link
         href={linkAlTool({ tipo: "invito" })}
         data-tap
-        className="mt-10 inline-flex items-center justify-center rounded-bolla bg-rosa px-8 py-5 text-xl font-extrabold text-white"
+        className="mt-10 inline-flex items-center justify-center rounded-2xl bg-viola px-8 py-5 text-xl font-extrabold text-white"
       >
         Crea il tuo, gratis
       </Link>

@@ -1,3 +1,4 @@
+import { TestataPagina } from "@/components/vetrina";
 import type { Metadata } from "next";
 import { games } from "@/games/registry";
 import { Contenitore } from "@/components/ui";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function GiochiPage() {
   return (
-    <Contenitore className="py-10">
+    <Contenitore largo className="pb-10 pt-8">
       <JsonLd data={jsonLdBreadcrumb([{ nome: "Giochi", percorso: "/giochi" }])} />
       <JsonLd
         data={jsonLdElenco(
@@ -22,13 +23,15 @@ export default function GiochiPage() {
         )}
       />
 
-      <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
-        Tutti i giochi
-      </h1>
-      <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
-        Un gioco, una competenza. Nessun timer, nessun punteggio da battere:
-        si gioca finché si ha voglia.
-      </p>
+      <TestataPagina occhiello="Gratis, senza timer" tono="azzurro" foto="G-01">
+        <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
+          Tutti i giochi
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
+          Un gioco, una competenza. Nessun timer, nessun punteggio da battere:
+          si gioca finché si ha voglia.
+        </p>
+      </TestataPagina>
 
       <CatalogoGiochi
         giochi={games.map((g) => ({

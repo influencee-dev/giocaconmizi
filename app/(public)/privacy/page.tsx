@@ -31,7 +31,7 @@ export default function PrivacyPage() {
       </p>
 
       {/* Il riassunto onesto, prima del legalese */}
-      <div className="mt-6 flex items-start gap-4 rounded-morbido border-2 border-crema-scuro bg-white p-5">
+      <div className="mt-6 flex items-start gap-4 rounded-[1.4rem] border border-notte/10 bg-white p-5">
         <span className="h-14 w-14 shrink-0" aria-hidden>
           <FacciaMizi emozione="felice" />
         </span>

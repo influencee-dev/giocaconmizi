@@ -1,3 +1,5 @@
+import { TestataPagina } from "@/components/vetrina";
+import { ScenaCoding } from "@/components/illustrazioni";
 import type { Metadata } from "next";
 import { games } from "@/games/registry";
 import { CardGioco, Contenitore, Griglia, TitoloSezione } from "@/components/ui";
@@ -16,14 +18,16 @@ export default function CodingPage() {
   const blocchi = giochi.filter((g) => g.ageMin >= 6);
 
   return (
-    <Contenitore className="py-10">
-      <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
-        Coding per bambini e ragazzi
-      </h1>
-      <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
-        Si comincia a tre anni con le frecce, si arriva a dodici con i cicli e le
-        variabili. Nessuna installazione, nessun account: si apre e si programma.
-      </p>
+    <Contenitore largo className="pb-10 pt-8">
+      <TestataPagina occhiello="Dai 3 ai 12 anni" tono="azzurro" foto="S-02" ripiego={<ScenaCoding />}>
+        <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
+          Coding per bambini e ragazzi
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
+          Si comincia a tre anni con le frecce, si arriva a dodici con i cicli e le
+          variabili. Nessuna installazione, nessun account: si apre e si programma.
+        </p>
+      </TestataPagina>
 
       <section className="mt-10">
         <TitoloSezione>Primi passi, senza leggere</TitoloSezione>

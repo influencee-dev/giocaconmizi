@@ -66,7 +66,7 @@ export default async function HubStorieEtaPage({ params }: Params) {
 
       <div className="mt-8">
         {storie.length === 0 ? (
-          <p className="rounded-morbido border-2 border-crema-scuro bg-white p-5 text-notte-tenue">
+          <p className="rounded-[1.4rem] border border-notte/10 bg-white p-5 text-notte-tenue">
             Le storie per questa età sono in scrittura.
           </p>
         ) : (

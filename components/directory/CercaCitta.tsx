@@ -35,7 +35,7 @@ export function CercaCitta({ voci }: { voci: { citta: string; href: string }[] }
           ))}
         </datalist>
       </label>
-      <button type="submit" className="rounded-bolla bg-rosa px-5 py-2.5 font-extrabold text-white">
+      <button type="submit" className="rounded-2xl bg-viola px-5 py-2.5 font-extrabold text-white">
         Cerca
       </button>
     </form>

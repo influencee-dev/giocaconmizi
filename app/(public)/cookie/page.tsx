@@ -24,7 +24,7 @@ export default function CookiePage() {
         sui cookie
       </p>
 
-      <div className="mt-6 flex items-start gap-4 rounded-morbido border-2 border-crema-scuro bg-white p-5">
+      <div className="mt-6 flex items-start gap-4 rounded-[1.4rem] border border-notte/10 bg-white p-5">
         <span className="h-14 w-14 shrink-0" aria-hidden>
           <FacciaMizi emozione="felice" />
         </span>
@@ -48,7 +48,7 @@ export default function CookiePage() {
         </p>
         <div className="flex flex-col gap-4">
           {cookieVeri.map((v) => (
-            <div key={v.nome} className="rounded-morbido border-2 border-crema-scuro bg-white p-5">
+            <div key={v.nome} className="rounded-[1.4rem] border border-notte/10 bg-white p-5">
               <p className="break-all font-mono text-sm font-bold text-viola">{v.nome}</p>
               <p className="mt-2 text-notte-tenue">{v.scopo}</p>
               <p className="mt-2 text-sm font-bold text-notte-tenue">
@@ -70,7 +70,7 @@ export default function CookiePage() {
         </p>
         <div className="flex flex-col gap-4">
           {archivioLocale.map((v) => (
-            <div key={v.nome} className="rounded-morbido border-2 border-crema-scuro bg-white p-5">
+            <div key={v.nome} className="rounded-[1.4rem] border border-notte/10 bg-white p-5">
               <p className="break-all font-mono text-sm font-bold text-viola">{v.nome}</p>
               <p className="mt-2 text-notte-tenue">{v.scopo}</p>
               <p className="mt-2 text-sm font-bold text-notte-tenue">

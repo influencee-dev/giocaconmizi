@@ -6,14 +6,14 @@
  */
 
 export const site = {
-  nome: "Gioca con Mizi",
+  nome: "Giocamizi",
   dominio: "https://giocamizi.it",
   titoloDefault:
-    "Gioca con Mizi — giochi educativi per bambini dai 3 ai 12 anni",
+    "Giocamizi — giochi educativi, storie e feste per bambini dai 3 ai 12 anni",
   descrizioneDefault:
     "Giochi educativi, storie da leggere, coding e biglietti di compleanno per bambini dai 3 ai 12 anni. Gratis, senza pubblicità e senza timer.",
   lingua: "it-IT",
-  autore: "Gioca con Mizi",
+  autore: "Giorgia Palazzo",
 } as const;
 
 /** URL assoluto per canonical, sitemap e Open Graph. */

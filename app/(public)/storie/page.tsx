@@ -1,3 +1,5 @@
+import { TestataPagina } from "@/components/vetrina";
+import { ScenaStorie } from "@/components/illustrazioni";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { tutteLeStorie } from "@/lib/content";
@@ -22,7 +24,7 @@ export default function StoriePage() {
   const storie = tutteLeStorie();
 
   return (
-    <Contenitore className="py-10">
+    <Contenitore largo className="pb-10 pt-8">
       <JsonLd data={jsonLdBreadcrumb([{ nome: "Storie", percorso: "/storie" }])} />
       <JsonLd
         data={jsonLdElenco(
@@ -30,13 +32,15 @@ export default function StoriePage() {
           storie.map((s) => ({ nome: s.title, percorso: `/storie/${s.slug}` })),
         )}
       />
-      <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
-        Storie da leggere
-      </h1>
-      <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
-        Un testo, tre caratteri: stampatello maiuscolo per chi inizia, minuscolo
-        per la prima elementare, corsivo per la seconda. Con il pulsante Ascolta.
-      </p>
+      <TestataPagina occhiello="Da leggere insieme" tono="viola" foto="S-01" ripiego={<ScenaStorie />}>
+        <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
+          Storie da leggere
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
+          Un testo, tre caratteri: stampatello maiuscolo per chi inizia, minuscolo
+          per la prima elementare, corsivo per la seconda. Con il pulsante Ascolta.
+        </p>
+      </TestataPagina>
 
       <section className="mt-8">
         <TitoloSezione>Per età</TitoloSezione>
@@ -73,7 +77,7 @@ export default function StoriePage() {
       <section className="mt-10">
         <TitoloSezione>Tutte le storie</TitoloSezione>
         {storie.length === 0 ? (
-          <p className="rounded-morbido border-2 border-crema-scuro bg-white p-5 text-notte-tenue">
+          <p className="rounded-[1.4rem] border border-notte/10 bg-white p-5 text-notte-tenue">
             Le prime 12 storie sono in scrittura. Il piano è in
             content/stories/_index.md.
           </p>

@@ -31,7 +31,7 @@ export default function TerminiAttivitaPage() {
       </p>
       <ol className="mt-8 flex flex-col gap-5">
         {VOCI.map((v, i) => (
-          <li key={v.titolo} className="rounded-morbido border-2 border-crema-scuro bg-white p-5">
+          <li key={v.titolo} className="rounded-[1.4rem] border border-notte/10 bg-white p-5">
             <p className="font-extrabold text-notte">{i + 1}. {v.titolo}</p>
             <p className="mt-1 leading-relaxed text-notte-tenue">{v.testo}</p>
           </li>

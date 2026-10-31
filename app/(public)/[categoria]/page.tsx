@@ -75,7 +75,7 @@ export default async function CategoriaPage({ params }: { params: Promise<{ cate
                 key={c.slug}
                 href={hrefCitta(c.slug)}
                 data-tap
-                className="overflow-hidden rounded-morbido border-2 border-crema-scuro bg-white transition-colors hover:border-viola"
+                className="overflow-hidden rounded-[1.4rem] border border-notte/10 bg-white transition-colors hover:border-viola"
               >
                 <Illustrazione colore={COLORI[i % COLORI.length]} icona={cat.icona} alta="h-24 sm:h-28" />
                 <span className="flex items-center justify-between gap-2 p-3">

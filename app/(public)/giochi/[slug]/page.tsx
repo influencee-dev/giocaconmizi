@@ -98,7 +98,7 @@ export default async function GiocoPage({ params }: Params) {
                 <Link
                   href={`/giochi/${gioco.slug}/gioca`}
                   data-tap
-                  className="inline-flex w-full items-center justify-center rounded-bolla bg-rosa px-10 py-5 text-2xl font-extrabold text-white sm:w-auto lg:w-full"
+                  className="inline-flex w-full items-center justify-center rounded-2xl bg-viola px-10 py-5 text-2xl font-extrabold text-white sm:w-auto lg:w-full"
                 >
                   Gioca
                 </Link>
@@ -122,7 +122,7 @@ export default async function GiocoPage({ params }: Params) {
                 </div>
               </div>
             ) : (
-              <p className="mt-4 rounded-morbido border-2 border-crema-scuro bg-white p-5 text-notte-tenue lg:border-0 lg:p-0">
+              <p className="mt-4 rounded-[1.4rem] border border-notte/10 bg-white p-5 text-notte-tenue lg:border-0 lg:p-0">
                 Questo gioco è in costruzione. Meccanica prevista: {gioco.mechanic}
               </p>
             )}

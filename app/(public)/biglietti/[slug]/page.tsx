@@ -194,7 +194,7 @@ export default async function PaginaBiglietti({ params }: Params) {
       <Link
         href={linkAlTool({ tipo, eta, genere, tema: temaFisso, variante: variante === "colorare" ? variante : undefined })}
         data-tap
-        className="mt-6 inline-flex items-center justify-center rounded-bolla bg-rosa px-8 py-5 text-xl font-extrabold text-white"
+        className="mt-6 inline-flex items-center justify-center rounded-2xl bg-viola px-8 py-5 text-xl font-extrabold text-white"
       >
         Crea il tuo, gratis
       </Link>
@@ -240,7 +240,7 @@ export default async function PaginaBiglietti({ params }: Params) {
         <TitoloSezione>Tre frasi pronte</TitoloSezione>
         <ul className="flex flex-col gap-3">
           {frasiPronte.map((f) => (
-            <li key={f} className="rounded-morbido border-2 border-crema-scuro bg-white p-4 text-lg text-notte">
+            <li key={f} className="rounded-[1.4rem] border border-notte/10 bg-white p-4 text-lg text-notte">
               {f}
             </li>
           ))}

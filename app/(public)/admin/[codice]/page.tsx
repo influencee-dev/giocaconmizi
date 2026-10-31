@@ -39,7 +39,7 @@ export default async function AdminPage({ params }: { params: Promise<{ codice: 
           ["Approvate o modificate", conta("approvato") + conta("modifica")],
           ["Rimozioni", conta("rimozione")],
         ].map(([t, n]) => (
-          <div key={t} className="rounded-morbido border-2 border-crema-scuro bg-white p-4">
+          <div key={t} className="rounded-[1.4rem] border border-notte/10 bg-white p-4">
             <p className="text-3xl font-extrabold text-notte">{n}</p>
             <p className="text-sm font-bold text-notte-tenue">{t}</p>
           </div>
@@ -52,7 +52,7 @@ export default async function AdminPage({ params }: { params: Promise<{ codice: 
         {attesa.map((r) => {
           const s = scheda(r.chiave);
           return (
-            <article key={r.id} className="rounded-morbido border-2 border-crema-scuro bg-white p-5">
+            <article key={r.id} className="rounded-[1.4rem] border border-notte/10 bg-white p-5">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <p className="text-xl font-extrabold text-notte">
                   {s?.nome ?? r.chiave} <span className="text-base font-bold text-notte-tenue">· {s?.citta}</span>

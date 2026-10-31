@@ -1,3 +1,5 @@
+import { TestataPagina } from "@/components/vetrina";
+import { ScenaCompiti } from "@/components/illustrazioni";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDE } from "@/lib/guide";
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function GuidePage() {
   return (
-    <Contenitore className="py-10">
+    <Contenitore largo className="pb-10 pt-8">
       <JsonLd
         data={jsonLdElenco(
           "Guide per i genitori — Gioca con Mizi",
@@ -23,15 +25,17 @@ export default function GuidePage() {
       />
       <JsonLd data={jsonLdBreadcrumb([{ nome: "Guide", percorso: "/guide" }])} />
 
-      <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
-        Guide per i genitori
-      </h1>
-      <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
-        Le domande che ci fanno più spesso le mamme, con risposte complete e
-        oneste: niente fuffa, niente &quot;dipende&quot; lasciati a metà, e per
-        ogni guida i giochi gratuiti per esercitarsi. Scritte da una mamma,
-        riviste a ogni aggiornamento del sito.
-      </p>
+      <TestataPagina occhiello="Scritte da una mamma" tono="giallo" foto="P-01" ripiego={<ScenaCompiti />}>
+        <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
+          Guide per i genitori
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
+          Le domande che ci fanno più spesso le mamme, con risposte complete e
+          oneste: niente fuffa, niente &quot;dipende&quot; lasciati a metà, e per
+          ogni guida i giochi gratuiti per esercitarsi. Scritte da una mamma,
+          riviste a ogni aggiornamento del sito.
+        </p>
+      </TestataPagina>
 
       <section className="mt-10">
         <TitoloSezione>Le guide</TitoloSezione>
@@ -41,7 +45,7 @@ export default function GuidePage() {
               key={g.slug}
               href={`/guide/${g.slug}`}
               data-tap
-              className="flex flex-col gap-2 overflow-hidden rounded-morbido border-2 border-crema-scuro bg-white p-5 transition-colors hover:border-viola"
+              className="flex flex-col gap-2 overflow-hidden rounded-[1.4rem] border border-notte/10 bg-white p-5 transition-colors hover:border-viola"
             >
               <span aria-hidden className="-mx-5 -mt-5 mb-1 flex h-24 items-center justify-center bg-crema p-2">
                 <IllustrazioneSkill skill={g.skill} />
