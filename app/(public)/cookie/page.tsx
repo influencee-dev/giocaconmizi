@@ -33,7 +33,8 @@ export default function CookiePage() {
           <p className="text-notte-tenue">
             Una cosa sola: se possiamo usare le statistiche anonime di Google Analytics
             per capire quali giochi piacciono. Se rifiuti, non parte nulla e il sito
-            funziona identico. Tutto il resto — le poche voci tecniche elencate sotto —
+            funziona identico. Il semplice conteggio delle visite (Vercel Web Analytics)
+            è sempre attivo perché non usa cookie e non riconosce nessuno. Tutto il resto — le poche voci tecniche elencate sotto —
             serve solo al funzionamento e per legge non richiede consenso. Niente
             pubblicità, niente profilazione, mai.
           </p>

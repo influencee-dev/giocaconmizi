@@ -85,7 +85,16 @@ export default function PrivacyPage() {
           contenuti interessano; non usiamo questi dati per altro.
         </p>
         <p>
-          <strong className="text-notte">4. Statistiche (solo col tuo consenso).</strong>{" "}
+          <strong className="text-notte">4a. Conteggio visite anonimo (sempre attivo).</strong>{" "}
+          Contiamo le pagine viste con Vercel Web Analytics, che non usa cookie, non
+          salva niente sul tuo dispositivo e non conserva l&apos;indirizzo IP: ogni visita
+          diventa un numero aggregato (pagina, paese, tipo di dispositivo) e non è
+          possibile risalire a te né seguirti tra un giorno e l&apos;altro. Per questo non
+          richiede consenso. Base giuridica: nostro legittimo interesse a sapere quali
+          pagine e giochi servono (art. 6.1.f).
+        </p>
+        <p>
+          <strong className="text-notte">4b. Statistiche dettagliate (solo col tuo consenso).</strong>{" "}
           Se accetti dal banner, usiamo Google Analytics per capire quante persone
           visitano il sito e quali giochi piacciono. È configurato al minimo: niente
           Google Signals, niente personalizzazione degli annunci. Base giuridica: il tuo

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito, Lexend } from "next/font/google";
 import { site, url } from "@/lib/seo";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -57,7 +58,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="it" className={`${nunito.variable} ${lexend.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        {/* Conteggio visite senza cookie e senza dati personali: non serve consenso. */}
+        <Analytics />
+      </body>
     </html>
   );
 }

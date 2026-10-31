@@ -119,7 +119,7 @@ export const REGISTRO: VoceRegistro[] = [
 export const FORNITORI = [
   {
     nome: "Vercel Inc.",
-    scopo: "Hosting del sito: riceve gli accessi e tiene log tecnici (indirizzo IP) per sicurezza e funzionamento.",
+    scopo: "Hosting del sito: riceve gli accessi e tiene log tecnici (indirizzo IP) per sicurezza e funzionamento. Con Vercel Web Analytics conta anche le visite in forma aggregata, senza cookie e senza conservare l'indirizzo IP.",
     dove: "Sito servito dalla regione di Francoforte; la società è statunitense e aderisce al Data Privacy Framework UE-USA",
   },
   {
