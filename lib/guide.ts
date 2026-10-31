@@ -964,6 +964,81 @@ export const GUIDE: Guida[] = [
     ],
     giochi: ["memory-animali", "le-emozioni-di-mizi", "puzzle-facile", "labirinto-a-blocchi"],
   },
+  {
+    slug: "imparare-a-contare",
+    titolo: "Imparare a contare: come insegnare i numeri ai bambini da 3 a 6 anni",
+    titoloBreve: "Imparare a contare",
+    descrizione:
+      "Dice «uno, due, tre… dieci» ma non sa quante caramelle ha in mano? È normale. Le tappe per imparare a contare davvero dai 3 ai 6 anni, e i giochi di tutti i giorni che aiutano più delle schede.",
+    rispostaBreve:
+      "Recitare i numeri non è ancora contare. Il bambino impara prima la filastrocca «uno, due, tre», poi ad abbinare un numero a ogni oggetto toccandolo, e infine, di solito intorno ai 4 anni, a capire che l'ultimo numero detto è «quanti sono». A casa funzionano poche cose fatte spesso: contare oggetti veri spostandoli uno per uno, chiedere alla fine «quindi quanti sono?» e giocare con dadi, scale e carte, senza esercizi a tavolino.",
+    etaMin: 3,
+    etaMax: 6,
+    minutiLettura: 6,
+    aggiornata: "2026-10-31",
+    skill: "numeri",
+    sezioni: [
+      {
+        titolo: "Dire i numeri non è ancora contare",
+        paragrafi: [
+          "Molti bambini di tre anni recitano «uno, due, tre… dieci» come una filastrocca, ma se chiedete quante macchinine ci sono sul tappeto ricominciano da capo o rispondono un numero a caso. Non c'è niente di strano: hanno imparato la sequenza delle parole, che è il primo passo, ma non ancora il suo significato.",
+          "Contare davvero mette insieme più cose: dire i numeri sempre nello stesso ordine, abbinare un numero e uno solo a ogni oggetto, e capire che l'ultimo numero detto dice quanti sono in tutto. Gli psicologi che hanno studiato il conteggio li chiamano i principi del contare, e i bambini li conquistano uno alla volta, non tutti insieme.",
+        ],
+      },
+      {
+        titolo: "Le tappe, più o meno per età",
+        paragrafi: [
+          "Tra i 2 e i 3 anni arriva la filastrocca dei numeri, spesso con dei buchi («uno, due, quattro, sette»), e il bambino riconosce a colpo d'occhio quantità piccolissime, uno, due, a volte tre oggetti, senza contarli.",
+          "Tra i 3 e i 4 anni impara a toccare un oggetto per ogni numero detto, all'inizio saltandone qualcuno o contandone uno due volte. Di solito intorno ai 4 anni capisce che l'ultimo numero è la risposta a «quanti sono?»: è il vero salto, e da lì riesce a darvi «quattro mele» se glielo chiedete.",
+          "Tra i 5 e i 6 anni il conteggio diventa sicuro fino a 10 e oltre, si riconoscono le cifre scritte e cominciano l'«uno in più» e l'«uno in meno», che sono già le prime addizioni e sottrazioni. Le età sono indicative: tra un bambino e l'altro ci possono essere mesi di differenza, ed è normale.",
+        ],
+      },
+      {
+        titolo: "Come aiutarlo a casa, senza schede",
+        paragrafi: [
+          "Contate cose vere e toccatele: i gradini delle scale, i biscotti nel piatto, le mollette sul filo. Spostare ogni oggetto da una parte all'altra mentre si dice il numero aiuta a non saltarne e a non contarne uno due volte.",
+          "Alla fine chiedete sempre «quindi quanti sono?»: è la domanda che allena il passo più difficile. Ogni tanto invertite i ruoli: «dammi tre cucchiai» obbliga a fermarsi al numero giusto, ed è più difficile che contare tutto quello che c'è sul tavolo.",
+          "Aiutano molto anche i giochi con il dado: riconoscere i puntini senza contarli e avanzare di tante caselle quante dice il dado è matematica vera, fatta giocando. Lo stesso vale per la spesa: contare le mele nel sacchetto, o le monete per pagare una cosa piccola.",
+        ],
+      },
+      {
+        titolo: "Dopo il 10: le cifre e le prime operazioni",
+        paragrafi: [
+          "Quando il conteggio fino a 10 è sicuro si passa alle cifre scritte, abbinandole sempre a una quantità, il 5 accanto a cinque cose, e non come disegni da copiare. Poi vengono i numeri fino a 20, dove la regola si nasconde dietro parole come «undici» e «dodici», e i primi problemi da tavola: «avevi tre biscotti, ne mangi uno, quanti ne restano?».",
+          "A scuola i numeri entro il 20 sono il lavoro della prima elementare. A casa non serve anticipare il programma: serve che il bambino abbia contato tante cose vere, e che i numeri gli sembrino un gioco e non una prova.",
+        ],
+      },
+      {
+        titolo: "Quando parlarne con qualcuno",
+        paragrafi: [
+          "Se verso i 5 anni il bambino non riesce ancora a contare con sicurezza piccoli gruppi di oggetti, o fatica molto più dei compagni a riconoscere le quantità piccole a colpo d'occhio, vale la pena parlarne con le maestre della scuola dell'infanzia o con il pediatra. Spesso è solo questione di tempo e di occasioni, ma un confronto aiuta a capire se serve un aiuto in più.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        domanda: "A che età un bambino sa contare fino a 10?",
+        risposta:
+          "Recitare i numeri fino a 10 arriva spesso tra i 3 e i 4 anni; contare davvero dieci oggetti sapendo quanti sono, di solito tra i 4 e i 5 anni. Le differenze tra un bambino e l'altro sono ampie e normali.",
+      },
+      {
+        domanda: "Dice i numeri ma non sa quanti sono: è normale?",
+        risposta:
+          "Sì. Ha imparato la sequenza delle parole, che è il primo passo. Il significato arriva contando oggetti veri, spostandoli uno per uno, e chiedendo alla fine «quanti sono?».",
+      },
+      {
+        domanda: "Meglio le schede o i giochi per imparare i numeri?",
+        risposta:
+          "Tra i 3 e i 6 anni funzionano meglio i giochi con oggetti veri: dadi, scale, carte, la spesa. Le schede servono più avanti, quando il conteggio è già sicuro.",
+      },
+      {
+        domanda: "Come si insegna a scrivere i numeri?",
+        risposta:
+          "Sempre insieme a una quantità: il 3 accanto a tre oggetti. Copiare le cifre come disegni non insegna che cosa vogliono dire.",
+      },
+    ],
+    giochi: ["conta-fino-a-10", "unisci-i-puntini", "addizioni-entro-20", "salvadanaio"],
+  },
 ];
 
 export function guida(slug: string): Guida | undefined {

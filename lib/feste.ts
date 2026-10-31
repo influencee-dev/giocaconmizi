@@ -1905,6 +1905,23 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "vicenza",
+    citta: "Vicenza",
+    aggiornata: "2026-10-31",
+    rispostaBreve: "A Vicenza la festa di compleanno per bambini si fa soprattutto in un parco giochi al coperto: Wonderwood Dino Camp, dentro il Centro Commerciale Palladio, ha due salette riservabili ed è pensato per bambini fino a 9-10 anni, mentre Jungle Jump, vicino all'uscita Vicenza Est, organizza feste con buffet e allestimento da scegliere passo dopo passo. Per il weekend conviene prenotare con anticipo e chiedere prima le regole su torta e cibo portati da casa.",
+    intro: "Vicenza ha diversi spazi al coperto dove i bambini possono correre e arrampicarsi anche quando il tempo non aiuta. Per la festa di compleanno ci sono due parchi giochi con sale dedicate, comodi da raggiungere dalla città.",
+    locali: [
+      { nome: "Wonderwood Dino Camp Vicenza", zona: "Vicenza (Centro Commerciale Palladio)", tipo: "parco giochi al coperto", descrizione: "Parco giochi al coperto a tema dinosauri, pensato per bambini fino a circa 9-10 anni e aperto quasi tutti i giorni dell'anno. Per il compleanno ci sono due salette riservabili con un'area per il gruppo e una zona ristoro allestita; si può portare la propria torta e aggiungere il truccabimbi o uno spettacolo di magia.", sito: "https://wonderwood.it/vicenza/" },
+      { nome: "Jungle Jump Vicenza", zona: "Vicenza Est (via Zamenhof)", tipo: "parco giochi al coperto", descrizione: "Play park al coperto con aree gioco, scivoli e tunnel, a due minuti dall'uscita autostradale Vicenza Est, aperto dal martedì alla domenica. Le feste di compleanno si compongono passo dopo passo, con buffet e allestimento a scelta, anche in sala riservata.", sito: "https://junglejumpvicenza.com" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia un compleanno al coperto a Vicenza?", risposta: "Nei parchi giochi al coperto: Wonderwood Dino Camp, nel Centro Commerciale Palladio, ha due salette per le feste; Jungle Jump, vicino all'uscita Vicenza Est, organizza feste con buffet e allestimento personalizzabili." },
+      { domanda: "Si può portare la torta da casa?", risposta: "Dipende dal posto: Wonderwood Dino Camp accetta la torta portata dalla famiglia. Negli altri casi chiedete al momento della prenotazione, perché le regole sul cibo esterno cambiano da struttura a struttura." },
+      { domanda: "Fino a che età vanno bene questi posti?", risposta: "Sono pensati soprattutto per i bambini della scuola dell'infanzia e dei primi anni di primaria: Wonderwood indica una fascia fino a circa 9-10 anni." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {
