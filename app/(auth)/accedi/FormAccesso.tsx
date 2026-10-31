@@ -73,10 +73,21 @@ export function FormAccesso() {
         style={{ minHeight: "4rem" }}
       />
 
+      <label className="flex items-start gap-3 text-notte">
+        <input type="checkbox" required className="mt-1 h-6 w-6 shrink-0 accent-[#9B6DD6]" />
+        <span>
+          Ho almeno 18 anni e ho letto{" "}
+          <a href="/privacy" target="_blank" rel="noopener" className="font-bold text-viola underline underline-offset-4">
+            come trattiamo i dati
+          </a>
+          . L&apos;area genitori è riservata agli adulti.
+        </span>
+      </label>
+
       <button
         type="submit"
         disabled={stato.tipo === "invio"}
-        className="rounded-bolla bg-rosa px-8 py-4 text-xl font-extrabold text-white disabled:opacity-60"
+        className="rounded-2xl bg-viola px-8 py-4 text-xl font-extrabold text-white disabled:opacity-60"
       >
         {stato.tipo === "invio" ? "Invio in corso…" : "Mandami il link"}
       </button>

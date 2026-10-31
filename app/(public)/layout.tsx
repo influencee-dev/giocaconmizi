@@ -52,6 +52,7 @@ const PIEDE: { titolo: string; voci: [string, string][] }[] = [
       ["/guide", "Guide per genitori"],
       ["/privacy", "Privacy"],
       ["/cookie", "Cookie"],
+      ["/note-legali", "Note legali"],
       ["/termini-attivita", "Per le attività"],
       ["/accedi", "Accedi"],
     ],

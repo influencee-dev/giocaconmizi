@@ -1,6 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { creaClientServer, utenteCorrente } from "@/lib/supabase/server";
-import { tracciaGiocoCompletato } from "@/lib/brevo";
 
 /**
  * Salva l'avanzamento di un gioco completato.
@@ -30,7 +29,7 @@ export async function POST(request: NextRequest) {
 
   const { error } = await supabase.from("progress").insert({
     profile_id: utente.id,
-    game_slug: corpo.slug,
+    game_slug: String(corpo.slug).slice(0, 80),
     score: corpo.score ?? 0,
     stars: corpo.stars ?? 0,
     completed_at: new Date().toISOString(),
@@ -38,11 +37,6 @@ export async function POST(request: NextRequest) {
 
   if (error) {
     return NextResponse.json({ errore: error.message }, { status: 500 });
-  }
-
-  if (utente.email) {
-    // L'evento Brevo alimenta le automazioni; un suo errore non invalida il salvataggio.
-    await tracciaGiocoCompletato(utente.email, corpo.slug);
   }
 
   return NextResponse.json({ ok: true });

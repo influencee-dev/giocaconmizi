@@ -19,7 +19,7 @@ export const TITOLARE = {
 } as const;
 
 /** Data dell'ultima revisione delle informative (si aggiorna a ogni modifica). */
-export const AGGIORNATA = "6 settembre 2026";
+export const AGGIORNATA = "31 ottobre 2026";
 
 export interface VoceRegistro {
   nome: string;
@@ -77,6 +77,16 @@ export const REGISTRO: VoceRegistro[] = [
     quando: "Solo dopo l'accesso all'area genitori",
   },
   {
+    nome: "Cookie di Instagram (Meta)",
+    tipo: "cookie",
+    scopo:
+      "Solo nelle pagine con un reel e solo se tocchi «Guarda il reel»: il player ufficiale di Instagram si carica dentro la pagina e Meta può impostare i suoi cookie, secondo la sua informativa. Senza il tuo tocco non viene caricato nulla.",
+    durata: "Decisa da Meta",
+    necessario: false,
+    chi: "Meta Platforms Ireland Ltd. (Instagram), titolare autonomo",
+    quando: "Solo dopo il tocco su «Guarda il reel»",
+  },
+  {
     nome: "_ga",
     tipo: "cookie",
     scopo:
@@ -119,5 +129,17 @@ export const FORNITORI = [
     scopo:
       "Statistiche di visita, SOLO se acconsenti dal banner: pagine viste e uso dei giochi, senza Google Signals né personalizzazione degli annunci.",
     dove: "Irlanda; possibili trasferimenti verso Google LLC (USA) coperti dal Data Privacy Framework UE-USA",
+  },
+] as const;
+
+/**
+ * Titolari autonomi: servizi che ricevono dati solo per un tuo gesto
+ * esplicito e li trattano secondo le proprie informative.
+ */
+export const TITOLARI_AUTONOMI = [
+  {
+    nome: "Meta Platforms Ireland Ltd. (Instagram)",
+    quando: "se tocchi «Guarda il reel» in una pagina città",
+    informativa: "https://privacycenter.instagram.com/policy",
   },
 ] as const;

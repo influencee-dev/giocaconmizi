@@ -64,6 +64,20 @@ export async function creaContatto(contatto: ContattoBrevo) {
     listIds: listId ? [listId] : undefined,
   };
 
+  // Doppio opt-in (consigliato dal Garante come prova del consenso): se in
+  // Vercel c'è BREVO_DOI_TEMPLATE_ID, Brevo manda l'email di conferma e il
+  // contatto entra in lista solo dopo il clic.
+  const doi = Number(process.env.BREVO_DOI_TEMPLATE_ID);
+  if (doi && listId) {
+    return chiama("/contacts/doubleOptinConfirmation", {
+      email: contatto.email,
+      includeListIds: [listId],
+      templateId: doi,
+      redirectionUrl: "https://giocamizi.it/?iscrizione=confermata",
+      attributes: { FIRSTNAME: contatto.nomeGenitore, CITTA: contatto.citta, ORIGINE: contatto.origine },
+    });
+  }
+
   const esito = await chiama("/contacts", {
     ...base,
     attributes: {
@@ -88,13 +102,4 @@ export async function creaContatto(contatto: ContattoBrevo) {
   }
 
   return esito;
-}
-
-/** Evento "gioco_completato": alimenta le automazioni Brevo (§4.4). */
-export async function tracciaGiocoCompletato(email: string, slug: string) {
-  return chiama("/events", {
-    event_name: "gioco_completato",
-    identifiers: { email_id: email },
-    event_properties: { slug },
-  });
 }

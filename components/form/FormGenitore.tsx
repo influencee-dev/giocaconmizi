@@ -33,6 +33,7 @@ export function FormGenitore({
   const [professione, setProfessione] = useState("");
   const [etaFiglio, setEtaFiglio] = useState("");
   const [consenso, setConsenso] = useState(false);
+  const [trappola, setTrappola] = useState("");
   const [stato, setStato] = useState<Stato>({ tipo: "fermo" });
 
   async function invia(evento: React.FormEvent<HTMLFormElement>) {
@@ -56,6 +57,9 @@ export function FormGenitore({
         etaFiglio: etaFiglio ? Number(etaFiglio) : undefined,
         origine,
         consenso,
+        // La stessa spunta dichiara la maggiore età (testo qui sotto).
+        maggiorenne: consenso,
+        sito: trappola,
       }),
     }).catch(() => null);
 
@@ -147,6 +151,18 @@ export function FormGenitore({
         </div>
       </details>
 
+      {/* Campo trappola per i bot: nascosto alle persone e ai lettori di schermo. */}
+      <input
+        type="text"
+        name="sito"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden
+        value={trappola}
+        onChange={(e) => setTrappola(e.target.value)}
+        className="absolute -left-[9999px] h-px w-px opacity-0"
+      />
+
       <label className="flex items-start gap-3 text-notte">
         <input
           type="checkbox"
@@ -155,7 +171,7 @@ export function FormGenitore({
           className="mt-1 h-6 w-6 shrink-0 accent-[#9B6DD6]"
         />
         <span>
-          Acconsento a ricevere email da Gioca con Mizi e ho letto{" "}
+          Ho almeno 18 anni, acconsento a ricevere email da Giocamizi e ho letto{" "}
           <a
             href="/privacy"
             target="_blank"

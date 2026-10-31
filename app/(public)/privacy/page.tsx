@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Contenitore } from "@/components/ui";
 import { FacciaMizi } from "@/games/_engine/arte";
-import { AGGIORNATA, FORNITORI, TITOLARE } from "@/lib/legal";
+import { AGGIORNATA, FORNITORI, TITOLARE, TITOLARI_AUTONOMI } from "@/lib/legal";
 
 export const metadata: Metadata = {
   title: "Privacy policy",
   description:
-    "Come Gioca con Mizi tratta i dati: pochi dati, nessuna pubblicità, nessuna profilazione. Informativa ai sensi degli articoli 13 e 14 del GDPR.",
+    "Come Giocamizi (Gioca con Mizi) tratta i dati: pochi dati, nessuna pubblicità, nessuna profilazione. Informativa ai sensi degli articoli 13 e 14 del GDPR.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -89,9 +89,37 @@ export default function PrivacyPage() {
           puoi cambiare idea in ogni momento dalla cookie policy.
         </p>
         <p>
+          <strong className="text-notte">5. Schede delle attività (ludoteche, sale feste, musei…).</strong>{" "}
+          Le pagine Feste e la directory descrivono attività reali. I dati vengono solo da
+          fonti pubbliche: il sito ufficiale dell&apos;attività e le pagine che lei stessa
+          pubblica (nome, zona, tipo di attività, descrizione dei servizi, indirizzo del
+          sito). Email e telefoni non vengono pubblicati né conservati sul sito. Se
+          l&apos;attività usa il suo link personale per confermare, correggere o chiedere
+          di togliere la scheda, salviamo la risposta, i testi che invia, la data e
+          un&apos;impronta cifrata del link (mai il link in chiaro). Base giuridica:
+          legittimo interesse a informare le famiglie su dove festeggiare (art. 6.1.f).
+          Questa sezione vale come informativa ai sensi dell&apos;art. 14 GDPR: ogni
+          attività può opporsi in qualsiasi momento e la scheda viene tolta.
+        </p>
+        <p>
+          <strong className="text-notte">6. Email che ci scrivi.</strong> Se ci scrivi,
+          usiamo il tuo indirizzo e quello che racconti solo per risponderti e per gestire
+          la richiesta (art. 6.1.b e 6.1.f). Le email vengono cancellate quando la
+          questione è chiusa, salvo che servano per dimostrare di aver dato seguito a una
+          richiesta sui dati.
+        </p>
+        <p>
+          <strong className="text-notte">7. Contenuti di terzi incorporati.</strong> Alcune
+          pagine possono mostrare un reel di Instagram. Il player non viene caricato finché
+          non tocchi «Guarda il reel»: solo da quel momento Instagram (Meta) riceve dati
+          come il tuo indirizzo IP e può impostare i suoi cookie, come titolare autonomo e
+          secondo la propria informativa.
+        </p>
+        <p>
           <strong className="text-notte">Cosa non facciamo:</strong> niente pubblicità,
-          niente profilazione, niente vendita o cessione di dati, niente social network
-          incorporati.
+          niente profilazione, niente vendita o cessione di dati, niente decisioni
+          automatizzate che producano effetti su di te (art. 22 GDPR). Dare i dati è
+          sempre facoltativo: senza email non si perde nessun gioco.
         </p>
       </Sezione>
 
@@ -103,6 +131,21 @@ export default function PrivacyPage() {
           completo, mai una foto, mai dati che lo rendano identificabile. È il principio di
           minimizzazione dell&apos;art. 5 GDPR, ed è una scelta di progetto prima che un
           obbligo.
+        </p>
+        <p>
+          L&apos;iscrizione alle novità e l&apos;area genitori sono riservate agli adulti:
+          chi si iscrive dichiara di avere almeno 18 anni. In Italia un minore di 14 anni
+          non può prestare da solo il consenso per i servizi online (art. 2-quinquies del
+          Codice privacy): se scopriamo che un minore si è iscritto, cancelliamo i suoi
+          dati.
+        </p>
+        <p>
+          Il banner delle statistiche è pensato per l&apos;adulto che apre il sito. Se a
+          rispondere è stato un bambino, basta cambiare la scelta dalla{" "}
+          <Link href="/cookie" className="font-bold text-viola underline underline-offset-4">
+            cookie policy
+          </Link>
+          .
         </p>
       </Sezione>
 
@@ -119,13 +162,57 @@ export default function PrivacyPage() {
             </li>
           ))}
         </ul>
+        <p>
+          Con ciascuno vale l&apos;accordo sul trattamento dei dati (DPA) previsto dalle sue
+          condizioni di servizio. Ricevono dati come titolari autonomi, solo dopo un tuo
+          gesto:{" "}
+          {TITOLARI_AUTONOMI.map((t) => (
+            <span key={t.nome}>
+              <strong className="text-notte">{t.nome}</strong>, {t.quando} (
+              <a href={t.informativa} rel="noopener noreferrer" className="font-bold text-viola underline underline-offset-4">
+                informativa
+              </a>
+              ).
+            </span>
+          ))}
+        </p>
+        <p>
+          <strong className="text-notte">Trasferimenti fuori dall&apos;UE.</strong> I dati
+          restano nell&apos;Unione Europea, tranne i possibili trasferimenti verso gli Stati
+          Uniti di Vercel e Google, società certificate nel Data Privacy Framework UE-USA
+          (decisione di adeguatezza della Commissione europea del 10 luglio 2023, art. 45
+          GDPR).
+        </p>
       </Sezione>
 
       <Sezione titolo="Per quanto conserviamo i dati">
         <p>
           L&apos;account e i suoi dati restano finché non lo cancelli. L&apos;iscrizione alle
-          novità resta finché non ti disiscrivi. I log tecnici dell&apos;hosting vengono
-          conservati per il breve periodo previsto dal fornitore per la sicurezza.
+          novità resta finché non ti disiscrivi. Le statistiche di Google Analytics sono
+          conservate per 2 mesi. Le risposte delle attività restano finché la scheda è
+          pubblicata, e una richiesta di rimozione viene eseguita entro 30 giorni. I log
+          tecnici dell&apos;hosting vengono conservati per il breve periodo previsto dal
+          fornitore per la sicurezza.
+        </p>
+      </Sezione>
+
+      <Sezione titolo="Responsabile della protezione dei dati (DPO)">
+        <p>
+          Non abbiamo nominato un DPO perché non è obbligatorio (art. 37 GDPR): il sito non
+          è un ente pubblico, non monitora le persone in modo regolare e sistematico su
+          larga scala e non tratta categorie particolari di dati. Per ogni questione sui
+          dati il riferimento è direttamente la titolare, all&apos;indirizzo qui sopra.
+        </p>
+      </Sezione>
+
+      <Sezione titolo="Come proteggiamo i dati">
+        <p>
+          Il sito viaggia solo su HTTPS. I database hanno l&apos;accesso bloccato riga per
+          riga e funzioni con permessi minimi. I codici personali delle attività sono
+          conservati solo come impronta cifrata (SHA-256). L&apos;accesso
+          all&apos;area genitori avviene con un link via email, senza password da rubare.
+          In caso di violazione dei dati la notifichiamo al Garante entro 72 ore e, se
+          serve, alle persone coinvolte (artt. 33 e 34 GDPR).
         </p>
       </Sezione>
 
@@ -137,7 +224,7 @@ export default function PrivacyPage() {
           <a href={`mailto:${TITOLARE.email}`} className="font-bold text-viola underline underline-offset-4">
             {TITOLARE.email}
           </a>
-          . Se ritieni che un trattamento violi le regole puoi fare reclamo al Garante per
+          . Rispondiamo entro un mese (art. 12 GDPR). Se ritieni che un trattamento violi le regole puoi fare reclamo al Garante per
           la protezione dei dati personali (
           <a href="https://www.garanteprivacy.it" className="font-bold text-viola underline underline-offset-4" rel="noopener noreferrer">
             garanteprivacy.it

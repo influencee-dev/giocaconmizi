@@ -8,8 +8,9 @@ import { avviaAnalytics, consensoStatistiche, salvaConsenso } from "./analytics"
  * Banner di consenso del primo ingresso (Garante cookie 2021, ePrivacy).
  *
  * Chiede il consenso per l'unica cosa che lo richiede: le statistiche
- * (Google Analytics). "Accetta" e "Rifiuta" hanno pari evidenza; senza
- * scelta non parte nessun tracciamento. I cookie tecnici non richiedono
+ * (Google Analytics). "Accetta" e "Rifiuta" hanno lo stesso aspetto (pari
+ * evidenza) e la X chiude rifiutando, come chiede il Garante (linee guida
+ * cookie del 10 giugno 2021); senza scelta non parte nessun tracciamento. I cookie tecnici non richiedono
  * consenso e sono elencati nella cookie policy.
  */
 export function BannerCookie() {
@@ -39,8 +40,10 @@ export function BannerCookie() {
     >
       <div className="mx-auto flex w-full max-w-4xl flex-wrap items-center gap-x-4 gap-y-2">
         <p className="min-w-0 flex-1 basis-60 text-xs leading-snug text-notte sm:text-sm">
-          Niente pubblicità né profilazione: solo <strong>statistiche anonime</strong>{" "}
-          per capire quali giochi piacciono. Dettagli e ripensamenti nella{" "}
+          Niente pubblicità né profilazione. Se accetti, usiamo{" "}
+          <strong>Google Analytics</strong> (cookie di terze parti) solo per contare le
+          visite e capire quali giochi piacciono; se rifiuti o chiudi, non parte nulla.
+          Dettagli e ripensamenti nella{" "}
           <Link href="/cookie" className="font-bold text-viola underline underline-offset-2">
             cookie policy
           </Link>{" "}
@@ -54,7 +57,7 @@ export function BannerCookie() {
           <button
             type="button"
             onClick={() => scegli("no")}
-            className="rounded-bolla border-2 border-crema-scuro bg-white px-4 py-2 text-sm font-extrabold text-notte"
+            className="rounded-2xl bg-notte px-4 py-2 text-sm font-extrabold text-white"
             style={{ minHeight: "2.75rem" }}
           >
             Rifiuta
@@ -62,10 +65,19 @@ export function BannerCookie() {
           <button
             type="button"
             onClick={() => scegli("si")}
-            className="rounded-2xl bg-viola px-4 py-2 text-sm font-extrabold text-white"
+            className="rounded-2xl bg-notte px-4 py-2 text-sm font-extrabold text-white"
             style={{ minHeight: "2.75rem" }}
           >
             Accetta
+          </button>
+          <button
+            type="button"
+            onClick={() => scegli("no")}
+            aria-label="Chiudi senza accettare"
+            className="rounded-2xl px-2 text-xl font-black text-notte-tenue hover:text-notte"
+            style={{ minHeight: "2.75rem", minWidth: "2.75rem" }}
+          >
+            ×
           </button>
         </div>
       </div>

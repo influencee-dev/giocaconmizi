@@ -2,7 +2,7 @@
 import { apriBrowser, conServer, BASE, B_PIENO } from "./comune.mjs";
 
 const PAGINE = [
-  "/", "/giochi", "/guide", "/chi-siamo", "/metodo", "/perche-lo-facciamo", "/per-insegnanti", "/per-le-mamme", "/storie", "/guide/memorizzare-le-poesie", "/guide/memoria-e-concentrazione", "/guide/bambino-non-sa-perdere", "/guide/imparare-a-contare", "/coding", "/feste", "/feste/milano", "/ludoteche", "/ludoteche/milano", "/ludoteche/milano/il-nano-gigante", "/sale-feste/roma", "/feste/perugia", "/feste/foggia", "/feste/rimini", "/feste/monza", "/feste/trento", "/feste/vicenza", "/giochi/salvadanaio", "/giochi/salvadanaio/gioca", "/biglietti/biglietti-compleanno-da-colorare", "/biglietti/crea?variante=colorare", "/termini-attivita", "/la-tua-scheda/link-di-prova-non-valido-000", "/biglietti", "/biglietti/inviti-compleanno-natale", "/giochi/eta/5-anni",
+  "/", "/giochi", "/guide", "/chi-siamo", "/note-legali", "/privacy", "/accedi", "/metodo", "/perche-lo-facciamo", "/per-insegnanti", "/per-le-mamme", "/storie", "/guide/memorizzare-le-poesie", "/guide/memoria-e-concentrazione", "/guide/bambino-non-sa-perdere", "/guide/imparare-a-contare", "/coding", "/feste", "/feste/milano", "/ludoteche", "/ludoteche/milano", "/ludoteche/milano/il-nano-gigante", "/sale-feste/roma", "/feste/perugia", "/feste/foggia", "/feste/rimini", "/feste/monza", "/feste/trento", "/feste/vicenza", "/giochi/salvadanaio", "/giochi/salvadanaio/gioca", "/biglietti/biglietti-compleanno-da-colorare", "/biglietti/crea?variante=colorare", "/termini-attivita", "/la-tua-scheda/link-di-prova-non-valido-000", "/biglietti", "/biglietti/inviti-compleanno-natale", "/giochi/eta/5-anni",
   `/biglietti/crea?b=${B_PIENO}`, `/biglietti/vedi?b=${B_PIENO}`,
 ];
 const LARGHEZZE = [340, 375, 414, 768, 1024, 1440];

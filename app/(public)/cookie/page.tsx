@@ -89,9 +89,10 @@ export default function CookiePage() {
         <h2 className="text-xl font-extrabold text-notte sm:text-2xl">Cosa NON c&apos;è</h2>
         <p>
           Nessun cookie pubblicitario, nessun cookie di profilazione, nessun pixel di
-          social network. L&apos;unico strumento di terze parti è Google Analytics, parte
-          solo col tuo consenso ed è configurato al minimo (niente Google Signals, niente
-          personalizzazione degli annunci). I biglietti di compleanno e i giochi creati
+          social network. Gli strumenti di terze parti sono due e nessuno parte da solo:
+          Google Analytics, solo col tuo consenso dal banner e configurato al minimo
+          (niente Google Signals, niente personalizzazione degli annunci), e il player di
+          Instagram, solo se tocchi «Guarda il reel» in una pagina città. I biglietti di compleanno e i giochi creati
           con l&apos;editor si salvano dentro il link che generi tu: non li conserviamo noi.
         </p>
         <h2 className="mt-4 text-xl font-extrabold text-notte sm:text-2xl">Come cancellare tutto</h2>
