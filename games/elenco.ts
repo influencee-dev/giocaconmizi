@@ -24,6 +24,7 @@ export const slugGiocabili = [
   "prime-parole-inglese",
   "addizioni-entro-20",
   "salvadanaio",
+  "pizza-delle-frazioni",
   "l-orologio",
   "ortografia-c-ch-g-gh",
   "tabelline",

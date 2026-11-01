@@ -2,8 +2,9 @@
 
 Sito italiano di giochi educativi gratuiti per bambini 3–12 anni, live su
 https://giocamizi.it (collegato su Vercel il 24/10/2026; giocaconmizi.vercel.app fa redirect).
-Progetto personale senza scopo di lucro di Giorgia Palazzo, nato per la
-figlia Domiziana. Mascotte: Mizi, una pinguina.
+Un'idea di Giorgia Palazzo (founder di Partidea e Influencee), nata per la
+figlia Domiziana, da cui il nome di Mizi. Titolare e gestore del sito:
+Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
 
 ## Regole assolute
 - Tutto in italiano: codice (nomi, commenti), contenuti, commit.
@@ -88,6 +89,8 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 ## In attesa (cose ferme lato Giorgia)
 - Immagini AI di Mizi per gli 11 slot in `public/mizi/` (lib/immagini.ts)
   e foto per Chi siamo (`public/foto-giorgia-domiziana.jpg`).
+- Vercel Web Analytics da attivare nel pannello (il codice c'è già:
+  conteggio visite senza cookie, sempre attivo; GA resta solo su consenso).
 - BREVO_API_KEY nelle env Vercel; email ciao@giocamizi.it da attivare
   in lib/legal.ts; dominio giocamizi.it collegato (24/10/2026)
   (poi: next.config vecchiHost, redirect Supabase, etichetta stream GA).

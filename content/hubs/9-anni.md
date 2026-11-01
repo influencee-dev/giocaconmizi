@@ -32,7 +32,7 @@ Dopo i giochi, prova le [storie per bambini di 9 anni](/storie/9-anni) e la sezi
 Angoli, ripetizioni e cicli annidati: con pochi blocchi si disegnano quadrati, stelle e fiori.
 
 **Ci sono giochi di frazioni?**
-Stanno arrivando nella sezione 9–12 anni.
+Sì: con [La pizza delle frazioni](/giochi/pizza-delle-frazioni) si legge la frazione di una pizza tagliata a fette e poi la si costruisce mettendo il salame sulle fette giuste.
 
 **Serve un computer?**
 No, funziona anche sul telefono, ma per il coding un tablet o un computer è più comodo.

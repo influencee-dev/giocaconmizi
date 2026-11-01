@@ -186,6 +186,57 @@ ok("salvadanaio: troppo → togli una moneta → paga", autocorretto);
 ok("salvadanaio: otto acquisti fino alla festa",
   pagamenti === 8 && (await page.locator("text=Bravissimo!").isVisible().catch(() => false)), `${pagamenti}/8`);
 
+// La pizza delle frazioni: partita completa. La frazione giusta sta in
+// data-frazione. Nel primo round "leggi" si sceglie apposta una sbagliata
+// (deve comparire l'aiuto e il round non deve chiudersi); nel primo round
+// "fai" si mette una fetta in più, si legge "Sono troppe" e la si toglie.
+await page.goto(`${BASE}/giochi/pizza-delle-frazioni/gioca`, { waitUntil: "networkidle" });
+await page.waitForTimeout(800);
+const NOMI_D = { 2: ["mezzo", "mezzi"], 3: ["terzo", "terzi"], 4: ["quarto", "quarti"], 5: ["quinto", "quinti"], 6: ["sesto", "sesti"], 8: ["ottavo", "ottavi"] };
+const aVoce = (n, d) => (n === 1 ? `un ${NOMI_D[d][0]}` : `${n} ${NOMI_D[d][1]}`);
+let pizzeFatte = 0;
+let aiutoLeggi = false;
+let aiutoFai = false;
+for (let r = 0; r < 8; r++) {
+  const banco = page.locator("[data-frazione]");
+  await banco.waitFor({ timeout: 5000 }).catch(() => null);
+  if (!(await banco.count())) break;
+  const [n, d] = (await banco.getAttribute("data-frazione")).split("/").map(Number);
+  const tipo = await banco.getAttribute("data-round");
+  if (tipo === "leggi") {
+    if (!aiutoLeggi) {
+      const bottoni = banco.locator("button");
+      for (let i = 0; i < (await bottoni.count()); i++) {
+        const nome = await bottoni.nth(i).getAttribute("aria-label");
+        if (nome !== aVoce(n, d)) {
+          await bottoni.nth(i).tap();
+          break;
+        }
+      }
+      await page.waitForTimeout(300);
+      const testo = (await banco.locator("[aria-live='polite']").textContent()) ?? "";
+      aiutoLeggi = testo.length > 10 && (await banco.getAttribute("data-frazione")) === `${n}/${d}`;
+    }
+    await page.getByRole("button", { name: aVoce(n, d), exact: true }).tap();
+  } else {
+    const quante = aiutoFai ? n : n + 1;
+    for (let i = 0; i < quante; i++) await page.getByRole("button", { name: `Fetta ${i + 1}`, exact: true }).dispatchEvent("click");
+    if (!aiutoFai) {
+      await page.getByRole("button", { name: "Fatto" }).tap();
+      await page.waitForTimeout(300);
+      aiutoFai = await page.locator("text=Sono troppe").isVisible().catch(() => false);
+      await page.getByRole("button", { name: `Fetta ${n + 1}`, exact: true }).dispatchEvent("click");
+    }
+    await page.getByRole("button", { name: "Fatto" }).tap();
+  }
+  pizzeFatte++;
+  await page.waitForTimeout(1800);
+}
+ok("pizza delle frazioni: risposta sbagliata → aiuto, il round resta", aiutoLeggi);
+ok("pizza delle frazioni: una fetta di troppo → «Sono troppe» → togli", aiutoFai);
+ok("pizza delle frazioni: otto pizze fino alla festa",
+  pizzeFatte === 8 && (await page.locator("text=Bravissimo!").isVisible().catch(() => false)), `${pizzeFatte}/8`);
+
 // Il catalogo dei giochi: il filtro per competenza restringe la griglia
 await page.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
 await page.waitForTimeout(400);

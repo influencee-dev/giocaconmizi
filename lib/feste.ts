@@ -1922,6 +1922,57 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "bolzano",
+    citta: "Bolzano",
+    aggiornata: "2026-11-01",
+    rispostaBreve: "A Bolzano la festa di compleanno per bambini si fa soprattutto al Kuni Kids Park, il parco giochi al coperto di 500 m² dentro il centro commerciale Twenty, pensato per bambini dai 3 agli 11 anni, con feste senza animazione oppure a tema con lo staff; a pochi minuti, a Pineta di Laives, la Ludoteca Il Bruco mette a disposizione la sua sala nel weekend con pacchetti personalizzabili per bambini da 0 a 12 anni. Prenotate per tempo e, per il Kuni, mettete nello zaino i calzini antiscivolo.",
+    intro: "Bolzano è una città bilingue e a misura di famiglia, dove d'inverno fa freddo presto e la festa si sposta volentieri al chiuso. Per il compleanno ci sono un grande parco giochi al coperto in città e una ludoteca appena fuori, a Pineta di Laives, adatta anche ai più piccoli.",
+    locali: [
+      { nome: "Kuni Kids Park", zona: "Bolzano (centro commerciale Twenty, via Galilei)", tipo: "parco giochi al coperto", descrizione: "Parco giochi al coperto di 500 m² su più livelli, gestito dalla cooperativa Ki.Ba. Project, per bambini dai 3 agli 11 anni; i calzini antiscivolo vanno portati da casa. Per il compleanno si può festeggiare con gli amici senza animazione oppure scegliere una festa a tema seguita dallo staff, tra principesse e cavalieri, magia, animali, sirene e pirati, dinosauri e spazio.", sito: "https://www.kibaproject.it/" },
+      { nome: "Ludoteca Il Bruco", zona: "Pineta di Laives", tipo: "ludoteca", descrizione: "Ludoteca per bambini da 0 a 12 anni con Area Soft, playground, piscina di palline e laboratori. Nei giorni feriali è uno spazio gioco e di accudimento; nel weekend la sala si riserva per feste di compleanno ed eventi, con pacchetti personalizzabili che includono animazione, giochi e l'uso degli spazi gioco.", sito: "https://www.ludotecailbruco.it/" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia un compleanno al coperto a Bolzano?", risposta: "In città c'è il Kuni Kids Park, il parco giochi al coperto del centro commerciale Twenty, per bambini dai 3 agli 11 anni. Appena fuori, a Pineta di Laives, la Ludoteca Il Bruco riserva la sua sala alle feste nel fine settimana." },
+      { domanda: "Ci sono feste a tema?", risposta: "Sì: al Kuni Kids Park si può scegliere una festa a tema seguita dallo staff, per esempio principesse e cavalieri, magia, animali, sirene e pirati, dinosauri o spazio. Chi preferisce può anche festeggiare con gli amici senza animazione." },
+      { domanda: "E per i bambini molto piccoli?", risposta: "La Ludoteca Il Bruco accoglie bambini da 0 a 12 anni e ha un'Area Soft, mentre il Kuni Kids Park è pensato dai 3 anni in su: con un festeggiato sotto i 3 anni conviene la ludoteca." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "piacenza",
+    citta: "Piacenza",
+    aggiornata: "2026-11-01",
+    rispostaBreve: "A Piacenza la festa di compleanno per bambini si fa al coperto in uno spazio gioco come L'isola che ora c'è, in via Beati, pensato per bambini da 1 a 9 anni con aree separate per età e salette per le feste, oppure in fattoria: a Bosco Gerolo, in Val Trebbia, il compleanno comprende merenda e uso del parco, con la visita agli animali o una caccia al tesoro a richiesta. Prima di andare chiamate per conferma, perché lo spazio gioco può essere riservato a una festa privata o aver raggiunto il limite di ingressi; in campagna, invece, chiedete sempre il piano B per la pioggia.",
+    intro: "Piacenza ha il vantaggio di avere la campagna e le colline a pochi minuti dalla città. Per il compleanno si può scegliere tra uno spazio gioco al coperto in città, comodo in ogni stagione, e una fattoria in Val Trebbia per chi vuole festeggiare tra animali e prati.",
+    locali: [
+      { nome: "L'isola che ora c'è", zona: "Piacenza (via Beati)", tipo: "ludoteca e spazio gioco al coperto", descrizione: "Spazio gioco al coperto per bambini da 1 a 9 anni, con un'area per i più piccoli fino a 4 anni, aree per i 5-9 anni e un bar per i genitori. Per le feste di compleanno ci sono salette dedicate, e su prenotazione si organizzano anche feste serali; le calzine antiscivolo sono obbligatorie.", sito: "https://www.lisolacheorace.it/" },
+      { nome: "Bosco Gerolo Valtrebbia", zona: "Rivergaro (Val Trebbia)", tipo: "agriturismo e fattoria didattica", descrizione: "Agriturismo con fattoria didattica, animali, parco giochi e una sala giochi interna. Per il compleanno in fattoria propone un pacchetto merenda con uno spazio dedicato e l'uso del parco; su richiesta si aggiungono la visita alla fattoria dando da mangiare agli animali, una caccia al tesoro o un laboratorio di cucina o sull'orto.", sito: "https://www.boscogerolovaltrebbia.it/" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia un compleanno al coperto a Piacenza?", risposta: "In uno spazio gioco come L'isola che ora c'è, in via Beati: ha aree separate per i più piccoli e per i bambini dai 5 ai 9 anni e salette per le feste. Telefonate prima di andare, perché lo spazio può essere riservato a una festa privata o aver raggiunto il limite di ingressi del giorno." },
+      { domanda: "Si può festeggiare in fattoria?", risposta: "Sì: a Bosco Gerolo, in Val Trebbia, il compleanno comprende merenda e uso del parco, e a richiesta la visita agli animali, una caccia al tesoro o un laboratorio. Chiedete sempre quale spazio al coperto resta disponibile in caso di pioggia." },
+      { domanda: "Fino a che età vanno bene questi posti?", risposta: "L'isola che ora c'è è pensata per bambini da 1 a 9 anni: chi ha già compiuto 10 anni può entrare ma non usare i giochi. La fattoria piace anche ai più grandi, soprattutto con la caccia al tesoro." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "novara",
+    citta: "Novara",
+    aggiornata: "2026-11-01",
+    rispostaBreve: "A Novara la festa di compleanno per bambini si fa nelle sale di un parco come il Parco della Mora, che affitta due sale con tavoli, frigorifero e bagno con fasciatoio affacciate su un parco giochi recintato, oppure al centro per famiglie Agorà, in via Cameri, che ha un'area feste accanto alla ludoteca e si prenota online. Per il weekend muovetevi con anticipo e chiedete sempre cosa è incluso nel prezzo: alla Mora le sale sono attrezzate con tavoli e frigorifero per merenda e torta, e il bar è proprio di fronte.",
+    intro: "Novara è una città pianeggiante e comoda da girare, con spazi verdi e centri per le famiglie a pochi minuti da casa. Per il compleanno si può scegliere tra una sala affacciata su un parco giochi all'aperto e una ludoteca al coperto con area feste.",
+    locali: [
+      { nome: "Parco della Mora", zona: "Novara", tipo: "sala feste", descrizione: "Centro sportivo nel verde con un parco giochi interamente recintato, dove a gennaio 2026 sono arrivati giochi nuovi. Per i compleanni affitta due sale colorate con frigorifero, tavoli e sedie per merenda e torta e un bagno con fasciatoio, a uso privato per il pomeriggio: una ha una pergola coperta, l'altra un dehor con ombrelloni, e da entrambe si vedono i bambini giocare.", sito: "https://www.parcodellamora.it/" },
+      { nome: "Agorà", zona: "Novara (via Cameri)", tipo: "ludoteca", descrizione: "Centro per le famiglie con ludoteca, scuola di musica e di lingue e campus estivi. Le feste di compleanno si fanno nell'area feste accanto alla ludoteca e si possono prenotare online.", sito: "https://www.agoranovara.com/" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia un compleanno per bambini a Novara?", risposta: "Due formule diverse: le sale del Parco della Mora, affacciate su un parco giochi recintato, oppure l'area feste accanto alla ludoteca del centro Agorà, in via Cameri, che si prenota online." },
+      { domanda: "Si può festeggiare con i bambini che giocano all'aperto?", risposta: "Sì: dalle due sale del Parco della Mora si vedono i bambini giocare nel parco, che è interamente recintato. Una sala ha una pergola coperta e l'altra un dehor con ombrelloni; nei mesi freddi chiedete quale resta più riparata." },
+      { domanda: "Posso portare merenda e torta da casa?", risposta: "Le sale del Parco della Mora hanno frigorifero, tavoli e sedie pensati per merenda e taglio della torta, e di fronte c'è il bar. Se volete portare cibo da casa chiedetelo al momento della prenotazione, perché le regole sul cibo esterno cambiano da posto a posto." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

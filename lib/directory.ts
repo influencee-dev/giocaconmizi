@@ -180,7 +180,11 @@ export const REGIONE: Record<string, string> = {
   palermo: "Sicilia", catania: "Sicilia", messina: "Sicilia", genova: "Liguria", bologna: "Emilia-Romagna",
   modena: "Emilia-Romagna", parma: "Emilia-Romagna", firenze: "Toscana", prato: "Toscana", bari: "Puglia",
   taranto: "Puglia", verona: "Veneto", venezia: "Veneto", padova: "Veneto", trieste: "Friuli Venezia Giulia",
-  "reggio-calabria": "Calabria",
+  "reggio-calabria": "Calabria", "reggio-emilia": "Emilia-Romagna", ravenna: "Emilia-Romagna",
+  rimini: "Emilia-Romagna", ferrara: "Emilia-Romagna", piacenza: "Emilia-Romagna", perugia: "Umbria",
+  livorno: "Toscana", cagliari: "Sardegna", foggia: "Puglia", salerno: "Campania", latina: "Lazio",
+  monza: "Lombardia", bergamo: "Lombardia", vicenza: "Veneto", trento: "Trentino-Alto Adige",
+  bolzano: "Trentino-Alto Adige", novara: "Piemonte",
 };
 
 export interface Scheda {
