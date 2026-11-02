@@ -108,7 +108,7 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 
 ## In attesa (cose ferme lato Giorgia)
 - Immagini AI di Mizi per gli 11 slot in `public/mizi/` (lib/immagini.ts)
-  e foto per Chi siamo (`public/foto-giorgia-domiziana.jpg`).
+  (la foto vera di Giorgia e Domiziana è in public/immagini/, fatta il 2/11).
 - Vercel Web Analytics da attivare nel pannello (il codice c'è già:
   conteggio visite senza cookie, sempre attivo; GA resta solo su consenso).
 - `supabase/backoffice.sql` da incollare nel SQL Editor (contatori schede);

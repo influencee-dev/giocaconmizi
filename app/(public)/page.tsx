@@ -64,7 +64,7 @@ const estratto = (testo: string) => {
   return `${out.slice(0, 236).replace(/\s+\S*$/, "")}…`;
 };
 
-const FOTO_FAMIGLIA = "foto-giorgia-domiziana.jpg";
+const FOTO_FAMIGLIA = "immagini/giorgia-e-domiziana-giocamizi-480.webp";
 
 export default function Home() {
   const vetrina = IN_VETRINA.map((s) => games.find((g) => g.slug === s)).filter(
