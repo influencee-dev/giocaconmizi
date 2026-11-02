@@ -101,6 +101,7 @@ export default function Home() {
           name: "Giocamizi",
           alternateName: "Gioca con Mizi",
           url: url("/"),
+          logo: url("/icon.png"),
           description: "Giochi educativi, storie, inviti di compleanno e guide per genitori di bambini dai 3 ai 12 anni: gratis e senza pubblicità.",
           founder: { "@type": "Person", name: "Giorgia Palazzo", url: url("/chi-siamo") },
           parentOrganization: {

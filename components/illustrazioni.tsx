@@ -11,50 +11,19 @@ import type { Skill } from "@/games/registry";
  * definitive (docs/asset-da-generare.md) basterà sostituire questi componenti.
  */
 
-/** Mizi a figura intera. `saluta` alza l'ala destra (a sinistra per chi guarda). */
+/**
+ * Mizi a figura intera: il disegno ufficiale di Giorgia (public/mizi/, dai
+ * loghi del 2/11/2026), al posto del vecchio SVG. Un <img> semplice, così
+ * funziona anche nei componenti client. `saluta` resta per compatibilità.
+ */
 export function MiziIntero({
-  saluta = true,
   className = "h-full w-full",
 }: {
   saluta?: boolean;
   className?: string;
 }) {
-  return (
-    <svg viewBox="0 0 200 240" className={className} aria-hidden>
-      {/* ala che saluta, dietro il corpo */}
-      {saluta ? (
-        <ellipse cx="38" cy="86" rx="14" ry="40" fill={COLORI.nero} transform="rotate(-38 38 86)" />
-      ) : (
-        <ellipse cx="34" cy="150" rx="13" ry="38" fill={COLORI.nero} transform="rotate(16 34 150)" />
-      )}
-      <ellipse cx="166" cy="150" rx="13" ry="38" fill={COLORI.nero} transform="rotate(-16 166 150)" />
-
-      {/* zampe */}
-      <ellipse cx="76" cy="226" rx="20" ry="10" fill={COLORI.arancione} />
-      <ellipse cx="124" cy="226" rx="20" ry="10" fill={COLORI.arancione} />
-
-      {/* corpo e pancia */}
-      <ellipse cx="100" cy="136" rx="68" ry="88" fill={COLORI.nero} />
-      <ellipse cx="100" cy="156" rx="46" ry="62" fill={COLORI.bianco} />
-
-      {/* faccia */}
-      <ellipse cx="100" cy="84" rx="42" ry="34" fill={COLORI.bianco} />
-      <circle cx="84" cy="78" r="7" fill={COLORI.nero} />
-      <circle cx="116" cy="78" r="7" fill={COLORI.nero} />
-      <circle cx="86.5" cy="75.5" r="2.2" fill={COLORI.bianco} />
-      <circle cx="118.5" cy="75.5" r="2.2" fill={COLORI.bianco} />
-      <path d="M92 92 L108 92 L100 103 Z" fill={COLORI.arancione} />
-      <circle cx="70" cy="94" r="6" fill="#F28AB2" opacity="0.55" />
-      <circle cx="130" cy="94" r="6" fill="#F28AB2" opacity="0.55" />
-
-      {/* sciarpa gialla */}
-      <path
-        d="M56 112 Q100 130 144 112 L144 126 Q100 144 56 126 Z"
-        fill="#F9C846"
-      />
-      <path d="M120 124 L134 168 L112 164 Z" fill="#F9C846" />
-    </svg>
-  );
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img src="/mizi/mizi-intera.webp" alt="" aria-hidden width={442} height={560} className={`object-contain ${className}`} />;
 }
 
 /* ------------------------------------------------------------------ */

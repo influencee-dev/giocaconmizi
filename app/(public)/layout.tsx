@@ -7,9 +7,7 @@ import { games } from "@/games/registry";
 import { GUIDE } from "@/lib/guide";
 import { CITTA_FESTE } from "@/lib/feste";
 import { BannerCookie } from "@/components/legal/BannerCookie";
-import { MiziIntero } from "@/components/illustrazioni";
 import { Freccia } from "@/components/vetrina";
-import { immagineMizi } from "@/lib/immagini";
 
 const MENU = [
   { href: "/giochi", nome: "Giochi" },
@@ -19,19 +17,26 @@ const MENU = [
   { href: "/chi-siamo", nome: "Chi siamo" },
 ];
 
+/** Il logo di Giorgia (public/mizi/, da Drive «Loghi» del 2/11/2026). */
 function Logo() {
-  // Il logo vero (public/mizi/mizi-logo.png) sostituisce il disegno appena c'è.
-  const logo = immagineMizi("mizi-logo");
   return (
-    <Link href="/" className="flex shrink-0 items-center gap-2" aria-label="Giocamizi, torna alla home">
-      {logo ? (
-        <Image src={logo} alt="" width={40} height={40} className="h-9 w-9 object-contain" priority />
-      ) : (
-        <span className="h-9 w-8">
-          <MiziIntero className="h-full w-full" />
-        </span>
-      )}
-      <span className="text-[1.35rem] font-black tracking-tight text-viola">Giocamizi</span>
+    <Link href="/" className="flex shrink-0 items-center" aria-label="Giocamizi, torna alla home">
+      <Image
+        src="/mizi/giocamizi-logo-orizzontale.webp"
+        alt="Giocamizi"
+        width={513}
+        height={176}
+        priority
+        className="h-11 w-auto sm:h-[3.25rem]"
+      />
+    </Link>
+  );
+}
+
+function LogoGrande() {
+  return (
+    <Link href="/" aria-label="Giocamizi, torna alla home" className="w-fit">
+      <Image src="/mizi/giocamizi-logo.webp" alt="Giocamizi" width={640} height={430} className="h-auto w-56" />
     </Link>
   );
 }
@@ -96,7 +101,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
 
       <FasciaNewsletter giochi={games.length} guide={GUIDE.length} citta={CITTA_FESTE.length} />
 
-      <Piede logo={<Logo />} />
+      <Piede logo={<LogoGrande />} />
     </>
   );
 }
