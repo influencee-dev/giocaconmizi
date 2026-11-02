@@ -8,6 +8,7 @@ import { CITTA_FESTE } from "@/lib/feste";
 import { CATEGORIE_ATTIVE, LISTING, SCHEDE, percorsoScheda } from "@/lib/directory";
 import { classi, eta, url } from "@/lib/seo";
 import { chiaveScheda, pubblicate } from "@/lib/directory-db";
+import { dataDi, dataGioco } from "@/lib/date-pagine";
 
 /**
  * Sitemap generata dal registry e dai contenuti: un nuovo gioco o una nuova
@@ -19,7 +20,39 @@ export const revalidate = 600;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const risposte = await pubblicate();
   const tolta = (s: (typeof SCHEDE)[number]) => risposte.get(chiaveScheda(s))?.tipo === "rimuovi";
-  const aggiornato = new Date();
+  // Date vere (lib/date-pagine.json, dalla storia git): Google ignora i
+  // lastmod di una sitemap che dice "modificato adesso" su ogni pagina.
+  // Dove una data non c'è, niente lastmod: meglio di uno falso.
+  const pagina = (percorso: string) =>
+    percorso === "/" ? "app/(public)/page.tsx" : `app/(public)${percorso}/page.tsx`;
+  const giochiLive = games.filter((g) => g.status === "live");
+  const ultimoGioco = dataDi(...giochiLive.map((g) => dataGioco(g.slug)?.toISOString().slice(0, 10)));
+  const giorno = (d: Date | undefined) => d?.toISOString().slice(0, 10);
+  const ultimaCitta = CITTA_FESTE.map((c) => c.aggiornata).sort().at(-1);
+  const ultimaGuida = GUIDE.map((g) => g.aggiornata).sort().at(-1);
+  const storie = tutteLeStorie();
+  const ultimaStoria = dataDi(...storie.map((s) => `content/stories/${s.slug}.md`));
+  /** Le pagine indice cambiano quando cambia ciò che elencano. */
+  const DATI_INDICE: Record<string, (string | undefined)[]> = {
+    "/": [giorno(ultimoGioco), ultimaGuida, ultimaCitta],
+    "/giochi": [giorno(ultimoGioco)],
+    "/storie": [giorno(ultimaStoria)],
+    "/storie/stampatello": [giorno(ultimaStoria)],
+    "/storie/minuscolo": [giorno(ultimaStoria)],
+    "/storie/corsivo": [giorno(ultimaStoria)],
+    "/coding": [giorno(dataDi(...giochiLive.filter((g) => g.skill === "coding").map((g) => giorno(dataGioco(g.slug)))))],
+    "/biglietti": ["lib/biglietti.ts", "cards/registry.ts"],
+    "/biglietti/crea": ["cards/registry.ts"],
+    "/biglietti/esempi": ["lib/esempi.ts"],
+    "/guide": [ultimaGuida],
+    "/feste": [ultimaCitta],
+    "/metodo": ["content/hubs/metodo.md"],
+    "/perche-lo-facciamo": ["content/hubs/perche-lo-facciamo.md"],
+  };
+  const ALIAS_COMPETENZA: Record<string, string[]> = {
+    lettere: ["alfabeto", "fonetica", "lettura"],
+    lettura: ["lettura", "comprensione"],
+  };
 
   const statiche = [
     "/",
@@ -53,7 +86,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const voci: MetadataRoute.Sitemap = [
     ...statiche.map((percorso) => ({
       url: url(percorso),
-      lastModified: aggiornato,
+      lastModified: dataDi(pagina(percorso), ...(DATI_INDICE[percorso] ?? [])),
       changeFrequency: "weekly" as const,
       priority: percorso === "/" ? 1 : 0.8,
     })),
@@ -61,21 +94,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Hub per età: sono le pagine che intercettano la domanda principale (§1.1)
     ...eta.map((anni) => ({
       url: url(`/giochi/eta/${anni}-anni`),
-      lastModified: aggiornato,
+      lastModified: dataDi(
+        `content/hubs/${anni}-anni.md`,
+        ...giochiLive.filter((g) => anni >= g.ageMin && anni <= g.ageMax).map((g) => giorno(dataGioco(g.slug))),
+      ),
       changeFrequency: "weekly" as const,
       priority: 0.9,
     })),
 
     ...competenze.map((skill) => ({
       url: url(`/giochi/competenza/${skill}`),
-      lastModified: aggiornato,
+      lastModified: dataDi(
+        ...giochiLive
+          .filter((g) => (ALIAS_COMPETENZA[skill] ?? [skill]).includes(g.skill))
+          .map((g) => giorno(dataGioco(g.slug))),
+      ),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     })),
 
     ...classi.map((classe) => ({
       url: url(`/compiti-vacanze/${classe}`),
-      lastModified: aggiornato,
+      lastModified: dataDi("app/(public)/compiti-vacanze/[classe]/page.tsx"),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
@@ -83,7 +123,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Le pagine locali delle feste: una per città, keyword locale (GEO)
     ...CITTA_FESTE.map((c) => ({
       url: url(`/feste/${c.slug}`),
-      lastModified: new Date(c.aggiornata),
+      lastModified: dataDi(c.aggiornata),
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
@@ -91,18 +131,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // La directory: categoria → città → scheda (docs/piano-directory.md)
     ...CATEGORIE_ATTIVE.map((c) => ({
       url: url(`/${c.slug}`),
+      lastModified: dataDi(ultimaCitta),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     })),
     ...LISTING.map((l) => ({
       url: url(`/${l.categoria.slug}/${l.cittaSlug}`),
-      lastModified: new Date(CITTA_FESTE.find((c) => c.slug === l.cittaSlug)?.aggiornata ?? Date.now()),
+      lastModified: dataDi(CITTA_FESTE.find((c) => c.slug === l.cittaSlug)?.aggiornata),
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
     ...SCHEDE.filter((s) => !tolta(s)).map((s) => ({
       url: url(percorsoScheda(s)),
-      lastModified: new Date(CITTA_FESTE.find((c) => c.slug === s.cittaSlug)?.aggiornata ?? Date.now()),
+      lastModified: dataDi(CITTA_FESTE.find((c) => c.slug === s.cittaSlug)?.aggiornata),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
@@ -110,28 +151,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Le guide per i genitori: contenuto evergreen, priorità alta (AEO)
     ...GUIDE.map((g) => ({
       url: url(`/guide/${g.slug}`),
-      lastModified: new Date(g.aggiornata),
+      lastModified: dataDi(g.aggiornata),
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
 
     ...[5, 6, 7].map((anni) => ({
       url: url(`/storie/eta/${anni}-anni`),
-      lastModified: aggiornato,
+      lastModified: ultimaStoria,
       changeFrequency: "weekly" as const,
       priority: 0.7,
     })),
 
     ...games.map((g) => ({
       url: url(`/giochi/${g.slug}`),
-      lastModified: aggiornato,
+      lastModified: dataGioco(g.slug),
       changeFrequency: "monthly" as const,
       priority: g.status === "live" ? 0.8 : 0.5,
     })),
 
-    ...tutteLeStorie().map((s) => ({
+    ...storie.map((s) => ({
       url: url(`/storie/${s.slug}`),
-      lastModified: aggiornato,
+      lastModified: dataDi(`content/stories/${s.slug}.md`),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
@@ -139,7 +180,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Le pagine dei biglietti sono generate da template (piano §14.2)
     ...tutteLePagine().map(({ slug }) => ({
       url: url(`/biglietti/${slug}`),
-      lastModified: aggiornato,
+      lastModified: dataDi("lib/biglietti.ts", "cards/registry.ts"),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
@@ -147,7 +188,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Gli esempi entrano in sitemap solo quando la loro immagine esiste
     ...esempiPubblicati().map((e) => ({
       url: url(`/biglietti/esempi/${e.slug}`),
-      lastModified: aggiornato,
+      lastModified: dataDi("lib/esempi.ts"),
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),

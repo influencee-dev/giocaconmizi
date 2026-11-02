@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "sync-content": "tsx scripts/sync-content-to-db.ts",
     "export-pdf": "tsx scripts/export-pdf.ts",
-    "verifica": "node scripts/verifica/tutte.mjs"
+    "verifica": "node scripts/verifica/tutte.mjs",
+    "date-pagine": "node scripts/date-pagine.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",

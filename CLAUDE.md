@@ -13,6 +13,10 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   verificata (vedi public/icone/LICENZA.txt).
 - Niente pubblicità, timer, dark pattern; dati dei bambini al minimo
   (vedi lib/legal.ts: un tracciamento nuovo = una voce nel registro).
+- Prima di OGNI push, `npm run date-pagine` (date vere per i lastmod della
+  sitemap, dalla storia git: serve il clone completo, quindi in un clone
+  `--depth` prima `git fetch --unshallow origin main`). La batteria seo
+  fallisce se lib/date-pagine.json non è allineato.
 - Prima di OGNI push, verifica TRE volte (regola di Giorgia):
   1. `npm run typecheck && npm run lint && npm run build`
   2. `npm run verifica` (batterie Playwright da mobile, scripts/verifica/)

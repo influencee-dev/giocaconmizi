@@ -35,6 +35,26 @@ ok("sitemap: nessun URL doppio", new Set(locs).size === locs.length, `${locs.len
 // 262 pagine il 25/10/2026: sotto 250 vuol dire che una sezione è sparita.
 ok("sitemap: almeno 250 pagine", locs.length >= 250, `${locs.length}`);
 
+// 2-bis. lastmod veri (dal 02/11/2026): Google li ignora se dicono "adesso"
+// su ogni pagina. Ogni lastmod è un giorno intero dalla storia git
+// (lib/date-pagine.json), mai nel futuro; i giochi ce l'hanno tutti; il
+// file delle date è allineato ai sorgenti (npm run date-pagine).
+const voci = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => ({
+  loc: m[1].match(/<loc>([^<]+)<\/loc>/)?.[1] ?? "",
+  lastmod: m[1].match(/<lastmod>([^<]+)<\/lastmod>/)?.[1],
+}));
+const conData = voci.filter((v) => v.lastmod);
+const adesso = conData.filter((v) => !/T00:00:00(\.000)?Z$/.test(v.lastmod));
+ok("sitemap: nessun lastmod «adesso», solo giorni veri", adesso.length === 0, adesso.slice(0, 2).map((v) => `${v.loc} ${v.lastmod}`).join(" "));
+const domani = Date.now() + 86400000;
+const futuri = conData.filter((v) => Date.parse(v.lastmod) > domani);
+ok("sitemap: nessun lastmod nel futuro", futuri.length === 0, futuri.slice(0, 2).map((v) => v.loc).join(" "));
+const giochiSenza = voci.filter((v) => /\/giochi\/[a-z0-9-]+$/.test(new URL(v.loc).pathname) && !v.lastmod);
+ok("sitemap: ogni gioco ha il suo lastmod", giochiSenza.length === 0, giochiSenza.slice(0, 3).map((v) => v.loc).join(" "));
+const { spawnSync } = await import("node:child_process");
+const controllo = spawnSync("node", ["scripts/date-pagine.mjs", "--controlla"], { encoding: "utf8" });
+ok("date-pagine.json allineato ai sorgenti", controllo.status === 0, (controllo.stderr || controllo.stdout).trim());
+
 // 3. Ogni pagina della sitemap: 200, un solo canonical, su sé stessa e sul
 // dominio; og:url coerente; i JSON-LD non citano altri domini del sito.
 const problemi = [];

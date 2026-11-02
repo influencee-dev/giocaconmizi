@@ -1973,6 +1973,40 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "arezzo",
+    citta: "Arezzo",
+    aggiornata: "2026-11-02",
+    rispostaBreve: "Ad Arezzo la festa di compleanno per bambini si può fare in uno spazio che affitta le sale e offre l'animazione per le feste private, come Spazio Seme in via del Pantano, il centro artistico accanto alle piscine con due sale che diventano un unico ambiente di circa 220 m², oppure nell'area giochi Moovy Land del centro commerciale Al Magnifico, che ha baby parking e mini club ed è pensata anche per i compleanni. Chiedete prima cosa comprende il prezzo, dall'animazione alla merenda, e prenotate per tempo se puntate al weekend.",
+    intro: "Arezzo è una città raccolta, dove il centro storico e i quartieri sono vicini e muoversi con i bambini è facile. Per il compleanno si può scegliere tra un centro artistico con sale ampie e animazione su richiesta e un'area giochi al coperto dentro un centro commerciale, comoda in ogni stagione.",
+    locali: [
+      { nome: "Spazio Seme", zona: "Arezzo (via del Pantano, accanto alle Piscine Pantano)", tipo: "sala in affitto con animazione", descrizione: "Centro artistico nato nel 2012, con corsi e laboratori per bambini, ragazzi e adulti. Ha circa 350 m² con due sale che si uniscono in un unico spazio di circa 220 m², un punto ristoro e spogliatoi con docce, e oltre alle attività artistiche offre l'affitto delle sale e l'animazione per feste private.", sito: "https://www.spazioseme.com/" },
+      { nome: "Moovy Land", zona: "Arezzo (centro commerciale Al Magnifico)", tipo: "area giochi al coperto", descrizione: "Il playground per bambini del centro commerciale Al Magnifico, con baby parking e un mini club che propone giochi, attività educative ed eventi. Il centro lo indica come adatto alle feste di compleanno e ai momenti di gioco in sicurezza.", sito: "https://www.almagnifico.it/divertimento/" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia un compleanno al coperto ad Arezzo?", risposta: "Due formule diverse: le sale di Spazio Seme, in via del Pantano, che si affittano per le feste private con l'animazione, oppure l'area giochi Moovy Land dentro il centro commerciale Al Magnifico, con baby parking e mini club." },
+      { domanda: "Che spazio serve per tanti invitati?", risposta: "Se la lista è lunga conviene uno spazio ampio: le due sale di Spazio Seme si uniscono in un unico ambiente di circa 220 m². Chiedete sempre quanti bambini e adulti sono ammessi e cosa è incluso nell'affitto." },
+      { domanda: "Posso portare merenda e torta da casa?", risposta: "Dipende dal posto: chiedetelo al momento della prenotazione, insieme alle regole su allestimento e pulizie, perché cambiano da struttura a struttura." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "udine",
+    citta: "Udine",
+    aggiornata: "2026-11-02",
+    rispostaBreve: "A Udine la festa di compleanno per bambini si fa in un parco giochi al coperto come il Bianconiglio Playland di via Tricesimo, con gonfiabili, area baby e pacchetti festa tutto compreso fino a tre ore (o la formula «fai da te» in una saletta accanto ai giochi), oppure in uno spazio più raccolto come la Fata dei Lillà, a Cussignacco, dove educatrici e psicomotriciste preparano feste su misura con giochi di movimento e musica, o si affitta solo la sala per bambini fino a 7 anni. Prenotate con anticipo e chiedete quali formule valgono nel weekend.",
+    intro: "Udine è una città a misura di famiglia, con spazi per i bambini sparsi tra i quartieri. Per il compleanno si può scegliere tra un grande parco giochi al coperto, comodo con tanti invitati e in ogni stagione, e uno spazio più piccolo dedicato al movimento, pensato soprattutto per i più piccoli.",
+    locali: [
+      { nome: "Bianconiglio Playland & Cafè", zona: "Udine (via Tricesimo)", tipo: "parco giochi al coperto", descrizione: "Parco giochi e ludoteca al coperto con gonfiabili e area baby, pensato per bambini da circa un anno ai 10 anni, con un bar per i genitori. Per il compleanno propone tre pacchetti tutto compreso, con inviti, area riservata, allestimento, cibo e bevande, oppure la formula «fai da te» in una saletta accanto all'area giochi, da 5 a 25 bambini; la festa dura al massimo tre ore. A richiesta si aggiungono animazione e truccabimbi.", sito: "https://www.bianconiglio-playland.it/" },
+      { nome: "Fata dei Lillà", zona: "Udine (Cussignacco)", tipo: "sala feste con animazione", descrizione: "Associazione che segue i bambini da 0 a 10 anni con psicomotricità, movimento e gioco. Le feste sono costruite su misura per il festeggiato da educatrici, psicomotriciste e insegnanti di movimento, con giochi di movimento, giochi musicali e piccoli laboratori creativi, senza mascotte né animatori in costume. Chi preferisce fare da sé può affittare solo la sala, pensata per bambini fino a 7 anni, con tavoli, frigorifero, impianto musicale e materiali di gioco.", sito: "https://www.fatadeililla.it/" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia un compleanno al coperto a Udine?", risposta: "Al Bianconiglio Playland di via Tricesimo, un parco giochi al coperto con gonfiabili, area baby e pacchetti festa, oppure alla Fata dei Lillà, a Cussignacco, che organizza feste con giochi di movimento e musica e affitta la sala a chi vuole organizzare da sé." },
+      { domanda: "Si può portare cibo da casa?", risposta: "Dipende dalla formula: al Bianconiglio, con i pacchetti tutto compreso non si porta cibo da fuori a parte la torta, mentre nella formula «fai da te» il cibo deve essere confezionato o tracciabile, per esempio da panetteria o pasticceria. Alla Fata dei Lillà, se affittate solo la sala, decorazioni, torta e merenda sono a cura della famiglia." },
+      { domanda: "E per i bambini più piccoli?", risposta: "Il Bianconiglio ha un'area baby e accoglie bambini da circa un anno; la sala della Fata dei Lillà è pensata per feste fino a 7 anni, e dai 5 anni si può scegliere la formula in cui i genitori accompagnano i bambini e tornano per la torta." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {
