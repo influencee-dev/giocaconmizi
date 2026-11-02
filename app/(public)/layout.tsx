@@ -1,12 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { JsonLd, jsonLdSito } from "@/components/seo/JsonLd";
-import { FormGenitore } from "@/components/form/FormGenitore";
+import { FasciaNewsletter } from "@/components/form/FasciaNewsletter";
+import { Piede } from "@/components/vetrina/Piede";
+import { games } from "@/games/registry";
+import { GUIDE } from "@/lib/guide";
+import { CITTA_FESTE } from "@/lib/feste";
 import { BannerCookie } from "@/components/legal/BannerCookie";
 import { MiziIntero } from "@/components/illustrazioni";
 import { Freccia } from "@/components/vetrina";
 import { immagineMizi } from "@/lib/immagini";
-import { SOCIETA } from "@/lib/legal";
 
 const MENU = [
   { href: "/giochi", nome: "Giochi" },
@@ -14,50 +17,6 @@ const MENU = [
   { href: "/guide", nome: "Guide" },
   { href: "/storie", nome: "Storie" },
   { href: "/chi-siamo", nome: "Chi siamo" },
-];
-
-const PIEDE: { titolo: string; voci: [string, string][] }[] = [
-  {
-    titolo: "Gioca",
-    voci: [
-      ["/giochi", "Tutti i giochi"],
-      ["/giochi/eta/5-anni", "Giochi per età"],
-      ["/storie", "Storie da leggere"],
-      ["/coding", "Coding"],
-      ["/compiti-vacanze/prima-elementare", "Compiti delle vacanze"],
-    ],
-  },
-  {
-    titolo: "Feste",
-    voci: [
-      ["/biglietti", "Inviti di compleanno"],
-      ["/feste", "Feste per città"],
-      ["/ludoteche", "Ludoteche"],
-      ["/sale-feste", "Sale feste"],
-      ["/parchi-giochi-al-coperto", "Parchi al coperto"],
-    ],
-  },
-  {
-    titolo: "Chi siamo",
-    voci: [
-      ["/chi-siamo", "Chi siamo"],
-      ["/metodo", "Il nostro metodo"],
-      ["/perche-lo-facciamo", "Perché lo facciamo"],
-      ["/per-insegnanti", "Per insegnanti"],
-      ["/per-le-mamme", "Per le mamme"],
-    ],
-  },
-  {
-    titolo: "Info",
-    voci: [
-      ["/guide", "Guide per genitori"],
-      ["/privacy", "Privacy"],
-      ["/cookie", "Cookie"],
-      ["/note-legali", "Note legali"],
-      ["/termini-attivita", "Per le attività"],
-      ["/accedi", "Accedi"],
-    ],
-  },
 ];
 
 function Logo() {
@@ -135,50 +94,9 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
 
       <BannerCookie />
 
-      <footer className="mt-20 border-t border-notte/10 bg-crema">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-10 pt-14 sm:px-8 lg:grid-cols-[1.2fr_2fr]">
-          <div className="flex flex-col gap-5">
-            <Logo />
-            <p className="max-w-sm text-[15px] leading-relaxed text-notte-tenue">
-              Giochi educativi, storie e feste per bambini dai 3 ai 12 anni. Gratis, senza pubblicità e senza timer,
-              fatto da una mamma.
-            </p>
-            <div className="max-w-sm">
-              <FormGenitore
-                origine="footer"
-                titolo="Vi mandiamo i giochi nuovi?"
-                sottotitolo="Una email ogni tanto, con i giochi e le storie nuove. Niente pubblicità."
-              />
-            </div>
-          </div>
-          <nav aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-            {PIEDE.map((col) => (
-              <div key={col.titolo} className="flex flex-col gap-2.5">
-                <p className="font-extrabold text-notte">{col.titolo}</p>
-                {col.voci.map(([href, nome]) => (
-                  <Link key={href} href={href} className="text-[15px] text-notte-tenue hover:text-viola">
-                    {nome}
-                  </Link>
-                ))}
-              </div>
-            ))}
-          </nav>
-        </div>
-        <div className="border-t border-notte/10">
-          <p className="mx-auto max-w-6xl px-4 py-5 text-sm text-notte-tenue sm:px-8">
-            © 2026 Giocamizi, un&apos;idea di Giorgia Palazzo · Gestito da {SOCIETA.ragioneSociale}, {SOCIETA.sede} · P.IVA{" "}
-            {SOCIETA.piva} · REA {SOCIETA.rea} · Capitale sociale {SOCIETA.capitale} · Icone:{" "}
-            <a href="https://github.com/microsoft/fluentui-emoji" target="_blank" rel="noopener" className="underline underline-offset-2 hover:text-viola">
-              Fluent Emoji
-            </a>{" "}
-            (MIT) e{" "}
-            <a href="https://github.com/jdecked/twemoji" target="_blank" rel="noopener" className="underline underline-offset-2 hover:text-viola">
-              Twemoji
-            </a>{" "}
-            (CC-BY 4.0)
-          </p>
-        </div>
-      </footer>
+      <FasciaNewsletter giochi={games.length} guide={GUIDE.length} citta={CITTA_FESTE.length} />
+
+      <Piede logo={<Logo />} />
     </>
   );
 }

@@ -73,6 +73,24 @@ const chiuse = await Promise.all(["schede", "iscritti", "schede/milano/il-nano-g
   fetch(`${BASE}/admin/codice-sbagliato-000000/${p}`).then((r) => r.text())));
 ok("pannello: tutte le sezioni chiuse senza codice", chiuse.every((t) => t.includes("Pannello non disponibile") && !t.includes("Genitori iscritti") && !t.includes("visite ·")));
 
+// 5. La fascia newsletter: in tutto il sito tranne dentro i giochi; senza
+// la spunta del consenso non parte niente (mai spuntata in partenza).
+await page.goto(`${BASE}/guide`, { waitUntil: "networkidle" });
+const fascia = page.locator("#newsletter");
+ok("newsletter: fascia presente nelle pagine", (await fascia.count()) === 1);
+ok("newsletter: consenso non spuntato in partenza", !(await fascia.getByRole("checkbox").isChecked()));
+let chiamate = 0;
+page.on("request", (r) => { if (r.url().endsWith("/api/brevo")) chiamate++; });
+await fascia.getByLabel("La tua email").fill("prova@esempio.it");
+await fascia.getByRole("button", { name: "7", exact: true }).tap();
+await fascia.getByRole("button", { name: "Sì, voglio la posta di Mizi" }).tap();
+await page.waitForTimeout(400);
+ok("newsletter: senza consenso non invia e lo dice", chiamate === 0 && (await fascia.getByRole("alert").isVisible()));
+await page.goto(`${BASE}/giochi/salvadanaio/gioca`, { waitUntil: "networkidle" });
+ok("newsletter: niente fascia dentro un gioco", (await page.locator("#newsletter").count()) === 0);
+const piede = await fetch(`${BASE}/`).then((r) => r.text());
+ok("piè di pagina: dati della società e quattro porte", piede.includes("04405500408") && piede.includes("REA") && (piede.match(/Foto illustrativa AI/g) ?? []).length >= 4);
+
 await browser.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("admin") ? 0 : 1);

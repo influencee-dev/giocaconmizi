@@ -70,8 +70,11 @@ export function Foto({
   sizes = "(min-width: 1024px) 33vw, 100vw",
   priority = false,
   nota = true,
+  oppure,
 }: {
   codice: CodiceFoto;
+  /** Se la foto del codice non c'è ancora, prova questa prima del disegno. */
+  oppure?: CodiceFoto;
   tono?: Tono;
   ripiego?: ReactNode;
   className?: string;
@@ -79,7 +82,7 @@ export function Foto({
   priority?: boolean;
   nota?: boolean;
 }) {
-  const foto = fotoSito(codice);
+  const foto = fotoSito(codice) ?? (oppure ? fotoSito(oppure) : null);
   if (foto) {
     return (
       <figure className={`relative overflow-hidden ${className}`}>

@@ -7,7 +7,8 @@
 export type CodiceFoto =
   | "H-01" | "H-02" | "H-03" | "H-04" | "H-05" | "H-06" | "H-07" | "H-08"
   | "G-01" | "F-01" | "F-02" | "P-01" | "S-01" | "S-02" | "S-03"
-  | "I-02" | "I-03" | "I-04" | "I-05";
+  | "I-02" | "I-03" | "I-04" | "I-05"
+  | "FT-01" | "FT-02" | "FT-03" | "FT-04";
 
 export interface SchedaFoto {
   /** Nome file base, senza larghezza né estensione (parole chiave SEO). */
@@ -37,6 +38,12 @@ export const FOTO: Record<CodiceFoto, SchedaFoto> = {
   "I-03": { file: "giochi-gratis-senza-pubblicita-famiglia", rapporto: 4 / 3, alt: "Mamma e figlio ridono sul divano dopo un gioco senza pubblicità, con Mizi in braccio" },
   "I-04": { file: "giochi-educativi-in-classe-lim", rapporto: 4 / 3, alt: "Maestra e bambini di prima elementare giocano a un gioco educativo sulla LIM, con Mizi sulla cattedra" },
   "I-05": { file: "rete-delle-mamme-incontro-parco", rapporto: 4 / 3, alt: "Gruppo di mamme con passeggini e bambini si incontra al parco, con Mizi su una panchina" },
+  // Piè di pagina (2/11/2026): quattro foto quadrate. Finché mancano, il piè
+  // di pagina usa la foto della sezione (G-01, F-01, S-01, I-03).
+  "FT-01": { file: "giochi-educativi-gratis-con-mizi", rapporto: 1, alt: "Bambini giocano con Mizi a un gioco educativo gratis" },
+  "FT-02": { file: "feste-di-compleanno-con-mizi", rapporto: 1, alt: "Festa di compleanno per bambini con Mizi" },
+  "FT-03": { file: "storie-per-bambini-con-mizi", rapporto: 1, alt: "Una storia da leggere insieme a Mizi" },
+  "FT-04": { file: "mamme-e-bambini-con-mizi", rapporto: 1, alt: "Mamma e bambino sorridono insieme a Mizi" },
 };
 
 export const LARGHEZZE = [1440, 960, 800, 640, 480];
