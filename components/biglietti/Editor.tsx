@@ -8,6 +8,7 @@ import { biglietoInPng, datiPerLink, foglioA4, leggiDatiDaLink, linkInvito, nume
 import { FORMATI, frasi, misure, temi, TIPI, type FormatoId, type Tipo } from "@/lib/biglietti";
 import { VARIANTI, type Variante } from "./Sfondo";
 import { Etichette, FOGLIO_A4, MAX_ETICHETTE, nomiOspiti } from "./Etichette";
+import { FoglioFestone, PER_FOGLIO, TESTI_FESTONE, bandierine, fogli, type TestoFestone } from "./Festone";
 
 /**
  * Il tool dei biglietti (piano §14.3).
@@ -52,6 +53,10 @@ export function Editor() {
   const [ospiti, setOspiti] = useState("");
   const foglioEtichette = useRef<HTMLDivElement>(null);
   const nomi = useMemo(() => nomiOspiti(ospiti), [ospiti]);
+  // Il festone usa solo il nome del festeggiato, già nel biglietto.
+  const [testoFestone, setTestoFestone] = useState<TestoFestone>("buon-compleanno");
+  const fogliFestone = useRef<HTMLDivElement>(null);
+  const fogliDelFestone = useMemo(() => fogli(bandierine(testoFestone, dati.nome)), [testoFestone, dati.nome]);
   const contenitore = useRef<HTMLDivElement>(null);
   const trascinato = useRef<number | null>(null);
 
@@ -197,6 +202,19 @@ export function Editor() {
     link.href = png;
     link.click();
   }, [dati.nome]);
+
+  const scaricaFestone = useCallback(
+    async (pagina: number) => {
+      const svg = fogliFestone.current?.querySelector(`[data-foglio-festone="${pagina}"]`);
+      if (!(svg instanceof SVGSVGElement)) return;
+      const png = await biglietoInPng(svg, FOGLIO_A4.larghezza, FOGLIO_A4.altezza);
+      const link = document.createElement("a");
+      link.download = `festone-${dati.nome || "compleanno"}-${pagina}.png`.toLowerCase().replace(/\s+/g, "-");
+      link.href = png;
+      link.click();
+    },
+    [dati.nome],
+  );
 
   const salvaNelLink = useCallback(() => {
     const codificato = datiPerLink(dati);
@@ -556,6 +574,64 @@ export function Editor() {
             {nomi.length > 0 && (
               <Etichette nomi={nomi} tema={dati.tema} variante={dati.variante} festeggiato={dati.nome} />
             )}
+          </div>
+        </Gruppo>
+
+        <Gruppo titolo="8. Festone col nome">
+          <p className="text-sm text-notte-tenue">
+            Una bandierina per lettera, nello stesso tema del biglietto, 6 per foglio A4.
+            Ritaglia sul tratteggio, piega la linguetta sullo spago e incolla: il numerino
+            dice l&apos;ordine.
+          </p>
+          <fieldset className="flex flex-col gap-2">
+            <legend className="mb-1 font-bold text-notte">Cosa c&apos;è scritto</legend>
+            {TESTI_FESTONE.map((t) => (
+              <label key={t.id} className="flex items-center gap-3 text-notte">
+                <input
+                  type="radio"
+                  name="testo-festone"
+                  checked={testoFestone === t.id}
+                  onChange={() => setTestoFestone(t.id)}
+                  className="h-5 w-5 accent-[#9B6DD6]"
+                />
+                {t.etichetta}
+              </label>
+            ))}
+          </fieldset>
+          {fogliDelFestone.length === 0 ? (
+            <p className="text-sm text-notte-tenue">Scrivi il nome del festeggiato al punto 3.</p>
+          ) : (
+            <>
+              <p className="text-sm text-notte-tenue">
+                {fogliDelFestone.flat().length} bandierine su {fogliDelFestone.length}{" "}
+                {fogliDelFestone.length === 1 ? "foglio" : "fogli"}: scarica e stampa ogni foglio.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {fogliDelFestone.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => scaricaFestone(i + 1)}
+                    className="rounded-bolla bg-viola px-5 py-3 font-extrabold text-white"
+                  >
+                    Scarica il foglio {i + 1} di {fogliDelFestone.length}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+          {/* I fogli veri, fuori dallo schermo: servono solo per generare i PNG. */}
+          <div ref={fogliFestone} aria-hidden className="hidden">
+            {fogliDelFestone.map((lettere, i) => (
+              <FoglioFestone
+                key={i}
+                lettere={lettere}
+                primo={i * PER_FOGLIO + 1}
+                tema={dati.tema}
+                variante={dati.variante}
+                pagina={i + 1}
+              />
+            ))}
           </div>
         </Gruppo>
       </div>

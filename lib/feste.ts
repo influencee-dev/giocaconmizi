@@ -2007,6 +2007,40 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "cesena",
+    citta: "Cesena",
+    aggiornata: "2026-11-02",
+    rispostaBreve: "A Cesena la festa di compleanno per bambini si fa nel verde del Parco Rio Marano, che ha pacchetti compleanno dai 4 anni in su con gonfiabili e reti elastiche senza limiti di tempo e una merenda con la pizza, oppure al coperto in una ludoteca come Libera-mente, a Capannaguzzo, che riserva lo spazio per le feste con area gioco, angolo per torta e buffet e una caffetteria per i genitori. Prenotate per tempo e, se scegliete il parco, chiedete sempre cosa succede in caso di pioggia.",
+    intro: "Cesena ha la campagna a pochi minuti dal centro, e per un compleanno è un vantaggio: si può festeggiare all'aperto in un grande parco giochi nel verde oppure in una ludoteca al coperto, comoda in ogni stagione. Due posti diversi, uno per chi vuole correre e saltare, l'altro per chi cerca uno spazio raccolto anche d'inverno.",
+    locali: [
+      { nome: "Parco Rio Marano", zona: "Cesena (via Vicinale Papa)", tipo: "parco giochi, spazi all'aperto", descrizione: "Parco giochi nel verde con oltre 20 giochi e attrazioni, tra cui gonfiabili, reti elastiche, scivoli, castelli in legno, minigolf, il Rio Tree Village e un'area protetta per i bimbi da 0 a 3 anni, con ristorante e pizzeria. I pacchetti compleanno, per bambini dai 4 anni, comprendono gonfiabili e reti senza limiti di tempo e una merenda con pizza, crocchette, panini dolci, frutta e bibite; la torta si può prendere al parco o portare da pasticceria o gelateria con lo scontrino.", sito: "https://www.riomaranocesena.it/" },
+      { nome: "Libera-mente APS", zona: "Cesena (Capannaguzzo, via Capannaguzzo)", tipo: "ludoteca", descrizione: "Ludoteca e spazio ricreativo e sensoriale per bambini, con un'area gioco attrezzata con giochi adatti a tutte le età, una zona costruzioni, laboratori sensoriali e creativi e una caffetteria dove i genitori si siedono mentre i bambini giocano. Lo spazio si può riservare per le feste di compleanno e gli eventi in esclusiva, con l'area gioco, uno spazio per il taglio della torta e il buffet e un aiuto nell'organizzazione. È un'associazione di promozione sociale: al primo ingresso si fa l'iscrizione, che serve anche per l'assicurazione.", sito: "https://www.libera-mente-aps.it/" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia un compleanno per bambini a Cesena?", risposta: "Due formule diverse: i pacchetti compleanno del Parco Rio Marano, nel verde, con gonfiabili, reti elastiche e merenda, oppure una festa al coperto nella ludoteca Libera-mente, a Capannaguzzo, che riserva lo spazio con area gioco e angolo per torta e buffet." },
+      { domanda: "E se piove?", risposta: "La ludoteca Libera-mente è al coperto, quindi va bene in ogni stagione. Il Parco Rio Marano è soprattutto all'aperto: al momento della prenotazione chiedete cosa succede in caso di maltempo." },
+      { domanda: "Da che età vanno bene questi posti?", risposta: "I pacchetti compleanno del Rio Marano sono pensati dai 4 anni in su, e per i più piccoli il parco ha un'area protetta da 0 a 3 anni. Libera-mente ha giochi per tutte le età; ricordate le calze antiscivolo e, per la zona costruzioni, le scarpe." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "lecce",
+    citta: "Lecce",
+    aggiornata: "2026-11-02",
+    rispostaBreve: "A Lecce la festa di compleanno per bambini si fa soprattutto nelle sale feste appena fuori città, verso Cavallino: LuluParty ha 200 m² climatizzati con playground, area buffet e spazio per la torta e un pacchetto con assistenti in sala e baby dance, mentre il Magic Land di Castromediano organizza feste di due ore con gioco gonfiabile, piscine di palline per i più piccoli e due animatori fino a 20 bambini. Le sale si riempiono presto: prenotate con mesi di anticipo e chiedete cosa è incluso, perché cibo e torta di solito si aggiungono a parte.",
+    intro: "Lecce è una città raccolta, e molte sale per le feste dei bambini stanno nei comuni attaccati alla città, a pochi minuti di macchina. Per il compleanno si può scegliere tra una sala grande con playground e un pacchetto con l'animazione, oppure una sala con gonfiabile e giochi guidati dagli animatori, pensata soprattutto per i più piccoli.",
+    locali: [
+      { nome: "LuluParty", zona: "Cavallino (via Miglietta), alle porte di Lecce", tipo: "sala feste con playground", descrizione: "Sala feste per bambini di circa 200 m² climatizzati, con playground, un'area buffet e uno spazio per il taglio della torta. Il pacchetto base comprende la sala, gli assistenti, i popcorn, la baby dance e una mascotte al momento della torta; menu per bambini e adulti, torta personalizzata e servizio caffè si aggiungono su richiesta.", sito: "https://luluparty.it/" },
+      { nome: "Magic Land", zona: "Castromediano (Cavallino), alle porte di Lecce", tipo: "sala feste con animazione", descrizione: "La sala feste per bambini della scuola di ballo Puerta del Sol. La festa dura due ore, più venti minuti per salutare gli ospiti, e comprende un operatore all'accoglienza, due animatori fino a 20 bambini, un gioco gonfiabile, piscine di palline con tappeti antitrauma per i più piccoli e la sala climatizzata, con un'area divani per i genitori. Non c'è una cucina interna: merenda e catering li sceglie la famiglia. La sala ospita una sola festa al giorno e il calendario si riempie con mesi di anticipo.", sito: "https://www.puerta.it/magic-land-sala-bambini/" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia un compleanno per bambini a Lecce?", risposta: "Nelle sale feste appena fuori città, verso Cavallino: LuluParty, con 200 m² di sala e playground, oppure il Magic Land di Castromediano, con gioco gonfiabile e animatori. Sono a pochi minuti di macchina dal centro." },
+      { domanda: "Con quanto anticipo bisogna prenotare?", risposta: "Prima che potete: il Magic Land ospita una sola festa al giorno e scrive che il calendario si riempie con mesi di anticipo. Per il sabato e la domenica muovetevi appena avete la data." },
+      { domanda: "Posso portare merenda e torta da casa?", risposta: "Dipende dalla sala: al Magic Land non c'è una cucina interna e merenda e catering li sceglie la famiglia, mentre LuluParty propone a richiesta menu per bambini e adulti e la torta. Chiedetelo al momento della prenotazione, insieme a cosa comprende il prezzo." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

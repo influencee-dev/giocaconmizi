@@ -84,6 +84,26 @@ const codiceLink = new URL(page.url()).searchParams.get("b") ?? "";
 const nelLink = Buffer.from(decodeURIComponent(codiceLink), "base64").toString("utf8");
 ok("etichette: i nomi degli invitati non vanno nel link", codiceLink.length > 0 && !nelLink.includes("Martina") && !nelLink.includes("Aurora"));
 
+// Festone col nome: "BUON ★ COMPLEANNO ★ DOMIZIANA" sono 25 bandierine,
+// 6 per foglio = 5 fogli; ogni foglio si scarica come PNG A4. "Solo il nome"
+// scende a 9 bandierine su 2 fogli.
+const contaBandierine = async () =>
+  (await page.locator("[data-foglio-festone]").evaluateAll((f) => f.map((x) => Number(x.getAttribute("data-bandierine")))))
+    .reduce((a, b) => a + b, 0);
+const bottoniFestone = page.getByRole("button", { name: /^Scarica il foglio \d+ di \d+$/ });
+ok("festone: 25 bandierine su 5 fogli", (await contaBandierine()) === 25 && (await bottoniFestone.count()) === 5,
+  `${await contaBandierine()} su ${await bottoniFestone.count()}`);
+const attesaFestone = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
+await page.getByRole("button", { name: "Scarica il foglio 5 di 5" }).tap();
+const festone = await attesaFestone;
+const pngFestone = festone ? readFileSync(await festone.path()) : null;
+ok("festone: un foglio è un PNG A4 2480×3508",
+  pngFestone && pngFestone.readUInt32BE(16) === 2480 && pngFestone.readUInt32BE(20) === 3508);
+await page.getByLabel("Solo il nome").check();
+await page.waitForTimeout(300);
+ok("festone: solo il nome, 9 bandierine su 2 fogli", (await contaBandierine()) === 9 && (await bottoniFestone.count()) === 2);
+await page.getByLabel("Buon compleanno + nome").check();
+
 // Nei formati digitali il foglio A4 non ha senso: il bottone sparisce
 await page.getByRole("button", { name: "WhatsApp e storie" }).tap();
 await page.waitForTimeout(300);
