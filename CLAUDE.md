@@ -80,6 +80,16 @@ Un miglioramento al giorno, piccolo e finito, a rotazione:
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 
+## Pannello e immagini (2/11/2026)
+- Piano completo: `docs/piano-backoffice.md` (fasi A-D). Il pannello vive
+  sotto `/admin/[codice]` (menu in `MenuAdmin.tsx`); il codice si controlla
+  con `adminValido()` in lib/admin.ts. Nelle verifiche vale il codice di
+  prova `CODICE_ADMIN_PROVA` (scripts/verifica/comune.mjs), mai su Vercel.
+- Ottimizzatore immagini: `/admin/[codice]/immagini` (pannello) e
+  `npm run immagini -- <file> --codice H-03` (riga di comando, scrive in
+  public/immagini/). Stessa logica in lib/immagini/ottimizza.ts: WebP alla
+  qualità più bassa con PSNR ≥ 38 dB, varianti 1440…480, niente metadati.
+
 ## Template vetrina (31/10/2026)
 - Stile dal riferimento di Giorgia: header bianco arrotondato che galleggia,
   hero a foto piena, card pastello con foto incassata, carte impilate,

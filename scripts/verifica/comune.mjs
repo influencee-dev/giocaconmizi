@@ -4,6 +4,8 @@ import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
 
 export const BASE = "http://localhost:3100";
+// Il codice del pannello valido SOLO nel server delle verifiche (lib/admin.ts).
+export const CODICE_ADMIN_PROVA = "prova-pannello-locale-0000";
 // Il Chromium cambia versione fra un ambiente e l'altro: si prende il primo
 // che esiste (/opt/pw-browsers/chromium è il collegamento alla versione attuale).
 export const CHROMIUM =
@@ -34,7 +36,11 @@ export async function apriBrowser() {
 export async function conServer() {
   const su = () => fetch(`${BASE}/robots.txt`).then((r) => r.ok).catch(() => false);
   if (await su()) return null;
-  const proc = spawn("npx", ["next", "start", "-p", "3100"], { stdio: "ignore", detached: true });
+  const proc = spawn("npx", ["next", "start", "-p", "3100"], {
+    stdio: "ignore",
+    detached: true,
+    env: { ...process.env, GIOCAMIZI_ADMIN_PROVA: CODICE_ADMIN_PROVA },
+  });
   for (let i = 0; i < 30; i++) {
     await new Promise((r) => setTimeout(r, 1000));
     if (await su()) return proc;

@@ -4,6 +4,7 @@ import { SCHEDE, percorsoScheda } from "@/lib/directory";
 import { adminDati } from "@/lib/directory-db";
 import { Contenitore } from "@/components/ui";
 import { decidi } from "./azioni";
+import { MenuAdmin } from "./MenuAdmin";
 
 /** Il pannello di Giorgia: le risposte dei locali da accettare e lo stato degli inviti. */
 
@@ -30,6 +31,7 @@ export default async function AdminPage({ params }: { params: Promise<{ codice: 
 
   return (
     <Contenitore largo className="py-10">
+      <MenuAdmin codice={codice} attivo="" />
       <h1 className="text-3xl font-extrabold text-notte">Pannello attività</h1>
       <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
         {[
