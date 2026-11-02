@@ -144,6 +144,12 @@ export default function Home() {
           </div>
         </div>
         {fotoHero && <Bollino className="absolute bottom-10 right-8 hidden lg:flex">Gratis e senza pubblicità</Bollino>}
+        {/* AI Act art. 50: la foto generata con l'AI lo dichiara. */}
+        {fotoHero && (
+          <span className="absolute bottom-2 left-3 z-10 rounded-full bg-notte/70 px-2 py-0.5 text-[0.65rem] font-bold text-white">
+            Foto illustrativa AI
+          </span>
+        )}
       </section>
 
       {/* ---------- TRE PORTE + blocco risposta ---------- */}
