@@ -45,6 +45,34 @@ const testo = dati.toString("latin1");
 ok("immagini: ZIP con i WebP e i nomi giusti",
   dati.subarray(0, 2).toString() === "PK" && testo.includes("foto-cucina.webp") && testo.includes("bambino-gioca-numeri-in-cucina-480.webp") && testo.includes("RIFF"));
 
+// 3. Contatori delle schede: solo schede ed eventi veri; la scheda li manda.
+const evento = (corpo) => fetch(`${BASE}/api/eventi`, { method: "POST", body: JSON.stringify(corpo) }).then((r) => r.status);
+ok("eventi: scheda inventata rifiutata", (await evento({ scheda: "milano/non-esiste", evento: "vista" })) === 400);
+ok("eventi: evento inventato rifiutato", (await evento({ scheda: "milano/il-nano-gigante", evento: "acquisto" })) === 400);
+ok("eventi: scheda vera accettata", (await evento({ scheda: "milano/il-nano-gigante", evento: "vista" })) === 204);
+const schedaPubblica = await fetch(`${BASE}/ludoteche/milano/il-nano-gigante`).then((r) => r.text());
+ok("scheda pubblica: i contatti sono contati", schedaPubblica.includes('data-traccia="sito"') || schedaPubblica.includes('data-traccia="invito"'));
+
+// 4. Le pagine del pannello: schede filtrabili, dettaglio, iscritti. In
+// locale il database non conosce il codice di prova e Brevo non ha la
+// chiave: si vedono i riquadri «da attivare», non errori.
+await page.goto(`${BASE}/admin/${CODICE_ADMIN_PROVA}/schede`, { waitUntil: "networkidle" });
+const tutte = Number(await page.locator("[data-schede]").getAttribute("data-schede"));
+await page.goto(`${BASE}/admin/${CODICE_ADMIN_PROVA}/schede?citta=milano`, { waitUntil: "networkidle" });
+const milano = Number(await page.locator("[data-schede]").getAttribute("data-schede"));
+ok("pannello schede: elenco completo e filtro per città", tutte > 100 && milano > 0 && milano < tutte, `${milano}/${tutte}`);
+const linkScheda = await page.locator(`a[href="/admin/${CODICE_ADMIN_PROVA}/schede/milano/il-nano-gigante"]`).count();
+await page.goto(`${BASE}/admin/${CODICE_ADMIN_PROVA}/schede/milano/il-nano-gigante`, { waitUntil: "networkidle" });
+ok("pannello scheda: dettaglio con traffico e ricerche Google",
+  linkScheda > 0 &&
+  (await page.getByRole("heading", { name: "Il Nano Gigante" }).count()) === 1 &&
+  (await page.getByText("Ricerche Google che portano qui").count()) === 1);
+await page.goto(`${BASE}/admin/${CODICE_ADMIN_PROVA}/iscritti`, { waitUntil: "networkidle" });
+ok("pannello iscritti: si apre", (await page.getByRole("heading", { name: "Iscritti" }).count()) === 1);
+const chiuse = await Promise.all(["schede", "iscritti", "schede/milano/il-nano-gigante"].map((p) =>
+  fetch(`${BASE}/admin/codice-sbagliato-000000/${p}`).then((r) => r.text())));
+ok("pannello: tutte le sezioni chiuse senza codice", chiuse.every((t) => t.includes("Pannello non disponibile") && !t.includes("Genitori iscritti") && !t.includes("visite ·")));
+
 await browser.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("admin") ? 0 : 1);

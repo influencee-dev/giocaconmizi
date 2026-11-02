@@ -1,8 +1,8 @@
 # Registro delle attività di trattamento (art. 30 GDPR)
 
-Titolare: Giorgia Palazzo, gestrice di Giocamizi (giocamizi.it). Contatto: ciao@giocamizi.it.
+Titolare: Partidea SRL (P.IVA 04405500408, Via Antonio Beltramelli 13, 47923 Rimini), che gestisce Giocamizi (giocamizi.it), idea di Giorgia Palazzo. Contatto: ciao@giocamizi.it.
 DPO: non nominato, perché non obbligatorio (art. 37: nessun ente pubblico, nessun monitoraggio regolare e sistematico su larga scala, nessuna categoria particolare di dati).
-Ultimo aggiornamento: 31 ottobre 2026. Va aggiornato a ogni nuovo trattamento, insieme a `lib/legal.ts`.
+Ultimo aggiornamento: 2 novembre 2026. Va aggiornato a ogni nuovo trattamento, insieme a `lib/legal.ts`.
 
 | # | Trattamento | Interessati | Dati | Finalità | Base giuridica | Destinatari / responsabili | Extra UE | Conservazione |
 |---|---|---|---|---|---|---|---|---|
@@ -12,6 +12,7 @@ Ultimo aggiornamento: 31 ottobre 2026. Va aggiornato a ogni nuovo trattamento, i
 | 4 | Area genitori | Genitori maggiorenni | Email, progressi di gioco, fascia d'età e soprannome dei figli | Servizio richiesto | Contratto (6.1.b) | Supabase (resp.) | No (Francoforte) | Fino alla cancellazione dell'account |
 | 5 | Directory delle attività | Titolari e referenti delle attività | Dati pubblici dai siti ufficiali; risposte dal link personale; impronta SHA-256 del codice | Informare le famiglie | Legittimo interesse (6.1.f), informativa art. 14 | Supabase, Vercel (resp.) | Vercel: DPF | Finché la scheda è pubblicata; rimozione entro 30 giorni dalla richiesta |
 | 6 | Corrispondenza | Chi scrive | Email e contenuto | Rispondere | Contratto o legittimo interesse | Provider email | Da verificare col provider | Fino alla chiusura della richiesta |
+| 7 | Conteggi anonimi | Visitatori | Nessun dato personale salvato: pagine viste aggregate (Vercel Web Analytics, senza cookie né IP) e, per ogni scheda della directory, visite e tocchi sui contatti sommati per giorno (tabella dir_statistiche) | Sapere quali pagine e schede servono; mostrarlo ad attività e Giorgia | Legittimo interesse (6.1.f); nessun accesso al dispositivo, quindi niente consenso ex art. 122 | Vercel Inc., Supabase (resp.) | USA (Vercel, DPF); No (Supabase Francoforte) | Conteggi per 400 giorni |
 
 Misure di sicurezza (art. 32): HTTPS con HSTS, Content Security Policy, RLS e funzioni `security definer` con `search_path` vuoto su Supabase, codici delle attività salvati solo come impronta, accesso senza password (magic link), chiavi API solo lato server, nessun dato dei bambini oltre fascia d'età e soprannome.
 

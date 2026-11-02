@@ -2,7 +2,9 @@ import Link from "next/link";
 
 /** Il menu del pannello di Giorgia: cresce con le fasi di docs/piano-backoffice.md. */
 const VOCI = [
-  { percorso: "", nome: "Attività" },
+  { percorso: "/schede", nome: "Schede" },
+  { percorso: "", nome: "Risposte dei locali" },
+  { percorso: "/iscritti", nome: "Iscritti" },
   { percorso: "/immagini", nome: "Immagini" },
 ] as const;
 

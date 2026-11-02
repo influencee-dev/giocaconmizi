@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SCHEDE, datiCard, haListing, percorsoScheda, scheda, schedeDi } from "@/lib/directory";
-import { conModifiche, pubblicate, type DatiModifica } from "@/lib/directory-db";
+import { chiaveScheda, conModifiche, pubblicate, type DatiModifica } from "@/lib/directory-db";
 import { url } from "@/lib/seo";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
@@ -10,6 +10,7 @@ import { Briciole, CtaAttivita, InBreve } from "@/components/directory/Briciole"
 import { CardAttivita } from "@/components/directory/CardAttivita";
 import { Illustrazione } from "@/components/directory/Illustrazione";
 import { ReelInstagram } from "@/components/feste/ReelInstagram";
+import { Contatore } from "@/components/directory/Contatore";
 
 /** La scheda di un'attività (Figma 04–06). */
 
@@ -52,28 +53,28 @@ function Contatti({ sito, instagram, extra }: { sito?: string; instagram?: strin
         Prezzi, disponibilità e pacchetti festa si chiedono direttamente al locale: noi non prendiamo commissioni.
       </p>
       {extra.whatsapp && (
-        <a href={wa(extra.whatsapp)} target="_blank" rel="nofollow noopener" className="rounded-bolla bg-verde px-5 py-3 text-center font-extrabold text-white">
+        <a data-traccia="whatsapp" href={wa(extra.whatsapp)} target="_blank" rel="nofollow noopener" className="rounded-bolla bg-verde px-5 py-3 text-center font-extrabold text-white">
           Scrivi su WhatsApp
         </a>
       )}
       {extra.telefono && (
-        <a href={`tel:${numero(extra.telefono)}`} className="rounded-bolla border-2 border-crema-scuro bg-white px-5 py-3 text-center font-extrabold text-notte">
+        <a data-traccia="telefono" href={`tel:${numero(extra.telefono)}`} className="rounded-bolla border-2 border-crema-scuro bg-white px-5 py-3 text-center font-extrabold text-notte">
           Chiama {extra.telefono}
         </a>
       )}
       {sito && (
-        <a href={sito} target="_blank" rel="nofollow noopener" className="rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
+        <a data-traccia="sito" href={sito} target="_blank" rel="nofollow noopener" className="rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
           Vai al sito ufficiale
         </a>
       )}
       {instagram && (
-        <a href={instagram} target="_blank" rel="nofollow noopener" className="rounded-bolla border-2 border-crema-scuro bg-white px-5 py-3 text-center font-extrabold text-notte">
+        <a data-traccia="social" href={instagram} target="_blank" rel="nofollow noopener" className="rounded-bolla border-2 border-crema-scuro bg-white px-5 py-3 text-center font-extrabold text-notte">
           Profilo Instagram
         </a>
       )}
       {[["Facebook", extra.facebook], ["TikTok", extra.tiktok]].map(([n, u]) =>
         u ? (
-          <a key={n} href={u} target="_blank" rel="nofollow noopener" className="rounded-bolla border-2 border-crema-scuro bg-white px-5 py-3 text-center font-extrabold text-notte">
+          <a key={n} data-traccia="social" href={u} target="_blank" rel="nofollow noopener" className="rounded-bolla border-2 border-crema-scuro bg-white px-5 py-3 text-center font-extrabold text-notte">
             {n}
           </a>
         ) : null,
@@ -83,7 +84,7 @@ function Contatti({ sito, instagram, extra }: { sito?: string; instagram?: strin
           I contatti arrivano quando l&apos;attività completa la scheda.
         </p>
       )}
-      <Link href="/biglietti/crea" className="border-t-2 border-crema pt-3 text-sm font-extrabold text-viola">
+      <Link data-traccia="invito" href="/biglietti/crea" className="border-t-2 border-crema pt-3 text-sm font-extrabold text-viola">
         Intanto prepara l&apos;invito, gratis ›
       </Link>
     </div>
@@ -109,6 +110,7 @@ export default async function SchedaPage({ params }: P) {
   return (
     <>
       <Contenitore largo className="pb-28 pt-6 lg:pb-12">
+        <Contatore scheda={chiaveScheda(s)} />
         <JsonLd
           data={jsonLdBreadcrumb([
             { nome: cat.nome, percorso: `/${cat.slug}` },
@@ -219,11 +221,11 @@ export default async function SchedaPage({ params }: P) {
       {/* Telefono e tablet: l'azione principale sempre a portata di pollice. */}
       <div className="fixed inset-x-0 bottom-0 z-20 border-t-2 border-crema-scuro bg-white px-4 py-3 lg:hidden">
         {s.sito ? (
-          <a href={s.sito} target="_blank" rel="nofollow noopener" className="block rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
+          <a data-traccia="sito" href={s.sito} target="_blank" rel="nofollow noopener" className="block rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
             Vai al sito ufficiale
           </a>
         ) : (
-          <Link href="/biglietti/crea" className="block rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
+          <Link data-traccia="invito" href="/biglietti/crea" className="block rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
             Prepara l&apos;invito, gratis
           </Link>
         )}

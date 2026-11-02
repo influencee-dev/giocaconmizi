@@ -156,6 +156,13 @@ l'attività riceve i dati per rispondere).
    (istruzioni passo passo nel riquadro del pannello), poi
    `GSC_SERVICE_ACCOUNT` su Vercel.
 
+## Stato
+
+- 2/11/2026: **A** online (ottimizzatore immagini). **B** e **C** online nel
+  codice (contatori, Schede con dettaglio e ricerche Google, Iscritti):
+  partono quando Giorgia incolla `supabase/backoffice.sql`, mette
+  `BREVO_API_KEY` e collega Search Console. **D** da fare.
+
 ## Ordine di costruzione
 
 A (subito, non dipende da nulla) → B + Schede/Panoramica del pannello →

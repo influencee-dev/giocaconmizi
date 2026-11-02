@@ -27,7 +27,7 @@ export const TITOLARE = {
 } as const;
 
 /** Data dell'ultima revisione delle informative (si aggiorna a ogni modifica). */
-export const AGGIORNATA = "31 ottobre 2026";
+export const AGGIORNATA = "2 novembre 2026";
 
 export interface VoceRegistro {
   nome: string;

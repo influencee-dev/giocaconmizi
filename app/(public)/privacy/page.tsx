@@ -90,8 +90,11 @@ export default function PrivacyPage() {
           salva niente sul tuo dispositivo e non conserva l&apos;indirizzo IP: ogni visita
           diventa un numero aggregato (pagina, paese, tipo di dispositivo) e non è
           possibile risalire a te né seguirti tra un giorno e l&apos;altro. Per questo non
-          richiede consenso. Base giuridica: nostro legittimo interesse a sapere quali
-          pagine e giochi servono (art. 6.1.f).
+          richiede consenso. Allo stesso modo, sulle schede delle attività contiamo
+          nel nostro database (Supabase, UE) quante volte ogni scheda viene aperta e
+          quante volte si tocca WhatsApp, telefono, sito o social: solo un numero per
+          giorno, senza cookie, senza IP e senza sapere chi sei. Base giuridica: nostro
+          legittimo interesse a sapere quali pagine, giochi e schede servono (art. 6.1.f).
         </p>
         <p>
           <strong className="text-notte">4b. Statistiche dettagliate (solo col tuo consenso).</strong>{" "}

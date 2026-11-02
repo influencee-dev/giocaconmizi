@@ -170,3 +170,58 @@ export async function creaContatto(contatto: ContattoBrevo) {
 
   return esito;
 }
+
+export interface Iscritto {
+  email: string;
+  lista: "genitori" | "insegnanti";
+  creato: string;
+  disiscritto: boolean;
+  citta?: string;
+  professione?: string;
+  origine?: string;
+  consensoData?: string;
+  consensoFonte?: string;
+}
+
+/**
+ * Per il pannello di Giorgia: i numeri delle due liste e gli ultimi iscritti
+ * (fino a 500 per lista). Dati personali: solo lato server, mai in cache.
+ * null = BREVO_API_KEY mancante o Brevo non raggiungibile.
+ */
+export async function iscrittiAdmin(): Promise<{
+  totali: Record<keyof typeof LISTE, { iscritti: number; disiscritti: number }>;
+  elenco: Iscritto[];
+} | null> {
+  const liste = await preparaBrevo();
+  if (!liste) return null;
+  const totali = {} as Record<keyof typeof LISTE, { iscritti: number; disiscritti: number }>;
+  const elenco: Iscritto[] = [];
+  for (const nome of Object.keys(LISTE) as (keyof typeof LISTE)[]) {
+    const [info, contatti] = await Promise.all([
+      api("GET", `/contacts/lists/${liste[nome]}`),
+      api("GET", `/contacts/lists/${liste[nome]}/contacts?limit=500&offset=0&sort=desc`),
+    ]);
+    if (!info?.ok) return null;
+    totali[nome] = { iscritti: info.dati.uniqueSubscribers ?? info.dati.totalSubscribers ?? 0, disiscritti: info.dati.totalBlacklisted ?? 0 };
+    for (const c of (contatti?.dati?.contacts ?? []) as {
+      email: string;
+      createdAt: string;
+      emailBlacklisted: boolean;
+      attributes?: Record<string, string>;
+    }[]) {
+      elenco.push({
+        email: c.email,
+        lista: nome,
+        creato: c.createdAt,
+        disiscritto: c.emailBlacklisted,
+        citta: c.attributes?.CITTA,
+        professione: c.attributes?.PROFESSIONE,
+        origine: c.attributes?.ORIGINE,
+        consensoData: c.attributes?.CONSENSO_DATA,
+        consensoFonte: c.attributes?.CONSENSO_FONTE,
+      });
+    }
+  }
+  elenco.sort((a, b) => b.creato.localeCompare(a.creato));
+  return { totali, elenco };
+}

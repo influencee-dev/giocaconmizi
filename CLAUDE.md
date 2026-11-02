@@ -89,6 +89,12 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   `npm run immagini -- <file> --codice H-03` (riga di comando, scrive in
   public/immagini/). Stessa logica in lib/immagini/ottimizza.ts: WebP alla
   qualità più bassa con PSNR ≥ 38 dB, varianti 1440…480, niente metadati.
+- Contatori delle schede (fase B): `Contatore.tsx` sulla scheda manda
+  vista + clic sugli elementi `data-traccia` a `/api/eventi` → funzione SQL
+  `dir_conta` (supabase/backoffice.sql). Solo conteggi per giorno, niente
+  cookie né IP. Un contatto nuovo sulla scheda = un `data-traccia`.
+- Pannello (fase C): Schede (filtro per categoria/città, dettaglio con
+  grafico, ricerche Google da lib/gsc.ts), Iscritti (Brevo), Immagini.
 
 ## Template vetrina (31/10/2026)
 - Stile dal riferimento di Giorgia: header bianco arrotondato che galleggia,
@@ -105,6 +111,8 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   e foto per Chi siamo (`public/foto-giorgia-domiziana.jpg`).
 - Vercel Web Analytics da attivare nel pannello (il codice c'è già:
   conteggio visite senza cookie, sempre attivo; GA resta solo su consenso).
+- `supabase/backoffice.sql` da incollare nel SQL Editor (contatori schede);
+  `GSC_SERVICE_ACCOUNT` su Vercel per le ricerche Google nel pannello.
 - BREVO_API_KEY nelle env Vercel; email ciao@giocamizi.it da attivare
   in lib/legal.ts; dominio giocamizi.it collegato (24/10/2026)
   (poi: next.config vecchiHost, redirect Supabase, etichetta stream GA).
