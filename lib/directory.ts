@@ -1,3 +1,5 @@
+import { etichettaDi, type Etichetta } from "./etichette";
+import { esperienzeDi, etaDi, type IdEsperienza } from "./esperienze";
 import { CITTA_FESTE, type LocaleFesta } from "@/lib/feste";
 
 /**
@@ -257,9 +259,17 @@ export interface DatiCard {
   citta: string;
   colore: string;
   icona: string;
+  etichetta: Etichetta;
+  esperienze: IdEsperienza[];
+  eta: string | null;
+  contatti: { whatsapp: boolean; telefono: boolean; sito: boolean; social: boolean };
+  verificata: boolean;
 }
 
-export const datiCard = (s: Scheda): DatiCard => ({
+/** I dati per le card e i filtri; accetta anche la scheda con le modifiche del titolare. */
+export const datiCard = (
+  s: Scheda & { extra?: { whatsapp?: string; telefono?: string; pacchetti?: string; facebook?: string; tiktok?: string }; verificata?: boolean },
+): DatiCard => ({
   chiave: `${s.cittaSlug}-${s.slug}`,
   href: percorsoScheda(s),
   nome: s.nome,
@@ -269,6 +279,16 @@ export const datiCard = (s: Scheda): DatiCard => ({
   citta: s.citta,
   colore: s.colore,
   icona: s.categoria.icona,
+  etichetta: etichettaDi(s.tipo, s.categoria.slug),
+  esperienze: esperienzeDi({ tipo: s.tipo, descrizione: s.descrizione, categoria: s.categoria.slug, pacchetti: s.extra?.pacchetti }),
+  eta: etaDi(s.descrizione),
+  contatti: {
+    whatsapp: Boolean(s.extra?.whatsapp),
+    telefono: Boolean(s.extra?.telefono),
+    sito: Boolean(s.sito),
+    social: Boolean(s.instagram || s.extra?.facebook || s.extra?.tiktok),
+  },
+  verificata: Boolean(s.verificata),
 });
 
 /** Le città della categoria, con quante schede ha ognuna (più ricche prima). */

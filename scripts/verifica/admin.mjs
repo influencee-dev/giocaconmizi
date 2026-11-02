@@ -89,7 +89,23 @@ ok("newsletter: senza consenso non invia e lo dice", chiamate === 0 && (await fa
 await page.goto(`${BASE}/giochi/salvadanaio/gioca`, { waitUntil: "networkidle" });
 ok("newsletter: niente fascia dentro un gioco", (await page.locator("#newsletter").count()) === 0);
 const piede = await fetch(`${BASE}/`).then((r) => r.text());
-ok("piè di pagina: dati della società e quattro porte", piede.includes("04405500408") && piede.includes("REA") && (piede.match(/Foto illustrativa AI/g) ?? []).length >= 4);
+ok("piè di pagina: dati della società e quattro porte", piede.includes("04405500408") && piede.includes("REA") && (piede.match(/data-ai/g) ?? []).length >= 4);
+
+// 6. Listing in stile Booking: filtri per esperienze, conteggi, indirizzo
+// condivisibile; etichette del tipo di attività; «Cosa offre» nella scheda.
+await page.goto(`${BASE}/sale-feste/milano`, { waitUntil: "networkidle" });
+const risultati = async () => Number(await page.locator("[data-risultati]").getAttribute("data-risultati"));
+const prima = await risultati();
+await page.getByRole("button", { name: /Animazione inclusa/ }).first().tap();
+await page.waitForTimeout(300);
+const dopo = await risultati();
+ok("listing: il filtro esperienze restringe i risultati", prima > dopo && dopo >= 1, `${dopo}/${prima}`);
+ok("listing: il filtro finisce nell'indirizzo", page.url().includes("servizi=animazione"));
+await page.goto(`${BASE}/sale-feste/milano?servizi=animazione`, { waitUntil: "networkidle" });
+ok("listing: un link con i filtri li riapre", (await risultati()) === dopo);
+ok("listing: etichette del tipo su ogni card", (await page.locator("[data-risultato] [data-etichetta-tipo]").count()) === dopo);
+await page.goto(`${BASE}/ludoteche/milano/il-nano-gigante`, { waitUntil: "networkidle" });
+ok("scheda: «Cosa offre» e domande da fare", (await page.locator("[data-cosa-offre]").count()) === 1 && (await page.getByText("Da chiedere al locale").count()) === 1);
 
 await browser.close();
 if (servito) process.kill(-servito.pid);

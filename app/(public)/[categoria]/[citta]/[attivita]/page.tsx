@@ -11,6 +11,8 @@ import { CardAttivita } from "@/components/directory/CardAttivita";
 import { Illustrazione } from "@/components/directory/Illustrazione";
 import { ReelInstagram } from "@/components/feste/ReelInstagram";
 import { Contatore } from "@/components/directory/Contatore";
+import { Etichetta } from "@/components/directory/Etichetta";
+import { ESPERIENZE } from "@/lib/esperienze";
 
 /** La scheda di un'attività (Figma 04–06). */
 
@@ -106,6 +108,11 @@ export default async function SchedaPage({ params }: P) {
     .filter((x): x is NonNullable<typeof x> => x !== null)
     .slice(0, 3);
   const faq = cat.faq.map((f) => ({ ...f }));
+  const card = datiCard(s);
+  const offre = ESPERIENZE.filter((e) => card.esperienze.includes(e.id) && e.gruppo !== "Dove");
+  const daChiedere = ESPERIENZE.filter(
+    (e) => !card.esperienze.includes(e.id) && ["animazione", "buffet", "esclusiva", "piccoli", "genitori"].includes(e.id),
+  );
 
   return (
     <>
@@ -135,7 +142,7 @@ export default async function SchedaPage({ params }: P) {
         <Briciole voci={[{ nome: cat.nome, href: `/${cat.slug}` }, { nome: s.citta, href: hrefCitta }, { nome: s.nome }]} />
 
         <div className="mt-4 overflow-hidden rounded-morbido">
-          <Illustrazione colore={s.colore} icona={cat.icona} alta="h-48 sm:h-72" grande />
+          <Illustrazione colore={card.etichetta.fondo} icona={cat.icona} alta="h-48 sm:h-72" grande />
         </div>
         <p className="mt-2 text-xs font-semibold text-notte-tenue">
           Le foto le aggiunge l&apos;attività quando completa la scheda.
@@ -147,6 +154,8 @@ export default async function SchedaPage({ params }: P) {
             {s.extra.indirizzo || `${s.zona}, ${s.citta}`} · {s.tipo}
           </p>
           <div className="flex flex-wrap gap-2">
+            <Etichetta e={card.etichetta} grande />
+            {card.eta && <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">{card.eta}</span>}
             {s.verificata ? (
               <span className="rounded-bolla bg-[#E3F4E8] px-3 py-1 text-xs font-extrabold text-[#2E7D4A]">✓ Verificata dal titolare</span>
             ) : (
@@ -162,6 +171,37 @@ export default async function SchedaPage({ params }: P) {
             <InBreve
               testo={`${s.descrizione} ${s.nome} si trova a ${s.citta}, zona ${s.zona}, e organizza feste di compleanno per bambini: chiedete al locale un preventivo scritto con tutto quello che è incluso.`}
             />
+            <section data-cosa-offre>
+              <TitoloSezione>Cosa offre</TitoloSezione>
+              {offre.length > 0 ? (
+                <ul className="grid gap-2.5 sm:grid-cols-2">
+                  {offre.map((e) => (
+                    <li key={e.id} className="flex items-center gap-3 rounded-xl bg-[#E3F4E7] px-4 py-3 font-extrabold text-[#2E7D4A]">
+                      <span className="text-xl" aria-hidden>
+                        {e.icona}
+                      </span>
+                      {e.nome}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-notte-tenue">La scheda non elenca ancora i servizi: chiedili al locale con le domande qui sotto.</p>
+              )}
+              {daChiedere.length > 0 && (
+                <div className="mt-5 rounded-[1.4rem] border-2 border-dashed border-crema-scuro bg-white p-5">
+                  <p className="font-black text-notte">Da chiedere al locale</p>
+                  <p className="mt-1 text-sm text-notte-tenue">Non è scritto nella scheda, il che non vuol dire che manchi:</p>
+                  <ul className="mt-3 flex flex-col gap-2">
+                    {daChiedere.map((e) => (
+                      <li key={e.id} className="flex gap-2 text-sm font-bold text-notte">
+                        <span aria-hidden>{e.icona}</span>
+                        {e.domanda}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </section>
             <section>
               <TitoloSezione>Cosa chiedere prima di prenotare</TitoloSezione>
               <ul className="grid gap-2.5 sm:grid-cols-2">

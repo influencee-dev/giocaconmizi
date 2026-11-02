@@ -86,12 +86,8 @@ export function Foto({
   if (foto) {
     return (
       <figure className={`relative overflow-hidden ${className}`}>
-        <Image src={foto.src} alt={foto.alt} fill sizes={sizes} priority={priority} className="object-cover" />
-        {nota && (
-          <figcaption className="absolute bottom-2 right-2 rounded-lg bg-notte/55 px-2 py-0.5 text-[10px] font-bold text-white">
-            Foto illustrativa AI
-          </figcaption>
-        )}
+        <Image src={foto.src} alt={`${foto.alt} (immagine generata con l'intelligenza artificiale)`} fill sizes={sizes} priority={priority} className="object-cover" />
+        {nota && <SegnoAI />}
       </figure>
     );
   }
@@ -105,6 +101,24 @@ export function Foto({
         {ripiego ?? <MiziIntero className="h-full w-auto" />}
       </div>
     </div>
+  );
+}
+
+/**
+ * Il segno discreto sulle foto generate con l'AI (AI Act, art. 50: va
+ * dichiarato in modo visibile, non solo nel testo alternativo). Piccolo,
+ * nell'angolo; la spiegazione completa è nelle note legali.
+ */
+export function SegnoAI({ className = "bottom-2 right-2" }: { className?: string }) {
+  return (
+    <span
+      data-ai
+      title="Immagine generata con l'intelligenza artificiale"
+      className={`absolute z-10 rounded-md bg-white/75 px-1.5 py-px text-[9px] font-black tracking-wider text-notte/70 backdrop-blur-sm ${className}`}
+    >
+      AI
+      <span className="sr-only"> (immagine generata con l&apos;intelligenza artificiale)</span>
+    </span>
   );
 }
 

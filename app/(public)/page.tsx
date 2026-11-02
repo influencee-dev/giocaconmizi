@@ -21,6 +21,7 @@ import {
   Foto,
   InBreve,
   TitoloVetrina,
+  SegnoAI,
 } from "@/components/vetrina";
 import { PilaGuide } from "@/components/vetrina/PilaGuide";
 import { JsonLd, jsonLdElenco, jsonLdFaq } from "@/components/seo/JsonLd";
@@ -146,11 +147,7 @@ export default function Home() {
         </div>
         {fotoHero && <Bollino className="absolute bottom-10 right-8 hidden lg:flex">Gratis e senza pubblicità</Bollino>}
         {/* AI Act art. 50: la foto generata con l'AI lo dichiara. */}
-        {fotoHero && (
-          <span className="absolute bottom-2 left-3 z-10 rounded-full bg-notte/70 px-2 py-0.5 text-[0.65rem] font-bold text-white">
-            Foto illustrativa AI
-          </span>
-        )}
+        {fotoHero && <SegnoAI className="bottom-2 left-3" />}
       </section>
 
       {/* ---------- TRE PORTE + blocco risposta ---------- */}

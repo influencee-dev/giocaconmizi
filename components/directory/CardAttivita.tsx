@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { DatiCard } from "@/lib/directory";
+import { esperienza } from "@/lib/esperienze";
 import { Illustrazione } from "./Illustrazione";
+import { Etichetta } from "./Etichetta";
 
 /** La card di un'attività nei listing (componente «Card attività» del Figma). */
 export function CardAttivita({ s }: { s: DatiCard }) {
@@ -11,9 +13,9 @@ export function CardAttivita({ s }: { s: DatiCard }) {
       className="flex flex-col overflow-hidden rounded-[1.4rem] border border-notte/10 bg-white transition-colors hover:border-viola"
     >
       <div className="relative">
-        <Illustrazione colore={s.colore} icona={s.icona} />
-        <span className="absolute bottom-3 left-3 rounded-bolla bg-white px-3 py-1 text-xs font-extrabold text-viola">
-          Fa feste di compleanno
+        <Illustrazione colore={s.etichetta.fondo} icona={s.icona} />
+        <span className="absolute bottom-3 left-3">
+          <Etichetta e={s.etichetta} />
         </span>
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
@@ -25,7 +27,19 @@ export function CardAttivita({ s }: { s: DatiCard }) {
           </svg>
           <span>{s.zona} · {s.tipo}</span>
         </span>
-        <p className="text-sm leading-relaxed text-notte-tenue">{s.descrizione}</p>
+        {s.esperienze.filter((e) => e !== "coperto" && e !== "aperto").length > 0 && (
+          <span className="flex flex-wrap gap-1">
+            {s.esperienze
+              .filter((e) => e !== "coperto" && e !== "aperto")
+              .slice(0, 3)
+              .map((id) => (
+                <span key={id} className="rounded-md bg-[#E3F4E7] px-1.5 py-0.5 text-[11px] font-extrabold text-[#2E7D4A]">
+                  ✓ {esperienza(id).nome}
+                </span>
+              ))}
+          </span>
+        )}
+        <p className="line-clamp-3 text-sm leading-relaxed text-notte-tenue">{s.descrizione}</p>
         <span className="mt-auto flex items-center justify-between border-t-2 border-crema pt-3 text-sm font-extrabold">
           <span className="text-notte">{s.citta}</span>
           <span className="text-viola">Vedi scheda ›</span>

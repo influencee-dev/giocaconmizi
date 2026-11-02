@@ -93,7 +93,7 @@ const FAQ = [
   {
     domanda: "Le foto dei bambini sul sito sono vere?",
     risposta:
-      "In questa pagina sì: sono Giorgia e Domiziana. Le altre foto del sito sono illustrazioni realizzate con l'intelligenza artificiale e lo dice la scritta «Foto illustrativa AI».",
+      "In questa pagina sì: sono Giorgia e Domiziana. Le altre foto del sito sono illustrazioni realizzate con l'intelligenza artificiale e lo dice il piccolo segno «AI» nell'angolo.",
   },
   {
     domanda: "Come posso proporre un'idea o segnalare un errore?",

@@ -64,7 +64,8 @@ export default function NoteLegaliPage() {
       <Sezione titolo="Immagini realizzate con l'intelligenza artificiale">
         <p>
           Alcune foto del sito sono illustrative e realizzate con l&apos;intelligenza
-          artificiale: lo dice la scritta «Foto illustrativa AI» sulla foto stessa, come
+          artificiale: lo dice il segno «AI» nell&apos;angolo della foto stessa (e il suo testo
+          alternativo, per chi usa un lettore di schermo), come
           chiede il Regolamento europeo sull&apos;intelligenza artificiale (Reg. UE 2024/1689,
           art. 50). Le persone che vi compaiono non esistono e non ritraggono clienti,
           locali o famiglie reali.
