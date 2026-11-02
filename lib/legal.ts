@@ -150,4 +150,9 @@ export const TITOLARI_AUTONOMI = [
     quando: "se tocchi «Guarda il reel» in una pagina città",
     informativa: "https://privacycenter.instagram.com/policy",
   },
+  {
+    nome: "OpenStreetMap Foundation (mappe)",
+    quando: "se tocchi «Mostra la mappa» nelle pagine delle feste e delle attività",
+    informativa: "https://osmfoundation.org/wiki/Privacy_Policy",
+  },
 ] as const;

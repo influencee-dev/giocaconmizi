@@ -107,6 +107,20 @@ ok("listing: etichette del tipo su ogni card", (await page.locator("[data-risult
 await page.goto(`${BASE}/ludoteche/milano/il-nano-gigante`, { waitUntil: "networkidle" });
 ok("scheda: «Cosa offre» e domande da fare", (await page.locator("[data-cosa-offre]").count()) === 1 && (await page.getByText("Da chiedere al locale").count()) === 1);
 
+// 7. Mappa: si carica solo al tocco (niente terze parti prima); ogni città
+// ha le coordinate; il pannello delle posizioni si apre.
+await page.goto(`${BASE}/feste`, { waitUntil: "networkidle" });
+ok("mappa: nessuna mappa prima del tocco", (await page.locator(".leaflet-container").count()) === 0);
+await page.locator("[data-apri-mappa]").first().tap();
+await page.locator(".leaflet-container").waitFor({ timeout: 10000 }).catch(() => null);
+ok("mappa: al tocco compare con le città", (await page.locator(".leaflet-marker-icon").count()) >= 40, `${await page.locator(".leaflet-marker-icon").count()} segnaposto`);
+const feste = readFileSync("lib/feste.ts", "utf8");
+const coord = readFileSync("lib/coordinate-citta.ts", "utf8");
+const cittaSenza = [...feste.matchAll(/slug: ["']([a-z-]+)["']/g)].map((m) => m[1]).filter((c) => !coord.includes(`${c}:`) && !coord.includes(`"${c}":`));
+ok("mappa: ogni città ha le coordinate", cittaSenza.length === 0, cittaSenza.join(" "));
+await page.goto(`${BASE}/admin/${CODICE_ADMIN_PROVA}/posizioni`, { waitUntil: "networkidle" });
+ok("pannello posizioni: si apre", (await page.getByRole("button", { name: "Cerca le prossime 12 posizioni" }).count()) === 1);
+
 await browser.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("admin") ? 0 : 1);

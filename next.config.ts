@@ -10,7 +10,7 @@ const CSP = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://vercel.live",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com",
+  "img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com https://tile.openstreetmap.org",
   "font-src 'self' data:",
   "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://vercel.live",
   "frame-src https://www.instagram.com https://vercel.live",

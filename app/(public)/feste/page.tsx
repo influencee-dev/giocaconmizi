@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CITTA_FESTE } from "@/lib/feste";
 import { CATEGORIE_ATTIVE } from "@/lib/directory";
+import { CENTRO_CITTA } from "@/lib/coordinate-citta";
+import { MappaLocali } from "@/components/mappa/MappaLocali";
 import { Contenitore, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 
@@ -57,6 +59,24 @@ export default function FestePage() {
 
       <section className="mt-10">
         <TitoloSezione>Scegli la città</TitoloSezione>
+        <div className="mb-6">
+          <MappaLocali
+            centro={[42.3, 12.6]}
+            zoom={5}
+            titolo="Mostra la mappa d'Italia"
+            nota="Tocca una città per vedere i suoi posti."
+            punti={CITTA_FESTE.filter((c) => CENTRO_CITTA[c.slug]).map((c) => ({
+              lat: CENTRO_CITTA[c.slug][0],
+              lng: CENTRO_CITTA[c.slug][1],
+              nome: c.citta,
+              href: `/feste/${c.slug}`,
+              icona: "🎉",
+              colore: "#F28AB2",
+              sotto: `${c.locali.length} posti per le feste`,
+              numero: c.locali.length,
+            }))}
+          />
+        </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {CITTA_FESTE.map((c) => (
             <Link

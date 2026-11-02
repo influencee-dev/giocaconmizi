@@ -129,7 +129,10 @@ export default function PrivacyPage() {
           pagine possono mostrare un reel di Instagram. Il player non viene caricato finché
           non tocchi «Guarda il reel»: solo da quel momento Instagram (Meta) riceve dati
           come il tuo indirizzo IP e può impostare i suoi cookie, come titolare autonomo e
-          secondo la propria informativa.
+          secondo la propria informativa. Allo stesso modo la mappa dei locali si carica
+          solo se tocchi «Mostra la mappa»: le immagini della mappa arrivano dai server
+          della OpenStreetMap Foundation (Regno Unito, paese con decisione di adeguatezza
+          UE), che riceve il tuo indirizzo IP e non usa cookie.
         </p>
         <p>
           <strong className="text-notte">Cosa non facciamo:</strong> niente pubblicità,

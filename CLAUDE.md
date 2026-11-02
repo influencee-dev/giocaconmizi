@@ -94,7 +94,14 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   `dir_conta` (supabase/backoffice.sql). Solo conteggi per giorno, niente
   cookie né IP. Un contatto nuovo sulla scheda = un `data-traccia`.
 - Pannello (fase C): Schede (filtro per categoria/città, dettaglio con
-  grafico, ricerche Google da lib/gsc.ts), Iscritti (Brevo), Immagini.
+  grafico, ricerche Google da lib/gsc.ts), Iscritti (Brevo), Mappa
+  (posizioni con OpenStreetMap Nominatim, dal server), Immagini.
+- Directory stile Booking: `lib/esperienze.ts` (filtri: SOLO ciò che è
+  scritto nella scheda, il resto va «da chiedere») e `lib/etichette.ts`
+  (etichette colorate per tipo). Mappa: `components/mappa/MappaLocali.tsx`
+  (Leaflet + tile OSM, caricata solo al tocco; CSP img-src
+  tile.openstreetmap.org), centri città in `lib/coordinate-citta.ts`: una
+  città nuova in lib/feste.ts = una riga lì (la batteria admin controlla).
 
 ## Template vetrina (31/10/2026)
 - Stile dal riferimento di Giorgia: header bianco arrotondato che galleggia,

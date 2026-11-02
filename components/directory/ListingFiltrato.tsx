@@ -5,6 +5,8 @@ import type { DatiCard } from "@/lib/directory";
 import { ESPERIENZE, GRUPPI, type IdEsperienza } from "@/lib/esperienze";
 import type { IdEtichetta } from "@/lib/etichette";
 import { CardRisultato } from "./CardRisultato";
+import { MappaLocali, type Punto } from "@/components/mappa/MappaLocali";
+import type { Posizione } from "@/lib/posizioni";
 
 /**
  * Il listing in stile Booking: filtri per «esperienze» (ciò che le mamme
@@ -21,7 +23,18 @@ const RAPIDE: IdEsperienza[] = ["animazione", "gonfiabili", "buffet", "esclusiva
 
 const scambia = <T,>(lista: T[], v: T) => (lista.includes(v) ? lista.filter((x) => x !== v) : [...lista, v]);
 
-export function ListingFiltrato({ schede, nome }: { schede: DatiCard[]; nome: string }) {
+export function ListingFiltrato({
+  schede,
+  nome,
+  posizioni = {},
+  centro,
+}: {
+  schede: DatiCard[];
+  nome: string;
+  /** Posizioni per DatiCard.chiave (lib/posizioni.ts). */
+  posizioni?: Record<string, Posizione>;
+  centro?: [number, number];
+}) {
   const [servizi, setServizi] = useState<IdEsperienza[]>([]);
   const [tipi, setTipi] = useState<IdEtichetta[]>([]);
   const [zone, setZone] = useState<string[]>([]);
@@ -195,6 +208,26 @@ export function ListingFiltrato({ schede, nome }: { schede: DatiCard[]; nome: st
             </select>
           </label>
         </div>
+
+        {centro && Object.keys(posizioni).length > 0 && (
+          <MappaLocali
+            centro={centro}
+            punti={visibili
+              .filter((s) => posizioni[s.chiave])
+              .map(
+                (s): Punto => ({
+                  ...posizioni[s.chiave],
+                  approssimativa: posizioni[s.chiave].precisione === "zona",
+                  nome: s.nome,
+                  href: s.href,
+                  icona: s.etichetta.icona,
+                  colore: s.etichetta.pieno,
+                  sotto: `${s.etichetta.nome} · ${s.zona}`,
+                }),
+              )}
+            nota="Segue i filtri che hai scelto."
+          />
+        )}
 
         {visibili.length === 0 ? (
           <div className="rounded-[1.4rem] border-2 border-dashed border-crema-scuro bg-white p-6 text-center">

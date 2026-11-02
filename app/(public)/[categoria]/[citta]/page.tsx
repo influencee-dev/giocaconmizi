@@ -9,6 +9,9 @@ import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { Briciole, CtaAttivita, InBreve } from "@/components/directory/Briciole";
 import { ListingFiltrato } from "@/components/directory/ListingFiltrato";
+import { chiaveScheda } from "@/lib/directory-db";
+import { posizioni as leggiPosizioni } from "@/lib/posizioni";
+import { CENTRO_CITTA } from "@/lib/coordinate-citta";
 
 /** Listing categoria + città, la pagina che conta per la SEO locale (Figma 01–03). */
 
@@ -43,7 +46,7 @@ export default async function ListingPage({ params }: P) {
   const d = await dati(params);
   if (!d) notFound();
   const { cat, nomeCitta, citta } = d;
-  const p = await pubblicate();
+  const [p, pos] = await Promise.all([pubblicate(), leggiPosizioni()]);
   const schede = d.schede.map((s) => conModifiche(s, p)).filter((s): s is NonNullable<typeof s> => s !== null);
   const altre = CATEGORIE_ATTIVE.filter((c) => c.slug !== cat.slug && haListing(c.slug, citta));
   const vicine = LISTING.filter((l) => l.categoria.slug === cat.slug && l.cittaSlug !== citta).slice(0, 6);
@@ -90,7 +93,17 @@ export default async function ListingPage({ params }: P) {
       </div>
 
       <div className="mt-8">
-        <ListingFiltrato schede={schede.map(datiCard)} nome={cat.nome} />
+        <ListingFiltrato
+          schede={schede.map(datiCard)}
+          nome={cat.nome}
+          centro={CENTRO_CITTA[citta]}
+          posizioni={Object.fromEntries(
+            schede.flatMap((s) => {
+              const x = pos.get(chiaveScheda(s));
+              return x ? [[datiCard(s).chiave, x]] : [];
+            }),
+          )}
+        />
       </div>
 
       <section className="mt-12">

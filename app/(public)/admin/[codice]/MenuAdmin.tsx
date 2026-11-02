@@ -5,6 +5,7 @@ const VOCI = [
   { percorso: "/schede", nome: "Schede" },
   { percorso: "", nome: "Risposte dei locali" },
   { percorso: "/iscritti", nome: "Iscritti" },
+  { percorso: "/posizioni", nome: "Mappa" },
   { percorso: "/immagini", nome: "Immagini" },
 ] as const;
 
