@@ -1,5 +1,6 @@
 "use client";
 
+import { Icona } from "@/components/icone";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { MiziIntero } from "@/components/illustrazioni";
@@ -31,10 +32,10 @@ export function FasciaNewsletter({ giochi, guide, citta }: { giochi: number; gui
   if (NASCOSTA.some((r) => r.test(percorso))) return null;
 
   const VANTAGGI = [
-    ["🎮", "Il gioco nuovo della settimana", "pronto da aprire, con l'età giusta scritta sopra"],
-    ["📖", "Una guida pratica in 3 minuti", "compiti, lettura, emozioni: cosa fare stasera"],
-    ["🎂", "Idee per il prossimo compleanno", "inviti gratis e posti per festeggiare nella tua città"],
-    ["💜", "Zero pubblicità, mai", "ti cancelli con un clic, quando vuoi"],
+    ["gamepad", "Il gioco nuovo della settimana", "pronto da aprire, con l'età giusta scritta sopra"],
+    ["libro", "Una guida pratica in 3 minuti", "compiti, lettura, emozioni: cosa fare stasera"],
+    ["torta-compleanno", "Idee per il prossimo compleanno", "inviti gratis e posti per festeggiare nella tua città"],
+    ["cuore-viola", "Zero pubblicità, mai", "ti cancelli con un clic, quando vuoi"],
   ] as const;
 
   async function invia(e: React.FormEvent<HTMLFormElement>) {
@@ -93,9 +94,7 @@ export function FasciaNewsletter({ giochi, guide, citta }: { giochi: number; gui
             <ul className="grid gap-3 sm:grid-cols-2">
               {VANTAGGI.map(([icona, titolo, testo]) => (
                 <li key={titolo} className="flex gap-3 rounded-2xl bg-white/10 p-3 sm:p-3.5">
-                  <span aria-hidden className="text-2xl leading-none">
-                    {icona}
-                  </span>
+                  <Icona nome={icona} className="h-8 w-8" />
                   <span>
                     <span className="block font-extrabold">{titolo}</span>
                     <span className="hidden text-sm text-white/70 sm:block">{testo}</span>
@@ -110,9 +109,7 @@ export function FasciaNewsletter({ giochi, guide, citta }: { giochi: number; gui
 
           {stato === "fatto" ? (
             <div className="flex flex-col justify-center gap-4 rounded-[1.6rem] bg-white p-6 text-notte sm:p-8" role="status">
-              <span className="text-5xl" aria-hidden>
-                📬
-              </span>
+              <Icona nome="cassetta-posta" className="h-14 w-14" />
               <p className="text-2xl font-black">Quasi fatto: apri la tua email!</p>
               <p className="text-notte-tenue">
                 Ti abbiamo scritto adesso. Tocca il bottone «Confermo l&apos;iscrizione» e la prima posta di Mizi arriva con il

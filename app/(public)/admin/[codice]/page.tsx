@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SCHEDE, percorsoScheda } from "@/lib/directory";
 import { adminDati } from "@/lib/directory-db";
+import { adminValido } from "@/lib/admin";
 import { Contenitore } from "@/components/ui";
 import { decidi } from "./azioni";
 import { MenuAdmin } from "./MenuAdmin";
@@ -16,7 +17,8 @@ const quando = (d: string) => new Date(d).toLocaleString("it-IT", { day: "numeri
 
 export default async function AdminPage({ params }: { params: Promise<{ codice: string }> }) {
   const { codice } = await params;
-  const dati = await adminDati(codice);
+  // Codice giusto ma database che non risponde: la pagina si apre vuota, con l'avviso.
+  const dati = (await adminDati(codice)) ?? ((await adminValido(codice)) ? { richieste: [], inviti: [] } : null);
   if (!dati) {
     return (
       <Contenitore className="py-16">

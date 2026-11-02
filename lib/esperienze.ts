@@ -1,3 +1,5 @@
+import type { NomeIcona } from "@/components/icone";
+
 /**
  * Le «esperienze»: ciò che una mamma cerca quando organizza una festa
  * (animazione, gonfiabili, buffet, sala tutta per sé…). Sono i filtri dei
@@ -29,7 +31,7 @@ export type IdEsperienza =
 export interface Esperienza {
   id: IdEsperienza;
   nome: string;
-  icona: string;
+  icona: NomeIcona;
   gruppo: "Per la festa" | "Per giocare" | "Comodità" | "Dove";
   /** La domanda da fare al locale se la scheda non ne parla. */
   domanda: string;
@@ -42,7 +44,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "animazione",
     nome: "Animazione inclusa",
-    icona: "🎈",
+    icona: "palloncino",
     gruppo: "Per la festa",
     domanda: "C'è un animatore? Per quanto tempo e per quanti bambini?",
     trova: /animazion|animator|intrattenitor|\bmago\b|clown|spettacolo di|baby ?dance/i,
@@ -50,7 +52,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "buffet",
     nome: "Buffet e torta",
-    icona: "🎂",
+    icona: "torta-compleanno",
     gruppo: "Per la festa",
     domanda: "Il buffet e la torta sono compresi, o si possono portare da casa?",
     trova: /buffet|merenda|\btorta\b|catering|rinfresco|\bmen[uù]\b|pizza/i,
@@ -58,7 +60,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "tema",
     nome: "Feste a tema",
-    icona: "🦄",
+    icona: "unicorno",
     gruppo: "Per la festa",
     domanda: "Si può fare una festa a tema, con truccabimbi o travestimenti?",
     trova: /a tema|feste tematiche|travestim|truccabimbi|trucca ?bimbi|costum/i,
@@ -66,7 +68,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "esclusiva",
     nome: "Sala tutta per voi",
-    icona: "🔑",
+    icona: "chiave",
     gruppo: "Per la festa",
     domanda: "La sala è in esclusiva o ci sono altre feste nello stesso momento?",
     trova: /esclusiv|privatizz|riservat[oa] (solo )?(a|per) voi|sala privata|uso privato/i,
@@ -74,7 +76,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "pacchetti",
     nome: "Pacchetti festa",
-    icona: "📦",
+    icona: "pacco",
     gruppo: "Per la festa",
     domanda: "Avete pacchetti festa? Cosa include ognuno, per iscritto?",
     trova: /pacchett|formula festa|festa chiavi in mano|tutto compreso|compres[eio] /i,
@@ -82,7 +84,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "gonfiabili",
     nome: "Gonfiabili e palline",
-    icona: "🏰",
+    icona: "castello",
     gruppo: "Per giocare",
     domanda: "Ci sono gonfiabili, scivoli o piscina di palline?",
     trova: /gonfiabil|tappet[oi] elastic|trampolin|piscin[ae] di palline|piscin[ae] con le palline|vasca (di|con le) palline|playground|labirint/i,
@@ -90,7 +92,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "laboratori",
     nome: "Laboratori creativi",
-    icona: "🎨",
+    icona: "tavolozza",
     gruppo: "Per giocare",
     domanda: "Fate laboratori durante la festa (creativi, di cucina, scientifici)?",
     trova: /laborator|esperiment|attivit[aà] creativ|didattic/i,
@@ -98,7 +100,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "sport",
     nome: "Sport e movimento",
-    icona: "⚽",
+    icona: "pallone",
     gruppo: "Per giocare",
     domanda: "Che attività di movimento si possono fare durante la festa?",
     trova: /laser ?(game|tag)|\bsport|calcett|calcio|bowling|arrampic|\bnuoto|pattin|karting|percorsi? (avventura|acrobatic)|parkour/i,
@@ -106,7 +108,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "animali",
     nome: "Animali e fattoria",
-    icona: "🐐",
+    icona: "capra",
     gruppo: "Per giocare",
     domanda: "I bambini possono vedere o accarezzare gli animali?",
     trova: /animali|fattoria|cavall|\bpony|asin[oi]|caprett/i,
@@ -114,7 +116,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "piccoli",
     nome: "Adatto ai più piccoli",
-    icona: "🧸",
+    icona: "orsetto",
     gruppo: "Comodità",
     domanda: "C'è un'area sicura per i bambini sotto i 3 anni?",
     trova: /\b0\s*[-–a]\s*[2-4]\s*anni|da 0 a|piccolissim|\bbaby\b|primi passi|area morbida|area soft|zona morbida/i,
@@ -122,7 +124,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "genitori",
     nome: "Angolo per i genitori",
-    icona: "☕",
+    icona: "caffe",
     gruppo: "Comodità",
     domanda: "C'è un posto dove gli adulti possono sedersi e prendere un caffè?",
     trova: /\bbar\b|caff[eè]|area (per i )?genitori|zona (per i )?genitori|genitori possono|relax per (i )?(genitori|adulti)/i,
@@ -130,7 +132,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "aperto",
     nome: "All'aperto",
-    icona: "🌳",
+    icona: "albero",
     gruppo: "Dove",
     domanda: "Avete uno spazio all'aperto? E se piove?",
     trova: /all'aperto|all’aperto|giardino|\bprato|outdoor|spazio esterno|area esterna|nel verde/i,
@@ -139,7 +141,7 @@ export const ESPERIENZE: Esperienza[] = [
   {
     id: "coperto",
     nome: "Al coperto",
-    icona: "🏠",
+    icona: "casa",
     gruppo: "Dove",
     domanda: "La festa si fa al chiuso? Com'è con il caldo d'estate?",
     trova: /al coperto|indoor|al chiuso/i,

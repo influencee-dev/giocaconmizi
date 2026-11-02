@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CATEGORIE_ATTIVE, REGIONE, categoria, cittaDi, datiCard, haListing, percorsoScheda, schedeDi } from "@/lib/directory";
+import { CATEGORIE_ATTIVE, REGIONE, categoria, cittaDi, datiCard, haListing, percorsoScheda, schedeDi, vociRicerca } from "@/lib/directory";
+import { RicercaCosaDove } from "@/components/directory/RicercaCosaDove";
+import { CardRicerca } from "@/components/directory/CardRicerca";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco, jsonLdFaq } from "@/components/seo/JsonLd";
 import { Briciole, CtaAttivita, InBreve } from "@/components/directory/Briciole";
-import { CardAttivita } from "@/components/directory/CardAttivita";
 import { conModifiche, pubblicate } from "@/lib/directory-db";
-import { CercaCitta } from "@/components/directory/CercaCitta";
 import { Illustrazione } from "@/components/directory/Illustrazione";
 
 /** Pagina categoria nazionale della directory (Figma 07–09). */
@@ -55,20 +55,46 @@ export default async function CategoriaPage({ params }: { params: Promise<{ cate
           citta.map((c) => ({ nome: `${cat.nome} a ${c.citta}`, percorso: hrefCitta(c.slug) })),
         )}
       />
-      <div className="border-b-2 border-crema-scuro bg-white">
-        <Contenitore largo className="flex flex-col gap-4 py-8 sm:py-10">
+      {/* Testata come matrimonio.com: fascia colorata, titolo e la grande ricerca «Cosa · Dove». */}
+      <div className="bg-[#F0E8FA]">
+        <Contenitore largo className="flex flex-col gap-4 pb-10 pt-8 sm:pb-14 sm:pt-10">
           <Briciole voci={[{ nome: cat.nome }]} />
-          <h1 className="text-3xl font-extrabold text-notte sm:text-5xl">{cat.titolo}</h1>
+          <h1 className="max-w-3xl text-[2.1rem] font-black leading-[1.05] tracking-tight text-notte sm:text-5xl lg:text-6xl">{cat.titolo}</h1>
           <p className="max-w-2xl text-lg font-semibold text-notte-tenue">{cat.sottotitolo}</p>
-          <CercaCitta voci={citta.map((c) => ({ citta: c.citta, href: hrefCitta(c.slug) }))} />
+          <div className="mt-2">
+            <RicercaCosaDove {...vociRicerca()} categoria={cat.slug} grande />
+          </div>
         </Contenitore>
       </div>
+
+      {/* Tutte le categorie, come le sotto-categorie di matrimonio.com. */}
+      <Contenitore largo className="-mt-6 sm:-mt-8">
+        <nav aria-label="Categorie" className="flex gap-3 overflow-x-auto pb-2">
+          {CATEGORIE_ATTIVE.map((c) => {
+            const qui = c.slug === cat.slug;
+            return (
+              <Link
+                key={c.slug}
+                href={`/${c.slug}`}
+                aria-current={qui ? "page" : undefined}
+                className={`flex shrink-0 flex-col items-center gap-2 rounded-[1.4rem] border-2 px-4 py-3 text-center text-sm font-extrabold shadow-sm ${
+                  qui ? "border-viola bg-viola text-white" : "border-white bg-white text-notte hover:border-viola"
+                }`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element -- icone statiche locali */}
+                <img src={`/icone/${c.icona}.png`} alt="" className="h-10 w-10" />
+                <span className="w-28 leading-tight">{c.nome}</span>
+              </Link>
+            );
+          })}
+        </nav>
+      </Contenitore>
 
       <Contenitore largo className="py-8">
         <InBreve testo={cat.rispostaBreve} />
 
         <section className="mt-10">
-          <TitoloSezione>Scegli la città</TitoloSezione>
+          <TitoloSezione>Le città con più posti</TitoloSezione>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
             {citta.map((c, i) => (
               <Link
@@ -89,7 +115,7 @@ export default async function CategoriaPage({ params }: { params: Promise<{ cate
 
         {regioni.length > 1 && (
           <section className="mt-10">
-            <TitoloSezione>Per regione</TitoloSezione>
+            <TitoloSezione>Cerca per regione</TitoloSezione>
             <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
               {regioni.map((r) => (
                 <div key={r} className="rounded-xl border-2 border-crema-scuro bg-white px-4 py-3">
@@ -111,7 +137,7 @@ export default async function CategoriaPage({ params }: { params: Promise<{ cate
           <TitoloSezione>In evidenza</TitoloSezione>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {evidenza.map((s) => (
-              <CardAttivita key={`${s.cittaSlug}-${s.slug}`} s={datiCard(s)} />
+              <CardRicerca key={`${s.cittaSlug}-${s.slug}`} s={datiCard(s)} />
             ))}
           </div>
         </section>

@@ -325,3 +325,15 @@ export function rispostaListing(cat: Categoria, citta: string, schede: Scheda[])
     `Prima di prenotare chiedete un preventivo scritto con cosa è incluso — animazione, buffet, torta e pulizie.`
   );
 }
+
+/** Le voci della barra «Cosa cerchi · Dove» (components/directory/RicercaCosaDove). */
+export function vociRicerca() {
+  return {
+    cosa: CATEGORIE_ATTIVE.map((c) => ({ slug: c.slug, nome: c.nome })),
+    dove: CITTA_FESTE.map((c) => ({
+      slug: c.slug,
+      nome: c.citta,
+      categorie: CATEGORIE_ATTIVE.filter((cat) => haListing(cat.slug, c.slug)).map((cat) => cat.slug),
+    })).sort((a, b) => a.nome.localeCompare(b.nome)),
+  };
+}

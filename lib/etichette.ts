@@ -1,3 +1,5 @@
+import type { NomeIcona } from "@/components/icone";
+
 /**
  * Le etichette che distinguono a colpo d'occhio il tipo di attività
  * (ludoteca, sala feste, bar per famiglie, asilo…): stesso colore e stessa
@@ -21,7 +23,7 @@ export type IdEtichetta =
 export interface Etichetta {
   id: IdEtichetta;
   nome: string;
-  icona: string;
+  icona: NomeIcona;
   /** Fondo chiaro, testo scuro e colore pieno (segnaposto della mappa). */
   fondo: string;
   testo: string;
@@ -29,16 +31,16 @@ export interface Etichetta {
 }
 
 const E: Record<IdEtichetta, Etichetta> = {
-  bar: { id: "bar", nome: "Bar e ristoranti", icona: "☕", fondo: "#F3E6DA", testo: "#6B4026", pieno: "#9A6240" },
-  asilo: { id: "asilo", nome: "Asilo e nido", icona: "🍼", fondo: "#FDE7EF", testo: "#9C2F5C", pieno: "#E36E9C" },
-  fattoria: { id: "fattoria", nome: "Fattoria", icona: "🐐", fondo: "#E6F2DC", testo: "#3D6B1F", pieno: "#6AA43A" },
-  museo: { id: "museo", nome: "Museo e scienza", icona: "🔭", fondo: "#FFF3CF", testo: "#7A5A00", pieno: "#E0A800" },
-  sport: { id: "sport", nome: "Sport e laser game", icona: "⚡", fondo: "#FFEBD3", testo: "#8A4A00", pieno: "#F59A23" },
-  divertimenti: { id: "divertimenti", nome: "Parco divertimenti", icona: "🎡", fondo: "#E5E9FB", testo: "#2F3F95", pieno: "#5A6FE0" },
-  ludoteca: { id: "ludoteca", nome: "Ludoteca", icona: "🧩", fondo: "#F0E8FA", testo: "#5B3A9A", pieno: "#9B6DD6" },
-  coperto: { id: "coperto", nome: "Parco giochi al coperto", icona: "🏰", fondo: "#E2F2FB", testo: "#185E7E", pieno: "#3DB5E6" },
-  aperto: { id: "aperto", nome: "All'aperto", icona: "🌳", fondo: "#E3F4E7", testo: "#2E7D4A", pieno: "#4CAF6D" },
-  sala: { id: "sala", nome: "Sala feste", icona: "🎉", fondo: "#FCE6EE", testo: "#A23462", pieno: "#F28AB2" },
+  bar: { id: "bar", nome: "Bar e ristoranti", icona: "caffe", fondo: "#F3E6DA", testo: "#6B4026", pieno: "#9A6240" },
+  asilo: { id: "asilo", nome: "Asilo e nido", icona: "biberon", fondo: "#FDE7EF", testo: "#9C2F5C", pieno: "#E36E9C" },
+  fattoria: { id: "fattoria", nome: "Fattoria", icona: "capra", fondo: "#E6F2DC", testo: "#3D6B1F", pieno: "#6AA43A" },
+  museo: { id: "museo", nome: "Museo e scienza", icona: "telescopio", fondo: "#FFF3CF", testo: "#7A5A00", pieno: "#E0A800" },
+  sport: { id: "sport", nome: "Sport e laser game", icona: "fulmine", fondo: "#FFEBD3", testo: "#8A4A00", pieno: "#F59A23" },
+  divertimenti: { id: "divertimenti", nome: "Parco divertimenti", icona: "ruota-panoramica", fondo: "#E5E9FB", testo: "#2F3F95", pieno: "#5A6FE0" },
+  ludoteca: { id: "ludoteca", nome: "Ludoteca", icona: "puzzle", fondo: "#F0E8FA", testo: "#5B3A9A", pieno: "#9B6DD6" },
+  coperto: { id: "coperto", nome: "Parco giochi al coperto", icona: "castello", fondo: "#E2F2FB", testo: "#185E7E", pieno: "#3DB5E6" },
+  aperto: { id: "aperto", nome: "All'aperto", icona: "albero", fondo: "#E3F4E7", testo: "#2E7D4A", pieno: "#4CAF6D" },
+  sala: { id: "sala", nome: "Sala feste", icona: "festa", fondo: "#FCE6EE", testo: "#A23462", pieno: "#F28AB2" },
 };
 
 /** Regole sul «tipo», in ordine: la prima che combacia vince. */

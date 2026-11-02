@@ -64,7 +64,13 @@ export function conModifiche(s: Scheda, p: Map<string, Pubblicata>): (Scheda & {
   };
 }
 
+/** Il link di prova dell'area attività: vale solo nel server delle verifiche (come lib/admin.ts), mai su Vercel. */
+export const INVITO_PROVA = { codice: "prova-attivita-locale-0000000000", chiave: "milano/il-nano-gigante" };
+
 export async function apriInvito(codice: string) {
+  if (process.env.GIOCAMIZI_ADMIN_PROVA && !process.env.VERCEL && codice === INVITO_PROVA.codice) {
+    return { chiave: INVITO_PROVA.chiave, stato: "inviato", scade_il: new Date(Date.now() + 30 * 86400000).toISOString() };
+  }
   const client = db();
   if (!client || !/^[A-Za-z0-9_-]{20,80}$/.test(codice)) return null;
   try {

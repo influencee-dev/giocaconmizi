@@ -24,7 +24,12 @@ export type NomeIcona =
   | "ghiaccio" | "bug" | "ingranaggio" | "link"
   | "pinguino" | "tartaruga" | "elefante" | "topo"
   | "scimmia" | "cane" | "gatto" | "pesce" | "mucca"
-  | "orologio" | "note" | "puzzle" | "razzo" | "torta";
+  | "orologio" | "note" | "puzzle" | "razzo" | "torta"
+  // Directory e newsletter (2/11/2026): sostituiscono le emoji di sistema.
+  | "palloncino" | "torta-compleanno" | "unicorno" | "chiave" | "pacco" | "castello"
+  | "pallone" | "capra" | "orsetto" | "caffe" | "albero" | "casa" | "biberon"
+  | "telescopio" | "fulmine" | "ruota-panoramica" | "festa" | "bebe" | "cuore-viola"
+  | "cassetta-posta" | "mappa";
 
 /** L'icona (o la coppia/terzina) che racconta ogni competenza. */
 export const ICONE_SKILL: Record<Skill, NomeIcona[]> = {
@@ -95,6 +100,12 @@ export function Icone({ nomi, lato = "h-12 w-12" }: { nomi: NomeIcona[]; lato?: 
       ))}
     </span>
   );
+}
+
+/** Una sola icona 3D, della misura del testo: per filtri, etichette e caratteristiche. */
+export function Icona({ nome, className = "h-5 w-5" }: { nome: NomeIcona; className?: string }) {
+  // eslint-disable-next-line @next/next/no-img-element -- file statici locali
+  return <img src={`/icone/${nome}.${ANCORA_TWEMOJI.has(nome) ? "svg" : "png"}`} alt="" aria-hidden className={`inline-block shrink-0 ${className}`} loading="lazy" />;
 }
 
 /** L'illustrazione di una card gioco: icona del gioco, o della competenza. */

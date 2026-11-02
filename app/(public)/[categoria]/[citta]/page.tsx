@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CATEGORIE_ATTIVE, LISTING, categoria, datiCard, haListing, percorsoScheda, rispostaListing, schedeDi } from "@/lib/directory";
+import { CATEGORIE_ATTIVE, LISTING, categoria, datiCard, haListing, percorsoScheda, rispostaListing, schedeDi, vociRicerca } from "@/lib/directory";
+import { RicercaCosaDove } from "@/components/directory/RicercaCosaDove";
 import { cittaFeste } from "@/lib/feste";
 import { conModifiche, pubblicate } from "@/lib/directory-db";
 import { url } from "@/lib/seo";
@@ -81,18 +82,19 @@ export default async function ListingPage({ params }: P) {
         }}
       />
 
+      <div className={`-mx-4 -mt-8 mb-6 px-4 pb-6 pt-6 sm:mx-0 sm:rounded-b-[2rem] sm:px-8`} style={{ background: "#F0E8FA" }}>
+        <RicercaCosaDove {...vociRicerca()} categoria={cat.slug} citta={citta} />
+      </div>
       <Briciole voci={[{ nome: cat.nome, href: `/${cat.slug}` }, { nome: nomeCitta }]} />
-      <h1 className="mt-4 text-3xl font-extrabold text-notte sm:text-5xl">
-        {cat.nome} a {nomeCitta}
+      <h1 className="mt-3 text-3xl font-black tracking-tight text-notte sm:text-5xl">
+        {cat.nome} a {nomeCitta} <span className="text-2xl font-extrabold text-notte-tenue sm:text-3xl">({schede.length})</span>
       </h1>
       <p className="mt-2 text-sm font-bold text-notte-tenue">
-        {schede.length} attività · aggiornato a {new Date(cittaFeste(citta)?.aggiornata ?? Date.now()).toLocaleDateString("it-IT", { month: "long", year: "numeric" })}
+        Aggiornato a {new Date(cittaFeste(citta)?.aggiornata ?? Date.now()).toLocaleDateString("it-IT", { month: "long", year: "numeric" })} · solo posti
+        verificati, nessun accordo commerciale
       </p>
-      <div className="mt-6">
-        <InBreve testo={rispostaListing(cat, nomeCitta, schede)} />
-      </div>
 
-      <div className="mt-8">
+      <div className="mt-6">
         <ListingFiltrato
           schede={schede.map(datiCard)}
           nome={cat.nome}
@@ -104,6 +106,10 @@ export default async function ListingPage({ params }: P) {
             }),
           )}
         />
+      </div>
+
+      <div className="mt-12">
+        <InBreve testo={rispostaListing(cat, nomeCitta, schede)} />
       </div>
 
       <section className="mt-12">

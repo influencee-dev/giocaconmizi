@@ -3,7 +3,8 @@ import { ScenaBiglietti } from "@/components/illustrazioni";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CITTA_FESTE } from "@/lib/feste";
-import { CATEGORIE_ATTIVE } from "@/lib/directory";
+import { CATEGORIE_ATTIVE, vociRicerca } from "@/lib/directory";
+import { RicercaCosaDove } from "@/components/directory/RicercaCosaDove";
 import { CENTRO_CITTA } from "@/lib/coordinate-citta";
 import { MappaLocali } from "@/components/mappa/MappaLocali";
 import { Contenitore, TitoloSezione } from "@/components/ui";
@@ -42,6 +43,10 @@ export default function FestePage() {
         </p>
       </TestataPagina>
 
+      <div className="-mt-4 mb-2">
+        <RicercaCosaDove {...vociRicerca()} grande />
+      </div>
+
       <section className="mt-8">
         <TitoloSezione>Cerca per tipo di posto</TitoloSezione>
         <div className="flex flex-wrap gap-2">
@@ -70,7 +75,7 @@ export default function FestePage() {
               lng: CENTRO_CITTA[c.slug][1],
               nome: c.citta,
               href: `/feste/${c.slug}`,
-              icona: "🎉",
+              icona: "festa",
               colore: "#F28AB2",
               sotto: `${c.locali.length} posti per le feste`,
               numero: c.locali.length,

@@ -6,4 +6,5 @@ bandiera-uk.svg proviene da Twemoji (https://github.com/jdecked/twemoji),
 copyright Twitter, Inc. e collaboratori, licenza CC-BY 4.0
 (https://creativecommons.org/licenses/by/4.0/), credito nel footer.
 
-I file sono rinominati con nomi italiani leggibili ma non modificati.
+I file sono rinominati con nomi italiani leggibili; quelli aggiunti il 2/11/2026
+(palloncino, torta-compleanno, castello, biberon…) sono ridotti a 96×96 px.

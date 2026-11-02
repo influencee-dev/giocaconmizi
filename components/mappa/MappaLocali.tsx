@@ -1,5 +1,6 @@
 "use client";
 
+import { Icona, type NomeIcona } from "@/components/icone";
 import { useEffect, useRef, useState } from "react";
 import "leaflet/dist/leaflet.css";
 
@@ -20,7 +21,8 @@ export interface Punto {
   lng: number;
   nome: string;
   href: string;
-  icona: string;
+  /** Nome dell'icona 3D (public/icone/), come l'etichetta. */
+  icona: NomeIcona;
   colore: string;
   sotto: string;
   approssimativa?: boolean;
@@ -34,14 +36,19 @@ export function MappaLocali({
   zoom = 12,
   titolo = "Mostra la mappa",
   nota,
+  subito = false,
+  alta = "h-80 sm:h-[26rem]",
 }: {
   punti: Punto[];
   centro: [number, number];
   zoom?: number;
   titolo?: string;
   nota?: string;
+  /** Aperta subito: SOLO quando è già il risultato di un gesto (l'interruttore «Mappa»). */
+  subito?: boolean;
+  alta?: string;
 }) {
-  const [aperta, setAperta] = useState(false);
+  const [aperta, setAperta] = useState(subito);
   const contenitore = useRef<HTMLDivElement>(null);
   const mappa = useRef<import("leaflet").Map | null>(null);
   const strato = useRef<import("leaflet").LayerGroup | null>(null);
@@ -81,7 +88,7 @@ export function MappaLocali({
     g.clearLayers();
     const confini: [number, number][] = [];
     for (const p of punti) {
-      const dentro = p.numero !== undefined ? `<b>${p.numero}</b>` : p.icona;
+      const dentro = p.numero !== undefined ? `<b>${p.numero}</b>` : `<img src="/icone/${p.icona}.png" alt="" width="22" height="22">`;
       const icona = L.divIcon({
         className: "",
         html: `<span style="display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:999px;background:${p.colore};border:3px ${p.approssimativa ? "dashed" : "solid"} #fff;box-shadow:0 4px 12px rgba(31,36,48,.35);font-size:${p.numero !== undefined ? 15 : 19}px;color:#1F2430;font-family:Nunito,system-ui,sans-serif">${dentro}</span>`,
@@ -107,7 +114,7 @@ export function MappaLocali({
     return (
       <div className="flex flex-col items-start gap-2 rounded-[1.4rem] border-2 border-dashed border-crema-scuro bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="font-black text-notte">🗺️ {punti.length} {punti.length === 1 ? "posto" : "posti"} sulla mappa</p>
+          <p className="flex items-center gap-2 font-black text-notte"><Icona nome="mappa" className="h-6 w-6" /> {punti.length} {punti.length === 1 ? "posto" : "posti"} sulla mappa</p>
           <p className="text-sm text-notte-tenue">
             La mappa è di OpenStreetMap e si carica solo se la apri.{nota ? ` ${nota}` : ""}
           </p>
@@ -120,7 +127,7 @@ export function MappaLocali({
   }
   return (
     <div className="overflow-hidden rounded-[1.4rem] border border-notte/10">
-      <div ref={contenitore} className="h-80 w-full sm:h-[26rem]" data-mappa />
+      <div ref={contenitore} className={`w-full ${alta}`} data-mappa />
     </div>
   );
 }

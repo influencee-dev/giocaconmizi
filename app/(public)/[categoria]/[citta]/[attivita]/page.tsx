@@ -1,3 +1,4 @@
+import { Icona } from "@/components/icone";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -11,6 +12,7 @@ import { CardAttivita } from "@/components/directory/CardAttivita";
 import { Illustrazione } from "@/components/directory/Illustrazione";
 import { ReelInstagram } from "@/components/feste/ReelInstagram";
 import { Contatore } from "@/components/directory/Contatore";
+import { Globe, Instagram, MessageCircle, Phone } from "lucide-react";
 import { Etichetta } from "@/components/directory/Etichetta";
 import { ESPERIENZE } from "@/lib/esperienze";
 
@@ -56,21 +58,25 @@ function Contatti({ sito, instagram, extra }: { sito?: string; instagram?: strin
       </p>
       {extra.whatsapp && (
         <a data-traccia="whatsapp" href={wa(extra.whatsapp)} target="_blank" rel="nofollow noopener" className="rounded-bolla bg-verde px-5 py-3 text-center font-extrabold text-white">
+          <MessageCircle className="mr-2 inline h-5 w-5 align-[-4px]" strokeWidth={2.4} aria-hidden />
           Scrivi su WhatsApp
         </a>
       )}
       {extra.telefono && (
         <a data-traccia="telefono" href={`tel:${numero(extra.telefono)}`} className="rounded-bolla border-2 border-crema-scuro bg-white px-5 py-3 text-center font-extrabold text-notte">
+          <Phone className="mr-2 inline h-5 w-5 align-[-4px]" strokeWidth={2.4} aria-hidden />
           Chiama {extra.telefono}
         </a>
       )}
       {sito && (
         <a data-traccia="sito" href={sito} target="_blank" rel="nofollow noopener" className="rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
+          <Globe className="mr-2 inline h-5 w-5 align-[-4px]" strokeWidth={2.4} aria-hidden />
           Vai al sito ufficiale
         </a>
       )}
       {instagram && (
         <a data-traccia="social" href={instagram} target="_blank" rel="nofollow noopener" className="rounded-bolla border-2 border-crema-scuro bg-white px-5 py-3 text-center font-extrabold text-notte">
+          <Instagram className="mr-2 inline h-5 w-5 align-[-4px]" strokeWidth={2.4} aria-hidden />
           Profilo Instagram
         </a>
       )}
@@ -177,9 +183,7 @@ export default async function SchedaPage({ params }: P) {
                 <ul className="grid gap-2.5 sm:grid-cols-2">
                   {offre.map((e) => (
                     <li key={e.id} className="flex items-center gap-3 rounded-xl bg-[#E3F4E7] px-4 py-3 font-extrabold text-[#2E7D4A]">
-                      <span className="text-xl" aria-hidden>
-                        {e.icona}
-                      </span>
+                      <Icona nome={e.icona} className="h-7 w-7" />
                       {e.nome}
                     </li>
                   ))}
@@ -194,7 +198,7 @@ export default async function SchedaPage({ params }: P) {
                   <ul className="mt-3 flex flex-col gap-2">
                     {daChiedere.map((e) => (
                       <li key={e.id} className="flex gap-2 text-sm font-bold text-notte">
-                        <span aria-hidden>{e.icona}</span>
+                        <Icona nome={e.icona} className="h-5 w-5" />
                         {e.domanda}
                       </li>
                     ))}
