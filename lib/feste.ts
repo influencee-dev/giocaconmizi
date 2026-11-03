@@ -2041,6 +2041,40 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "treviso",
+    citta: "Treviso",
+    aggiornata: "2026-11-03",
+    rispostaBreve: "A Treviso la festa di compleanno per bambini si fa soprattutto appena fuori città: al Super Park di Dosson di Casier, un parco giochi al coperto con area bimbi, trampolini e kart, dove avete uno spazio riservato con tavoli e l'accesso a tutte le attrazioni, oppure alla Fattoria di Geronimo di Merlengo, una fattoria didattica dove la festa si fa all'aperto con la visita agli animali e giochi adatti all'età. Al parco la torta va nel frigo apposta e pizza o buffet si aggiungono a parte; alla fattoria le feste si fanno nel weekend e si fermano d'estate.",
+    intro: "Attorno a Treviso le feste dei bambini si dividono tra due mondi: il parco giochi al coperto, che funziona con ogni tempo e piace a chi vuole correre e saltare, e la fattoria, per chi preferisce animali, prato e aria aperta. Tutti e due sono a pochi minuti di macchina dalla città.",
+    locali: [
+      { nome: "Super Park", zona: "Dosson di Casier, alle porte di Treviso", tipo: "parco giochi al coperto con trampolini e kart", descrizione: "Un parco giochi al coperto per tutta la famiglia, con un'area per i bimbi da 1 a 6 anni di oltre 200 m² e attrazioni per i più grandi, tra trampolini, un percorso ninja e i kart. Per il compleanno c'è uno spazio riservato con tre tavoli e posti a sedere, l'accesso a tutte le attrazioni del parco e un frigorifero per la torta; pizza, buffet e panini si aggiungono a richiesta, mentre addobbi e smaltimento dei rifiuti non sono compresi.", sito: "https://superpark.fun/" },
+      { nome: "La Fattoria di Geronimo", zona: "Merlengo di Ponzano Veneto, a pochi chilometri da Treviso", tipo: "fattoria didattica, spazi all'aperto", descrizione: "Fattoria didattica riconosciuta dalla Regione Veneto, con animali e centro equestre. La festa si fa all'aperto, con uno spazio al coperto se il tempo è brutto, e comprende la visita della fattoria e giochi adatti all'età, con lo staff che aiuta a seguire i bambini. Le feste si tengono nel weekend, con orari che cambiano secondo la stagione, e sono sospese da giugno ad agosto per i centri estivi; per confermare si versa un acconto.", sito: "https://www.ilrifugiodigeronimo.it/" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia un compleanno per bambini a Treviso?", risposta: "Appena fuori città: al Super Park di Dosson di Casier, un parco giochi al coperto con trampolini e kart, o alla Fattoria di Geronimo di Merlengo, per una festa all'aperto con gli animali." },
+      { domanda: "E se piove?", risposta: "Il Super Park è al coperto, quindi va bene tutto l'anno. Alla Fattoria di Geronimo la festa è all'aperto ma c'è uno spazio al coperto per il maltempo: chiedete al momento della prenotazione come funziona." },
+      { domanda: "Si può portare la torta?", risposta: "Al Super Park sì: nello spazio riservato c'è un frigorifero per la torta, e pizza, buffet o panini si ordinano a parte. Per la fattoria chiedetelo quando prenotate, insieme a cosa comprende il prezzo." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "como",
+    citta: "Como",
+    aggiornata: "2026-11-03",
+    rispostaBreve: "A Como la festa di compleanno per bambini più semplice da organizzare è al Kids Park, un parco giochi al coperto di circa 1.000 m² dentro il centro Driver, con playground su due piani e un'area per i bimbi da 1 a 3 anni: la sala è riservata per 3 ore e la tavola viene apparecchiata, ma dall'esterno si può portare solo la torta. Tra Como e Varese, a Binago, c'è anche Il Villaggio di Piedone, con un pacchetto che comprende sala privata decorata, merenda, torta e accesso ai giochi.",
+    intro: "A Como i compleanni dei bambini si fanno soprattutto nei parchi giochi al coperto, che con il clima del lago sono una sicurezza in ogni stagione. In città c'è un grande parco con sale per le feste; poco fuori, verso Varese, un altro parco propone pacchetti con merenda e torta già compresi.",
+    locali: [
+      { nome: "Kids Park Como", zona: "Como, dentro il centro Driver (via Pasquale Paoli)", tipo: "parco giochi al coperto", descrizione: "Parco giochi al coperto di circa 1.000 m², con un playground su due piani, una piscina di palline con scivoli, un'area calci di rigore e uno spazio per i bimbi da 1 a 3 anni. Per il compleanno la sala è riservata per 3 ore e la tavola è apparecchiata con piatti, bicchieri, posate e la corona per il festeggiato; cibo e bevande si ordinano al parco, perché dall'esterno si può portare solo la torta. Calze antiscivolo obbligatorie, serve almeno un adulto che accompagni i bambini e alla prenotazione si versa un acconto.", sito: "https://www.kidsparkcomo.it/" },
+      { nome: "Il Villaggio di Piedone", zona: "Binago, tra Como e Varese", tipo: "parco giochi al coperto con gonfiabili", descrizione: "Parco giochi al coperto con un playground alto 7 metri, gonfiabili e un'area per i bimbi da 0 a 3 anni. Il pacchetto più scelto comprende una sala privata decorata, la merenda (pizza, focaccia, patatine, popcorn e bibite), la torta della pasticceria del parco e l'accesso ai giochi; da giugno a settembre la festa può usare anche le piscine all'aperto. Il parco resta aperto al pubblico durante le feste e le calze antiscivolo sono obbligatorie.", sito: "https://ilvillaggiodipiedone.com/" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia un compleanno per bambini a Como?", risposta: "In città al Kids Park Como, dentro il centro Driver, con sala riservata per 3 ore; poco fuori, a Binago, al Villaggio di Piedone, con un pacchetto che comprende sala, merenda e torta." },
+      { domanda: "Si può portare la torta da casa?", risposta: "Al Kids Park sì, ed è l'unica cosa che si può portare da fuori: cibo e bevande si ordinano al parco. Al Villaggio di Piedone no: la torta arriva dalla pasticceria con cui lavora il parco." },
+      { domanda: "Cosa serve portare?", risposta: "In tutti e due i parchi le calze antiscivolo sono obbligatorie: mettetelo nell'invito. Al Kids Park serve anche almeno un adulto che accompagni i bambini." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

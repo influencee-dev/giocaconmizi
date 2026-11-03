@@ -187,7 +187,7 @@ export const REGIONE: Record<string, string> = {
   livorno: "Toscana", cagliari: "Sardegna", foggia: "Puglia", salerno: "Campania", latina: "Lazio",
   monza: "Lombardia", bergamo: "Lombardia", vicenza: "Veneto", trento: "Trentino-Alto Adige",
   bolzano: "Trentino-Alto Adige", novara: "Piemonte", arezzo: "Toscana", udine: "Friuli Venezia Giulia",
-  cesena: "Emilia-Romagna", lecce: "Puglia",
+  cesena: "Emilia-Romagna", lecce: "Puglia", treviso: "Veneto", como: "Lombardia",
 };
 
 export interface Scheda {

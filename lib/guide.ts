@@ -1039,6 +1039,80 @@ export const GUIDE: Guida[] = [
     ],
     giochi: ["conta-fino-a-10", "unisci-i-puntini", "addizioni-entro-20", "salvadanaio"],
   },
+  {
+    slug: "frazioni-spiegate-ai-bambini",
+    titolo: "Come spiegare le frazioni ai bambini: dalla pizza ai numeri",
+    titoloBreve: "Le frazioni",
+    descrizione:
+      "Le frazioni in terza, quarta e quinta elementare: come spiegarle con pizza, fogli piegati e strisce di carta, perché un quarto è più piccolo di un terzo e gli errori più comuni da evitare.",
+    rispostaBreve:
+      "Una frazione dice due cose: in quante parti UGUALI è diviso l'intero (il numero sotto, il denominatore) e quante di quelle parti prendiamo (il numero sopra, il numeratore). Si spiega prima con le mani, piegando fogli, tagliando una pizza o spezzando una tavoletta di cioccolato, e solo dopo con i numeri scritti; l'errore più comune da smontare è pensare che 1/4 sia più grande di 1/3 perché 4 è più grande di 3.",
+    etaMin: 8,
+    etaMax: 10,
+    minutiLettura: 6,
+    aggiornata: "2026-11-03",
+    skill: "matematica",
+    sezioni: [
+      {
+        titolo: "Prima le mani, poi i numeri",
+        paragrafi: [
+          "A scuola le frazioni di solito arrivano in terza elementare e si allargano in quarta e in quinta. Il passaggio difficile non è la scrittura, è l'idea: un intero si può dividere in parti, e quelle parti hanno un nome. Per questo conviene cominciare da cose che si toccano e si dividono davvero: una pizza, una tavoletta di cioccolato, un foglio, una barretta di pongo.",
+          "Un esercizio semplicissimo: prendete un foglio, piegatelo a metà e poi ancora a metà, apritelo e contate i rettangoli. Sono quattro, tutti uguali: ognuno è un quarto. Colorarne tre e dire «tre quarti» vale più di una pagina di definizioni, perché il bambino vede da dove arrivano i due numeri.",
+        ],
+      },
+      {
+        titolo: "Sopra e sotto la linea: cosa vogliono dire",
+        paragrafi: [
+          "Il numero sotto la linea, il denominatore, dice in quante parti uguali è stato diviso l'intero: dà il nome alle parti (metà, terzi, quarti, quinti). Il numero sopra, il numeratore, dice quante di quelle parti stiamo prendendo. In 3/8 la pizza è tagliata in otto fette e ne prendiamo tre.",
+          "Un trucco che aiuta: leggete le frazioni ad alta voce come si dicono e non come si scrivono, «tre ottavi» e non «tre fratto otto». Così il denominatore diventa un nome, come «fette», e il numeratore un numero di cose, come in «tre fette».",
+        ],
+      },
+      {
+        titolo: "Le parti devono essere uguali",
+        paragrafi: [
+          "Molti bambini disegnano una torta divisa in quattro pezzi di grandezza diversa e la chiamano «quarti». Vale la pena fermarsi: se le fette non sono uguali, non sono quarti. Un buon test a tavola è chiedere «se ti do questa fetta e a tuo fratello quest'altra, è giusto?». Il senso di giustizia dei bambini fa il resto.",
+          "Lo stesso vale per i disegni sul quaderno: un rettangolo diviso in strisce uguali funziona meglio di un cerchio, perché tagliare un cerchio in tre parti uguali a mano libera è difficile anche per un adulto.",
+        ],
+      },
+      {
+        titolo: "Perché un quarto è più piccolo di un terzo",
+        paragrafi: [
+          "È l'errore più diffuso, e ha una logica: per tutta la vita il bambino ha imparato che 4 è più di 3, quindi 1/4 gli sembra più di 1/3. La risposta non è ripetere la regola, è farglielo vedere: dividete la stessa pizza fra tre amici e fra quattro amici e chiedete in quale caso la fetta è più grande. Più persone ci sono, più la fetta è piccola.",
+          "Con le strisce di carta l'idea diventa evidente: tre strisce della stessa lunghezza, una piegata a metà, una in tre e una in quattro, messe una sotto l'altra. Si vede subito che due quarti e una metà coprono lo stesso pezzo: è il primo incontro con le frazioni equivalenti, senza nemmeno nominarle.",
+        ],
+      },
+      {
+        titolo: "Le frazioni di tutti i giorni",
+        paragrafi: [
+          "Le frazioni sono già in casa: mezz'ora e un quarto d'ora sull'orologio, mezzo litro di latte, mezzo panetto di burro in una ricetta, metà della paghetta da mettere da parte. Ogni volta che ne usate una, fate notare che è una frazione: «un quarto d'ora sono quindici minuti, perché un'ora divisa in quattro parti uguali fa quindici».",
+          "Cucinare insieme è l'esercizio migliore: dimezzare una ricetta, misurare mezzo bicchiere, tagliare una torta in otto. Il bambino usa le frazioni per uno scopo vero, ed è lì che smettono di essere un argomento di scuola.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        domanda: "In che classe si fanno le frazioni?",
+        risposta:
+          "Di solito si cominciano in terza elementare con l'idea di parte di un intero, e si approfondiscono in quarta e quinta con confronti, frazioni equivalenti e frazioni di un numero. Ogni scuola ha i suoi tempi.",
+      },
+      {
+        domanda: "Come si spiega il numeratore e il denominatore?",
+        risposta:
+          "Il denominatore (sotto) dice in quante parti uguali è diviso l'intero; il numeratore (sopra) dice quante parti prendiamo. In 3/4 una pizza è tagliata in quattro fette uguali e ne prendiamo tre.",
+      },
+      {
+        domanda: "Perché mio figlio pensa che 1/4 sia più di 1/3?",
+        risposta:
+          "Perché confronta i numeri e non le parti: 4 è più di 3. Fategli dividere la stessa pizza fra tre e fra quattro persone: vedrà che con più persone la fetta è più piccola.",
+      },
+      {
+        domanda: "Quali giochi aiutano con le frazioni?",
+        risposta:
+          "Tutti quelli in cui si divide qualcosa in parti uguali: tagliare pizza e torte, piegare fogli, i mattoncini da costruzione, le ricette. Online, giochi dove si tocca la frazione su una figura, come la pizza delle frazioni di Giocamizi.",
+      },
+    ],
+    giochi: ["pizza-delle-frazioni", "l-orologio", "tabelline", "salvadanaio"],
+  },
 ];
 
 export function guida(slug: string): Guida | undefined {
