@@ -2,7 +2,7 @@
 // «Scarica Giocamizi sul tuo telefono» compare SOLO sul telefono, dopo il
 // banner dei cookie, mai dentro i giochi né sopra la barra della scheda, e
 // se la chiudi resta chiusa.
-import { apriBrowser, conServer, contatore, BASE } from "./comune.mjs";
+import { apriBrowser, conServer, contatore, BASE, B_PIENO } from "./comune.mjs";
 
 const servito = await conServer();
 const { ok, chiudi } = contatore();
@@ -99,6 +99,110 @@ await m.locator("main h1").first().tap({ force: true });
 await m.waitForTimeout(300);
 ok("menu: si chiude toccando fuori", !(await menu.isVisible()));
 await menuCtx.close();
+
+// 8. Il telefono come un'app: benvenuto, profilo e barra delle schede.
+// Le verifiche girano in un browser automatico, dove il benvenuto non compare
+// (navigator.webdriver): qui lo si spegne per provarlo come una persona vera.
+const UMANO = () => { Object.defineProperty(Navigator.prototype, "webdriver", { get: () => false }); localStorage.setItem("mizi.consenso-statistiche", "no"); };
+const telefono = { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, userAgent: IPHONE };
+const benvenuto = (p) => p.locator("[data-benvenuto]");
+{
+  const ctx = await b.newContext(telefono); await ctx.addInitScript(UMANO);
+  const p = await ctx.newPage();
+  const brevo = []; p.on("request", (r) => r.url().includes("/api/brevo") && brevo.push(r.url()));
+  await p.goto(BASE + "/", { waitUntil: "networkidle" });
+  ok("benvenuto: alla prima visita compare a tutto schermo", await benvenuto(p).isVisible());
+  ok("benvenuto: sul sito si può saltare («Più tardi»)", await p.locator("[data-piu-tardi]").isVisible());
+  await p.locator("[data-inizia]").tap();
+  await p.locator("[data-avanti]").tap();
+  ok("benvenuto: senza nome non va avanti", (await benvenuto(p).getByRole("alert").textContent())?.includes("nome"));
+  await p.locator("[data-campo=mamma]").fill("Giorgia"); await p.locator("[data-avanti]").tap();
+  await p.locator("[data-campo=bimbo-0]").fill("Domiziana"); await p.locator("[data-eta='7']").first().tap();
+  await p.locator("[data-altro-bimbo]").tap(); await p.locator("[data-campo=bimbo-1]").fill("Leo"); await p.locator("[data-eta='4']").nth(1).tap();
+  await p.locator("[data-avanti]").tap();
+  await p.locator("[data-campo=email]").fill("giorgia@esempio.it"); await p.locator("[data-avanti]").tap();
+  ok("benvenuto: senza la spunta privacy non entra", (await benvenuto(p).getByRole("alert").textContent())?.includes("privacy"));
+  await p.locator("[data-spunta=privacy]").check(); await p.locator("[data-avanti]").tap();
+  await p.waitForTimeout(500);
+  ok("benvenuto: finito, si chiude", !(await benvenuto(p).isVisible()));
+  ok("home: «Ciao Giorgia!» e i giochi per Domiziana, 7 anni",
+    (await p.locator("[data-saluto]").textContent()) === "Ciao Giorgia!" && (await p.locator("[data-home-app]").textContent()).includes("Oggi per Domiziana · 7 anni"));
+  const prof = await p.evaluate(() => JSON.parse(localStorage.getItem("giocamizi-profilo")));
+  ok("profilo: salvato sul telefono, due bimbi, posta spenta", prof?.bimbi?.length === 2 && prof.posta === false && prof.email === "giorgia@esempio.it");
+  ok("privacy: senza posta nessuna chiamata a Brevo", brevo.length === 0, `${brevo.length} chiamate`);
+  await p.getByRole("button", { name: "Leo · 4" }).tap();
+  ok("home: si cambia bimbo con un tocco", (await p.locator("[data-home-app]").textContent()).includes("Oggi per Leo · 4 anni"));
+  await p.reload({ waitUntil: "networkidle" }); await p.waitForTimeout(400);
+  ok("seconda visita: entra direttamente, niente benvenuto", !(await benvenuto(p).isVisible()));
+  // la barra delle schede
+  const schede = p.locator("[data-barra-schede]");
+  ok("schede: in basso sul telefono, Home attiva", (await schede.isVisible()) && (await schede.locator("[aria-current=page]").textContent()) === "Home");
+  await schede.getByRole("link", { name: "Giochi" }).tap(); await p.waitForURL("**/giochi");
+  ok("schede: Giochi diventa attiva", (await schede.locator("[aria-current=page]").textContent()) === "Giochi");
+  await p.goto(BASE + "/giochi/salvadanaio/gioca", { waitUntil: "networkidle" });
+  ok("schede: dentro un gioco spariscono", !(await schede.isVisible()));
+  await p.goto(BASE + "/ludoteche/milano/il-nano-gigante", { waitUntil: "networkidle" });
+  ok("schede: sulla scheda del locale resta la sua barra", !(await schede.isVisible()) && (await p.locator("[data-barra-fissa]").isVisible()));
+  // profilo: si vede e si cancella
+  await p.goto(BASE + "/profilo", { waitUntil: "networkidle" });
+  ok("profilo: nome e bimbi", (await p.locator("[data-nome-mamma]").textContent()) === "Giorgia" && (await p.locator("[data-bimbo]").count()) === 2);
+  ok("profilo: noindex", /noindex/.test(await (await fetch(BASE + "/profilo")).text()));
+  p.once("dialog", (d) => d.accept());
+  await p.locator("[data-cancella]").tap(); await p.waitForTimeout(300);
+  ok("profilo: «Cancella i miei dati» toglie tutto", (await p.evaluate(() => localStorage.getItem("giocamizi-profilo"))) === null);
+  await ctx.close();
+}
+{
+  // «Più tardi»: chiuso, e non torna per 7 giorni.
+  const ctx = await b.newContext(telefono); await ctx.addInitScript(UMANO);
+  const p = await ctx.newPage();
+  await p.goto(BASE + "/giochi", { waitUntil: "networkidle" });
+  await p.locator("[data-piu-tardi]").tap();
+  ok("«Più tardi»: si chiude e la pagina si usa", !(await benvenuto(p).isVisible()));
+  await p.goto(BASE + "/storie", { waitUntil: "networkidle" }); await p.waitForTimeout(300);
+  ok("«Più tardi»: non ricompare nelle pagine dopo", !(await benvenuto(p).isVisible()));
+  await p.goto(BASE + "/", { waitUntil: "networkidle" });
+  await p.locator("[data-crea-profilo]").tap(); await p.waitForTimeout(300);
+  ok("home senza profilo: «Crea il profilo» riapre il benvenuto", await benvenuto(p).isVisible());
+  await ctx.close();
+}
+{
+  // Da Google: la pagina cercata resta libera, il benvenuto arriva dalla seconda.
+  const ctx = await b.newContext(telefono); await ctx.addInitScript(UMANO);
+  const p = await ctx.newPage();
+  await p.goto(BASE + "/guide/imparare-a-contare", { waitUntil: "networkidle", referer: "https://www.google.com/" }); await p.waitForTimeout(400);
+  ok("da Google: la prima pagina non viene coperta", !(await benvenuto(p).isVisible()));
+  await p.locator("[data-barra-schede]").getByRole("link", { name: "Giochi" }).tap(); await p.waitForURL("**/giochi"); await p.waitForTimeout(400);
+  ok("da Google: dalla seconda pagina compare", await benvenuto(p).isVisible());
+  // L'invito ricevuto non si copre mai.
+  await p.locator("[data-piu-tardi]").tap();
+  await p.evaluate(() => localStorage.removeItem("giocamizi-benvenuto-rimandato"));
+  await p.goto(BASE + "/biglietti/vedi?b=" + B_PIENO, { waitUntil: "networkidle" }); await p.waitForTimeout(300);
+  ok("invito ricevuto: mai coperto dal benvenuto", !(await benvenuto(p).isVisible()));
+  await ctx.close();
+}
+{
+  // App installata: obbligatorio (niente «Più tardi»).
+  const ctx = await b.newContext(telefono);
+  await ctx.addInitScript(UMANO);
+  await ctx.addInitScript(() => { const mm = window.matchMedia.bind(window); window.matchMedia = (q) => (q.includes("display-mode: standalone") ? { matches: true, media: q, addEventListener() {}, removeEventListener() {} } : mm(q)); });
+  const p = await ctx.newPage();
+  await p.goto(BASE + "/", { waitUntil: "networkidle" });
+  ok("app installata: benvenuto obbligatorio", (await benvenuto(p).isVisible()) && !(await p.locator("[data-piu-tardi]").count()));
+  await ctx.close();
+}
+{
+  // Browser automatici e computer: niente benvenuto.
+  const ctx = await b.newContext(telefono); const p = await ctx.newPage();
+  await p.goto(BASE + "/", { waitUntil: "networkidle" }); await p.waitForTimeout(300);
+  ok("robot/browser automatico: niente benvenuto", !(await benvenuto(p).isVisible()));
+  ok("telefono: un solo titolo H1 visibile in home", (await p.locator("h1:visible").count()) === 1);
+  await ctx.close();
+  const pc2 = await b.newContext({ viewport: { width: 1280, height: 900 } }); await pc2.addInitScript(UMANO);
+  const d2 = await pc2.newPage(); await d2.goto(BASE + "/", { waitUntil: "networkidle" }); await d2.waitForTimeout(300);
+  ok("computer: niente benvenuto né schede, resta il sito", !(await benvenuto(d2).isVisible()) && !(await d2.locator("[data-barra-schede]").isVisible()) && (await d2.locator("h1:visible").count()) === 1);
+  await pc2.close();
+}
 
 await b.close();
 if (servito) process.kill(-servito.pid);

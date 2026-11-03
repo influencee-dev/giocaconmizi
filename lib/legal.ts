@@ -31,7 +31,7 @@ export const AGGIORNATA = "3 novembre 2026";
 
 export interface VoceRegistro {
   nome: string;
-  tipo: "cookie" | "localStorage";
+  tipo: "cookie" | "localStorage" | "sessionStorage";
   scopo: string;
   durata: string;
   /** true = tecnico/necessario: non richiede consenso preventivo (ePrivacy). */
@@ -83,6 +83,35 @@ export const REGISTRO: VoceRegistro[] = [
     necessario: true,
     chi: "noi",
     quando: "Quando tocchi il cuoricino «Salva» su un posto",
+  },
+  {
+    nome: "giocamizi-profilo",
+    tipo: "localStorage",
+    scopo:
+      "Il profilo che crei sul telefono: il tuo nome, nome ed età dei bimbi, l'email e se hai acceso la posta di Mizi. Serve a salutarti per nome e a proporti i giochi giusti per l'età. Resta solo sul tuo dispositivo: l'email ci arriva solo se accendi la posta di Mizi, e mai insieme ai nomi.",
+    durata: "Finché non tocchi «Cancella i miei dati» nel Profilo o cancelli i dati del browser",
+    necessario: true,
+    chi: "noi",
+    quando: "Quando completi il benvenuto sul telefono",
+  },
+  {
+    nome: "giocamizi-benvenuto-rimandato",
+    tipo: "localStorage",
+    scopo: "Ricorda che hai scelto «Più tardi» nel benvenuto, così non te lo riproponiamo per 7 giorni.",
+    durata: "7 giorni",
+    necessario: true,
+    chi: "noi",
+    quando: "Quando tocchi «Più tardi»",
+  },
+  {
+    nome: "giocamizi-pagine-visita · giocamizi-bentornata",
+    tipo: "sessionStorage",
+    scopo:
+      "Contano le pagine aperte in questa visita (chi arriva da un motore di ricerca vede il benvenuto solo dalla seconda pagina) e ricordano che il saluto «Bentornata» è già comparso. Niente nomi, niente identificativi.",
+    durata: "Finché chiudi la scheda o l'app",
+    necessario: true,
+    chi: "noi",
+    quando: "A ogni visita dal telefono",
   },
   {
     nome: "giocamizi-app-chiusa",

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function CookiePage() {
   const cookieVeri = REGISTRO.filter((v) => v.tipo === "cookie");
-  const archivioLocale = REGISTRO.filter((v) => v.tipo === "localStorage");
+  const archivioLocale = REGISTRO.filter((v) => v.tipo !== "cookie");
 
   return (
     <Contenitore className="py-10">
@@ -63,7 +63,7 @@ export default function CookiePage() {
 
       <section className="mt-8">
         <h2 className="mb-2 text-xl font-extrabold text-notte sm:text-2xl">
-          Dati salvati nel browser (localStorage)
+          Dati salvati nel browser (localStorage e sessionStorage)
         </h2>
         <p className="mb-4 leading-relaxed text-notte-tenue">
           Il localStorage è un cassetto del tuo browser: quello che ci mettiamo resta sul

@@ -127,7 +127,8 @@ export function BarraApp() {
       <div
         role="region"
         aria-label="Installa Giocamizi sul telefono"
-        className="fixed inset-x-0 bottom-0 z-30 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden"
+        style={{ bottom: "var(--barra-schede, 0px)" }}
+        className="fixed inset-x-0 z-30 px-3 pb-3 md:hidden"
         data-barra-app
       >
         {aiuto && (

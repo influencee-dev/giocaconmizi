@@ -24,6 +24,7 @@ import {
   SegnoAI,
 } from "@/components/vetrina";
 import { PilaGuide } from "@/components/vetrina/PilaGuide";
+import { HomeApp } from "@/components/app/HomeApp";
 import { JsonLd, jsonLdElenco, jsonLdFaq } from "@/components/seo/JsonLd";
 import { fotoSito } from "@/lib/foto";
 import { GUIDE } from "@/lib/guide";
@@ -117,8 +118,14 @@ export default function Home() {
       <JsonLd data={jsonLdFaq(FAQ)} />
       <JsonLd data={jsonLdElenco("Giochi in evidenza", vetrina.map((g) => ({ nome: g.title, percorso: `/giochi/${g.slug}` })))} />
 
-      {/* ---------- HERO: foto a tutta larghezza, il menu ci galleggia sopra ---------- */}
-      <section className="relative -mt-[5.5rem] overflow-hidden bg-notte">
+      {/* ---------- Telefono: la home come un'app (components/app/HomeApp) ---------- */}
+      <HomeApp
+        giochi={games.filter((g) => g.status === "live").map((g) => ({ slug: g.slug, titolo: g.title, etaMin: g.ageMin, etaMax: g.ageMax, minuti: g.minutes, skill: g.skill }))}
+        inVetrina={IN_VETRINA}
+      />
+
+      {/* ---------- HERO (dal tablet in su): foto a tutta larghezza, il menu ci galleggia sopra ---------- */}
+      <section className="relative -mt-[5.5rem] hidden overflow-hidden bg-notte md:block">
         {fotoHero ? (
           <Image src={fotoHero.src} alt={fotoHero.alt} fill priority sizes="100vw" className="object-cover object-[70%_center]" />
         ) : (

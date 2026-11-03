@@ -38,7 +38,8 @@ export function BannerCookie() {
     <div
       role="region"
       aria-label="Consenso su cookie e statistiche"
-      className="fixed inset-x-0 bottom-0 z-40 border-t-2 border-crema-scuro bg-white px-4 py-2.5 shadow-[0_-4px_20px_rgba(31,36,48,0.08)]"
+      style={{ bottom: "var(--barra-schede, 0px)" }}
+      className="fixed inset-x-0 z-40 border-t-2 border-crema-scuro bg-white px-4 py-2.5 shadow-[0_-4px_20px_rgba(31,36,48,0.08)]"
     >
       <div className="mx-auto flex w-full max-w-4xl flex-wrap items-center gap-x-4 gap-y-2">
         <p className="min-w-0 flex-1 basis-60 text-xs leading-snug text-notte sm:text-sm">

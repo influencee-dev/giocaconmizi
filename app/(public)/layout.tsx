@@ -8,6 +8,8 @@ import { GUIDE } from "@/lib/guide";
 import { CITTA_FESTE } from "@/lib/feste";
 import { BannerCookie } from "@/components/legal/BannerCookie";
 import { BarraApp } from "@/components/app/BarraApp";
+import { BarraSchede } from "@/components/app/BarraSchede";
+import { Benvenuto } from "@/components/app/Benvenuto";
 import { Freccia } from "@/components/vetrina";
 import { MenuMobile } from "@/components/vetrina/MenuMobile";
 
@@ -81,6 +83,10 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       <Piede logo={<LogoGrande />} />
 
       <BarraApp />
+
+      <BarraSchede />
+
+      <Benvenuto />
     </>
   );
 }
