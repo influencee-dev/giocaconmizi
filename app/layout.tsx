@@ -27,6 +27,8 @@ export const metadata: Metadata = {
   },
   description: site.descrizioneDefault,
   applicationName: site.nome,
+  // Su iPhone, aggiunta alla schermata Home, si apre come un'app.
+  appleWebApp: { capable: true, title: "Giocamizi", statusBarStyle: "default" },
   authors: [{ name: site.autore }],
   alternates: { canonical: "/" },
   openGraph: {

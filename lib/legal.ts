@@ -27,7 +27,7 @@ export const TITOLARE = {
 } as const;
 
 /** Data dell'ultima revisione delle informative (si aggiorna a ogni modifica). */
-export const AGGIORNATA = "2 novembre 2026";
+export const AGGIORNATA = "3 novembre 2026";
 
 export interface VoceRegistro {
   nome: string;
@@ -73,6 +73,26 @@ export const REGISTRO: VoceRegistro[] = [
     necessario: true,
     chi: "noi",
     quando: "Quando scegli nel banner del primo ingresso",
+  },
+  {
+    nome: "giocamizi-preferiti",
+    tipo: "localStorage",
+    scopo:
+      "I posti per la festa che salvi col cuoricino. Restano solo sul tuo dispositivo: non ci arrivano e non servono a profilarti.",
+    durata: "Finché non li togli o cancelli i dati del browser",
+    necessario: true,
+    chi: "noi",
+    quando: "Quando tocchi il cuoricino «Salva» su un posto",
+  },
+  {
+    nome: "giocamizi-app-chiusa",
+    tipo: "localStorage",
+    scopo:
+      "Ricorda che hai chiuso la barretta «Scarica Giocamizi sul tuo telefono», così non ricompare per 30 giorni.",
+    durata: "30 giorni",
+    necessario: true,
+    chi: "noi",
+    quando: "Quando chiudi la barretta con la X",
   },
   {
     nome: "sb-wrkderhcbzlppkveknyd-auth-token",

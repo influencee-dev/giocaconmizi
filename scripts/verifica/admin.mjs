@@ -15,6 +15,20 @@ ok("immagini: codice sbagliato → pannello non disponibile", sbagliata.includes
 const senza = await fetch(`${BASE}/api/admin/immagini`, { method: "POST", body: new FormData() });
 ok("API immagini: 401 senza codice", senza.status === 401);
 
+// 1-bis. /admin senza codice: il campo per incollare codice o link intero.
+const ingresso = await fetch(`${BASE}/admin`).then(async (r) => [r.status, await r.text()]);
+ok("/admin senza codice: pagina con il campo, noindex", ingresso[0] === 200 && ingresso[1].includes("data-codice-admin") && /noindex/.test(ingresso[1]));
+{
+  const b0 = await apriBrowser();
+  const p0 = await b0.newPage({ viewport: { width: 390, height: 844 } });
+  await p0.goto(`${BASE}/admin`, { waitUntil: "networkidle" });
+  await p0.locator("[data-codice-admin]").fill(`https://giocamizi.it/admin/${CODICE_ADMIN_PROVA}/schede`);
+  await p0.getByRole("button", { name: "Apri il pannello" }).click();
+  await p0.waitForURL(`**/admin/${CODICE_ADMIN_PROVA}`, { timeout: 8000 }).catch(() => null);
+  ok("/admin: incollando il link intero si apre il pannello", p0.url().endsWith(`/admin/${CODICE_ADMIN_PROVA}`) && !(await p0.content()).includes("Pannello non disponibile"));
+  await b0.close();
+}
+
 // 2. Una foto vera del sito, rifatta PNG pesante (come quelle di ChatGPT).
 const png = await sharp("public/immagini/bambino-gioca-numeri-in-cucina-1440.webp").png().toBuffer();
 

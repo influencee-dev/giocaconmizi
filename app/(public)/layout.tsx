@@ -7,6 +7,7 @@ import { games } from "@/games/registry";
 import { GUIDE } from "@/lib/guide";
 import { CITTA_FESTE } from "@/lib/feste";
 import { BannerCookie } from "@/components/legal/BannerCookie";
+import { BarraApp } from "@/components/app/BarraApp";
 import { Freccia } from "@/components/vetrina";
 
 const MENU = [
@@ -102,6 +103,8 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       <FasciaNewsletter giochi={games.length} guide={GUIDE.length} citta={CITTA_FESTE.length} />
 
       <Piede logo={<LogoGrande />} />
+
+      <BarraApp />
     </>
   );
 }

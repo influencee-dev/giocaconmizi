@@ -30,6 +30,8 @@ export function salvaConsenso(valore: "si" | "no") {
   } catch {
     // Browser senza storage: la scelta varrà per questa visita.
   }
+  // La barretta «Scarica l'app» aspetta che il banner sia chiuso.
+  window.dispatchEvent(new Event("giocamizi-consenso"));
 }
 
 /** Toglie la scelta salvata: al prossimo caricamento il banner ricompare. */

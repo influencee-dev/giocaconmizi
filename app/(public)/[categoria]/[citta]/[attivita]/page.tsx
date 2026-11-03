@@ -263,7 +263,7 @@ export default async function SchedaPage({ params }: P) {
       </Contenitore>
 
       {/* Telefono e tablet: l'azione principale sempre a portata di pollice. */}
-      <div className="fixed inset-x-0 bottom-0 z-20 border-t-2 border-crema-scuro bg-white px-4 py-3 lg:hidden">
+      <div data-barra-fissa className="fixed inset-x-0 bottom-0 z-20 border-t-2 border-crema-scuro bg-white px-4 py-3 lg:hidden">
         {s.sito ? (
           <a data-traccia="sito" href={s.sito} target="_blank" rel="nofollow noopener" className="block rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
             Vai al sito ufficiale
