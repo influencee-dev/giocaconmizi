@@ -79,6 +79,7 @@
   "content/games/trova-le-differenze.md": "2026-08-23",
   "content/games/unisci-i-puntini.md": "2026-08-23",
   "content/games/unisci-le-sillabe.md": "2026-08-23",
+  "content/games/vesti-mizi.md": "2026-11-03",
   "content/hubs/10-anni.md": "2026-08-23",
   "content/hubs/11-anni.md": "2026-08-23",
   "content/hubs/12-anni.md": "2026-08-23",
@@ -138,6 +139,7 @@
   "games/trova-le-differenze": "2026-08-23",
   "games/unisci-i-puntini": "2026-10-11",
   "games/unisci-le-sillabe": "2026-10-11",
+  "games/vesti-mizi": "2026-11-03",
   "lib/biglietti.ts": "2026-10-26",
   "lib/esempi.ts": "2026-08-23"
 }

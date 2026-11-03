@@ -298,6 +298,38 @@ ok("og:image della home", await ogServita("/"));
 ok("og:image di una guida", await ogServita("/guide/tabelline-senza-lacrime"));
 ok("og:image di una città", await ogServita("/feste/milano"));
 
+// Vesti Mizi: Fatto senza i capi → aiuto e il livello resta; sei uscite
+// vestite giuste, il gioco libero con la foto, poi la festa.
+{
+  const prima = erroriJs;
+  await page.goto(`${BASE}/giochi/vesti-mizi/gioca`, { waitUntil: "networkidle" });
+  await page.waitForTimeout(800);
+  await page.locator("[data-fatto]").tap();
+  const aiuto = await page.locator("[data-messaggio=aiuto]").textContent().catch(() => "");
+  ok("vesti Mizi: senza vestiti → aiuto, il livello resta", aiuto.includes("cappello di paglia") && (await page.locator("text=Livello 1 di 7").isVisible()));
+  const SERVE = [["paglia", "sole"], ["festa", "palloncino"], ["ombrello", "stivali"], ["lana"], ["sub", "pinne"], ["corona", "bacchetta"]];
+  const ZONA = { paglia: "testa", sole: "occhi", festa: "testa", palloncino: "ali", ombrello: "ali", stivali: "piedi", lana: "testa", sub: "occhi", pinne: "piedi", corona: "testa", bacchetta: "ali" };
+  let vestite = 0;
+  for (const capi of SERVE) {
+    for (const id of capi) { await page.locator(`[data-zona=${ZONA[id]}]`).tap(); await page.locator(`[data-capo=${id}]`).tap(); }
+    const addosso = await page.locator("[data-palco] [data-addosso]").count();
+    await page.locator("[data-fatto]").tap();
+    if ((await page.locator("[data-messaggio=brava]").count()) && addosso === capi.length) vestite++;
+    await page.waitForTimeout(1700);
+  }
+  ok("vesti Mizi: sei uscite vestite giuste", vestite === 6, `${vestite}/6`);
+  await page.locator("[data-zona=trucchi]").tap();
+  for (const id of ["guance", "stelline", "brillantini"]) await page.locator(`[data-capo=${id}]`).tap();
+  ok("vesti Mizi: i trucchi si sommano", (await page.locator("[data-palco] [data-addosso]").count()) === 3);
+  const scarico = page.waitForEvent("download", { timeout: 8000 }).catch(() => null);
+  await page.locator("[data-salva-foto]").tap();
+  const foto = await scarico;
+  ok("vesti Mizi: «Salva la foto» scarica un PNG", foto?.suggestedFilename() === "mizi-vestita-giocamizi.png");
+  await page.locator("[data-fatto]").tap();
+  await page.waitForTimeout(1900);
+  ok("vesti Mizi: fino alla festa, senza errori", (await page.locator("text=Bravissimo!").isVisible().catch(() => false)) && erroriJs === prima);
+}
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("giochi") ? 0 : 1);

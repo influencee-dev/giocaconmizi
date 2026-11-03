@@ -99,6 +99,11 @@ a[role="button"],
   animation: cade 2.4s linear infinite;
 }
 
+@keyframes comparsa {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @keyframes cade {
   0% {
     transform: translateY(0) rotate(0deg);

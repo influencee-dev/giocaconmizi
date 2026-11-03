@@ -65,6 +65,7 @@ export const ICONE_GIOCO: Record<string, NomeIcona[]> = {
   "cosa-manca": ["lente", "domanda"],
   salvadanaio: ["numeri", "piu"],
   "pizza-delle-frazioni": ["torta", "numeri"],
+  "vesti-mizi": ["pinguino", "unicorno"],
   "addizioni-entro-20": ["piu", "pesce"],
   "l-orologio": ["orologio"],
   tabelline: ["per", "numeri"],
