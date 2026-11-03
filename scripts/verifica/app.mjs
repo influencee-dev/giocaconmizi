@@ -74,6 +74,32 @@ await d.waitForTimeout(500);
 ok("computer: la barra non compare", !(await visibile(d)));
 await pc.close();
 
+// 7. Il menu del telefono si richiude da solo quando cambi pagina.
+const menuCtx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+await menuCtx.addInitScript(() => localStorage.setItem("mizi.consenso-statistiche", "no"));
+const m = await menuCtx.newPage();
+await m.goto(BASE + "/", { waitUntil: "networkidle" });
+const tasto = m.locator("button[aria-controls='menu-mobile']");
+const menu = m.locator("#menu-mobile");
+await tasto.tap();
+await m.waitForTimeout(300);
+ok("menu: si apre al tocco", (await menu.isVisible()) && (await tasto.getAttribute("aria-expanded")) === "true");
+await menu.getByRole("link", { name: "Guide", exact: true }).tap();
+await m.waitForURL("**/guide", { timeout: 8000 }).catch(() => null);
+await m.waitForTimeout(400);
+ok("menu: cambiando pagina si richiude", m.url().endsWith("/guide") && !(await menu.isVisible()) && (await tasto.textContent()) === "Menu");
+await tasto.tap();
+await m.waitForTimeout(300);
+await m.keyboard.press("Escape");
+await m.waitForTimeout(300);
+ok("menu: si chiude con Esc", !(await menu.isVisible()));
+await tasto.tap();
+await m.waitForTimeout(300);
+await m.locator("main h1").first().tap({ force: true });
+await m.waitForTimeout(300);
+ok("menu: si chiude toccando fuori", !(await menu.isVisible()));
+await menuCtx.close();
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("app") ? 0 : 1);

@@ -9,6 +9,7 @@ import { CITTA_FESTE } from "@/lib/feste";
 import { BannerCookie } from "@/components/legal/BannerCookie";
 import { BarraApp } from "@/components/app/BarraApp";
 import { Freccia } from "@/components/vetrina";
+import { MenuMobile } from "@/components/vetrina/MenuMobile";
 
 const MENU = [
   { href: "/giochi", nome: "Giochi" },
@@ -66,32 +67,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
             >
               Gioca ora <Freccia />
             </Link>
-            <details className="group lg:hidden">
-              <summary
-                data-tap
-                className="flex cursor-pointer list-none items-center justify-center rounded-2xl bg-notte px-4 font-extrabold text-white [&::-webkit-details-marker]:hidden"
-              >
-                <span className="group-open:hidden">Menu</span>
-                <span className="hidden group-open:inline">Chiudi</span>
-              </summary>
-              <nav
-                aria-label="Menu"
-                className="absolute inset-x-0 top-[calc(100%+0.5rem)] hidden flex-col gap-1 group-open:flex rounded-[1.4rem] bg-white p-3 shadow-[0_18px_40px_-12px_rgba(31,36,48,0.35)]"
-              >
-                {[...MENU, { href: "/biglietti", nome: "Inviti di compleanno" }].map((m) => (
-                  <Link key={m.href} href={m.href} className="rounded-xl px-4 py-3 text-lg font-extrabold text-notte hover:bg-crema">
-                    {m.nome}
-                  </Link>
-                ))}
-                <Link
-                  href="/giochi"
-                  data-tap
-                  className="mt-1 flex items-center justify-center gap-2 rounded-2xl bg-viola font-extrabold text-white sm:hidden"
-                >
-                  Gioca ora <Freccia />
-                </Link>
-              </nav>
-            </details>
+            <MenuMobile voci={[...MENU, { href: "/biglietti", nome: "Inviti di compleanno" }]} />
           </div>
         </div>
       </header>
