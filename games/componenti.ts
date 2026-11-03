@@ -36,6 +36,7 @@ export const componenti: Record<string, ComponentType<GameProps>> = {
   salvadanaio: dynamic(() => import("@/games/salvadanaio/Game"), { ssr: false }),
   "pizza-delle-frazioni": dynamic(() => import("@/games/pizza-delle-frazioni/Game"), { ssr: false }),
   "vesti-mizi": dynamic(() => import("@/games/vesti-mizi/Game"), { ssr: false }),
+  "colora-con-mizi": dynamic(() => import("@/games/colora-con-mizi/Game"), { ssr: false }),
   "prime-parole-inglese": dynamic(() => import("@/games/prime-parole-inglese/Game"), { ssr: false }),
   "addizioni-entro-20": dynamic(() => import("@/games/addizioni-entro-20/Game"), { ssr: false }),
   "l-orologio": dynamic(() => import("@/games/l-orologio/Game"), { ssr: false }),

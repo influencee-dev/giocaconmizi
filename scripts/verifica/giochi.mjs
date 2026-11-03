@@ -330,6 +330,34 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   ok("vesti Mizi: fino alla festa, senza errori", (await page.locator("text=Bravissimo!").isVisible().catch(() => false)) && erroriJs === prima);
 }
 
+// Colora con Mizi: secchiello, pennello col dito, annulla, salva, sei disegni.
+{
+  const prima = erroriJs;
+  await page.goto(`${BASE}/giochi/colora-con-mizi/gioca`, { waitUntil: "networkidle" });
+  await page.waitForTimeout(800);
+  await page.locator('[data-colore="rosso"]').tap();
+  await page.locator('[data-parte="pancia"]').dispatchEvent("click");
+  ok("colora: il secchiello riempie la parte toccata", (await page.locator('[data-parte="pancia"]').getAttribute("fill")) === "#EF5350");
+  await page.locator("[data-annulla]").tap();
+  ok("colora: «Annulla» toglie il colore", (await page.locator('[data-parte="pancia"]').getAttribute("fill")) === "#FFFFFF");
+  const pieni = () => page.locator("[data-tela]").evaluate((c) => { const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; let n = 0; for (let k = 3; k < d.length; k += 4) if (d[k]) n++; return n; });
+  await page.locator("[data-strumento=pennello]").tap();
+  const box = await page.locator("[data-tela]").boundingBox();
+  await page.mouse.move(box.x + 40, box.y + 60); await page.mouse.down();
+  for (let k = 0; k < 12; k++) await page.mouse.move(box.x + 40 + k * 10, box.y + 60 + k * 4);
+  await page.mouse.up();
+  const dopoTratto = await pieni();
+  ok("colora: il pennello disegna col dito", dopoTratto > 500, `${dopoTratto} pixel`);
+  await page.locator("[data-annulla]").tap();
+  ok("colora: «Annulla» cancella il tratto", (await pieni()) === 0);
+  const scarico = page.waitForEvent("download", { timeout: 8000 }).catch(() => null);
+  await page.locator("[data-salva]").tap();
+  ok("colora: «Salva» scarica il disegno in PNG", (await scarico)?.suggestedFilename() === "mizi-colorato-giocamizi.png");
+  for (let k = 0; k < 6; k++) { await page.locator("[data-fatto]").tap(); await page.waitForTimeout(400); }
+  await page.waitForTimeout(600);
+  ok("colora: sei disegni fino alla festa, senza errori", (await page.locator("text=Bravissimo!").isVisible().catch(() => false)) && erroriJs === prima);
+}
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("giochi") ? 0 : 1);

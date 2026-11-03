@@ -26,6 +26,7 @@ export const slugGiocabili = [
   "salvadanaio",
   "pizza-delle-frazioni",
   "vesti-mizi",
+  "colora-con-mizi",
   "l-orologio",
   "ortografia-c-ch-g-gh",
   "tabelline",
