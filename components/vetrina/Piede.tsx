@@ -54,7 +54,8 @@ export const COLONNE: { titolo: string; voci: [string, string][] }[] = [
     titolo: "Giocamizi",
     voci: [
       ["/chi-siamo", "Chi siamo"],
-      ["/termini-attivita", "Per le attività"],
+      ["/aggiungi-attivita", "Aggiungi la tua attività"],
+      ["/termini-attivita", "Termini per le attività"],
       ["/accedi", "Accedi"],
       ["/privacy", "Privacy"],
       ["/cookie", "Cookie"],

@@ -145,5 +145,54 @@ await page.goto(`${BASE}/admin/${CODICE_ADMIN_PROVA}/posizioni`, { waitUntil: "n
 ok("pannello posizioni: si apre", (await page.getByRole("button", { name: "Cerca le prossime 12 posizioni" }).count()) === 1);
 
 await browser.close();
+// Candidature: le attività si propongono da /aggiungi-attivita e arrivano nel pannello.
+{
+  const pagina = await fetch(`${BASE}/aggiungi-attivita`).then(async (r) => [r.status, await r.text()]);
+  ok("aggiungi attività: pagina pubblica con canonical", pagina[0] === 200 && pagina[1].includes('rel="canonical" href="https://giocamizi.it/aggiungi-attivita"'));
+  ok("aggiungi attività: c'è la categoria «Associazioni e laboratori»", pagina[1].includes("Associazioni e laboratori"));
+  const sbagliato = await fetch(`${BASE}/admin/codice-sbagliato-000000/candidature`).then((r) => r.text());
+  ok("candidature: senza codice → pannello non disponibile", sbagliato.includes("Pannello non disponibile"));
+
+  const bc = await apriBrowser();
+  const pc = await bc.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await pc.goto(`${BASE}/aggiungi-attivita`, { waitUntil: "networkidle" });
+  await pc.locator("[data-campo=nome]").fill("Associazione Prova Bimbi");
+  await pc.locator("[data-campo=categoria]").selectOption("associazioni-per-bambini");
+  await pc.locator("[data-campo=citta]").fill("Milano");
+  await pc.locator("[data-campo=descrizione]").fill("Laboratori creativi per bambini dai 4 ai 10 anni e feste di compleanno a tema con un educatore.");
+  await pc.locator("[data-campo=referente]").fill("Maria Prova");
+  await pc.locator("[data-campo=email]").fill("maria@esempio.it");
+  await pc.locator("[data-spunta=titolare]").check();
+  await pc.locator("[data-spunta=termini]").check();
+  await pc.locator("[data-invia]").tap();
+  await pc.locator("[data-candidatura-ok]").waitFor({ timeout: 8000 }).catch(() => null);
+  ok("aggiungi attività: un'associazione nuova si propone", await pc.locator("[data-candidatura-ok]").isVisible());
+
+  await pc.goto(`${BASE}/aggiungi-attivita`, { waitUntil: "networkidle" });
+  await pc.getByText("Gestire la scheda della mia attività").tap();
+  await pc.locator("[data-campo=citta-scheda]").selectOption("Milano");
+  await pc.locator("[data-campo=scheda]").selectOption("milano/il-nano-gigante");
+  await pc.locator("[data-campo=referente]").fill("Luca Titolare");
+  await pc.locator("[data-campo=email]").fill("luca@esempio.it");
+  await pc.locator("[data-spunta=titolare]").check();
+  await pc.locator("[data-spunta=termini]").check();
+  await pc.locator("[data-invia]").tap();
+  await pc.locator("[data-candidatura-ok]").waitFor({ timeout: 8000 }).catch(() => null);
+  ok("aggiungi attività: il titolare di una scheda chiede l'accesso", (await pc.locator("[data-candidatura-ok]").textContent())?.includes("link personale"));
+
+  await pc.goto(`${BASE}/admin/${CODICE_ADMIN_PROVA}/candidature`, { waitUntil: "networkidle" });
+  ok("candidature: nel pannello arrivano tutte e due",
+    (await pc.locator("[data-candidatura=nuova]").count()) >= 1 && (await pc.locator("[data-candidatura=accesso]").count()) >= 1);
+  ok("candidature: l'accesso mostra il nome della scheda", (await pc.locator("[data-candidatura=accesso]").first().textContent()).includes("Il Nano Gigante"));
+  await pc.locator("[data-candidatura=nuova] [data-accetta]").first().tap();
+  await pc.waitForLoadState("networkidle");
+  await pc.waitForTimeout(500);
+  ok("candidature: «Accetta» la sposta nello storico", (await pc.locator("[data-storico]").first().textContent().catch(() => "")).includes("accettata"));
+
+  await pc.goto(`${BASE}/ludoteche/milano/il-nano-gigante`, { waitUntil: "networkidle" });
+  ok("scheda: «Aggiungi o gestisci» porta al modulo", (await pc.locator("[data-cta-attivita]").getAttribute("href")) === "/aggiungi-attivita");
+  await bc.close();
+}
+
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("admin") ? 0 : 1);

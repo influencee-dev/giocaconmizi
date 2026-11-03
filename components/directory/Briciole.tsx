@@ -36,11 +36,11 @@ export function CtaAttivita() {
       <div>
         <p className="text-xl font-extrabold text-notte">Gestisci uno di questi spazi per bambini?</p>
         <p className="mt-1 text-sm font-semibold text-notte-tenue">
-          La scheda è gratuita: presto potrai reclamarla, aggiungere foto, orari e pacchetti festa.
+          La scheda è gratuita: chiedi di gestirla o aggiungi la tua attività, anche se è un&apos;associazione o un laboratorio.
         </p>
       </div>
-      <Link href="/chi-siamo" className="shrink-0 rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
-        Scrivici
+      <Link href="/aggiungi-attivita" className="shrink-0 rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white" data-cta-attivita>
+        Aggiungi o gestisci
       </Link>
     </section>
   );

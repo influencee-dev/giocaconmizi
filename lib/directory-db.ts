@@ -123,3 +123,67 @@ export async function adminEsito(codice: string, id: number, esito: "accettata" 
   const { error } = await client.rpc("dir_admin_esito", { p_codice: codice, p_id: id, p_esito: esito, p_nota: nota });
   return !error;
 }
+
+// ---------- Candidature: le attività che si propongono da sole (/aggiungi-attivita) ----------
+
+export interface Candidatura {
+  id: number;
+  tipo: "nuova" | "accesso";
+  chiave: string | null;
+  dati: Record<string, string>;
+  email: string;
+  referente: string;
+  termini_accettati: boolean;
+  creato_il: string;
+  stato: "in_attesa" | "accettata" | "rifiutata";
+  nota: string | null;
+}
+
+/** Solo nel server delle verifiche: le candidature restano in memoria, niente database. */
+const inProva = () => Boolean(process.env.GIOCAMIZI_ADMIN_PROVA && !process.env.VERCEL);
+// Su globalThis: azioni e pagine del server possono stare in moduli separati.
+const memoriaProva: Candidatura[] = ((globalThis as { __candidatureProva?: Candidatura[] }).__candidatureProva ??= []);
+
+export async function inviaCandidatura(c: {
+  tipo: "nuova" | "accesso"; chiave: string | null; dati: Record<string, string>; email: string; referente: string; termini: boolean;
+}) {
+  if (inProva()) {
+    memoriaProva.unshift({ id: memoriaProva.length + 1, tipo: c.tipo, chiave: c.chiave, dati: c.dati, email: c.email, referente: c.referente, termini_accettati: c.termini, creato_il: new Date().toISOString(), stato: "in_attesa", nota: null });
+    return { ok: true as const };
+  }
+  const client = db();
+  if (!client) return { ok: false as const, errore: "servizio non disponibile" };
+  try {
+    const { error } = await client.rpc("dir_candidatura", {
+      p_tipo: c.tipo, p_chiave: c.chiave, p_dati: c.dati, p_email: c.email, p_referente: c.referente, p_termini: c.termini,
+    });
+    if (error) return { ok: false as const, errore: error.message };
+    return { ok: true as const };
+  } catch {
+    return { ok: false as const, errore: "servizio non disponibile" };
+  }
+}
+
+export async function adminCandidature(codice: string): Promise<Candidatura[] | null> {
+  if (inProva() && codice === process.env.GIOCAMIZI_ADMIN_PROVA) return memoriaProva;
+  const client = db();
+  if (!client) return null;
+  try {
+    const { data, error } = await client.rpc("dir_admin_candidature", { p_codice: codice });
+    return error ? null : (data as Candidatura[]);
+  } catch {
+    return null;
+  }
+}
+
+export async function adminEsitoCandidatura(codice: string, id: number, esito: "accettata" | "rifiutata", nota: string) {
+  if (inProva() && codice === process.env.GIOCAMIZI_ADMIN_PROVA) {
+    const c = memoriaProva.find((x) => x.id === id);
+    if (c) Object.assign(c, { stato: esito, nota });
+    return Boolean(c);
+  }
+  const client = db();
+  if (!client) return false;
+  const { error } = await client.rpc("dir_admin_esito_candidatura", { p_codice: codice, p_id: id, p_esito: esito, p_nota: nota });
+  return !error;
+}

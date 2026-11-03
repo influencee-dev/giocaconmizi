@@ -152,6 +152,29 @@ export const CATEGORIE: Categoria[] = [
     regola: /parco giochi|area giochi|luna park|parco a tema|trampoline/i,
   },
   {
+    slug: "associazioni-per-bambini",
+    nome: "Associazioni e laboratori",
+    singolare: "associazione",
+    titolo: "Associazioni e laboratori per bambini",
+    sottotitolo: "Associazioni, laboratori creativi e centri per bambini che organizzano attività e feste, città per città.",
+    rispostaBreve:
+      "Le associazioni e i laboratori per bambini propongono attività guidate, come arte, musica, teatro, scienza, natura o sport, e spesso anche feste di compleanno a tema con un educatore. Prima di scegliere guardate la fascia d'età, quanti bambini segue ogni educatore e se serve la tessera associativa.",
+    comeScegliere: [
+      "La fascia d'età dell'attività e quanti bambini segue ogni educatore.",
+      "Se per partecipare serve la tessera dell'associazione e quanto costa.",
+      "Cosa comprende la festa: laboratorio, materiali, merenda, spazio.",
+      "Dove si svolge: nella sede, all'aperto o a casa vostra.",
+    ],
+    faq: [
+      { domanda: "Cosa fa un'associazione per bambini?", risposta: "Organizza attività educative e di gioco guidate da educatori: laboratori creativi, musica, teatro, scienza, natura o sport, spesso con corsi durante l'anno, centri estivi e feste di compleanno a tema." },
+      { domanda: "Serve la tessera per la festa?", risposta: "A volte sì: molte associazioni chiedono una tessera associativa annuale, anche solo per il festeggiato. Chiedetelo al momento del preventivo, insieme a cosa comprende il prezzo." },
+      { domanda: "Da che età si può fare una festa con un laboratorio?", risposta: "Dai 3-4 anni per i laboratori più semplici, come pittura, pasta di sale e musica; quelli di scienza o teatro funzionano meglio dai 6 anni in su." },
+    ],
+    schema: "NGO",
+    icona: "tavolozza",
+    regola: /associazion|laboratori|centro per bambini|\basd\b/i,
+  },
+  {
     slug: "sale-feste",
     nome: "Sale feste per bambini",
     singolare: "sala feste",

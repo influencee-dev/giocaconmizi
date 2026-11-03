@@ -118,6 +118,15 @@ export default function PrivacyPage() {
           attività può opporsi in qualsiasi momento e la scheda viene tolta.
         </p>
         <p>
+          <strong className="text-notte">5-bis. Attività che si propongono.</strong>{" "}
+          Se usi la pagina «Aggiungi la tua attività» salviamo i dati dell&apos;attività che
+          scrivi, il nome e il ruolo di chi compila, l&apos;email, il telefono se lo lasci e la
+          data. Li usiamo solo per verificare l&apos;attività, risponderti e, se lo chiedi,
+          pubblicare la scheda: email e telefono non vengono pubblicati se non ce lo chiedi.
+          Base giuridica: la tua richiesta (art. 6.1.b). Le proposte non accettate vengono
+          cancellate entro 12 mesi.
+        </p>
+        <p>
           <strong className="text-notte">6. Email che ci scrivi.</strong> Se ci scrivi,
           usiamo il tuo indirizzo e quello che racconti solo per risponderti e per gestire
           la richiesta (art. 6.1.b e 6.1.f). Le email vengono cancellate quando la
@@ -209,7 +218,7 @@ export default function PrivacyPage() {
           L&apos;account e i suoi dati restano finché non lo cancelli. L&apos;iscrizione alle
           novità resta finché non ti disiscrivi. Le statistiche di Google Analytics sono
           conservate per 2 mesi. Le risposte delle attività restano finché la scheda è
-          pubblicata, e una richiesta di rimozione viene eseguita entro 30 giorni. I log
+          pubblicata, le proposte non accettate al massimo 12 mesi, e una richiesta di rimozione viene eseguita entro 30 giorni. I log
           tecnici dell&apos;hosting vengono conservati per il breve periodo previsto dal
           fornitore per la sicurezza.
         </p>

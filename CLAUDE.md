@@ -50,6 +50,13 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   MAI foto prese dai siti o dai social dei locali: solo illustrazioni
   nostre finché l'attività non carica le sue. Email e telefoni dei locali
   NON vanno nel repo (è pubblico): stanno nel foglio privato di Giorgia.
+- Candidature: `/aggiungi-attivita` (pubblica) — un'attività nuova si propone
+  (anche la categoria «Associazioni e laboratori», attiva solo quando c'è una
+  scheda) o un titolare chiede l'accesso alla sua scheda. Finiscono in
+  `dir_candidature` (`supabase/candidature.sql`) e in /admin/[codice]/candidature.
+  Niente va online da solo: un'attività nuova si verifica sul sito ufficiale e
+  si aggiunge a lib/feste.ts come le altre; un accesso si chiude mandando il
+  link personale. Email e telefoni dei proponenti restano nel database, mai nel repo.
 - Area attività (fase 1): `/la-tua-scheda/[codice]` (link personale: il
   locale approva, modifica o chiede di togliere la scheda) e
   `/admin/[codice]` (Giorgia decide). Database in `supabase/directory.sql`,
