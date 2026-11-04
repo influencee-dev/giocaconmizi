@@ -4,6 +4,7 @@
 // scartava ogni pagina. Il server locale risponde su BASE: i percorsi
 // dichiarati si riscrivono lì, gli host si confrontano tra loro.
 import { conServer, contatore, BASE } from "./comune.mjs";
+import { validaJsonLd } from "./jsonld.mjs";
 
 const servito = await conServer();
 const { ok, chiudi } = contatore();
@@ -58,6 +59,7 @@ ok("date-pagine.json allineato ai sorgenti", controllo.status === 0, (controllo.
 // 3. Ogni pagina della sitemap: 200, un solo canonical, su sé stessa e sul
 // dominio; og:url coerente; i JSON-LD non citano altri domini del sito.
 const problemi = [];
+const strutturati = [];
 const coda = [...locs];
 async function controlla(loc) {
   const percorso = locale(loc);
@@ -78,6 +80,7 @@ async function controlla(loc) {
       .filter((o) => o !== dominio);
     if (altri.length) problemi.push(`${percorso}: JSON-LD cita ${altri[0]}`);
   }
+  strutturati.push(...validaJsonLd(html, percorso).problemi);
 }
 // Cinque richieste alla volta: abbastanza veloce, senza affogare il server.
 await Promise.all(Array.from({ length: 5 }, async () => {
@@ -88,6 +91,23 @@ ok(
   problemi.length === 0,
   problemi.length ? `${problemi.length} problemi, es. ${problemi.slice(0, 3).join(" | ")}` : `${locs.length} pagine`,
 );
+
+// 3-bis. I dati strutturati di ogni pagina (dal 04/11/2026, scripts/verifica/jsonld.mjs):
+// JSON leggibile, tipi schema.org veri, FAQ complete e VISIBILI nella pagina,
+// una sola FAQPage, briciole dalla Home con indirizzi sul dominio, Article
+// con titolo, data, autrice e immagine.
+ok("dati strutturati validi su ogni pagina", strutturati.length === 0,
+  strutturati.length ? `${strutturati.length} problemi, es. ${strutturati.slice(0, 3).join(" | ")}` : `${locs.length} pagine`);
+// La guardia stessa: su una pagina finta piena di errori deve trovarli tutti.
+const finta = `<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Domanda che non c'è nella pagina?","acceptedAnswer":{"@type":"Answer","text":"x"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Giochi","item":"https://altro.it/giochi"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Articolo"}</script><p>niente</p>`;
+const trovati = validaJsonLd(finta, "/prova").problemi.join(" | ");
+ok("la guardia dei dati strutturati scatta sugli errori",
+  ["FAQ non visibile", "FAQPage senza domande", "2 FAQPage", "meno di 2 voci", "fuori dominio", "tipo sconosciuto «Articolo»"].every((t) => trovati.includes(t)), trovati.slice(0, 120));
+const copertina = await fetch(`${BASE}/guide/tabelline-senza-lacrime/copertina.png`);
+ok("guida: la copertina dell'Article risponde (PNG)", copertina.ok && copertina.headers.get("content-type")?.includes("image/png"));
 
 // 4. Le pagine private restano fuori da Google: l'accesso e gli inviti dei
 // bambini (/biglietti/vedi porta nome, data e indirizzo della festa), il

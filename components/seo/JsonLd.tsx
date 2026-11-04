@@ -103,6 +103,7 @@ export function jsonLdArticolo(guida: {
     headline: guida.titolo,
     description: guida.descrizione,
     url: url(`/guide/${guida.slug}`),
+    image: { "@type": "ImageObject", url: url(`/guide/${guida.slug}/copertina.png`), width: 1200, height: 630 },
     inLanguage: site.lingua,
     isAccessibleForFree: true,
     datePublished: guida.aggiornata,
@@ -136,6 +137,8 @@ export function jsonLdFaq(faq: { domanda: string; risposta: string }[]) {
 
 /** Breadcrumb: gioco → età → competenza, come da piano §3. */
 export function jsonLdBreadcrumb(voci: { nome: string; percorso: string }[]) {
+  // Si parte sempre dalla Home: una briciola sola Google la segnala come errore.
+  if (voci[0]?.percorso !== "/") voci = [{ nome: "Home", percorso: "/" }, ...voci];
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

@@ -2075,6 +2075,40 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "varese",
+    citta: "Varese",
+    aggiornata: "2026-11-04",
+    rispostaBreve: "A Varese la festa di compleanno per bambini si fa soprattutto a Gazzada Schianno, appena fuori città: al Gatto e la Volpe, un parco giochi al coperto di circa 600 m² con gonfiabili, playground e un'area per i bimbi fino a 3 anni, dove la festa ha un'area riservata e un menu a scelta da almeno 10 bambini, oppure allo SmashX3 Club Bellavista, un centro sportivo con gonfiabili, piscina interna riscaldata e animatore. Prenotate per tempo e chiedete cosa è compreso nel menu.",
+    intro: "Intorno a Varese le feste dei bambini si concentrano a Gazzada Schianno, a pochi minuti dall'uscita Varese Sud. Si può scegliere tra un parco giochi al coperto, pensato apposta per le feste, e un centro sportivo dove il compleanno si fa tra gonfiabili, piscina e campi da calcetto, con qualsiasi tempo.",
+    locali: [
+      { nome: "Il Gatto e la Volpe", zona: "Gazzada Schianno, alle porte di Varese", tipo: "parco giochi al coperto", descrizione: "Parco giochi al coperto di circa 600 m², con gonfiabili, playground, tappeto elastico, un'area recintata per i bimbi da 0 a 3 anni e una zona per i 3–11 anni. La festa ha un'area riservata e l'uso di tutti i giochi, con diversi menu a scelta e un minimo di 10 bambini: si va dal solo affitto dello spazio ai menu con pizza, panini, torta e bibite. Si prenota per telefono.", sito: "https://www.ilgattoelavolpesrl.com/" },
+      { nome: "SmashX3 Club Bellavista", zona: "Gazzada Schianno (località Campagnola), vicino all'uscita Varese Sud", tipo: "centro sportivo con gonfiabili e piscina", descrizione: "Centro sportivo che organizza compleanni per bambini con gonfiabili a tema, giochi in acqua nella piscina interna riscaldata (d'estate anche in quella esterna), campi da calcetto e un animatore con giochi adatti all'età. Si festeggia con qualsiasi tempo; catering o grigliata, torta, bevande, palloncini e foto si aggiungono a richiesta.", sito: "https://smashx3.com/compleanni-bambini/" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia un compleanno per bambini a Varese?", risposta: "Appena fuori città, a Gazzada Schianno: al Gatto e la Volpe, un parco giochi al coperto con area riservata per la festa, oppure allo SmashX3 Club Bellavista, con gonfiabili, piscina interna e animatore." },
+      { domanda: "Quanti bambini servono per la festa?", risposta: "Al Gatto e la Volpe i menu della festa partono da un minimo di 10 bambini. Allo SmashX3 chiedete al momento della prenotazione, insieme a cosa comprende il pacchetto." },
+      { domanda: "E se piove?", risposta: "Tutti e due vanno bene in ogni stagione: Il Gatto e la Volpe è al coperto, e lo SmashX3 ha la piscina interna e gli spazi al chiuso. D'estate allo SmashX3 si usa anche la piscina esterna." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "lucca",
+    citta: "Lucca",
+    aggiornata: "2026-11-04",
+    rispostaBreve: "A Lucca la festa di compleanno per bambini si fa spesso in pizzeria o al ristorante con l'area giochi: da Mara Meo, a Lammari, c'è un locale feste con stanza riservata e buffet nel pomeriggio, con le pulizie comprese, mentre al Ristorante La Corte di Santa Maria a Colle si festeggia in un gazebo affacciato sull'area giochi, con buffet di pizza. Chiedete sempre cosa comprende il pacchetto e le regole sulla torta.",
+    intro: "A Lucca e dintorni il compleanno dei bambini si fa soprattutto dove si mangia bene e si gioca intorno: pizzerie e ristoranti con una stanza o un gazebo per la festa, spazi all'aperto e un buffet pensato per i bambini. Sono a pochi minuti dal centro, verso Capannori e verso le colline.",
+    locali: [
+      { nome: "Mara Meo", zona: "Lammari (Capannori), alle porte di Lucca", tipo: "pizzeria con sala feste", descrizione: "Pizzeria che organizza feste di compleanno per bambini nel pomeriggio, con stanza riservata, buffet e pulizie comprese, e pacchetti di grandezza diversa fino a 15 bambini, con un supplemento per ogni bambino in più; il pacchetto più grande comprende anche il campino all'aperto. L'animazione è facoltativa, con i loro animatori, e la torta portata da fuori deve venire da una pasticceria con lo scontrino. Per prenotare si versa un acconto.", sito: "https://www.marameo-lucca.it/" },
+      { nome: "Ristorante La Corte", zona: "Santa Maria a Colle, Lucca", tipo: "ristorante, spazi all'aperto con giochi", descrizione: "Ristorante dove la festa dei bambini si fa in un gazebo affacciato sull'area giochi: parco giochi per i più piccoli, campo da calcio e scivolo gonfiabile per i più grandi, con buffet di pizza e bibite. Le feste si fanno nei giorni feriali o in date da concordare, e per i ragazzi dai 12 ai 17 anni c'è anche la pizzata serale; i prezzi si chiedono al ristorante.", sito: "https://www.ristorantelacortedadino.com/" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia un compleanno per bambini a Lucca?", risposta: "In pizzeria o al ristorante con l'area giochi: da Mara Meo a Lammari, con stanza riservata e buffet, o al Ristorante La Corte di Santa Maria a Colle, con il gazebo sull'area giochi all'aperto." },
+      { domanda: "Si può portare la torta?", risposta: "Da Mara Meo la torta portata da fuori deve venire da una pasticceria con lo scontrino. Alla Corte chiedetelo al momento della prenotazione, insieme a cosa comprende il buffet." },
+      { domanda: "E per i ragazzi più grandi?", risposta: "Il Ristorante La Corte propone anche una pizzata serale per i ragazzi dai 12 ai 17 anni, quando la festa con i giochi non va più bene." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {
