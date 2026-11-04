@@ -259,7 +259,7 @@ export default async function SchedaPage({ params }: P) {
           </section>
         )}
 
-        <CtaAttivita />
+        <CtaAttivita scheda={chiaveScheda(s)} />
       </Contenitore>
 
       {/* Telefono e tablet: l'azione principale sempre a portata di pollice. */}

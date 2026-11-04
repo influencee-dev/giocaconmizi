@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronLeft, Lock, Plus, X } from "lucide-react";
+import { ChevronLeft, Lock, Mail, Plus, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -30,13 +30,15 @@ import {
  * Dalla seconda apertura dell'app installata: «Bentornata, …!» per un attimo.
  */
 
-const MAI = [/^\/biglietti\/vedi/, /^\/admin/, /^\/la-tua-scheda\//, /^\/(privacy|cookie|note-legali|termini-attivita)/, /^\/accedi/, /^\/auth/, /^\/giochi\/[^/]+\/gioca/, /^\/iscrizione-confermata/];
+const MAI = [/^\/biglietti\/vedi/, /^\/admin/, /^\/la-tua-scheda\//, /^\/(privacy|cookie|note-legali|termini-attivita)/, /^\/accedi/, /^\/aggiungi-attivita/, /^\/auth/, /^\/giochi\/[^/]+\/gioca/, /^\/iscrizione-confermata/];
 const SETTE_GIORNI = 7 * 24 * 60 * 60 * 1000;
 const CHIAVE_PAGINE = "giocamizi-pagine-visita";
 const ROBOT = /bot|crawl|spider|slurp|lighthouse|inspectiontool|headless|preview/i;
 const MOTORI = /(google|bing|yahoo|duckduckgo|ecosia|qwant|yandex|baidu)\./i;
 
-type Passo = 0 | 1 | 2 | 3;
+type Passo = 0 | 1 | 2 | 3 | 4;
+/** Com'è andata la posta all'ultimo passo: non chiesta, partita, non partita. */
+type EsitoPosta = "no" | "ok" | "ko";
 
 function rimandatoDaPoco(): boolean {
   try {
@@ -67,8 +69,8 @@ export function Benvenuto() {
   const [mamma, setMamma] = useState("");
   const [bimbi, setBimbi] = useState<Bimbo[]>([{ nome: "", eta: 0 }]);
   const [email, setEmail] = useState("");
-  const [privacy, setPrivacy] = useState(false);
   const [posta, setPosta] = useState(false);
+  const [esitoPosta, setEsitoPosta] = useState<EsitoPosta>("no");
   const [avviso, setAvviso] = useState("");
   const [invio, setInvio] = useState(false);
   const daMotore = useRef(false);
@@ -160,10 +162,10 @@ export function Benvenuto() {
     }
     if (passo === 3) {
       if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email.trim())) return setAvviso("Controlla l'email: sembra incompleta.");
-      if (!privacy) return setAvviso("Manca la spunta sulla privacy.");
       setInvio(true);
       let postaAttiva = false;
       if (posta) postaAttiva = await iscriviPosta(email.trim(), bimbi[0]?.eta);
+      setEsitoPosta(posta ? (postaAttiva ? "ok" : "ko") : "no");
       salvaProfilo({
         mamma: mamma.trim(),
         bimbi: bimbi.map((b) => ({ nome: b.nome.trim(), eta: b.eta })),
@@ -173,11 +175,14 @@ export function Benvenuto() {
         creato: new Date().toISOString(),
       });
       setInvio(false);
-      setAperto(false);
+      // Il profilo è salvato: la schermata «Tutto pronto» dice com'è andata.
+      setPasso(4);
+      return;
     }
+    if (passo === 4) setAperto(false);
   };
 
-  const indietro = () => setPasso((p) => (p > 0 ? ((p - 1) as Passo) : p));
+  const indietro = () => setPasso((p) => (p > 0 && p < 4 ? ((p - 1) as Passo) : p));
   const mettiBimbo = (i: number, b: Partial<Bimbo>) => setBimbi((l) => l.map((x, j) => (j === i ? { ...x, ...b } : x)));
 
   // ---- Passo 0: il benvenuto viola ----
@@ -217,6 +222,40 @@ export function Benvenuto() {
     );
   }
 
+  // ---- Passo 4: tutto pronto ----
+  if (passo === 4) {
+    const primo = bimbi[0];
+    return (
+      <div role="dialog" aria-modal="true" aria-labelledby="pronto-titolo" className="fixed inset-0 z-[60] overflow-y-auto bg-viola text-white md:hidden" data-benvenuto data-passo={4}>
+        <span aria-hidden className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-giallo/35" />
+        <span aria-hidden className="absolute -left-12 top-[58%] h-36 w-36 rounded-full bg-rosa/45" />
+        <div className="relative mx-auto flex min-h-full max-w-md flex-col items-center px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(2.5rem,env(safe-area-inset-top))] text-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/mizi/mizi-intera.webp" alt="" width={300} height={380} className="h-[min(14rem,32vh)] w-auto drop-shadow-2xl" />
+          <h2 id="pronto-titolo" className="mt-5 text-[2.2rem] font-black leading-none">
+            Tutto pronto, {mamma.trim()}!
+          </h2>
+          <p className="mt-3 max-w-xs text-lg font-semibold text-white/90">
+            {bimbi.length > 1 ? "Ogni giorno trovi i giochi giusti per i tuoi bimbi." : `Ogni giorno trovi i giochi giusti per ${primo?.nome.trim()}, ${primo?.eta} anni.`}
+          </p>
+          {esitoPosta !== "no" && (
+            <p role="status" className="mt-5 flex w-full items-start gap-3 rounded-2xl bg-white px-4 py-3 text-left text-base font-bold text-notte" data-esito-posta={esitoPosta}>
+              <Mail className="mt-0.5 h-5 w-5 shrink-0 text-viola" strokeWidth={2.4} aria-hidden />
+              {esitoPosta === "ok"
+                ? "Ti abbiamo scritto: apri l'email e tocca il link di conferma (se non la vedi, guarda in Spam)."
+                : "La posta di Mizi non è partita. Nessun problema: la accendi quando vuoi dal Profilo."}
+            </p>
+          )}
+          <div className="mt-auto w-full pt-8">
+            <button type="button" onClick={() => setAperto(false)} className="w-full rounded-[1.4rem] bg-giallo py-4 text-xl font-black text-notte shadow-[0_12px_28px_-10px_rgba(31,36,48,0.6)]" data-avanti>
+              Andiamo a giocare
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // ---- Passi 1-3 ----
   const FUMETTO = { 1: "Piacere! Io sono Mizi. Tu come ti chiami?", 2: `Ciao ${mamma.trim() || "mamma"}! Per chi scegliamo i giochi?`, 3: "Ultima cosa e poi si gioca!" } as const;
   return (
@@ -226,7 +265,7 @@ export function Benvenuto() {
           e.preventDefault();
           void avanti();
         }}
-        className="mx-auto flex min-h-full max-w-md flex-col px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))]"
+        className="mx-auto flex min-h-full max-w-md flex-col px-5 pt-[max(0.75rem,env(safe-area-inset-top))]"
       >
         <div className="flex items-center gap-3">
           <button type="button" onClick={indietro} aria-label="Indietro" className="-ml-2 flex h-11 w-11 items-center justify-center rounded-full" style={{ minHeight: 0, minWidth: 0 }}>
@@ -245,10 +284,7 @@ export function Benvenuto() {
           )}
         </div>
 
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/mizi/giocamizi-logo-orizzontale.webp" alt="Giocamizi" width={513} height={176} className="mx-auto mt-3 h-9 w-auto" />
-
-        <div className="mt-4 flex items-center gap-3">
+        <div className="mt-5 flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/mizi/mizi-intera.webp" alt="" width={300} height={380} className="h-[4.5rem] w-auto shrink-0" />
           <p className="rounded-[1.2rem] rounded-bl-sm bg-white px-4 py-3 font-bold shadow-[0_8px_20px_-12px_rgba(31,36,48,0.4)]">{FUMETTO[passo]}</p>
@@ -282,7 +318,7 @@ export function Benvenuto() {
                   <input ref={i === 0 ? campo : undefined} value={b.nome} onChange={(e) => mettiBimbo(i, { nome: e.target.value })} autoComplete="off" maxLength={30} className="w-full min-w-0 rounded-[1.1rem] border-[2.5px] border-viola bg-white px-4 py-3.5 text-lg font-bold" data-campo={`bimbo-${i}`} />
                 </label>
                 <fieldset>
-                  <legend className="mb-2 font-extrabold">Quanti anni ha?</legend>
+                  <legend className="mb-2 font-extrabold">Quanti anni ha{b.nome.trim() ? ` ${b.nome.trim()}` : ""}?</legend>
                   <div className="grid grid-cols-5 gap-2">
                     {ETA.map((a) => (
                       <button
@@ -320,33 +356,33 @@ export function Benvenuto() {
               <span className="font-extrabold">Email</span>
               <input ref={campo} type="email" inputMode="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full min-w-0 rounded-[1.1rem] border-[2.5px] border-viola bg-white px-4 py-3.5 text-lg font-bold" data-campo="email" />
             </label>
-            <p className="text-sm font-semibold text-notte-tenue">Resta su questo telefono. Ti scriviamo solo se accendi la posta di Mizi qui sotto. Niente pubblicità, mai.</p>
-            <label className="flex items-start gap-3">
-              <input type="checkbox" checked={privacy} onChange={(e) => setPrivacy(e.target.checked)} className="mt-0.5 h-6 w-6 shrink-0 accent-[#9B6DD6]" data-spunta="privacy" />
-              <span className="font-bold">
-                Ho almeno 18 anni e ho letto{" "}
-                <a href="/privacy" target="_blank" rel="noopener" className="text-viola underline underline-offset-4">
-                  come trattiamo i dati
-                </a>
-              </span>
-            </label>
-            <label className="flex items-start gap-3">
+            <p className="flex items-start gap-2.5 rounded-2xl bg-viola/10 px-4 py-3 text-sm font-bold">
+              <Lock className="mt-0.5 h-5 w-5 shrink-0 text-viola" strokeWidth={2.4} aria-hidden />
+              Resta su questo telefono: a noi arriva solo se accendi la posta di Mizi qui sotto.
+            </p>
+            <label className={`flex items-start gap-3 rounded-2xl border-2 bg-white px-4 py-3.5 transition-colors ${posta ? "border-viola" : "border-crema-scuro"}`}>
               <input type="checkbox" checked={posta} onChange={(e) => setPosta(e.target.checked)} className="mt-0.5 h-6 w-6 shrink-0 accent-[#9B6DD6]" data-spunta="posta" />
               <span>
-                <span className="block font-bold">Voglio anche la posta di Mizi: un gioco nuovo a settimana</span>
-                <span className="block text-sm font-semibold text-notte-tenue">Facoltativa: puoi dire di no e usare Giocamizi uguale.</span>
+                <span className="block font-black">Sì, voglio la posta di Mizi</span>
+                <span className="block text-sm font-semibold text-notte-tenue">
+                  Un gioco nuovo a settimana, niente pubblicità. Facoltativa. Ho almeno 18 anni e ho letto{" "}
+                  <a href="/privacy" target="_blank" rel="noopener" className="font-bold text-viola underline underline-offset-4">
+                    la privacy
+                  </a>
+                  .
+                </span>
               </span>
             </label>
           </div>
         )}
 
-        {avviso && (
-          <p role="alert" className="mt-4 font-bold text-arancione">
-            {avviso}
-          </p>
-        )}
-
-        <div className="mt-auto pt-8">
+        {/* Il pulsante resta sempre in vista, anche quando il passo è lungo. */}
+        <div className="sticky bottom-0 -mx-5 mt-auto bg-gradient-to-t from-crema from-70% to-crema/0 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-6">
+          {avviso && (
+            <p role="alert" className="mb-3 rounded-2xl bg-arancione/15 px-4 py-2.5 font-bold text-notte">
+              {avviso}
+            </p>
+          )}
           <button type="submit" disabled={invio} className="w-full rounded-[1.4rem] bg-viola py-4 text-xl font-black text-white shadow-[0_12px_28px_-10px_rgba(155,109,214,0.9)] disabled:opacity-60" data-avanti>
             {invio ? "Un attimo…" : passo === 3 ? "Entra in Giocamizi" : "Avanti"}
           </button>

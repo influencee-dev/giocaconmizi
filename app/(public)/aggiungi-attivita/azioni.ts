@@ -17,8 +17,10 @@ export async function proponi(_prima: EsitoCandidatura, form: FormData): Promise
   const email = pulito(form.get("email"), 200).toLowerCase();
   if (!referente) return { stato: "errore", messaggio: "Scrivi il tuo nome e cognome." };
   if (!EMAIL.test(email)) return { stato: "errore", messaggio: "Controlla l'email: ti scriviamo lì." };
-  if (form.get("titolare") !== "si") return { stato: "errore", messaggio: "Serve la conferma che gestisci l'attività o hai il permesso di farlo." };
-  if (form.get("termini") !== "si") return { stato: "errore", messaggio: "Per comparire su Giocamizi serve accettare i termini per le attività." };
+  // Una spunta sola nel modulo («conferma»): vale come titolare + termini.
+  const conferma = form.get("conferma") === "si";
+  if (!conferma && form.get("titolare") !== "si") return { stato: "errore", messaggio: "Serve la conferma che gestisci l'attività o hai il permesso di farlo." };
+  if (!conferma && form.get("termini") !== "si") return { stato: "errore", messaggio: "Per comparire su Giocamizi serve accettare i termini per le attività." };
 
   const dati: Record<string, string> = {};
   const metti = (k: string, max = 300) => {
@@ -32,7 +34,7 @@ export async function proponi(_prima: EsitoCandidatura, form: FormData): Promise
   let chiave: string | null = null;
   if (tipo === "accesso") {
     const s = SCHEDE.find((x) => chiaveScheda(x) === pulito(form.get("scheda"), 200));
-    if (!s) return { stato: "errore", messaggio: "Scegli la tua scheda dall'elenco." };
+    if (!s) return { stato: "errore", messaggio: "Cerca la tua attività e toccala nell'elenco." };
     chiave = chiaveScheda(s);
     dati.nome = s.nome;
   } else {

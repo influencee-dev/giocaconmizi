@@ -30,17 +30,20 @@ export function InBreve({ testo }: { testo: string }) {
 }
 
 /** L'invito alle attività: iscriversi o reclamare la scheda già creata. */
-export function CtaAttivita() {
+/** Il richiamo per le attività. Sulla scheda di un locale (`scheda`) porta al modulo con quella scheda già scelta. */
+export function CtaAttivita({ scheda }: { scheda?: string } = {}) {
   return (
     <section className="mt-12 flex flex-col gap-4 rounded-morbido border-[3px] border-dashed border-rosa bg-white p-6 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <p className="text-xl font-extrabold text-notte">Gestisci uno di questi spazi per bambini?</p>
+        <p className="text-xl font-extrabold text-notte">{scheda ? "È la tua attività?" : "Gestisci uno di questi spazi per bambini?"}</p>
         <p className="mt-1 text-sm font-semibold text-notte-tenue">
-          La scheda è gratuita: chiedi di gestirla o aggiungi la tua attività, anche se è un&apos;associazione o un laboratorio.
+          {scheda
+            ? "La scheda è gratuita: chiedi di gestirla per correggerla, completarla o aggiungere le foto."
+            : "La scheda è gratuita: chiedi di gestirla o aggiungi la tua attività, anche se è un'associazione o un laboratorio."}
         </p>
       </div>
-      <Link href="/aggiungi-attivita" className="shrink-0 rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white" data-cta-attivita>
-        Aggiungi o gestisci
+      <Link href={scheda ? `/aggiungi-attivita?scheda=${encodeURIComponent(scheda)}` : "/aggiungi-attivita"} className="shrink-0 rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white" data-cta-attivita>
+        {scheda ? "Gestisci la scheda" : "Aggiungi o gestisci"}
       </Link>
     </section>
   );

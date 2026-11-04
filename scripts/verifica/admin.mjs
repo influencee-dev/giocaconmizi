@@ -162,20 +162,28 @@ await browser.close();
   await pc.locator("[data-campo=descrizione]").fill("Laboratori creativi per bambini dai 4 ai 10 anni e feste di compleanno a tema con un educatore.");
   await pc.locator("[data-campo=referente]").fill("Maria Prova");
   await pc.locator("[data-campo=email]").fill("maria@esempio.it");
-  await pc.locator("[data-spunta=titolare]").check();
-  await pc.locator("[data-spunta=termini]").check();
+  // senza la spunta il browser ferma l'invio; si spunta e si manda
+  await pc.locator("[data-spunta=conferma]").check();
   await pc.locator("[data-invia]").tap();
   await pc.locator("[data-candidatura-ok]").waitFor({ timeout: 8000 }).catch(() => null);
   ok("aggiungi attività: un'associazione nuova si propone", await pc.locator("[data-candidatura-ok]").isVisible());
 
   await pc.goto(`${BASE}/aggiungi-attivita`, { waitUntil: "networkidle" });
-  await pc.getByText("Gestire la scheda della mia attività").tap();
-  await pc.locator("[data-campo=citta-scheda]").selectOption("Milano");
-  await pc.locator("[data-campo=scheda]").selectOption("milano/il-nano-gigante");
+  await pc.getByText("La mia attività c'è già").tap();
+  await pc.locator("[data-campo=cerca-scheda]").fill("attività che non esiste");
+  ok("aggiungi attività: se non la trova, propone di aggiungerla", await pc.locator("[data-nessuna]").isVisible());
+  await pc.locator("[data-campo=cerca-scheda]").fill("nano gigante");
+  await pc.locator("[data-trovata='milano/il-nano-gigante']").tap();
+  ok("aggiungi attività: la ricerca trova la scheda e la sceglie", (await pc.locator("[data-scheda-scelta]").textContent())?.includes("Il Nano Gigante"));
   await pc.locator("[data-campo=referente]").fill("Luca Titolare");
+  await pc.locator("[data-campo=email]").fill("luca@esempio");
+  await pc.locator("[data-spunta=conferma]").check();
+  // email che il browser accetta ma il server no: l'errore si vede e i campi restano scritti
+  await pc.locator("[data-invia]").tap();
+  await pc.locator("[data-candidatura-errore]").waitFor({ timeout: 8000 }).catch(() => null);
+  ok("aggiungi attività: dopo un errore quello che hai scritto resta lì",
+    (await pc.locator("[data-candidatura-errore]").isVisible()) && (await pc.locator("[data-campo=referente]").inputValue()) === "Luca Titolare");
   await pc.locator("[data-campo=email]").fill("luca@esempio.it");
-  await pc.locator("[data-spunta=titolare]").check();
-  await pc.locator("[data-spunta=termini]").check();
   await pc.locator("[data-invia]").tap();
   await pc.locator("[data-candidatura-ok]").waitFor({ timeout: 8000 }).catch(() => null);
   ok("aggiungi attività: il titolare di una scheda chiede l'accesso", (await pc.locator("[data-candidatura-ok]").textContent())?.includes("link personale"));
@@ -190,7 +198,12 @@ await browser.close();
   ok("candidature: «Accetta» la sposta nello storico", (await pc.locator("[data-storico]").first().textContent().catch(() => "")).includes("accettata"));
 
   await pc.goto(`${BASE}/ludoteche/milano/il-nano-gigante`, { waitUntil: "networkidle" });
-  ok("scheda: «Aggiungi o gestisci» porta al modulo", (await pc.locator("[data-cta-attivita]").getAttribute("href")) === "/aggiungi-attivita");
+  ok("scheda: «Gestisci la scheda» porta al modulo con la scheda già scelta", (await pc.locator("[data-cta-attivita]").getAttribute("href")) === "/aggiungi-attivita?scheda=milano%2Fil-nano-gigante");
+  await pc.locator("[data-cta-attivita]").tap();
+  await pc.locator("[data-scheda-scelta]").waitFor({ timeout: 8000 }).catch(() => null);
+  ok("modulo: arrivando dalla scheda, la scheda è già scelta", (await pc.locator("[data-scheda-scelta]").textContent().catch(() => ""))?.includes("Il Nano Gigante"));
+  await pc.goto(`${BASE}/ludoteche/milano`, { waitUntil: "networkidle" });
+  ok("città: «Aggiungi o gestisci» porta al modulo", (await pc.locator("[data-cta-attivita]").getAttribute("href")) === "/aggiungi-attivita");
   await bc.close();
 }
 

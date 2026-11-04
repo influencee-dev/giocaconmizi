@@ -120,9 +120,15 @@ const benvenuto = (p) => p.locator("[data-benvenuto]");
   await p.locator("[data-campo=bimbo-0]").fill("Domiziana"); await p.locator("[data-eta='7']").first().tap();
   await p.locator("[data-altro-bimbo]").tap(); await p.locator("[data-campo=bimbo-1]").fill("Leo"); await p.locator("[data-eta='4']").nth(1).tap();
   await p.locator("[data-avanti]").tap();
+  ok("benvenuto: il pulsante resta in vista anche col passo lungo", await p.locator("[data-avanti]").isVisible() && (await p.locator("[data-avanti]").boundingBox()).y + 40 < 844);
+  await p.locator("[data-avanti]").tap();
+  await p.locator("[data-campo=email]").fill("giorgia@esempio"); await p.locator("[data-avanti]").tap();
+  ok("benvenuto: email incompleta, lo dice", (await benvenuto(p).getByRole("alert").textContent())?.includes("email"));
+  ok("benvenuto: la posta parte spenta", !(await p.locator("[data-spunta=posta]").isChecked()));
   await p.locator("[data-campo=email]").fill("giorgia@esempio.it"); await p.locator("[data-avanti]").tap();
-  ok("benvenuto: senza la spunta privacy non entra", (await benvenuto(p).getByRole("alert").textContent())?.includes("privacy"));
-  await p.locator("[data-spunta=privacy]").check(); await p.locator("[data-avanti]").tap();
+  await p.waitForTimeout(300);
+  ok("benvenuto: «Tutto pronto, Giorgia!» alla fine", (await benvenuto(p).textContent())?.includes("Tutto pronto, Giorgia!") && (await p.locator("[data-esito-posta]").count()) === 0);
+  await p.locator("[data-avanti]").tap();
   await p.waitForTimeout(500);
   ok("benvenuto: finito, si chiude", !(await benvenuto(p).isVisible()));
   ok("home: «Ciao Giorgia!» e i giochi per Domiziana, 7 anni",
@@ -202,6 +208,40 @@ const benvenuto = (p) => p.locator("[data-benvenuto]");
   const d2 = await pc2.newPage(); await d2.goto(BASE + "/", { waitUntil: "networkidle" }); await d2.waitForTimeout(300);
   ok("computer: niente benvenuto né schede, resta il sito", !(await benvenuto(d2).isVisible()) && !(await d2.locator("[data-barra-schede]").isVisible()) && (await d2.locator("h1:visible").count()) === 1);
   await pc2.close();
+}
+
+{
+  // posta chiesta ma Brevo non risponde (qui non c'è la chiave): lo si dice, il profilo resta
+  const ctx = await b.newContext(telefono); await ctx.addInitScript(UMANO);
+  const p = await ctx.newPage();
+  await p.goto(BASE + "/", { waitUntil: "networkidle" });
+  await p.locator("[data-inizia]").tap();
+  await p.locator("[data-campo=mamma]").fill("Anna"); await p.locator("[data-avanti]").tap();
+  await p.locator("[data-campo=bimbo-0]").fill("Sara"); await p.locator("[data-eta='5']").first().tap(); await p.locator("[data-avanti]").tap();
+  await p.locator("[data-campo=email]").fill("anna@esempio.it"); await p.locator("[data-spunta=posta]").check();
+  await p.locator("[data-avanti]").tap();
+  await p.locator("[data-esito-posta]").waitFor({ timeout: 8000 });
+  ok("benvenuto: posta non partita, lo dice e rimanda al Profilo", (await p.locator("[data-esito-posta=ko]").textContent())?.includes("Profilo"));
+  const prof = await p.evaluate(() => JSON.parse(localStorage.getItem("giocamizi-profilo")));
+  ok("benvenuto: profilo salvato lo stesso, posta spenta", prof?.mamma === "Anna" && prof.posta === false);
+  await ctx.close();
+}
+
+{
+  // Accedi: errori detti come li direbbe una persona
+  const ctx = await b.newContext(telefono); await ctx.addInitScript(UMANO);
+  const p = await ctx.newPage();
+  await p.goto(BASE + "/accedi?errore=link-scaduto", { waitUntil: "networkidle" });
+  ok("accedi: link scaduto, lo spiega", (await p.locator("form [role=alert]").textContent())?.includes("scaduto"));
+  await p.locator("#email").fill("mamma@esempio.it"); await p.getByRole("checkbox").check();
+  await p.getByRole("button", { name: "Mandami il link" }).tap();
+  await p.waitForTimeout(400);
+  // qui Supabase non si raggiunge: deve uscire una frase in italiano, non l'errore tecnico
+  await p.locator("form [role=alert]").filter({ hasNotText: "scaduto" }).waitFor({ timeout: 8000 }).catch(() => null);
+  const msg = (await p.locator("form [role=alert]").textContent()) ?? "";
+  ok("accedi: se il link non parte lo dice in italiano", /Riprova|manutenzione|aspetta/.test(msg) && !/fetch|error|supabase/i.test(msg), msg);
+  ok("accedi: niente barra delle schede", !(await p.locator("[data-barra-schede]").isVisible()));
+  await ctx.close();
 }
 
 await b.close();
