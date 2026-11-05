@@ -9,6 +9,7 @@ import { FORMATI, frasi, misure, temi, TIPI, type FormatoId, type Tipo } from "@
 import { VARIANTI, type Variante } from "./Sfondo";
 import { Etichette, FOGLIO_A4, MAX_ETICHETTE, nomiOspiti } from "./Etichette";
 import { FoglioFestone, PER_FOGLIO, TESTI_FESTONE, bandierine, fogli, type TestoFestone } from "./Festone";
+import { FoglioTopper, anniTopper } from "./Topper";
 
 /**
  * Il tool dei biglietti (piano §14.3).
@@ -56,6 +57,7 @@ export function Editor() {
   // Il festone usa solo il nome del festeggiato, già nel biglietto.
   const [testoFestone, setTestoFestone] = useState<TestoFestone>("buon-compleanno");
   const fogliFestone = useRef<HTMLDivElement>(null);
+  const foglioTopper = useRef<HTMLDivElement>(null);
   const fogliDelFestone = useMemo(() => fogli(bandierine(testoFestone, dati.nome)), [testoFestone, dati.nome]);
   const contenitore = useRef<HTMLDivElement>(null);
   const trascinato = useRef<number | null>(null);
@@ -215,6 +217,16 @@ export function Editor() {
     },
     [dati.nome],
   );
+
+  const scaricaTopper = useCallback(async () => {
+    const svg = foglioTopper.current?.querySelector("svg");
+    if (!svg) return;
+    const png = await biglietoInPng(svg, FOGLIO_A4.larghezza, FOGLIO_A4.altezza);
+    const link = document.createElement("a");
+    link.download = `topper-torta-${dati.nome || "compleanno"}.png`.toLowerCase().replace(/\s+/g, "-");
+    link.href = png;
+    link.click();
+  }, [dati.nome]);
 
   const salvaNelLink = useCallback(() => {
     const codificato = datiPerLink(dati);
@@ -632,6 +644,26 @@ export function Editor() {
                 pagina={i + 1}
               />
             ))}
+          </div>
+        </Gruppo>
+
+        <Gruppo titolo="9. Topper per la torta">
+          <p className="text-sm text-notte-tenue">
+            Un foglio A4 nello stesso tema del biglietto: un disco grande con gli anni e il nome
+            da mettere sulla torta, e 8 dischetti per i cupcake. Ritaglia sul tratteggio e fissa
+            uno stecchino dietro con lo scotch.
+          </p>
+          <p className="text-sm text-notte-tenue" data-topper-riepilogo>
+            {anniTopper(dati.eta) !== null
+              ? `Il disco grande dice ${anniTopper(dati.eta)}${dati.nome.trim() ? ` e ${dati.nome.trim()}` : ""}.`
+              : "Senza l'età (punto 3) al posto del numero c'è una stella."}
+          </p>
+          <button type="button" onClick={scaricaTopper} className="rounded-bolla bg-viola px-5 py-4 font-extrabold text-white" data-scarica-topper>
+            Scarica il topper (A4)
+          </button>
+          {/* Il foglio vero, fuori dallo schermo: serve solo per generare il PNG. */}
+          <div ref={foglioTopper} aria-hidden className="hidden">
+            <FoglioTopper nome={dati.nome} eta={dati.eta} tema={dati.tema} variante={dati.variante} />
           </div>
         </Gruppo>
       </div>

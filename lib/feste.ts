@@ -2109,6 +2109,41 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "grosseto",
+    citta: "Grosseto",
+    aggiornata: "2026-11-05",
+    rispostaBreve: "A Grosseto la festa di compleanno per bambini si fa da KIDS in via Irlanda, una sala feste in esclusiva con una sala baby per i bambini da 0 a 6 anni e una sala kids con lo scivolo gonfiabile, oppure al Joy Family Park, un parco giochi al coperto con trampolini e una sala per i compleanni. Con la bella stagione c'è anche l'Agriturismo Le Giare, a Roselle, con parco giochi e castello gonfiabile. Nessuno pubblica i prezzi: chiedete un preventivo e cosa comprende (buffet, allestimento, torta).",
+    intro: "A Grosseto le feste dei bambini si fanno in poche sale dedicate e nei parchi giochi al coperto in città, oppure negli agriturismi della campagna intorno. Per scegliere guardate l'età degli invitati e la stagione: al chiuso d'inverno, nel verde quando fa bello.",
+    locali: [
+      { nome: "KIDS", zona: "Grosseto, via Irlanda", tipo: "sala feste per bambini in esclusiva", descrizione: "Sala feste con due ambienti: la sala Baby, per i bambini da 0 a 6 anni, con un'area recintata a fondo morbido, giochi a dondolo, costruzioni e una piccola arrampicata, e la sala Kids, per tutte le età, con scivolo gonfiabile, biliardino, air hockey e giochi giganti. Tutte e due hanno l'area buffet allestita, il carretto dei popcorn e un fondale per le foto. I pacchetti si personalizzano, con buffet e allestimenti di ditte locali, e gli inviti digitali a tema sono in regalo.", sito: "https://kidsgrosseto.it/" },
+      { nome: "Joy Family Park", zona: "Grosseto, via del Terminillo", tipo: "parco giochi al coperto con sala compleanni", descrizione: "Parco giochi al coperto con oltre 600 mq e un'area esterna: playground, trampolini, giochi di abilità, due piste per le auto radiocomandate e sale multigioco. Ha una sala dedicata ai compleanni, dove la festa si organizza su misura; il costo dipende dai servizi scelti, quindi si chiede un preventivo. Il lunedì apre solo per feste ed eventi prenotati.", sito: "https://www.joyfamilypark.it/" },
+      { nome: "Agriturismo Le Giare", zona: "Roselle (Grosseto), Strada del Bottegone", tipo: "agriturismo con parco giochi e ristorante", descrizione: "Agriturismo di circa 12 ettari con ristorante a km zero che organizza anche feste di compleanno per bambini. Il parco giochi ha un castello gonfiabile, un saltarello e scivoli per età diverse, e ci sono un campo da calcio e uno da pallavolo: è adatto soprattutto alle feste all'aperto della bella stagione. La festa si prenota contattando la struttura.", sito: "https://agriturismolegiare.it/" },
+    ],
+    faq: [
+      { domanda: "Dove si festeggia a Grosseto con bambini molto piccoli?", risposta: "Da KIDS, in via Irlanda, c'è una sala Baby pensata per i bambini da 0 a 6 anni, con un'area recintata a fondo morbido; accanto la sala Kids ha giochi per tutte le età, così fratelli e cugini di età diverse giocano ognuno nel suo spazio." },
+      { domanda: "C'è un parco giochi al coperto per le feste quando piove?", risposta: "Sì, il Joy Family Park: oltre 600 mq al coperto con trampolini, playground e piste per le auto radiocomandate, e una sala per i compleanni. Il prezzo dipende dai servizi scelti: chiedete un preventivo prima di fissare la data." },
+      { domanda: "Si può fare una festa all'aperto vicino a Grosseto?", risposta: "L'Agriturismo Le Giare, a Roselle, organizza feste per bambini con un parco giochi con castello gonfiabile, saltarello e scivoli, e un ristorante a km zero: è una buona scelta dalla primavera all'inizio dell'autunno." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "siracusa",
+    citta: "Siracusa",
+    aggiornata: "2026-11-05",
+    rispostaBreve: "A Siracusa la festa di compleanno per bambini si fa soprattutto da Mama Party, in via Elorina: una sala feste climatizzata con playground, area soft e area baby, animatori e allestimenti a tema, dal solo affitto della sala alla festa chiavi in mano. Poco a nord, a Città Giardino, il Bowling Manhattan propone un pacchetto compleanno con cibo, una partita a bowling e un birillo ricordo. Chiedete subito cosa comprende il pacchetto e come funziona la torta.",
+    intro: "A Siracusa le sale dedicate alle feste dei bambini sono poche, quindi conviene prenotare con anticipo, soprattutto per il fine settimana. Le scelte più comode sono una sala attrezzata in città o il bowling appena fuori, per i bambini un po' più grandi.",
+    locali: [
+      { nome: "Mama Party", zona: "Siracusa, via Elorina (zona sud)", tipo: "sala feste con playground e area baby", descrizione: "Sala feste dedicata soprattutto ai compleanni dei bambini, con una sala giochi che comprende playground, giostra, area soft e area baby, e animatori che seguono i bambini durante la festa. Tra le animazioni ci sono trucca bimbi, bolle di sapone, baby dance e il teatrino delle marionette, con baby catering e allestimenti a tema. La sala è climatizzata, c'è un ampio parcheggio e si può scegliere dal solo affitto dello spazio alla festa organizzata per intero, con un unico referente per i fornitori.", sito: "https://www.mamapartysiracusa.it/" },
+      { nome: "Bowling Manhattan", zona: "Città Giardino (Melilli), viale Edoardo Garrone, a nord di Siracusa", tipo: "bowling con pacchetto compleanno", descrizione: "Centro bowling attivo dal 1995, con sala giochi e area ristoro, aperto tutti i giorni dal pomeriggio. Il pacchetto compleanno pubblicato dal locale comprende un trancio di pizza o un hot dog, patatine e nuggets, una bibita, una partita a bowling e un birillo personalizzato da portare a casa, con la torta offerta dal locale. Si prenota per telefono: chiedete le condizioni aggiornate.", instagram: "https://www.instagram.com/bowlingmanhattan/" },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa al coperto a Siracusa?", risposta: "Da Mama Party, in via Elorina, che ha una sala climatizzata con playground, area soft e area baby e gli animatori; oppure al Bowling Manhattan di Città Giardino, al chiuso e aperto tutti i giorni dal pomeriggio." },
+      { domanda: "La torta si porta o la fornisce il locale?", risposta: "Dipende. Nel pacchetto compleanno pubblicato dal Bowling Manhattan la torta la offre il locale; Mama Party parla di baby catering ma non della torta, quindi chiedetelo quando prenotate." },
+      { domanda: "Che festa scelgo per i bambini più grandi?", risposta: "Per i bambini dalla scuola elementare in su il bowling è un'alternativa diversa dal solito: al Bowling Manhattan il pacchetto comprende una partita e un birillo ricordo per il festeggiato. Per i più piccoli è più adatta la sala con area baby e animazione di Mama Party." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

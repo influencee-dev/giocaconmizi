@@ -104,6 +104,22 @@ await page.waitForTimeout(300);
 ok("festone: solo il nome, 9 bandierine su 2 fogli", (await contaBandierine()) === 9 && (await bottoniFestone.count()) === 2);
 await page.getByLabel("Buon compleanno + nome").check();
 
+// Topper per la torta: disco grande con gli anni e il nome, 8 dischetti, PNG A4.
+const topper = page.locator("[data-foglio-topper]");
+ok("topper: 7 anni e Domiziana sul disco grande, 8 dischetti",
+  (await topper.getAttribute("data-anni")) === "7" && (await topper.locator("[data-topper-nome]").textContent()) === "Domiziana" &&
+  (await topper.getAttribute("data-dischetti")) === "8");
+const attesaTopper = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
+await page.locator("[data-scarica-topper]").tap();
+const scaricatoTopper = await attesaTopper;
+const pngTopper = scaricatoTopper ? readFileSync(await scaricatoTopper.path()) : null;
+ok("topper: è un PNG A4 2480×3508", pngTopper && pngTopper.readUInt32BE(16) === 2480 && pngTopper.readUInt32BE(20) === 3508);
+await page.getByLabel("Età", { exact: true }).fill("");
+await page.waitForTimeout(200);
+ok("topper: senza età c'è la stella al posto del numero",
+  (await topper.locator("[data-topper-stella]").count()) === 1 && (await topper.locator("[data-topper-numero]").count()) === 0);
+await page.getByLabel("Età", { exact: true }).fill("7");
+
 // Nei formati digitali il foglio A4 non ha senso: il bottone sparisce
 await page.getByRole("button", { name: "WhatsApp e storie" }).tap();
 await page.waitForTimeout(300);

@@ -86,7 +86,7 @@ export function HomeApp({ giochi, inVetrina }: { giochi: GiocoBreve[]; inVetrina
           <div className="relative flex items-center gap-3">
             <div className="min-w-0 flex-1">
               <p className="text-xs font-black uppercase tracking-wide text-giallo">Il gioco di oggi</p>
-              <p className="mt-1 text-[1.45rem] font-black leading-tight">{oggi.titolo}</p>
+              <p className="mt-1 text-[clamp(1.15rem,5.8vw,1.45rem)] font-black leading-tight [overflow-wrap:anywhere]">{oggi.titolo}</p>
               <p className="mt-1 text-sm font-bold text-white/85">
                 {oggi.etaMin}–{oggi.etaMax} anni · {oggi.minuti} minuti
               </p>
