@@ -2144,6 +2144,59 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "cremona",
+    citta: "Cremona",
+    aggiornata: "2026-11-06",
+    rispostaBreve: "A Cremona la festa di compleanno per bambini si fa da Tourlé, in via Gaspare Pedone: una pizzeria con area bimbi (scivoli, percorsi e vasche di palline) che apre il pomeriggio su prenotazione per i compleanni, con tavoli allestiti e giropizza per gli invitati. Chi preferisce la campagna trova a Ossalengo di Castelverde, a pochi minuti dalla città, la Fattoria Ca' Bianca, che su richiesta organizza gli AGRIcompleanni tra animali, giochi e merenda. Prenotate con anticipo e chiedete subito come funziona la torta.",
+    intro: "A Cremona le feste dei bambini si dividono fra il pomeriggio in pizzeria con l'area giochi e la festa in fattoria didattica, nella campagna appena fuori città. La prima è al coperto e senza pensieri, la seconda all'aria aperta e a contatto con gli animali.",
+    locali: [
+      { nome: "Tourlé", zona: "Cremona, via Gaspare Pedone", tipo: "pizzeria con area bimbi e feste di compleanno", descrizione: "Pizzeria che apre tutti i pomeriggi, su prenotazione, per le feste di compleanno dei bambini. L'area bimbi ha scivoli, percorsi e vasche di palline ed è visibile dai tavoli, così i genitori tengono d'occhio i piccoli. La festa prevede tavoli allestiti, gioco libero nell'area bimbi e giropizza per gli invitati, con un giropizza dedicato ai bambini fino a 10 anni. La torta si può portare dalla propria pasticceria pagando il servizio piattini, oppure si sceglie quella proposta dal locale.", sito: "https://www.tourle.it/cremona" },
+      { nome: "Fattoria Ca' Bianca", zona: "Ossalengo di Castelverde, a pochi minuti da Cremona", tipo: "fattoria didattica con compleanni in fattoria", descrizione: "Fattoria didattica alle porte di Cremona che su richiesta organizza gli AGRIcompleanni, il compleanno in fattoria tra animali, giochi e merenda. Per i bambini dai 3 anni in su propone anche laboratori sull'orto, sul frutteto e sugli animali, come la passeggiata con le caprette e gli asinelli. I dettagli della festa si concordano direttamente con la fattoria.", sito: "https://cabianca.eu/" },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto a Cremona per la festa di compleanno?", risposta: "Sì: Tourlé, in via Gaspare Pedone, apre il pomeriggio su prenotazione per i compleanni dei bambini, con l'area bimbi al coperto (scivoli, percorsi e vasche di palline) visibile dai tavoli." },
+      { domanda: "Si può portare la torta dalla pasticceria?", risposta: "Da Tourlé sì, pagando il servizio piattini, oppure si sceglie la torta proposta dal locale. Per la festa a Ca' Bianca la merenda si concorda con la fattoria quando si organizza." },
+      { domanda: "La festa in fattoria va bene anche per i più piccoli?", risposta: "La Fattoria Ca' Bianca fa laboratori per bambini dai 3 anni, con caprette e asinelli, e organizza il compleanno in fattoria su richiesta. Visto che si sta soprattutto all'aperto, chiedete cosa propongono in caso di brutto tempo." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "cosenza",
+    citta: "Cosenza",
+    aggiornata: "2026-11-06",
+    rispostaBreve: "A Cosenza la festa di compleanno per bambini si fa da MagicLand, in città, con sala in esclusiva, area giochi morbida e un pacchetto con buffet e torta; da PlayTown a Rende, un parco giochi al coperto costruito come una piccola città, riservato agli invitati durante la festa; oppure in fattoria da Animagricola, a Rende, tra asini, animali e giochi di una volta. Prenotate con anticipo per il fine settimana e chiedete subito cosa comprende il pacchetto e quanti bambini sono ammessi.",
+    intro: "Nell'area urbana di Cosenza, che arriva a Rende, ci sono sale feste al coperto con gonfiabili e animazione e una fattoria didattica a pochi minuti. Si sceglie tra la festa al chiuso, che va bene tutto l'anno, e quella a contatto con gli animali.",
+    locali: [
+      { nome: "MagicLand", zona: "Cosenza, via Barlaam di Calabria", tipo: "sala feste con area giochi e gonfiabili", descrizione: "Il pacchetto feste comprende la sala in esclusiva, l'area giochi morbida con piscina di palline, scivoli, costruzioni giganti e gonfiabili, il buffet, la torta, i palloncini e l'assistenza di un operatore. Su richiesta si aggiungono animazione, allestimenti personalizzati e sweet table, e l'area gioco è sorvegliata dagli educatori. Il locale propone anche laboratori creativi e di cucina, ludoteca e baby parking.", sito: "https://www.magiclandcosenza.it/" },
+      { nome: "PlayTown Family Park", zona: "Rende, via Vittorio Bottego", tipo: "parco giochi al coperto con sala feste", descrizione: "Parco giochi al coperto costruito come una piccola città per bambini da 0 a 10 anni: una zona «Città» per giocare ai mestieri (ristorante, ospedale, pompieri) e una zona «Aeroporto» per il gioco di movimento, con gli animatori. Per le feste ci sono tre pacchetti: il base comprende inviti, percorsi di gioco, sala festa con animazione e menù a scelta, quelli superiori aggiungono laboratorio a tema, allestimento più ricco, sweet table e spettacolo. I menù dei bambini arrivano in box personalizzati, ci sono menù anche per i genitori e durante la festa la struttura è riservata agli invitati.", sito: "https://www.playtownrende.it/" },
+      { nome: "Animagricola", zona: "Rende, contrada Isolette", tipo: "fattoria didattica e asineria con compleanni", descrizione: "Fattoria didattica e asineria che organizza compleanni in fattoria: giochi di una volta, incontro con gli asini e con galline, capre, pecore, cavalli e conigli, giochi con la terra e le piante e pic-nic sul prato. Ha uno spazio interno coperto e attrezzato, così la festa si può fare anche d'inverno o con il maltempo. Per gli eventi la prenotazione è obbligatoria.", sito: "https://www.animagricola.farm/" },
+    ],
+    faq: [
+      { domanda: "Meglio una festa al coperto o in fattoria a Cosenza?", risposta: "Dipende dalla stagione e dall'età: MagicLand e PlayTown sono al coperto e vanno bene tutto l'anno; Animagricola, a Rende, punta su animali e giochi all'aperto, ma ha anche uno spazio coperto per l'inverno o la pioggia." },
+      { domanda: "La sala è riservata solo ai nostri invitati?", risposta: "MagicLand comprende nel pacchetto la sala in esclusiva e PlayTown riserva la struttura agli invitati per tutta la festa. Confermatelo comunque quando prenotate." },
+      { domanda: "Cosa comprende di solito il pacchetto festa?", risposta: "Da MagicLand sala, area giochi, buffet, torta, palloncini e un operatore, con animazione e sweet table su richiesta; da PlayTown tre pacchetti con inviti, animazione e menù a scelta, più laboratorio e spettacolo in quelli superiori. Chiedete sempre il dettaglio aggiornato." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "caserta",
+    citta: "Caserta",
+    aggiornata: "2026-11-06",
+    rispostaBreve: "A Caserta la festa di compleanno per bambini si fa da Sunrise Pizza, in via Roma, che ha un'area kids con scivoli e giochi morbidi e pacchetti con due animatori, menù bimbi e un gadget per ogni bambino; da Meraviland, a Puccianiello, una ludoteca con playground e sala feste; oppure da Pharina, a Capodrise, pizzeria con area bambini dai 3 ai 9 anni, comoda anche per una festa di sera. Chiedete un preventivo scritto con cosa è compreso e se si può portare la torta.",
+    intro: "A Caserta e nei comuni attaccati alla città le feste dei bambini si fanno soprattutto nelle ludoteche con playground e nelle pizzerie con un'area kids sorvegliata dallo staff. Si va dalla festa con animatori e menù compreso alla serata in pizzeria con i giochi.",
+    locali: [
+      { nome: "Sunrise Pizza", zona: "Caserta centro, via Roma", tipo: "pizzeria con area kids e pacchetti feste", descrizione: "Pizzeria con un'area kids protetta, con scivoli, percorsi e giochi morbidi, sorvegliata dagli animatori dello staff e pensata per bambini dai 2 ai 9 anni. I pacchetti per i compleanni prevedono due animatori, il playground, giochi di gruppo, l'apertura dei regali, un menù bimbi (pizza oppure pasta e cotoletta con patatine), bibita, un dolce e un gadget per ogni bambino; per uno dei pacchetti servono almeno 15 bambini. Ci sono anche opzioni senza glutine, vegetariane e vegane.", sito: "https://www.sunrisepizzacaserta.it/area-kids/" },
+      { nome: "Meraviland", zona: "Puccianiello (Caserta), via Concezione", tipo: "ludoteca con playground e sala feste", descrizione: "Ludoteca con playground e sala feste dove i compleanni si fanno nell'area playground, con attrezzature e pavimenti protettivi e personale che sorveglia i bambini. Su richiesta si aggiungono animazione, catering e allestimenti a tema. Propone anche laboratori creativi e decorazioni con i palloncini.", sito: "https://meraviland.it/" },
+      { nome: "Pharina", zona: "Capodrise, via Retella (al confine con Caserta e Marcianise)", tipo: "pizzeria con area bambini e sale per eventi", descrizione: "Pizzeria, ristorante e burgeria con un'area kids per bambini dai 3 ai 9 anni, con giochi sorvegliati dallo staff. Organizza feste ed eventi privati con servizio personalizzato e gadget per tutti i bambini, nelle sale interne o nel giardino attrezzato. Apre la sera ed è comoda per una festa con cena, con un ampio parcheggio.", sito: "https://www.pharinapizzaevents.com/area-bimbi-pizzeria-ristorante-burgeria-eventi-caserta" },
+    ],
+    faq: [
+      { domanda: "Quale locale di Caserta va bene per i bambini piccoli?", risposta: "L'area kids di Sunrise Pizza è pensata per i bambini dai 2 ai 9 anni, quella di Pharina a Capodrise per i 3-9 anni, e il playground di Meraviland a Puccianiello ha pavimenti protettivi e personale che sorveglia." },
+      { domanda: "Si può fare la festa di sera?", risposta: "Sì: Pharina apre la sera ed è adatta a una festa con cena e area bambini. Per gli altri locali chiedete quali fasce orarie sono libere quando prenotate." },
+      { domanda: "Cosa conviene chiedere quando prenoto?", risposta: "Cosa comprende il pacchetto (animazione, menù, gadget), il numero minimo di bambini e se si può portare la torta: nessuno dei tre locali pubblica le regole sulla torta. Per intolleranze e diete, Sunrise Pizza indica opzioni senza glutine, vegetariane e vegane." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

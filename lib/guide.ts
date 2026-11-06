@@ -1113,6 +1113,87 @@ export const GUIDE: Guida[] = [
     ],
     giochi: ["pizza-delle-frazioni", "l-orologio", "tabelline", "salvadanaio"],
   },
+  {
+    slug: "paghetta-ai-bambini",
+    titolo: "La paghetta ai bambini: da che età, quanto dare e come farla funzionare",
+    titoloBreve: "La paghetta",
+    descrizione:
+      "Quando cominciare con la paghetta, quanto dare a un bambino delle elementari, se legarla ai lavoretti di casa e come usarla per insegnare a contare i soldi, aspettare e risparmiare.",
+    rispostaBreve:
+      "La paghetta si può cominciare verso i 6-7 anni, quando il bambino sa contare le monete e capisce che una cosa costa: una piccola somma fissa, data sempre lo stesso giorno, che può spendere da solo, anche sbagliando. Più della cifra contano tre regole: regolarità, libertà di scelta e niente anticipi, così impara ad aspettare e a mettere da parte per qualcosa che desidera.",
+    etaMin: 6,
+    etaMax: 12,
+    minutiLettura: 6,
+    aggiornata: "2026-11-06",
+    skill: "matematica",
+    sezioni: [
+      {
+        titolo: "Da che età cominciare",
+        paragrafi: [
+          "Non c'è un'età giusta per legge, ma c'è un momento in cui la paghetta comincia ad avere senso: quando il bambino riconosce le monete, sa contare fino a qualche euro e ha capito che le cose nei negozi hanno un prezzo. Per molti bambini succede in prima o seconda elementare, verso i 6-7 anni.",
+          "Prima di quell'età i soldi si possono già toccare e contare per gioco, per esempio facendo la spesa finta a casa o lasciandogli pagare il pane alla cassa. La paghetta vera arriva quando può decidere da solo cosa farne.",
+        ],
+      },
+      {
+        titolo: "Quanto dare: piccola, fissa e regolare",
+        paragrafi: [
+          "La cifra conta meno di quanto si pensi. Deve essere abbastanza da permettere una piccola scelta (un pacchetto di figurine, un gelato, una matita colorata speciale) e abbastanza poca da costringere ad aspettare per le cose più grandi. Alle elementari bastano pochi euro alla settimana; con le medie si può passare a una paghetta mensile un po' più grande, che il ragazzo deve far durare.",
+          "Più della cifra conta la regolarità: stesso giorno, stessa somma, senza dimenticanze. Se la paghetta arriva quando capita, il bambino non può organizzarsi, e organizzarsi è proprio quello che deve imparare.",
+        ],
+      },
+      {
+        titolo: "Lasciare che sbagli (con i soldi piccoli)",
+        paragrafi: [
+          "La paghetta serve se il bambino può spenderla come vuole, anche male. Se ogni acquisto deve essere approvato, resta un regalo con l'autorizzazione dei genitori. Lasciatelo comprare il giocattolo che si romperà in due giorni: la delusione di aver finito i soldi per una cosa che non valeva la pena insegna più di qualsiasi spiegazione, e costa pochi euro.",
+          "La regola che fa la differenza è una sola: niente anticipi. Se la paghetta di questa settimana è finita, si aspetta la prossima. È lì che nasce l'idea di mettere da parte.",
+        ],
+      },
+      {
+        titolo: "I tre barattoli: spendere, risparmiare, regalare",
+        paragrafi: [
+          "Un metodo semplice e molto usato sono tre barattoli o tre buste: uno per le spese di tutti i giorni, uno per risparmiare per qualcosa di più grande, uno per regalare (un pensiero per un amico, la festa della mamma, una raccolta a scuola). Il bambino divide da solo la paghetta appena la riceve.",
+          "Per il barattolo del risparmio aiuta molto un obiettivo concreto: una foto del gioco che desidera attaccata sopra, e una tacca per ogni settimana che manca. Vedere il barattolo che si riempie rende l'attesa sopportabile, e il giorno dell'acquisto il bambino conta da solo le monete alla cassa.",
+        ],
+      },
+      {
+        titolo: "Paghetta e lavoretti di casa",
+        paragrafi: [
+          "Molte famiglie si chiedono se la paghetta vada «guadagnata» con i lavoretti. Molti esperti di educazione consigliano di tenere separate le due cose: apparecchiare, rifare il letto e mettere in ordine si fanno perché si vive insieme, non per soldi. Se ogni piccolo aiuto diventa un compenso, il rischio è sentirsi rispondere «quanto mi dai?».",
+          "Si possono però aggiungere lavori extra, fuori dalla routine, pagati a parte: lavare la macchina, sistemare la cantina, aiutare in giardino. Così il bambino scopre che il lavoro produce soldi, senza che la paghetta di base dipenda dal comportamento.",
+        ],
+      },
+      {
+        titolo: "La paghetta allena anche la matematica",
+        paragrafi: [
+          "Contare le monete, fare il resto, capire che due monete da 50 centesimi fanno un euro, calcolare quante settimane mancano al gioco nuovo: con la paghetta la matematica diventa una cosa che serve. Al supermercato potete chiedergli di controllare se i soldi bastano o quanto resta.",
+          "Con i più grandi si possono introdurre le prime idee di bilancio: scrivere su un quaderno quanto entra e quanto esce, e confrontare il prezzo della stessa cosa in due negozi. Sono le basi dell'educazione finanziaria, imparate con soldi veri e piccoli.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        domanda: "A che età si dà la paghetta?",
+        risposta:
+          "Di solito verso i 6-7 anni, quando il bambino riconosce le monete, sa contare qualche euro e ha capito che le cose hanno un prezzo. Prima i soldi si possono già usare per gioco, contando monete e facendo la spesa finta.",
+      },
+      {
+        domanda: "Quanto dare di paghetta a un bambino delle elementari?",
+        risposta:
+          "Non c'è una cifra giusta: bastano pochi euro alla settimana, abbastanza per una piccola scelta e abbastanza pochi da dover aspettare per le cose più grandi. Conta di più darla sempre lo stesso giorno e senza anticipi.",
+      },
+      {
+        domanda: "La paghetta va legata ai compiti di casa?",
+        risposta:
+          "Meglio di no per i lavoretti di tutti i giorni, che si fanno perché si vive insieme. Si possono pagare a parte i lavori extra, fuori dalla routine, così il bambino scopre che il lavoro produce soldi.",
+      },
+      {
+        domanda: "Come insegno a mio figlio a risparmiare?",
+        risposta:
+          "Con un obiettivo concreto e visibile: un barattolo per il risparmio con la foto del gioco desiderato, una tacca per ogni settimana, e la regola di non dare anticipi. Il giorno dell'acquisto fategli contare le monete alla cassa.",
+      },
+    ],
+    giochi: ["salvadanaio", "addizioni-entro-20", "tabelline", "pizza-delle-frazioni"],
+  },
 ];
 
 export function guida(slug: string): Guida | undefined {
