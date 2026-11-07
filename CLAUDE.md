@@ -133,6 +133,11 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   conteggio visite senza cookie, sempre attivo; GA resta solo su consenso).
 - `supabase/backoffice.sql` da incollare nel SQL Editor (contatori schede);
   `GSC_SERVICE_ACCOUNT` su Vercel per le ricerche Google nel pannello.
-- BREVO_API_KEY nelle env Vercel; email ciao@giocamizi.it da attivare
+- Brevo: account dedicato di Giocamizi (non quello Influencee del
+  connettore). Serve BREVO_API_KEY di quell'account su Vercel e il dominio
+  giocamizi.it autenticato in Brevo (record DNS su Netsons). Liste, campi,
+  mittente ciao@giocamizi.it e template di conferma li crea il sito alla
+  prima iscrizione (lib/brevo.ts). Alias Netsons: ciao@ → casella Gmail di
+  Giocamizi, giorgia@ → Gmail di Giorgia. Email ciao@giocamizi.it da attivare
   in lib/legal.ts; dominio giocamizi.it collegato (24/10/2026)
   (poi: next.config vecchiHost, redirect Supabase, etichetta stream GA).

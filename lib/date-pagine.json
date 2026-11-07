@@ -30,7 +30,7 @@
   "app/(public)/giochi/page.tsx": "2026-10-31",
   "app/(public)/guide/[slug]/page.tsx": "2026-11-07",
   "app/(public)/guide/page.tsx": "2026-10-31",
-  "app/(public)/iscrizione-confermata/page.tsx": "2026-10-31",
+  "app/(public)/iscrizione-confermata/page.tsx": "2026-11-07",
   "app/(public)/la-tua-scheda/[codice]/page.tsx": "2026-10-25",
   "app/(public)/metodo/page.tsx": "2026-10-31",
   "app/(public)/note-legali/page.tsx": "2026-11-02",
