@@ -91,19 +91,25 @@ export function jsonLdElenco(nome: string, voci: { nome: string; percorso: strin
 }
 
 /** Una guida per i genitori: Article con autrice reale (E-E-A-T per motori e AI). */
-export function jsonLdArticolo(guida: {
-  slug: string;
-  titolo: string;
-  descrizione: string;
-  aggiornata: string;
-}) {
+export function jsonLdArticolo(
+  guida: {
+    slug: string;
+    titolo: string;
+    descrizione: string;
+    aggiornata: string;
+  },
+  /** La foto di testata, se è arrivata; altrimenti la copertina generata. */
+  foto?: { src: string; larghezza: number; altezza: number } | null,
+) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: guida.titolo,
     description: guida.descrizione,
     url: url(`/guide/${guida.slug}`),
-    image: { "@type": "ImageObject", url: url(`/guide/${guida.slug}/copertina.png`), width: 1200, height: 630 },
+    image: foto
+      ? { "@type": "ImageObject", url: url(foto.src), width: foto.larghezza, height: foto.altezza }
+      : { "@type": "ImageObject", url: url(`/guide/${guida.slug}/copertina.png`), width: 1200, height: 630 },
     inLanguage: site.lingua,
     isAccessibleForFree: true,
     datePublished: guida.aggiornata,

@@ -25,3 +25,20 @@ export function fotoSito(codice: CodiceFoto): { src: string; larghezza: number; 
   }
   return null;
 }
+
+/** Larghezze consegnate per le foto delle guide (16:9). */
+export const LARGHEZZE_GUIDA = [1440, 960, 640];
+
+/**
+ * La foto di testata di una guida (public/immagini/guida-<slug>-<larghezza>.webp),
+ * o null se non è ancora arrivata. Il prompt sta nel documento «00 PROMPT GUIDE».
+ */
+export function fotoGuida(slug: string, alt: string): { src: string; larghezza: number; altezza: number; alt: string } | null {
+  for (const l of LARGHEZZE_GUIDA) {
+    const nome = `guida-${slug}-${l}.webp`;
+    if (existsSync(join(process.cwd(), "public", "immagini", nome))) {
+      return { src: `/immagini/${nome}`, larghezza: l, altezza: Math.round((l * 9) / 16), alt };
+    }
+  }
+  return null;
+}

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import { fotoGuida } from "@/lib/foto";
+import { SegnoAI } from "@/components/vetrina";
 import { notFound } from "next/navigation";
 import { GUIDE, guida, guideCorrelate } from "@/lib/guide";
 import { games } from "@/games/registry";
@@ -48,13 +51,14 @@ export default async function GuidaPage({
   const voce = guida(slug);
   if (!voce) notFound();
 
+  const foto = fotoGuida(voce.slug, voce.foto.alt);
   const correlati = voce.giochi
     .map((s) => games.find((g) => g.slug === s && g.status === "live"))
     .filter((g) => g !== undefined);
 
   return (
     <Contenitore className="py-10">
-      <JsonLd data={jsonLdArticolo(voce)} />
+      <JsonLd data={jsonLdArticolo(voce, foto)} />
       <JsonLd data={jsonLdFaq(voce.faq)} />
       <JsonLd
         data={jsonLdBreadcrumb([
@@ -85,6 +89,20 @@ export default async function GuidaPage({
         {voce.etaMin}–{voce.etaMax} anni · {voce.minutiLettura} minuti di lettura ·
         di Giorgia Palazzo, mamma e creatrice del sito
       </p>
+
+      {foto && (
+        <figure className="relative mt-6 aspect-video overflow-hidden rounded-morbido bg-crema-scuro" data-foto-guida>
+          <Image
+            src={foto.src}
+            alt={`${foto.alt} (immagine generata con l'intelligenza artificiale)`}
+            fill
+            priority
+            sizes="(min-width: 1024px) 896px, 100vw"
+            className="object-cover"
+          />
+          <SegnoAI />
+        </figure>
+      )}
 
       {/* La risposta in breve: il blocco pensato per essere citato dalle AI. */}
       <div className="mt-6 rounded-morbido border-2 border-viola/40 bg-viola/10 p-5">

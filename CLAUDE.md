@@ -36,6 +36,12 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   motore condiviso in `games/_engine/`, testi in `content/games/*.md`.
 - `lib/guide.ts` — le guide per i genitori (/guide): risposta breve
   citabile dalle AI + sezioni + FAQ + giochi collegati.
+  Ogni guida ha `foto: { scena, alt }`: è la scheda per la foto di testata.
+  Dopo una guida nuova, `npm run prompt-guide` e aggiorna su Drive il
+  documento «00 PROMPT GUIDE · Foto degli articoli Giocamizi» (cartella
+  «Giocamizi · Prompt immagini», id 1tvRSJlXalCDtEsiDaGK3MBRAEM-3lEYhAU8EW9coRX8):
+  Giorgia lo dà a ChatGPT. Le foto arrivano come
+  public/immagini/guida-<slug>-<1440|960|640>.webp e compaiono da sole.
 - `cards/registry.ts` + `components/biglietti/` — il creatore di biglietti:
   temi (motivi SVG in motivi.tsx), adesivi (stickers.tsx), QR RSVP,
   foto solo nel PNG mai nei link (lib/condivisione.ts).

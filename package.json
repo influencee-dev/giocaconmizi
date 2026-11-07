@@ -13,7 +13,8 @@
     "export-pdf": "tsx scripts/export-pdf.ts",
     "verifica": "node scripts/verifica/tutte.mjs",
     "date-pagine": "node scripts/date-pagine.mjs",
-    "immagini": "tsx scripts/immagini.ts"
+    "immagini": "tsx scripts/immagini.ts",
+    "prompt-guide": "tsx scripts/prompt-guide.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",

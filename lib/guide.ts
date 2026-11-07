@@ -31,6 +31,14 @@ export interface Guida {
   faq: { domanda: string; risposta: string }[];
   /** Slug dei giochi del sito citati come "per esercitarsi". */
   giochi: string[];
+  /**
+   * La foto di testata, prodotta con ChatGPT dal documento su Drive
+   * «00 PROMPT GUIDE» (Giocamizi · Prompt immagini): scena del prompt e
+   * testo alternativo. Il file è public/immagini/guida-<slug>-<larghezza>.webp;
+   * finché manca, la pagina resta com'è. Una guida nuova = una scheda in più
+   * nel documento Drive.
+   */
+  foto: { scena: string; alt: string };
 }
 
 export const GUIDE: Guida[] = [
@@ -101,6 +109,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["tabelline", "addizioni-entro-20", "conta-fino-a-10"],
+    foto: {
+      scena:
+        "Tavolo della cucina al pomeriggio. Una bambina di circa 8 anni ripete le tabelline battendo il ritmo con le mani, sorridente; la mamma seduta accanto batte le mani con lei. Sul tavolo un quaderno a quadretti senza numeri leggibili e una ciotola di bottoni colorati. Mizi è seduta vicino ai bottoni, con un'ala alzata come se tenesse il tempo.",
+      alt: "Bambina di 8 anni ripete le tabelline battendo le mani con la mamma, con Mizi sul tavolo",
+    },
   },
   {
     slug: "coding-per-bambini",
@@ -185,6 +198,11 @@ export const GUIDE: Guida[] = [
       "tartaruga",
       "crea-il-tuo-gioco",
     ],
+    foto: {
+      scena:
+        "Pavimento del soggiorno. Un bambino di circa 6 anni dispone in fila delle frecce di cartoncino colorate per guidare un piccolo robot giocattolo generico sul tappeto; la sorella di circa 10 anni lo guarda dal divano con un portatile chiuso sulle ginocchia. Mizi è seduta alla fine del percorso di frecce, come se fosse l'arrivo.",
+      alt: "Bambino di 6 anni prepara un percorso di frecce per un robot giocattolo, con Mizi all'arrivo",
+    },
   },
   {
     slug: "imparare-a-leggere-l-orologio",
@@ -246,6 +264,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["l-orologio", "conta-fino-a-10", "tabelline"],
+    foto: {
+      scena:
+        "Cucina al mattino. Un bambino di circa 7 anni sposta con il dito le lancette di un grande orologio di cartone colorato fatto in casa, concentrato; il papà accanto gli indica la lancetta lunga. Un vero orologio da parete tondo sfocato sullo sfondo. Mizi è seduta sul tavolo accanto all'orologio di cartone. Nessun numero leggibile in primo piano.",
+      alt: "Bambino di 7 anni impara a leggere l'orologio con un orologio di cartone, insieme al papà e a Mizi",
+    },
   },
   {
     slug: "imparare-a-leggere-giocando",
@@ -312,6 +335,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["lettera-iniziale", "tocca-la-lettera", "unisci-le-sillabe", "leggi-e-rispondi"],
+    foto: {
+      scena:
+        "Cameretta luminosa. Una bambina di circa 5 anni seduta sul tappeto compone una parola con lettere di legno colorate, il dito sotto la prima lettera; la mamma è inginocchiata accanto e la incoraggia. Le lettere sono sparse e non formano parole leggibili. Mizi è seduta tra le lettere.",
+      alt: "Bambina di 5 anni gioca con lettere di legno colorate insieme alla mamma e a Mizi",
+    },
   },
   {
     slug: "tempo-davanti-allo-schermo",
@@ -378,6 +406,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["le-emozioni-di-mizi", "sequenze-logiche", "puzzle-facile"],
+    foto: {
+      scena:
+        "Soggiorno al tramonto. Un tablet spento è appoggiato a faccia in giù su una mensola. In primo piano due fratelli di circa 6 e 9 anni costruiscono una torre di cartoni e coperte sul tappeto, ridendo. La mamma sul divano li guarda serena. Mizi è seduta in cima alla torre di cartoni.",
+      alt: "Due fratelli giocano con cartoni e coperte mentre il tablet resta spento, con Mizi in cima alla torre",
+    },
   },
   {
     slug: "compiti-senza-litigare",
@@ -450,6 +483,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["tabelline", "unisci-le-sillabe", "leggi-e-rispondi", "l-orologio"],
+    foto: {
+      scena:
+        "Tavolo del soggiorno al pomeriggio. Un bambino di circa 9 anni fa i compiti tranquillo, con una piccola clessidra accanto al quaderno; il papà legge un libro a poca distanza, disponibile ma senza stare addosso. Luce calda, merenda su un piattino. Mizi è appoggiata alla pila dei libri. I quaderni non hanno testo leggibile.",
+      alt: "Bambino di 9 anni fa i compiti sereno con il papà vicino che legge, e Mizi accanto ai libri",
+    },
   },
   {
     slug: "inglese-per-bambini",
@@ -524,6 +562,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["prime-parole-inglese", "il-suono-dell-animale", "memory-animali"],
+    foto: {
+      scena:
+        "Cucina la sera. Una bambina di circa 6 anni canta e balla con una mamma mentre preparano insieme una pizza, con farina sulle mani e risate. Un vecchio stereo o una piccola cassa sullo sfondo. Mizi è seduta sul bancone accanto al mattarello. Nessuna bandiera e nessuna scritta.",
+      alt: "Mamma e figlia di 6 anni cantano e ballano in cucina mentre preparano la pizza, con Mizi sul bancone",
+    },
   },
   {
     slug: "memorizzare-le-poesie",
@@ -594,6 +637,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["memory-animali", "sequenze-logiche", "leggi-e-rispondi"],
+    foto: {
+      scena:
+        "Cameretta. Un bambino di circa 8 anni in piedi recita una poesia con un gesto teatrale della mano, sorridente; la sorellina e la nonna, sedute sul letto, lo ascoltano e applaudono. Un foglio con disegni (senza testo leggibile) è appeso alla parete. Mizi è seduta sul letto accanto alla nonna.",
+      alt: "Bambino di 8 anni recita una poesia davanti alla nonna e alla sorellina, con Mizi sul letto",
+    },
   },
   {
     slug: "ansia-da-verifica",
@@ -668,6 +716,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["le-emozioni-di-mizi", "tabelline", "leggi-e-rispondi"],
+    foto: {
+      scena:
+        "Cameretta la sera, luce calda di una lampada. Una mamma seduta sul bordo del letto abbraccia di lato la figlia di circa 9 anni, che respira piano con gli occhi chiusi e un mezzo sorriso, una mano sulla pancia. Lo zaino di scuola è appoggiato a terra. Mizi è stretta tra le braccia della bambina.",
+      alt: "Mamma abbraccia la figlia di 9 anni che respira con calma prima di una verifica, mentre stringe Mizi",
+    },
   },
   {
     slug: "scrittura-in-corsivo",
@@ -743,6 +796,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["tocca-la-lettera", "ortografia-c-ch-g-gh", "leggi-e-rispondi"],
+    foto: {
+      scena:
+        "Tavolo di legno vicino alla finestra. Primo piano delle mani di una bambina di circa 7 anni che traccia con un pastello una lunga linea a onde continue su un grande foglio, senza lettere. Accanto, pastelli a cera colorati e un vassoio con un po' di farina dove è disegnata una spirale col dito. Mizi è seduta sul tavolo e guarda le onde.",
+      alt: "Mani di una bambina di 7 anni disegnano onde continue per prepararsi al corsivo, con Mizi sul tavolo",
+    },
   },
   {
     slug: "festa-di-compleanno-semplice",
@@ -817,6 +875,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["le-emozioni-di-mizi", "memory-animali", "robot-ballerino"],
+    foto: {
+      scena:
+        "Soggiorno di casa addobbato in modo semplice: un festone di carta colorato senza scritte, pochi palloncini. Cinque bambini di circa 6 anni seduti in cerchio sul tappeto giocano a passarsi un pacco regalo, ridendo. Una torta fatta in casa sul tavolino. Mizi è seduta nel cerchio con un cappellino di carta.",
+      alt: "Bambini giocano in cerchio a una festa di compleanno semplice in casa, con Mizi e il cappellino di carta",
+    },
   },
   {
     slug: "memoria-e-concentrazione",
@@ -890,6 +953,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["cosa-manca", "memory-animali", "trova-le-differenze", "sequenze-logiche"],
+    foto: {
+      scena:
+        "Tappeto del soggiorno. Un bambino di circa 7 anni e il papà giocano a memory con grandi carte di cartone colorate a faccia in giù; il bambino ne gira una con espressione concentrata. Le carte mostrano solo forme e colori semplici, senza scritte. Mizi è seduta accanto alle carte e le osserva.",
+      alt: "Bambino di 7 anni gioca a memory con il papà sul tappeto, concentrato, con Mizi accanto alle carte",
+    },
   },
   {
     slug: "bambino-non-sa-perdere",
@@ -963,6 +1031,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["memory-animali", "le-emozioni-di-mizi", "puzzle-facile", "labirinto-a-blocchi"],
+    foto: {
+      scena:
+        "Tavolo del soggiorno dopo una partita a un gioco da tavolo. Un bambino di circa 6 anni ha il broncio con le braccia incrociate; la mamma, seduta accanto, gli tende la mano per stringerla con un sorriso affettuoso, e la sorella maggiore sorride. Il tabellone ha solo caselle colorate senza scritte. Mizi è seduta sul tabellone.",
+      alt: "Mamma tende la mano al figlio di 6 anni dopo una partita persa, con Mizi seduta sul tabellone",
+    },
   },
   {
     slug: "imparare-a-contare",
@@ -1038,6 +1111,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["conta-fino-a-10", "unisci-i-puntini", "addizioni-entro-20", "salvadanaio"],
+    foto: {
+      scena:
+        "Cucina al mattino. Un bambino di circa 4 anni conta dei mandarini mettendoli uno a uno in una ciotola, toccandoli con il dito; la nonna accanto conta con lui. Tavolo di legno, luce morbida. Mizi è seduta accanto alla ciotola. Nessun numero scritto.",
+      alt: "Bambino di 4 anni conta i mandarini uno a uno con la nonna, con Mizi accanto alla ciotola",
+    },
   },
   {
     slug: "frazioni-spiegate-ai-bambini",
@@ -1112,6 +1190,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["pizza-delle-frazioni", "l-orologio", "tabelline", "salvadanaio"],
+    foto: {
+      scena:
+        "Cucina la sera. Una bambina di circa 9 anni taglia con l'aiuto del papà una pizza fatta in casa in otto fette uguali, con un tagliapizza; il papà le tiene la mano sul manico. Teglia di metallo, tovaglia a quadretti. Mizi è seduta sul tavolo e guarda le fette.",
+      alt: "Bambina di 9 anni divide una pizza in otto fette uguali con il papà, con Mizi sul tavolo",
+    },
   },
   {
     slug: "paghetta-ai-bambini",
@@ -1193,6 +1276,11 @@ export const GUIDE: Guida[] = [
       },
     ],
     giochi: ["salvadanaio", "addizioni-entro-20", "tabelline", "pizza-delle-frazioni"],
+    foto: {
+      scena:
+        "Tavolo della cucina. Un bambino di circa 7 anni divide alcune monete in tre barattoli di vetro con etichette colorate senza scritte (giallo, azzurro, rosa), concentrato; la mamma lo guarda sorridendo. Sul barattolo del risparmio è attaccato il disegno di un aquilone. Mizi è seduta accanto ai barattoli.",
+      alt: "Bambino di 7 anni divide la paghetta in tre barattoli con la mamma, con Mizi accanto",
+    },
   },
 ];
 
