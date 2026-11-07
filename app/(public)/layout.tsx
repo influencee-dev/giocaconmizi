@@ -18,6 +18,7 @@ const MENU = [
   { href: "/feste", nome: "Feste" },
   { href: "/guide", nome: "Guide" },
   { href: "/storie", nome: "Storie" },
+  { href: "/risorse-educative-bambini", nome: "Risorse" },
   { href: "/chi-siamo", nome: "Chi siamo" },
 ];
 

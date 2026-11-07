@@ -1,5 +1,6 @@
 import { TestataPagina } from "@/components/vetrina";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Contenitore, TitoloSezione } from "@/components/ui";
 import { FacciaMizi } from "@/games/_engine/arte";
 import { TITOLARE } from "@/lib/legal";
@@ -125,6 +126,21 @@ export default function PerLeMammePage() {
           <li>Ogni realtà viene verificata prima di entrare; pubblichiamo solo contatti che la realtà stessa chiede di mostrare.</li>
           <li>Se qualcosa cambia o vuoi essere rimossa, basta una email e la voce sparisce.</li>
         </ul>
+      </section>
+
+      <section className="mt-12">
+        <TitoloSezione>Blog, magazine e risorse per genitori</TitoloSezione>
+        <p className="max-w-2xl text-lg text-notte-tenue">
+          Cerchi idee da leggere o attività per i tuoi bambini? Abbiamo raccolto siti per famiglie,
+          scuole e laboratori in{" "}
+          <Link
+            href="/risorse-educative-bambini"
+            className="font-bold text-notte underline decoration-viola decoration-2 underline-offset-4"
+          >
+            risorse educative per bambini, famiglie e insegnanti
+          </Link>
+          .
+        </p>
       </section>
     </Contenitore>
   );

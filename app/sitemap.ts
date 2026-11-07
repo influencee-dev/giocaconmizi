@@ -49,6 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/feste": [ultimaCitta],
     "/metodo": ["content/hubs/metodo.md"],
     "/perche-lo-facciamo": ["content/hubs/perche-lo-facciamo.md"],
+    "/risorse-educative-bambini": ["lib/risorse-educative-dati.ts", "lib/risorse-educative.ts"],
   };
   const ALIAS_COMPETENZA: Record<string, string[]> = {
     lettere: ["alfabeto", "fonetica", "lettura"],
@@ -77,6 +78,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/aggiungi-attivita",
     "/per-insegnanti",
     "/per-le-mamme",
+    "/risorse-educative-bambini",
   ];
 
   const competenze = [

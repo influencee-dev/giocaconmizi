@@ -27,7 +27,7 @@ export const TITOLARE = {
 } as const;
 
 /** Data dell'ultima revisione delle informative (si aggiorna a ogni modifica). */
-export const AGGIORNATA = "3 novembre 2026";
+export const AGGIORNATA = "7 novembre 2026";
 
 export interface VoceRegistro {
   nome: string;
@@ -168,7 +168,7 @@ export const REGISTRO: VoceRegistro[] = [
 export const FORNITORI = [
   {
     nome: "Vercel Inc.",
-    scopo: "Hosting del sito: riceve gli accessi e tiene log tecnici (indirizzo IP) per sicurezza e funzionamento. Con Vercel Web Analytics conta anche le visite in forma aggregata, senza cookie e senza conservare l'indirizzo IP.",
+    scopo: "Hosting del sito: riceve gli accessi e tiene log tecnici (indirizzo IP) per sicurezza e funzionamento. Con Vercel Web Analytics conta anche le visite in forma aggregata, senza cookie e senza conservare l'indirizzo IP. Per difendere alcune pagine dalle letture automatiche a raffica, il sito registra nei log brevi eventi tecnici con un'impronta non reversibile dell'IP, che cambia ogni giorno, e solo la famiglia del browser.",
     dove: "Sito servito dalla regione di Francoforte; la società è statunitense e aderisce al Data Privacy Framework UE-USA",
   },
   {

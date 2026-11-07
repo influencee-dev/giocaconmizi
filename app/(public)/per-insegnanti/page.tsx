@@ -60,6 +60,20 @@ export default function PerInsegnantiPage() {
           ))}
         </div>
       </section>
+
+      <section className="mt-10">
+        <TitoloSezione>Altri siti utili per la classe</TitoloSezione>
+        <p className="max-w-2xl text-lg text-notte-tenue">
+          Portali di schede, blog di maestre e progetti di coding e STEM, divisi per tema:{" "}
+          <Link
+            href="/risorse-educative-bambini?sezione=insegnanti"
+            className="font-bold text-notte underline decoration-viola decoration-2 underline-offset-4"
+          >
+            risorse educative per insegnanti e scuola primaria
+          </Link>
+          .
+        </p>
+      </section>
     </Contenitore>
   );
 }

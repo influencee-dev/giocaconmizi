@@ -1,9 +1,18 @@
 import type { MetadataRoute } from "next";
 import { url } from "@/lib/seo";
+import { PERCORSO_TRAPPOLA } from "@/lib/protezione/limiti";
 
+/**
+ * ATTENZIONE: robots.txt (come il meta robots) è un'indicazione per i
+ * crawler che rispettano le regole, NON una barriera di sicurezza: chi fa
+ * scraping può ignorarlo. Le difese vere sono in lib/protezione (limiti di
+ * frequenza, trappola) e nelle regole WAF di Vercel.
+ */
 export default function robots(): MetadataRoute.Robots {
   // Pagine di servizio: nulla da indicizzare, e niente sessioni nei log.
-  const privati = ["/api/", "/auth/", "/accedi", "/account", "/la-tua-scheda/", "/admin/"];
+  // La trappola anti-bot è vietata qui: un crawler corretto non la visita mai,
+  // quindi chi la apre sta ignorando robots.txt.
+  const privati = ["/api/", "/auth/", "/accedi", "/account", "/la-tua-scheda/", "/admin/", PERCORSO_TRAPPOLA];
 
   return {
     rules: [

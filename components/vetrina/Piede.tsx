@@ -47,6 +47,7 @@ export const COLONNE: { titolo: string; voci: [string, string][] }[] = [
       ["/metodo", "Il nostro metodo"],
       ["/per-insegnanti", "Per insegnanti"],
       ["/per-le-mamme", "Per le mamme"],
+      ["/risorse-educative-bambini", "Risorse educative consigliate"],
       ["/perche-lo-facciamo", "Perché lo facciamo"],
     ],
   },
