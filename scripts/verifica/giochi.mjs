@@ -75,6 +75,32 @@ for (let r = 0; r < 8; r++) {
 }
 ok("ortografia: partita completa 8/8", buchi === 8, `${buchi}/8`);
 
+// Con l'H o senza?: la risposta si ricava dalla frase letta (istruzione) e
+// dal buco mostrato. Al primo round si sbaglia apposta: deve comparire il trucco.
+const COPPIA = { ho: "o", o: "ho", ha: "a", a: "ha", hanno: "anno", anno: "hanno", hai: "ai", ai: "hai", "è": "e", e: "è" };
+await page.goto(`${BASE}/giochi/con-l-h-o-senza/gioca`, { waitUntil: "networkidle" });
+await page.waitForTimeout(800);
+let frasiH = 0;
+let truccoVisto = false;
+for (let r = 0; r < 10; r++) {
+  const istruzione = await page.locator("text=/Come si scrive\\?/").first().textContent({ timeout: 5000 }).catch(() => null);
+  if (!istruzione) break;
+  const frase = istruzione.replace(/\s*Come si scrive\?\s*$/, "").trim();
+  const centro = (await page.locator("main [data-frase]").first().textContent()).trim();
+  const [prima, dopo] = centro.split("___");
+  const giusta = frase.slice(prima.length, frase.length - dopo.length);
+  if (r === 0) {
+    await page.locator(`button[aria-label='${COPPIA[giusta]}']`).first().tap();
+    await page.waitForTimeout(300);
+    truccoVisto = /Trucco/.test((await page.locator("[data-aiuto]").textContent().catch(() => "")) ?? "");
+  }
+  await page.locator(`button[aria-label='${giusta}']`).first().tap();
+  frasiH++;
+  await page.waitForTimeout(1400);
+}
+ok("con l'H o senza: dopo un errore Mizi mostra il trucco", truccoVisto);
+ok("con l'H o senza: partita completa 10/10", frasiH === 10, `${frasiH}/10`);
+
 // Il robot ballerino: 6 coreografie lette dall'istruzione, toccando sempre
 // la PRIMA tessera con quel nome. Con le mosse doppie (due "batti le mani")
 // è il caso che scoprì il bug dei gemelli: la mossa giusta rifiutata

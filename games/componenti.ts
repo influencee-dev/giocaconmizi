@@ -41,6 +41,7 @@ export const componenti: Record<string, ComponentType<GameProps>> = {
   "addizioni-entro-20": dynamic(() => import("@/games/addizioni-entro-20/Game"), { ssr: false }),
   "l-orologio": dynamic(() => import("@/games/l-orologio/Game"), { ssr: false }),
   "ortografia-c-ch-g-gh": dynamic(() => import("@/games/ortografia-c-ch-g-gh/Game"), { ssr: false }),
+  "con-l-h-o-senza": dynamic(() => import("@/games/con-l-h-o-senza/Game"), { ssr: false }),
   tabelline: dynamic(() => import("@/games/tabelline/Game"), { ssr: false }),
   "leggi-e-rispondi": dynamic(() => import("@/games/leggi-e-rispondi/Game"), { ssr: false }),
   "guida-mizi": dynamic(() => import("@/games/guida-mizi/Game"), { ssr: false }),

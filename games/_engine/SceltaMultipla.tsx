@@ -48,6 +48,8 @@ export interface Round {
   centro?: ReactNode;
   opzioni: Opzione[];
   correttaId: string;
+  /** Il trucco da dire (e mostrare) dopo un errore, al posto del solito «Riprova». */
+  aiuto?: string;
   /** Colonne solo per questo round: vince sulle colonne del gioco. */
   colonne?: number;
 }
@@ -126,9 +128,9 @@ export function SceltaMultipla({
       // Errore: feedback gentile, l'opzione si spegne, si resta nel round.
       setSbagliate((precedenti) => [...precedenti, id]);
       setPrimoTentativo(false);
-      parla(INCORAGGIAMENTI[sbagliate.length % INCORAGGIAMENTI.length]);
+      parla(corrente.aiuto ?? INCORAGGIAMENTI[sbagliate.length % INCORAGGIAMENTI.length]);
     },
-    [azzeccata, finito, corrente.correttaId, indice, primoTentativo, prossimoRound, sbagliate.length],
+    [azzeccata, finito, corrente.correttaId, corrente.aiuto, indice, primoTentativo, prossimoRound, sbagliate.length],
   );
 
   // Modalità demo per i reel: risponde giusto da sola, una volta al secondo.
@@ -188,6 +190,12 @@ export function SceltaMultipla({
             />
           ))}
         </div>
+
+        {corrente.aiuto && sbagliate.length > 0 && !azzeccata && (
+          <p role="status" className="max-w-xl rounded-2xl bg-giallo/30 px-4 py-3 text-center text-lg font-bold text-notte" data-aiuto>
+            {corrente.aiuto}
+          </p>
+        )}
       </div>
     </GameShell>
   );

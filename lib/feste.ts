@@ -2197,6 +2197,42 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "pozzuoli",
+    citta: "Pozzuoli",
+    aggiornata: "2026-11-07",
+    rispostaBreve: "A Pozzuoli la festa di compleanno per bambini si fa spesso all'aperto, tra il Lago d'Averno e il Lago Lucrino: il Giardino dell'Orco organizza feste in campagna tra prati e agrumeti, con giochi di una volta, caccia al tesoro e il percorso sulle api; Masseria Sardo costruisce eventi privati su misura con menù per bambini e animatori; il Parco dei Laghi ha un parco giochi con bar e ristorante e un pacchetto per le feste dei bambini. Visto che sono spazi all'aperto, chiedete subito cosa succede se piove.",
+    intro: "Nei Campi Flegrei le feste dei bambini più caratteristiche si fanno in campagna, nella fascia verde fra il Lago d'Averno e Lucrino. Aziende agricole, agriturismi e parchi con l'area giochi sono un'alternativa alla solita sala al chiuso.",
+    locali: [
+      { nome: "Il Giardino dell'Orco", zona: "Lago d'Averno, via Lago Averno (Pozzuoli)", tipo: "azienda agricola con fattoria didattica", descrizione: "Azienda agricola affacciata sul Lago d'Averno che organizza compleanni all'aperto, tra prati e agrumeti, con tavoli da picnic o coperte sul prato. Il programma può comprendere giochi di campagna come la corsa nei sacchi e il tiro alla fune, una caccia al tesoro nella natura che finisce con un erbario e le focaccine di verdure, oppure un percorso sulle api e sul miele. Per gli adulti si può chiedere un preventivo per brunch, barbecue o buffet; il preventivo si chiede indicando data e numero di invitati.", sito: "https://www.ilgiardinodellorco.it" },
+      { nome: "Masseria Sardo", zona: "Lago d'Averno, via Montenuovo Licola Patria (Pozzuoli)", tipo: "agriturismo con eventi privati", descrizione: "Agriturismo sul Lago d'Averno con orti, frutteti, ristorante e un bar all'aperto, che ospita eventi privati costruiti insieme alla famiglia, senza pacchetti fissi. Tra i servizi ci sono le proposte per bambini nel menù e gli animatori per intrattenere i più piccoli, in terrazza, nelle sale interne o sul prato del frutteto. Nei fine settimana di primavera e d'estate ospita anche giochi e laboratori all'aperto con un ludobus.", sito: "https://masseriasardo.com" },
+      { nome: "Parco dei Laghi", zona: "Lucrino, via Circumlago (Pozzuoli)", tipo: "parco con area giochi, bar e ristorante", descrizione: "Parco tra il Lago Lucrino e il Lago d'Averno, con un parco giochi su superfici morbide, bar e ristorante e ampi spazi per festeggiare. Propone pacchetti per gli eventi, tra cui uno per le feste dei bambini, da personalizzare indicando data e numero di persone. Non ci sono aree picnic: cibo e bevande da fuori non sono ammessi.", sito: "https://parcodeilaghi.it" },
+    ],
+    faq: [
+      { domanda: "A Pozzuoli ci sono posti al chiuso per la festa?", risposta: "I locali di questa pagina puntano soprattutto sugli spazi all'aperto; Masseria Sardo ha anche sale interne e una terrazza. Per una festa d'inverno chiedete quali spazi coperti ci sono e cosa si fa se piove." },
+      { domanda: "Si può portare la torta da casa?", risposta: "Dipende: al Parco dei Laghi cibo e bevande da fuori non sono ammessi, quindi chiedete la torta a loro. Al Giardino dell'Orco il rinfresco si concorda nel preventivo." },
+      { domanda: "Cosa si fa in una festa in fattoria sul Lago d'Averno?", risposta: "Al Giardino dell'Orco giochi di campagna come la corsa nei sacchi e il tiro alla fune, una caccia al tesoro con l'erbario e le focaccine, o il percorso sulle api e sul miele; da Masseria Sardo, nei fine settimana della bella stagione, giochi e laboratori con il ludobus." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "viterbo",
+    citta: "Viterbo",
+    aggiornata: "2026-11-07",
+    rispostaBreve: "A Viterbo la festa di compleanno per bambini si fa al Parco Giochi Pratogiardino, nella villa comunale, con gonfiabili, pacchetti personalizzati, un regalo per il festeggiato e buffet o sala al bar del parco; nella sala con gonfiabili della piscina MGM, in Strada Castiglione; oppure, per i bambini dagli 8 ai 12 anni, con il compleanno dopo la scuola del Toto's, in sala riservata con gli animatori. Pratogiardino è all'aperto e ha orari stagionali: d'inverno puntate sulle sale al chiuso.",
+    intro: "A Viterbo le feste dei bambini si dividono fra il parco giochi storico della villa comunale, la sala con gonfiabili di un centro sportivo e i locali che organizzano compleanni in sala riservata. Conviene prenotare con anticipo per il fine settimana.",
+    locali: [
+      { nome: "Parco Giochi Pratogiardino", zona: "Viterbo, villa comunale di Prato Giardino, vicino al centro", tipo: "parco giochi con gonfiabili all'aperto", descrizione: "Il parco giochi della villa comunale, attivo dal 1993, con giochi, gonfiabili e zone d'ombra. Per i compleanni ci sono sconti e pacchetti personalizzati, il festeggiato riceve un regalo dallo staff e buffet e sala si prenotano al bar del parco. Lo staff noleggia anche gonfiabili da portare nella location scelta. Gli orari cambiano con le stagioni.", sito: "https://parcogiochiviterbo.it/" },
+      { nome: "MGM Pool", zona: "Viterbo, Strada Castiglione", tipo: "centro piscina con sala feste e gonfiabili", descrizione: "Centro piscina con una sala attrezzata con gonfiabili per i compleanni dei bambini, anche a tema. Nel centro ci sono bar, caffetteria e parcheggio, e lo staff aiuta a organizzare la festa. Pacchetti e disponibilità si chiedono direttamente al centro.", sito: "https://www.piscinamgm.it/" },
+      { nome: "Toto's", zona: "Viterbo, via Genova, vicino al centro", tipo: "ristorante con sala per compleanni", descrizione: "Propone un compleanno dopo la scuola per i bambini dagli 8 ai 12 anni, con una sala intera riservata ai festeggiati e agli amici e gli animatori a intrattenerli, mentre i genitori passano a riprenderli più tardi. Menù e torta, anche con una grafica personalizzata, si scelgono con lo staff, e c'è un menù per bambini.", sito: "https://www.totospub.it/" },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno a Viterbo?", risposta: "Sì: la sala con gonfiabili della piscina MGM, in Strada Castiglione, e la sala riservata del Toto's sono al chiuso. Il Parco Giochi Pratogiardino è all'aperto e segue orari stagionali." },
+      { domanda: "Dove festeggio un bambino fra gli 8 e i 12 anni?", risposta: "Il Toto's ha una formula di compleanno dopo la scuola pensata proprio per gli 8-12 anni: sala intera, animatori, menù e torta scelti con lo staff. Per i più piccoli vanno meglio i gonfiabili di Pratogiardino e della piscina MGM." },
+      { domanda: "Posso portare la torta?", risposta: "Al Toto's la torta si concorda con lo staff. Per Pratogiardino e la piscina MGM le fonti non lo dicono: chiedetelo quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

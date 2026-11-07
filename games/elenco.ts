@@ -29,6 +29,7 @@ export const slugGiocabili = [
   "colora-con-mizi",
   "l-orologio",
   "ortografia-c-ch-g-gh",
+  "con-l-h-o-senza",
   "tabelline",
   "leggi-e-rispondi",
   "guida-mizi",
