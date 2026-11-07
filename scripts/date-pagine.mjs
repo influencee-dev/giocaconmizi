@@ -15,8 +15,9 @@
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const RADICE = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const USCITA = path.join(RADICE, "lib/date-pagine.json");
 const git = (...a) => execFileSync("git", a, { cwd: RADICE, encoding: "utf8" });
 

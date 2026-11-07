@@ -16,7 +16,10 @@
     "immagini": "tsx scripts/immagini.ts",
     "prompt-guide": "tsx scripts/prompt-guide.ts",
     "prompt-del-giorno": "tsx scripts/prompt-del-giorno.ts",
-    "foto-arrivate": "tsx scripts/foto-arrivate.ts"
+    "foto-arrivate": "tsx scripts/foto-arrivate.ts",
+    "articoli:compila": "node scripts/articoli/compila.mjs",
+    "articoli:controlla": "node scripts/articoli/controlla.mjs",
+    "articoli:piano": "node scripts/articoli/piano.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",

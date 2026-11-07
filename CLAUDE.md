@@ -100,9 +100,26 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   riquadro esterno e sfonda il layout — `Disegno` ha il prop `lato` apposta.
 - Trappola nota: commenti JSX mai prima dell'elemento radice di un return.
 
+## Articoli approfonditi e voce di Giorgia (7/11/2026)
+- Voce: `.claude/skills/giorgia-authentic-voice/SKILL.md` (testo originale di
+  Giorgia, non modificarlo). Va letta PRIMA di scrivere qualsiasi testo a suo
+  nome. Domiziana = Domi o Dodò; **Mizi è solo la pinguina**. Mai esperienze,
+  dialoghi o test inventati: senza materiale suo si scrive senza vissuto.
+- Articoli lunghi: `content/guide/<slug>.md` → `npm run articoli:compila` →
+  `lib/approfondimenti.json` (solo `stato: pubblicata`) → entrano in GUIDE di
+  lib/guide.ts (stesso slug di una guida breve = la sostituisce). Pagina:
+  `components/guide/Approfondimento.tsx`; stili `.articolo` in globals.css.
+- Piano dei 100 articoli: `content/piano-editoriale.json`, uno al giorno
+  (`npm run articoli:piano -- prossimo | stato | segna`). Cancello prima di
+  pubblicare: `npm run articoli:controlla -- <slug> --rete` (≥27.000 caratteri,
+  fonti, prezzi datati, immagini autorizzate, autenticità): se fallisce, resta bozza.
+- Procedura completa del job quotidiano (5:30): `docs/routine-articoli.md`.
+
 ## Co-work quotidiano (Routine delle 7:00 italiane)
 Un miglioramento al giorno, piccolo e finito, a rotazione:
-(a) biglietti · (b) guida nuova · (c) giochi · (d) SEO/AEO tecnico.
+(a) biglietti · (b) guide: migliorare una guida breve esistente (le guide
+NUOVE le scrive solo la routine articoli delle 5:30, mai questa) · (c) giochi ·
+(d) SEO/AEO tecnico. Non toccare content/guide/ né content/piano-editoriale.json.
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 
