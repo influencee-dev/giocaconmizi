@@ -9,6 +9,7 @@ import { CATEGORIE_ATTIVE, LISTING, SCHEDE, percorsoScheda } from "@/lib/directo
 import { classi, eta, url } from "@/lib/seo";
 import { chiaveScheda, pubblicate } from "@/lib/directory-db";
 import { dataDi, dataGioco } from "@/lib/date-pagine";
+import { fotoDellaPagina, fotoGuida } from "@/lib/foto";
 
 /**
  * Sitemap generata dal registry e dai contenuti: un nuovo gioco o una nuova
@@ -84,12 +85,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "attenzione", "spazio", "ascolto",
   ];
 
+  // Sitemap delle immagini: le foto vere di ogni pagina, così Google
+  // Immagini le trova legate alla pagina giusta. Solo foto già consegnate.
+  const immagini = (percorsi: string[]) => (percorsi.length ? { images: percorsi.map((p) => url(p)) } : {});
+
   const voci: MetadataRoute.Sitemap = [
     ...statiche.map((percorso) => ({
       url: url(percorso),
       lastModified: dataDi(pagina(percorso), ...(DATI_INDICE[percorso] ?? [])),
       changeFrequency: "weekly" as const,
       priority: percorso === "/" ? 1 : 0.8,
+      ...immagini(fotoDellaPagina(percorso)),
     })),
 
     // Hub per età: sono le pagine che intercettano la domanda principale (§1.1)
@@ -155,6 +161,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: dataDi(g.aggiornata),
       changeFrequency: "monthly" as const,
       priority: 0.9,
+      ...immagini([fotoGuida(g.slug, g.foto.alt)?.src].filter((s): s is string => !!s)),
     })),
 
     ...[5, 6, 7].map((anni) => ({
@@ -192,6 +199,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: dataDi("lib/esempi.ts"),
       changeFrequency: "monthly" as const,
       priority: 0.6,
+      ...immagini([`/esempi/${e.slug}.png`]),
     })),
   ];
 

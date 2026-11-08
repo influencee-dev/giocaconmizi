@@ -42,3 +42,40 @@ export function fotoGuida(slug: string, alt: string): { src: string; larghezza: 
   }
   return null;
 }
+
+/**
+ * Quali foto vere stanno in quale pagina, per la sitemap delle immagini
+ * (Google Immagini). Le foto del piè di pagina, uguali ovunque, restano
+ * fuori. La batteria SEO controlla che ogni foto in sitemap compaia davvero
+ * nella sua pagina: se si sposta un riquadro, va aggiornata questa mappa.
+ */
+const FOTO_PAGINE: Record<string, CodiceFoto[]> = {
+  "/": ["H-01", "H-02", "H-03", "H-04", "H-05", "H-06", "H-07", "H-08"],
+  "/chi-siamo": ["H-08"],
+  "/giochi": ["G-01"],
+  "/feste": ["F-01"],
+  "/biglietti": ["F-02"],
+  "/guide": ["P-01"],
+  "/storie": ["S-01"],
+  "/coding": ["S-02"],
+  "/metodo": ["I-02"],
+  "/perche-lo-facciamo": ["I-03"],
+  "/per-insegnanti": ["I-04"],
+  "/per-le-mamme": ["I-05"],
+};
+
+/** Le foto di Chi siamo, fuori dal registro dei riquadri. */
+const FOTO_FISSE: Record<string, string[]> = {
+  "/chi-siamo": [
+    "/immagini/giorgia-e-domiziana-giocamizi.webp",
+    "/immagini/giorgia-palazzo-giocamizi.webp",
+    "/immagini/domiziana-giocamizi.webp",
+  ],
+};
+
+/** I percorsi delle foto consegnate di una pagina (la variante più larga). */
+export function fotoDellaPagina(percorso: string): string[] {
+  const riquadri = (FOTO_PAGINE[percorso] ?? []).map((c) => fotoSito(c)?.src).filter((s): s is string => !!s);
+  const fisse = (FOTO_FISSE[percorso] ?? []).filter((s) => existsSync(join(process.cwd(), "public", s)));
+  return [...new Set([...riquadri, ...fisse])];
+}

@@ -2233,6 +2233,41 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "trapani",
+    citta: "Trapani",
+    aggiornata: "2026-11-08",
+    rispostaBreve: "A Trapani la festa di compleanno per bambini si fa alla Giungla Incantata Park, un parco giochi al coperto con sala feste; al Parco Avventura Erice, nella pineta di Martogna, con percorsi sugli alberi e un'area feste nel bosco; oppure alla Tenuta Pizzolungo, ai piedi di Erice, con il compleanno in fattoria fra gli animali. Il Parco Avventura e la fattoria sono all'aperto: d'inverno puntate sulla sala al chiuso.",
+    intro: "A Trapani le feste dei bambini si dividono fra il parco giochi al coperto in città e due proposte all'aperto appena fuori, verso Erice: il bosco di Martogna e la campagna vicino al mare di Pizzolungo. Orari e pacchetti cambiano: conviene chiedere conferma e prenotare con anticipo per il fine settimana.",
+    locali: [
+      { nome: "La Giungla Incantata Park", zona: "Trapani, in città", tipo: "parco giochi al coperto con sala feste", descrizione: "Un parco giochi al coperto a tema giungla, con una grande struttura imbottita, un tappeto elastico, una piscina di palline e uno spazio per i bambini da 1 a 3 anni. Per le feste c'è una sala dedicata e si festeggia un solo compleanno alla volta. Si può affittare solo la sala oppure scegliere un pacchetto con catering, e il personale sorveglia i bambini. Orari e indirizzo esatto si confermano quando prenotate.", instagram: "https://www.instagram.com/lagiunglaincantatapark/" },
+      { nome: "Parco Avventura Erice", zona: "Erice, pineta di Martogna, a pochi minuti da Trapani", tipo: "parco avventura all'aperto", descrizione: "Un parco avventura con percorsi sugli alberi nel bosco di Martogna. Per i compleanni c'è un'area di circa 50 metri quadri sotto una pergola, a uso esclusivo, con un frigorifero e i percorsi a prezzo scontato. Per i più piccoli c'è il percorso Mini Junior, basso e senza imbrago, pensato per la scuola dell'infanzia e i primi anni della primaria. Nel 2026 il parco apre il sabato e la domenica." },
+      { nome: "Tenuta Pizzolungo", zona: "Erice, località Pizzolungo, ai piedi del monte e vicino al mare", tipo: "agriturismo e fattoria didattica", descrizione: "Un agriturismo con fattoria didattica che propone il compleanno in fattoria. La festa si fa in giardino, all'aperto, fra alberi, gazebo e zone d'ombra. I bambini incontrano gli animali della fattoria e c'è un piccolo parco giochi; si può organizzare anche una passeggiata sull'asino, con animazione e sorveglianza dello staff." },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno a Trapani?", risposta: "Sì: la Giungla Incantata Park è un parco giochi al chiuso, con sala feste. Il Parco Avventura Erice e la Tenuta Pizzolungo sono all'aperto e vanno meglio con la bella stagione." },
+      { domanda: "Ci sono proposte per bambini molto piccoli?", risposta: "Alla Giungla Incantata c'è uno spazio per i bambini da 1 a 3 anni. Al Parco Avventura Erice il percorso Mini Junior è basso e si fa senza imbrago, pensato per i bimbi della scuola dell'infanzia e dei primi anni della primaria." },
+      { domanda: "Posso portare la torta?", risposta: "Alla Giungla Incantata ci sono pacchetti con catering e al Parco Avventura Erice l'area feste ha un frigorifero. Se si può portare una torta propria, le fonti non lo dicono per nessuno dei tre: chiedetelo quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "savona",
+    citta: "Savona",
+    aggiornata: "2026-11-08",
+    rispostaBreve: "A Savona la festa di compleanno per bambini si fa al Bowling Savona, con piste dotate di sponde per i bambini, videogiochi e un'area riservata alle feste; oppure nella sala feste di Capriole sulle Nuvole, vicino al centro storico e alla Darsena, da affittare da sola o con animazione e allestimento a tema. Sono due posti al chiuso, quindi vanno bene anche d'inverno.",
+    intro: "A Savona le feste dei bambini si dividono fra il bowling, per una festa di movimento, e la sala feste con le animatrici, per chi preferisce giochi, palloncini e un tema scelto insieme. Tutti e due sono al chiuso. Conviene prenotare con anticipo per il fine settimana.",
+    locali: [
+      { nome: "Bowling Savona", zona: "Savona, via Trilussa", tipo: "bowling con area feste", descrizione: "Un centro bowling che organizza feste di compleanno con la formula B-Party: 10 piste con le sponde per i bambini, videogiochi, giochi a punti, un'area riservata per festeggiare e uno snack bar. Lo staff aiuta a organizzare la festa. Prezzi e pacchetti non sono indicati online: chiedeteli quando prenotate.", instagram: "https://www.instagram.com/bowlingsavona/" },
+      { nome: "Capriole sulle Nuvole", zona: "Savona, via Santa Lucia, vicino al centro storico e alla Darsena", tipo: "sala feste con animazione", descrizione: "Un'agenzia di animazione per bambini con una sala feste attrezzata e colorata. Le formule sono tre: solo la sala, sala con animazione, oppure sala con animazione e allestimento a tema; numero di animatrici, tema e attività si scelgono insieme. La sala è disponibile dal lunedì alla domenica e organizzano anche pigiama party.", instagram: "https://www.instagram.com/capriole_sulle_nuvole/" },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno a Savona?", risposta: "Sì, tutti e due: il Bowling Savona ha un'area riservata alle feste accanto alle piste, e la sala di Capriole sulle Nuvole è un locale chiuso in via Santa Lucia, vicino alla Darsena." },
+      { domanda: "Che età serve per una festa al bowling?", risposta: "Il Bowling Savona ha piste con le sponde pensate per i bambini, ma non indica un'età minima: chiedetela quando prenotate. Per i più piccoli la sala con animazione di Capriole sulle Nuvole è spesso la scelta più semplice." },
+      { domanda: "Posso portare la torta?", risposta: "Le fonti non lo dicono, né per il Bowling Savona né per Capriole sulle Nuvole: chiedetelo quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

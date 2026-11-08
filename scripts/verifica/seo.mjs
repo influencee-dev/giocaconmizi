@@ -56,6 +56,28 @@ const { spawnSync } = await import("node:child_process");
 const controllo = spawnSync("node", ["scripts/date-pagine.mjs", "--controlla"], { encoding: "utf8" });
 ok("date-pagine.json allineato ai sorgenti", controllo.status === 0, (controllo.stderr || controllo.stdout).trim());
 
+// 2-ter. Sitemap delle immagini (dal 08/11/2026): le foto vere legate alla
+// loro pagina. Ogni immagine sul dominio, risponde come immagine e compare
+// davvero nella pagina che la dichiara (anche dentro /_next/image).
+const conImmagini = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => ({
+  loc: m[1].match(/<loc>([^<]+)<\/loc>/)?.[1] ?? "",
+  immagini: [...m[1].matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((x) => x[1]),
+})).filter((v) => v.immagini.length);
+const tutteImmagini = conImmagini.flatMap((v) => v.immagini);
+ok("sitemap immagini: dichiarata e con le foto del sito", /xmlns:image=/.test(sitemap) && tutteImmagini.length >= 10, `${tutteImmagini.length} foto`);
+const immaginiStorte = [];
+for (const v of conImmagini) {
+  const html = (await testo(locale(v.loc))).replace(/%2F/gi, "/");
+  for (const img of v.immagini) {
+    const u = new URL(img);
+    if (u.origin !== dominio) { immaginiStorte.push(`${img}: fuori dominio`); continue; }
+    const r = await fetch(`${BASE}${u.pathname}`);
+    if (!r.ok || !r.headers.get("content-type")?.startsWith("image/")) immaginiStorte.push(`${u.pathname}: ${r.status}`);
+    if (!html.includes(u.pathname)) immaginiStorte.push(`${u.pathname}: non è in ${new URL(v.loc).pathname}`);
+  }
+}
+ok("sitemap immagini: ogni foto risponde e sta nella sua pagina", immaginiStorte.length === 0, immaginiStorte.slice(0, 3).join(" | "));
+
 // 3. Ogni pagina della sitemap: 200, un solo canonical, su sé stessa e sul
 // dominio; og:url coerente; i JSON-LD non citano altri domini del sito.
 const problemi = [];

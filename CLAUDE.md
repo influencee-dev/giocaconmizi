@@ -75,6 +75,10 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   generati dai registri. JSON-LD in `components/seo/JsonLd.tsx`.
 - SEO/AEO: ogni contenuto nuovo deve avere risposta citabile, FAQ con
   JSON-LD e link interni ai giochi pertinenti.
+- Sitemap delle immagini (08/11/2026): le foto vere stanno in sitemap con
+  la loro pagina (`fotoDellaPagina` in lib/foto.ts, guide ed esempi da soli).
+  Un riquadro foto nuovo o spostato = aggiornare FOTO_PAGINE: la batteria
+  SEO controlla che ogni foto in sitemap compaia nella sua pagina.
 
 ## Ambiente di lavoro (sessioni Claude)
 - Playwright: Chromium in `/opt/pw-browsers/chromium` (collegamento alla
