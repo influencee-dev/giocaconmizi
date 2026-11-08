@@ -1,7 +1,7 @@
 {
   "$schema": "Piano editoriale Giocamizi: un articolo al giorno. Regole in docs/routine-articoli.md; tipi in lib/piano-editoriale.ts.",
   "modalita": "pubblica-se-supera-i-controlli",
-  "aggiornato": "2026-11-07",
+  "aggiornato": "2026-11-08",
   "argomenti": [
     {
       "id": 1,
@@ -28,7 +28,7 @@
     },
     {
       "id": 26,
-      "slug": "minecraft-vs-roblox-quale-scegliere-per-un-bambino",
+      "slug": "minecraft-vs-roblox",
       "titolo": "Minecraft vs Roblox: quale scegliere per un bambino?",
       "keyword": "Minecraft vs Roblox",
       "keywordSecondarie": [],

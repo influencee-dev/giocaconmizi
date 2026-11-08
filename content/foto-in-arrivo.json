@@ -1,4 +1,15 @@
 {
   "descrizione": "Coda unica delle foto da far generare a ChatGPT. Si prenota con npm run foto:prenota almeno il giorno prima; procedura in docs/foto-sera.md.",
-  "prenotazioni": []
+  "prenotazioni": [
+    {
+      "nomeFile": "guida-minecraft-vs-roblox",
+      "perIl": "2026-11-09",
+      "titolo": "Foto dell'articolo «Minecraft vs Roblox: quale scegliere per un bambino?»",
+      "scena": "Salotto italiano luminoso: un bambino di circa 8 anni e una bambina di circa 10, generati, seduti sul divano con plaid, ciascuno con un tablet in mano; sugli schermi solo forme colorate semplici (blocchi quadrati su uno, cerchi e omini stilizzati senza dettagli sull'altro), senza testo né personaggi. Un adulto sorridente seduto vicino li guarda con interesse. Sul bracciolo del divano, tra i due bambini, Mizi pupazzo di stoffa, come a fare da arbitro. Atmosfera serena di scelta e confronto.",
+      "alt": "Due bambini sul divano con un tablet a testa e un adulto accanto, mentre confrontano due giochi; tra loro il pupazzo Mizi",
+      "rapporto": 1.7777777777777777,
+      "chi": "routine articoli",
+      "prenotataIl": "2026-11-08"
+    }
+  ]
 }
