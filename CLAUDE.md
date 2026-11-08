@@ -81,15 +81,19 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   generati dai registri. JSON-LD in `components/seo/JsonLd.tsx`.
 - SEO/AEO: ogni contenuto nuovo deve avere risposta citabile, FAQ con
   JSON-LD e link interni ai giochi pertinenti.
-- Foto da ChatGPT, giro quotidiano (08/11/2026): ogni mattina la Routine
-  genera `npm run prompt-del-giorno` (le prossime 3 foto mancanti, prompt
-  interi) e lo carica come doc nuovo in Drive «Giocamizi · Prompt immagini /
-  02 Prompt del giorno» (id 1B5v_f7JpfXiZGnnXyEBBXxzy9ARYtYwe). La sera
-  Giorgia carica i PNG in «99 Immagini pronte» (id 1lUlL1Uj2AspXO2SgFeSU_itN0nu2RQbP)
-  col nome indicato; la mattina dopo si scaricano in una cartella dello
-  scratchpad e `npm run foto-arrivate -- <cartella>` li trasforma in WebP
-  in public/immagini (riconosce guida-<slug>, i file di FOTO e i codici).
-  Un nome non riconosciuto si guarda e si abbina alla scena del prompt.
+- Foto da ChatGPT, preparate LA SERA PRIMA (08/11/2026, docs/foto-sera.md):
+  chi prepara un contenuto prenota le foto che gli serviranno domani o dopo
+  in `content/foto-in-arrivo.json` (`npm run foto:prenota`). Alle 21:00 la
+  routine «Prompt della sera» prenota la foto dell'articolo di domani e
+  carica `npm run prompt-del-giorno -- --data <domani>` come doc nuovo in Drive
+  «Giocamizi · Prompt immagini / 02 Prompt del giorno» (id 1B5v_f7JpfXiZGnnXyEBBXxzy9ARYtYwe).
+  Alle 6:00 la routine ChatGPT di Giorgia genera le foto in «99 Immagini pronte»
+  (id 1lUlL1Uj2AspXO2SgFeSU_itN0nu2RQbP) col nome indicato. Chi lavora dopo
+  (articoli 9:00, routine 7:00, chat) le scarica in una cartella dello
+  scratchpad e `npm run foto-arrivate -- <cartella>` le trasforma in WebP
+  (riconosce guida-<slug>, i file di FOTO, i codici e le prenotazioni, anche
+  di pagine non ancora uscite). Un nome non riconosciuto si guarda a mano.
+  La mattina NON si genera più il prompt del giorno: è già uscito la sera prima.
 - Sitemap delle immagini (08/11/2026): le foto vere stanno in sitemap con
   la loro pagina (`fotoDellaPagina` in lib/foto.ts, guide ed esempi da soli).
   Un riquadro foto nuovo o spostato = aggiornare FOTO_PAGINE: la batteria
@@ -119,13 +123,15 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   (`npm run articoli:piano -- prossimo | stato | segna`). Cancello prima di
   pubblicare: `npm run articoli:controlla -- <slug> --rete` (≥27.000 caratteri,
   fonti, prezzi datati, immagini autorizzate, autenticità): se fallisce, resta bozza.
-- Procedura completa del job quotidiano (5:30): `docs/routine-articoli.md`.
+- Procedura completa del job quotidiano (9:00, dopo le foto di ChatGPT delle 6:00): `docs/routine-articoli.md`.
 
 ## Co-work quotidiano (Routine delle 7:00 italiane)
 Un miglioramento al giorno, piccolo e finito, a rotazione:
 (a) biglietti · (b) guide: migliorare una guida breve esistente (le guide
-NUOVE le scrive solo la routine articoli delle 5:30, mai questa) · (c) giochi ·
+NUOVE le scrive solo la routine articoli delle 9:00, mai questa) · (c) giochi ·
 (d) SEO/AEO tecnico. Non toccare content/guide/ né content/piano-editoriale.json.
+Prima di iniziare importa le foto arrivate in «99 Immagini pronte»; se il
+contenuto di domani avrà bisogno di foto, prenotale oggi (`npm run foto:prenota`).
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 

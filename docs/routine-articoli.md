@@ -39,9 +39,15 @@ ragionamenti («una delle prime verifiche che consiglio è…»), mai per fatti 
 Se un'esperienza c'è, va registrata in `esperienzeAutentiche` (fonte + data).
 Il controllo automatico blocca ogni segno di vissuto senza quella voce.
 
-## Il giro quotidiano (fuso Europe/Rome)
+## Il giro quotidiano (fuso Europe/Rome, alle 9:00)
+0. **Foto arrivate**: importa da Drive «99 Immagini pronte» le foto non ancora
+   sul sito (`npm run foto-arrivate`, procedura in docs/foto-sera.md). Le ha
+   generate ChatGPT alle 6:00 dai prompt preparati ieri sera.
 1. `git pull` su main. `npm run articoli:piano -- prossimo`: argomento del giorno
    (se uno è già `bozza` o `bloccato`, si riprende quello: niente doppioni).
+   **Usa lo slug fissato ieri sera** nel piano e, per `foto.scena` e `foto.alt`,
+   esattamente la prenotazione `guida-<slug>` in content/foto-in-arrivo.json:
+   così la foto già arrivata si aggancia alla pagina. Se cambi slug, la foto non si trova più.
 2. Controlla le pagine con intento simile che lo script segnala e il campo
    `guidaEsistente`: se l'intento è lo stesso si **aggiorna** la pagina
    esistente (stesso slug, `aggiornaGuidaBreve: true`), non se ne crea una nuova.
@@ -71,8 +77,23 @@ Il controllo automatico blocca ogni segno di vissuto senza quella voce.
 
 Un giorno senza fonti sufficienti produce un report, non un articolo inventato.
 
+## La sera prima (routine «Prompt della sera», 21:00)
+1. `git pull`. `npm run articoli:piano -- prossimo`: è l'argomento che la routine
+   delle 9:00 scriverà domani (se c'è una bozza o un bloccato, è quello).
+2. Fissa lo slug definitivo (corto, con la keyword, senza date):
+   `npm run articoli:piano -- segna <id> <stato attuale> --slug <slug>`.
+3. Scrivi la scena della foto di testata (regole in docs/foto-sera.md e
+   scripts/blocchi-prompt.ts: niente loghi, schermate di giochi, personaggi
+   protetti, persone reali; Mizi come pupazzo) e prenotala:
+   `npm run foto:prenota -- --file guida-<slug> --per <domani> --titolo "Foto dell'articolo «…»" --scena "…" --alt "…" --chi "routine articoli"`.
+4. `npm run prompt-del-giorno -- --data <domani>` e carica il testo come
+   documento nuovo «Prompt del giorno · GG/MM/AAAA» in Drive «02 Prompt del giorno».
+5. Commit (piano + coda), `git pull --rebase`, push su main. Niente build:
+   non cambia nessuna pagina.
+
 ## Non pestarsi i piedi con la routine delle 7:00
-Questo job gira prima (alle 5:30) e tocca solo: content/guide/, content/piano-editoriale.json,
+Questo job gira dopo (alle 9:00) e tocca solo: content/guide/, content/piano-editoriale.json,
+content/foto-in-arrivo.json, public/immagini/ (foto arrivate),
 lib/approfondimenti.json, lib/date-pagine.json, scripts/verifica/sbordi.mjs.
 Prima del push: `git pull --rebase`. La routine delle 7:00 non scrive più
 guide nuove (lo slot «guida» migliora quelle esistenti): vedi CLAUDE.md.

@@ -1,18 +1,22 @@
 /**
- * «01 PROMPT DEL GIORNO» (cartella Drive «Giocamizi · Prompt immagini»): le
- * prossime foto che mancano al sito, ognuna con un prompt intero da incollare
- * in ChatGPT così com'è. Prima le foto delle guide, poi i riquadri del sito.
- * La Routine del mattino lo rigenera e lo carica su Drive; la sera Giorgia
- * fa generare le foto e le carica in «99 Immagini pronte»; il mattino dopo
- * `npm run foto-arrivate` le trasforma in WebP per il sito.
+ * «Prompt del giorno» (cartella Drive «Giocamizi · Prompt immagini / 02 Prompt
+ * del giorno»): le foto da generare per un giorno, ognuna con un prompt intero.
+ * Prima TUTTE le foto prenotate per quel giorno (content/foto-in-arrivo.json,
+ * es. la foto dell'articolo che esce quel giorno), poi fino a --quante foto
+ * che mancano al sito (guide, poi riquadri del sito).
+ * Giro (docs/foto-sera.md): alle 21:00 la routine «Prompt della sera» lo genera
+ * con --data <domani> e lo carica su Drive; alle 6:00 la routine ChatGPT di
+ * Giorgia genera le foto in «99 Immagini pronte»; dalle 9:00 chi lavora le
+ * importa con `npm run foto-arrivate`.
  *
- *   npm run prompt-del-giorno -- [--quante 3] [--data 2026-11-08]
+ *   npm run prompt-del-giorno -- [--quante 3] [--data 2026-11-09]
  */
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { GUIDE } from "../lib/guide";
-import { FOTO, LARGHEZZE_GUIDA, fotoSito, type CodiceFoto } from "../lib/foto";
+import { FOTO, LARGHEZZE, LARGHEZZE_GUIDA, fotoSito, type CodiceFoto } from "../lib/foto";
 import { BLOCCO_FOTO, BLOCCO_MIZI, REGOLE_PERSONE } from "./blocchi-prompt";
+import { fotoArrivata, leggiCoda } from "../lib/foto-in-arrivo";
 
 const arg = (nome: string) => {
   const i = process.argv.indexOf(`--${nome}`);
@@ -41,8 +45,16 @@ const formato = (r: number) => FORMATI.find(([x]) => Math.abs(x - r) < 0.01)?.[1
 const guidaFatta = (slug: string) =>
   LARGHEZZE_GUIDA.some((l) => existsSync(join(process.cwd(), "public", "immagini", `guida-${slug}-${l}.webp`)));
 
+// Le prenotazioni per quel giorno (o rimaste indietro e non ancora arrivate).
+const prenotate: Foto[] = leggiCoda()
+  .prenotazioni.filter(
+    (p) => p.perIl <= data && !fotoArrivata(p.nomeFile, p.nomeFile.startsWith("guida-") ? LARGHEZZE_GUIDA : LARGHEZZE),
+  )
+  .map((p) => ({ nomeFile: p.nomeFile, titolo: p.titolo, scena: p.scena, formato: formato(p.rapporto) }));
+const giaPrenotate = new Set(prenotate.map((p) => p.nomeFile));
+
 const coda: Foto[] = [
-  ...GUIDE.filter((g) => !guidaFatta(g.slug)).map((g) => ({
+  ...GUIDE.filter((g) => !guidaFatta(g.slug) && !giaPrenotate.has(`guida-${g.slug}`)).map((g) => ({
     nomeFile: `guida-${g.slug}`,
     titolo: `Foto della guida «${g.titolo}»`,
     scena: g.foto.scena,
@@ -57,13 +69,13 @@ const coda: Foto[] = [
       formato: formato(FOTO[c].rapporto),
     })),
 ];
-const oggi = coda.slice(0, quante);
+const oggi = [...prenotate, ...coda.slice(0, quante)];
 
 const righe: string[] = [
   `# Prompt del giorno · ${data.split("-").reverse().join("/")}`,
   "",
   oggi.length
-    ? `Oggi ${oggi.length === 1 ? "c'è 1 foto" : `ci sono ${oggi.length} foto`} da fare (ne mancano ${coda.length} in tutto). Per ognuna: apri una chat nuova di ChatGPT, allega la foto di riferimento di Mizi (cartella «01 Mizi pupazzo (riferimento)»), incolla il prompt intero, scarica il PNG e caricalo nella cartella «99 Immagini pronte» con il nome indicato. Al resto pensa Claude il mattino dopo.`
+    ? `Oggi ${oggi.length === 1 ? "c'è 1 foto" : `ci sono ${oggi.length} foto`} da fare (${prenotate.length} prenotate per i contenuti di oggi, poi ${oggi.length - prenotate.length} delle ${coda.length} che mancano al sito). Le prenotate sono le più importanti: falle per prime. Per ognuna: una conversazione nuova, la foto di riferimento di Mizi (cartella «01 Mizi pupazzo (riferimento)»), il prompt intero, poi il PNG nella cartella «99 Immagini pronte» con il nome indicato. Dalle 9:00 Claude le importa da sola.`
     : "Oggi non manca nessuna foto: il sito le ha tutte.",
   "",
 ];
@@ -90,7 +102,7 @@ oggi.forEach((f, i) => {
     "",
     `FORMATO: ${f.formato}. Lascia un po' d'aria sopra le teste.`,
     "",
-    `CONSEGNA: mostrami la foto. Se la approvo, salvala come PNG chiamato esattamente ${f.nomeFile}.png e dammi il link per scaricarla.`,
+    `CONSEGNA: salva la foto come PNG chiamato esattamente ${f.nomeFile}.png nella cartella Google Drive «Giocamizi · Prompt immagini / 99 Immagini pronte». Se non riesci a salvarla da solo, mostrala e indica il nome ${f.nomeFile}.png, così la carica Giorgia.`,
     "",
     "CONTROLLO: Mizi ha il caschetto castano, la bandana rosa a pois, il cuore sulla pancia, becco e zampe arancioni ed è chiaramente un pupazzo di stoffa. Nessuna scritta né numero leggibile. Mani e dita corrette.",
     "",

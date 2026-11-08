@@ -1,0 +1,4 @@
+{
+  "descrizione": "Coda unica delle foto da far generare a ChatGPT. Si prenota con npm run foto:prenota almeno il giorno prima; procedura in docs/foto-sera.md.",
+  "prenotazioni": []
+}

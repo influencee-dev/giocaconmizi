@@ -19,7 +19,8 @@
     "foto-arrivate": "tsx scripts/foto-arrivate.ts",
     "articoli:compila": "node scripts/articoli/compila.mjs",
     "articoli:controlla": "node scripts/articoli/controlla.mjs",
-    "articoli:piano": "node scripts/articoli/piano.mjs"
+    "articoli:piano": "node scripts/articoli/piano.mjs",
+    "foto:prenota": "tsx scripts/foto-prenota.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",

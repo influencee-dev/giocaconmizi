@@ -13,6 +13,7 @@ import path from "node:path";
 import { GUIDE } from "../lib/guide";
 import { FOTO, LARGHEZZE, LARGHEZZE_GUIDA, type CodiceFoto } from "../lib/foto";
 import { ottimizza } from "../lib/immagini/ottimizza";
+import { leggiCoda } from "../lib/foto-in-arrivo";
 
 const cartella = process.argv.slice(2).find((a) => !a.startsWith("--"));
 const sovrascrivi = process.argv.includes("--sovrascrivi");
@@ -39,6 +40,15 @@ function riconosci(nome: string): Destinazione | null {
   if (guida) return { base: `guida-${guida.slug}`, rapporto: 16 / 9, larghezze: LARGHEZZE_GUIDA };
   const codice = (Object.keys(FOTO) as CodiceFoto[]).find((c) => c.toLowerCase() === r || FOTO[c].file === r);
   if (codice) return { base: FOTO[codice].file, rapporto: FOTO[codice].rapporto, larghezze: [...LARGHEZZE] };
+  // Le foto prenotate (content/foto-in-arrivo.json) di pagine non ancora
+  // pubblicate: es. l'articolo di oggi, la cui foto arriva prima del testo.
+  const prenotata = leggiCoda().prenotazioni.find((p) => p.nomeFile === r);
+  if (prenotata)
+    return {
+      base: prenotata.nomeFile,
+      rapporto: prenotata.rapporto,
+      larghezze: prenotata.nomeFile.startsWith("guida-") ? LARGHEZZE_GUIDA : [...LARGHEZZE],
+    };
   return null;
 }
 
