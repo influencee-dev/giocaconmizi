@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Contenitore } from "@/components/ui";
 import { adminValido } from "@/lib/admin";
-import { iscrittiAdmin } from "@/lib/brevo";
+import { diagnosiBrevo, iscrittiAdmin } from "@/lib/brevo";
 import { MenuAdmin } from "../MenuAdmin";
 import { DaAttivare, NonDisponibile, Numero } from "../NonDisponibile";
 import { EsportaCsv } from "./EsportaCsv";
@@ -17,6 +17,7 @@ export default async function IscrittiPage({ params }: { params: Promise<{ codic
   const { codice } = await params;
   if (!(await adminValido(codice))) return <NonDisponibile />;
   const dati = await iscrittiAdmin();
+  const perche = dati ? null : await diagnosiBrevo();
   const settimana = new Date(Date.now() - 7 * 86400000).toISOString();
 
   return (
@@ -28,6 +29,9 @@ export default async function IscrittiPage({ params }: { params: Promise<{ codic
           <DaAttivare titolo="Brevo non è collegato">
             Su Vercel → progetto giocaconmizi → Settings → Environment Variables aggiungi <code>BREVO_API_KEY</code> (Brevo →
             SMTP &amp; API → Chiavi API → Genera), poi Redeploy. Le liste si creano da sole al primo iscritto.
+            <span className="mt-3 block break-words rounded-xl bg-white px-3 py-2 font-semibold" data-diagnosi-brevo>
+              Cosa dice Brevo: {perche}
+            </span>
           </DaAttivare>
         </div>
       ) : (

@@ -60,6 +60,38 @@ async function api(metodo: "GET" | "POST" | "PUT", percorso: string, body?: unkn
 }
 
 /**
+ * Perché Brevo non risponde, in una riga per il pannello (solo admin).
+ * Mai la chiave, mai l'email dell'account: solo il codice HTTP e il
+ * messaggio di errore di Brevo, tagliato.
+ */
+export async function diagnosiBrevo(): Promise<string> {
+  const grezza = process.env.BREVO_API_KEY;
+  if (!grezza) return "La variabile BREVO_API_KEY non arriva al sito: va salvata su Vercel e serve un Redeploy.";
+  if (grezza !== grezza.trim()) return "La chiave salvata su Vercel ha spazi o «a capo» all'inizio o alla fine: va incollata di nuovo, pulita.";
+  if (grezza.startsWith("xsmtpsib-")) return "Questa è una chiave SMTP: serve quella della scheda «API keys» (inizia con xkeysib-).";
+  const passo = async (nome: string, percorso: string) => {
+    try {
+      const r = await fetch(`${BREVO_API}${percorso}`, { headers: { "api-key": grezza, accept: "application/json" }, cache: "no-store" });
+      if (r.ok) return null;
+      const testo = (await r.text()).replaceAll(grezza, "•••");
+      let messaggio = testo;
+      try {
+        const j = JSON.parse(testo) as { code?: string; message?: string };
+        messaggio = [j.code, j.message].filter(Boolean).join(": ");
+      } catch {}
+      return `${nome}: Brevo risponde ${r.status} · ${messaggio.slice(0, 240) || "senza messaggio"}`;
+    } catch (e) {
+      return `${nome}: Brevo non raggiungibile (${String(e).slice(0, 120)})`;
+    }
+  };
+  return (
+    (await passo("Chiave", "/account")) ??
+    (await passo("Cartelle contatti", "/contacts/folders?limit=1&offset=0")) ??
+    "La chiave funziona e Brevo risponde: ricarica la pagina, dovrebbero comparire gli iscritti."
+  );
+}
+
+/**
  * Un'email di servizio (avvisi a Giorgia, conferme e link alle attività):
  * stessa chiave e stesso mittente delle novità. Senza BREVO_API_KEY non parte
  * e restituisce false, senza errori: le azioni del sito non si bloccano mai
