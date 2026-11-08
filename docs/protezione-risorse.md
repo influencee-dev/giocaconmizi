@@ -9,7 +9,7 @@ verificati. Nessuna risposta contiene dati falsi, alterati o codice ostile.
 
 | Difesa | Dove | Cosa fa |
 | --- | --- | --- |
-| Solo dati pubblici nel repo | `lib/risorse-educative-dati.ts` | 53 schede: nome, descrizione, sezioni, temi, destinatari, località, sito. Mai email, fonti email, bozze, stati Gmail, note. Le 25 righe «Solo outreach» non ci sono. |
+| Solo dati pubblici nel repo | `lib/risorse-educative-dati.ts` | 44 schede: nome, descrizione, sezioni, temi, destinatari, località, sito, e la scheda «Scopri di più» (cosa fa, per chi, come si usa, costi) riscritta dai siti ufficiali l’8/11/2026. Mai email, fonti email, bozze, stati Gmail, note. Le 25 righe «Solo outreach» non ci sono. |
 | HTML lato server | `app/(public)/risorse-educative-bambini/page.tsx` | Le schede arrivano già nell'HTML; filtri = link, funzionano senza JavaScript. Nessun endpoint JSON con l'elenco. |
 | Paginazione lato server | `?sezione=…&pagina=…` | 12 schede per pagina nelle viste filtrate (noindex,follow, canonical all'hub). |
 | Limite di frequenza | `lib/protezione/limiti.ts` + `middleware.ts` | Per IP 120/min (scuole con IP condiviso), per «sessione tecnica» IP+browser 40/min e 15 in 10 s. Oltre: 429 + Retry-After + pagina gentile in italiano. I prefetch del browser non contano. |
@@ -60,7 +60,7 @@ npm run build && npx next start -p 3100
 
 ```bash
 B=http://localhost:3100/risorse-educative-bambini
-# 1. SEO: title, H1, canonical, meta robots, 53 schede, 3 JSON-LD propri
+# 1. SEO: title, H1, canonical, meta robots, 44 schede, 3 JSON-LD propri
 curl -s $B | grep -oE '<title>[^<]*|<h1[^>]*>[^<]*|<link rel="canonical"[^>]*>|<meta name="robots"[^>]*>'
 curl -s $B | grep -o '<article' | wc -l
 # 2. Nessuna email delle realtà (devono uscire solo ciao@giocamizi.it e il segnaposto del modulo)

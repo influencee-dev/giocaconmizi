@@ -285,8 +285,21 @@ function CardRisorsa({ risorsa: r }: { risorsa: Risorsa }) {
               {t}
             </li>
           ))}
-        <li className="rounded-lg border border-notte/15 px-2.5 py-1 text-xs font-bold text-notte-tenue">Per: {r.perChi.toLowerCase()}</li>
       </ul>
+      {/* <details> nativo: funziona senza JavaScript, con tastiera e screen reader,
+          e il testo resta nell'HTML (lo leggono anche i motori di ricerca). */}
+      <details className="group rounded-2xl bg-crema/60 px-4 py-3">
+        <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 font-extrabold text-notte [&::-webkit-details-marker]:hidden">
+          Scopri di più
+          <span aria-hidden className="text-viola transition-transform group-open:rotate-180">▾</span>
+        </summary>
+        <dl className="mt-2 grid gap-2 text-sm">
+          {r.cosaFa && <VoceScheda nome="Cosa fa" valore={r.cosaFa} />}
+          <VoceScheda nome="Per chi" valore={r.perChi} />
+          {r.comeSiUsa && <VoceScheda nome="Come si usa" valore={r.comeSiUsa} />}
+          <VoceScheda nome="Costi" valore={r.costi ?? "Da verificare sul sito"} />
+        </dl>
+      </details>
       <div className="mt-auto flex flex-col gap-2 pt-2">
         <a
           href={r.url}
@@ -301,6 +314,15 @@ function CardRisorsa({ risorsa: r }: { risorsa: Risorsa }) {
         <p className="text-xs text-notte-tenue">{AVVISO_LINK}</p>
       </div>
     </article>
+  );
+}
+
+function VoceScheda({ nome, valore }: { nome: string; valore: string }) {
+  return (
+    <div>
+      <dt className="font-extrabold text-notte">{nome}</dt>
+      <dd className="text-notte-tenue">{valore}</dd>
+    </div>
   );
 }
 
