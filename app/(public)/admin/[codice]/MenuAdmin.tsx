@@ -8,6 +8,7 @@ const VOCI = [
   { percorso: "/iscritti", nome: "Iscritti" },
   { percorso: "/posizioni", nome: "Mappa" },
   { percorso: "/immagini", nome: "Immagini" },
+  { percorso: "/social", nome: "Social" },
 ] as const;
 
 export function MenuAdmin({ codice, attivo }: { codice: string; attivo: (typeof VOCI)[number]["percorso"] }) {

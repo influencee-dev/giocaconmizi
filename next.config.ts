@@ -30,6 +30,18 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["@supabase/supabase-js"],
   },
+  // Le slide Instagram si disegnano a richiesta (lib/social/disegna.tsx) e
+  // leggono dal disco Mizi, le foto delle guide e il carattere Nunito: su
+  // Vercel quei file vanno inclusi a mano nella funzione.
+  outputFileTracingIncludes: {
+    "/social/[id]/[file]": ["./lib/social/caratteri/*.ttf", "./public/mizi/mizi-intera.webp", "./public/immagini/guida-*.webp"],
+    "/admin/[codice]/social/anteprima/[id]/[file]": [
+      "./lib/social/caratteri/*.ttf",
+      "./public/mizi/mizi-intera.webp",
+      "./public/immagini/guida-*.webp",
+    ],
+    "/admin/[codice]/social": ["./public/immagini/guida-*.webp"],
+  },
   async redirects() {
     // L'indirizzo canonico è uno solo: gli alias vecchi del progetto Vercel
     // reindirizzano lì in modo permanente (SEO + niente doppioni).
