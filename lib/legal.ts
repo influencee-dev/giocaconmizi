@@ -27,7 +27,7 @@ export const TITOLARE = {
 } as const;
 
 /** Data dell'ultima revisione delle informative (si aggiorna a ogni modifica). */
-export const AGGIORNATA = "7 novembre 2026";
+export const AGGIORNATA = "8 novembre 2026";
 
 export interface VoceRegistro {
   nome: string;
@@ -178,7 +178,8 @@ export const FORNITORI = [
   },
   {
     nome: "Brevo (Sendinblue SAS)",
-    scopo: "Invia le email delle novità a chi si iscrive. Riceve solo i dati del modulo di iscrizione.",
+    scopo:
+      "Invia le email delle novità a chi si iscrive (riceve solo i dati del modulo di iscrizione) e le email di servizio alle attività e alle realtà che chiedono o gestiscono una scheda: conferma della richiesta, link personale, esito. Per queste riceve solo l'email e il nome di chi ha scritto.",
     dove: "Unione Europea (Francia)",
   },
   {

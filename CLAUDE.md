@@ -79,7 +79,13 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   dir_inviti/dir_richieste) → la realtà completa la scheda e carica il logo
   (ricodificato in WebP, approvato da Giorgia, servito da /loghi/risorse/).
   Mai loghi presi dai siti. SQL: `supabase/risorse-reclamo.sql`, logica in
-  `lib/risorse-reclamo.ts`. Dati dal foglio «Listing GiocaMizi» di Giorgia: SOLO
+  `lib/risorse-reclamo.ts`. Tutti e 4 i file SQL sono stati incollati l'8/11/2026.
+- Email di servizio delle schede: `lib/email-servizio.ts` (via Brevo,
+  `inviaEmailServizio`, sempre dentro `after()`: non bloccano mai l'azione).
+  Avviso a Giorgia (AVVISI_EMAIL su Vercel, se no ciao@) a ogni candidatura,
+  risposta o logo; conferma a chi scrive; «Manda il link personale» in
+  Candidature; «la tua scheda è online / tolta» quando Giorgia decide.
+  Senza BREVO_API_KEY non parte niente (il link si copia a mano). Dati dal foglio «Listing GiocaMizi» di Giorgia: SOLO
   colonne pubbliche, mai le righe «Solo outreach — non pubblicare», mai email
   o note di outreach (il repo è pubblico). Difese anti-scraping in
   `lib/protezione/` (limiti, crawler verificati, trappola): docs/protezione-risorse.md.

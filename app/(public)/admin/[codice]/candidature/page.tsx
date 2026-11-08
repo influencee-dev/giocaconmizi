@@ -7,6 +7,7 @@ import { Contenitore } from "@/components/ui";
 import { MenuAdmin } from "../MenuAdmin";
 import { NonDisponibile } from "../NonDisponibile";
 import { decidiCandidatura } from "./azioni";
+import { MandaLink } from "./MandaLink";
 
 /**
  * Le attività che si sono proposte da /aggiungi-attivita. Niente va online da
@@ -50,7 +51,7 @@ export default async function Candidature({ params }: { params: Promise<{ codice
         <Link href="/aggiungi-attivita" target="_blank" className="font-bold text-viola underline">
           Aggiungi la tua attività
         </Link>
-        . Accettare non pubblica nulla da solo: un&apos;attività nuova va verificata sul sito ufficiale e aggiunta, un accesso si chiude mandando il link personale da Schede.
+        . Accettare non pubblica nulla da solo: un&apos;attività nuova va verificata sul sito ufficiale e aggiunta, un accesso si chiude con «Manda il link personale» (parte per email; se Brevo non è collegato ti mostra il link da copiare).
       </p>
 
       <h2 className="mt-8 text-2xl font-extrabold text-notte">Da decidere ({attesa.length})</h2>
@@ -87,6 +88,7 @@ export default async function Candidature({ params }: { params: Promise<{ codice
                   Vedi la scheda ›
                 </Link>
               )}
+              {c.tipo === "accesso" && c.chiave && <MandaLink codice={codice} id={c.id} email={c.email} />}
               <form action={decidiCandidatura.bind(null, "rifiutata")} className="mt-4 flex flex-wrap items-center gap-2">
                 <input type="hidden" name="codice" value={codice} />
                 <input type="hidden" name="id" value={c.id} />
