@@ -97,6 +97,8 @@ export function jsonLdArticolo(
     titolo: string;
     descrizione: string;
     aggiornata: string;
+    /** Data di prima pubblicazione (articoli approfonditi); se manca vale «aggiornata». */
+    pubblicata?: string | null;
   },
   /** La foto di testata, se è arrivata; altrimenti la copertina generata. */
   foto?: { src: string; larghezza: number; altezza: number } | null,
@@ -112,7 +114,7 @@ export function jsonLdArticolo(
       : { "@type": "ImageObject", url: url(`/guide/${guida.slug}/copertina.png`), width: 1200, height: 630 },
     inLanguage: site.lingua,
     isAccessibleForFree: true,
-    datePublished: guida.aggiornata,
+    datePublished: guida.pubblicata ?? guida.aggiornata,
     dateModified: guida.aggiornata,
     author: {
       "@type": "Person",

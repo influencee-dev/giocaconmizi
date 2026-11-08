@@ -17,7 +17,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-// fileURLToPath e non .pathname: su Windows .pathname dà "/C:/..." e git non parte.
 const RADICE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const USCITA = path.join(RADICE, "lib/date-pagine.json");
 const git = (...a) => execFileSync("git", a, { cwd: RADICE, encoding: "utf8" });

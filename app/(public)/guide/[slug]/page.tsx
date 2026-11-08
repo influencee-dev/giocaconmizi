@@ -10,6 +10,12 @@ import { CardGioco, Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { IllustrazioneSkill } from "@/components/illustrazioni";
 import { IconaGioco } from "@/components/icone";
 import {
+  CorpoArticolo,
+  FontiArticolo,
+  IndiceArticolo,
+  SchedaRapida,
+} from "@/components/guide/Approfondimento";
+import {
   JsonLd,
   jsonLdArticolo,
   jsonLdBreadcrumb,
@@ -36,7 +42,7 @@ export async function generateMetadata({
   const voce = guida(slug);
   if (!voce) return {};
   return {
-    title: voce.titolo,
+    title: voce.approfondimento?.titoloSeo ?? voce.titolo,
     description: voce.descrizione,
     alternates: { canonical: `/guide/${voce.slug}` },
   };
@@ -58,7 +64,7 @@ export default async function GuidaPage({
 
   return (
     <Contenitore className="py-10">
-      <JsonLd data={jsonLdArticolo(voce, foto)} />
+      <JsonLd data={jsonLdArticolo({ ...voce, pubblicata: voce.approfondimento?.pubblicata }, foto)} />
       <JsonLd data={jsonLdFaq(voce.faq)} />
       <JsonLd
         data={jsonLdBreadcrumb([
@@ -88,6 +94,18 @@ export default async function GuidaPage({
       <p className="mt-2 text-sm font-bold text-notte-tenue">
         {voce.etaMin}–{voce.etaMax} anni · {voce.minutiLettura} minuti di lettura ·
         di Giorgia Palazzo, mamma e creatrice del sito
+        {voce.approfondimento && (
+          <>
+            {" "}· aggiornato il{" "}
+            <time dateTime={voce.aggiornata}>
+              {new Date(`${voce.aggiornata}T12:00:00Z`).toLocaleDateString("it-IT", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </time>
+          </>
+        )}
       </p>
 
       {foto && (
@@ -110,16 +128,24 @@ export default async function GuidaPage({
         <p className="mt-1 text-lg leading-relaxed text-notte">{voce.rispostaBreve}</p>
       </div>
 
-      {voce.sezioni.map((sezione) => (
-        <section key={sezione.titolo} className="mt-10">
-          <h2 className="text-2xl font-extrabold text-notte">{sezione.titolo}</h2>
-          {sezione.paragrafi.map((p, i) => (
-            <p key={i} className="mt-4 text-lg leading-relaxed text-notte">
-              {p}
-            </p>
-          ))}
-        </section>
-      ))}
+      {voce.approfondimento ? (
+        <>
+          <SchedaRapida voci={voce.approfondimento.schedaRapida} />
+          <IndiceArticolo voci={voce.approfondimento.indice} />
+          <CorpoArticolo html={voce.approfondimento.html} />
+        </>
+      ) : (
+        voce.sezioni.map((sezione) => (
+          <section key={sezione.titolo} className="mt-10">
+            <h2 className="text-2xl font-extrabold text-notte">{sezione.titolo}</h2>
+            {sezione.paragrafi.map((p, i) => (
+              <p key={i} className="mt-4 text-lg leading-relaxed text-notte">
+                {p}
+              </p>
+            ))}
+          </section>
+        ))
+      )}
 
       {correlati.length > 0 && (
         <section className="mt-12">
@@ -141,6 +167,8 @@ export default async function GuidaPage({
       )}
 
       <Faq voci={voce.faq} />
+
+      {voce.approfondimento && <FontiArticolo dati={voce.approfondimento} />}
 
       <section className="mt-12">
         <TitoloSezione>Leggi anche</TitoloSezione>

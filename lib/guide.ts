@@ -1,4 +1,5 @@
 import type { Skill } from "@/games/registry";
+import datiApprofondimenti from "./approfondimenti.json";
 
 // Le guide per i genitori — Gioca con Mizi.
 // Rispondono alle domande che le mamme fanno davvero (a Google e alle AI):
@@ -39,9 +40,44 @@ export interface Guida {
    * nel documento Drive.
    */
   foto: { scena: string; alt: string };
+  /**
+   * Solo per gli articoli approfonditi (content/guide/<slug>.md, compilati
+   * in lib/approfondimenti.json da `npm run articoli:compila`): corpo HTML
+   * con tabelle e grafici, indice, scheda rapida e fonti.
+   */
+  approfondimento?: Approfondimento;
 }
 
-export const GUIDE: Guida[] = [
+export interface FonteArticolo {
+  titolo: string;
+  editore?: string;
+  url: string;
+  consultata: string;
+}
+
+export interface Approfondimento {
+  stato: string;
+  /** Registro della voce di Giorgia: pratica, personale, spontanea. */
+  voce: string;
+  categoria: string;
+  keyword: string;
+  titoloSeo: string | null;
+  pubblicata: string | null;
+  fontiVerificateIl: string | null;
+  prezziVerificatiIl: string | null;
+  /** Caratteri del corpo, spazi inclusi (grafici e matrici esclusi). */
+  caratteri: number;
+  schedaRapida: { voce: string; valore: string }[];
+  indice: { id: string; titolo: string }[];
+  html: string;
+  fonti: FonteArticolo[];
+  immagini: { file: string; alt: string; didascalia?: string; origine: string; licenza: string }[];
+  relazioniCommerciali: string | null;
+  trasparenza: string | null;
+}
+
+/** Le guide brevi scritte a mano. Gli articoli lunghi stanno in content/guide/. */
+const GUIDE_BREVI: Guida[] = [
   {
     slug: "tabelline-senza-lacrime",
     skill: "matematica",
@@ -1282,6 +1318,18 @@ export const GUIDE: Guida[] = [
       alt: "Bambino di 7 anni divide la paghetta in tre barattoli con la mamma, con Mizi accanto",
     },
   },
+];
+
+/** Gli articoli approfonditi pubblicati (le bozze non arrivano qui). */
+const APPROFONDIMENTI = datiApprofondimenti as unknown as Guida[];
+
+/**
+ * Tutte le guide: brevi + approfondite. Un articolo con lo stesso slug di
+ * una guida breve la sostituisce (è il suo aggiornamento): l'URL resta.
+ */
+export const GUIDE: Guida[] = [
+  ...GUIDE_BREVI.filter((b) => !APPROFONDIMENTI.some((a) => a.slug === b.slug)),
+  ...APPROFONDIMENTI,
 ];
 
 export function guida(slug: string): Guida | undefined {
