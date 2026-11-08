@@ -192,6 +192,8 @@ await browser.close();
   ok("candidature: nel pannello arrivano tutte e due",
     (await pc.locator("[data-candidatura=nuova]").count()) >= 1 && (await pc.locator("[data-candidatura=accesso]").count()) >= 1);
   ok("candidature: l'accesso mostra il nome della scheda", (await pc.locator("[data-candidatura=accesso]").first().textContent()).includes("Il Nano Gigante"));
+  ok("candidature: l'accesso ha «Manda il link personale» con l'email di chi ha scritto",
+    (await pc.locator("[data-candidatura=accesso] [data-manda-link]").first().textContent().catch(() => ""))?.includes("luca@esempio.it"));
   await pc.locator("[data-candidatura=nuova] [data-accetta]").first().tap();
   await pc.waitForLoadState("networkidle");
   await pc.waitForTimeout(500);

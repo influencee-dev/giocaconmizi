@@ -2,7 +2,7 @@
   "app/(public)/[categoria]/[citta]/[attivita]/page.tsx": "2026-11-04",
   "app/(public)/[categoria]/[citta]/page.tsx": "2026-11-02",
   "app/(public)/[categoria]/page.tsx": "2026-11-02",
-  "app/(public)/admin/[codice]/candidature/page.tsx": "2026-11-03",
+  "app/(public)/admin/[codice]/candidature/page.tsx": "2026-11-08",
   "app/(public)/admin/[codice]/immagini/page.tsx": "2026-11-02",
   "app/(public)/admin/[codice]/iscritti/page.tsx": "2026-11-02",
   "app/(public)/admin/[codice]/page.tsx": "2026-11-08",

@@ -3,6 +3,8 @@
 import { CATEGORIE, SCHEDE } from "@/lib/directory";
 import { chiaveScheda, inviaCandidatura } from "@/lib/directory-db";
 import { chiaveRisorsa, risorsaDaChiave } from "@/lib/risorse-educative";
+import { after } from "next/server";
+import { avvisaGiorgia, confermaRicevuta } from "@/lib/email-servizio";
 
 export type EsitoCandidatura = { stato: "fermo" } | { stato: "ok"; tipo: "nuova" | "accesso" } | { stato: "errore"; messaggio: string };
 
@@ -64,5 +66,19 @@ export async function proponi(_prima: EsitoCandidatura, form: FormData): Promise
       messaggio: r.errore.includes("troppe") ? "Hai già mandato diverse richieste oggi: ti rispondiamo presto." : "Non siamo riusciti a inviare la richiesta. Riprova tra qualche minuto.",
     };
   }
+  // Le email partono dopo la risposta: chi compila non aspetta Brevo.
+  const nome = dati.nome ?? "";
+  after(() =>
+    Promise.all([
+      avvisaGiorgia(tipo === "nuova" ? "candidatura-nuova" : "candidatura-accesso", nome, {
+        "Chi scrive": `${referente}${dati.ruolo ? ` (${dati.ruolo})` : ""}`,
+        Email: email,
+        Telefono: dati.telefono,
+        Città: dati.citta,
+        Messaggio: dati.messaggio ?? dati.descrizione,
+      }),
+      confermaRicevuta(email, referente, nome, tipo === "nuova" ? "candidatura" : "accesso"),
+    ]),
+  );
   return { stato: "ok", tipo };
 }

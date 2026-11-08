@@ -59,6 +59,32 @@ async function api(metodo: "GET" | "POST" | "PUT", percorso: string, body?: unkn
   }
 }
 
+/**
+ * Un'email di servizio (avvisi a Giorgia, conferme e link alle attività):
+ * stessa chiave e stesso mittente delle novità. Senza BREVO_API_KEY non parte
+ * e restituisce false, senza errori: le azioni del sito non si bloccano mai
+ * per un'email. Testi e grafica in lib/email-servizio.ts.
+ */
+export async function inviaEmailServizio(e: { a: string; oggetto: string; html: string; etichetta: string; rispondiA?: string }): Promise<boolean> {
+  if (!chiave()) return false;
+  try {
+    const invio = await Promise.race([
+      api("POST", "/smtp/email", {
+        sender: MITTENTE,
+        to: [{ email: e.a }],
+        replyTo: { email: e.rispondiA ?? MITTENTE.email },
+        subject: e.oggetto,
+        htmlContent: e.html,
+        tags: [e.etichetta],
+      }),
+      new Promise<null>((ok) => setTimeout(() => ok(null), 6000)),
+    ]);
+    return Boolean(invio?.ok);
+  } catch {
+    return false;
+  }
+}
+
 let listeCache: Record<keyof typeof LISTE, number> | null = null;
 
 /**
