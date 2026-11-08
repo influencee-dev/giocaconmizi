@@ -71,6 +71,12 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   codici veri non vanno MAI nel repo. Le pagine pubbliche leggono le
   risposte accettate con `pubblicate()` (lib/directory-db.ts) e si
   rigenerano ogni 10 minuti o subito dopo una decisione.
+- `lib/risorse-educative.ts` + `lib/risorse-educative-dati.ts` — l'hub
+  /risorse-educative-bambini (5 sezioni filtrabili, una sola pagina, niente
+  schede singole). Dati dal foglio «Listing GiocaMizi» di Giorgia: SOLO
+  colonne pubbliche, mai le righe «Solo outreach — non pubblicare», mai email
+  o note di outreach (il repo è pubblico). Difese anti-scraping in
+  `lib/protezione/` (limiti, crawler verificati, trappola): docs/protezione-risorse.md.
 - `app/llms.txt/route.ts`, `app/sitemap.ts`, `app/robots.ts` — AEO/SEO:
   generati dai registri. JSON-LD in `components/seo/JsonLd.tsx`.
 - SEO/AEO: ogni contenuto nuovo deve avere risposta citabile, FAQ con
