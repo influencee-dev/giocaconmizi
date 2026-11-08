@@ -38,6 +38,10 @@ export interface Pubblicata {
 
 /** Le risposte dei locali che Giorgia ha accettato, per chiave scheda. */
 export async function pubblicate(): Promise<Map<string, Pubblicata>> {
+  // Nel server delle verifiche una risorsa risulta reclamata, per provarne la pagina propria.
+  if (process.env.GIOCAMIZI_ADMIN_PROVA && !process.env.VERCEL) {
+    return new Map([[INVITO_PROVA_RISORSA.chiave, { tipo: "modifica", dati: { descrizione: "Scheda di prova: testo scritto dalla realtà dal suo link personale.", sito: "https://www.coopaccento.it/" } }]]);
+  }
   const client = db();
   if (!client) return new Map();
   try {
@@ -68,8 +72,9 @@ export function conModifiche(s: Scheda, p: Map<string, Pubblicata>): (Scheda & {
 export const INVITO_PROVA = { codice: "prova-attivita-locale-0000000000", chiave: "milano/il-nano-gigante" };
 
 export async function apriInvito(codice: string) {
-  if (process.env.GIOCAMIZI_ADMIN_PROVA && !process.env.VERCEL && codice === INVITO_PROVA.codice) {
-    return { chiave: INVITO_PROVA.chiave, stato: "inviato", scade_il: new Date(Date.now() + 30 * 86400000).toISOString() };
+  if (process.env.GIOCAMIZI_ADMIN_PROVA && !process.env.VERCEL) {
+    const prova = [INVITO_PROVA, INVITO_PROVA_RISORSA].find((p) => p.codice === codice);
+    if (prova) return { chiave: prova.chiave, stato: "inviato", scade_il: new Date(Date.now() + 30 * 86400000).toISOString() };
   }
   const client = db();
   if (!client || !/^[A-Za-z0-9_-]{20,80}$/.test(codice)) return null;
@@ -186,4 +191,79 @@ export async function adminEsitoCandidatura(codice: string, id: number, esito: "
   if (!client) return false;
   const { error } = await client.rpc("dir_admin_esito_candidatura", { p_codice: codice, p_id: id, p_esito: esito, p_nota: nota });
   return !error;
+}
+
+// ---------- Risorse educative: link personale e logo (supabase/risorse-reclamo.sql) ----------
+
+/** Il link di prova di una risorsa: come INVITO_PROVA, solo nel server delle verifiche. */
+export const INVITO_PROVA_RISORSA = { codice: "prova-risorsa-locale-000000000000", chiave: "risorse/accento-cooperativa-sociale" };
+
+/** Giorgia crea (o rinnova) il link personale di una scheda: restituisce il codice, da mandare una volta sola. */
+export async function adminCreaInvito(codice: string, chiave: string): Promise<string | null> {
+  const client = db();
+  if (!client) return null;
+  const bytes = crypto.getRandomValues(new Uint8Array(24));
+  const token = btoa(String.fromCharCode(...bytes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  try {
+    const { error } = await client.rpc("dir_admin_crea_invito", { p_codice: codice, p_chiave: chiave, p_token: token });
+    return error ? null : token;
+  } catch {
+    return null;
+  }
+}
+
+/** Il logo già ricodificato in WebP dal server, in base64. */
+export async function inviaLogo(codice: string, base64: string) {
+  const client = db();
+  if (!client) return { ok: false as const, errore: "servizio non disponibile" };
+  try {
+    const { error } = await client.rpc("dir_invia_logo", { p_codice: codice, p_immagine: base64 });
+    return error ? { ok: false as const, errore: error.message } : { ok: true as const };
+  } catch {
+    return { ok: false as const, errore: "servizio non disponibile" };
+  }
+}
+
+export interface LogoInAttesa { id: number; chiave: string; immagine: string; creato_il: string; stato: string }
+
+export async function adminLoghi(codice: string): Promise<LogoInAttesa[]> {
+  const client = db();
+  if (!client) return [];
+  try {
+    const { data, error } = await client.rpc("dir_admin_loghi", { p_codice: codice });
+    return error || !Array.isArray(data) ? [] : (data as LogoInAttesa[]);
+  } catch {
+    return [];
+  }
+}
+
+export async function adminEsitoLogo(codice: string, id: number, esito: "accettato" | "rifiutato") {
+  const client = db();
+  if (!client) return false;
+  const { error } = await client.rpc("dir_admin_esito_logo", { p_codice: codice, p_id: id, p_esito: esito });
+  return !error;
+}
+
+/** Le chiavi delle schede con un logo approvato (per sapere dove mostrarlo). */
+export async function chiaviConLogo(): Promise<Set<string>> {
+  const client = db();
+  if (!client) return new Set();
+  try {
+    const { data, error } = await client.rpc("dir_chiavi_con_logo");
+    return error || !Array.isArray(data) ? new Set() : new Set(data as string[]);
+  } catch {
+    return new Set();
+  }
+}
+
+/** Il logo approvato di una scheda, o null. */
+export async function logoDi(chiave: string): Promise<Buffer | null> {
+  const client = db();
+  if (!client) return null;
+  try {
+    const { data, error } = await client.rpc("dir_logo", { p_chiave: chiave });
+    return error || typeof data !== "string" || !data ? null : Buffer.from(data, "base64");
+  } catch {
+    return null;
+  }
 }

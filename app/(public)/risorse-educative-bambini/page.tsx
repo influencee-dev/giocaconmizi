@@ -8,8 +8,9 @@ import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { TITOLARE } from "@/lib/legal";
 import { site, url } from "@/lib/seo";
 import { PERCORSO_TRAPPOLA } from "@/lib/protezione/limiti";
+import { COLORI, CardRisorsa } from "@/components/risorse/CardRisorsa";
+import { risorseVisibili, type RisorsaVista } from "@/lib/risorse-reclamo";
 import {
-  AVVISO_LINK,
   DISCLAIMER,
   FAQ_RISORSE,
   LINK_CONTROLLATI,
@@ -17,13 +18,10 @@ import {
   PERCORSO_RISORSE,
   RISPOSTA_BREVE,
   SEZIONI,
-  contaRisorse,
-  dominio,
   eSezione,
-  iniziali,
   paginaDi,
+  percorsoRisorsa,
   principaliDi,
-  type Risorsa,
   type Sezione,
 } from "@/lib/risorse-educative";
 
@@ -62,25 +60,19 @@ export async function generateMetadata({ searchParams }: { searchParams: Paramet
   };
 }
 
-const COLORI: Record<Sezione, { pallino: string; fondo: string }> = {
-  famiglie: { pallino: "bg-rosa", fondo: "bg-[#FCE6EE]" },
-  insegnanti: { pallino: "bg-verde", fondo: "bg-[#E3F4E7]" },
-  territorio: { pallino: "bg-arancione", fondo: "bg-[#FFEBD3]" },
-  coding: { pallino: "bg-azzurro", fondo: "bg-[#E2F2FB]" },
-  lettura: { pallino: "bg-viola", fondo: "bg-[#F0E8FA]" },
-};
-
 export default async function RisorseEducativePage({ searchParams }: { searchParams: Parametri }) {
   const { sezione, pagina } = leggi(await searchParams);
   const filtro = eSezione(sezione) ? sezione : null;
   const numero = pagina === undefined ? 1 : Number(pagina);
-  const risultati = filtro ? paginaDi(filtro, numero) : null;
+  // Le risorse con sopra le risposte accettate (reclamate, logo, rimozioni).
+  const tutte = await risorseVisibili();
+  const risultati = filtro ? paginaDi(filtro, numero, tutte) : null;
   if (filtro && !risultati) notFound();
 
   // Le schede che il JSON-LD elenca sono esattamente quelle visibili.
-  const visibili: Risorsa[] = risultati
+  const visibili: RisorsaVista[] = risultati
     ? risultati.voci
-    : ORDINE_SEZIONI.flatMap((s) => principaliDi(s));
+    : ORDINE_SEZIONI.flatMap((s) => principaliDi(s, tutte));
 
   return (
     <Contenitore largo className="pb-10 pt-8">
@@ -96,7 +88,7 @@ export default async function RisorseEducativePage({ searchParams }: { searchPar
         <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">{H1}</h1>
         <p className="max-w-2xl text-lg font-semibold text-notte">{RISPOSTA_BREVE}</p>
         <p className="max-w-2xl text-notte-tenue">
-          Qui raccogliamo {contaRisorse()} realtà, siti e progetti utili a bambini, famiglie e
+          Qui raccogliamo {tutte.length} realtà, siti e progetti utili a bambini, famiglie e
           insegnanti: idee per leggere, creare, imparare con il digitale e scoprire attività sul
           territorio.
         </p>
@@ -156,7 +148,7 @@ export default async function RisorseEducativePage({ searchParams }: { searchPar
               </h2>
             </div>
             <p className="mb-5 max-w-2xl text-notte-tenue">{SEZIONI[s].descrizione}</p>
-            <Elenco voci={principaliDi(s)} />
+            <Elenco voci={principaliDi(s, tutte)} />
             <p className="mt-4">
               <Link
                 href={`${PERCORSO_RISORSE}?sezione=${s}#elenco`}
@@ -227,102 +219,21 @@ export default async function RisorseEducativePage({ searchParams }: { searchPar
   );
 }
 
-/** Un tema del foglio già detto da una sezione della card non si ripete. */
-const TEMA_SEZIONE: Record<string, Sezione | undefined> = {
-  "Famiglie e genitorialità": "famiglie",
-  "Scuola e didattica": "insegnanti",
-  "Territorio e attività": "territorio",
-  "Coding e STEM": "coding",
-  "Lettura e storie": "lettura",
-};
-
 function chip(attivo: boolean) {
   return `inline-flex min-h-12 items-center gap-2 rounded-bolla border-2 px-4 py-2 text-[15px] font-bold transition-colors ${
     attivo ? "border-notte bg-notte text-white" : "border-crema-scuro bg-white text-notte hover:border-viola"
   }`;
 }
 
-function Elenco({ voci }: { voci: Risorsa[] }) {
+function Elenco({ voci }: { voci: RisorsaVista[] }) {
   return (
     <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {voci.map((r) => (
         <li key={r.url}>
-          <CardRisorsa risorsa={r} />
+          <CardRisorsa risorsa={r} reclamata={r.reclamata} logo={r.logo} />
         </li>
       ))}
     </ul>
-  );
-}
-
-function CardRisorsa({ risorsa: r }: { risorsa: Risorsa }) {
-  const principale = r.sezioni[0]!;
-  return (
-    <article className="flex h-full flex-col gap-3 rounded-[1.4rem] border border-notte/10 bg-white p-5">
-      <div className="flex items-start gap-3">
-        {/* Iniziali al posto del logo: nessun marchio preso dai siti esterni. */}
-        <span
-          aria-hidden
-          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-lg font-black text-notte ${COLORI[principale].fondo}`}
-        >
-          {iniziali(r.nome)}
-        </span>
-        <div className="min-w-0">
-          <h3 className="text-lg font-extrabold leading-snug text-notte [overflow-wrap:anywhere]">{r.nome}</h3>
-          {r.localita && <p className="text-sm font-bold text-notte-tenue">{r.localita}</p>}
-        </div>
-      </div>
-      <p className="text-notte-tenue">{r.descrizione}</p>
-      <ul aria-label="Sezioni e temi" className="flex flex-wrap gap-1.5">
-        {r.sezioni.map((s) => (
-          <li key={s} className={`rounded-lg px-2.5 py-1 text-xs font-bold text-notte ${COLORI[s].fondo}`}>
-            {SEZIONI[s].breve}
-          </li>
-        ))}
-        {r.temi
-          .filter((t) => !r.sezioni.includes(TEMA_SEZIONE[t] as Sezione))
-          .map((t) => (
-            <li key={t} className="rounded-lg border border-notte/15 px-2.5 py-1 text-xs font-bold text-notte-tenue">
-              {t}
-            </li>
-          ))}
-      </ul>
-      {/* <details> nativo: funziona senza JavaScript, con tastiera e screen reader,
-          e il testo resta nell'HTML (lo leggono anche i motori di ricerca). */}
-      <details className="group rounded-2xl bg-crema/60 px-4 py-3">
-        <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 font-extrabold text-notte [&::-webkit-details-marker]:hidden">
-          Scopri di più
-          <span aria-hidden className="text-viola transition-transform group-open:rotate-180">▾</span>
-        </summary>
-        <dl className="mt-2 grid gap-2 text-sm">
-          {r.cosaFa && <VoceScheda nome="Cosa fa" valore={r.cosaFa} />}
-          <VoceScheda nome="Per chi" valore={r.perChi} />
-          {r.comeSiUsa && <VoceScheda nome="Come si usa" valore={r.comeSiUsa} />}
-          <VoceScheda nome="Costi" valore={r.costi ?? "Da verificare sul sito"} />
-        </dl>
-      </details>
-      <div className="mt-auto flex flex-col gap-2 pt-2">
-        <a
-          href={r.url}
-          target="_blank"
-          rel="noopener noreferrer nofollow external"
-          className="inline-flex min-h-12 w-fit items-center gap-2 rounded-2xl bg-notte px-4 py-2 font-extrabold text-white transition-colors hover:bg-viola [overflow-wrap:anywhere]"
-        >
-          Sito ufficiale: {dominio(r.url)}
-          <span aria-hidden>↗</span>
-          <span className="sr-only"> (link esterno, si apre in una nuova scheda)</span>
-        </a>
-        <p className="text-xs text-notte-tenue">{AVVISO_LINK}</p>
-      </div>
-    </article>
-  );
-}
-
-function VoceScheda({ nome, valore }: { nome: string; valore: string }) {
-  return (
-    <div>
-      <dt className="font-extrabold text-notte">{nome}</dt>
-      <dd className="text-notte-tenue">{valore}</dd>
-    </div>
   );
 }
 
@@ -358,7 +269,7 @@ function Paginazione({ sezione, pagina, pagine }: { sezione: Sezione; pagina: nu
 }
 
 /** CollectionPage + ItemList: solo le schede visibili, con la stessa descrizione della card. */
-function jsonLdCollezione(voci: Risorsa[]) {
+function jsonLdCollezione(voci: RisorsaVista[]) {
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -375,7 +286,8 @@ function jsonLdCollezione(voci: Risorsa[]) {
       itemListElement: voci.map((r, i) => ({
         "@type": "ListItem",
         position: i + 1,
-        item: { "@type": "WebPage", name: r.nome, url: r.url, description: r.descrizione },
+        // Chi ha reclamato la scheda ha la pagina propria su Giocamizi.
+        item: { "@type": "WebPage", name: r.nome, url: r.reclamata ? url(percorsoRisorsa(r)) : r.url, description: r.descrizione },
       })),
     },
   };

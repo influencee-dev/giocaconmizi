@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { CATEGORIE, SCHEDE } from "@/lib/directory";
 import { CITTA_FESTE } from "@/lib/feste";
 import { chiaveScheda } from "@/lib/directory-db";
+import { chiaveRisorsa } from "@/lib/risorse-educative";
+import { RISORSE } from "@/lib/risorse-educative-dati";
 import { Contenitore } from "@/components/ui";
 import { ModuloCandidatura } from "./ModuloCandidatura";
 
@@ -21,7 +23,9 @@ export default async function AggiungiAttivita({ searchParams }: { searchParams:
   const { scheda } = await searchParams;
   const schede = [...SCHEDE]
     .sort((a, b) => a.citta.localeCompare(b.citta, "it") || a.nome.localeCompare(b.nome, "it"))
-    .map((s) => ({ chiave: chiaveScheda(s), nome: s.nome, citta: s.citta }));
+    .map((s) => ({ chiave: chiaveScheda(s), nome: s.nome, citta: s.citta }))
+    // Anche le risorse educative si possono reclamare (chiave "risorse/<slug>").
+    .concat(RISORSE.map((r) => ({ chiave: chiaveRisorsa(r), nome: r.nome, citta: r.localita ?? "Risorse educative" })));
   const categorie = CATEGORIE.map((c) => ({ slug: c.slug, nome: c.nome }));
   const citta = CITTA_FESTE.map((c) => c.citta).sort((a, b) => a.localeCompare(b, "it"));
 

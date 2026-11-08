@@ -57,6 +57,8 @@ export type Costi = "Gratuito" | "A pagamento" | "In parte gratuito" | "Da verif
 export interface Risorsa {
   /** Codice dell'archivio (GM-xxx): serve per allineare il foglio, non si mostra. */
   id: string;
+  /** Indirizzo stabile della scheda: risorse/<slug> nel database, /risorse-educative-bambini/<slug> se reclamata. */
+  slug: string;
   nome: string;
   /** La stessa frase compare nella card e nel JSON-LD. */
   descrizione: string;
@@ -105,25 +107,32 @@ export const FAQ_RISORSE = [
   {
     domanda: "Posso segnalare una risorsa o chiedere una correzione?",
     risposta:
-      "Sì: scrivi al contatto ufficiale di Gioca con Mizi indicato in fondo alla pagina. Valutiamo ogni segnalazione e correggiamo o togliamo una scheda su richiesta della realtà interessata.",
+      "Sì. Se gestisci una delle realtà elencate, tocca «È la tua realtà? Reclama la scheda» sotto la sua card: dopo un controllo ricevi un link personale per correggerla, aggiungere logo e contatti e avere una pagina tua, oppure per toglierla. Per segnalare un progetto nuovo scrivi al contatto indicato in fondo alla pagina.",
   },
 ] as const;
 
 /** Schede per pagina nella vista filtrata (paginazione lato server). */
 export const PER_PAGINA = 12;
 
+/** La chiave della scheda nel database (stesse tabelle delle attività). */
+export const chiaveRisorsa = (r: Pick<Risorsa, "slug">) => `risorse/${r.slug}`;
+/** La pagina propria: esiste solo per le risorse che hanno reclamato la scheda. */
+export const percorsoRisorsa = (r: Pick<Risorsa, "slug">) => `${PERCORSO_RISORSE}/${r.slug}`;
+export const risorsaDaSlug = (slug: string) => RISORSE.find((r) => r.slug === slug);
+export const risorsaDaChiave = (chiave: string) => RISORSE.find((r) => chiaveRisorsa(r) === chiave);
+
 export function eSezione(valore: unknown): valore is Sezione {
   return typeof valore === "string" && valore in SEZIONI;
 }
 
 /** Vista completa: ogni risorsa una volta sola, nella sua sezione principale. */
-export function principaliDi(sezione: Sezione): Risorsa[] {
-  return RISORSE.filter((r) => r.sezioni[0] === sezione);
+export function principaliDi<T extends Risorsa>(sezione: Sezione, elenco: T[] = RISORSE as T[]): T[] {
+  return elenco.filter((r) => r.sezioni[0] === sezione);
 }
 
 /** Vista filtrata: tutte le risorse che toccano la sezione. */
-export function tutteDi(sezione: Sezione): Risorsa[] {
-  return RISORSE.filter((r) => r.sezioni.includes(sezione));
+export function tutteDi<T extends Risorsa>(sezione: Sezione, elenco: T[] = RISORSE as T[]): T[] {
+  return elenco.filter((r) => r.sezioni.includes(sezione));
 }
 
 export function contaRisorse(): number {
@@ -131,8 +140,8 @@ export function contaRisorse(): number {
 }
 
 /** Una pagina di risultati; `null` se la pagina chiesta non esiste. */
-export function paginaDi(sezione: Sezione, pagina: number) {
-  const tutte = tutteDi(sezione);
+export function paginaDi<T extends Risorsa>(sezione: Sezione, pagina: number, elenco: T[] = RISORSE as T[]) {
+  const tutte = tutteDi(sezione, elenco);
   const pagine = Math.max(1, Math.ceil(tutte.length / PER_PAGINA));
   if (!Number.isInteger(pagina) || pagina < 1 || pagina > pagine) return null;
   return {

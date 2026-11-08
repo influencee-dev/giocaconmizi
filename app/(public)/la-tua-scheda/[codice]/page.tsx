@@ -5,6 +5,9 @@ import { apriInvito } from "@/lib/directory-db";
 import { Contenitore } from "@/components/ui";
 import { CardAttivita } from "@/components/directory/CardAttivita";
 import { ModuloRisposta } from "./ModuloRisposta";
+import { ModuloRisorsa } from "./ModuloRisorsa";
+import { CardRisorsa } from "@/components/risorse/CardRisorsa";
+import { risorsaDaChiave, type Risorsa } from "@/lib/risorse-educative";
 
 /**
  * Il link personale che riceve ogni attività: anteprima della sua scheda e
@@ -21,6 +24,8 @@ export const metadata: Metadata = {
 export default async function LaTuaSchedaPage({ params }: { params: Promise<{ codice: string }> }) {
   const { codice } = await params;
   const invito = await apriInvito(codice);
+  const r = invito?.chiave.startsWith("risorse/") ? risorsaDaChiave(invito.chiave) : undefined;
+  if (invito && r) return <LinkRisorsa codice={codice} risorsa={r} stato={invito.stato} />;
   const s = invito && SCHEDE.find((x) => `${x.cittaSlug}/${x.slug}` === invito.chiave);
 
   if (!s) {
@@ -64,6 +69,38 @@ export default async function LaTuaSchedaPage({ params }: { params: Promise<{ co
           codice={codice}
           nome={s.nome}
           valori={{ descrizione: s.descrizione, indirizzo: `${s.zona}, ${s.citta}`, sito: s.sito ?? "", instagram: s.instagram ?? "" }}
+        />
+      </div>
+    </Contenitore>
+  );
+}
+
+/** La variante per le risorse educative: anteprima della card e modulo con il logo. */
+function LinkRisorsa({ codice, risorsa: r, stato }: { codice: string; risorsa: Risorsa; stato: string }) {
+  const gia = stato === "approvato" || stato === "modifica" || stato === "rimozione";
+  return (
+    <Contenitore largo className="py-10">
+      <p className="text-sm font-extrabold uppercase tracking-widest text-viola">La tua scheda</p>
+      <h1 className="mt-2 text-3xl font-extrabold text-notte sm:text-4xl">Ciao! Ecco {r.nome} su Giocamizi</h1>
+      <p className="mt-3 max-w-2xl text-lg text-notte-tenue">
+        {r.nome} è tra le risorse educative consigliate a famiglie e insegnanti. Qui sotto vedi la scheda com&apos;è oggi:
+        approvala o completala (anche con il vostro logo) e avrete una pagina tutta vostra, con il bollino «Scheda
+        verificata». Se preferisci, puoi anche toglierla.
+      </p>
+      {gia && (
+        <p className="mt-4 rounded-xl bg-[#E3F4E8] px-4 py-3 font-bold text-[#2E7D4A]">
+          Abbiamo già ricevuto una tua risposta: se vuoi cambiare qualcosa, puoi inviarne un&apos;altra.
+        </p>
+      )}
+      <div className="mt-8 grid gap-8 lg:grid-cols-[22rem_minmax(0,1fr)] lg:items-start">
+        <div className="flex flex-col gap-3">
+          <CardRisorsa risorsa={r} anteprima />
+          <p className="text-sm font-semibold text-notte-tenue">È gratis e lo resta: nessuna commissione, nessuna pubblicità.</p>
+        </div>
+        <ModuloRisorsa
+          codice={codice}
+          nome={r.nome}
+          valori={{ descrizione: r.descrizione, cosaFa: r.cosaFa ?? "", perChi: r.perChi, comeSiUsa: r.comeSiUsa ?? "", costi: r.costi ?? "Da verificare sul sito", sito: r.url }}
         />
       </div>
     </Contenitore>
