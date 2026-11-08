@@ -51,6 +51,9 @@ export const SEZIONI = {
 export type Sezione = keyof typeof SEZIONI;
 export const ORDINE_SEZIONI = Object.keys(SEZIONI) as Sezione[];
 
+/** Solo ciò che il sito ufficiale dice chiaramente; nel dubbio «Da verificare sul sito». */
+export type Costi = "Gratuito" | "A pagamento" | "In parte gratuito" | "Da verificare sul sito";
+
 export interface Risorsa {
   /** Codice dell'archivio (GM-xxx): serve per allineare il foglio, non si mostra. */
   id: string;
@@ -61,6 +64,10 @@ export interface Risorsa {
   sezioni: Sezione[];
   temi: string[];
   perChi: string;
+  /** La scheda che si apre con «Scopri di più»: scritta rileggendo il sito ufficiale. */
+  cosaFa?: string;
+  comeSiUsa?: string;
+  costi?: Costi;
   localita?: string;
   /** Sito ufficiale (controllato il 7/11/2026). */
   url: string;
