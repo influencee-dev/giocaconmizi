@@ -10,6 +10,8 @@ import { classi, eta, url } from "@/lib/seo";
 import { chiaveScheda, pubblicate } from "@/lib/directory-db";
 import { dataDi, dataGioco } from "@/lib/date-pagine";
 import { fotoDellaPagina, fotoGuida } from "@/lib/foto";
+import { percorsoRisorsa } from "@/lib/risorse-educative";
+import { risorseVisibili } from "@/lib/risorse-reclamo";
 
 /**
  * Sitemap generata dal registry e dai contenuti: un nuovo gioco o una nuova
@@ -21,6 +23,7 @@ export const revalidate = 600;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const risposte = await pubblicate();
   const tolta = (s: (typeof SCHEDE)[number]) => risposte.get(chiaveScheda(s))?.tipo === "rimuovi";
+  const reclamate = (await risorseVisibili()).filter((r) => r.reclamata);
   // Date vere (lib/date-pagine.json, dalla storia git): Google ignora i
   // lastmod di una sitemap che dice "modificato adesso" su ogni pagina.
   // Dove una data non c'è, niente lastmod: meglio di uno falso.
@@ -155,6 +158,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: dataDi(CITTA_FESTE.find((c) => c.slug === s.cittaSlug)?.aggiornata),
       changeFrequency: "monthly" as const,
       priority: 0.6,
+    })),
+    // Le risorse educative che hanno reclamato la scheda hanno la pagina propria.
+    // Niente lastmod: la data vera è quella della decisione nel database.
+    ...reclamate.map((r) => ({
+      url: url(percorsoRisorsa(r)),
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
     })),
 
     // Le guide per i genitori: contenuto evergreen, priorità alta (AEO)

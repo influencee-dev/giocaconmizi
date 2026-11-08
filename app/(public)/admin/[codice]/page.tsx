@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SCHEDE, percorsoScheda } from "@/lib/directory";
 import { adminDati } from "@/lib/directory-db";
+import { risorsaDaChiave } from "@/lib/risorse-educative";
 import { adminValido } from "@/lib/admin";
 import { Contenitore } from "@/components/ui";
 import { decidi } from "./azioni";
@@ -27,7 +28,13 @@ export default async function AdminPage({ params }: { params: Promise<{ codice: 
       </Contenitore>
     );
   }
-  const scheda = (chiave: string) => SCHEDE.find((s) => `${s.cittaSlug}/${s.slug}` === chiave);
+  // Le risposte arrivano sia dai locali ("città/slug") sia dalle risorse educative ("risorse/slug").
+  const scheda = (chiave: string) => {
+    const r = chiave.startsWith("risorse/") ? risorsaDaChiave(chiave) : undefined;
+    if (r) return { nome: r.nome, citta: "Risorsa educativa", href: `/risorse-educative-bambini#elenco` };
+    const s = SCHEDE.find((x) => `${x.cittaSlug}/${x.slug}` === chiave);
+    return s && { nome: s.nome, citta: s.citta, href: percorsoScheda(s) };
+  };
   const attesa = dati.richieste.filter((r) => r.stato === "in_attesa");
   const conta = (stato: string) => dati.inviti.filter((i) => i.stato === stato).length;
 
@@ -79,7 +86,7 @@ export default async function AdminPage({ params }: { params: Promise<{ codice: 
                 </dl>
               )}
               {s && (
-                <Link href={percorsoScheda(s)} target="_blank" className="mt-3 inline-block text-sm font-extrabold text-viola">
+                <Link href={s.href} target="_blank" className="mt-3 inline-block text-sm font-extrabold text-viola">
                   Vedi la scheda attuale ›
                 </Link>
               )}

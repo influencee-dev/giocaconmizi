@@ -2,6 +2,7 @@
 
 import { CATEGORIE, SCHEDE } from "@/lib/directory";
 import { chiaveScheda, inviaCandidatura } from "@/lib/directory-db";
+import { chiaveRisorsa, risorsaDaChiave } from "@/lib/risorse-educative";
 
 export type EsitoCandidatura = { stato: "fermo" } | { stato: "ok"; tipo: "nuova" | "accesso" } | { stato: "errore"; messaggio: string };
 
@@ -33,10 +34,12 @@ export async function proponi(_prima: EsitoCandidatura, form: FormData): Promise
 
   let chiave: string | null = null;
   if (tipo === "accesso") {
-    const s = SCHEDE.find((x) => chiaveScheda(x) === pulito(form.get("scheda"), 200));
-    if (!s) return { stato: "errore", messaggio: "Cerca la tua attività e toccala nell'elenco." };
-    chiave = chiaveScheda(s);
-    dati.nome = s.nome;
+    const scelta = pulito(form.get("scheda"), 200);
+    const s = SCHEDE.find((x) => chiaveScheda(x) === scelta);
+    const r = s ? undefined : risorsaDaChiave(scelta);
+    if (!s && !r) return { stato: "errore", messaggio: "Cerca la tua attività e toccala nell'elenco." };
+    chiave = s ? chiaveScheda(s) : chiaveRisorsa(r!);
+    dati.nome = s ? s.nome : r!.nome;
   } else {
     metti("nome", 120);
     metti("citta", 80);

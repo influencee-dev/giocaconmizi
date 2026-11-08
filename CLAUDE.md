@@ -72,8 +72,14 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   risposte accettate con `pubblicate()` (lib/directory-db.ts) e si
   rigenerano ogni 10 minuti o subito dopo una decisione.
 - `lib/risorse-educative.ts` + `lib/risorse-educative-dati.ts` — l'hub
-  /risorse-educative-bambini (5 sezioni filtrabili, una sola pagina, niente
-  schede singole). Dati dal foglio «Listing GiocaMizi» di Giorgia: SOLO
+  /risorse-educative-bambini (5 sezioni filtrabili; pagina propria
+  /risorse-educative-bambini/<slug> SOLO per chi reclama la scheda e viene
+  approvato). Reclamo come le attività: «È la tua realtà?» → Candidature →
+  link personale da /admin/[codice]/risorse (chiave `risorse/<slug>` in
+  dir_inviti/dir_richieste) → la realtà completa la scheda e carica il logo
+  (ricodificato in WebP, approvato da Giorgia, servito da /loghi/risorse/).
+  Mai loghi presi dai siti. SQL: `supabase/risorse-reclamo.sql`, logica in
+  `lib/risorse-reclamo.ts`. Dati dal foglio «Listing GiocaMizi» di Giorgia: SOLO
   colonne pubbliche, mai le righe «Solo outreach — non pubblicare», mai email
   o note di outreach (il repo è pubblico). Difese anti-scraping in
   `lib/protezione/` (limiti, crawler verificati, trappola): docs/protezione-risorse.md.
