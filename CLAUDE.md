@@ -75,6 +75,15 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   generati dai registri. JSON-LD in `components/seo/JsonLd.tsx`.
 - SEO/AEO: ogni contenuto nuovo deve avere risposta citabile, FAQ con
   JSON-LD e link interni ai giochi pertinenti.
+- Foto da ChatGPT, giro quotidiano (08/11/2026): ogni mattina la Routine
+  genera `npm run prompt-del-giorno` (le prossime 3 foto mancanti, prompt
+  interi) e lo carica come doc nuovo in Drive «Giocamizi · Prompt immagini /
+  02 Prompt del giorno» (id 1B5v_f7JpfXiZGnnXyEBBXxzy9ARYtYwe). La sera
+  Giorgia carica i PNG in «99 Immagini pronte» (id 1lUlL1Uj2AspXO2SgFeSU_itN0nu2RQbP)
+  col nome indicato; la mattina dopo si scaricano in una cartella dello
+  scratchpad e `npm run foto-arrivate -- <cartella>` li trasforma in WebP
+  in public/immagini (riconosce guida-<slug>, i file di FOTO e i codici).
+  Un nome non riconosciuto si guarda e si abbina alla scena del prompt.
 - Sitemap delle immagini (08/11/2026): le foto vere stanno in sitemap con
   la loro pagina (`fotoDellaPagina` in lib/foto.ts, guide ed esempi da soli).
   Un riquadro foto nuovo o spostato = aggiornare FOTO_PAGINE: la batteria
