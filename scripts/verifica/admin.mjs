@@ -150,6 +150,9 @@ await browser.close();
   const pagina = await fetch(`${BASE}/aggiungi-attivita`).then(async (r) => [r.status, await r.text()]);
   ok("aggiungi attività: pagina pubblica con canonical", pagina[0] === 200 && pagina[1].includes('rel="canonical" href="https://giocamizi.it/aggiungi-attivita"'));
   ok("aggiungi attività: c'è la categoria «Associazioni e laboratori»", pagina[1].includes("Associazioni e laboratori"));
+  ok("aggiungi attività: categorie nuove e voce «Altro»",
+    ["Fattorie didattiche e agriturismi", "Ristoranti e pizzerie per feste", "Animatori e feste a domicilio", "Corsi e sport per bambini", "Teatro e cinema per bambini", "Torte, palloncini e allestimenti", 'value="altro"'].every((t) => pagina[1].includes(t)));
+  ok("footer: invito ad aggiungere un'attività su ogni pagina", pagina[1].includes("data-piede-attivita"));
   const sbagliato = await fetch(`${BASE}/admin/codice-sbagliato-000000/candidature`).then((r) => r.text());
   ok("candidature: senza codice → pannello non disponibile", sbagliato.includes("Pannello non disponibile"));
 

@@ -26,7 +26,8 @@ export default async function AggiungiAttivita({ searchParams }: { searchParams:
     .map((s) => ({ chiave: chiaveScheda(s), nome: s.nome, citta: s.citta }))
     // Anche le risorse educative si possono reclamare (chiave "risorse/<slug>").
     .concat(RISORSE.map((r) => ({ chiave: chiaveRisorsa(r), nome: r.nome, citta: r.localita ?? "Risorse educative" })));
-  const categorie = CATEGORIE.map((c) => ({ slug: c.slug, nome: c.nome }));
+  // «Altro»: nessuno resta fuori; Giorgia decide la categoria quando approva.
+  const categorie = [...CATEGORIE.map((c) => ({ slug: c.slug, nome: c.nome })), { slug: "altro", nome: "Altro (raccontalo nella descrizione)" }];
   const citta = CITTA_FESTE.map((c) => c.citta).sort((a, b) => a.localeCompare(b, "it"));
 
   return (

@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import spostamenti from "./content/directory-spostamenti.json";
 
 /**
  * Content Security Policy: il browser carica solo da noi e dai pochi servizi
@@ -48,12 +49,20 @@ const nextConfig: NextConfig = {
     // Quando il dominio giocaconmizi.com sarà attivo, aggiungere qui anche
     // "giocaconmizi.vercel.app" e cambiare destinazione.
     const vecchiHost = ["giocaconmizi-influencees-projects.vercel.app"];
-    return vecchiHost.map((host) => ({
-      source: "/:path*",
-      has: [{ type: "host" as const, value: host }],
-      destination: "https://giocaconmizi.vercel.app/:path*",
-      permanent: true,
-    }));
+    // Schede e listing della directory passati a un'altra categoria
+    // (content/directory-spostamenti.json): l'indirizzo vecchio resta valido.
+    const directory = spostamenti.spostamenti.flatMap((g) =>
+      g.indirizzi.map((i) => ({ source: i.da, destination: i.a, permanent: true })),
+    );
+    return [
+      ...vecchiHost.map((host) => ({
+        source: "/:path*",
+        has: [{ type: "host" as const, value: host }],
+        destination: "https://giocaconmizi.vercel.app/:path*",
+        permanent: true,
+      })),
+      ...directory,
+    ];
   },
   async headers() {
     return [

@@ -136,7 +136,7 @@ export const ESPERIENZE: Esperienza[] = [
     gruppo: "Dove",
     domanda: "Avete uno spazio all'aperto? E se piove?",
     trova: /all'aperto|all’aperto|giardino|\bprato|outdoor|spazio esterno|area esterna|nel verde/i,
-    categorie: ["parchi-all-aperto"],
+    categorie: ["parchi-all-aperto", "fattorie-didattiche"],
   },
   {
     id: "coperto",
@@ -145,7 +145,7 @@ export const ESPERIENZE: Esperienza[] = [
     gruppo: "Dove",
     domanda: "La festa si fa al chiuso? Com'è con il caldo d'estate?",
     trova: /al coperto|indoor|al chiuso/i,
-    categorie: ["parchi-giochi-al-coperto", "ludoteche", "sale-feste", "laser-game", "musei-per-bambini"],
+    categorie: ["parchi-giochi-al-coperto", "ludoteche", "sale-feste", "laser-game", "musei-per-bambini", "ristoranti-per-bambini", "teatro-per-bambini"],
   },
 ];
 

@@ -67,7 +67,7 @@ export default async function Candidature({ params }: { params: Promise<{ codice
                   {c.dati.nome ?? "—"} <span className="text-base font-bold text-notte-tenue">· {s?.citta ?? c.dati.citta}</span>
                 </p>
                 <span className={`rounded-bolla px-3 py-1 text-xs font-extrabold ${c.tipo === "nuova" ? "bg-verde/15 text-verde" : "bg-viola/10 text-viola"}`}>
-                  {c.tipo === "nuova" ? `Attività nuova${cat ? ` · ${cat.nome}` : ""}` : "Chiede l'accesso alla scheda"}
+                  {c.tipo === "nuova" ? `Attività nuova${cat ? ` · ${cat.nome}` : c.dati.categoria === "altro" ? " · Altro" : ""}` : "Chiede l'accesso alla scheda"}
                 </span>
               </div>
               <p className="mt-1 break-words text-sm font-semibold text-notte-tenue">

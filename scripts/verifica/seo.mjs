@@ -56,6 +56,22 @@ const { spawnSync } = await import("node:child_process");
 const controllo = spawnSync("node", ["scripts/date-pagine.mjs", "--controlla"], { encoding: "utf8" });
 ok("date-pagine.json allineato ai sorgenti", controllo.status === 0, (controllo.stderr || controllo.stdout).trim());
 
+// 2-quater. Directory: gli indirizzi cambiati di categoria (content/directory-spostamenti.json)
+// reindirizzano in modo permanente a una pagina viva della sitemap, e non
+// sono più in sitemap loro stessi.
+const { readFileSync } = await import("node:fs");
+const spostati = JSON.parse(readFileSync("content/directory-spostamenti.json", "utf8")).spostamenti.flatMap((g) => g.indirizzi);
+const percorsiSitemap = new Set(locs.map((l) => new URL(l).pathname));
+const rotti = [];
+for (const { da, a } of spostati) {
+  const r = await fetch(`${BASE}${da}`, { redirect: "manual" });
+  const dove = r.headers.get("location") ?? "";
+  if (![301, 308].includes(r.status) || new URL(dove, BASE).pathname !== a) rotti.push(`${da}: ${r.status} → ${dove}`);
+  if (!percorsiSitemap.has(a)) rotti.push(`${a}: non è in sitemap`);
+  if (percorsiSitemap.has(da)) rotti.push(`${da}: ancora in sitemap`);
+}
+ok("directory: indirizzi vecchi reindirizzati a pagine vive", spostati.length > 0 && rotti.length === 0, rotti.slice(0, 3).join(" | ") || `${spostati.length} indirizzi`);
+
 // 2-ter. Sitemap delle immagini (dal 08/11/2026): le foto vere legate alla
 // loro pagina. Ogni immagine sul dominio, risponde come immagine e compare
 // davvero nella pagina che la dichiara (anche dentro /_next/image).

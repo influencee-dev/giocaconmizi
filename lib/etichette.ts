@@ -64,6 +64,12 @@ const PER_CATEGORIA: Record<string, IdEtichetta> = {
   "parchi-all-aperto": "aperto",
   "musei-per-bambini": "museo",
   "laser-game": "sport",
+  "fattorie-didattiche": "fattoria",
+  "ristoranti-per-bambini": "bar",
+  "animatori-per-feste": "sala",
+  "corsi-per-bambini": "sport",
+  "teatro-per-bambini": "divertimenti",
+  "allestimenti-feste": "sala",
 };
 
 export function etichettaDi(tipo: string, categoria: string): Etichetta {

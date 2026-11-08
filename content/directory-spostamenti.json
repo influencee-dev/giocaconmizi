@@ -1,0 +1,119 @@
+{
+  "descrizione": "Indirizzi della directory cambiati (categoria nuova): reindirizzamento permanente. Si aggiunge, non si toglie: Google e i link esterni li usano ancora.",
+  "spostamenti": [
+    {
+      "data": "2026-11-08",
+      "motivo": "nuove categorie: fattorie didattiche, ristoranti, animatori",
+      "indirizzi": [
+        {
+          "da": "/sale-feste/roma/criollo-il-bistrot-del-gelato",
+          "a": "/ristoranti-per-bambini/roma/criollo-il-bistrot-del-gelato"
+        },
+        {
+          "da": "/sale-feste/palermo/dueffe-animazione",
+          "a": "/animatori-per-feste/palermo/dueffe-animazione"
+        },
+        {
+          "da": "/sale-feste/genova/capriole-sulle-nuvole",
+          "a": "/animatori-per-feste/genova/capriole-sulle-nuvole"
+        },
+        {
+          "da": "/sale-feste/bari/playhouse",
+          "a": "/animatori-per-feste/bari/playhouse"
+        },
+        {
+          "da": "/sale-feste/verona/trattoria-da-maick",
+          "a": "/ristoranti-per-bambini/verona/trattoria-da-maick"
+        },
+        {
+          "da": "/sale-feste/venezia/mida-eventi",
+          "a": "/ristoranti-per-bambini/venezia/mida-eventi"
+        },
+        {
+          "da": "/parchi-all-aperto/reggio-emilia/asineria-asini-di-reggio-emilia",
+          "a": "/fattorie-didattiche/reggio-emilia/asineria-asini-di-reggio-emilia"
+        },
+        {
+          "da": "/parchi-all-aperto/reggio-emilia/fattoria-alex",
+          "a": "/fattorie-didattiche/reggio-emilia/fattoria-alex"
+        },
+        {
+          "da": "/parchi-all-aperto/livorno/limone-nel-verde",
+          "a": "/fattorie-didattiche/livorno/limone-nel-verde"
+        },
+        {
+          "da": "/parchi-all-aperto/monza/la-camilla",
+          "a": "/fattorie-didattiche/monza/la-camilla"
+        },
+        {
+          "da": "/parchi-all-aperto/piacenza/bosco-gerolo-valtrebbia",
+          "a": "/fattorie-didattiche/piacenza/bosco-gerolo-valtrebbia"
+        },
+        {
+          "da": "/parchi-all-aperto/treviso/la-fattoria-di-geronimo",
+          "a": "/fattorie-didattiche/treviso/la-fattoria-di-geronimo"
+        },
+        {
+          "da": "/sale-feste/lucca/mara-meo",
+          "a": "/ristoranti-per-bambini/lucca/mara-meo"
+        },
+        {
+          "da": "/sale-feste/cremona/tourle",
+          "a": "/ristoranti-per-bambini/cremona/tourle"
+        },
+        {
+          "da": "/sale-feste/cremona/fattoria-ca-bianca",
+          "a": "/fattorie-didattiche/cremona/fattoria-ca-bianca"
+        },
+        {
+          "da": "/sale-feste/cosenza/animagricola",
+          "a": "/fattorie-didattiche/cosenza/animagricola"
+        },
+        {
+          "da": "/sale-feste/caserta/sunrise-pizza",
+          "a": "/ristoranti-per-bambini/caserta/sunrise-pizza"
+        },
+        {
+          "da": "/sale-feste/caserta/pharina",
+          "a": "/ristoranti-per-bambini/caserta/pharina"
+        },
+        {
+          "da": "/sale-feste/pozzuoli/il-giardino-dellorco",
+          "a": "/fattorie-didattiche/pozzuoli/il-giardino-dellorco"
+        },
+        {
+          "da": "/sale-feste/viterbo/totos",
+          "a": "/ristoranti-per-bambini/viterbo/totos"
+        },
+        {
+          "da": "/parchi-all-aperto/trapani/tenuta-pizzolungo",
+          "a": "/fattorie-didattiche/trapani/tenuta-pizzolungo"
+        },
+        {
+          "da": "/parchi-all-aperto/reggio-emilia",
+          "a": "/fattorie-didattiche/reggio-emilia"
+        },
+        {
+          "da": "/sale-feste/caserta",
+          "a": "/ristoranti-per-bambini/caserta"
+        },
+        {
+          "da": "/sale-feste/cremona",
+          "a": "/feste/cremona"
+        },
+        {
+          "da": "/sale-feste/genova",
+          "a": "/feste/genova"
+        },
+        {
+          "da": "/sale-feste/verona",
+          "a": "/feste/verona"
+        },
+        {
+          "da": "/sale-feste/viterbo",
+          "a": "/feste/viterbo"
+        }
+      ]
+    }
+  ]
+}

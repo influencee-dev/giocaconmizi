@@ -38,6 +38,9 @@ export const COLONNE: { titolo: string; voci: [string, string][] }[] = [
       ["/ludoteche", "Ludoteche"],
       ["/sale-feste", "Sale feste"],
       ["/parchi-giochi-al-coperto", "Parchi al coperto"],
+      ["/fattorie-didattiche", "Fattorie didattiche"],
+      ["/ristoranti-per-bambini", "Ristoranti e pizzerie"],
+      ["/animatori-per-feste", "Animatori e feste a domicilio"],
     ],
   },
   {
@@ -120,6 +123,17 @@ export function Piede({ logo }: { logo: ReactNode }) {
               La posta di Mizi
             </Link>
           </div>
+          <Link
+            href="/aggiungi-attivita"
+            data-piede-attivita
+            className="flex max-w-sm items-center justify-between gap-3 rounded-2xl bg-white px-5 py-4 text-notte ring-1 ring-notte/10 hover:ring-viola"
+          >
+            <span>
+              <span className="block font-extrabold">Hai un&apos;attività per bambini?</span>
+              <span className="block text-sm text-notte-tenue">Ludoteche, fattorie, ristoranti, animatori, corsi, teatri: aggiungila gratis.</span>
+            </span>
+            <Freccia className="h-5 w-5 shrink-0" />
+          </Link>
         </div>
         <nav aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-4">
           {COLONNE.map((col) => (

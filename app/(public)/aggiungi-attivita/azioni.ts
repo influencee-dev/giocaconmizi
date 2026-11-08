@@ -50,7 +50,8 @@ export async function proponi(_prima: EsitoCandidatura, form: FormData): Promise
     metti("eta", 40);
     metti("sito", 200);
     metti("instagram", 200);
-    const cat = CATEGORIE.find((c) => c.slug === pulito(form.get("categoria"), 80));
+    const scelta = pulito(form.get("categoria"), 80);
+    const cat = scelta === "altro" ? { slug: "altro" } : CATEGORIE.find((c) => c.slug === scelta);
     if (!dati.nome) return { stato: "errore", messaggio: "Scrivi il nome dell'attività." };
     if (!cat) return { stato: "errore", messaggio: "Scegli la categoria." };
     if (!dati.citta) return { stato: "errore", messaggio: "Scrivi la città." };

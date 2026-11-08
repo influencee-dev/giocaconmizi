@@ -56,6 +56,13 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   MAI foto prese dai siti o dai social dei locali: solo illustrazioni
   nostre finché l'attività non carica le sue. Email e telefoni dei locali
   NON vanno nel repo (è pubblico): stanno nel foglio privato di Giorgia.
+- Categorie della directory (08/11/2026): 13, in `CATEGORIE` di lib/directory.ts
+  (fattorie didattiche, ristoranti, animatori, corsi, teatro, allestimenti
+  oltre alle 7 storiche); una categoria diventa pagina solo con ≥1 scheda.
+  Se una regola nuova sposta schede esistenti di categoria, gli indirizzi
+  vecchi vanno aggiunti a `content/directory-spostamenti.json` (redirect
+  permanenti in next.config.ts; la batteria SEO li controlla). Il modulo
+  ha anche «Altro».
 - Candidature: `/aggiungi-attivita` (pubblica) — un'attività nuova si propone
   (anche la categoria «Associazioni e laboratori», attiva solo quando c'è una
   scheda) o un titolare chiede l'accesso alla sua scheda. Finiscono in
