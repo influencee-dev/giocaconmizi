@@ -141,6 +141,17 @@ contenuto di domani avrà bisogno di foto, prenotale oggi (`npm run foto:prenota
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 
+## Instagram (8/11/2026, docs/instagram.md)
+- Post del giorno da `lib/social/post.ts` (carosello da articolo, foto di una
+  guida, gioco): solo testi già sul sito. Slide disegnate da
+  `lib/social/disegna.tsx` (JPEG 1080×1350, Nunito in lib/social/caratteri).
+  La parte social è SOLO admin: anteprime dietro il codice
+  (`/admin/[codice]/social/anteprima/...`), `/social/<id>/<n>.jpg` risponde solo
+  con la firma HMAC del token Instagram (il prelievo di Meta), altrimenti 404.
+- Pubblicazione SOLO dal tocco di Giorgia in `/admin/[codice]/social`
+  (`lib/social/instagram.ts`, API Meta). Chiavi `INSTAGRAM_USER_ID` e
+  `INSTAGRAM_ACCESS_TOKEN` solo su Vercel; il token scade ogni 60 giorni.
+
 ## Pannello e immagini (2/11/2026)
 - Piano completo: `docs/piano-backoffice.md` (fasi A-D). Il pannello vive
   sotto `/admin/[codice]` (menu in `MenuAdmin.tsx`); il codice si controlla
