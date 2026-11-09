@@ -2268,6 +2268,40 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "busto-arsizio",
+    citta: "Busto Arsizio",
+    aggiornata: "2026-11-09",
+    rispostaBreve: "A Busto Arsizio la festa di compleanno per bambini si può fare in fattoria da Erba Fina, in via Favana, tra animali, orto e laboratori, con un giardino e una serra al chiuso. A pochi chilometri, a Gallarate, c'è La Tana di Ninì, una ludoteca con laboratori creativi, uno spazio interno e il giardino. Prenotate con qualche settimana di anticipo, soprattutto per il fine settimana.",
+    intro: "Intorno a Busto Arsizio le feste dei bambini si dividono fra la campagna, con gli animali e l'orto, e la ludoteca con i laboratori creativi. Conviene prenotare con anticipo per il fine settimana.",
+    locali: [
+      { nome: "Erba Fina", zona: "Busto Arsizio, via Favana", tipo: "fattoria didattica con spazi per feste", descrizione: "Una fattoria didattica alla periferia della città, tra prati e un bosco di robinie, con piccoli animali tra l'aia e l'orto. Organizza feste di compleanno con laboratori creativi, esperienze con gli animali o nell'orto didattico, giochi sul prato e cacce al tesoro, seguite da operatori di fattoria didattica o da educatori. Per la festa si può prenotare il giardino, anche in esclusiva, oppure la Serra Urbana, uno spazio al chiuso." },
+      { nome: "La Tana di Ninì", zona: "Gallarate, viale Milano, a pochi chilometri da Busto Arsizio", tipo: "ludoteca con laboratori e giardino per feste", descrizione: "Una ludoteca con laboratori creativi per bambini da 12 mesi a 10 anni, con uno spazio interno e un ampio giardino. Per i compleanni ci sono più formule: solo l'affitto degli spazi, la festa con allestimento a tema e animazione, oppure una festa con un allestimento più ricco. Si possono chiedere anche laboratori privati per il compleanno; gli spazi accolgono circa 25-30 persone." },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno a Busto Arsizio?", risposta: "Sì: da Erba Fina c'è la Serra Urbana, uno spazio al chiuso pensato anche per le feste, e a Gallarate La Tana di Ninì ha uno spazio interno oltre al giardino. Chiedete quale spazio è libero nella vostra data." },
+      { domanda: "Fino a che età si può festeggiare?", risposta: "La Tana di Ninì propone laboratori per bambini da 12 mesi a 10 anni. Erba Fina organizza feste in fattoria anche per i ragazzi più grandi." },
+      { domanda: "Posso portare la torta?", risposta: "Le fonti non lo dicono in modo chiaro per nessuno dei due locali: chiedetelo quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "carpi",
+    citta: "Carpi",
+    aggiornata: "2026-11-09",
+    rispostaBreve: "A Carpi la festa di compleanno per bambini si fa al coperto al BabyCSI di via Lombardia, con castello gioco, tappeti elastici, gonfiabili, saletta riservata e buffet con torta; chi ama l'acqua può scegliere la festa in piscina con Coopernuoto alla piscina Campedelli, la domenica mattina da settembre a maggio. Prenotate con qualche settimana di anticipo e chiedete cosa comprende il pacchetto.",
+    intro: "A Carpi ci sono un centro giochi al coperto con le salette per le feste e una piscina comunale che organizza compleanni anche d'inverno. Conviene prenotare con anticipo per il fine settimana.",
+    locali: [
+      { nome: "BabyCSI", zona: "Carpi, via Lombardia", tipo: "parco giochi al coperto con sale feste", descrizione: "Un centro ludico motorio per bambini fino a 11 anni, gestito da Csi Carpi Sport, con un castello gioco su tre piani, tappeti elastici, due gonfiabili, un campo da calcio e un'area soft per i più piccoli. Le feste si prenotano dal martedì alla domenica pomeriggio, con almeno 10 bambini paganti, e i pacchetti comprendono una saletta riservata e un buffet con la torta. A settembre 2026 il centro ha riaperto rinnovato." },
+      { nome: "Coopernuoto, piscina Campedelli", zona: "Carpi, piazzale delle Piscine", tipo: "piscina con corsi di nuoto e feste di compleanno", descrizione: "Coopernuoto organizza feste di compleanno in piscina per bambini e ragazzi. In vasca coperta la festa si fa la domenica mattina, da settembre a maggio, con formule per 4-13 anni e per 14-17 anni, nella vasca baby o in quella dei corsi secondo disponibilità, con giochi d'acqua. Si può scegliere solo la piscina oppure piscina con buffet." },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno a Carpi?", risposta: "Sì: il BabyCSI è un centro giochi al coperto con gonfiabili e salette per le feste, e Coopernuoto organizza feste in piscina coperta la domenica mattina, da settembre a maggio." },
+      { domanda: "Quanti bambini servono per prenotare?", risposta: "Al BabyCSI servono almeno 10 bambini paganti. Per la festa in piscina le fonti non indicano un minimo: chiedetelo quando prenotate." },
+      { domanda: "Posso portare la torta?", risposta: "Al BabyCSI la torta è già compresa nei pacchetti. Per la festa in piscina c'è la formula con buffet: se si può portare una torta propria, chiedetelo quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

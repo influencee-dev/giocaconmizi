@@ -10,6 +10,7 @@ import { VARIANTI, type Variante } from "./Sfondo";
 import { Etichette, FOGLIO_A4, MAX_ETICHETTE, nomiOspiti } from "./Etichette";
 import { FoglioFestone, PER_FOGLIO, TESTI_FESTONE, bandierine, fogli, type TestoFestone } from "./Festone";
 import { FoglioTopper, anniTopper } from "./Topper";
+import { FoglioSegnaposto, SEGNAPOSTO_PER_FOGLIO, fogliSegnaposto } from "./Segnaposto";
 
 /**
  * Il tool dei biglietti (piano §14.3).
@@ -58,6 +59,7 @@ export function Editor() {
   const [testoFestone, setTestoFestone] = useState<TestoFestone>("buon-compleanno");
   const fogliFestone = useRef<HTMLDivElement>(null);
   const foglioTopper = useRef<HTMLDivElement>(null);
+  const fogliSegnapostoRef = useRef<HTMLDivElement>(null);
   const fogliDelFestone = useMemo(() => fogli(bandierine(testoFestone, dati.nome)), [testoFestone, dati.nome]);
   const contenitore = useRef<HTMLDivElement>(null);
   const trascinato = useRef<number | null>(null);
@@ -227,6 +229,19 @@ export function Editor() {
     link.href = png;
     link.click();
   }, [dati.nome]);
+
+  const scaricaSegnaposto = useCallback(
+    async (pagina: number) => {
+      const svg = fogliSegnapostoRef.current?.querySelector(`[data-foglio-segnaposto="${pagina}"]`);
+      if (!(svg instanceof SVGSVGElement)) return;
+      const png = await biglietoInPng(svg, FOGLIO_A4.larghezza, FOGLIO_A4.altezza);
+      const link = document.createElement("a");
+      link.download = `segnaposto-${dati.nome || "festa"}-${pagina}.png`.toLowerCase().replace(/\s+/g, "-");
+      link.href = png;
+      link.click();
+    },
+    [dati.nome],
+  );
 
   const salvaNelLink = useCallback(() => {
     const codificato = datiPerLink(dati);
@@ -664,6 +679,38 @@ export function Editor() {
           {/* Il foglio vero, fuori dallo schermo: serve solo per generare il PNG. */}
           <div ref={foglioTopper} aria-hidden className="hidden">
             <FoglioTopper nome={dati.nome} eta={dati.eta} tema={dati.tema} variante={dati.variante} />
+          </div>
+        </Gruppo>
+
+        <Gruppo titolo="10. Segnaposto per la tavola">
+          <p className="text-sm text-notte-tenue">
+            Un cartoncino per ogni invitato con il suo nome, nello stesso tema del biglietto, {SEGNAPOSTO_PER_FOGLIO} per
+            foglio A4. Ritaglia sul tratteggio e piega a tenda sui puntini: il nome si legge da tutti e due i lati.
+          </p>
+          {nomi.length === 0 ? (
+            <p className="text-sm font-bold text-notte" data-segnaposto-vuoto>
+              Scrivi i nomi degli invitati al punto 7: i segnaposto usano gli stessi.
+            </p>
+          ) : (
+            <div className="flex flex-wrap gap-2">
+              {fogliSegnaposto(nomi).map((_, i, tutti) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => void scaricaSegnaposto(i + 1)}
+                  className="rounded-bolla bg-viola px-5 py-4 font-extrabold text-white"
+                  data-scarica-segnaposto={i + 1}
+                >
+                  {tutti.length === 1 ? "Scarica i segnaposto (A4)" : `Scarica i segnaposto, foglio ${i + 1} di ${tutti.length}`}
+                </button>
+              ))}
+            </div>
+          )}
+          {/* I fogli veri, fuori dallo schermo: servono solo per generare i PNG. */}
+          <div ref={fogliSegnapostoRef} aria-hidden className="hidden">
+            {fogliSegnaposto(nomi).map((gruppo, i) => (
+              <FoglioSegnaposto key={i} nomi={gruppo} tema={dati.tema} variante={dati.variante} festeggiato={dati.nome} pagina={i + 1} />
+            ))}
           </div>
         </Gruppo>
       </div>

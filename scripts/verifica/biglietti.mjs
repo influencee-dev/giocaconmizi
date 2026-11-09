@@ -14,6 +14,28 @@ page.on("pageerror", (e) => ok("nessun errore JS", false, e.message));
 await page.goto(`${BASE}/biglietti/crea`, { waitUntil: "networkidle" });
 await page.getByLabel("Nome", { exact: true }).fill("Domiziana");
 await page.getByLabel("Età", { exact: true }).fill("7");
+
+// Segnaposto: usano i nomi delle etichette (qui Martina, Leo, Aurora); un
+// foglio A4 con 3 cartoncini a due facce, PNG 2480×3508; con 7 nomi due fogli.
+ok("segnaposto: senza nomi rimanda al punto 7", (await page.locator("[data-segnaposto-vuoto]").count()) === 1);
+await page.getByLabel("Nomi degli invitati (uno per riga)").fill("Martina\n\nLeo\nAurora");
+await page.waitForTimeout(300);
+const fogliSp = page.locator("[data-foglio-segnaposto]");
+ok("segnaposto: un foglio con i 3 invitati, ognuno sulle due facce",
+  (await fogliSp.count()) === 1 && (await fogliSp.first().getAttribute("data-segnaposto")) === "3" &&
+  (await fogliSp.first().locator("[data-segnaposto-nome]").count()) === 6);
+const attesaSp = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
+await page.getByRole("button", { name: "Scarica i segnaposto (A4)" }).tap();
+const scaricatoSp = await attesaSp;
+const pngSp = scaricatoSp ? readFileSync(await scaricatoSp.path()) : null;
+ok("segnaposto: è un PNG A4 2480×3508", pngSp && pngSp.readUInt32BE(16) === 2480 && pngSp.readUInt32BE(20) === 3508);
+await page.getByLabel("Nomi degli invitati (uno per riga)").fill("Martina\nLeo\nAurora\nNoah\nSofia\nGiulia\nAhmed");
+await page.waitForTimeout(300);
+ok("segnaposto: 7 invitati su 2 fogli (6 + 1)",
+  (await fogliSp.count()) === 2 && (await page.locator("[data-scarica-segnaposto]").count()) === 2 &&
+  (await fogliSp.nth(1).getAttribute("data-segnaposto")) === "1");
+await page.getByLabel("Nomi degli invitati (uno per riga)").fill("");
+await page.waitForTimeout(200);
 await page.getByLabel("Conferma a (numero WhatsApp)").fill("333 1234567");
 await page.waitForTimeout(300);
 ok("avviso RSVP col numero valido", await page.locator("text=Confermo, ci saremo!").count());
