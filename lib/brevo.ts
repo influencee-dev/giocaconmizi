@@ -53,9 +53,9 @@ async function api(metodo: "GET" | "POST" | "PUT", percorso: string, body?: unkn
   });
   const testo = await r.text();
   try {
-    return { ok: r.ok, dati: testo ? JSON.parse(testo) : {} };
+    return { ok: r.ok, stato: r.status, dati: testo ? JSON.parse(testo) : {} };
   } catch {
-    return { ok: r.ok, dati: {} };
+    return { ok: r.ok, stato: r.status, dati: {} };
   }
 }
 
@@ -158,11 +158,19 @@ let confermaCache: number | null = null;
  * creato nell'account (con il mittente, se non c'è ancora). 0 = nessuna
  * conferma; null = non è stato possibile prepararlo (si iscrive senza).
  */
+/** Perché l'email di conferma non è pronta: codice e messaggio di Brevo, senza dati sensibili. */
+let erroreConferma = "";
+const spiega = (passo: string, r: { stato?: number; dati?: { message?: string; code?: string } } | null) =>
+  `${passo}: ${r ? `${r.stato ?? "?"} ${String(r.dati?.message ?? r.dati?.code ?? "").slice(0, 160)}` : "nessuna risposta"}`.trim();
+
 async function templateConferma(): Promise<number | null> {
   if (TEMPLATE_DOI_ENV !== undefined && TEMPLATE_DOI_ENV !== "") return Number(TEMPLATE_DOI_ENV) || 0;
   if (confermaCache) return confermaCache;
   const elenco = await api("GET", "/smtp/templates?templateStatus=true&limit=100&offset=0&sort=desc");
-  if (!elenco?.ok) return null;
+  if (!elenco?.ok) {
+    erroreConferma = spiega("elenco dei modelli", elenco);
+    return null;
+  }
   const trovato = (elenco.dati.templates ?? []).find((t: { name: string; id: number }) => t.name === NOME_CONFERMA)?.id;
   if (trovato) return (confermaCache = trovato);
 
@@ -170,7 +178,10 @@ async function templateConferma(): Promise<number | null> {
   // dominio autenticato è subito attivo, altrimenti Brevo manda un codice).
   const mittenti = await api("GET", "/senders");
   const presente = (mittenti?.dati?.senders ?? []).some((m: { email: string }) => m.email.toLowerCase() === MITTENTE.email.toLowerCase());
-  if (!presente) await api("POST", "/senders", MITTENTE);
+  if (!presente) {
+    const nuovo = await api("POST", "/senders", MITTENTE);
+    if (!nuovo?.ok) erroreConferma = spiega("mittente", nuovo);
+  }
 
   const creato = await api("POST", "/smtp/templates", {
     templateName: NOME_CONFERMA,
@@ -182,6 +193,7 @@ async function templateConferma(): Promise<number | null> {
     isActive: true,
   });
   const id = Number(creato?.dati?.id);
+  if (!id) erroreConferma = [erroreConferma, spiega("modello di conferma", creato)].filter(Boolean).join(" · ");
   return id ? (confermaCache = id) : null;
 }
 
@@ -232,7 +244,7 @@ export async function creaContatto(contatto: ContattoBrevo) {
   const conferma = listId ? await templateConferma() : null;
   // Senza email di conferma pronta non si iscrive nessuno «di nascosto»:
   // meglio un'iscrizione non riuscita (il sito lo dice) che senza la prova del consenso.
-  if (listId && conferma === null) return { ok: false, motivo: "Email di conferma non pronta in Brevo" };
+  if (listId && conferma === null) return { ok: false, motivo: `Email di conferma non pronta in Brevo (${erroreConferma || "motivo sconosciuto"})` };
   if (conferma && listId) {
     return chiama("/contacts/doubleOptinConfirmation", {
       email: contatto.email,
