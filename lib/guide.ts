@@ -317,8 +317,8 @@ const GUIDE_BREVI: Guida[] = [
       "In italiano si impara a leggere in cinque tappe: giocare coi suoni delle parole, riconoscere le lettere, fondere le sillabe (MA+RE), leggere parole intere e infine frasi con senso. A casa la cosa più efficace non è anticipare la scuola: è leggere ad alta voce ogni giorno e giocare coi suoni, senza mai trasformare la lettura in una prestazione.",
     etaMin: 4,
     etaMax: 7,
-    minutiLettura: 6,
-    aggiornata: "2026-09-26",
+    minutiLettura: 9,
+    aggiornata: "2026-11-10",
     sezioni: [
       {
         titolo: "Tappa zero: le orecchie vengono prima degli occhi",
@@ -341,10 +341,32 @@ const GUIDE_BREVI: Guida[] = [
         ],
       },
       {
+        titolo: "Giochi da fare a casa, tappa per tappa",
+        paragrafi: [
+          "Per i suoni (4-5 anni): il gioco delle rime (\"cosa fa rima con GATTO?\"), indovinare l'oggetto dal primo suono (\"vedo una cosa che comincia con SSS\"), battere le mani su ogni sillaba del nome di tutta la famiglia. Bastano pochi minuti, quando capita: in macchina, mentre si cucina, aspettando il turno dal medico.",
+          "Per le lettere (5-6 anni): la caccia alla lettera, cercando la sua iniziale su insegne, scatole e cartelli; lettere magnetiche sul frigo da toccare dicendo il suono; scrivere le lettere col dito nella farina o nella sabbia. Toccare e muovere aiuta a ricordare la forma.",
+          "Per sillabe e parole (6-7 anni): il treno delle sillabe, con un vagone di cartoncino per ogni sillaba da agganciare (MA + NO = MANO); leggere insieme le etichette della spesa o il menù della pizzeria; lasciare un bigliettino al giorno sotto il cuscino, due o tre parole in stampatello. Leggere per scoprire qualcosa motiva più di qualsiasi esercizio.",
+        ],
+      },
+      {
+        titolo: "Le lettere che si scambiano: b e d, p e q",
+        paragrafi: [
+          "Scambiare b con d, p con q o leggere al contrario qualche sillaba è comunissimo nei primi mesi: sono lettere che differiscono solo per il verso, e il cervello dei bambini impara un po' alla volta che, per le lettere, la direzione conta. Da solo non è un segnale di allarme.",
+          "Aiuta dare a ciascuna un appiglio concreto e sempre uguale, per esempio una parola-immagine che il bambino conosce bene per la b e un'altra per la d, e lavorare su una lettera alla volta prima di metterle vicine. Se gli scambi restano frequenti e insistenti anche in seconda elementare, se ne parla con l'insegnante.",
+        ],
+      },
+      {
         titolo: "Cosa fare a casa (e cosa non fare mai)",
         paragrafi: [
           "La cosa più potente resta la lettura ad alta voce dell'adulto, ogni giorno, anche dopo che il bambino ha imparato: nutre vocabolario e amore per le storie mentre lui automatizza la tecnica. Testi brevi, stampatello grande, e la stessa storia riletta cento volte va benissimo: la ripetizione è allenamento, non pigrizia.",
           "Da non fare mai: correggere ogni singolo errore (interrompe il filo e il coraggio), confrontare con fratelli o compagni, forzare chi non è pronto. E un'attenzione: se a metà prima elementare la fusione delle sillabe resta un muro, parlatene con l'insegnante — un controllo precoce non fa mai danni, aspettare sì.",
+        ],
+      },
+      {
+        titolo: "Quando chiedere un parere",
+        paragrafi: [
+          "Ogni bambino ha i suoi tempi, ma alcuni segnali meritano una chiacchierata con le insegnanti: a metà prima elementare non riesce ancora a fondere due suoni in una sillaba; in seconda legge con una fatica che non diminuisce, inventa le parole invece di leggerle, si stanca moltissimo dopo poche righe; evita in tutti i modi di leggere, anche le cose che gli piacciono.",
+          "In Italia la dislessia, uno dei disturbi specifici dell'apprendimento riconosciuti dalla legge 170 del 2010, di norma si diagnostica non prima della fine della seconda elementare: prima i tempi di apprendimento sono troppo diversi da un bambino all'altro. Chiedere un parere prima, però, non è mai sbagliato: si può parlarne col pediatra, e un aiuto mirato dato presto funziona meglio di uno dato tardi.",
         ],
       },
     ],
@@ -363,6 +385,16 @@ const GUIDE_BREVI: Guida[] = [
         domanda: "Perché si parte dallo stampatello maiuscolo?",
         risposta:
           "Perché le maiuscole sono le più facili da distinguere tra loro. Il minuscolo arriva subito dopo, e il corsivo per ultimo, quando la lettura è già avviata.",
+      },
+      {
+        domanda: "Confonde la b con la d: è dislessia?",
+        risposta:
+          "Quasi sempre no. Scambiare lettere che differiscono solo per il verso, come b e d o p e q, è normale nei primi mesi di lettura. Diventa un segnale da approfondire se resta frequente anche in seconda elementare, insieme ad altre fatiche nella lettura.",
+      },
+      {
+        domanda: "Quanto tempo al giorno dedicare alla lettura a casa?",
+        risposta:
+          "Pochi minuti ma tutti i giorni valgono più di un'ora una volta alla settimana. Per un bambino che inizia, dieci minuti di lettura insieme, più la storia della sera letta da voi, sono un ritmo sostenibile. Se diventa una lotta, accorciate e tornate al gioco.",
       },
       {
         domanda: "Legge lentamente e sillabando: devo preoccuparmi?",

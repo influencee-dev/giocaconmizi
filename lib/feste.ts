@@ -2302,6 +2302,39 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "imola",
+    citta: "Imola",
+    aggiornata: "2026-11-10",
+    rispostaBreve: "A Imola la festa di compleanno per bambini si fa da Coccolandia, un parco giochi al coperto con gonfiabile, tappeti elastici e salette per le feste, oppure al museo con «Buon compleanno al Museo» dei Musei civici, per bambini dai 6 ai 12 anni. Per il museo bisogna prenotare almeno 15 giorni prima: conviene muoversi presto.",
+    intro: "A Imola ci sono due proposte al coperto adatte a ogni stagione: il parco giochi per i più piccoli e il laboratorio al museo per chi va già a scuola. Conviene prenotare con anticipo per il fine settimana.",
+    locali: [
+      { nome: "Coccolandia Imola", zona: "Imola, via Calamelli", tipo: "parco giochi al coperto con salette per le feste", descrizione: "Un'associazione per bambini e ragazzi da 1 a 12 anni con un grande spazio giochi al chiuso: un gonfiabile grande, un playground, quattro tappeti elastici e un'area baby per i più piccoli. Su un soppalco ci sono quattro salette riservate alle feste di compleanno, con accesso all'area giochi, e il personale allestisce la sala con il tema e i colori scelti dalla famiglia.", instagram: "https://www.instagram.com/coccolandiaimola/" },
+      { nome: "Imola Musei, Buon compleanno al Museo", zona: "Imola, centro storico", tipo: "museo con laboratorio per feste di compleanno", descrizione: "I Musei civici di Imola propongono una festa di compleanno al museo per bambini dai 6 ai 12 anni, nei pomeriggi del fine settimana, della durata di circa due ore. La proposta è nel listino dei musei in vigore dal 2026 e si prenota almeno 15 giorni prima." },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno a Imola?", risposta: "Sì, tutti e due: Coccolandia è un parco giochi al chiuso con gonfiabile, tappeti elastici e salette per le feste, e anche la festa dei Musei civici si fa al coperto, nelle sale del museo." },
+      { domanda: "Qual è la proposta giusta in base all'età?", risposta: "Coccolandia accoglie bambini da 1 a 12 anni e ha un'area baby; la festa al museo è pensata per bambini dai 6 ai 12 anni." },
+      { domanda: "Posso portare la torta?", risposta: "Le fonti non lo dicono per nessuno dei due: chiedetelo quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "pordenone",
+    citta: "Pordenone",
+    aggiornata: "2026-11-10",
+    rispostaBreve: "A Pordenone la festa di compleanno per bambini si fa al New Joy Village, in zona via Nuova di Corva, con ludoteche riservate al solo gruppo della festa e un coordinatore di sala; a pochi minuti, a Fontanafredda, c'è Fable Table, una pizzeria con un'area giochi di oltre 100 metri quadri. Per il sabato e la domenica conviene prenotare con largo anticipo.",
+    intro: "Intorno a Pordenone ci sono locali al coperto pensati per le feste dei più piccoli, utili soprattutto nei mesi freddi. Conviene prenotare con anticipo per il fine settimana.",
+    locali: [
+      { nome: "New Joy Village", zona: "Pordenone, zona via Nuova di Corva", tipo: "ludoteca con sale feste riservate", descrizione: "Un centro con ludoteche per le feste di compleanno. La festa è in esclusiva: la ludoteca è riservata solo al gruppo che ha prenotato e c'è un coordinatore di sala dedicato; le guide locali citano anche i gonfiabili. Si può festeggiare dalla mattina alla sera e il centro riceve su appuntamento." },
+      { nome: "Fable Table", zona: "Fontanafredda, viale Venezia, a pochi minuti da Pordenone", tipo: "pizzeria con area bimbi e feste di compleanno", descrizione: "Una pizzeria pensata per le famiglie, con un'area giochi di oltre 100 metri quadri con gonfiabili, playground e mattoncini giganti. Per la festa si può portare la torta da casa o sceglierla dal locale, e d'estate si può festeggiare anche nell'area giochi all'aperto." },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno a Pordenone?", risposta: "Sì: il New Joy Village ha ludoteche al coperto riservate al gruppo della festa, e Fable Table a Fontanafredda ha un'area giochi interna di oltre 100 metri quadri con gonfiabili." },
+      { domanda: "Posso portare la torta?", risposta: "Da Fable Table sì: si può portare da casa oppure ordinarla al locale. Per il New Joy Village le fonti non lo dicono: chiedetelo quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {
