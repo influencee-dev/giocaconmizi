@@ -1,19 +1,23 @@
 # Foto preparate la sera prima
 
-Le foto si preparano **la sera prima**, così il contenuto del giorno dopo esce
-già con la foto. Dall'11/11/2026 le genera la routine serale di Claude con
-l'API immagini di OpenAI, nel cloud: funziona anche a computer spento (la
-routine Codex/ChatGPT delle 6:00 non serve più). Il documento dei prompt su
-Drive resta come riserva per rifare a mano una foto.
+Le foto si preparano **il giorno prima**, così il contenuto del giorno dopo esce
+già con la foto. Dal 12/11/2026 le genera l'attività programmata di ChatGPT
+delle 9:30 (nel cloud, anche a computer spento) dal documento «Prompt del
+giorno» che la routine delle 9:00 carica su Drive; la sera alle 21:00 Claude le
+importa. L'API di OpenAI (`npm run foto:genera`) resta la riserva automatica.
 
-## Il giro
+## Il giro (dal 12/11/2026: con ChatGPT e la Bacheca, docs/bacheca.md)
 
 | Quando | Chi | Cosa |
 |---|---|---|
 | durante il giorno | chiunque prepari contenuti (routine, chat) | prenota le foto che gli serviranno **domani o dopo**: `npm run foto:prenota` |
-| 21:00 | routine Claude «Giocamizi · Foto della sera» | sceglie l'articolo di domani e ne prenota la foto; `npm run foto:genera -- --data <domani>` genera le foto con l'API e le mette in public/immagini; carica su Drive il documento dei prompt (riserva); verifica e pubblica |
-| 9:00 | routine Claude articoli | importa eventuali foto caricate a mano in «99 Immagini pronte», poi scrive e pubblica l'articolo, che trova già la sua foto |
-| 7:00 e ogni altra sessione | chi lavora | importa le foto caricate a mano prima di iniziare (il comando salta quelle già sul sito) |
+| 9:00, subito | routine Claude articoli | prenota la foto dell'articolo di DOMANI (`npm run articoli:piano -- domani`) e carica su Drive il «Prompt del giorno» di domani |
+| 9:30 | attività programmata di ChatGPT | genera le foto del «Prompt del giorno» più recente e le salva in «99 Immagini pronte» (docs/chatgpt-attivita.md) |
+| 21:00 | routine Claude «Foto della sera» | importa le foto di ChatGPT; le mancanti le genera con l'API (`npm run foto:genera`, solo con la chiave); verifica e pubblica: domani i contenuti escono con la foto |
+| 7:00 e ogni altra sessione | chi lavora | importa le foto arrivate prima di iniziare (il comando salta quelle già sul sito) |
+
+Ogni giro lascia una nota in Drive «Giocamizi / 0 Bacheca» e legge quelle
+degli ultimi 2 giorni prima di iniziare.
 
 ## Generazione con l'API (scripts/foto-genera.ts)
 - Stesse foto e stessi prompt del documento su Drive (`lib/foto-del-giorno.ts`):

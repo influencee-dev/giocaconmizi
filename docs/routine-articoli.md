@@ -40,9 +40,15 @@ Se un'esperienza c'è, va registrata in `esperienzeAutentiche` (fonte + data).
 Il controllo automatico blocca ogni segno di vissuto senza quella voce.
 
 ## Il giro quotidiano (fuso Europe/Rome, alle 9:00)
-0. **Foto arrivate**: importa da Drive «99 Immagini pronte» le foto non ancora
-   sul sito (`npm run foto-arrivate`, procedura in docs/foto-sera.md). Le ha
-   generate ChatGPT alle 6:00 dai prompt preparati ieri sera.
+0. **Bacheca e foto di domani, SUBITO** (ChatGPT parte alle 9:30, docs/bacheca.md):
+   leggi le note degli ultimi 2 giorni in Drive «Giocamizi / 0 Bacheca».
+   Poi `npm run articoli:piano -- domani`: fissa lo slug definitivo
+   (`segna <id> da-fare --slug <slug>`), scrivi la scena e prenota
+   `guida-<slug>` `--per <domani>` (come nella sezione «La foto di domani» sotto);
+   `npm run prompt-del-giorno -- --data <domani>` e carica il testo come doc
+   nuovo «Prompt del giorno · GG/MM/AAAA» (data di domani) in «02 Prompt del giorno».
+   Committa subito piano e coda (`git pull --rebase`, push). Poi importa da
+   «99 Immagini pronte» le foto non ancora sul sito (`npm run foto-arrivate`).
 1. `git pull` su main. `npm run articoli:piano -- prossimo`: argomento del giorno
    (se uno è già `bozza` o `bloccato`, si riprende quello: niente doppioni).
    **Usa lo slug fissato ieri sera** nel piano e, per `foto.scena` e `foto.alt`,
@@ -71,33 +77,43 @@ Il controllo automatico blocca ogni segno di vissuto senza quella voce.
    Se NON passa (o `modalita` è `draft_only`): resta `bozza`,
    `segna <id> bloccato` (o `bozza`), si committa solo il Markdown e il piano
    (la bozza non va online: compila esclude le bozze), e il report dice cosa manca.
-8. Report (≤ 12 righe): data, argomento, keyword, titolo, caratteri, fonti
+8. Nota in Bacheca: doc nuovo «AAAA-MM-GG 09:00 · Claude · Articolo» in
+   «0 Bacheca» (Fatto / Per chi viene dopo / Problemi).
+   Report (≤ 12 righe): data, argomento, keyword, titolo, caratteri, fonti
    verificate, immagini, link interni, esito SEO, build e test, stato, blocchi,
    prossimo argomento. Mai pubblicare il report come articolo.
 
 Un giorno senza fonti sufficienti produce un report, non un articolo inventato.
 
-## La sera prima (routine «Foto della sera», 21:00)
-1. `git pull`. `npm run articoli:piano -- prossimo`: è l'argomento che la routine
-   delle 9:00 scriverà domani (se c'è una bozza o un bloccato, è quello).
+## La foto di domani (la prepara la routine delle 9:00, passo 0)
+1. `git pull`. `npm run articoli:piano -- domani`: è l'argomento che la routine
+   delle 9:00 scriverà domani. (La sera, alle 21:00, si controlla con
+   `prossimo`: se la sua foto non è prenotata, la prenota la routine della sera.)
 2. Fissa lo slug definitivo (corto, con la keyword, senza date):
    `npm run articoli:piano -- segna <id> <stato attuale> --slug <slug>`.
 3. Scrivi la scena della foto di testata (regole in docs/foto-sera.md e
    scripts/blocchi-prompt.ts: niente loghi, schermate di giochi, personaggi
    protetti, persone reali; Mizi come pupazzo) e prenotala:
    `npm run foto:prenota -- --file guida-<slug> --per <domani> --titolo "Foto dell'articolo «…»" --scena "…" --alt "…" --chi "routine articoli"`.
-4. `npm run foto:genera -- --data <domani>`: genera con l'API di OpenAI le
-   foto prenotate (più fino a 2 che mancano al sito) e le mette in
-   public/immagini come WebP. Guarda ogni PNG in .foto-generate/<domani>/: niente
-   scritte leggibili, loghi, schermate di giochi, persone reali; Mizi riconoscibile.
-   Una foto sbagliata si cancella (i suoi WebP compresi) e resta da fare a mano.
-   Se esce con codice 2 (manca OPENAI_API_KEY) si va avanti senza foto.
-5. `npm run prompt-del-giorno -- --data <domani>` e carica il testo come
+4. `npm run prompt-del-giorno -- --data <domani>` e carica il testo come
    documento nuovo «Prompt del giorno · GG/MM/AAAA» in Drive «02 Prompt del giorno»:
-   è la riserva per rifare a mano le foto saltate.
-6. Se sono arrivati WebP nuovi: `npm run date-pagine` e le TRE verifiche di
+   sono i compiti di ChatGPT delle 9:30.
+
+## La sera (routine «Foto della sera», 21:00)
+1. `git pull`. Leggi le note degli ultimi 2 giorni in «0 Bacheca».
+2. Importa le foto di ChatGPT da «99 Immagini pronte» (`npm run foto-arrivate`,
+   docs/foto-sera.md). Guarda ogni foto nuova: niente scritte leggibili, loghi,
+   schermate di giochi, persone reali; Mizi riconoscibile. Una foto sbagliata
+   non si importa e resta da rifare.
+3. `npm run articoli:piano -- prossimo`: se la foto dell'articolo di domani non
+   è prenotata (la routine delle 9:00 è saltata), prenotala ora.
+4. Foto ancora mancanti: `npm run foto:genera -- --data <domani>` (API OpenAI).
+   Se esce con codice 2 (manca OPENAI_API_KEY) si va avanti senza.
+5. Se sono arrivati WebP nuovi: `npm run date-pagine` e le TRE verifiche di
    CLAUDE.md (una foto di una guida già online cambia la pagina). Poi commit
    (piano, coda, public/immagini), `git pull --rebase`, push su main, deploy READY.
+6. Nota in Bacheca: «AAAA-MM-GG 21:00 · Claude · Foto importate» (foto
+   importate, foto che mancano ancora col loro nome, problemi).
 
 ## Non pestarsi i piedi con la routine delle 7:00
 Questo job gira dopo (alle 9:00) e tocca solo: content/guide/, content/piano-editoriale.json,

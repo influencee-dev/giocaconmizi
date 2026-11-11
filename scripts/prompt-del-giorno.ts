@@ -1,9 +1,9 @@
 /**
  * «Prompt del giorno» (cartella Drive «Giocamizi · Prompt immagini / 02 Prompt
- * del giorno»): la RISERVA manuale delle foto di un giorno. Dall'11/11/2026 le
- * foto le genera la routine serale con l'API di OpenAI (scripts/foto-genera.ts);
- * questo documento resta su Drive per rifarle a mano in ChatGPT se l'API non
- * risponde o una foto non piace. Stesse foto e stessi prompt: lib/foto-del-giorno.ts.
+ * del giorno»): le foto che servono in un giorno. Dal 12/11/2026 lo carica la
+ * routine articoli delle 9:00 per il giorno DOPO e l'attività programmata di
+ * ChatGPT delle 9:30 genera le foto in «99 Immagini pronte» (docs/bacheca.md);
+ * la sera Claude le importa. Stesse foto e stessi prompt: lib/foto-del-giorno.ts.
  *
  *   npm run prompt-del-giorno -- [--quante 2] [--data 2026-11-12]
  */
@@ -22,7 +22,7 @@ const righe: string[] = [
   `# Prompt del giorno · ${data.split("-").reverse().join("/")}`,
   "",
   oggi.length
-    ? `${oggi.length === 1 ? "C'è 1 foto" : `Ci sono ${oggi.length} foto`} per questo giorno (${prenotate.length} prenotate per i contenuti, poi ${oggi.length - prenotate.length} delle ${mancanti.length} che mancano al sito). Di solito le genera già la routine serale di Claude: questo documento serve per rifarle a mano se una non è arrivata o non piace. Per ognuna: una conversazione nuova in ChatGPT, l'immagine di Mizi come riferimento, il prompt intero, poi il PNG nella cartella «99 Immagini pronte» con il nome indicato. Claude le importa da sola il mattino dopo.`
+    ? `${oggi.length === 1 ? "C'è 1 foto" : `Ci sono ${oggi.length} foto`} per questo giorno (${prenotate.length} prenotate per i contenuti, poi ${oggi.length - prenotate.length} delle ${mancanti.length} che mancano al sito). Le genera l'attività programmata di ChatGPT delle 9:30 del giorno prima; se una manca o non piace si rifà a mano. Per ognuna: una conversazione nuova in ChatGPT, l'immagine di Mizi come riferimento (3 Risorse / Mizi e brand), il prompt intero, poi il PNG nella cartella «99 Immagini pronte» con il nome indicato. Claude la importa la sera alle 21:00.`
     : "Per questo giorno non manca nessuna foto: il sito le ha tutte.",
   "",
 ];

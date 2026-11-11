@@ -102,13 +102,12 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   JSON-LD e link interni ai giochi pertinenti.
 - Foto preparate LA SERA PRIMA (docs/foto-sera.md): chi prepara un contenuto
   prenota le foto che gli serviranno domani o dopo in `content/foto-in-arrivo.json`
-  (`npm run foto:prenota`). Dall'11/11/2026 alle 21:00 la routine «Foto della
-  sera» le GENERA con l'API di OpenAI (`npm run foto:genera -- --data <domani>`,
-  chiave OPENAI_API_KEY solo nell'ambiente cloud «Giocamizi»), le mette in
-  public/immagini e pubblica: funziona a computer spento. Il documento dei prompt
-  (`npm run prompt-del-giorno`) va comunque su Drive «02 Prompt del giorno»
-  (id 1B5v_f7JpfXiZGnnXyEBBXxzy9ARYtYwe) come riserva manuale: le foto rifatte a
-  mano finiscono in «99 Immagini pronte» (id 1lUlL1Uj2AspXO2SgFeSU_itN0nu2RQbP)
+  (`npm run foto:prenota`). Dal 12/11/2026 il giro è quello della Bacheca (sotto):
+  il documento dei prompt (`npm run prompt-del-giorno -- --data <domani>`) va su
+  Drive «02 Prompt del giorno» (id 1B5v_f7JpfXiZGnnXyEBBXxzy9ARYtYwe) alle 9:00,
+  ChatGPT genera alle 9:30, Claude importa alle 21:00. Riserva: l'API di OpenAI
+  (`npm run foto:genera`, chiave OPENAI_API_KEY solo nell'ambiente cloud
+  «Giocamizi»). Le foto finiscono in «99 Immagini pronte» (id 1lUlL1Uj2AspXO2SgFeSU_itN0nu2RQbP)
   con nomi neutri (foto-xxxxxxxx) e chi lavora dopo le importa con
   `npm run foto-arrivate -- <cartella>`. Prompt e scelta delle foto: lib/foto-del-giorno.ts.
 - Sitemap delle immagini (08/11/2026): le foto vere stanno in sitemap con
@@ -125,6 +124,16 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
 - Ogni file nuovo di Giocamizi va nel cassetto giusto, mai nella radice; una
   cartella nuova = una riga nel LEGGIMI; progetto finito → 4 Archivio; mai
   cancellare. Il resto del Drive di Giorgia non si tocca.
+
+- Bacheca (12/11/2026, docs/bacheca.md): Claude e ChatGPT lavorano in
+  continuità su Drive. Ogni routine legge le note degli ultimi 2 giorni in
+  «0 Bacheca» (id 1wY3hFuwkjp-BwlD8jEsDF-AllPG4XXtG) e ne lascia una nuova
+  («AAAA-MM-GG HH:MM · Claude · cosa»: Fatto / Per chi viene dopo / Problemi).
+  Giro: 9:00 Claude prenota la foto di DOMANI (`npm run articoli:piano -- domani`)
+  e carica il «Prompt del giorno»; 9:30 ChatGPT (attività programmata, testo in
+  docs/chatgpt-attivita.md) genera le foto in «99 Immagini pronte»; 21:00 Claude
+  le importa (l'API OpenAI è solo la riserva). Questo sostituisce il vecchio
+  giro «prompt alle 21:00, ChatGPT alle 6:00».
 
 ## Ambiente di lavoro (sessioni Claude)
 - Playwright: Chromium in `/opt/pw-browsers/chromium` (collegamento alla
@@ -150,7 +159,7 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   (`npm run articoli:piano -- prossimo | stato | segna`). Cancello prima di
   pubblicare: `npm run articoli:controlla -- <slug> --rete` (≥27.000 caratteri,
   fonti, prezzi datati, immagini autorizzate, autenticità): se fallisce, resta bozza.
-- Procedura completa del job quotidiano (9:00, dopo le foto di ChatGPT delle 6:00): `docs/routine-articoli.md`.
+- Procedura completa del job quotidiano (9:00): `docs/routine-articoli.md`.
 
 ## Co-work quotidiano (Routine delle 7:00 italiane)
 Un miglioramento al giorno, piccolo e finito, a rotazione:
@@ -159,6 +168,8 @@ NUOVE le scrive solo la routine articoli delle 9:00, mai questa) · (c) giochi �
 (d) SEO/AEO tecnico. Non toccare content/guide/ né content/piano-editoriale.json.
 Prima di iniziare importa le foto arrivate in «99 Immagini pronte»; se il
 contenuto di domani avrà bisogno di foto, prenotale oggi (`npm run foto:prenota`).
+Prima leggi le note recenti in «0 Bacheca» e alla fine lasciane una
+(«AAAA-MM-GG 07:00 · Claude · Miglioramento», docs/bacheca.md).
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 

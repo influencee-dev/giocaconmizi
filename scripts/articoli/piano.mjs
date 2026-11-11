@@ -1,6 +1,7 @@
 // Il calendario dei 100 articoli (content/piano-editoriale.json): uno al giorno.
 //
 //   node scripts/articoli/piano.mjs prossimo        il prossimo argomento da scrivere + possibili doppioni
+//   node scripts/articoli/piano.mjs domani          l'argomento DOPO quello di oggi (per prenotarne la foto)
 //   node scripts/articoli/piano.mjs stato           quanti fatti, in bozza, bloccati
 //   node scripts/articoli/piano.mjs segna <id> <stato> [--slug x] [--motivo "..."]
 //        stati: da-fare | bozza | bloccato | pubblicato | sostituito
@@ -66,6 +67,17 @@ if (comando === "prossimo") {
     console.log("\nPagine con un intento forse simile (controlla la cannibalizzazione):");
     for (const p of simili.slice(0, 5)) console.log(`  /guide/${p.slug} — ${p.titolo} (${Math.round(p.s * 100)}%)`);
   }
+} else if (comando === "domani") {
+  // L'argomento che la routine scriverà DOMANI: il primo «da-fare» dopo quello
+  // di oggi (oggi = la bozza/il bloccato aperto, o il primo da-fare).
+  const aperto = piano.argomenti.find((a) => a.stato === "bozza" || a.stato === "bloccato");
+  const daFare = piano.argomenti.filter((a) => a.stato === "da-fare").sort((a, b) => a.ordine - b.ordine);
+  const voce = aperto ? daFare[0] : daFare[1];
+  if (!voce) {
+    console.log("Nessun argomento per domani: il piano è finito.");
+    process.exit(0);
+  }
+  console.log(JSON.stringify(voce, null, 2));
 } else if (comando === "stato") {
   const conta = {};
   for (const a of piano.argomenti) conta[a.stato] = (conta[a.stato] ?? 0) + 1;
@@ -95,6 +107,6 @@ if (comando === "prossimo") {
   salva();
   console.log(`#${voce.id} ${voce.slug} → ${stato}`);
 } else {
-  console.error("Uso: piano.mjs prossimo | stato | segna <id> <stato>");
+  console.error("Uso: piano.mjs prossimo | domani | stato | segna <id> <stato>");
   process.exit(2);
 }
