@@ -98,7 +98,17 @@ export async function diagnosiBrevo(): Promise<string> {
  * per un'email. Testi e grafica in lib/email-servizio.ts.
  */
 export async function inviaEmailServizio(e: { a: string; oggetto: string; html: string; etichetta: string; rispondiA?: string }): Promise<boolean> {
-  if (!chiave()) return false;
+  return (await inviaConEsito(e)).ok;
+}
+
+/**
+ * Come inviaEmailServizio, ma dice perché un'email non è partita (codice e
+ * messaggio di Brevo). Il motivo finisce anche nei log di Vercel, senza
+ * destinatario né chiave: così un invio fallito non resta muto.
+ */
+async function inviaConEsito(e: { a: string; oggetto: string; html: string; etichetta: string; rispondiA?: string }): Promise<{ ok: boolean; motivo: string }> {
+  if (!chiave()) return { ok: false, motivo: "manca BREVO_API_KEY su Vercel" };
+  let motivo: string;
   try {
     const invio = await Promise.race([
       api("POST", "/smtp/email", {
@@ -111,10 +121,48 @@ export async function inviaEmailServizio(e: { a: string; oggetto: string; html: 
       }),
       new Promise<null>((ok) => setTimeout(() => ok(null), 6000)),
     ]);
-    return Boolean(invio?.ok);
-  } catch {
-    return false;
+    if (invio?.ok) return { ok: true, motivo: "" };
+    motivo = invio
+      ? [invio.dati?.code, invio.dati?.message].filter(Boolean).join(": ").slice(0, 240) || "Brevo ha rifiutato senza messaggio"
+      : "Brevo non ha risposto entro 6 secondi";
+  } catch (err) {
+    motivo = `Brevo non raggiungibile (${String(err).slice(0, 120)})`;
   }
+  console.error(`[brevo] email «${e.etichetta}» non partita: ${motivo}`);
+  return { ok: false, motivo };
+}
+
+/**
+ * Lo stato dell'invio per il pannello: quale account Brevo è collegato (nome
+ * dell'azienda, mai l'email), se il mittente del sito è attivo e se il suo
+ * dominio è autenticato in quell'account.
+ */
+export async function statoInvio(): Promise<{ account: string; mittente: string; dominio: string } | null> {
+  if (!chiave()) return null;
+  const dominioMittente = MITTENTE.email.split("@")[1]?.toLowerCase() ?? "";
+  const [account, mittenti, domini] = await Promise.all([api("GET", "/account"), api("GET", "/senders"), api("GET", "/senders/domains")]);
+  const nome = account?.ok ? String(account.dati?.companyName || account.dati?.firstName || "senza nome") : "non leggibile";
+  const m = (mittenti?.dati?.senders ?? []).find((s: { email: string }) => s.email.toLowerCase() === MITTENTE.email.toLowerCase()) as
+    | { active?: boolean }
+    | undefined;
+  const d = (domini?.dati?.domains ?? []).find((x: { domain_name: string }) => x.domain_name.toLowerCase() === dominioMittente) as
+    | { authenticated?: boolean; verified?: boolean }
+    | undefined;
+  return {
+    account: nome,
+    mittente: !mittenti?.ok ? "non leggibile" : !m ? `${MITTENTE.email} NON c'è tra i mittenti` : m.active ? `${MITTENTE.email} attivo` : `${MITTENTE.email} presente ma NON attivo (da confermare)`,
+    dominio: !domini?.ok ? "non leggibile" : !d ? `${dominioMittente} NON aggiunto in questo account` : d.authenticated ? `${dominioMittente} autenticato` : `${dominioMittente} aggiunto ma NON autenticato (record DNS)`,
+  };
+}
+
+/** Un'email di prova verso l'indirizzo indicato: dice subito se parte o perché no. */
+export async function provaEmailServizio(a: string): Promise<{ ok: boolean; motivo: string }> {
+  return inviaConEsito({
+    a,
+    oggetto: "Prova dal pannello di Giocamizi",
+    html: `<!doctype html><html lang="it"><body style="font-family:Arial,Helvetica,sans-serif;color:#1F2430;"><p>Questa è un'email di prova dal pannello di Giocamizi: se la leggi, le email di servizio partono.</p></body></html>`,
+    etichetta: "prova-pannello",
+  });
 }
 
 let listeCache: Record<keyof typeof LISTE, number> | null = null;

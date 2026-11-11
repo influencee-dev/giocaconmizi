@@ -1,4 +1,4 @@
-import { inviaEmailServizio } from "./brevo";
+import { inviaEmailServizio, provaEmailServizio } from "./brevo";
 import { TITOLARE } from "./legal";
 
 /**
@@ -16,6 +16,11 @@ import { TITOLARE } from "./legal";
 const SITO = "https://giocamizi.it";
 /** Dove arrivano gli avvisi per Giorgia: AVVISI_EMAIL su Vercel, se no la casella del sito. */
 const AVVISI = process.env.AVVISI_EMAIL || TITOLARE.email;
+
+/** La prova dal pannello va dove arrivano gli avvisi: se parte questa, partono anche le altre. */
+export async function provaVersoAvvisi(): Promise<{ ok: boolean; motivo: string; a: string }> {
+  return { ...(await provaEmailServizio(AVVISI)), a: AVVISI };
+}
 
 /** Tutto ciò che arriva dai moduli va ripulito prima di entrare nell'HTML. */
 const h = (testo: string) =>
