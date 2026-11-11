@@ -101,6 +101,32 @@ for (let r = 0; r < 10; r++) {
 ok("con l'H o senza: dopo un errore Mizi mostra il trucco", truccoVisto);
 ok("con l'H o senza: partita completa 10/10", frasiH === 10, `${frasiH}/10`);
 
+// Le doppie: si tocca la prima parola; se Mizi mostra la spiegazione era
+// sbagliata e si tocca l'altra. Le due parole differiscono solo per una
+// consonante raddoppiata, e il fumetto non contiene la risposta prima della scelta.
+await page.goto(`${BASE}/giochi/le-doppie/gioca`, { waitUntil: "networkidle" });
+await page.waitForTimeout(800);
+let roundDoppie = 0;
+let spiegazioneVista = false;
+let coppieBuone = true;
+for (let r = 0; r < 10; r++) {
+  const bottoni = page.locator("main button[aria-label]").filter({ hasText: /^[a-zàèéìòù]+$/ });
+  if ((await page.locator("main [data-frase]").count()) === 0) break;
+  const parole = (await bottoni.allTextContents()).map((t) => t.trim()).filter(Boolean).slice(0, 2);
+  const [a, b] = [...parole].sort((x, y) => x.length - y.length);
+  if (!(a && b && b.length === a.length + 1 && [...b].some((_, i) => b.slice(0, i) + b.slice(i + 1) === a && b[i] === b[i - 1]))) coppieBuone = false;
+  await page.locator(`main button[aria-label='${parole[0]}']`).first().tap();
+  await page.waitForTimeout(300);
+  if (await page.locator("[data-aiuto]").isVisible().catch(() => false)) {
+    spiegazioneVista = true;
+    await page.locator(`main button[aria-label='${parole[1]}']`).first().tap();
+  }
+  roundDoppie++;
+  await page.waitForTimeout(1400);
+}
+ok("le doppie: ogni round è una coppia semplice/doppia", coppieBuone);
+ok("le doppie: partita completa 10/10, con la spiegazione dopo un errore", roundDoppie === 10 && spiegazioneVista, `${roundDoppie}/10, spiegazione ${spiegazioneVista}`);
+
 // Il robot ballerino: 6 coreografie lette dall'istruzione, toccando sempre
 // la PRIMA tessera con quel nome. Con le mosse doppie (due "batti le mani")
 // è il caso che scoprì il bug dei gemelli: la mossa giusta rifiutata

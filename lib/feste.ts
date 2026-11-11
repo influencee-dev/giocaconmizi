@@ -2335,6 +2335,40 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "sesto-san-giovanni",
+    citta: "Sesto San Giovanni",
+    aggiornata: "2026-11-11",
+    rispostaBreve: "A Sesto San Giovanni la festa di compleanno per bambini si fa al Sesto Regno di via Mazzini, una ludoteca con quattro sale feste a tema e un'area bimbi con gonfiabili e scivolo, oppure negli spazi di Al Villaggio, l'associazione di via Cavallotti che affitta saletta o salone in esclusiva per tre ore, anche a chi non è socio. Scegliete il pacchetto in base al numero di bambini e chiedete subito cosa comprende tra cibo e torta.",
+    intro: "A Sesto San Giovanni ci sono sale feste in esclusiva per qualche ora, con area giochi, sia in ludoteca sia in un'associazione sportiva del quartiere. Conviene prenotare con anticipo per il fine settimana.",
+    locali: [
+      { nome: "Il Sesto Regno", zona: "Sesto San Giovanni, via Mazzini", tipo: "ludoteca con area bimbi e sale feste a tema", descrizione: "Di pomeriggio è una giocheria per bambini, con una sala con scivolo, gonfiabili, playground e una zona per i più piccoli. Ha quattro sale per le feste, pensate per compleanni ed eventi di bambini da 0 a 12 anni, con formule diverse: in alcune si può portare il cibo confezionato, in altre la torta è già compresa. Si possono organizzare anche pizzate, con allestimento e menù da concordare." },
+      { nome: "Al Villaggio", zona: "Sesto San Giovanni, via Cavallotti", tipo: "associazione sportiva con saletta e salone per feste", descrizione: "L'associazione affitta i suoi spazi per le feste dei bambini da 0 a 11 anni, anche a chi non è socio. Ci sono più pacchetti, dal «fai da te» in su, tutti con il locale in esclusiva per tre ore: si sceglie la saletta o il salone, con area giochi e spazio esterno. Su richiesta c'è l'animazione per i più piccoli.", instagram: "https://www.instagram.com/al_villaggio/" },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno a Sesto San Giovanni?", risposta: "Sì: Il Sesto Regno ha sale feste e un'area bimbi interna con gonfiabili, scivolo e playground, e Al Villaggio mette a disposizione saletta o salone, oltre allo spazio esterno." },
+      { domanda: "Posso portare la torta?", risposta: "Dipende dal pacchetto: al Sesto Regno alcune formule permettono di portare cibo confezionato, altre comprendono già la torta. Per Al Villaggio chiedetelo quando prenotate: il pacchetto «fai da te» è pensato per organizzare voi." },
+      { domanda: "Fino a che età vanno bene queste feste?", risposta: "Al Sesto Regno le sale sono pensate per bambini da 0 a 12 anni, Al Villaggio per bambini da 0 a 11 anni. Per un festeggiato più grande chiedete al locale." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "altamura",
+    citta: "Altamura",
+    aggiornata: "2026-11-11",
+    rispostaBreve: "Ad Altamura la festa di compleanno per bambini si fa all'Agorateca, la biblioteca di comunità di via Stefano Lorusso, tra letture ad alta voce e laboratori creativi, oppure alla Favola, in via Monte Rosa, che è ludoteca, parco giochi e sala per compleanni. All'Agorateca le feste si tengono soprattutto nel fine settimana: prenotate con qualche settimana di anticipo.",
+    intro: "Ad Altamura si può scegliere tra una festa con libri e laboratori e una festa in ludoteca con giochi e spazio per correre. Conviene prenotare con anticipo per il fine settimana.",
+    locali: [
+      { nome: "Agorateca", zona: "Altamura, via Stefano Lorusso", tipo: "biblioteca di comunità con laboratori e feste di compleanno", descrizione: "La biblioteca di comunità di Altamura offre per i compleanni uno spazio interno ed esterno dove passare il pomeriggio tra letture ad alta voce e laboratori creativi. Gli allestimenti usano materiali naturali e sostenibili, con festoni, stoviglie e inviti su carta riciclata, e ai genitori si chiede il tema preferito del festeggiato. Torta e merenda le preparano le famiglie.", instagram: "https://www.instagram.com/agoratecaaltamura/" },
+      { nome: "La Favola", zona: "Altamura, via Monte Rosa", tipo: "ludoteca con parco giochi e sala feste", descrizione: "Si presenta come ludoteca, parco giochi e sala per le feste di compleanno, e ogni estate organizza anche un campo estivo per bambini. Spazi e formule della festa si concordano direttamente con la struttura." },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno ad Altamura?", risposta: "L'Agorateca ha uno spazio interno, oltre a quello esterno, dove fare letture e laboratori anche nei mesi freddi. Anche La Favola è una ludoteca: chiedete quali spazi sono al chiuso quando prenotate." },
+      { domanda: "Posso portare la torta?", risposta: "All'Agorateca sì: torta e merenda le preparano i genitori. Per La Favola le fonti non lo dicono: chiedetelo quando prenotate." },
+      { domanda: "Che festa scegliere per un bambino che ama libri e lavoretti?", risposta: "L'Agorateca è pensata proprio per questo: letture ad alta voce, laboratori creativi e un allestimento sul tema scelto dal festeggiato." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

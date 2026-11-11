@@ -30,6 +30,7 @@ export const slugGiocabili = [
   "l-orologio",
   "ortografia-c-ch-g-gh",
   "con-l-h-o-senza",
+  "le-doppie",
   "tabelline",
   "leggi-e-rispondi",
   "guida-mizi",

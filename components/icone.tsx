@@ -68,6 +68,7 @@ export const ICONE_GIOCO: Record<string, NomeIcona[]> = {
   "vesti-mizi": ["pinguino", "unicorno"],
   "colora-con-mizi": ["tavolozza", "matita"],
   "con-l-h-o-senza": ["matita", "libro"],
+  "le-doppie": ["matita", "orecchio"],
   "addizioni-entro-20": ["piu", "pesce"],
   "l-orologio": ["orologio"],
   tabelline: ["per", "numeri"],
