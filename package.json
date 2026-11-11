@@ -20,7 +20,8 @@
     "articoli:compila": "node scripts/articoli/compila.mjs",
     "articoli:controlla": "node scripts/articoli/controlla.mjs",
     "articoli:piano": "node scripts/articoli/piano.mjs",
-    "foto:prenota": "tsx scripts/foto-prenota.ts"
+    "foto:prenota": "tsx scripts/foto-prenota.ts",
+    "foto:genera": "tsx scripts/foto-genera.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",

@@ -100,19 +100,17 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   generati dai registri. JSON-LD in `components/seo/JsonLd.tsx`.
 - SEO/AEO: ogni contenuto nuovo deve avere risposta citabile, FAQ con
   JSON-LD e link interni ai giochi pertinenti.
-- Foto da ChatGPT, preparate LA SERA PRIMA (08/11/2026, docs/foto-sera.md):
-  chi prepara un contenuto prenota le foto che gli serviranno domani o dopo
-  in `content/foto-in-arrivo.json` (`npm run foto:prenota`). Alle 21:00 la
-  routine «Prompt della sera» prenota la foto dell'articolo di domani e
-  carica `npm run prompt-del-giorno -- --data <domani>` come doc nuovo in Drive
-  «Giocamizi · Prompt immagini / 02 Prompt del giorno» (id 1B5v_f7JpfXiZGnnXyEBBXxzy9ARYtYwe).
-  Alle 6:00 la routine ChatGPT di Giorgia genera le foto in «99 Immagini pronte»
-  (id 1lUlL1Uj2AspXO2SgFeSU_itN0nu2RQbP) col nome indicato. Chi lavora dopo
-  (articoli 9:00, routine 7:00, chat) le scarica in una cartella dello
-  scratchpad e `npm run foto-arrivate -- <cartella>` le trasforma in WebP
-  (riconosce guida-<slug>, i file di FOTO, i codici e le prenotazioni, anche
-  di pagine non ancora uscite). Un nome non riconosciuto si guarda a mano.
-  La mattina NON si genera più il prompt del giorno: è già uscito la sera prima.
+- Foto preparate LA SERA PRIMA (docs/foto-sera.md): chi prepara un contenuto
+  prenota le foto che gli serviranno domani o dopo in `content/foto-in-arrivo.json`
+  (`npm run foto:prenota`). Dall'11/11/2026 alle 21:00 la routine «Foto della
+  sera» le GENERA con l'API di OpenAI (`npm run foto:genera -- --data <domani>`,
+  chiave OPENAI_API_KEY solo nell'ambiente cloud «Giocamizi»), le mette in
+  public/immagini e pubblica: funziona a computer spento. Il documento dei prompt
+  (`npm run prompt-del-giorno`) va comunque su Drive «02 Prompt del giorno»
+  (id 1B5v_f7JpfXiZGnnXyEBBXxzy9ARYtYwe) come riserva manuale: le foto rifatte a
+  mano finiscono in «99 Immagini pronte» (id 1lUlL1Uj2AspXO2SgFeSU_itN0nu2RQbP)
+  con nomi neutri (foto-xxxxxxxx) e chi lavora dopo le importa con
+  `npm run foto-arrivate -- <cartella>`. Prompt e scelta delle foto: lib/foto-del-giorno.ts.
 - Sitemap delle immagini (08/11/2026): le foto vere stanno in sitemap con
   la loro pagina (`fotoDellaPagina` in lib/foto.ts, guide ed esempi da soli).
   Un riquadro foto nuovo o spostato = aggiornare FOTO_PAGINE: la batteria

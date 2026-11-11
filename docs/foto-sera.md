@@ -1,18 +1,33 @@
 # Foto preparate la sera prima
 
-ChatGPT ci mette ore a produrre le immagini: se il prompt nasce la mattina,
-le foto arrivano quando il contenuto è già uscito. Quindi i prompt si
-scrivono **la sera prima**, per tutto Giocamizi, in un solo documento.
+Le foto si preparano **la sera prima**, così il contenuto del giorno dopo esce
+già con la foto. Dall'11/11/2026 le genera la routine serale di Claude con
+l'API immagini di OpenAI, nel cloud: funziona anche a computer spento (la
+routine Codex/ChatGPT delle 6:00 non serve più). Il documento dei prompt su
+Drive resta come riserva per rifare a mano una foto.
 
 ## Il giro
 
 | Quando | Chi | Cosa |
 |---|---|---|
 | durante il giorno | chiunque prepari contenuti (routine, chat) | prenota le foto che gli serviranno **domani o dopo**: `npm run foto:prenota` |
-| 21:00 | routine Claude «Giocamizi · Prompt della sera» | sceglie l'articolo di domani e ne prenota la foto, genera `npm run prompt-del-giorno -- --data <domani>`, lo carica su Drive |
-| 6:00 | routine ChatGPT di Giorgia | legge l'ultimo documento in «02 Prompt del giorno», genera le foto, le salva in «99 Immagini pronte» con il nome indicato |
-| 9:00 | routine Claude articoli | scarica le foto arrivate, `npm run foto-arrivate`, poi scrive e pubblica l'articolo già con la foto |
-| 7:00 e ogni altra sessione | chi lavora | anche lui importa le foto arrivate prima di iniziare (il comando salta quelle già sul sito) |
+| 21:00 | routine Claude «Giocamizi · Foto della sera» | sceglie l'articolo di domani e ne prenota la foto; `npm run foto:genera -- --data <domani>` genera le foto con l'API e le mette in public/immagini; carica su Drive il documento dei prompt (riserva); verifica e pubblica |
+| 9:00 | routine Claude articoli | importa eventuali foto caricate a mano in «99 Immagini pronte», poi scrive e pubblica l'articolo, che trova già la sua foto |
+| 7:00 e ogni altra sessione | chi lavora | importa le foto caricate a mano prima di iniziare (il comando salta quelle già sul sito) |
+
+## Generazione con l'API (scripts/foto-genera.ts)
+- Stesse foto e stessi prompt del documento su Drive (`lib/foto-del-giorno.ts`):
+  tutte le prenotazioni del giorno, poi fino a 2 foto che mancano al sito.
+- Riferimento di Mizi: `public/mizi/mizi-intera.webp`.
+- Chiave `OPENAI_API_KEY` SOLO nelle variabili d'ambiente dell'ambiente cloud
+  «Giocamizi» (claude.ai/code → ingranaggio dell'ambiente). Facoltative:
+  `OPENAI_IMAGE_MODEL` (predefinito gpt-image-2), `OPENAI_IMAGE_QUALITY` (high).
+- Senza chiave esce con codice 2 e non tocca niente: resta il documento su Drive.
+- Una foto rifiutata o in errore viene saltata e segnalata nel report: si
+  rifà a mano dal documento su Drive, oppure si cambia la scena e si riprova.
+- `--prova` mostra cosa genererebbe, senza chiamare l'API.
+- Le foto si guardano prima di pubblicarle: il report elenca i file, e la
+  routine controlla che non ci siano scritte, loghi o persone reali.
 
 Una foto in ritardo **non blocca** niente: il contenuto esce lo stesso e la
 foto compare da sola quando arriva (le pagine la cercano in public/immagini).

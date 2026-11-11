@@ -77,7 +77,7 @@ Il controllo automatico blocca ogni segno di vissuto senza quella voce.
 
 Un giorno senza fonti sufficienti produce un report, non un articolo inventato.
 
-## La sera prima (routine «Prompt della sera», 21:00)
+## La sera prima (routine «Foto della sera», 21:00)
 1. `git pull`. `npm run articoli:piano -- prossimo`: è l'argomento che la routine
    delle 9:00 scriverà domani (se c'è una bozza o un bloccato, è quello).
 2. Fissa lo slug definitivo (corto, con la keyword, senza date):
@@ -86,10 +86,18 @@ Un giorno senza fonti sufficienti produce un report, non un articolo inventato.
    scripts/blocchi-prompt.ts: niente loghi, schermate di giochi, personaggi
    protetti, persone reali; Mizi come pupazzo) e prenotala:
    `npm run foto:prenota -- --file guida-<slug> --per <domani> --titolo "Foto dell'articolo «…»" --scena "…" --alt "…" --chi "routine articoli"`.
-4. `npm run prompt-del-giorno -- --data <domani>` e carica il testo come
-   documento nuovo «Prompt del giorno · GG/MM/AAAA» in Drive «02 Prompt del giorno».
-5. Commit (piano + coda), `git pull --rebase`, push su main. Niente build:
-   non cambia nessuna pagina.
+4. `npm run foto:genera -- --data <domani>`: genera con l'API di OpenAI le
+   foto prenotate (più fino a 2 che mancano al sito) e le mette in
+   public/immagini come WebP. Guarda ogni PNG in .foto-generate/<domani>/: niente
+   scritte leggibili, loghi, schermate di giochi, persone reali; Mizi riconoscibile.
+   Una foto sbagliata si cancella (i suoi WebP compresi) e resta da fare a mano.
+   Se esce con codice 2 (manca OPENAI_API_KEY) si va avanti senza foto.
+5. `npm run prompt-del-giorno -- --data <domani>` e carica il testo come
+   documento nuovo «Prompt del giorno · GG/MM/AAAA» in Drive «02 Prompt del giorno»:
+   è la riserva per rifare a mano le foto saltate.
+6. Se sono arrivati WebP nuovi: `npm run date-pagine` e le TRE verifiche di
+   CLAUDE.md (una foto di una guida già online cambia la pagina). Poi commit
+   (piano, coda, public/immagini), `git pull --rebase`, push su main, deploy READY.
 
 ## Non pestarsi i piedi con la routine delle 7:00
 Questo job gira dopo (alle 9:00) e tocca solo: content/guide/, content/piano-editoriale.json,

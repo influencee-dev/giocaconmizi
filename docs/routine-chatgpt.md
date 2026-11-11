@@ -1,4 +1,11 @@
-# Routine ChatGPT delle 6:00 — testo da incollare
+# Routine ChatGPT delle 6:00 — NON PIÙ IN USO (11/11/2026)
+
+> Dall'11/11/2026 le foto le genera la routine serale di Claude con l'API di
+> OpenAI (docs/foto-sera.md), perché la routine Codex non parte a computer
+> spento. Questo testo resta solo per rifare a mano, in ChatGPT, le foto che
+> l'API ha saltato.
+
+# Testo da incollare (solo per l'uso manuale)
 
 Questa è l'istruzione per l'attività pianificata di Giorgia in ChatGPT (o Codex),
 ogni giorno alle 6:00. Legge i prompt preparati la sera prima da Claude
