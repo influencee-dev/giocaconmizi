@@ -21,7 +21,9 @@ foto compare da sola quando arriva (le pagine la cercano in public/immagini).
 - «02 Prompt del giorno» — id `1B5v_f7JpfXiZGnnXyEBBXxzy9ARYtYwe`: un documento
   per giorno, titolo «Prompt del giorno · GG/MM/AAAA» (il giorno in cui servono le foto).
 - «99 Immagini pronte» — id `1lUlL1Uj2AspXO2SgFeSU_itN0nu2RQbP`: i PNG di ChatGPT,
-  col nome esatto del prompt (es. `guida-minecraft-vs-roblox.png`).
+  col nome esatto del prompt: un nome NEUTRO tipo `foto-3fa91c2e.png` (niente marchi
+  o nomi di giochi, che il generatore rifiuta: lib/foto-in-arrivo.ts → nomeConsegna).
+  `foto-arrivate` lo riconduce da solo al nome vero (es. guida-minecraft-vs-roblox).
 - «01 Mizi pupazzo (riferimento)»: la foto di riferimento di Mizi da allegare.
 
 ## Prenotare una foto
@@ -44,8 +46,10 @@ slug** e **quella scena** (stessi `foto.scena` e `foto.alt` nel frontmatter):
 il file arrivato si aggancia da solo alla pagina.
 
 ## Importare le foto arrivate
-1. Elenca i file in «99 Immagini pronte» (connettore Google Drive) e scarica
-   quelli che non sono ancora in public/immagini in una cartella temporanea.
+1. Elenca i file in «99 Immagini pronte» (connettore Google Drive) creati negli
+   ultimi 2 giorni e scaricali in una cartella temporanea (i nomi neutri
+   foto-xxxxxxxx non dicono se la foto è già sul sito: ci pensa il passo 2,
+   che salta quelle già presenti).
 2. `npm run foto-arrivate -- <cartella>`: le foto riconosciute (guide, riquadri
    del sito, prenotazioni) diventano WebP; le «SCONOSCIUTE» si guardano a mano.
 3. Commit dei WebP insieme al contenuto del giorno.

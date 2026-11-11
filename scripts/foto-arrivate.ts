@@ -13,7 +13,7 @@ import path from "node:path";
 import { GUIDE } from "../lib/guide";
 import { FOTO, LARGHEZZE, LARGHEZZE_GUIDA, type CodiceFoto } from "../lib/foto";
 import { ottimizza } from "../lib/immagini/ottimizza";
-import { leggiCoda } from "../lib/foto-in-arrivo";
+import { leggiCoda, nomeConsegna } from "../lib/foto-in-arrivo";
 
 const cartella = process.argv.slice(2).find((a) => !a.startsWith("--"));
 const sovrascrivi = process.argv.includes("--sovrascrivi");
@@ -34,8 +34,22 @@ const radice = (f: string) =>
 
 type Destinazione = { base: string; rapporto: number; larghezze: number[] };
 
+/** I nomi neutri del documento serale (foto-xxxxxxxx) → il nome vero. */
+let neutri: Map<string, string> | null = null;
+function daNomeNeutro(r: string): string | null {
+  if (!/^foto-[0-9a-f]{8}$/.test(r)) return null;
+  neutri ??= new Map(
+    [
+      ...GUIDE.map((g) => `guida-${g.slug}`),
+      ...(Object.keys(FOTO) as CodiceFoto[]).map((c) => FOTO[c].file),
+      ...leggiCoda().prenotazioni.map((p) => p.nomeFile),
+    ].map((n) => [nomeConsegna(n), n]),
+  );
+  return neutri.get(r) ?? null;
+}
+
 function riconosci(nome: string): Destinazione | null {
-  const r = radice(nome);
+  const r = daNomeNeutro(radice(nome)) ?? radice(nome);
   const guida = GUIDE.find((g) => r === `guida-${g.slug}`);
   if (guida) return { base: `guida-${guida.slug}`, rapporto: 16 / 9, larghezze: LARGHEZZE_GUIDA };
   const codice = (Object.keys(FOTO) as CodiceFoto[]).find((c) => c.toLowerCase() === r || FOTO[c].file === r);

@@ -148,6 +148,7 @@ function controlla(a, { rete }) {
 async function controllaRete(fonti) {
   const errori = [];
   const avvisi = [];
+  let nonAperte = 0;
   await Promise.all(
     fonti.map(async (f) => {
       try {
@@ -157,12 +158,24 @@ async function controllaRete(fonti) {
           headers: { "user-agent": "Mozilla/5.0 (compatible; GiocamiziVerificaFonti/1.0)", accept: "text/html,*/*" },
         });
         if (r.status === 404 || r.status === 410) errori.push(`fonte non trovata (${r.status}): ${f.url}`);
-        else if (r.status >= 400) avvisi.push(`fonte risponde ${r.status} (spesso è un blocco anti-robot: controllala a mano): ${f.url}`);
+        else if (r.status >= 400) {
+          nonAperte++;
+          avvisi.push(`fonte risponde ${r.status} (spesso è un blocco anti-robot: controllala a mano): ${f.url}`);
+        }
       } catch (e) {
+        nonAperte++;
         avvisi.push(`fonte non raggiungibile ora (${e.name}): ${f.url}`);
       }
     }),
   );
+  // Se una parte importante delle fonti non si apre, le fonti non sono
+  // verificate: di solito è la rete della sessione che blocca i siti. Si
+  // pubblica solo con fonti aperte davvero (regola del 7/11, rinforzata l'11/11
+  // dopo un articolo uscito con fonti viste solo nei risultati di ricerca).
+  if (fonti.length && nonAperte / fonti.length > 0.25)
+    errori.push(
+      `${nonAperte} fonti su ${fonti.length} non si aprono: non sono verificate. Se è la rete della sessione che blocca i siti, niente pubblicazione oggi.`,
+    );
   return { errori, avvisi };
 }
 
@@ -178,6 +191,7 @@ const articoli = args.includes("--tutti")
 let falliti = 0;
 for (const a of articoli) {
   const r = controlla(a, { rete });
+  if (!rete) r.avvisi.push("controllo senza --rete: i link delle fonti non sono stati aperti, non pubblicare così");
   if (rete) {
     const n = await controllaRete(r.fonti);
     r.errori.push(...n.errori);

@@ -16,7 +16,7 @@ import { join } from "node:path";
 import { GUIDE } from "../lib/guide";
 import { FOTO, LARGHEZZE, LARGHEZZE_GUIDA, fotoSito, type CodiceFoto } from "../lib/foto";
 import { BLOCCO_FOTO, BLOCCO_MIZI, REGOLE_PERSONE } from "./blocchi-prompt";
-import { fotoArrivata, leggiCoda } from "../lib/foto-in-arrivo";
+import { fotoArrivata, leggiCoda, nomeConsegna } from "../lib/foto-in-arrivo";
 
 const arg = (nome: string) => {
   const i = process.argv.indexOf(`--${nome}`);
@@ -80,13 +80,24 @@ const righe: string[] = [
   "",
 ];
 
+// Nel documento per ChatGPT niente titoli né nomi di file con marchi o nomi di
+// giochi: il generatore li rifiuta (11/11/2026, saltate le due foto «Minecraft»).
+// Titolo generico e nome neutro; foto-arrivate li riconduce al nome vero.
+const titoloNeutro = (f: Foto) =>
+  f.nomeFile.startsWith("guida-")
+    ? f.titolo.startsWith("Foto dell'articolo")
+      ? "Foto di testata di un articolo per genitori"
+      : "Foto di testata di una guida per genitori"
+    : "Foto per una pagina del sito";
+
 oggi.forEach((f, i) => {
+  const file = nomeConsegna(f.nomeFile);
   righe.push(
     "-----",
     "",
-    `## ${i + 1}. ${f.titolo}`,
+    `## ${i + 1}. ${titoloNeutro(f)}`,
     "",
-    `Nome del file da caricare: ${f.nomeFile}.png`,
+    `Nome del file da caricare: ${file}.png`,
     "",
     "### Prompt da incollare",
     "",
@@ -102,7 +113,7 @@ oggi.forEach((f, i) => {
     "",
     `FORMATO: ${f.formato}. Lascia un po' d'aria sopra le teste.`,
     "",
-    `CONSEGNA: salva la foto come PNG chiamato esattamente ${f.nomeFile}.png nella cartella Google Drive «Giocamizi · Prompt immagini / 99 Immagini pronte». Se non riesci a salvarla da solo, mostrala e indica il nome ${f.nomeFile}.png, così la carica Giorgia.`,
+    `CONSEGNA: salva la foto come PNG chiamato esattamente ${file}.png nella cartella Google Drive «Giocamizi · Prompt immagini / 99 Immagini pronte». Se non riesci a salvarla da solo, mostrala e indica il nome ${file}.png, così la carica Giorgia.`,
     "",
     "CONTROLLO: Mizi ha il caschetto castano, la bandana rosa a pois, il cuore sulla pancia, becco e zampe arancioni ed è chiaramente un pupazzo di stoffa. Nessuna scritta né numero leggibile. Mani e dita corrette.",
     "",

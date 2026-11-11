@@ -22,9 +22,9 @@ etaMax: 12
 skill: coding
 stato: pubblicata
 pubblicata: 2026-11-09
-aggiornata: 2026-11-09
+aggiornata: 2026-11-11
 fontiVerificateIl: 2026-11-09
-prezziVerificatiIl: 2026-11-09
+prezziVerificatiIl: 2026-11-11
 giochi:
   - pixel-art
   - labirinto-a-blocchi
@@ -36,7 +36,7 @@ schedaRapida:
   - { voce: "Cos'è Minecraft", valore: "Un gioco solo (di Mojang, Microsoft): mondo a blocchi da esplorare e costruire, da soli o con altri" }
   - { voce: "Cos'è Roblox", valore: "Una piattaforma gratuita con milioni di giochi («esperienze») creati dagli utenti" }
   - { voce: "PEGI", valore: "Minecraft: PEGI 7 · Roblox: nessun numero, etichetta «!» (supervisione consigliata)" }
-  - { voce: "Costo per iniziare", valore: "Minecraft: acquisto una tantum (es. 7,99 € su App Store, 29,99 € di listino su PC) · Roblox: 0 €" }
+  - { voce: "Costo per iniziare", valore: "Minecraft: acquisto una tantum (es. 6,99 € su App Store, 29,99 € di listino su PC) · Roblox: 0 €" }
   - { voce: "Acquisti dentro", valore: "Minecraft: Minecoin, Marketplace, Realms · Roblox: Robux e abbonamento Roblox Plus" }
   - { voce: "Si gioca da soli?", valore: "Minecraft sì, in un mondo tutto suo · Roblox è sempre online, con altre persone collegate" }
   - { voce: "Controlli del genitore", valore: "Minecraft: account Microsoft/Xbox famiglia · Roblox: account genitore collegato, con fasce d'età per la chat" }
@@ -47,6 +47,8 @@ fonti:
   - { titolo: "Minecraft: Java e Bedrock Edition per PC", editore: "Minecraft (store ufficiale)", url: "https://www.minecraft.net/it-it/store/minecraft-java-bedrock-edition-pc", consultata: 2026-11-09 }
   - { titolo: "Informazioni su Minecraft", editore: "Minecraft", url: "https://www.minecraft.net/it-it/about-minecraft", consultata: 2026-11-09 }
   - { titolo: "Realms per Java: piani", editore: "Minecraft", url: "https://www.minecraft.net/it-it/realms-for-java/plans", consultata: 2026-11-09 }
+  - { titolo: "Minecraft Java e Bedrock in offerta", editore: "SpazioGames", url: "https://www.spaziogames.it/offerte/minecraft-java-e-bedrock-45-e-soli-16eur-per-costruire-insieme", consultata: 2026-11-11 }
+  - { titolo: "Xbox per le famiglie", editore: "Xbox", url: "https://www.xbox.com/it-IT/family-hub", consultata: 2026-11-11 }
   - { titolo: "Acquista Minecoin", editore: "Minecraft", url: "https://www.minecraft.net/it-it/marketplace/buy-minecoins", consultata: 2026-11-09 }
   - { titolo: "Minecraft e account Microsoft", editore: "Minecraft", url: "https://www.minecraft.net/it-it/realms/minecraft-and-microsoft-accounts", consultata: 2026-11-09 }
   - { titolo: "Strumento di segnalazione della chat", editore: "Minecraft", url: "https://www.minecraft.net/it-it/article/addressing-player-chat-reporting-tool", consultata: 2026-11-09 }
@@ -74,14 +76,14 @@ fonti:
 immagini: []
 esperienzeAutentiche: []
 relazioniCommerciali: null
-trasparenza: "Ricerca e prima stesura con l'aiuto dell'intelligenza artificiale, solo dalle fonti elencate qui sopra. Le informazioni su Roblox vengono dalle pagine ufficiali verificate il 7/11/2026 per la nostra guida sulla sicurezza di Roblox; quelle su Minecraft, prezzi e PEGI sono state controllate il 9/11/2026 attraverso la ricerca web (estratti delle pagine ufficiali e delle testate indicate). Non è una prova personale: nessuno di noi ha testato i giochi per scrivere questo articolo. Prezzi e regole cambiano spesso: ricontrolla sempre nello store prima di comprare."
+trasparenza: "Ricerca e prima stesura con l'aiuto dell'intelligenza artificiale, solo dalle fonti elencate qui sopra. Le informazioni su Roblox vengono dalle pagine ufficiali verificate il 7/11/2026 per la nostra guida sulla sicurezza di Roblox; quelle su Minecraft, prezzi e PEGI sono state ricontrollate l'11/11/2026 aprendo le pagine ufficiali e le testate indicate (la prima versione del 9/11 si basava su estratti della ricerca web: abbiamo corretto alcuni prezzi). Non è una prova personale: nessuno di noi ha testato i giochi per scrivere questo articolo. Prezzi e regole cambiano spesso: ricontrolla sempre nello store prima di comprare."
 faq:
   - domanda: "Meglio Minecraft o Roblox per un bambino di 7 anni?"
     risposta: "Di solito Minecraft, giocato da solo o con i fratelli in un mondo privato: è un gioco unico classificato PEGI 7, quindi sai in anticipo cosa contiene, e non serve andare online. Roblox a 7 anni ha senso solo con l'account Roblox Kids collegato al tuo, la chat spenta e un adulto vicino, perché è una piattaforma piena di giochi diversi creati da altri utenti."
   - domanda: "Minecraft è più sicuro di Roblox?"
     risposta: "Non in assoluto. Minecraft è più prevedibile perché è un gioco solo e si può giocare offline dagli altri; i rischi arrivano con i server pubblici, i Realms aperti a sconosciuti e le mod. Roblox è sociale per natura, ma ha controlli per fasce d'età sulla chat che Minecraft non ha. Su entrambi il rischio lo decidono chat, multiplayer e acquisti, e come li imposti."
   - domanda: "Quanto costa Minecraft e quanto costa Roblox?"
-    risposta: "Roblox si scarica gratis, ma dentro si spendono soldi veri in Robux e nell'abbonamento Roblox Plus (4,99 dollari al mese secondo l'annuncio ufficiale). Minecraft si compra una volta: per esempio 7,99 € sull'App Store italiano o 29,99 € di listino per la versione PC Java e Bedrock, al 9/11/2026. Poi ci sono acquisti facoltativi: Minecoin per il Marketplace, Marketplace Pass, Realms."
+    risposta: "Roblox si scarica gratis, ma dentro si spendono soldi veri in Robux e nell'abbonamento Roblox Plus (4,99 dollari al mese secondo l'annuncio ufficiale). Minecraft si compra una volta: per esempio 6,99 € sull'App Store italiano o 29,99 € di listino per la versione PC Java e Bedrock, all'11/11/2026. Poi ci sono acquisti facoltativi: Minecoin per il Marketplace, Marketplace Pass, Realms."
   - domanda: "Che differenza c'è tra Minecraft Java e Bedrock?"
     risposta: "Bedrock è la versione per console, tablet, telefoni e Windows, e permette di giocare insieme tra dispositivi diversi. Java è la versione storica per computer Windows, Mac e Linux, molto usata con le mod. Su PC oggi si comprano insieme in un'unica confezione. Le due versioni non giocano insieme tra loro, e i controlli dell'account Xbox arrivano meno su Java."
   - domanda: "Si può giocare a Minecraft senza internet?"
@@ -204,11 +206,12 @@ Qui la differenza è netta e spesso fraintesa. Roblox sembra più conveniente pe
 
 ### Minecraft: si paga all'inizio
 
-Minecraft si compra una volta. Prezzi verificati il 9 novembre 2026:
+Minecraft si compra una volta. Prezzi verificati l'11 novembre 2026:
 
-- **App Store italiano** (iPhone e iPad): 7,99 €.
+- **App Store italiano** (iPhone e iPad): 6,99 €.
 - **PC, Minecraft: Java e Bedrock Edition**: 29,99 € di prezzo di listino. Nei negozi online si trova spesso scontato: SpazioGames, per esempio, ha segnalato a ottobre 2026 un'offerta a 16,39 € su un rivenditore di chiavi digitali. Il prezzo di listino è quello che conta per farsi un'idea; le offerte cambiano di settimana in settimana.
-- **Deluxe Collection** (gioco più alcuni contenuti aggiuntivi): da 39,99 € sullo store Xbox.
+- **Deluxe Collection** (gioco più alcuni contenuti aggiuntivi e 700 Minecoin): 39,99 €.
+- **Ultimate Collection**, l'edizione più completa dello store ufficiale: 49,99 €.
 
 C'è poi una strada che molte famiglie non conoscono: Minecraft: Java e Bedrock Edition è nel catalogo di **PC Game Pass**, l'abbonamento di Microsoft ai giochi per computer. Da aprile 2026, secondo Punto Informatico, PC Game Pass costa 12,99 € al mese e Game Pass Ultimate 20,99 € al mese. Ha senso solo se in casa si usano anche altri giochi del catalogo: per Minecraft da solo, l'acquisto una tantum si ripaga in pochi mesi.
 
@@ -216,11 +219,9 @@ C'è poi una strada che molte famiglie non conoscono: Minecraft: Java e Bedrock 
 
 Dopo l'acquisto, il gioco base è completo. Ma ci sono tre voci di spesa possibili:
 
-- **Minecoin**: la valuta del Marketplace (solo Bedrock), con cui si comprano mondi, pacchetti di texture, skin (l'aspetto del personaggio) creati da Mojang e da altri creator.
+- **Minecoin**: la valuta del Marketplace (solo Bedrock), con cui si comprano mondi, pacchetti di texture, skin (l'aspetto del personaggio) creati da Mojang e da altri creator. Sulla pagina ufficiale italiana i pacchetti vanno da 1,99 € a 49,99 €.
 - **Marketplace Pass**: un abbonamento a un catalogo di contenuti del Marketplace. La pagina ufficiale indica 30 giorni gratis, poi 3,99 dollari al mese; all'annuncio, nel 2024, la stampa italiana riportava 3,99 euro al mese.
-- **Realms**: server privati ospitati da Mojang, dove si gioca solo con le persone invitate. La pagina italiana di Minecraft indica 3,99 dollari al mese per Realms su Bedrock e 7,99 dollari al mese per Realms Plus (che include anche il Marketplace Pass); anche Realms per Java è indicato a 7,99 dollari al mese.
-
-I prezzi dei Realms sulle pagine ufficiali che ho consultato sono in dollari: in euro li vedi al momento dell'acquisto, nello store del tuo dispositivo.
+- **Realms**: server privati ospitati da Mojang, dove si gioca solo con le persone invitate. La pagina italiana di Minecraft indica 3,99 € al mese per Realms (fino a 2 giocatori), 7,99 € al mese per Realms Plus (che include anche il Marketplace Pass) e 7,19 € al mese per Realms per Java.
 
 ### Roblox: si paga dopo
 
@@ -234,11 +235,11 @@ Roblox si scarica e si usa senza pagare. Dentro però si spendono soldi veri:
 
 | Voce | Minecraft | Roblox | Prezzo verificato |
 |---|---|---|---|
-| Per iniziare | Acquisto una tantum | Gratis | Minecraft: 7,99 € App Store, 29,99 € listino PC (9/11/2026); Roblox 0 € |
-| Edizione più completa | Deluxe Collection | — | da 39,99 € (store Xbox, 9/11/2026) |
-| Valuta del gioco | Minecoin (Marketplace, solo Bedrock) | Robux | in euro non pubblicati sulle pagine ufficiali consultate |
+| Per iniziare | Acquisto una tantum | Gratis | Minecraft: 6,99 € App Store, 29,99 € listino PC (11/11/2026); Roblox 0 € |
+| Edizioni con extra | Deluxe e Ultimate Collection | — | 39,99 € e 49,99 € (store ufficiale, 11/11/2026) |
+| Valuta del gioco | Minecoin (Marketplace, solo Bedrock) | Robux | Minecoin da 1,99 € a 49,99 € (pagina ufficiale, 11/11/2026); Robux: controlla nello store |
 | Abbonamento ai contenuti | Marketplace Pass | Roblox Plus | 3,99 $/mese · 4,99 $/mese |
-| Server privati | Realms / Realms Plus | Server privati (inclusi in Plus) | Realms 3,99 $/mese, Realms Plus 7,99 $/mese |
+| Server privati | Realms / Realms Plus | Server privati (inclusi in Plus) | Realms 3,99 €/mese, Realms Plus 7,99 €/mese, Realms per Java 7,19 €/mese |
 | In abbonamento a un catalogo | PC Game Pass | — | 12,99 €/mese (da aprile 2026) |
 | Loot box (oggetti casuali a pagamento) | Non segnalate nelle fonti consultate | Presenti in alcuni giochi: l'App Store le segnala | — |
 | Tetto di spesa del genitore | Sì, dall'account famiglia Microsoft | Sì, mensile, dall'account collegato | — |
@@ -246,7 +247,7 @@ Roblox si scarica e si usa senza pagare. Dentro però si spendono soldi veri:
 Il grafico qui sotto mette in fila solo una cosa: quanto costa *partire*. È utile per capire l'ordine di grandezza, ma non dice tutto, ed è proprio questo il punto.
 
 ```grafico
-{"titolo": "Quanto costa iniziare (solo l'ingresso, senza acquisti dentro)", "unita": "€", "nota": "Fonti: App Store italiano, store Minecraft e store Xbox; prezzi di listino letti il 9/11/2026. Roblox è gratuito all'ingresso: la spesa arriva dopo, con Robux e abbonamento.", "voci": [{"etichetta": "Roblox", "valore": 0}, {"etichetta": "Minecraft su iPhone e iPad", "valore": 7.99}, {"etichetta": "Minecraft Java e Bedrock (PC)", "valore": 29.99}, {"etichetta": "Minecraft Deluxe Collection", "valore": 39.99}]}
+{"titolo": "Quanto costa iniziare (solo l'ingresso, senza acquisti dentro)", "unita": "€", "nota": "Fonti: App Store italiano, store Minecraft e store Xbox; prezzi di listino letti l'11/11/2026. Roblox è gratuito all'ingresso: la spesa arriva dopo, con Robux e abbonamento.", "voci": [{"etichetta": "Roblox", "valore": 0}, {"etichetta": "Minecraft su iPhone e iPad", "valore": 6.99}, {"etichetta": "Minecraft Java e Bedrock (PC)", "valore": 29.99}, {"etichetta": "Minecraft Deluxe Collection", "valore": 39.99}]}
 ```
 
 Come leggerlo: con Minecraft sai quasi subito quanto spendi, perché il grosso è all'inizio e il resto è facoltativo. Con Roblox l'ingresso è a zero, ma il modello è costruito sulle spese piccole e ripetute, quelle che non si notano finché non arriva l'estratto conto. Non è un motivo per scegliere uno o l'altro: è un motivo per mettere **un tetto di spesa** su qualsiasi dei due, dal primo giorno.
@@ -268,7 +269,7 @@ Su Minecraft si può giocare in quattro modi, dal più chiuso al più aperto:
 
 I primi due livelli non hanno chat con estranei. Il terzo dipende da chi inviti. Il quarto è quello che richiede attenzione: ogni server ha regole e moderatori suoi, e la qualità della moderazione varia molto.
 
-Dal luglio 2022, con la versione Java 1.19.1, Mojang ha introdotto la **segnalazione dei messaggi in chat**: chi riceve un messaggio offensivo lo può segnalare a Mojang, selezionando il messaggio e la categoria. La segnalazione la esamina il team di moderazione di Mojang, che può sospendere l'account.
+Dal 2022, con la versione Java 1.19.1, Mojang ha introdotto la **segnalazione dei messaggi in chat**: chi riceve un messaggio offensivo lo può segnalare a Mojang, selezionando il messaggio e la categoria. La segnalazione la esamina il team di moderazione di Mojang, che può sospendere l'account.
 
 ### Roblox: l'online è la regola
 
@@ -332,7 +333,7 @@ Il consiglio pratico: per un bambino sotto i 9 anni, su Minecraft resta sul gioc
 
 Molti genitori scelgono Minecraft perché «è educativo». È una parola da maneggiare con cura. Su Minecraft si costruisce, si pianifica, si sperimenta con lo spazio e con i materiali: è un gioco aperto, dove spesso non c'è un obiettivo dato. Questo può essere prezioso, ma non ho trovato fonti solide che dicano che giocare a Minecraft a casa *insegni* qualcosa di specifico, quindi non lo scrivo.
 
-Quello che c'è di verificabile è **Minecraft Education**, una versione pensata per la scuola, con lezioni e strumenti per gli insegnanti. Secondo il sito ufficiale si acquista a partire da circa 5 dollari, ed è inclusa in alcuni piani Microsoft 365 per le scuole. Il supporto di Minecraft Education precisa che le licenze «commerciali» le possono comprare anche campi estivi, club, chi fa scuola a casa e privati. Se a scuola di tuo figlio la usano, è un buon motivo per chiedere alla maestra come.
+Quello che c'è di verificabile è **Minecraft Education**, una versione pensata per la scuola, con lezioni e strumenti per gli insegnanti. Secondo il sito ufficiale, per le scuole idonee costa circa 5 dollari per utente all'anno ed è inclusa in alcuni piani Microsoft 365 per le scuole; campi estivi, associazioni e altre organizzazioni possono acquistare licenze a 36 dollari per utente all'anno. Se a scuola di tuo figlio la usano, è un buon motivo per chiedere alla maestra come.
 
 Su **Roblox** la creatività sta soprattutto in un'altra direzione: chiunque può creare un gioco e pubblicarlo. Per un ragazzo di 11 o 12 anni curioso di come si fanno i videogiochi è un'idea potente, ma lo strumento per crearli (Roblox Studio) non è pensato per i bambini piccoli.
 
@@ -404,7 +405,7 @@ I nomi dei menu cambiano con gli aggiornamenti, ma la logica resta.
 5. **Club e Realms**: lasciali bloccati finché non serve. Se apri un Realm per la famiglia, invita solo persone che conosci.
 6. **Acquisti**: attiva l'approvazione delle spese, così ogni acquisto di Minecoin o contenuti ti arriva come richiesta.
 7. **Aggiorna il gioco**: i controlli non esistono nelle versioni prima della 1.16.4.
-8. **Su Java** ricorda che le impostazioni dell'account arrivano meno: la chat si può nascondere dalle impostazioni del gioco (Impostazioni, Multigiocatore, Chat), e le mod vanno valutate insieme.
+8. **Su Java** ricorda che le impostazioni dell'account arrivano meno: la chat si può nascondere dalle impostazioni della chat dentro il gioco, e le mod vanno valutate insieme.
 
 ### Su Roblox
 

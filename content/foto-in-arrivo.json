@@ -2,16 +2,6 @@
   "descrizione": "Coda unica delle foto da far generare a ChatGPT. Si prenota con npm run foto:prenota almeno il giorno prima; procedura in docs/foto-sera.md.",
   "prenotazioni": [
     {
-      "nomeFile": "guida-minecraft-vs-roblox",
-      "perIl": "2026-11-09",
-      "titolo": "Foto dell'articolo «Minecraft vs Roblox: quale scegliere per un bambino?»",
-      "scena": "Salotto italiano luminoso: un bambino di circa 8 anni e una bambina di circa 10, generati, seduti sul divano con plaid, ciascuno con un tablet in mano; sugli schermi solo forme colorate semplici (blocchi quadrati su uno, cerchi e omini stilizzati senza dettagli sull'altro), senza testo né personaggi. Un adulto sorridente seduto vicino li guarda con interesse. Sul bracciolo del divano, tra i due bambini, Mizi pupazzo di stoffa, come a fare da arbitro. Atmosfera serena di scelta e confronto.",
-      "alt": "Due bambini sul divano con un tablet a testa e un adulto accanto, mentre confrontano due giochi; tra loro il pupazzo Mizi",
-      "rapporto": 1.7777777777777777,
-      "chi": "routine articoli",
-      "prenotataIl": "2026-11-08"
-    },
-    {
       "nomeFile": "guida-imparare-a-leggere-giocando",
       "perIl": "2026-11-10",
       "titolo": "Foto della guida «Imparare a leggere: il percorso dai suoni alle prime frasi»",
@@ -23,13 +13,23 @@
     },
     {
       "nomeFile": "guida-minecraft-per-bambini",
-      "perIl": "2026-11-11",
+      "perIl": "2026-11-12",
       "titolo": "Foto dell'articolo «Minecraft per bambini: modalità, mondi e rischi»",
-      "scena": "Cameretta italiana luminosa con parquet e piante. Un bambino di circa 7 anni, generato, seduto sul tappeto davanti a un portatile appoggiato su un tavolino basso: sullo schermo solo grandi blocchi quadrati colorati (verdi, marroni, azzurri) senza dettagli né testo. Un papà seduto accanto a lui indica lo schermo con curiosità e sorride. Sul tappeto, vicino al portatile, Mizi pupazzo di stoffa e alcuni cubi di legno colorati. Atmosfera serena di scoperta insieme.",
-      "alt": "Bambino e papà davanti a un portatile con blocchi colorati, accanto il pupazzo Mizi e dei cubi di legno",
+      "scena": "Cameretta italiana luminosa con parquet e piante. Un bambino di circa 7 anni, generato, seduto sul tappeto davanti a un portatile appoggiato su un tavolino basso: lo schermo mostra solo colori sfocati, senza forme riconoscibili né testo. Un papà seduto accanto a lui indica lo schermo con curiosità e sorride. Sul tappeto, vicino al portatile, Mizi pupazzo di stoffa e alcuni cubi di legno colorati per costruire. Atmosfera serena di scoperta insieme.",
+      "alt": "Bambino e papà davanti a un portatile, accanto il pupazzo Mizi e dei cubi di legno colorati",
       "rapporto": 1.7777777777777777,
-      "chi": "routine articoli",
-      "prenotataIl": "2026-11-10"
+      "chi": "routine articoli (rimessa in coda l'11/11)",
+      "prenotataIl": "2026-11-11"
+    },
+    {
+      "nomeFile": "guida-minecraft-vs-roblox",
+      "perIl": "2026-11-12",
+      "titolo": "Foto dell'articolo «Minecraft vs Roblox: quale scegliere per un bambino?»",
+      "scena": "Salotto italiano luminoso: un bambino di circa 8 anni e una bambina di circa 10, generati, seduti sul divano con un plaid, ciascuno con un tablet in mano; sugli schermi solo macchie di colore sfocate, senza forme riconoscibili né testo. Un adulto sorridente seduto vicino li ascolta con interesse mentre i due bambini si mostrano a vicenda gli schermi. Sul bracciolo del divano, tra i due, Mizi pupazzo di stoffa. Atmosfera serena di confronto.",
+      "alt": "Due bambini sul divano si mostrano i tablet mentre un adulto li ascolta; tra loro il pupazzo Mizi",
+      "rapporto": 1.7777777777777777,
+      "chi": "routine articoli (rimessa in coda l'11/11)",
+      "prenotataIl": "2026-11-11"
     }
   ]
 }

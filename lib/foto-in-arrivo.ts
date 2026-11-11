@@ -1,5 +1,16 @@
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+
+/**
+ * Il nome NEUTRO con cui ChatGPT salva una foto (es. foto-3fa91c2e): niente
+ * slug con marchi o nomi di giochi (Minecraft, Roblox…), che il generatore di
+ * immagini tende a rifiutare. È deterministico: foto-arrivate lo riconduce
+ * al nome vero ricalcolandolo su tutti i nomi possibili.
+ */
+export function nomeConsegna(nomeFile: string): string {
+  return `foto-${createHash("sha1").update(nomeFile).digest("hex").slice(0, 8)}`;
+}
 
 /**
  * La coda unica delle foto da far generare a ChatGPT (content/foto-in-arrivo.json).
