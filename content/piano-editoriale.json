@@ -1,7 +1,7 @@
 {
   "$schema": "Piano editoriale Giocamizi: un articolo al giorno. Regole in docs/routine-articoli.md; tipi in lib/piano-editoriale.ts.",
   "modalita": "pubblica-se-supera-i-controlli",
-  "aggiornato": "2026-11-10",
+  "aggiornato": "2026-11-11",
   "argomenti": [
     {
       "id": 1,
@@ -65,11 +65,11 @@
       "voce": "pratica",
       "priorita": 1,
       "ordine": 3,
-      "stato": "da-fare",
+      "stato": "pubblicato",
       "dataPianificata": "2026-11-09",
-      "fontiVerificateIl": null,
+      "fontiVerificateIl": "2026-11-11",
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": "2026-11-11"
     },
     {
       "id": 46,
