@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Contenitore } from "@/components/ui";
 import { adminValido } from "@/lib/admin";
-import { diagnosiBrevo, iscrittiAdmin } from "@/lib/brevo";
+import { diagnosiBrevo, iscrittiAdmin, statoInvio } from "@/lib/brevo";
 import { MenuAdmin } from "../MenuAdmin";
 import { DaAttivare, NonDisponibile, Numero } from "../NonDisponibile";
 import { EsportaCsv } from "./EsportaCsv";
+import { ProvaEmail } from "./ProvaEmail";
 
 /** Gli iscritti alle email (liste Brevo «Giocamizi · Genitori» e «Insegnanti»). */
 
@@ -18,12 +19,24 @@ export default async function IscrittiPage({ params }: { params: Promise<{ codic
   if (!(await adminValido(codice))) return <NonDisponibile />;
   const dati = await iscrittiAdmin();
   const perche = dati ? null : await diagnosiBrevo();
+  const invio = await statoInvio();
   const settimana = new Date(Date.now() - 7 * 86400000).toISOString();
 
   return (
     <Contenitore largo className="py-10">
       <MenuAdmin codice={codice} attivo="/iscritti" />
       <h1 className="text-3xl font-extrabold text-notte">Iscritti</h1>
+      {invio && (
+        <section className="mt-6 rounded-[1.4rem] border border-notte/10 bg-white p-5 text-sm text-notte" data-stato-invio>
+          <h2 className="text-lg font-extrabold">Email di servizio</h2>
+          <ul className="mt-2 flex flex-col gap-1 break-words">
+            <li>Account Brevo collegato: <strong>{invio.account}</strong></li>
+            <li>Mittente: <strong>{invio.mittente}</strong></li>
+            <li>Dominio: <strong>{invio.dominio}</strong></li>
+          </ul>
+          <ProvaEmail codice={codice} />
+        </section>
+      )}
       {!dati ? (
         <div className="mt-6">
           <DaAttivare titolo="Brevo non è collegato">
