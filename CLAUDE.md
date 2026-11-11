@@ -116,6 +116,16 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   Un riquadro foto nuovo o spostato = aggiornare FOTO_PAGINE: la batteria
   SEO controlla che ogni foto in sitemap compaia nella sua pagina.
 
+## Drive di Giocamizi: secondo cervello PARA (11/11/2026)
+- Cartella «Giocamizi» (id 1Qh2okN0Bj-GDvy4y9m9wGSk9KnBnpPfN) con 1 Progetti,
+  2 Aree, 3 Risorse, 4 Archivio. Indice: doc «00 LEGGIMI · Giocamizi»
+  (id 1CGrdlDVfSe0C2h-G2AMS76Rprq9UuS0QC-cw9iWU9zE): leggerlo prima di cercare
+  o salvare su Drive. «Prompt immagini» e «Social» stanno in 2 Aree con gli
+  stessi id di prima (le routine non cambiano).
+- Ogni file nuovo di Giocamizi va nel cassetto giusto, mai nella radice; una
+  cartella nuova = una riga nel LEGGIMI; progetto finito → 4 Archivio; mai
+  cancellare. Il resto del Drive di Giorgia non si tocca.
+
 ## Ambiente di lavoro (sessioni Claude)
 - Playwright: Chromium in `/opt/pw-browsers/chromium` (collegamento alla
   versione installata; o env CHROMIUM); `playwright-core` è nelle devDependencies.
