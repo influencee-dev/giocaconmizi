@@ -2369,6 +2369,40 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "aprilia",
+    citta: "Aprilia",
+    aggiornata: "2026-11-12",
+    rispostaBreve: "Ad Aprilia la festa di compleanno per bambini si fa spesso al coperto: CandyLand, in via Mozart, è un parco giochi al chiuso con una sala feste in esclusiva e feste a tema, mentre Youngo, nel centro commerciale Aprilia2, ha un'area gioco con scivoli e percorsi e sale dedicate ai compleanni. Prenotate con qualche settimana di anticipo, soprattutto per il sabato e la domenica.",
+    intro: "Ad Aprilia le feste per bambini si fanno soprattutto nei parchi giochi al chiuso, comodi in ogni stagione. Conviene prenotare con anticipo per il fine settimana.",
+    locali: [
+      { nome: "CandyLand By Sbirulina", zona: "Aprilia, via Mozart", tipo: "parco giochi al coperto con sala feste", descrizione: "Un parco giochi al chiuso con attrazioni a tema dolci, che si presenta come «il posto più bello dove essere bambini». Per i compleanni c'è una sala feste in esclusiva e si possono organizzare feste a tema.", instagram: "https://www.instagram.com/candylandfeste_aprilia/" },
+      { nome: "Youngo Aprilia2", zona: "Aprilia, centro commerciale Aprilia2, sulla Pontina", tipo: "parco giochi al coperto con sale compleanni", descrizione: "Dentro il centro commerciale Aprilia2, con un'area gioco con scivoli, tunnel, palline e percorsi avventura e, nel nuovo spazio annunciato a luglio 2026, giochi arcade e sfide interattive. Le sale per compleanni ed eventi sono ampie, colorate e personalizzabili: la festa prevede uno spazio riservato, l'accesso alle attrazioni e l'assistenza dello staff." },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno ad Aprilia?", risposta: "Sì, tutti e due: CandyLand è un parco giochi al chiuso con sala feste in esclusiva, e Youngo è dentro il centro commerciale Aprilia2, con sale dedicate ai compleanni." },
+      { domanda: "Cosa comprende la festa da Youngo?", risposta: "Secondo il locale ci sono uno spazio festa riservato, l'accesso alle attrazioni e l'assistenza dello staff. Prezzi e dettagli del pacchetto si chiedono quando si prenota." },
+      { domanda: "Posso portare la torta?", risposta: "Le fonti non lo dicono: chiedetelo quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "vigevano",
+    citta: "Vigevano",
+    aggiornata: "2026-11-12",
+    rispostaBreve: "A Vigevano la festa di compleanno per bambini si fa al Parco Giochi Arlecchino, un parco giochi coperto e riscaldato con gonfiabili, mini go kart e sale a tema, oppure al Leopark, una pizzeria con un parco giochi indoor di 300 metri quadri dove si organizzano compleanni su misura. Sono tutti e due al chiuso: prenotate con qualche settimana di anticipo per il sabato e la domenica.",
+    intro: "A Vigevano le feste dei bambini si fanno al coperto: in un parco giochi con gonfiabili o in pizzeria, con l'area giochi a vista. Conviene prenotare con anticipo per il fine settimana.",
+    locali: [
+      { nome: "Parco Giochi Arlecchino", zona: "Vigevano, via Santa Maria", tipo: "parco giochi al coperto con sale feste", descrizione: "Una struttura coperta, riscaldata e climatizzata con percorsi, piscine di palline, reti elastiche, scivoli e castelli gonfiabili, una pista di mini go kart e un'area tutta per i bimbi fino a tre anni. Organizza feste di compleanno ed eventi, con servizio bar e sale a tema per festeggiare.", instagram: "https://www.instagram.com/parcogiochiarlecchino_vigevano/" },
+      { nome: "Leopark", zona: "Vigevano, viale Leopardi", tipo: "pizzeria con gonfiabili e sala feste", descrizione: "Ristorante, pizzeria e bar con un parco giochi di 300 metri quadri, gratuito per chi mangia, con gonfiabili e tappeti elastici, per bambini fino a 12 anni. I genitori guardano i figli dalle grandi finestre della sala e nell'area giochi c'è sempre qualcuno dello staff. Si organizzano compleanni e feste su misura, in sala o nell'area giochi." },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno a Vigevano?", risposta: "Sì, tutti e due: il Parco Giochi Arlecchino è coperto e riscaldato, e il Leopark ha un parco giochi indoor accanto alla sala." },
+      { domanda: "Ci sono posti adatti anche ai bambini molto piccoli?", risposta: "Il Parco Giochi Arlecchino ha un'area per i bimbi fino a tre anni; il parco giochi del Leopark è pensato per bambini fino a 12 anni." },
+      { domanda: "Posso portare la torta?", risposta: "Le fonti non lo dicono chiaramente: chiedetelo quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

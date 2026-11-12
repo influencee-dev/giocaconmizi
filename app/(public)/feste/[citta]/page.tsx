@@ -8,6 +8,7 @@ import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { ReelInstagram } from "@/components/feste/ReelInstagram";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { site } from "@/lib/seo";
+import { cittaVicine } from "@/lib/coordinate-citta";
 
 /**
  * Pagina locale "Festa di compleanno per bambini a [città]" (piano SEO/GEO/AEO):
@@ -67,6 +68,12 @@ export default async function FestaCittaPage({
   if (!voce) notFound();
 
   const altre = CITTA_FESTE.filter((c) => c.slug !== voce.slug);
+  // Le 6 città più vicine (in linea d'aria): link interni con un senso per chi cerca.
+  const vicine = cittaVicine(voce.slug)
+    .map((v) => ({ ...v, citta: CITTA_FESTE.find((c) => c.slug === v.slug)?.citta }))
+    .filter((v): v is { slug: string; km: number; citta: string } => Boolean(v.citta))
+    // Entro 200 km; se sono meno di 3 (isole, città isolate) le 3 più vicine comunque.
+    .filter((v, i) => v.km <= 200 || i < 3);
   // I locali che hanno chiesto di non comparire spariscono anche da qui.
   const p = await pubblicate();
   const locali = voce.locali.filter((l) => p.get(`${voce.slug}/${slugify(l.nome)}`)?.tipo !== "rimuovi");
@@ -206,9 +213,28 @@ export default async function FestaCittaPage({
 
       <Faq voci={voce.faq} />
 
+      {vicine.length > 0 && (
+        <section className="mt-10" data-citta-vicine={vicine.length}>
+          <TitoloSezione>Feste nelle città vicine</TitoloSezione>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {vicine.map((v) => (
+              <Link
+                key={v.slug}
+                href={`/feste/${v.slug}`}
+                data-tap
+                className="flex flex-col gap-1 rounded-[1.4rem] border border-notte/10 bg-white p-4 transition-colors hover:border-viola"
+              >
+                <span className="font-extrabold text-notte">Feste di compleanno a {v.citta}</span>
+                <span className="text-sm text-notte-tenue">A circa {Math.max(5, Math.round(v.km / 5) * 5)} km da {voce.citta}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       {altre.length > 0 && (
         <section className="mt-10 flex flex-wrap items-center gap-3 rounded-morbido bg-crema p-6">
-          <p className="w-full font-bold text-notte">Le altre città:</p>
+          <p className="w-full font-bold text-notte">Tutte le città:</p>
           {altre.map((c) => (
             <Link
               key={c.slug}

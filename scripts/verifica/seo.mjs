@@ -72,6 +72,14 @@ for (const { da, a } of spostati) {
 }
 ok("directory: indirizzi vecchi reindirizzati a pagine vive", spostati.length > 0 && rotti.length === 0, rotti.slice(0, 3).join(" | ") || `${spostati.length} indirizzi`);
 
+// 2-quinquies. Città vicine (dal 12/11/2026): ogni pagina città linka le 6
+// più vicine; Carpi deve avere Modena e Reggio Emilia, e mai sé stessa.
+const htmlCarpi = await testo("/feste/carpi");
+const vicineCarpi = [...(htmlCarpi.match(/data-citta-vicine="6"[\s\S]*?<\/section>/)?.[0] ?? "").matchAll(/href="\/feste\/([a-z-]+)"/g)].map((m) => m[1]);
+ok("città vicine: Carpi linka 6 città vicine, tra cui Modena e Reggio Emilia",
+  vicineCarpi.length === 6 && vicineCarpi.includes("modena") && vicineCarpi.includes("reggio-emilia") && !vicineCarpi.includes("carpi"),
+  vicineCarpi.join(" "));
+
 // 2-ter. Sitemap delle immagini (dal 08/11/2026): le foto vere legate alla
 // loro pagina. Ogni immagine sul dominio, risponde come immagine e compare
 // davvero nella pagina che la dichiara (anche dentro /_next/image).

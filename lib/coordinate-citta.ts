@@ -14,5 +14,31 @@ export const CENTRO_CITTA: Record<string, [number, number]> = {
   salerno: [40.6824, 14.7681], ferrara: [44.8381, 11.6198], latina: [41.4676, 12.9037], monza: [45.5845, 9.2744],
   bergamo: [45.6983, 9.6773], trento: [46.0748, 11.1217], vicenza: [45.5455, 11.5354], bolzano: [46.4983, 11.3548],
   piacenza: [45.0526, 9.693], novara: [45.4469, 8.622], arezzo: [43.4633, 11.8796], udine: [46.0711, 13.2346],
-  cesena: [44.1391, 12.2431], lecce: [40.3515, 18.175], treviso: [45.6669, 12.243], como: [45.8081, 9.0852], varese: [45.8206, 8.8251], lucca: [43.8429, 10.5027], grosseto: [42.7635, 11.1124], siracusa: [37.0755, 15.2866], cremona: [45.1332, 10.0227], cosenza: [39.2983, 16.2537], caserta: [41.0745, 14.3323], pozzuoli: [40.8227, 14.1219], viterbo: [42.4174, 12.1047], trapani: [38.0176, 12.5365], savona: [44.3091, 8.4772], "busto-arsizio": [45.612, 8.8518], carpi: [44.7836, 10.885], imola: [44.3533, 11.7141], pordenone: [45.9564, 12.6615], "sesto-san-giovanni": [45.5343, 9.2398], altamura: [40.8263, 16.5535],
+  cesena: [44.1391, 12.2431], lecce: [40.3515, 18.175], treviso: [45.6669, 12.243], como: [45.8081, 9.0852], varese: [45.8206, 8.8251], lucca: [43.8429, 10.5027], grosseto: [42.7635, 11.1124], siracusa: [37.0755, 15.2866], cremona: [45.1332, 10.0227], cosenza: [39.2983, 16.2537], caserta: [41.0745, 14.3323], pozzuoli: [40.8227, 14.1219], viterbo: [42.4174, 12.1047], trapani: [38.0176, 12.5365], savona: [44.3091, 8.4772], "busto-arsizio": [45.612, 8.8518], carpi: [44.7836, 10.885], imola: [44.3533, 11.7141], pordenone: [45.9564, 12.6615], "sesto-san-giovanni": [45.5343, 9.2398], altamura: [40.8263, 16.5535], aprilia: [41.5947, 12.6545], vigevano: [45.3167, 8.8597],
 };
+
+/** Distanza in linea d'aria tra due città, in km (formula dell'emisenoverso). */
+export function distanzaKm(a: string, b: string): number | null {
+  const p = CENTRO_CITTA[a];
+  const q = CENTRO_CITTA[b];
+  if (!p || !q) return null;
+  const rad = (g: number) => (g * Math.PI) / 180;
+  const dLat = rad(q[0] - p[0]);
+  const dLon = rad(q[1] - p[1]);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(p[0])) * Math.cos(rad(q[0])) * Math.sin(dLon / 2) ** 2;
+  return 6371 * 2 * Math.asin(Math.sqrt(h));
+}
+
+/**
+ * Le città più vicine a una città (escluse le uguali): per i link interni
+ * «Feste nelle città vicine», più utili a una famiglia e a Google di un
+ * elenco di tutte le città in ordine sparso.
+ */
+export function cittaVicine(slug: string, quante = 6): { slug: string; km: number }[] {
+  return Object.keys(CENTRO_CITTA)
+    .filter((s) => s !== slug)
+    .map((s) => ({ slug: s, km: distanzaKm(slug, s) }))
+    .filter((v): v is { slug: string; km: number } => v.km !== null)
+    .sort((x, y) => x.km - y.km)
+    .slice(0, quante);
+}
