@@ -92,7 +92,16 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   Avviso a Giorgia (AVVISI_EMAIL su Vercel, se no ciao@) a ogni candidatura,
   risposta o logo; conferma a chi scrive; «Manda il link personale» in
   Candidature; «la tua scheda è online / tolta» quando Giorgia decide.
-  Senza BREVO_API_KEY non parte niente (il link si copia a mano). Dati dal foglio «Listing GiocaMizi» di Giorgia: SOLO
+  Senza BREVO_API_KEY non parte niente (il link si copia a mano).
+  Collegate e provate il 12/11/2026: account Brevo «Gioca Mizi» (NON quello
+  Influencee del connettore MCP, che da qui non vede né log né liste del sito),
+  mittente ciao@giocamizi.it, dominio autenticato. Blocco IP di Brevo spento
+  (Vercel cambia IP). Pannello → Iscritti → «Email di servizio»: account,
+  mittente, dominio e bottone di prova; un invio fallito lascia
+  `[brevo] email «…» non partita` nei log di Vercel. Posta di giocamizi.it su
+  Zoho Mail (MX zoho.eu, organizzazione di giorgia@influencee.it):
+  ciao@giocamizi.it è una casella Zoho, non un alias Gmail. DNS su Netsons.
+  Dati dal foglio «Listing GiocaMizi» di Giorgia: SOLO
   colonne pubbliche, mai le righe «Solo outreach — non pubblicare», mai email
   o note di outreach (il repo è pubblico). Difese anti-scraping in
   `lib/protezione/` (limiti, crawler verificati, trappola): docs/protezione-risorse.md.
@@ -222,13 +231,10 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   (la foto vera di Giorgia e Domiziana è in public/immagini/, fatta il 2/11).
 - Vercel Web Analytics da attivare nel pannello (il codice c'è già:
   conteggio visite senza cookie, sempre attivo; GA resta solo su consenso).
-- `supabase/backoffice.sql` da incollare nel SQL Editor (contatori schede);
-  `GSC_SERVICE_ACCOUNT` su Vercel per le ricerche Google nel pannello.
-- Brevo: account dedicato di Giocamizi (non quello Influencee del
-  connettore). Serve BREVO_API_KEY di quell'account su Vercel e il dominio
-  giocamizi.it autenticato in Brevo (record DNS su Netsons). Liste, campi,
-  mittente ciao@giocamizi.it e template di conferma li crea il sito alla
-  prima iscrizione (lib/brevo.ts). Alias Netsons: ciao@ → casella Gmail di
-  Giocamizi, giorgia@ → Gmail di Giorgia. Email ciao@giocamizi.it da attivare
-  in lib/legal.ts; dominio giocamizi.it collegato (24/10/2026)
-  (poi: next.config vecchiHost, redirect Supabase, etichetta stream GA).
+- `GSC_SERVICE_ACCOUNT` su Vercel per le ricerche Google nel pannello
+  (supabase/backoffice.sql è stato incollato l'8/11/2026).
+- Email «la tua scheda è online / tolta» non ancora provata dal vivo (parte
+  quando Giorgia accetta una risposta): controllarla al primo reclamo vero.
+  Brevo è collegato (vedi «Email di servizio» sopra); dominio giocamizi.it
+  collegato (24/10/2026) (poi: next.config vecchiHost, redirect Supabase,
+  etichetta stream GA).
