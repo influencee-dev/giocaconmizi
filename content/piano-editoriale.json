@@ -1,7 +1,7 @@
 {
   "$schema": "Piano editoriale Giocamizi: un articolo al giorno. Regole in docs/routine-articoli.md; tipi in lib/piano-editoriale.ts.",
   "modalita": "pubblica-se-supera-i-controlli",
-  "aggiornato": "2026-11-11",
+  "aggiornato": "2026-11-12",
   "argomenti": [
     {
       "id": 1,
@@ -95,7 +95,7 @@
     },
     {
       "id": 50,
-      "slug": "google-family-link-guida-completa-per-genitori",
+      "slug": "google-family-link",
       "titolo": "Google Family Link: guida completa per genitori",
       "keyword": "Google Family Link",
       "keywordSecondarie": [],
