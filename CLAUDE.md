@@ -98,7 +98,13 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   mittente ciao@giocamizi.it, dominio autenticato. Blocco IP di Brevo spento
   (Vercel cambia IP). Pannello → Iscritti → «Email di servizio»: account,
   mittente, dominio e bottone di prova; un invio fallito lascia
-  `[brevo] email «…» non partita` nei log di Vercel. Posta di giocamizi.it su
+  `[brevo] email «…» non partita` nei log di Vercel.
+  Posta di Mizi (iscrizione con doppio opt-in → email di conferma → pagina
+  /iscrizione-confermata → email di benvenuto con la foto di Giorgia e
+  Domiziana, lib/brevo-benvenuto.ts) provata dal vivo fino in fondo il
+  13/11/2026: arrivate tutte e due. Se si blocca, la risposta di /api/brevo
+  riporta il messaggio esatto di Brevo (es. «Sender is invalid / inactive»
+  = mittente da riverificare). Posta di giocamizi.it su
   Zoho Mail (MX zoho.eu, organizzazione di giorgia@influencee.it):
   ciao@giocamizi.it è una casella Zoho, non un alias Gmail. DNS su Netsons.
   Dati dal foglio «Listing GiocaMizi» di Giorgia: SOLO
