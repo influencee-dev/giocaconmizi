@@ -130,15 +130,29 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   Un riquadro foto nuovo o spostato = aggiornare FOTO_PAGINE: la batteria
   SEO controlla che ogni foto in sitemap compaia nella sua pagina.
 
-## Drive di Giocamizi: secondo cervello PARA (11/11/2026)
-- Cartella «Giocamizi» (id 1Qh2okN0Bj-GDvy4y9m9wGSk9KnBnpPfN) con 1 Progetti,
-  2 Aree, 3 Risorse, 4 Archivio. Indice: doc «00 LEGGIMI · Giocamizi»
-  (id 1CGrdlDVfSe0C2h-G2AMS76Rprq9UuS0QC-cw9iWU9zE): leggerlo prima di cercare
-  o salvare su Drive. «Prompt immagini» e «Social» stanno in 2 Aree con gli
-  stessi id di prima (le routine non cambiano).
+## Drive di Giocamizi: secondo cervello PARA (11/11/2026, rifatto il 13/11/2026)
+- Cartella «Giocamizi» (id 1Qh2okN0Bj-GDvy4y9m9wGSk9KnBnpPfN) con 0 Bacheca,
+  0 Richieste di Giorgia, 1 Progetti, 2 Aree, 3 Risorse, 4 Archivio. Indice:
+  doc «00 LEGGIMI · Giocamizi (13-11-2026)» (id 1VgWbEO9HWppoMp2J5YurE1twkQvS5jDra91Iol-RcBQ;
+  il vecchio dell'11/11 è «zz_SUPERATO»): leggerlo prima di cercare o salvare
+  su Drive. «Prompt immagini» e «Social» stanno in 2 Aree con gli stessi id.
+- I quattro documenti base in 3 Risorse, scritti per ChatGPT che il repo non
+  lo legge: «01 Fatti di Giocamizi», «02 Mappa del sito · dove sta ogni testo»,
+  «03 Come si cambiano i testi», «04 Patto di lavoro Claude e ChatGPT». Sono
+  FOTOGRAFIE con la data nel titolo: il connettore Drive crea, rinomina e
+  sposta ma non modifica, quindi quando cambiano i fatti si crea la versione
+  nuova e la vecchia prende «zz_SUPERATO — » davanti al titolo.
+- «0 Richieste di Giorgia» (id 1UWRDMZzDF5Rpbh17amd_KrCjXwbNKr9v): una modifica
+  al sito per documento («AAAA-MM-GG · pagina · cosa»). Le aperte sono quelle che
+  non iniziano con «FATTO», «DA CHIARIRE» o «00». Fatta la modifica (con le
+  verifiche di sempre), rinominare il documento «FATTO · <titolo>» (o «DA
+  CHIARIRE · …» se manca qualcosa) e dirlo nella nota di Bacheca.
+- «3 Risorse / Decisioni» (id 1LB1cGhrzRgfz3g_y4DAw-lzjg8J7A7mz): ogni decisione
+  nuova di Giorgia = un documento «AAAA-MM-GG · Decisione · titolo» (cosa,
+  perché, cosa cambia). Riepilogo fino al 13/11 già lì.
 - Ogni file nuovo di Giocamizi va nel cassetto giusto, mai nella radice; una
-  cartella nuova = una riga nel LEGGIMI; progetto finito → 4 Archivio; mai
-  cancellare. Il resto del Drive di Giorgia non si tocca.
+  cartella nuova = una riga nel LEGGIMI successivo; progetto finito → 4 Archivio;
+  mai cancellare. Il resto del Drive di Giorgia non si tocca.
 
 - Bacheca (12/11/2026, docs/bacheca.md): Claude e ChatGPT lavorano in
   continuità su Drive. Ogni routine legge le note degli ultimi 2 giorni in
@@ -183,7 +197,11 @@ NUOVE le scrive solo la routine articoli delle 9:00, mai questa) · (c) giochi �
 (d) SEO/AEO tecnico. Non toccare content/guide/ né content/piano-editoriale.json.
 Prima di iniziare importa le foto arrivate in «99 Immagini pronte»; se il
 contenuto di domani avrà bisogno di foto, prenotale oggi (`npm run foto:prenota`).
-Prima leggi le note recenti in «0 Bacheca» e alla fine lasciane una
+Prima leggi le note recenti in «0 Bacheca» e le richieste aperte in
+«0 Richieste di Giorgia»: una richiesta aperta viene PRIMA della rotazione
+(se è piccola si fa e basta; se è grande, se ne fa un pezzo e lo si dice).
+Il lunedì controlla anche che i quattro documenti base di 3 Risorse siano
+ancora veri: se no, versione nuova con la data. Alla fine lascia una nota
 («AAAA-MM-GG 07:00 · Claude · Miglioramento», docs/bacheca.md).
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.

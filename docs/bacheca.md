@@ -3,7 +3,9 @@
 Le routine di Claude e l'attività programmata di ChatGPT non si parlano: si
 passano il lavoro su Drive, nel secondo cervello di Giocamizi (cartella
 «Giocamizi», id `1Qh2okN0Bj-GDvy4y9m9wGSk9KnBnpPfN`, indice nel doc
-«00 LEGGIMI · Giocamizi»).
+«00 LEGGIMI · Giocamizi» con la data più recente; dal 13/11/2026 anche i
+quattro documenti base di «3 Risorse»: Fatti, Mappa del sito, Come si cambiano
+i testi, Patto di lavoro Claude e ChatGPT).
 
 - **«0 Bacheca»** — id `1wY3hFuwkjp-BwlD8jEsDF-AllPG4XXtG`: un **documento nuovo
   per ogni giro** (i documenti esistenti non si riscrivono: il connettore Drive
@@ -17,6 +19,15 @@ passano il lavoro su Drive, nel secondo cervello di Giocamizi (cartella
   di ChatGPT, un documento per giorno.
 - **«99 Immagini pronte»** (id `1lUlL1Uj2AspXO2SgFeSU_itN0nu2RQbP`): dove ChatGPT
   consegna le foto, col nome esatto indicato nel prompt.
+
+- **«0 Richieste di Giorgia»** (id `1UWRDMZzDF5Rpbh17amd_KrCjXwbNKr9v`): le
+  modifiche al sito chieste da Giorgia (o da ChatGPT per lei), una per
+  documento. Le fa solo Claude, poi rinomina il documento «FATTO · …» (o «DA
+  CHIARIRE · …»). ChatGPT non tocca il sito: scrive la richiesta.
+- **«3 Risorse / Decisioni»** (id `1LB1cGhrzRgfz3g_y4DAw-lzjg8J7A7mz`): una
+  decisione di Giorgia per documento, «AAAA-MM-GG · Decisione · titolo».
+- Se qualcosa che doveva arrivare manca da 2 giorni (per esempio le foto delle
+  9:30), la nota lo scrive in cima come «AVVISO PER GIORGIA».
 
 Ogni giro, **prima di iniziare**, legge le note della Bacheca degli ultimi 2
 giorni (le più recenti per prime) e riparte da «Per chi viene dopo».
