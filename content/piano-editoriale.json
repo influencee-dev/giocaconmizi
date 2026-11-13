@@ -1,7 +1,7 @@
 {
   "$schema": "Piano editoriale Giocamizi: un articolo al giorno. Regole in docs/routine-articoli.md; tipi in lib/piano-editoriale.ts.",
   "modalita": "pubblica-se-supera-i-controlli",
-  "aggiornato": "2026-11-12",
+  "aggiornato": "2026-11-13",
   "argomenti": [
     {
       "id": 1,
@@ -117,7 +117,7 @@
     },
     {
       "id": 52,
-      "slug": "tempo-di-utilizzo-iphone-e-ipad-guida-per",
+      "slug": "tempo-di-utilizzo-iphone-ipad",
       "titolo": "Tempo di utilizzo iPhone e iPad: guida per mamme",
       "keyword": "tempo utilizzo iPad bambini",
       "keywordSecondarie": [],
