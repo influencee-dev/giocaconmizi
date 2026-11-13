@@ -2403,6 +2403,23 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
+  {
+    slug: "benevento",
+    citta: "Benevento",
+    aggiornata: "2026-11-13",
+    rispostaBreve: "A Benevento la festa di compleanno per bambini si fa al coperto alla Ludoteca Un Due Tre Stella, in via Colonnette, pensata per i bambini fino a circa 7 anni; chi preferisce animali e laboratori può scegliere la Fattoria La Cinta, una fattoria didattica alle porte della città. In tutti e due i casi conviene prenotare con qualche settimana di anticipo e chiedere subito cosa è incluso.",
+    intro: "A Benevento le feste per bambini si fanno in ludoteca, ma alle porte della città c'è anche una fattoria didattica che accoglie famiglie e gruppi. Conviene prenotare con anticipo per il fine settimana.",
+    locali: [
+      { nome: "Ludoteca Un Due Tre Stella", zona: "Benevento, via Colonnette, in centro", tipo: "ludoteca con feste di compleanno", descrizione: "Una ludoteca nel centro di Benevento, aperta nel 2024 e pensata per bambini fino a circa 7 anni. Organizza feste di compleanno, che si prenotano su WhatsApp, e durante l'anno propone laboratori creativi, baby dance e yoga per bambini." },
+      { nome: "Fattoria La Cinta", zona: "Benevento, in campagna alle porte della città", tipo: "fattoria didattica con spazio per feste", descrizione: "Una fattoria didattica con asini, pecore, capre, un cavallo e un antico mulino in pietra, che si propone anche per le feste. I bambini possono fare laboratori pratici, come il pane o il formaggio, e poi mangiare con i prodotti dell'azienda. Si prenota con il modulo sul sito." },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno a Benevento?", risposta: "Sì: la Ludoteca Un Due Tre Stella è uno spazio al chiuso pensato per i più piccoli. Alla Fattoria La Cinta molte attività si fanno all'aperto: d'inverno chiedete quali si possono fare al coperto." },
+      { domanda: "Per che età vanno bene?", risposta: "La ludoteca si rivolge ai bambini fino a circa 7 anni; i laboratori in fattoria piacciono anche ai più grandi. Quando prenotate, dite l'età dei bambini." },
+      { domanda: "Posso portare la torta?", risposta: "Le fonti non lo dicono: chiedetelo quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
 ];
 
 export function cittaFeste(slug: string): CittaFeste | undefined {

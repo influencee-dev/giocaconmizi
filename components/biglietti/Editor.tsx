@@ -11,6 +11,7 @@ import { Etichette, FOGLIO_A4, MAX_ETICHETTE, nomiOspiti } from "./Etichette";
 import { FoglioFestone, PER_FOGLIO, TESTI_FESTONE, bandierine, fogli, type TestoFestone } from "./Festone";
 import { FoglioTopper, anniTopper } from "./Topper";
 import { FoglioSegnaposto, SEGNAPOSTO_PER_FOGLIO, fogliSegnaposto } from "./Segnaposto";
+import { FoglioCaccia, INDIZI_PRONTI, MAX_CARATTERI_INDIZIO, NUMERO_INDIZI, indiziDaStampare } from "./Caccia";
 
 /**
  * Il tool dei biglietti (piano §14.3).
@@ -60,6 +61,9 @@ export function Editor() {
   const fogliFestone = useRef<HTMLDivElement>(null);
   const foglioTopper = useRef<HTMLDivElement>(null);
   const fogliSegnapostoRef = useRef<HTMLDivElement>(null);
+  const foglioCaccia = useRef<HTMLDivElement>(null);
+  // Gli indizi della caccia al tesoro: restano nel browser, come i nomi degli invitati.
+  const [indizi, setIndizi] = useState<string[]>(() => Array(NUMERO_INDIZI).fill(""));
   const fogliDelFestone = useMemo(() => fogli(bandierine(testoFestone, dati.nome)), [testoFestone, dati.nome]);
   const contenitore = useRef<HTMLDivElement>(null);
   const trascinato = useRef<number | null>(null);
@@ -242,6 +246,16 @@ export function Editor() {
     },
     [dati.nome],
   );
+
+  const scaricaCaccia = useCallback(async () => {
+    const svg = foglioCaccia.current?.querySelector("svg");
+    if (!svg) return;
+    const png = await biglietoInPng(svg, FOGLIO_A4.larghezza, FOGLIO_A4.altezza);
+    const link = document.createElement("a");
+    link.download = `caccia-al-tesoro-${dati.nome || "festa"}.png`.toLowerCase().replace(/\s+/g, "-");
+    link.href = png;
+    link.click();
+  }, [dati.nome]);
 
   const salvaNelLink = useCallback(() => {
     const codificato = datiPerLink(dati);
@@ -711,6 +725,38 @@ export function Editor() {
             {fogliSegnaposto(nomi).map((gruppo, i) => (
               <FoglioSegnaposto key={i} nomi={gruppo} tema={dati.tema} variante={dati.variante} festeggiato={dati.nome} pagina={i + 1} />
             ))}
+          </div>
+        </Gruppo>
+
+        <Gruppo titolo="11. Caccia al tesoro">
+          <p className="text-sm text-notte-tenue">
+            {NUMERO_INDIZI} cartoncini «Indizio» nello stesso tema del biglietto. Ogni indizio dice dove
+            trovare il successivo, l&apos;ultimo porta al tesoro. Gli indizi pronti sono per una caccia
+            in casa: cambiali come vuoi, quelli lasciati vuoti restano come suggeriti.
+          </p>
+          <div className="flex flex-col gap-2">
+            {indizi.map((testo, i) => (
+              <label key={i} className="flex flex-col gap-1">
+                <span className="text-sm font-bold text-notte">
+                  {i === NUMERO_INDIZI - 1 ? "Ultimo indizio (porta al tesoro)" : `Indizio ${i + 1}`}
+                </span>
+                <input
+                  value={testo}
+                  maxLength={MAX_CARATTERI_INDIZIO}
+                  onChange={(e) => setIndizi((v) => v.map((x, k) => (k === i ? e.target.value : x)))}
+                  placeholder={INDIZI_PRONTI[i]}
+                  className="rounded-morbido border-2 border-crema-scuro px-4 py-3 text-base text-notte"
+                  data-campo-indizio={i + 1}
+                />
+              </label>
+            ))}
+          </div>
+          <button type="button" onClick={scaricaCaccia} className="rounded-bolla bg-viola px-5 py-4 font-extrabold text-white" data-scarica-caccia>
+            Scarica la caccia al tesoro (A4)
+          </button>
+          {/* Il foglio vero, fuori dallo schermo: serve solo per generare il PNG. */}
+          <div ref={foglioCaccia} aria-hidden className="hidden">
+            <FoglioCaccia indizi={indiziDaStampare(indizi)} tema={dati.tema} variante={dati.variante} festeggiato={dati.nome} />
           </div>
         </Gruppo>
       </div>

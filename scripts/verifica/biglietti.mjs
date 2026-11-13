@@ -36,6 +36,22 @@ ok("segnaposto: 7 invitati su 2 fogli (6 + 1)",
   (await fogliSp.nth(1).getAttribute("data-segnaposto")) === "1");
 await page.getByLabel("Nomi degli invitati (uno per riga)").fill("");
 await page.waitForTimeout(200);
+
+// Caccia al tesoro: 6 indizi pronti; uno cambiato a mano compare nel foglio,
+// gli altri restano quelli suggeriti; PNG A4 2480×3508.
+const caccia = page.locator("[data-foglio-caccia]");
+ok("caccia al tesoro: 6 indizi pronti sul foglio",
+  (await caccia.getAttribute("data-indizi")) === "6" && (await caccia.locator("[data-testo-indizio]").first().textContent()).includes("cuscini"));
+await page.locator("[data-campo-indizio='3']").fill("Cerca nella cesta dei giochi di Mizi");
+await page.waitForTimeout(200);
+ok("caccia al tesoro: l'indizio cambiato va sul foglio, gli altri restano",
+  /cesta.*giochi di Mizi/.test(await caccia.locator("[data-indizio='3'] [data-testo-indizio]").textContent()) &&
+  (await caccia.locator("[data-indizio='4'] [data-testo-indizio]").textContent()).includes("sedia"));
+const attesaCaccia = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
+await page.locator("[data-scarica-caccia]").tap();
+const scaricataCaccia = await attesaCaccia;
+const pngCaccia = scaricataCaccia ? readFileSync(await scaricataCaccia.path()) : null;
+ok("caccia al tesoro: è un PNG A4 2480×3508", pngCaccia && pngCaccia.readUInt32BE(16) === 2480 && pngCaccia.readUInt32BE(20) === 3508);
 await page.getByLabel("Conferma a (numero WhatsApp)").fill("333 1234567");
 await page.waitForTimeout(300);
 ok("avviso RSVP col numero valido", await page.locator("text=Confermo, ci saremo!").count());
