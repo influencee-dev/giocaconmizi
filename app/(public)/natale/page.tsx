@@ -4,7 +4,8 @@ import { Contenitore } from "@/components/ui";
 import { FaqVetrina, InBreve } from "@/components/vetrina";
 import { JsonLd, jsonLdFaq } from "@/components/seo/JsonLd";
 import { CITTA_EVENTI, eventiAttivi } from "@/lib/eventi-natale";
-import { PERCORSO_BIGLIETTI_NATALE, PERCORSO_EVENTI, PERCORSO_LETTERINA, PERCORSO_NATALE, RISPOSTA_BREVE_NATALE } from "@/lib/natale";
+import { MOTIVI } from "@/components/biglietti/motivi";
+import { PERCORSO_BIGLIETTI_NATALE, PERCORSO_COME_SCRIVERE, PERCORSO_EVENTI, PERCORSO_LETTERINA, PERCORSO_NATALE, RISPOSTA_BREVE_NATALE } from "@/lib/natale";
 
 export const metadata: Metadata = {
   title: "Natale per bambini: letterina, biglietti, eventi e giochi gratis",
@@ -33,11 +34,13 @@ const FAQ = [
 
 export default function NatalePage() {
   const citta = CITTA_EVENTI.filter((c) => eventiAttivi(c).length > 0);
+  // Ogni scheda ha il suo disegno: si capisce anche senza leggere (studio UX 14/11/2026).
   const pezzi = [
-    { titolo: "Letterina a Babbo Natale", testo: "Frasi pronte per età, lista dei desideri, da stampare o colorare.", href: PERCORSO_LETTERINA, tono: "bg-rosa/15 border-rosa/40" },
-    { titolo: "Biglietti di Natale", testo: "Auguri da personalizzare con il nome, per nonni, maestre e amici.", href: PERCORSO_BIGLIETTI_NATALE, tono: "bg-giallo/15 border-giallo/50" },
-    { titolo: "Eventi di Natale per bambini", testo: "Villaggi di Babbo Natale, mercatini e laboratori nella tua città.", href: PERCORSO_EVENTI, tono: "bg-azzurro/15 border-azzurro/40" },
-    { titolo: "Le favole di Mizi", testo: "In arrivo a dicembre: storie buffe da leggere e da colorare.", href: "/storie", tono: "bg-viola/10 border-viola/40" },
+    { titolo: "Letterina a Babbo Natale", testo: "Frasi pronte per età, lista dei desideri, la busta da colorare. PDF da stampare.", href: PERCORSO_LETTERINA, tono: "bg-rosa/15 border-rosa/40", motivo: "natale-regali" },
+    { titolo: "Come scrivere la letterina", testo: "Le parti della lettera ed esempi completi per 3-5, 6-8 e 9-12 anni.", href: PERCORSO_COME_SCRIVERE, tono: "bg-verde/10 border-verde/40", motivo: "natale-neve" },
+    { titolo: "Biglietti di Natale", testo: "Auguri da personalizzare con il nome, per nonni, maestre e amici.", href: PERCORSO_BIGLIETTI_NATALE, tono: "bg-giallo/15 border-giallo/50", motivo: "natale" },
+    { titolo: "Eventi di Natale per bambini", testo: "Villaggi di Babbo Natale, mercatini e laboratori nella tua città.", href: PERCORSO_EVENTI, tono: "bg-azzurro/15 border-azzurro/40", motivo: "natale-renne" },
+    { titolo: "Le favole di Mizi", testo: "In arrivo a dicembre: storie buffe da leggere e da colorare.", href: "/storie", tono: "bg-viola/10 border-viola/40", motivo: "natale-dolci" },
   ];
   return (
     <Contenitore className="py-10">
@@ -50,10 +53,15 @@ export default function NatalePage() {
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {pezzi.map((p) => (
-          <Link key={p.titolo} href={p.href} className={`flex flex-col gap-2 rounded-[1.6rem] border-2 p-6 hover:shadow-md ${p.tono}`}>
+          <Link key={p.titolo} href={p.href} className={`flex flex-col gap-2 rounded-[1.6rem] border-2 p-6 hover:shadow-md ${p.tono}`} data-scheda-natale>
+            {MOTIVI[p.motivo] && (
+              <svg viewBox="0 0 40 40" className="h-14 w-14" aria-hidden>
+                {MOTIVI[p.motivo].motivo(MOTIVI[p.motivo].tinte)}
+              </svg>
+            )}
             <span className="text-xl font-extrabold text-notte">{p.titolo}</span>
             <span className="text-notte-tenue">{p.testo}</span>
-            <span className="mt-auto pt-2 font-extrabold text-viola">Apri →</span>
+            <span className="mt-auto pt-2 font-extrabold text-viola-forte">Apri →</span>
           </Link>
         ))}
       </div>

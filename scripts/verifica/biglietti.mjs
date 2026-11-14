@@ -177,14 +177,21 @@ await page.waitForTimeout(400);
 ok("invito digitale con bottone conferma",
   (await page.getByRole("button", { name: /Confermo, ci saremo/ }).count()) === 1);
 
-// Frasi a tema: col tema halloween la prima frase proposta è a tema
+// Frasi pronte solo dopo il nome (niente «{nome}» a vista, studio UX 14/11)
 await page.goto(`${BASE}/biglietti/crea?tema=halloween`, { waitUntil: "networkidle" });
 await page.waitForTimeout(400);
+ok("frasi pronte: senza nome c'è l'invito a scriverlo, niente {nome}",
+  (await page.locator("[data-frasi-dopo-il-nome]").count()) === 1 && (await page.locator("button:has-text('{nome}')").count()) === 0);
+await page.getByLabel("Nome", { exact: true }).fill("Margherita");
+await page.waitForTimeout(200);
+// Frasi a tema: col tema halloween la prima frase proposta è a tema
 ok("frasi a tema (halloween)", await page.locator("button:has-text('Dolcetto o scherzetto')").count());
 
 // Tema natale: frase dedicata e i tre adesivi nuovi a catalogo
 await page.goto(`${BASE}/biglietti/crea?tema=natale`, { waitUntil: "networkidle" });
 await page.waitForTimeout(400);
+await page.getByLabel("Nome", { exact: true }).fill("Margherita");
+await page.waitForTimeout(200);
 ok("frasi a tema (natale)", await page.getByRole("button", { name: /sotto l'albero/ }).count());
 ok("adesivi di natale a catalogo",
   (await page.getByRole("button", { name: "Aggiungi Pupazzo di neve" }).count()) &&
@@ -192,6 +199,41 @@ ok("adesivi di natale a catalogo",
   (await page.getByRole("button", { name: "Aggiungi Fiocco di neve" }).count()));
 ok("adesivi del tema in testa (natale)",
   (await page.locator("button[aria-label^='Aggiungi ']").first().getAttribute("aria-label")) === "Aggiungi Alberello");
+
+// La frase non deve mai toccare la data (difetto trovato il 14/11): tutte le
+// frasi pronte, nome lungo, in tutti e quattro i formati.
+await page.goto(`${BASE}/biglietti/crea`, { waitUntil: "networkidle" });
+await page.getByLabel("Nome", { exact: true }).fill("Margherita");
+await page.getByLabel("Età", { exact: true }).fill("10");
+await page.getByLabel("Data", { exact: true }).fill("sabato 20 dicembre");
+await page.getByLabel("Ora", { exact: true }).fill("dalle 16 alle 19");
+await page.getByLabel("Dove", { exact: true }).fill("Via Roma 1, Milano");
+await page.waitForTimeout(200);
+const sovrapposte = [];
+for (const formato of ["A6 da stampare", "A5 da stampare", "WhatsApp e storie", "Quadrato"]) {
+  await page.getByRole("button", { name: formato }).tap();
+  const frasi = page.locator("button.text-left.text-sm");
+  const quante = await frasi.count();
+  for (let i = 0; i < quante; i++) {
+    await frasi.nth(i).tap();
+    await page.waitForTimeout(60);
+    const esito = await page.evaluate(() => {
+      const svg = document.querySelector(".lg\\:sticky svg") ?? document.querySelector("svg[aria-label^='Biglietto per']");
+      const righe = [...svg.querySelectorAll("[data-riga-frase]")];
+      const quando = svg.querySelector("[data-riga-quando]");
+      if (!righe.length || !quando) return null;
+      const fondo = Math.max(...righe.map((r) => { const b = r.getBBox(); return b.y + b.height; }));
+      return { fondo, cima: quando.getBBox().y, frase: righe.map((r) => r.textContent).join(" ") };
+    });
+    if (esito && esito.fondo > esito.cima) sovrapposte.push(`${formato}: «${esito.frase}»`);
+  }
+}
+ok("la frase non tocca mai la data (tutte le frasi pronte, 4 formati)", sovrapposte.length === 0, sovrapposte.join(" | "));
+const attesaEsito = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
+await page.getByRole("button", { name: "Scarica", exact: true }).tap();
+await attesaEsito;
+ok("dopo «Scarica» compare il messaggio «Fatto!» in basso",
+  await page.locator("[data-esito]").filter({ hasText: "Fatto!" }).waitFor({ state: "visible", timeout: 3000 }).then(() => true, () => false));
 
 // Da colorare: dal link della pagina SEO il tool si apre già in modalità
 // contorni; il PNG scaricato deve essere bianco e nero (quasi nessun pixel
@@ -234,6 +276,78 @@ ok("pagina da colorare: anteprime a contorni e link al tool in modalità colorar
   (await page.locator("main a[href*='variante=colorare']").count()) > 3);
 await page.goto(`${BASE}/biglietti/inviti-compleanno-bambini`, { waitUntil: "networkidle" });
 ok("le altre pagine restano a colori", (await page.locator("svg .dc-linea").count()) === 0);
+
+// La letterina a Babbo Natale (/natale/letterina-babbo-natale), da telefono:
+// il nome non deve mai uscire dalla pagina; PDF, busta, messaggio «Fatto!»,
+// miniatura sempre in vista che si apre a tutto schermo.
+const richiesteConNome = [];
+page.on("request", (r) => {
+  if (`${r.url()} ${r.postData() ?? ""}`.includes("Sofiella")) richiesteConNome.push(r.url());
+});
+await page.goto(`${BASE}/natale/letterina-babbo-natale`, { waitUntil: "networkidle" });
+const anteprimaL = page.locator("[data-anteprima-letterina] [data-foglio-letterina]");
+ok("letterina: c'è il foglio in anteprima e Mizi guida dal primo passo",
+  (await anteprimaL.count()) === 1 && (await page.locator("[data-mizi-guida]").textContent()).includes("Quanti anni hai") &&
+  (await page.locator("form[data-passo='0']").count()) === 1);
+await page.locator("#letterina-nome").fill("Sofiella");
+await page.locator("#letterina-eta").fill("7");
+await page.waitForTimeout(150);
+ok("letterina: il nome va sul foglio, col contatore",
+  (await anteprimaL.textContent()).includes("Sofiella") && (await page.locator("[data-contatore='letterina-nome']").textContent()) === "8/24");
+await page.locator("[data-voce-mizi]").tap(); // nei test niente voce
+await page.locator("[data-avanti]").tap();
+ok("letterina: passo 2, sette carte da lettera a figura",
+  (await page.locator("form[data-passo='1']").count()) === 1 && (await page.locator("[data-carta-letterina] svg").count()) === 7 &&
+  (await page.locator("#letterina-nome").count()) === 0);
+await page.locator("[data-carta-letterina='natale-renne']").tap();
+ok("letterina: la carta scelta resta segnata", (await page.locator("[data-carta-letterina='natale-renne']").getAttribute("aria-checked")) === "true");
+await page.locator("[data-avanti]").tap();
+await page.locator("[data-avanti]").tap();
+await page.locator("[data-idea-desiderio]").first().tap();
+await page.waitForTimeout(150);
+ok("letterina: passo 4, l'idea toccata diventa il primo desiderio",
+  (await page.locator("form[data-passo='3']").count()) === 1 && (await page.locator("#letterina-desiderio-1").inputValue()).length > 0);
+await page.locator("[data-avanti]").tap();
+ok("letterina: accanto a Mizi c'è la letterina in piccolo", await page.locator("[data-miniatura-guida]").isVisible());
+await page.locator("[data-sezione-busta]").scrollIntoViewIfNeeded();
+ok("letterina: lontano da Mizi la miniatura fissa resta in vista",
+  await page.locator("[data-miniatura-letterina]").waitFor({ state: "visible", timeout: 3000 }).then(() => true, () => false));
+await page.locator("[data-miniatura-letterina]").tap();
+ok("letterina: toccando la miniatura si apre a tutto schermo",
+  (await page.locator("[data-letterina-grande] [data-foglio-letterina]").count()) === 1);
+await page.locator("[data-chiudi-grande]").tap();
+await page.locator("[data-avanti]").tap();
+ok("letterina: ultimo passo «Fatto!» con i bottoni per stampare e la festa",
+  (await page.locator("[data-passo-fatto] [data-scarica-letterina-pdf]").count()) === 1 &&
+  (await page.locator("[data-esito]").filter({ hasText: "Evviva" }).waitFor({ state: "visible", timeout: 3000 }).then(() => true, () => false)));
+await page.locator("[data-vedi-tutto]").tap();
+ok("letterina: «Vedi tutto in una pagina» mostra tutti i passi insieme",
+  (await page.locator("#letterina-nome").count()) === 1 && (await page.locator("#letterina-pensiero").count()) === 1 &&
+  (await page.locator("[data-navigazione-passi]").count()) === 0);
+const attesaPdfL = page.waitForEvent("download", { timeout: 15000 }).catch(() => null);
+await page.locator("[data-anteprima-letterina] ~ div [data-scarica-letterina-pdf]").tap();
+const pdfL = await attesaPdfL;
+const bytePdfL = pdfL ? readFileSync(await pdfL.path()) : null;
+ok("letterina: il PDF è un A4 vero", bytePdfL && bytePdfL.subarray(0, 5).toString() === "%PDF-" &&
+  bytePdfL.toString("latin1").includes("/MediaBox [0 0 595.28 841.89]") && bytePdfL.length > 50_000,
+  bytePdfL ? `${Math.round(bytePdfL.length / 1024)} KB` : "nessun download");
+ok("letterina: dopo il download compare «Fatto!»",
+  await page.locator("[data-esito]").filter({ hasText: "Fatto!" }).waitFor({ state: "visible", timeout: 3000 }).then(() => true, () => false));
+const bustaL = page.locator("[data-foglio-busta]");
+ok("busta: da colorare, col mittente e «A: Babbo Natale»",
+  (await bustaL.locator(".dc-linea").count()) > 5 &&
+  (await bustaL.locator("[data-busta-mittente]").textContent()) === "Da: Sofiella" &&
+  (await bustaL.locator("[data-busta-destinatario]").textContent()) === "A: Babbo Natale");
+const attesaBustaL = page.waitForEvent("download", { timeout: 15000 }).catch(() => null);
+await page.locator("[data-scarica-busta]").tap();
+const bustaPdfL = await attesaBustaL;
+const byteBustaL = bustaPdfL ? readFileSync(await bustaPdfL.path()) : null;
+ok("busta: PDF A4", byteBustaL && byteBustaL.subarray(0, 5).toString() === "%PDF-");
+ok("letterina: il nome del bambino non è mai uscito dalla pagina", richiesteConNome.length === 0, richiesteConNome.join(", "));
+await page.goto(`${BASE}/natale`, { waitUntil: "networkidle" });
+ok("hub del Natale: cinque schede, ognuna col suo disegno", (await page.locator("[data-scheda-natale] svg").count()) === 5);
+await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
+ok("home: in stagione c'è il riquadro del Natale", await page.locator("[data-riquadro-natale]").first().isVisible());
 
 await b.close();
 if (servito) process.kill(-servito.pid);

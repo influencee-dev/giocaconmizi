@@ -10,7 +10,7 @@ import { FAQ_LETTERINA, PERCORSO_LETTERINA, PERCORSO_NATALE, RISPOSTA_BREVE_LETT
 export const metadata: Metadata = {
   title: "Letterina a Babbo Natale da stampare e compilare online, gratis",
   description:
-    "Scrivi la letterina a Babbo Natale con Mizi: frasi pronte per età, lista dei desideri, carta da lettera natalizia o da colorare. Stampa in A4 o condividi. Gratis, senza registrazione.",
+    "Scrivi la letterina a Babbo Natale con Mizi: frasi pronte per età, lista dei desideri, sette carte da lettera anche da colorare e la busta da ritagliare. PDF A4 da stampare. Gratis, senza registrazione.",
   alternates: { canonical: PERCORSO_LETTERINA },
 };
 
