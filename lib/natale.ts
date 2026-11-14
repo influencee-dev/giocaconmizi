@@ -11,6 +11,19 @@ export const PERCORSO_NATALE = "/natale";
 export const PERCORSO_LETTERINA = "/natale/letterina-babbo-natale";
 export const PERCORSO_BIGLIETTI_NATALE = "/natale/biglietti-di-natale";
 export const PERCORSO_EVENTI = "/natale/eventi";
+/** Gli esempi per età stanno nella pagina della letterina: niente pagina doppia per Google. */
+export const PERCORSO_COME_SCRIVERE = `${PERCORSO_LETTERINA}#come-si-scrive`;
+
+/**
+ * Il Natale si mette in vetrina (home, menu) dal 1 novembre al 15 gennaio.
+ * Le pagine sono statiche: la data è quella della pubblicazione, e il sito
+ * si ripubblica ogni giorno con le routine.
+ */
+export function inStagioneNatale(oggi = new Date()): boolean {
+  const m = oggi.getMonth() + 1;
+  const g = oggi.getDate();
+  return m === 11 || m === 12 || (m === 1 && g <= 15);
+}
 
 /** Le fasce d'età della letterina: le frasi cambiano con l'età. */
 export const FASCE = [
@@ -20,7 +33,7 @@ export const FASCE = [
 ] as const;
 export type Fascia = (typeof FASCE)[number]["id"];
 
-/** Le cornici della letterina: i motivi stanno in components/biglietti/motivi.tsx (le quattro «natale-*» sono solo cornici, non temi dei biglietti). */
+/** Le carte da lettera: i temi dei biglietti che stanno bene a Natale. */
 export const CARTE = [
   { tema: "natale", etichetta: "Albero e palline" },
   { tema: "natale-neve", etichetta: "Pupazzi di neve" },
@@ -28,7 +41,12 @@ export const CARTE = [
   { tema: "natale-dolci", etichetta: "Biscotti e dolci" },
   { tema: "natale-renne", etichetta: "Renne" },
   { tema: "stelle-luna", etichetta: "Stelle e luna" },
+  { tema: "animali-foresta", etichetta: "Bosco d'inverno" },
 ] as const;
+
+/** Il testo che accompagna l'immagine quando la si condivide. */
+export const TESTO_CONDIVISIONE =
+  "Ho scritto la letterina a Babbo Natale con Mizi. Puoi farla anche tu, gratis: giocamizi.it/natale/letterina-babbo-natale";
 
 /** Le frasi d'apertura, una si sceglie e si può cambiare a mano. */
 export const APERTURE: Record<Fascia, string[]> = {
@@ -116,7 +134,7 @@ export const RISPOSTA_BABBO_NATALE = [
 export const DATA_RISPOSTA = "2026-12-20";
 
 export const RISPOSTA_BREVE_LETTERINA =
-  "La letterina a Babbo Natale si scrive meglio in tre parti: una presentazione («sono…, ho … anni»), un racconto dell'anno e la lista dei desideri, al massimo tre-cinque. Si scrive tra fine novembre e l'8 dicembre e si lascia sotto l'albero o si spedisce. Con lo strumento di Giocamizi si compila dal telefono, si scarica in PDF A4, si stampa o si fa da colorare, con la busta da colorare, gratis e senza registrazione.";
+  "La letterina a Babbo Natale si scrive meglio in tre parti: una presentazione («sono…, ho … anni»), un racconto dell'anno e la lista dei desideri, al massimo tre-cinque. Si scrive tra fine novembre e l'8 dicembre e si lascia sotto l'albero o si spedisce. Con lo strumento di Giocamizi si compila dal telefono, si scarica in PDF A4 o si stampa subito, anche da colorare e con la busta da ritagliare, gratis e senza registrazione.";
 
 export const FAQ_LETTERINA = [
   {
@@ -138,6 +156,11 @@ export const FAQ_LETTERINA = [
     domanda: "La letterina di Giocamizi è gratis? I dati dove vanno?",
     risposta:
       "È gratis e non serve registrarsi. Nome, età e desideri restano sul tuo telefono o computer: la letterina viene disegnata nel browser e non arriva mai ai nostri server.",
+  },
+  {
+    domanda: "C'è anche la busta per la letterina?",
+    risposta:
+      "Sì, da colorare: si stampa su un A4, si ritaglia sulla linea continua e si piega sui trattini. Davanti c'è «A: Babbo Natale, Polo Nord», il francobollo da colorare e il nome di chi scrive; dentro ci sta la letterina piegata in quattro.",
   },
   {
     domanda: "C'è anche la risposta di Babbo Natale?",

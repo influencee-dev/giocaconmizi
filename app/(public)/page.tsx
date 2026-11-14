@@ -1,3 +1,4 @@
+import { RiquadroNatale } from "@/components/natale/RiquadroNatale";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import Image from "next/image";
@@ -124,6 +125,9 @@ export default function Home() {
         inVetrina={IN_VETRINA}
       />
 
+      {/* Il Natale, in stagione: sul telefono subito dopo la home-app. */}
+      <RiquadroNatale className="mx-4 mt-6 md:hidden" />
+
       {/* ---------- HERO (dal tablet in su): foto a tutta larghezza, il menu ci galleggia sopra ---------- */}
       <section className="relative -mt-[5.5rem] hidden overflow-hidden bg-notte md:block">
         {fotoHero ? (
@@ -156,6 +160,11 @@ export default function Home() {
         {/* AI Act art. 50: la foto generata con l'AI lo dichiara. */}
         {fotoHero && <SegnoAI className="bottom-2 left-3" />}
       </section>
+
+      {/* Il Natale, in stagione: dal tablet in su, subito sotto la foto. */}
+      <div className="mx-auto hidden max-w-6xl px-4 pt-10 sm:px-8 md:block">
+        <RiquadroNatale />
+      </div>
 
       {/* ---------- TRE PORTE + blocco risposta ---------- */}
       <section className="mx-auto max-w-6xl px-4 pt-16 sm:px-8 sm:pt-24">

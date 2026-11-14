@@ -24,7 +24,7 @@ import { consensoStatistiche } from "@/components/legal/analytics";
 
 export const CHIAVE_APP_CHIUSA = "giocamizi-app-chiusa";
 const TRENTA_GIORNI = 30 * 24 * 60 * 60 * 1000;
-const NASCOSTA = [/^\/giochi\/[^/]+\/gioca/, /^\/admin\//, /^\/la-tua-scheda\//, /^\/biglietti\/crea/, /^\/biglietti\/vedi/, /^\/accedi/, /^\/aggiungi-attivita/];
+const NASCOSTA = [/^\/giochi\/[^/]+\/gioca/, /^\/admin\//, /^\/la-tua-scheda\//, /^\/biglietti\/crea/, /^\/biglietti\/vedi/, /^\/natale\/letterina-babbo-natale/, /^\/accedi/, /^\/aggiungi-attivita/];
 
 interface EventoInstallazione extends Event {
   prompt: () => Promise<void>;

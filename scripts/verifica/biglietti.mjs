@@ -233,7 +233,7 @@ const attesaEsito = page.waitForEvent("download", { timeout: 10000 }).catch(() =
 await page.getByRole("button", { name: "Scarica", exact: true }).tap();
 await attesaEsito;
 ok("dopo «Scarica» compare il messaggio «Fatto!» in basso",
-  await page.locator("[data-esito]").filter({ hasText: "Fatto!" }).isVisible());
+  await page.locator("[data-esito]").filter({ hasText: "Fatto!" }).waitFor({ state: "visible", timeout: 3000 }).then(() => true, () => false));
 
 // Da colorare: dal link della pagina SEO il tool si apre già in modalità
 // contorni; il PNG scaricato deve essere bianco e nero (quasi nessun pixel
@@ -277,38 +277,58 @@ ok("pagina da colorare: anteprime a contorni e link al tool in modalità colorar
 await page.goto(`${BASE}/biglietti/inviti-compleanno-bambini`, { waitUntil: "networkidle" });
 ok("le altre pagine restano a colori", (await page.locator("svg .dc-linea").count()) === 0);
 
-// La letterina a Babbo Natale (/natale/letterina-babbo-natale): il foglio si
-// compone nel browser e il nome non deve mai uscire dalla pagina.
+// La letterina a Babbo Natale (/natale/letterina-babbo-natale), da telefono:
+// il nome non deve mai uscire dalla pagina; PDF, busta, messaggio «Fatto!»,
+// miniatura sempre in vista che si apre a tutto schermo.
 const richiesteConNome = [];
 page.on("request", (r) => {
   if (`${r.url()} ${r.postData() ?? ""}`.includes("Sofiella")) richiesteConNome.push(r.url());
 });
 await page.goto(`${BASE}/natale/letterina-babbo-natale`, { waitUntil: "networkidle" });
-const lettera = page.locator("[data-foglio-letterina]");
+const anteprimaL = page.locator("[data-anteprima-letterina] [data-foglio-letterina]");
+ok("letterina: c'è il foglio in anteprima", (await anteprimaL.count()) === 1);
 await page.locator("#letterina-nome").fill("Sofiella");
 await page.locator("#letterina-eta").fill("7");
-await page.locator("#letterina-desiderio-1").fill("una bicicletta rossa");
+await page.locator("[data-idea-desiderio]").first().tap();
 await page.waitForTimeout(200);
-const testoLettera = (await lettera.textContent()) ?? "";
-ok("letterina: nome, età e desiderio vanno sul foglio", /Sofiella/.test(testoLettera) && /7 anni/.test(testoLettera) && /una bicicletta rossa/.test(testoLettera));
-ok("letterina: sei cornici a scelta", (await page.locator("[data-cornice-letterina]").count()) === 6);
-await page.locator("[data-cornice-letterina='natale-renne']").tap();
-const attesaPdf = page.waitForEvent("download", { timeout: 15000 }).catch(() => null);
-await page.locator("[data-scarica-letterina-pdf]").tap();
-const pdf = await attesaPdf;
-const bytePdf = pdf ? readFileSync(await pdf.path()) : null;
-ok("letterina: il PDF è un PDF A4 vero", bytePdf && bytePdf.subarray(0, 5).toString() === "%PDF-" &&
-  bytePdf.toString("latin1").includes("/MediaBox [0 0 595.28 841.89]") && bytePdf.length > 50_000,
-  bytePdf ? `${Math.round(bytePdf.length / 1024)} KB` : "nessun download");
-const bustaF = page.locator("[data-foglio-busta]");
-ok("busta: da colorare, col mittente", (await bustaF.count()) === 1 && (await bustaF.locator(".dc-linea").count()) > 5 &&
-  (await bustaF.locator("[data-busta-mittente]").textContent()) === "Da: Sofiella");
-const attesaBusta = page.waitForEvent("download", { timeout: 15000 }).catch(() => null);
+ok("letterina: nome e idea-desiderio vanno sul foglio, col contatore",
+  (await anteprimaL.textContent()).includes("Sofiella") &&
+  (await page.locator("#letterina-desiderio-1").inputValue()).length > 0 &&
+  (await page.locator("[data-contatore='letterina-nome']").textContent()) === "8/24");
+ok("letterina: sette carte da lettera a figura", (await page.locator("[data-carta-letterina] svg").count()) === 7);
+await page.locator("[data-carta-letterina='natale-renne']").tap();
+ok("letterina: la carta scelta resta segnata", (await page.locator("[data-carta-letterina='natale-renne']").getAttribute("aria-checked")) === "true");
+// La miniatura in basso si vede senza scorrere e si apre a tutto schermo.
+await page.locator("#letterina-pensiero").scrollIntoViewIfNeeded();
+ok("letterina: la miniatura resta in vista mentre si scrive", await page.locator("[data-miniatura-letterina]").isVisible());
+await page.locator("[data-miniatura-letterina]").tap();
+ok("letterina: toccando la miniatura si apre a tutto schermo",
+  (await page.locator("[data-letterina-grande] [data-foglio-letterina]").count()) === 1);
+await page.locator("[data-chiudi-grande]").tap();
+const attesaPdfL = page.waitForEvent("download", { timeout: 15000 }).catch(() => null);
+await page.locator("[data-anteprima-letterina] ~ div [data-scarica-letterina-pdf]").tap();
+const pdfL = await attesaPdfL;
+const bytePdfL = pdfL ? readFileSync(await pdfL.path()) : null;
+ok("letterina: il PDF è un A4 vero", bytePdfL && bytePdfL.subarray(0, 5).toString() === "%PDF-" &&
+  bytePdfL.toString("latin1").includes("/MediaBox [0 0 595.28 841.89]") && bytePdfL.length > 50_000,
+  bytePdfL ? `${Math.round(bytePdfL.length / 1024)} KB` : "nessun download");
+ok("letterina: dopo il download compare «Fatto!»",
+  await page.locator("[data-esito]").filter({ hasText: "Fatto!" }).waitFor({ state: "visible", timeout: 3000 }).then(() => true, () => false));
+const bustaL = page.locator("[data-foglio-busta]");
+ok("busta: da colorare, col mittente e «A: Babbo Natale»",
+  (await bustaL.locator(".dc-linea").count()) > 5 &&
+  (await bustaL.locator("[data-busta-mittente]").textContent()) === "Da: Sofiella" &&
+  (await bustaL.locator("[data-busta-destinatario]").textContent()) === "A: Babbo Natale");
+const attesaBustaL = page.waitForEvent("download", { timeout: 15000 }).catch(() => null);
 await page.locator("[data-scarica-busta]").tap();
-const bustaPdf = await attesaBusta;
-const byteBusta = bustaPdf ? readFileSync(await bustaPdf.path()) : null;
-ok("busta: PDF A4", byteBusta && byteBusta.subarray(0, 5).toString() === "%PDF-" && byteBusta.toString("latin1").includes("/MediaBox [0 0 595.28 841.89]"));
+const bustaPdfL = await attesaBustaL;
+const byteBustaL = bustaPdfL ? readFileSync(await bustaPdfL.path()) : null;
+ok("busta: PDF A4", byteBustaL && byteBustaL.subarray(0, 5).toString() === "%PDF-");
 ok("letterina: il nome del bambino non è mai uscito dalla pagina", richiesteConNome.length === 0, richiesteConNome.join(", "));
+await page.goto(`${BASE}/natale`, { waitUntil: "networkidle" });
+ok("hub del Natale: cinque schede, ognuna col suo disegno", (await page.locator("[data-scheda-natale] svg").count()) === 5);
+await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
+ok("home: in stagione c'è il riquadro del Natale", await page.locator("[data-riquadro-natale]").first().isVisible());
 
 await b.close();
 if (servito) process.kill(-servito.pid);
