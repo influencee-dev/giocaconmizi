@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Biglietto, type DatiBiglietto } from "./Biglietto";
 import { CATALOGO_STICKER, catalogoPerTema } from "./stickers";
@@ -12,6 +13,7 @@ import { FoglioFestone, PER_FOGLIO, TESTI_FESTONE, bandierine, fogli, type Testo
 import { FoglioTopper, anniTopper } from "./Topper";
 import { FoglioSegnaposto, SEGNAPOSTO_PER_FOGLIO, fogliSegnaposto } from "./Segnaposto";
 import { annuncia, MessaggioEsito } from "@/components/ui/Esito";
+import { FacciaMizi } from "@/games/_engine/arte";
 import { FoglioCaccia, INDIZI_PRONTI, MAX_CARATTERI_INDIZIO, NUMERO_INDIZI, indiziDaStampare } from "./Caccia";
 
 /**
@@ -48,8 +50,32 @@ const POSTI_LIBERI: [number, number][] = [
 
 const MASSIMO_STICKER = 6;
 
-export function Editor() {
+/**
+ * Studio UX del 14/11/2026: undici riquadri in fila spaventavano. Il biglietto
+ * ora va a passi, con Mizi che dice cosa fare; il kit della festa (etichette,
+ * festone, topper, segnaposto, caccia) ha la sua pagina, /biglietti/kit-festa,
+ * e ci arriva col biglietto già fatto nel link.
+ */
+const PASSI = [
+  { titolo: "Che biglietto è", mizi: "Ciao! Facciamo il biglietto insieme. Prima scegli: invito, auguri o grazie?" },
+  { titolo: "Lo sfondo", mizi: "Ora lo sfondo: tocca quello che piace al festeggiato." },
+  { titolo: "Le scritte", mizi: "Scrivi il nome: le frasi pronte compaiono già con il nome dentro." },
+  { titolo: "Gli adesivi", mizi: "Tocca un adesivo per metterlo, poi spostalo col dito sul biglietto." },
+  { titolo: "La foto", mizi: "Se vuoi, metti la foto del festeggiato. Resta sul tuo telefono." },
+  { titolo: "I ritocchi", mizi: "Ultimi ritocchi: la forma delle lettere e Mizi nell'angolo." },
+  { titolo: "Pronto!", mizi: "Il biglietto è pronto! Scaricalo o mandalo su WhatsApp. Poi, se vuoi, prepariamo il kit della festa." },
+] as const;
+
+/** Gli sfondi che si vedono subito; gli altri dietro «Vedi tutti». */
+const TEMI_IN_EVIDENZA = ["palloncini", "unicorno", "dinosauri", "calcio", "principessa", "supereroe", "spazio", "sirena"];
+
+export function Editor({ parte = "biglietto" }: { parte?: "biglietto" | "kit" }) {
+  const kit = parte === "kit";
   const parametri = useSearchParams();
+  const [passo, setPasso] = useState(0);
+  const [tutto, setTutto] = useState(false);
+  const [tuttiITemi, setTuttiITemi] = useState(false);
+  const inizio = useRef<HTMLDivElement>(null);
   const [dati, setDati] = useState<DatiBiglietto>(VUOTO);
   const [formato, setFormato] = useState<FormatoId>("a6");
   const [copiato, setCopiato] = useState(false);
@@ -83,6 +109,8 @@ export function Editor() {
       // Link rovinato: si riparte dal biglietto vuoto senza messaggi d'errore.
       if (salvato) {
         setDati((d) => ({ ...d, ...salvato }));
+        // Chi torna con un biglietto già fatto lo ritrova tutto in una pagina.
+        setTutto(true);
         return;
       }
     }
@@ -276,6 +304,52 @@ export function Editor() {
   }, [dati]);
 
   const invitoDigitale = useMemo(() => linkInvito(dati), [dati]);
+  // Il biglietto passa dal link: niente foto e niente nomi degli invitati.
+  const codiceBiglietto = useMemo(() => datiPerLink(dati), [dati]);
+
+  const vaiA = useCallback((n: number) => {
+    setPasso(Math.max(0, Math.min(PASSI.length - 1, n)));
+    const cima = inizio.current;
+    if (cima && cima.getBoundingClientRect().top < 0) cima.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+  const vedi = (i: number) => kit || tutto || passo === i;
+
+  const temiMostrati = useMemo(() => {
+    if (tuttiITemi) return temi;
+    const scelti = TEMI_IN_EVIDENZA.map((id) => temi.find((t) => t.theme === id)).filter((t) => t !== undefined);
+    const attuale = temi.find((t) => t.theme === dati.tema);
+    return attuale && !scelti.includes(attuale) ? [attuale, ...scelti.slice(0, -1)] : scelti;
+  }, [tuttiITemi, dati.tema]);
+
+  const sceltaSfondo = (
+    <>
+      <div className="grid grid-cols-4 gap-2" data-temi={temiMostrati.length}>
+        {temiMostrati.map((t) => (
+          <button
+            key={t.theme}
+            type="button"
+            onClick={() => aggiorna("tema", t.theme)}
+            aria-pressed={dati.tema === t.theme}
+            aria-label={t.label}
+            title={t.label}
+            className={`overflow-hidden rounded-lg border-4 ${dati.tema === t.theme ? "border-viola" : "border-transparent"}`}
+            style={{ minHeight: 0, minWidth: 0 }}
+          >
+            <Biglietto dati={{ ...VUOTO, tema: t.theme, variante: dati.variante }} larghezza={100} altezza={140} />
+          </button>
+        ))}
+      </div>
+      <button
+        type="button"
+        onClick={() => setTuttiITemi((v) => !v)}
+        className="min-h-14 rounded-bolla border-2 border-crema-scuro bg-white px-5 font-bold text-notte"
+        data-tutti-i-temi
+      >
+        {tuttiITemi ? "Mostra meno sfondi" : `Vedi tutti i ${temi.length} sfondi`}
+      </button>
+      <Scelte valore={dati.variante} opzioni={VARIANTI} onCambia={(v) => aggiorna("variante", v as Variante)} />
+    </>
+  );
 
   const mandaSuWhatsApp = useCallback(() => {
     const testo = `${dati.nome ? `La festa di ${dati.nome}` : "Sei invitato!"} 🎉 Apri l'invito: ${window.location.origin}${invitoDigitale}`;
@@ -296,9 +370,10 @@ export function Editor() {
   }, [dati.frase, invitoDigitale]);
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1fr_minmax(0,22rem)]">
+    <div className={kit ? "mx-auto grid max-w-2xl gap-8" : "grid gap-8 lg:grid-cols-[1fr_minmax(0,22rem)]"}>
       <MessaggioEsito />
-      {/* Anteprima */}
+      {/* Anteprima (il kit non ne ha: ogni foglio si scarica dal suo riquadro) */}
+      {!kit && (
       <div className="order-1 lg:order-2">
         <div className="lg:sticky lg:top-20">
           <div
@@ -392,9 +467,68 @@ export function Editor() {
           )}
         </div>
       </div>
+      )}
 
       {/* Comandi */}
-      <div className="order-2 flex flex-col gap-6 lg:order-1">
+      <div className="order-2 flex min-w-0 flex-col gap-6 lg:order-1" data-passo={kit ? "kit" : tutto ? "tutto" : passo}>
+        {!kit && (
+          <div ref={inizio} className="flex scroll-mt-28 flex-col gap-3">
+            <div className="flex items-center gap-3" data-mizi-guida>
+              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+                <FacciaMizi emozione="felice" className="h-12 w-12" />
+              </span>
+              <p className="fumetto relative flex-1 rounded-morbido border-2 border-crema-scuro bg-white px-4 py-3 text-lg font-extrabold leading-snug text-notte">
+                {tutto ? "Ecco tutto il biglietto in una pagina: cambia quello che vuoi." : PASSI[passo].mizi}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              {!tutto && (
+                <ol className="flex items-center" aria-label={`Passo ${passo + 1} di ${PASSI.length}: ${PASSI[passo].titolo}`}>
+                  {PASSI.map((p, i) => (
+                    <li key={p.titolo}>
+                      <button
+                        type="button"
+                        onClick={() => vaiA(i)}
+                        aria-label={`Vai al passo ${i + 1}: ${p.titolo}`}
+                        aria-current={i === passo ? "step" : undefined}
+                        className="flex h-10 w-7 items-center justify-center"
+                        style={{ minHeight: 0, minWidth: 0 }}
+                      >
+                        <span className={`block h-3.5 w-3.5 rounded-full ${i <= passo ? "bg-viola-forte" : "bg-crema-scuro"}`} />
+                      </button>
+                    </li>
+                  ))}
+                </ol>
+              )}
+              <button
+                type="button"
+                onClick={() => setTutto((t) => !t)}
+                className="min-h-12 rounded-bolla border-2 border-notte/15 bg-white px-3 text-sm font-bold text-notte"
+                data-vedi-tutto
+              >
+                {tutto ? "Torna ai passi" : "Vedi tutto in una pagina"}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {kit && (
+          <Gruppo titolo="1. La festa di chi">
+            <Campo etichetta="Nome" valore={dati.nome} onCambia={(v) => aggiorna("nome", v)} placeholder="Sofia" />
+            <Campo etichetta="Età" valore={dati.eta} onCambia={(v) => aggiorna("eta", v)} placeholder="5" />
+            <p className="text-sm text-notte-tenue">Lo sfondo vale per tutti i fogli del kit.</p>
+            {sceltaSfondo}
+            <Link
+              href={`/biglietti/crea?b=${codiceBiglietto}`}
+              className="text-center font-extrabold text-viola-forte underline"
+              data-torna-al-biglietto
+            >
+              ← Torna al biglietto
+            </Link>
+          </Gruppo>
+        )}
+
+        {!kit && vedi(0) && (
         <Gruppo titolo="1. Che biglietto è">
           <Scelte
             valore={dati.tipo}
@@ -407,35 +541,11 @@ export function Editor() {
             onCambia={(v) => setFormato(v as FormatoId)}
           />
         </Gruppo>
+        )}
 
-        <Gruppo titolo="2. Lo sfondo">
-          <div className="grid grid-cols-4 gap-2">
-            {temi.map((t) => (
-              <button
-                key={t.theme}
-                type="button"
-                onClick={() => aggiorna("tema", t.theme)}
-                aria-pressed={dati.tema === t.theme}
-                aria-label={t.label}
-                title={t.label}
-                className={`overflow-hidden rounded-lg border-4 ${dati.tema === t.theme ? "border-viola" : "border-transparent"}`}
-                style={{ minHeight: 0, minWidth: 0 }}
-              >
-                <Biglietto
-                  dati={{ ...VUOTO, tema: t.theme, variante: dati.variante }}
-                  larghezza={100}
-                  altezza={140}
-                />
-              </button>
-            ))}
-          </div>
-          <Scelte
-            valore={dati.variante}
-            opzioni={VARIANTI}
-            onCambia={(v) => aggiorna("variante", v as Variante)}
-          />
-        </Gruppo>
+        {!kit && vedi(1) && <Gruppo titolo="2. Lo sfondo">{sceltaSfondo}</Gruppo>}
 
+        {!kit && vedi(2) && (
         <Gruppo titolo="3. Che cosa c'è scritto">
           <Campo etichetta="Nome" valore={dati.nome} onCambia={(v) => aggiorna("nome", v)} placeholder="Sofia" />
           <Campo etichetta="Età" valore={dati.eta} onCambia={(v) => aggiorna("eta", v)} placeholder="5" />
@@ -484,7 +594,9 @@ export function Editor() {
 
           <Campo etichetta="Firma" valore={dati.firma} onCambia={(v) => aggiorna("firma", v)} placeholder="Sofia e mamma" />
         </Gruppo>
+        )}
 
+        {!kit && vedi(3) && (
         <Gruppo titolo="4. Adesivi">
           <div className="grid grid-cols-4 gap-2">
             {catalogoPerTema(dati.tema).map((v) => (
@@ -552,7 +664,9 @@ export function Editor() {
             regalare in tutta tranquillità.
           </p>
         </Gruppo>
+        )}
 
+        {!kit && vedi(4) && (
         <Gruppo titolo="5. La foto del festeggiato">
           {dati.foto ? (
             <div className="flex items-center gap-3">
@@ -583,7 +697,9 @@ export function Editor() {
             nei link che condividi.
           </p>
         </Gruppo>
+        )}
 
+        {!kit && vedi(5) && (
         <Gruppo titolo="6. Ritocchi">
           <Scelte
             valore={dati.carattere}
@@ -603,8 +719,51 @@ export function Editor() {
             Metti Mizi nell&apos;angolo
           </label>
         </Gruppo>
+        )}
 
-        <Gruppo titolo="7. Etichette per i sacchettini">
+        {!kit && (tutto || passo === PASSI.length - 1) && (
+          <section className="flex flex-col gap-3 rounded-morbido bg-giallo/30 p-5" data-passo-fatto>
+            <h2 className="text-xl font-extrabold text-notte">Prepara il kit della festa</h2>
+            <p className="text-notte">
+              Etichette per i sacchettini, festone col nome, topper per la torta, segnaposto e caccia al
+              tesoro: tutto con lo stesso sfondo del biglietto, da stampare a casa.
+            </p>
+            <Link
+              href={`/biglietti/kit-festa?b=${codiceBiglietto}`}
+              className="flex min-h-14 items-center justify-center rounded-bolla bg-viola-forte px-6 text-lg font-extrabold text-white"
+              data-link-kit
+            >
+              Prepara il kit della festa
+            </Link>
+          </section>
+        )}
+
+        {!kit && !tutto && (
+          <div className="grid grid-cols-2 gap-3" data-navigazione-passi>
+            <button
+              type="button"
+              onClick={() => vaiA(passo - 1)}
+              disabled={passo === 0}
+              className="min-h-16 rounded-bolla border-2 border-crema-scuro bg-white px-5 text-lg font-bold text-notte disabled:opacity-40"
+              data-indietro
+            >
+              ← Indietro
+            </button>
+            {passo < PASSI.length - 1 ? (
+              <button type="button" onClick={() => vaiA(passo + 1)} className="min-h-16 rounded-bolla bg-viola-forte px-5 text-lg font-extrabold text-white" data-avanti>
+                Avanti →
+              </button>
+            ) : (
+              <button type="button" onClick={() => vaiA(0)} className="min-h-16 rounded-bolla border-2 border-crema-scuro bg-white px-5 text-lg font-bold text-notte" data-ricomincia>
+                Dall&apos;inizio
+              </button>
+            )}
+          </div>
+        )}
+
+        {kit && (
+        <>
+        <Gruppo titolo="2. Etichette per i sacchettini">
           <p className="text-sm text-notte-tenue">
             Un foglio A4 con un cartellino &quot;Grazie&quot; per ogni invitato, nello stesso
             tema del biglietto: stampa, ritaglia sul tratteggio e lega al sacchetto.
@@ -639,7 +798,7 @@ export function Editor() {
           </div>
         </Gruppo>
 
-        <Gruppo titolo="8. Festone col nome">
+        <Gruppo titolo="3. Festone col nome">
           <p className="text-sm text-notte-tenue">
             Una bandierina per lettera, nello stesso tema del biglietto, 6 per foglio A4.
             Ritaglia sul tratteggio, piega la linguetta sullo spago e incolla: il numerino
@@ -661,7 +820,7 @@ export function Editor() {
             ))}
           </fieldset>
           {fogliDelFestone.length === 0 ? (
-            <p className="text-sm text-notte-tenue">Scrivi il nome del festeggiato al punto 3.</p>
+            <p className="text-sm text-notte-tenue">Scrivi il nome del festeggiato al punto 1.</p>
           ) : (
             <>
               <p className="text-sm text-notte-tenue">
@@ -697,7 +856,7 @@ export function Editor() {
           </div>
         </Gruppo>
 
-        <Gruppo titolo="9. Topper per la torta">
+        <Gruppo titolo="4. Topper per la torta">
           <p className="text-sm text-notte-tenue">
             Un foglio A4 nello stesso tema del biglietto: un disco grande con gli anni e il nome
             da mettere sulla torta, e 8 dischetti per i cupcake. Ritaglia sul tratteggio e fissa
@@ -706,7 +865,7 @@ export function Editor() {
           <p className="text-sm text-notte-tenue" data-topper-riepilogo>
             {anniTopper(dati.eta) !== null
               ? `Il disco grande dice ${anniTopper(dati.eta)}${dati.nome.trim() ? ` e ${dati.nome.trim()}` : ""}.`
-              : "Senza l'età (punto 3) al posto del numero c'è una stella."}
+              : "Senza l'età (punto 1) al posto del numero c'è una stella."}
           </p>
           <button type="button" onClick={scaricaTopper} className="rounded-bolla bg-viola-forte px-5 py-4 font-extrabold text-white" data-scarica-topper>
             Scarica il topper (A4)
@@ -717,14 +876,14 @@ export function Editor() {
           </div>
         </Gruppo>
 
-        <Gruppo titolo="10. Segnaposto per la tavola">
+        <Gruppo titolo="5. Segnaposto per la tavola">
           <p className="text-sm text-notte-tenue">
             Un cartoncino per ogni invitato con il suo nome, nello stesso tema del biglietto, {SEGNAPOSTO_PER_FOGLIO} per
             foglio A4. Ritaglia sul tratteggio e piega a tenda sui puntini: il nome si legge da tutti e due i lati.
           </p>
           {nomi.length === 0 ? (
             <p className="text-sm font-bold text-notte" data-segnaposto-vuoto>
-              Scrivi i nomi degli invitati al punto 7: i segnaposto usano gli stessi.
+              Scrivi i nomi degli invitati al punto 2: i segnaposto usano gli stessi.
             </p>
           ) : (
             <div className="flex flex-wrap gap-2">
@@ -749,7 +908,7 @@ export function Editor() {
           </div>
         </Gruppo>
 
-        <Gruppo titolo="11. Caccia al tesoro">
+        <Gruppo titolo="6. Caccia al tesoro">
           <p className="text-sm text-notte-tenue">
             {NUMERO_INDIZI} cartoncini «Indizio» nello stesso tema del biglietto. Ogni indizio dice dove
             trovare il successivo, l&apos;ultimo porta al tesoro. Gli indizi pronti sono per una caccia
@@ -780,6 +939,8 @@ export function Editor() {
             <FoglioCaccia indizi={indiziDaStampare(indizi)} tema={dati.tema} variante={dati.variante} festeggiato={dati.nome} />
           </div>
         </Gruppo>
+        </>
+        )}
       </div>
     </div>
   );

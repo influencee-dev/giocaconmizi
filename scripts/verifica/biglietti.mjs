@@ -11,13 +11,19 @@ const page = await b.newPage({
 });
 page.on("pageerror", (e) => ok("nessun errore JS", false, e.message));
 
-await page.goto(`${BASE}/biglietti/crea`, { waitUntil: "networkidle" });
+// Kit della festa (/biglietti/kit-festa, studio UX 14/11): i cinque fogli A4
+// con lo sfondo del biglietto, senza anteprima e senza passi.
+await page.goto(`${BASE}/biglietti/kit-festa`, { waitUntil: "networkidle" });
 await page.getByLabel("Nome", { exact: true }).fill("Domiziana");
 await page.getByLabel("Età", { exact: true }).fill("7");
+ok("kit: niente anteprima del biglietto e niente passi",
+  (await page.locator("[data-navigazione-passi]").count()) === 0 &&
+  (await page.getByRole("button", { name: "Scarica", exact: true }).count()) === 0 &&
+  (await page.locator("[data-passo='kit']").count()) === 1);
 
 // Segnaposto: usano i nomi delle etichette (qui Martina, Leo, Aurora); un
 // foglio A4 con 3 cartoncini a due facce, PNG 2480×3508; con 7 nomi due fogli.
-ok("segnaposto: senza nomi rimanda al punto 7", (await page.locator("[data-segnaposto-vuoto]").count()) === 1);
+ok("segnaposto: senza nomi rimanda al punto 2", (await page.locator("[data-segnaposto-vuoto]").count()) === 1);
 await page.getByLabel("Nomi degli invitati (uno per riga)").fill("Martina\n\nLeo\nAurora");
 await page.waitForTimeout(300);
 const fogliSp = page.locator("[data-foglio-segnaposto]");
@@ -52,6 +58,105 @@ await page.locator("[data-scarica-caccia]").tap();
 const scaricataCaccia = await attesaCaccia;
 const pngCaccia = scaricataCaccia ? readFileSync(await scaricataCaccia.path()) : null;
 ok("caccia al tesoro: è un PNG A4 2480×3508", pngCaccia && pngCaccia.readUInt32BE(16) === 2480 && pngCaccia.readUInt32BE(20) === 3508);
+
+// Etichette per i sacchettini: senza nomi il bottone è spento; con tre nomi
+// (più una riga vuota da ignorare) il foglio A4 ha tre cartellini, e i nomi
+// degli invitati non finiscono nel link del biglietto.
+const bottoneEtichette = page.getByRole("button", { name: "Scarica le etichette (A4)" });
+ok("etichette: bottone spento senza nomi", await bottoneEtichette.isDisabled());
+await page.getByLabel("Nomi degli invitati (uno per riga)").fill("Martina\n\nLeo\nAurora");
+await page.waitForTimeout(300);
+const quanteEtichette = await page.locator("[data-etichette]").getAttribute("data-etichette");
+const attesaEtichette = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
+await bottoneEtichette.tap();
+const etichette = await attesaEtichette;
+const pngEtichette = etichette ? readFileSync(await etichette.path()) : null;
+ok("etichette: tre cartellini su un PNG A4 2480×3508",
+  quanteEtichette === "3" && pngEtichette && pngEtichette.readUInt32BE(16) === 2480 && pngEtichette.readUInt32BE(20) === 3508,
+  `cartellini ${quanteEtichette}`);
+const hrefTorna = await page.locator("[data-torna-al-biglietto]").getAttribute("href");
+const codiceLink = new URL(hrefTorna, BASE).searchParams.get("b") ?? "";
+const nelLink = Buffer.from(decodeURIComponent(codiceLink), "base64").toString("utf8");
+ok("etichette: i nomi degli invitati non vanno nel link del biglietto",
+  codiceLink.length > 0 && nelLink.includes("Domiziana") && !nelLink.includes("Martina") && !nelLink.includes("Aurora"));
+
+
+// Festone col nome: "BUON ★ COMPLEANNO ★ DOMIZIANA" sono 25 bandierine,
+// 6 per foglio = 5 fogli; ogni foglio si scarica come PNG A4. "Solo il nome"
+// scende a 9 bandierine su 2 fogli.
+const contaBandierine = async () =>
+  (await page.locator("[data-foglio-festone]").evaluateAll((f) => f.map((x) => Number(x.getAttribute("data-bandierine")))))
+    .reduce((a, b) => a + b, 0);
+const bottoniFestone = page.getByRole("button", { name: /^Scarica il foglio \d+ di \d+$/ });
+ok("festone: 25 bandierine su 5 fogli", (await contaBandierine()) === 25 && (await bottoniFestone.count()) === 5,
+  `${await contaBandierine()} su ${await bottoniFestone.count()}`);
+const attesaFestone = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
+await page.getByRole("button", { name: "Scarica il foglio 5 di 5" }).tap();
+const festone = await attesaFestone;
+const pngFestone = festone ? readFileSync(await festone.path()) : null;
+ok("festone: un foglio è un PNG A4 2480×3508",
+  pngFestone && pngFestone.readUInt32BE(16) === 2480 && pngFestone.readUInt32BE(20) === 3508);
+await page.getByLabel("Solo il nome").check();
+await page.waitForTimeout(300);
+ok("festone: solo il nome, 9 bandierine su 2 fogli", (await contaBandierine()) === 9 && (await bottoniFestone.count()) === 2);
+await page.getByLabel("Buon compleanno + nome").check();
+
+// Topper per la torta: disco grande con gli anni e il nome, 8 dischetti, PNG A4.
+const topper = page.locator("[data-foglio-topper]");
+ok("topper: 7 anni e Domiziana sul disco grande, 8 dischetti",
+  (await topper.getAttribute("data-anni")) === "7" && (await topper.locator("[data-topper-nome]").textContent()) === "Domiziana" &&
+  (await topper.getAttribute("data-dischetti")) === "8");
+const attesaTopper = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
+await page.locator("[data-scarica-topper]").tap();
+const scaricatoTopper = await attesaTopper;
+const pngTopper = scaricatoTopper ? readFileSync(await scaricatoTopper.path()) : null;
+ok("topper: è un PNG A4 2480×3508", pngTopper && pngTopper.readUInt32BE(16) === 2480 && pngTopper.readUInt32BE(20) === 3508);
+await page.getByLabel("Età", { exact: true }).fill("");
+await page.waitForTimeout(200);
+ok("topper: senza età c'è la stella al posto del numero",
+  (await topper.locator("[data-topper-stella]").count()) === 1 && (await topper.locator("[data-topper-numero]").count()) === 0);
+await page.getByLabel("Età", { exact: true }).fill("7");
+
+// Il biglietto a passi (/biglietti/crea): Mizi guida, 8 sfondi in vista e gli
+// altri dietro un bottone, alla fine il passaggio al kit col biglietto nel link.
+await page.goto(`${BASE}/biglietti/crea`, { waitUntil: "networkidle" });
+ok("biglietto: si parte dal passo 1, con Mizi che spiega",
+  (await page.locator("[data-passo='0']").count()) === 1 &&
+  (await page.locator("[data-mizi-guida]").textContent()).includes("Facciamo il biglietto") &&
+  (await page.getByRole("heading", { name: "2. Lo sfondo" }).count()) === 0);
+await page.locator("[data-avanti]").tap();
+await page.waitForTimeout(150);
+const griglia = page.locator("[data-temi]");
+const temiPrima = Number(await griglia.getAttribute("data-temi"));
+await page.locator("[data-tutti-i-temi]").tap();
+await page.waitForTimeout(150);
+const temiDopo = Number(await griglia.getAttribute("data-temi"));
+ok("biglietto: passo 2, 8 sfondi in vista e gli altri a richiesta",
+  (await page.locator("[data-passo='1']").count()) === 1 && temiPrima === 8 && temiDopo > 20, `${temiPrima} → ${temiDopo}`);
+await page.getByRole("button", { name: "Dinosauri", exact: true }).tap();
+await page.locator("[data-avanti]").tap();
+await page.getByLabel("Nome", { exact: true }).fill("Domiziana");
+await page.getByLabel("Età", { exact: true }).fill("7");
+await page.locator("[aria-label^='Vai al passo 7']").tap();
+await page.waitForTimeout(150);
+const hrefKit = await page.locator("[data-link-kit]").getAttribute("href");
+const nelKit = JSON.parse(Buffer.from(new URL(hrefKit, BASE).searchParams.get("b") ?? "", "base64").toString("utf8"));
+ok("biglietto: all'ultimo passo il kit della festa, col biglietto nel link",
+  (await page.locator("[data-passo='6'] [data-passo-fatto]").count()) === 1 &&
+  hrefKit.startsWith("/biglietti/kit-festa?b=") && nelKit.nome === "Domiziana" && nelKit.tema === "dinosauri");
+await page.goto(`${BASE}${hrefKit}`, { waitUntil: "networkidle" });
+ok("kit: arriva col nome e lo sfondo del biglietto",
+  (await page.getByLabel("Nome", { exact: true }).inputValue()) === "Domiziana" &&
+  (await page.getByRole("button", { name: "Dinosauri", exact: true }).getAttribute("aria-pressed")) === "true");
+
+// Il resto delle prove sull'invito, con tutto in una pagina
+await page.goto(`${BASE}/biglietti/crea`, { waitUntil: "networkidle" });
+await page.locator("[data-vedi-tutto]").tap();
+await page.getByLabel("Nome", { exact: true }).fill("Domiziana");
+await page.getByLabel("Età", { exact: true }).fill("7");
+ok("biglietto: «Vedi tutto in una pagina» mostra i sei riquadri e il kit",
+  (await page.locator("[data-passo='tutto'] > section h2").count()) === 7);
+
 await page.getByLabel("Conferma a (numero WhatsApp)").fill("333 1234567");
 await page.waitForTimeout(300);
 ok("avviso RSVP col numero valido", await page.locator("text=Confermo, ci saremo!").count());
@@ -100,64 +205,6 @@ const percorsoFoglio = foglio ? await foglio.path() : null;
 const testaFoglio = percorsoFoglio ? readFileSync(percorsoFoglio) : null;
 ok("foglio A4 da 4 copie: PNG 2480×3508",
   testaFoglio && testaFoglio.readUInt32BE(16) === 2480 && testaFoglio.readUInt32BE(20) === 3508);
-
-// Etichette per i sacchettini: senza nomi il bottone è spento; con tre nomi
-// (più una riga vuota da ignorare) il foglio A4 ha tre cartellini, e i nomi
-// degli invitati non finiscono nel link del biglietto.
-const bottoneEtichette = page.getByRole("button", { name: "Scarica le etichette (A4)" });
-ok("etichette: bottone spento senza nomi", await bottoneEtichette.isDisabled());
-await page.getByLabel("Nomi degli invitati (uno per riga)").fill("Martina\n\nLeo\nAurora");
-await page.waitForTimeout(300);
-const quanteEtichette = await page.locator("[data-etichette]").getAttribute("data-etichette");
-const attesaEtichette = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
-await bottoneEtichette.tap();
-const etichette = await attesaEtichette;
-const pngEtichette = etichette ? readFileSync(await etichette.path()) : null;
-ok("etichette: tre cartellini su un PNG A4 2480×3508",
-  quanteEtichette === "3" && pngEtichette && pngEtichette.readUInt32BE(16) === 2480 && pngEtichette.readUInt32BE(20) === 3508,
-  `cartellini ${quanteEtichette}`);
-await page.getByRole("button", { name: /Salva il link|Link copiato/ }).tap();
-await page.waitForTimeout(200);
-const codiceLink = new URL(page.url()).searchParams.get("b") ?? "";
-const nelLink = Buffer.from(decodeURIComponent(codiceLink), "base64").toString("utf8");
-ok("etichette: i nomi degli invitati non vanno nel link", codiceLink.length > 0 && !nelLink.includes("Martina") && !nelLink.includes("Aurora"));
-
-// Festone col nome: "BUON ★ COMPLEANNO ★ DOMIZIANA" sono 25 bandierine,
-// 6 per foglio = 5 fogli; ogni foglio si scarica come PNG A4. "Solo il nome"
-// scende a 9 bandierine su 2 fogli.
-const contaBandierine = async () =>
-  (await page.locator("[data-foglio-festone]").evaluateAll((f) => f.map((x) => Number(x.getAttribute("data-bandierine")))))
-    .reduce((a, b) => a + b, 0);
-const bottoniFestone = page.getByRole("button", { name: /^Scarica il foglio \d+ di \d+$/ });
-ok("festone: 25 bandierine su 5 fogli", (await contaBandierine()) === 25 && (await bottoniFestone.count()) === 5,
-  `${await contaBandierine()} su ${await bottoniFestone.count()}`);
-const attesaFestone = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
-await page.getByRole("button", { name: "Scarica il foglio 5 di 5" }).tap();
-const festone = await attesaFestone;
-const pngFestone = festone ? readFileSync(await festone.path()) : null;
-ok("festone: un foglio è un PNG A4 2480×3508",
-  pngFestone && pngFestone.readUInt32BE(16) === 2480 && pngFestone.readUInt32BE(20) === 3508);
-await page.getByLabel("Solo il nome").check();
-await page.waitForTimeout(300);
-ok("festone: solo il nome, 9 bandierine su 2 fogli", (await contaBandierine()) === 9 && (await bottoniFestone.count()) === 2);
-await page.getByLabel("Buon compleanno + nome").check();
-
-// Topper per la torta: disco grande con gli anni e il nome, 8 dischetti, PNG A4.
-const topper = page.locator("[data-foglio-topper]");
-ok("topper: 7 anni e Domiziana sul disco grande, 8 dischetti",
-  (await topper.getAttribute("data-anni")) === "7" && (await topper.locator("[data-topper-nome]").textContent()) === "Domiziana" &&
-  (await topper.getAttribute("data-dischetti")) === "8");
-const attesaTopper = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
-await page.locator("[data-scarica-topper]").tap();
-const scaricatoTopper = await attesaTopper;
-const pngTopper = scaricatoTopper ? readFileSync(await scaricatoTopper.path()) : null;
-ok("topper: è un PNG A4 2480×3508", pngTopper && pngTopper.readUInt32BE(16) === 2480 && pngTopper.readUInt32BE(20) === 3508);
-await page.getByLabel("Età", { exact: true }).fill("");
-await page.waitForTimeout(200);
-ok("topper: senza età c'è la stella al posto del numero",
-  (await topper.locator("[data-topper-stella]").count()) === 1 && (await topper.locator("[data-topper-numero]").count()) === 0);
-await page.getByLabel("Età", { exact: true }).fill("7");
-
 // Nei formati digitali il foglio A4 non ha senso: il bottone sparisce
 await page.getByRole("button", { name: "WhatsApp e storie" }).tap();
 await page.waitForTimeout(300);
@@ -179,6 +226,7 @@ ok("invito digitale con bottone conferma",
 
 // Frasi pronte solo dopo il nome (niente «{nome}» a vista, studio UX 14/11)
 await page.goto(`${BASE}/biglietti/crea?tema=halloween`, { waitUntil: "networkidle" });
+await page.locator("[data-vedi-tutto]").tap();
 await page.waitForTimeout(400);
 ok("frasi pronte: senza nome c'è l'invito a scriverlo, niente {nome}",
   (await page.locator("[data-frasi-dopo-il-nome]").count()) === 1 && (await page.locator("button:has-text('{nome}')").count()) === 0);
@@ -189,6 +237,7 @@ ok("frasi a tema (halloween)", await page.locator("button:has-text('Dolcetto o s
 
 // Tema natale: frase dedicata e i tre adesivi nuovi a catalogo
 await page.goto(`${BASE}/biglietti/crea?tema=natale`, { waitUntil: "networkidle" });
+await page.locator("[data-vedi-tutto]").tap();
 await page.waitForTimeout(400);
 await page.getByLabel("Nome", { exact: true }).fill("Margherita");
 await page.waitForTimeout(200);
@@ -203,6 +252,7 @@ ok("adesivi del tema in testa (natale)",
 // La frase non deve mai toccare la data (difetto trovato il 14/11): tutte le
 // frasi pronte, nome lungo, in tutti e quattro i formati.
 await page.goto(`${BASE}/biglietti/crea`, { waitUntil: "networkidle" });
+await page.locator("[data-vedi-tutto]").tap();
 await page.getByLabel("Nome", { exact: true }).fill("Margherita");
 await page.getByLabel("Età", { exact: true }).fill("10");
 await page.getByLabel("Data", { exact: true }).fill("sabato 20 dicembre");
@@ -239,6 +289,7 @@ ok("dopo «Scarica» compare il messaggio «Fatto!» in basso",
 // contorni; il PNG scaricato deve essere bianco e nero (quasi nessun pixel
 // colorato), con il nome a lettere vuote.
 await page.goto(`${BASE}/biglietti/crea?variante=colorare&tema=dinosauri`, { waitUntil: "networkidle" });
+await page.locator("[data-vedi-tutto]").tap();
 await page.getByLabel("Nome", { exact: true }).fill("Domiziana");
 await page.waitForTimeout(300);
 ok("da colorare: modalità scelta dal link",
@@ -303,6 +354,15 @@ await page.locator("[data-carta-letterina='natale-renne']").tap();
 ok("letterina: la carta scelta resta segnata", (await page.locator("[data-carta-letterina='natale-renne']").getAttribute("aria-checked")) === "true");
 await page.locator("[data-avanti]").tap();
 await page.locator("[data-avanti]").tap();
+await page.locator("[data-desiderio-figura='libro']").tap();
+await page.waitForTimeout(100);
+ok("letterina: il disegno del libro diventa il desiderio «un libro» (modalità bambino)",
+  (await page.locator("#letterina-desiderio-1").inputValue()) === "un libro" &&
+  (await page.locator("[data-desiderio-figura='libro']").getAttribute("aria-pressed")) === "true" &&
+  (await page.locator("[data-desideri-figura] img").count()) === 12);
+await page.locator("[data-desiderio-figura='libro']").tap();
+await page.waitForTimeout(100);
+ok("letterina: toccato di nuovo, il disegno toglie il desiderio", (await page.locator("#letterina-desiderio-1").inputValue()) === "");
 await page.locator("[data-idea-desiderio]").first().tap();
 await page.waitForTimeout(150);
 ok("letterina: passo 4, l'idea toccata diventa il primo desiderio",

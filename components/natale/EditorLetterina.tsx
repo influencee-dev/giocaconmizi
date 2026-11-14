@@ -6,12 +6,14 @@ import { FOGLIO_A4 } from "@/components/biglietti/Etichette";
 import { MOTIVI } from "@/components/biglietti/motivi";
 import { annuncia, MessaggioEsito } from "@/components/ui/Esito";
 import { FacciaMizi } from "@/games/_engine/arte";
+import { Icona } from "@/components/icone";
 import { parla, zittisci } from "@/lib/audio";
 import {
   APERTURE,
   CARTE,
   CHIUSURE,
   DATA_RISPOSTA,
+  DESIDERI_FIGURA,
   FASCE,
   IDEE_DESIDERI,
   MAX_CARATTERI_DESIDERIO,
@@ -53,7 +55,7 @@ const PASSI = [
   { titolo: "Chi scrive", mizi: "Ciao! Quanti anni hai? Se vuoi, scrivi anche il tuo nome." },
   { titolo: "La carta", mizi: "Tocca il disegno che ti piace di più per la tua carta da lettera." },
   { titolo: "Come cominci", mizi: "Tocca una frase per cominciare. Te la leggo io!" },
-  { titolo: "I desideri", mizi: "Cosa vorresti per Natale? Tocca un'idea o scrivila tu." },
+  { titolo: "I desideri", mizi: "Cosa vorresti per Natale? Tocca un disegno, oppure scrivilo tu." },
   { titolo: "Il saluto", mizi: "Ultima cosa: come vuoi salutare Babbo Natale?" },
   { titolo: "Fatto!", mizi: "Evviva, la tua letterina è pronta! Chiedi a un grande di stamparla, poi colora la busta." },
 ] as const;
@@ -382,7 +384,34 @@ export function EditorLetterina() {
         {(tutto || passo === 3) && (
         <fieldset className="grid gap-2">
           <legend className="text-lg font-extrabold text-notte">5. I desideri (al massimo {MAX_DESIDERI})</legend>
-          <p className="text-notte-tenue">Tocca un&apos;idea oppure scrivi tu:</p>
+          <p className="font-bold text-notte">Tocca un disegno:</p>
+          <div className="grid grid-cols-3 gap-2 sm:grid-cols-4" data-desideri-figura>
+            {DESIDERI_FIGURA.map((d) => {
+              const scelto = desideri.some((x) => x.trim() === d.testo);
+              return (
+                <button
+                  key={d.icona}
+                  type="button"
+                  aria-pressed={scelto}
+                  onClick={() => {
+                    dici(d.testo);
+                    setDesideri((v) => {
+                      if (v.some((x) => x.trim() === d.testo)) return v.map((x) => (x.trim() === d.testo ? "" : x));
+                      const vuoto = v.findIndex((x) => !x.trim());
+                      if (vuoto >= 0) return v.map((x, k) => (k === vuoto ? d.testo : x));
+                      return v.length < MAX_DESIDERI ? [...v, d.testo] : v;
+                    });
+                  }}
+                  className={`flex min-h-24 flex-col items-center justify-center gap-1 rounded-morbido border-4 bg-white p-2 text-center text-xs font-extrabold leading-tight text-notte ${scelto ? "border-viola-forte bg-viola/10" : "border-crema-scuro"}`}
+                  data-desiderio-figura={d.icona}
+                >
+                  <Icona nome={d.icona} className="h-12 w-12" />
+                  {d.testo}
+                </button>
+              );
+            })}
+          </div>
+          <p className="text-notte-tenue">Oppure un&apos;idea, o scrivi tu:</p>
           <div className="flex flex-wrap gap-2">
             {IDEE_DESIDERI[fascia].map((idea) => (
               <button
