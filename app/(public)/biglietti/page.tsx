@@ -56,6 +56,7 @@ const SEZIONI = [
   { href: "/biglietti/ringraziamento-compleanno-bambini", nome: "Ringraziamenti", testo: "Dopo la festa, per chi è venuto." },
   { href: "/biglietti/biglietti-compleanno-da-colorare", nome: "Da colorare", testo: "Stampalo chiaro e lascia il colore a lui." },
   { href: "/biglietti/esempi", nome: "Esempi", testo: "Biglietti veri da cui prendere ispirazione." },
+  { href: "/natale/lettera-a-babbo-natale", nome: "Lettera a Babbo Natale", testo: "La letterina da scrivere con Mizi e stampare, anche da colorare." },
 ];
 
 export default function BigliettiPage() {

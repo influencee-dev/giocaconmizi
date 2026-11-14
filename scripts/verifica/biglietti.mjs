@@ -235,6 +235,71 @@ ok("pagina da colorare: anteprime a contorni e link al tool in modalità colorar
 await page.goto(`${BASE}/biglietti/inviti-compleanno-bambini`, { waitUntil: "networkidle" });
 ok("le altre pagine restano a colori", (await page.locator("svg .dc-linea").count()) === 0);
 
+// La letterina a Babbo Natale (/natale/lettera-a-babbo-natale): il testo si
+// compone nel browser e il nome non deve mai uscire dalla pagina.
+const richiesteConNome = [];
+page.on("request", (r) => {
+  if (`${r.url()} ${r.postData() ?? ""}`.includes("Sofiella")) richiesteConNome.push(r.url());
+});
+await page.goto(`${BASE}/natale/lettera-a-babbo-natale`, { waitUntil: "networkidle" });
+const lettera = page.locator("[data-foglio-letterina]");
+ok("letterina: il foglio parte con «Caro Babbo Natale,»",
+  (await lettera.count()) === 1 && (await lettera.locator("[data-letterina-apertura]").textContent()) === "Caro Babbo Natale,");
+await page.locator("[data-campo-nome-letterina]").fill("Sofiella");
+await page.locator("[data-campo-eta-letterina]").fill("7");
+await page.locator("[data-campo-desiderio='1']").fill("una bicicletta rossa");
+await page.waitForTimeout(200);
+const testoLettera = async () => (await lettera.locator("[data-letterina-testo]").textContent()) ?? "";
+ok("letterina: nome, età e desiderio vanno sul foglio (6-8 anni)",
+  /Mi chiamo Sofiella, ho 7 anni/.test(await testoLettera()) &&
+  (await lettera.locator("[data-letterina-desiderio]").count()) === 1 &&
+  (await lettera.locator("[data-letterina-firma]").textContent()) === "Sofiella");
+await page.locator("[data-fascia='3-5']").tap();
+await page.waitForTimeout(200);
+ok("letterina: cambiando età cambiano le frasi", /Mi chiamo Sofiella e ho 7 anni\./.test(await testoLettera()));
+// Tutte le frasi e 5 desideri lunghi: il testo si rimpicciolisce ma resta nel foglio.
+await page.locator("[data-fascia='9-12']").tap();
+for (const casella of await page.locator("[data-frase-letterina]").all()) if (!(await casella.isChecked())) await casella.tap();
+await page.locator("[data-aggiungi-desiderio]").tap();
+await page.locator("[data-aggiungi-desiderio]").tap();
+for (let i = 1; i <= 5; i++) await page.locator(`[data-campo-desiderio='${i}']`).fill(`un desiderio lungo numero ${i} per vedere se va a capo bene`);
+await page.locator("[data-testo-libero-letterina]").fill("Ti scrivo anche due righe mie, per dirti che quest'anno è stato bello e pieno di cose nuove.");
+await page.waitForTimeout(300);
+const corpo = Number(await lettera.locator("[data-letterina-testo]").getAttribute("data-corpo"));
+const fondo = await page.evaluate(() => {
+  const svg = document.querySelector("[data-foglio-letterina]");
+  const righe = [...svg.querySelectorAll("[data-letterina-testo] text")];
+  return Math.max(...righe.map((t) => Number(t.getAttribute("y"))));
+});
+ok("letterina: con tutto spuntato il testo resta sopra la firma", corpo >= 50 && fondo < 3508 * 0.935 - 470, `corpo ${corpo}, ultima riga a y=${fondo}`);
+const attesaPdf = page.waitForEvent("download", { timeout: 15000 }).catch(() => null);
+await page.locator("[data-scarica-letterina-pdf]").tap();
+const pdf = await attesaPdf;
+const bytePdf = pdf ? readFileSync(await pdf.path()) : null;
+ok("letterina: il PDF è un PDF A4 vero", bytePdf && bytePdf.subarray(0, 5).toString() === "%PDF-" &&
+  bytePdf.toString("latin1").includes("/MediaBox [0 0 595.28 841.89]") && bytePdf.length > 50_000,
+  bytePdf ? `${Math.round(bytePdf.length / 1024)} KB` : "nessun download");
+const attesaPngL = page.waitForEvent("download", { timeout: 15000 }).catch(() => null);
+await page.locator("[data-scarica-letterina-png]").tap();
+const pngL = await attesaPngL;
+const bytePngL = pngL ? readFileSync(await pngL.path()) : null;
+ok("letterina: il PNG è un A4 2480×3508", bytePngL && bytePngL.readUInt32BE(16) === 2480 && bytePngL.readUInt32BE(20) === 3508);
+await page.locator("[data-modo-letterina='righe']").tap();
+await page.locator("[data-variante-letterina='colorare']").tap();
+await page.waitForTimeout(200);
+ok("letterina: a righe e da colorare, senza testo già scritto",
+  (await lettera.locator("[data-letterina-righe]").count()) === 1 && (await lettera.locator("[data-letterina-testo]").count()) === 0 &&
+  (await lettera.getAttribute("data-variante")) === "colorare" && (await lettera.locator(".dc-linea").count()) > 5);
+ok("letterina: il nome del bambino non è mai uscito dalla pagina", richiesteConNome.length === 0, richiesteConNome.join(", "));
+await page.goto(`${BASE}/natale/come-scrivere-la-letterina`, { waitUntil: "networkidle" });
+ok("come scrivere la letterina: tre esempi completi, uno per fascia",
+  (await page.locator("[data-esempio-letterina]").count()) === 3 &&
+  (await page.locator("[data-esempio-letterina='9-12'] figure").textContent()).includes("Per Natale vorrei:"));
+await page.goto(`${BASE}/natale`, { waitUntil: "networkidle" });
+ok("hub del Natale: porta alla letterina, alla guida e ai biglietti",
+  (await page.locator("[data-natale-letterina]").count()) === 1 && (await page.locator("[data-natale-come-scrivere]").count()) === 1 &&
+  (await page.locator("[data-natale-biglietti]").getAttribute("href")).includes("tema=natale"));
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("biglietti") ? 0 : 1);

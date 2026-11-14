@@ -53,6 +53,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/metodo": ["content/hubs/metodo.md"],
     "/perche-lo-facciamo": ["content/hubs/perche-lo-facciamo.md"],
     "/risorse-educative-bambini": ["lib/risorse-educative-dati.ts", "lib/risorse-educative.ts"],
+    "/natale": ["lib/natale/pagine.ts"],
+    "/natale/lettera-a-babbo-natale": ["lib/natale/pagine.ts", "lib/natale/letterina.ts", "components/natale/FoglioLetterina.tsx"],
+    "/natale/come-scrivere-la-letterina": ["lib/natale/pagine.ts", "lib/natale/letterina.ts"],
   };
   const ALIAS_COMPETENZA: Record<string, string[]> = {
     lettere: ["alfabeto", "fonetica", "lettura"],
@@ -82,6 +85,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/per-insegnanti",
     "/per-le-mamme",
     "/risorse-educative-bambini",
+    "/natale",
+    "/natale/lettera-a-babbo-natale",
+    "/natale/come-scrivere-la-letterina",
   ];
 
   const competenze = [
