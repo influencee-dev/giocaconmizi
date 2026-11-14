@@ -495,9 +495,9 @@ const GUIDE_BREVI: Guida[] = [
     aggiornata: "2026-09-26",
     sezioni: [
       {
-        titolo: "Questo sito è nato da un litigio sui compiti",
+        titolo: "Questo sito è nato dai compiti di un'estate",
         paragrafi: [
-          "Lo diciamo subito, perché è la verità: Gioca con Mizi esiste perché una bambina di nome Domiziana non voleva mai fare i compiti, e sua mamma invece di insistere ha provato a trasformare l'esercizio in gioco. Quindi questa guida non arriva dall'alto: arriva da una cucina come la vostra, all'ora dei compiti.",
+          "Lo diciamo subito: Gioca con Mizi esiste perché nell'estate 2026 Domiziana non aveva voglia di fare i compiti, e sua mamma, Giorgia, per spronarla ha iniziato a giocarci insieme. Questa guida parte da lì.",
         ],
       },
       {

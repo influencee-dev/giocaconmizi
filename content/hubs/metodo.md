@@ -6,7 +6,7 @@ description: "Perché i giochi di Gioca con Mizi sono senza timer, senza pubblic
 
 # Il nostro metodo
 
-Gioca con Mizi è nato per una bambina e i suoi compiti delle vacanze. Volevamo giochi che insegnassero davvero una cosa alla volta, senza fretta e senza pubblicità. Da questa esigenza è venuta una regola semplice che vale per ogni gioco del sito: **un gioco, una competenza, un adulto vicino**.
+Giocamizi è nato nell'estate 2026, quando mia figlia non aveva voglia di fare i compiti delle vacanze. Volevamo giochi che insegnassero davvero una cosa alla volta, senza fretta e senza pubblicità. Da questa esigenza è venuta una regola semplice che vale per ogni gioco del sito: **un gioco, una competenza, un adulto vicino**.
 
 ## Cinque caratteristiche che cerchiamo in ogni gioco
 
@@ -36,7 +36,7 @@ Il coding a 4 anni non è programmare: è mettere in ordine, ripetere, trovare u
 
 ## Senza pubblicità, sempre
 
-I giochi sono gratuiti e lo resteranno. Il sito si sostiene con i libri da colorare e i quaderni in PDF che produciamo noi, e una parte di ogni vendita va a un'associazione per l'infanzia. [Perché lo facciamo →](/perche-lo-facciamo)
+I giochi sono gratuiti e lo resteranno, senza pubblicità. [Perché lo facciamo →](/perche-lo-facciamo)
 
 ## Fonti
 - Zosh, J. M., Hirsh-Pasek, K. et al., *Learning through play: a review of the evidence*, LEGO Foundation, 2017.

@@ -191,13 +191,13 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   pubblicare: `npm run articoli:controlla -- <slug> --rete` (≥27.000 caratteri,
   fonti, prezzi datati, immagini autorizzate, autenticità): se fallisce, resta bozza.
 - Procedura completa del job quotidiano (9:00): `docs/routine-articoli.md`.
-- Registro di ciò che è prodotto (14/11/2026): ogni articolo, canzone, post,
-  pagina o guida prodotta = `npm run registro -- aggiungi …` in
-  `content/registro-prodotto.json` (tutte le routine e le chat). Il lunedì la
-  routine delle 9:00 genera `npm run piano:foglio` e carica il foglio «Piano
-  editoriale Giocamizi (data)» su Drive (schede: prompt per l'AI, riepilogo,
-  piano articoli, canzoni, prodotto, sostituiti); il vecchio diventa zz_SUPERATO.
-  Canzoni in `content/canzoni-mizi.json`.
+- Registro del prodotto (14/11/2026, docs/registro-prodotto.md): tutto ciò che
+  si produce va tracciato nel Foglio «Piano editoriale Giocamizi · <data>» su
+  Drive (1 Progetti / 100 articoli approfonditi), scheda «Prodotto»; la prima
+  scheda ha il prompt per fare il piano successivo. Si ricostruisce dal repo con
+  `npm run registro -- <cartella>` (dai commit: messaggi chiari in italiano) e
+  si ricarica ogni sera alle 21:00 e dopo ogni pubblicazione importante; il
+  file vecchio prende «zz_SUPERATO — ».
 
 ## Co-work quotidiano (Routine delle 7:00 italiane)
 Un miglioramento al giorno, piccolo e finito, a rotazione:
@@ -224,6 +224,7 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   canzoni esistenti, mai nomi di artisti nei prompt); niente Domiziana nei video.
   Musica con Suno (piano a pagamento), video con CapCut: li fa Giorgia o la sua
   automazione. Claude scrive le schede nuove quando le 10 finiscono.
+  Elenco e stati in `content/canzoni-mizi.json` (scheda-pronta → pubblicata).
 
 ## Instagram (8/11/2026, docs/instagram.md)
 - Post del giorno da `lib/social/post.ts` (carosello da articolo, foto di una
