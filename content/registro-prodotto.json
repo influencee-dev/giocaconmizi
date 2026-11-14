@@ -1,0 +1,11 @@
+{
+  "$schema": "Registro di tutto ciò che è stato prodotto per il piano editoriale (articoli, canzoni, post, pagine, foto). Si aggiunge una riga con `npm run registro -- aggiungi` a ogni cosa prodotta; finisce nella scheda «Prodotto» del foglio del piano (npm run piano:foglio). Mai dati personali.",
+  "voci": [
+    { "data": "2026-11-07", "tipo": "articolo", "titolo": "Roblox è sicuro per bambini? Guida completa per genitori", "dove": "https://giocamizi.it/guide/roblox-e-sicuro-per-bambini", "chi": "Claude (routine 9:00)", "piano": 1, "note": "" },
+    { "data": "2026-11-09", "tipo": "articolo", "titolo": "Minecraft vs Roblox: quale scegliere per un bambino?", "dove": "https://giocamizi.it/guide/minecraft-vs-roblox", "chi": "Claude (routine 9:00)", "piano": 26, "note": "" },
+    { "data": "2026-11-11", "tipo": "articolo", "titolo": "Minecraft per bambini: modalità, mondi e rischi", "dove": "https://giocamizi.it/guide/minecraft-per-bambini", "chi": "Claude (routine 9:00)", "piano": 2, "note": "" },
+    { "data": "2026-11-12", "tipo": "articolo", "titolo": "Come impostare il parental control su Roblox", "dove": "https://giocamizi.it/guide/parental-control-roblox", "chi": "Claude (routine 9:00)", "piano": 46, "note": "" },
+    { "data": "2026-11-14", "tipo": "piano", "titolo": "Piano dei 100 articoli ribilanciato", "dove": "content/piano-editoriale.json", "chi": "Claude (chat con Giorgia)", "piano": null, "note": "30 argomenti su schermi sostituiti da feste, fuori casa, stagione e famiglia" },
+    { "data": "2026-11-14", "tipo": "canzone", "titolo": "10 schede delle canzoni di Mizi (01–10)", "dove": "https://drive.google.com/drive/folders/1UQyt5Pdnj0nTtjAEG7P_iAj8CF1K1fC4", "chi": "Claude (chat con Giorgia)", "piano": null, "note": "Testo, prompt per Suno, scene CapCut, didascalia. Da produrre: musica e video" }
+  ]
+}

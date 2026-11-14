@@ -1,0 +1,16 @@
+{
+  "$schema": "Canzoni di Mizi: una a settimana, pubblicata insieme al post della settimana SOLO se in Drive «99 Canzoni pronte» c'è il file canzone-NN-slug.mp4. Schede e guida su Drive: 2 Aree → Giocamizi · Social → Canzoni di Mizi (id 1VnaChhQWdr6zhvQZom9cMat9jmIiRvDv). Stati: scheda-pronta | musica-fatta | video-pronto | pubblicata | slittata.",
+  "aggiornato": "2026-11-14",
+  "canzoni": [
+    { "nn": "01", "slug": "mizi-e-la-neve", "titolo": "Mizi e la neve", "tema": "stagione", "settimana": "2026-11-16", "eta": "2-6", "stato": "scheda-pronta" },
+    { "nn": "02", "slug": "conto-alla-rovescia", "titolo": "Il conto alla rovescia di Mizi", "tema": "stagione", "settimana": "2026-11-23", "eta": "3-7", "stato": "scheda-pronta" },
+    { "nn": "03", "slug": "la-letterina", "titolo": "La letterina", "tema": "stagione", "settimana": "2026-11-30", "eta": "3-8", "stato": "scheda-pronta" },
+    { "nn": "04", "slug": "il-vasino", "titolo": "Il vasino", "tema": "educativa", "settimana": "2026-12-07", "eta": "2-4", "stato": "scheda-pronta" },
+    { "nn": "05", "slug": "lava-le-manine", "titolo": "Lava lava le manine", "tema": "educativa", "settimana": "2026-12-14", "eta": "2-6", "stato": "scheda-pronta" },
+    { "nn": "06", "slug": "tutti-a-nanna", "titolo": "Tutti a nanna", "tema": "educativa", "settimana": "2026-12-21", "eta": "1-6", "stato": "scheda-pronta" },
+    { "nn": "07", "slug": "denti-dentini", "titolo": "Denti, dentini", "tema": "educativa", "settimana": "2026-12-28", "eta": "2-7", "stato": "scheda-pronta" },
+    { "nn": "08", "slug": "sono-arrabbiata", "titolo": "Sono arrabbiata (e va bene)", "tema": "emozioni", "settimana": "2027-01-04", "eta": "3-7", "stato": "scheda-pronta" },
+    { "nn": "09", "slug": "giochi-a-casa-loro", "titolo": "I giochi a casa loro", "tema": "educativa", "settimana": "2027-01-11", "eta": "2-7", "stato": "scheda-pronta" },
+    { "nn": "10", "slug": "mizi-conta-fino-a-dieci", "titolo": "Mizi conta fino a dieci", "tema": "educativa", "settimana": "2027-01-18", "eta": "2-5", "stato": "scheda-pronta" }
+  ]
+}

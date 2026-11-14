@@ -191,6 +191,13 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   pubblicare: `npm run articoli:controlla -- <slug> --rete` (≥27.000 caratteri,
   fonti, prezzi datati, immagini autorizzate, autenticità): se fallisce, resta bozza.
 - Procedura completa del job quotidiano (9:00): `docs/routine-articoli.md`.
+- Registro di ciò che è prodotto (14/11/2026): ogni articolo, canzone, post,
+  pagina o guida prodotta = `npm run registro -- aggiungi …` in
+  `content/registro-prodotto.json` (tutte le routine e le chat). Il lunedì la
+  routine delle 9:00 genera `npm run piano:foglio` e carica il foglio «Piano
+  editoriale Giocamizi (data)» su Drive (schede: prompt per l'AI, riepilogo,
+  piano articoli, canzoni, prodotto, sostituiti); il vecchio diventa zz_SUPERATO.
+  Canzoni in `content/canzoni-mizi.json`.
 
 ## Co-work quotidiano (Routine delle 7:00 italiane)
 Un miglioramento al giorno, piccolo e finito, a rotazione:

@@ -77,6 +77,9 @@ Il controllo automatico blocca ogni segno di vissuto senza quella voce.
    `npm run prompt-guide`, aggiungi lo slug a scripts/verifica/sbordi.mjs,
    `npm run date-pagine`, poi le TRE verifiche di CLAUDE.md, commit, push, deploy READY.
    `npm run articoli:piano -- segna <id> pubblicato`.
+   Registra l'uscita: `npm run registro -- aggiungi --tipo articolo --titolo "<titolo>"
+   --dove "https://giocamizi.it/guide/<slug>" --chi "Claude (routine 9:00)" --piano <id>`
+   (va nello stesso commit).
    Se NON passa (o `modalita` è `draft_only`): resta `bozza`,
    `segna <id> bloccato` (o `bozza`), si committa solo il Markdown e il piano
    (la bozza non va online: compila esclude le bozze), e il report dice cosa manca.
@@ -87,6 +90,20 @@ Il controllo automatico blocca ogni segno di vissuto senza quella voce.
    prossimo argomento. Mai pubblicare il report come articolo.
 
 Un giorno senza fonti sufficienti produce un report, non un articolo inventato.
+
+## Il registro di ciò che è prodotto e il foglio del piano (14/11/2026)
+- Ogni cosa prodotta per il piano (articolo, canzone, post, pagina, guida, gioco)
+  = una riga in `content/registro-prodotto.json` con `npm run registro -- aggiungi`.
+  Vale per tutte le routine e per le chat. Mai dati personali.
+- Il LUNEDÌ la routine delle 9:00, a fine giro: `npm run piano:foglio -- <cartella
+  temporanea>/piano-editoriale-AAAA-MM-GG.xlsx` (serve Python con openpyxl:
+  `pip install openpyxl`) e lo carica su Drive come Foglio Google in
+  1 Progetti → «100 articoli approfonditi» (id 1w7h_IGqfsTD5uiHQl03QsvJCeQAWN7sS)
+  col titolo «Piano editoriale Giocamizi (AAAA-MM-GG)». La versione precedente
+  prende «zz_SUPERATO — » davanti al titolo (mai cancellarla).
+- La prima scheda del foglio, «00 Prompt per l'AI», è il prompt con cui un'AI
+  rilegge tutto (piano, canzoni, prodotto, sostituiti) e prepara il piano
+  successivo. Si cambia in scripts/piano-foglio.py.
 
 ## La foto di domani (la prepara la routine delle 9:00, passo 0)
 1. `git pull`. `npm run articoli:piano -- domani`: è l'argomento che la routine
