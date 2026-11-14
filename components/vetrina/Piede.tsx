@@ -33,6 +33,7 @@ export const COLONNE: { titolo: string; voci: [string, string][] }[] = [
   {
     titolo: "Feste",
     voci: [
+      ["/natale", "Natale con Mizi"],
       ["/biglietti", "Inviti di compleanno"],
       ["/feste", "Feste per città"],
       ["/ludoteche", "Ludoteche"],

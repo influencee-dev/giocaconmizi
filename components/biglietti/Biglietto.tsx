@@ -97,6 +97,11 @@ const TITOLI: Record<DatiBiglietto["tipo"], string> = {
   ringraziamento: "GRAZIE",
 };
 
+/** Gli auguri con lo sfondo di Natale sono auguri di Natale, non di compleanno. */
+export function titoloBiglietto(dati: Pick<DatiBiglietto, "tipo" | "tema">): string {
+  return dati.tipo === "auguri" && dati.tema === "natale" ? "BUON NATALE" : TITOLI[dati.tipo];
+}
+
 export function Biglietto({
   dati,
   larghezza,
@@ -161,13 +166,13 @@ export function Biglietto({
         y={u * 28}
         textAnchor="middle"
         fontFamily={famiglia}
-        fontSize={corpoCheEntra(TITOLI[dati.tipo], u * 4.6, larghezzaUtile * 0.85)}
+        fontSize={corpoCheEntra(titoloBiglietto(dati), u * 4.6, larghezzaUtile * 0.85)}
         fontWeight="800"
         letterSpacing={u * 0.35}
         fill={testo}
         opacity="0.75"
       >
-        {TITOLI[dati.tipo]}
+        {titoloBiglietto(dati)}
       </text>
 
       {dati.nome && (

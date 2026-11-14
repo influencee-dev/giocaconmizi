@@ -94,6 +94,20 @@ export const phrasesPerTema: Record<string, string[]> = {
   ],
 };
 
+/**
+ * Auguri a tema: con lo sfondo di Natale il biglietto di auguri diventa un
+ * biglietto di Natale ({nome} è chi lo riceve: «Nonna Rosa», «Maestra Anna»).
+ */
+export const auguriPerTema: Record<string, string[]> = {
+  natale: [
+    "Buon Natale {nome}! Che la tua casa sia piena di luci, biscotti e risate.",
+    "Tanti auguri di buon Natale e felice anno nuovo, {nome}!",
+    "{nome}, ti auguro un Natale caldo come una tazza di cioccolata.",
+    "Per {nome}: grazie di esserci, buone feste!",
+    "Buone feste {nome}! Ci vediamo sotto l'albero.",
+  ],
+};
+
 export const phrases = {
   invito: [
     "{nome} compie {eta} anni e vuole festeggiare con te!",

@@ -5,6 +5,7 @@ import { tutteLePagine } from "@/lib/biglietti";
 import { esempiPubblicati } from "@/lib/esempi";
 import { GUIDE } from "@/lib/guide";
 import { CITTA_FESTE } from "@/lib/feste";
+import { CITTA_EVENTI, eventiAttivi } from "@/lib/eventi-natale";
 import { CATEGORIE_ATTIVE, LISTING, SCHEDE, percorsoScheda } from "@/lib/directory";
 import { classi, eta, url } from "@/lib/seo";
 import { chiaveScheda, pubblicate } from "@/lib/directory-db";
@@ -48,6 +49,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/biglietti": ["lib/biglietti.ts", "cards/registry.ts"],
     "/biglietti/crea": ["cards/registry.ts"],
     "/biglietti/esempi": ["lib/esempi.ts"],
+    "/natale": ["lib/natale.ts", "lib/eventi-natale.ts"],
+    "/natale/letterina-babbo-natale": ["lib/natale.ts", "components/natale/EditorLetterina.tsx"],
+    "/natale/biglietti-di-natale": ["cards/registry.ts"],
+    "/natale/eventi": ["lib/eventi-natale.ts"],
     "/guide": [ultimaGuida],
     "/feste": [ultimaCitta],
     "/metodo": ["content/hubs/metodo.md"],
@@ -82,6 +87,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/per-insegnanti",
     "/per-le-mamme",
     "/risorse-educative-bambini",
+    "/natale",
+    "/natale/letterina-babbo-natale",
+    "/natale/biglietti-di-natale",
+    "/natale/eventi",
   ];
 
   const competenze = [
@@ -132,6 +141,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     })),
 
+    // Gli eventi di Natale per città: solo le città con eventi non ancora finiti.
+    ...CITTA_EVENTI.filter((c) => eventiAttivi(c).length > 0).map((c) => ({
+      url: url(`/natale/eventi/${c.slug}`),
+      lastModified: dataDi("lib/eventi-natale.ts"),
+    })),
     // Le pagine locali delle feste: una per città, keyword locale (GEO)
     ...CITTA_FESTE.map((c) => ({
       url: url(`/feste/${c.slug}`),
