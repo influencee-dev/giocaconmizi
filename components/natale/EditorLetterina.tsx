@@ -5,6 +5,8 @@ import { VARIANTI, type Variante } from "@/components/biglietti/Sfondo";
 import { FOGLIO_A4 } from "@/components/biglietti/Etichette";
 import { MOTIVI } from "@/components/biglietti/motivi";
 import { annuncia, MessaggioEsito } from "@/components/ui/Esito";
+import { FacciaMizi } from "@/games/_engine/arte";
+import { parla, zittisci } from "@/lib/audio";
 import {
   APERTURE,
   CARTE,
@@ -41,6 +43,20 @@ import { FoglioLetterina, FoglioRisposta, type DatiLetterina } from "./FoglioLet
  */
 
 const MAX_NOME = 24;
+
+/**
+ * La letterina a passi, come i giochi (studio UX del 14/11/2026): un compito
+ * per schermata, Mizi che lo dice nel fumetto e a voce, bottoni grandi
+ * «Avanti» e «Indietro». «Vedi tutto in una pagina» è la modalità dei grandi.
+ */
+const PASSI = [
+  { titolo: "Chi scrive", mizi: "Ciao! Quanti anni hai? Se vuoi, scrivi anche il tuo nome." },
+  { titolo: "La carta", mizi: "Tocca il disegno che ti piace di più per la tua carta da lettera." },
+  { titolo: "Come cominci", mizi: "Tocca una frase per cominciare. Te la leggo io!" },
+  { titolo: "I desideri", mizi: "Cosa vorresti per Natale? Tocca un'idea o scrivila tu." },
+  { titolo: "Il saluto", mizi: "Ultima cosa: come vuoi salutare Babbo Natale?" },
+  { titolo: "Fatto!", mizi: "Evviva, la tua letterina è pronta! Chiedi a un grande di stamparla, poi colora la busta." },
+] as const;
 const { larghezza: W, altezza: H } = FOGLIO_A4;
 
 export function EditorLetterina() {
@@ -59,16 +75,43 @@ export function EditorLetterina() {
   const [rispostaPronta, setRispostaPronta] = useState(false);
   const [grande, setGrande] = useState(false);
   const [anteprimaFuori, setAnteprimaFuori] = useState(false);
+  const [passo, setPasso] = useState(0);
+  const [tutto, setTutto] = useState(false);
+  const [voce, setVoce] = useState(true);
+  const inizio = useRef<HTMLDivElement>(null);
+
+  /** Mizi legge ad alta voce, se la voce è accesa. */
+  const dici = useCallback((testo: string) => {
+    if (voce && testo.trim()) parla(testo);
+  }, [voce]);
+
+  const vaiA = useCallback((n: number) => {
+    const nuovo = Math.max(0, Math.min(PASSI.length - 1, n));
+    setPasso(nuovo);
+    zittisci();
+    if (voce) parla(PASSI[nuovo].mizi);
+    if (nuovo === PASSI.length - 1) annuncia("Evviva! La letterina è pronta.", true);
+    inizio.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [voce]);
   const foglio = useRef<HTMLDivElement>(null);
   const foglioBusta = useRef<HTMLDivElement>(null);
   const foglioRisposta = useRef<HTMLDivElement>(null);
 
-  // La miniatura compare solo quando l'anteprima grande è uscita dallo schermo.
+  // La miniatura fissa compare solo quando serve davvero (vedi sotto).
   useEffect(() => {
-    const el = foglio.current;
-    if (!el || typeof IntersectionObserver === "undefined") return;
-    const osserva = new IntersectionObserver(([voce]) => setAnteprimaFuori(!voce.isIntersecting), { threshold: 0.15 });
-    osserva.observe(el);
+    // La miniatura fissa serve solo quando sono fuori schermo sia il foglio
+    // grande sia la barra di Mizi (che ha la sua miniatura): così non copre niente.
+    const elementi = [foglio.current, inizio.current].filter((e): e is HTMLDivElement => Boolean(e));
+    if (!elementi.length || typeof IntersectionObserver === "undefined") return;
+    const visibili = new Map<Element, boolean>();
+    const osserva = new IntersectionObserver(
+      (voci) => {
+        for (const v of voci) visibili.set(v.target, v.isIntersecting);
+        setAnteprimaFuori(![...visibili.values()].some(Boolean));
+      },
+      { threshold: 0.15 },
+    );
+    elementi.forEach((e) => osserva.observe(e));
     return () => osserva.disconnect();
   }, []);
 
@@ -208,7 +251,68 @@ export function EditorLetterina() {
         </div>
       </div>
 
-      <form className="order-2 grid min-w-0 gap-8 lg:order-1" onSubmit={(e) => e.preventDefault()}>
+      <form className="order-2 grid min-w-0 scroll-mt-28 gap-8 lg:order-1" onSubmit={(e) => e.preventDefault()} data-passo={tutto ? "tutto" : passo}>
+        <div ref={inizio} className="grid scroll-mt-28 gap-3">
+          <button
+            type="button"
+            onClick={() => parla(tutto ? "Qui vedi tutta la letterina in una pagina." : PASSI[passo].mizi)}
+            aria-label="Mizi ripete a voce"
+            className="flex items-center gap-3 text-left"
+            data-mizi-guida
+          >
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+              <FacciaMizi emozione="felice" className="h-12 w-12" />
+            </span>
+            <span className="fumetto relative flex-1 rounded-morbido border-2 border-crema-scuro bg-white px-4 py-3">
+              <span className="block text-lg font-extrabold leading-snug text-notte">
+                {tutto ? "Ecco tutta la letterina in una pagina: cambia quello che vuoi." : PASSI[passo].mizi}
+              </span>
+              <span className="mt-1 block text-sm font-bold text-viola-forte">🔊 tocca per sentirlo</span>
+            </span>
+          </button>
+          {/* Telefono: la letterina in piccolo accanto a Mizi, si apre a tutto schermo. */}
+          <button
+            type="button"
+            onClick={() => setGrande(true)}
+            className="-mt-1 flex items-center gap-3 self-end rounded-xl bg-white p-1.5 pr-3 text-sm font-extrabold text-notte shadow-sm lg:hidden"
+            aria-label="Guarda la letterina a tutto schermo"
+            data-miniatura-guida
+          >
+            <span className="w-12 overflow-hidden rounded-md border border-crema-scuro [&_svg]:h-auto [&_svg]:w-full">
+              <FoglioLetterina dati={dati} />
+            </span>
+            Guarda la letterina
+          </button>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            {!tutto && (
+              <ol className="flex gap-1.5" aria-label={`Passo ${passo + 1} di ${PASSI.length}`}>
+                {PASSI.map((p, i) => (
+                  <li key={p.titolo} className={`h-3 w-3 rounded-full ${i <= passo ? "bg-viola-forte" : "bg-crema-scuro"}`} />
+                ))}
+              </ol>
+            )}
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setVoce((v) => !v);
+                  zittisci();
+                }}
+                aria-pressed={voce}
+                className="min-h-12 rounded-bolla border-2 border-notte/15 bg-white px-3 text-sm font-bold text-notte"
+                data-voce-mizi
+              >
+                {voce ? "🔊 Voce sì" : "🔇 Voce no"}
+              </button>
+              <button type="button" onClick={() => setTutto((t) => !t)} className="min-h-12 rounded-bolla border-2 border-notte/15 bg-white px-3 text-sm font-bold text-notte" data-vedi-tutto>
+                {tutto ? "Torna ai passi" : "Vedi tutto in una pagina"}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {(tutto || passo === 0) && (
+        <>
         <fieldset className="grid gap-2">
           <legend className="text-lg font-extrabold text-notte">1. Per che età</legend>
           <div className="flex flex-wrap gap-2">
@@ -220,14 +324,18 @@ export function EditorLetterina() {
           </div>
         </fieldset>
 
-        <div className="grid gap-3 sm:grid-cols-[1fr_8rem]">
+        <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_8rem]">
           <Campo etichetta="Nome (facoltativo)" id="letterina-nome" valore={nome} massimo={MAX_NOME} onChange={setNome} />
-          <label className="grid gap-1 font-bold text-notte">
+          <label className="grid min-w-0 gap-1 font-bold text-notte">
             Anni
-            <input id="letterina-eta" value={eta} inputMode="numeric" maxLength={2} onChange={(e) => setEta(e.target.value.replace(/\D/g, ""))} className="min-h-14 rounded-xl border-2 border-notte/15 px-3 py-2 text-lg font-normal" />
+            <input id="letterina-eta" value={eta} inputMode="numeric" maxLength={2} onChange={(e) => setEta(e.target.value.replace(/\D/g, ""))} className="min-h-14 w-full min-w-0 rounded-xl border-2 border-notte/15 px-3 py-2 text-lg font-normal" />
           </label>
         </div>
 
+        </>
+        )}
+
+        {(tutto || passo === 1) && (
         <fieldset className="grid gap-3">
           <legend className="text-lg font-extrabold text-notte">2. La carta da lettera</legend>
           <div className="grid grid-cols-3 gap-2 sm:grid-cols-4" role="radiogroup" aria-label="Carta da lettera">
@@ -244,7 +352,7 @@ export function EditorLetterina() {
                   data-carta-letterina={c.tema}
                 >
                   {motivo && (
-                    <svg viewBox="0 0 40 40" className="h-12 w-12" aria-hidden>
+                    <svg viewBox="0 0 40 40" className="h-12 w-12 rounded-xl bg-crema" aria-hidden>
                       {motivo.motivo(motivo.tinte)}
                     </svg>
                   )}
@@ -262,9 +370,16 @@ export function EditorLetterina() {
           </div>
         </fieldset>
 
-        <Frase titolo="3. Come cominci" valore={apertura} scelte={APERTURE[fascia].map((f) => riempi(f, nome, eta))} onChange={setApertura} id="letterina-apertura" />
-        <Frase titolo="4. Com'è andato l'anno" valore={questAnno} scelte={QUEST_ANNO[fascia]} onChange={setQuestAnno} id="letterina-anno" />
+        )}
 
+        {(tutto || passo === 2) && (
+        <>
+        <Frase titolo="3. Come cominci" valore={apertura} scelte={APERTURE[fascia].map((f) => riempi(f, nome, eta))} onChange={setApertura} onScelta={dici} id="letterina-apertura" />
+        <Frase titolo="4. Com'è andato l'anno" valore={questAnno} scelte={QUEST_ANNO[fascia]} onChange={setQuestAnno} onScelta={dici} id="letterina-anno" />
+        </>
+        )}
+
+        {(tutto || passo === 3) && (
         <fieldset className="grid gap-2">
           <legend className="text-lg font-extrabold text-notte">5. I desideri (al massimo {MAX_DESIDERI})</legend>
           <p className="text-notte-tenue">Tocca un&apos;idea oppure scrivi tu:</p>
@@ -273,13 +388,14 @@ export function EditorLetterina() {
               <button
                 key={idea}
                 type="button"
-                onClick={() =>
+                onClick={() => {
+                  dici(idea);
                   setDesideri((v) => {
                     const vuoto = v.findIndex((x) => !x.trim());
                     if (vuoto >= 0) return v.map((x, k) => (k === vuoto ? idea : x));
                     return v.length < MAX_DESIDERI ? [...v, idea] : v;
-                  })
-                }
+                  });
+                }}
                 className="min-h-12 rounded-bolla border-2 border-crema-scuro bg-crema px-4 py-2 text-base font-bold text-notte hover:border-viola"
                 data-idea-desiderio
               >
@@ -304,20 +420,62 @@ export function EditorLetterina() {
             </button>
           )}
         </fieldset>
+        )}
 
-        <Frase titolo="6. Un pensiero per gli altri (facoltativo)" valore={pensiero} scelte={PENSIERI} onChange={setPensiero} id="letterina-pensiero" />
-        <Frase titolo="7. Come saluti" valore={chiusura} scelte={CHIUSURE[fascia]} onChange={setChiusura} id="letterina-chiusura" />
+        {(tutto || passo === 4) && (
+        <>
+        <Frase titolo="6. Un pensiero per gli altri (facoltativo)" valore={pensiero} scelte={PENSIERI} onChange={setPensiero} onScelta={dici} id="letterina-pensiero" />
+        <Frase titolo="7. Come saluti" valore={chiusura} scelte={CHIUSURE[fascia]} onChange={setChiusura} onScelta={dici} id="letterina-chiusura" />
 
         <label className="flex min-h-12 items-center gap-3 font-bold text-notte">
           <input type="checkbox" checked={conMizi} onChange={(e) => setConMizi(e.target.checked)} className="h-6 w-6 accent-[#7B4CC4]" /> Metti Mizi nella letterina
         </label>
         <p className="text-notte-tenue">Lascia vuoti i campi che vuoi scrivere a mano: sul foglio diventano righe.</p>
+        </>
+        )}
 
-        {/* Sul telefono i bottoni stanno anche qui, in fondo: niente su e giù. */}
-        <div className="lg:hidden">{bottoni}</div>
+        {(tutto || passo === PASSI.length - 1) && (
+          <div className="grid gap-3" data-passo-fatto>
+            {!tutto && (
+              <div className="mx-auto w-full max-w-xs overflow-hidden rounded-morbido shadow-lg lg:hidden [&_svg]:h-auto [&_svg]:w-full">
+                <FoglioLetterina dati={dati} />
+              </div>
+            )}
+            {/* Sul telefono i bottoni stanno anche qui: niente su e giù. */}
+            <div className="lg:hidden">{bottoni}</div>
+            {!tutto && (
+              <a href="#busta" className="text-center font-extrabold text-viola-forte underline underline-offset-2">
+                Ora stampa la busta da colorare ↓
+              </a>
+            )}
+          </div>
+        )}
+
+        {!tutto && (
+          <div className="grid grid-cols-2 gap-3" data-navigazione-passi>
+            <button
+              type="button"
+              onClick={() => vaiA(passo - 1)}
+              disabled={passo === 0}
+              className="min-h-16 rounded-bolla border-2 border-notte/15 bg-white px-5 text-lg font-extrabold text-notte disabled:opacity-40"
+              data-indietro
+            >
+              ← Indietro
+            </button>
+            {passo < PASSI.length - 1 ? (
+              <button type="button" onClick={() => vaiA(passo + 1)} className="min-h-16 rounded-bolla bg-viola-forte px-5 text-lg font-extrabold text-white" data-avanti>
+                Avanti →
+              </button>
+            ) : (
+              <button type="button" onClick={() => vaiA(0)} className="min-h-16 rounded-bolla border-2 border-viola-forte bg-white px-5 text-lg font-extrabold text-viola-forte" data-ricomincia>
+                Rifalla da capo
+              </button>
+            )}
+          </div>
+        )}
       </form>
 
-      <section className="order-3 rounded-morbido border border-notte/10 bg-white p-5 lg:col-span-2" data-sezione-busta>
+      <section id="busta" className="order-3 scroll-mt-28 rounded-morbido border border-notte/10 bg-white p-5 lg:col-span-2" data-sezione-busta>
         <h2 className="text-xl font-extrabold text-notte">La busta da colorare</h2>
         <p className="mt-1 text-notte-tenue">
           Si stampa su un A4, si colora, si ritaglia e si piega: dentro ci sta la letterina piegata in quattro. Davanti c&apos;è
@@ -418,7 +576,7 @@ function Campo({
 }) {
   const vicino = valore.length >= massimo - 4;
   return (
-    <label className="grid gap-1 font-bold text-notte">
+    <label className="grid min-w-0 gap-1 font-bold text-notte">
       <span className={nascondiEtichetta ? "sr-only" : undefined}>{etichetta}</span>
       <input
         id={id}
@@ -426,7 +584,7 @@ function Campo({
         maxLength={massimo}
         placeholder={nascondiEtichetta ? etichetta : undefined}
         onChange={(e) => onChange(e.target.value)}
-        className="min-h-14 rounded-xl border-2 border-notte/15 px-3 py-2 text-lg font-normal"
+        className="min-h-14 w-full min-w-0 rounded-xl border-2 border-notte/15 px-3 py-2 text-lg font-normal"
         autoComplete="off"
       />
       {valore.length > 0 && (
@@ -443,12 +601,15 @@ function Frase({
   valore,
   scelte,
   onChange,
+  onScelta,
   id,
 }: {
   titolo: string;
   valore: string;
   scelte: string[];
   onChange: (v: string) => void;
+  /** Quando si tocca una frase pronta (Mizi la legge ad alta voce). */
+  onScelta?: (v: string) => void;
   id: string;
 }) {
   return (
@@ -459,7 +620,10 @@ function Frase({
           <button
             key={s}
             type="button"
-            onClick={() => onChange(s)}
+            onClick={() => {
+              onChange(s);
+              onScelta?.(s);
+            }}
             aria-pressed={valore === s}
             className={`min-h-14 rounded-2xl border-2 px-4 py-3 text-left text-base ${valore === s ? "border-viola-forte bg-viola/10 font-extrabold text-notte" : "border-notte/10 bg-white text-notte hover:border-viola"}`}
           >

@@ -286,25 +286,42 @@ page.on("request", (r) => {
 });
 await page.goto(`${BASE}/natale/letterina-babbo-natale`, { waitUntil: "networkidle" });
 const anteprimaL = page.locator("[data-anteprima-letterina] [data-foglio-letterina]");
-ok("letterina: c'è il foglio in anteprima", (await anteprimaL.count()) === 1);
+ok("letterina: c'è il foglio in anteprima e Mizi guida dal primo passo",
+  (await anteprimaL.count()) === 1 && (await page.locator("[data-mizi-guida]").textContent()).includes("Quanti anni hai") &&
+  (await page.locator("form[data-passo='0']").count()) === 1);
 await page.locator("#letterina-nome").fill("Sofiella");
 await page.locator("#letterina-eta").fill("7");
-await page.locator("[data-idea-desiderio]").first().tap();
-await page.waitForTimeout(200);
-ok("letterina: nome e idea-desiderio vanno sul foglio, col contatore",
-  (await anteprimaL.textContent()).includes("Sofiella") &&
-  (await page.locator("#letterina-desiderio-1").inputValue()).length > 0 &&
-  (await page.locator("[data-contatore='letterina-nome']").textContent()) === "8/24");
-ok("letterina: sette carte da lettera a figura", (await page.locator("[data-carta-letterina] svg").count()) === 7);
+await page.waitForTimeout(150);
+ok("letterina: il nome va sul foglio, col contatore",
+  (await anteprimaL.textContent()).includes("Sofiella") && (await page.locator("[data-contatore='letterina-nome']").textContent()) === "8/24");
+await page.locator("[data-voce-mizi]").tap(); // nei test niente voce
+await page.locator("[data-avanti]").tap();
+ok("letterina: passo 2, sette carte da lettera a figura",
+  (await page.locator("form[data-passo='1']").count()) === 1 && (await page.locator("[data-carta-letterina] svg").count()) === 7 &&
+  (await page.locator("#letterina-nome").count()) === 0);
 await page.locator("[data-carta-letterina='natale-renne']").tap();
 ok("letterina: la carta scelta resta segnata", (await page.locator("[data-carta-letterina='natale-renne']").getAttribute("aria-checked")) === "true");
-// La miniatura in basso si vede senza scorrere e si apre a tutto schermo.
-await page.locator("#letterina-pensiero").scrollIntoViewIfNeeded();
+await page.locator("[data-avanti]").tap();
+await page.locator("[data-avanti]").tap();
+await page.locator("[data-idea-desiderio]").first().tap();
+await page.waitForTimeout(150);
+ok("letterina: passo 4, l'idea toccata diventa il primo desiderio",
+  (await page.locator("form[data-passo='3']").count()) === 1 && (await page.locator("#letterina-desiderio-1").inputValue()).length > 0);
+await page.locator("[data-avanti]").tap();
+await page.locator("[data-navigazione-passi]").scrollIntoViewIfNeeded();
 ok("letterina: la miniatura resta in vista mentre si scrive", await page.locator("[data-miniatura-letterina]").isVisible());
 await page.locator("[data-miniatura-letterina]").tap();
 ok("letterina: toccando la miniatura si apre a tutto schermo",
   (await page.locator("[data-letterina-grande] [data-foglio-letterina]").count()) === 1);
 await page.locator("[data-chiudi-grande]").tap();
+await page.locator("[data-avanti]").tap();
+ok("letterina: ultimo passo «Fatto!» con i bottoni per stampare e la festa",
+  (await page.locator("[data-passo-fatto] [data-scarica-letterina-pdf]").count()) === 1 &&
+  (await page.locator("[data-esito]").filter({ hasText: "Evviva" }).waitFor({ state: "visible", timeout: 3000 }).then(() => true, () => false)));
+await page.locator("[data-vedi-tutto]").tap();
+ok("letterina: «Vedi tutto in una pagina» mostra tutti i passi insieme",
+  (await page.locator("#letterina-nome").count()) === 1 && (await page.locator("#letterina-pensiero").count()) === 1 &&
+  (await page.locator("[data-navigazione-passi]").count()) === 0);
 const attesaPdfL = page.waitForEvent("download", { timeout: 15000 }).catch(() => null);
 await page.locator("[data-anteprima-letterina] ~ div [data-scarica-letterina-pdf]").tap();
 const pdfL = await attesaPdfL;
