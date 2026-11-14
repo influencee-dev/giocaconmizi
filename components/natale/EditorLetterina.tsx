@@ -21,6 +21,8 @@ import {
   type Fascia,
 } from "@/lib/natale";
 import { FoglioLetterina, FoglioRisposta, type DatiLetterina } from "./FoglioLetterina";
+import { FoglioBusta } from "./FoglioBusta";
+import { condividiImmagine, nomeFileLetterina, pngInPdf, scaricaUrl, stampaImmagine } from "@/lib/letterina-esporta";
 
 /**
  * Lo strumento della letterina a Babbo Natale.
@@ -31,12 +33,6 @@ import { FoglioLetterina, FoglioRisposta, type DatiLetterina } from "./FoglioLet
  * dopo, si propone la posta di Mizi, senza condizioni.
  */
 
-function scaricaPng(png: string, nome: string) {
-  const link = document.createElement("a");
-  link.download = nome;
-  link.href = png;
-  link.click();
-}
 
 export function EditorLetterina() {
   const [fascia, setFascia] = useState<Fascia>("medi");
@@ -82,34 +78,84 @@ export function EditorLetterina() {
     [carta, variante, apertura, nome, eta, questAnno, desideri, pensiero, chiusura, conMizi],
   );
 
-  const scarica = useCallback(async () => {
-    const svg = foglio.current?.querySelector("svg");
-    if (!svg) return;
-    const png = await biglietoInPng(svg, FOGLIO_A4.larghezza, FOGLIO_A4.altezza);
-    scaricaPng(png, `letterina-babbo-natale${nome ? `-${nome}` : ""}.png`.toLowerCase().replace(/\s+/g, "-"));
-    setScaricata(true);
-  }, [nome]);
+  const busta = useRef<HTMLDivElement>(null);
+  const [avviso, setAvviso] = useState("");
 
-  const condividi = useCallback(async () => {
-    const svg = foglio.current?.querySelector("svg");
-    if (!svg) return;
-    const png = await biglietoInPng(svg, FOGLIO_A4.larghezza, FOGLIO_A4.altezza);
-    const blob = await (await fetch(png)).blob();
-    const file = new File([blob], "letterina-babbo-natale.png", { type: "image/png" });
-    if (navigator.canShare?.({ files: [file] })) {
-      await navigator.share({ files: [file], title: "La mia letterina a Babbo Natale" }).catch(() => undefined);
-    } else {
-      scaricaPng(png, "letterina-babbo-natale.png");
+  const pngDi = useCallback(async (dove: React.RefObject<HTMLDivElement | null>) => {
+    const svg = dove.current?.querySelector("svg");
+    if (!svg) throw new Error("foglio non pronto");
+    return biglietoInPng(svg, FOGLIO_A4.larghezza, FOGLIO_A4.altezza);
+  }, []);
+
+  const esegui = useCallback(async (azione: () => Promise<unknown>, fatto: string) => {
+    try {
+      await azione();
+      setAvviso(fatto);
+    } catch {
+      setAvviso("Qualcosa non è andato: riprova, oppure scarica il PNG.");
     }
-    setScaricata(true);
   }, []);
 
-  const scaricaRisposta = useCallback(async () => {
-    const svg = foglioRisposta.current?.querySelector("svg");
-    if (!svg) return;
-    const png = await biglietoInPng(svg, FOGLIO_A4.larghezza, FOGLIO_A4.altezza);
-    scaricaPng(png, "risposta-di-babbo-natale.png");
-  }, []);
+  const scaricaPdf = useCallback(
+    () =>
+      esegui(async () => {
+        const pdf = await pngInPdf(await pngDi(foglio), FOGLIO_A4.larghezza, FOGLIO_A4.altezza);
+        const url = URL.createObjectURL(pdf);
+        scaricaUrl(url, nomeFileLetterina(nome, "pdf"));
+        setTimeout(() => URL.revokeObjectURL(url), 30_000);
+        setScaricata(true);
+      }, "Fatto: trovi il PDF nei download, pronto da stampare in A4."),
+    [esegui, pngDi, nome],
+  );
+
+  const scarica = useCallback(
+    () =>
+      esegui(async () => {
+        scaricaUrl(await pngDi(foglio), nomeFileLetterina(nome, "png"));
+        setScaricata(true);
+      }, "Fatto: l'immagine è nei download."),
+    [esegui, pngDi, nome],
+  );
+
+  const stampa = useCallback(
+    () =>
+      esegui(async () => {
+        stampaImmagine(await pngDi(foglio));
+        setScaricata(true);
+      }, "Si apre la finestra di stampa: scegli A4."),
+    [esegui, pngDi],
+  );
+
+  const condividi = useCallback(
+    () =>
+      esegui(async () => {
+        await condividiImmagine(await pngDi(foglio), nomeFileLetterina(nome, "png"), "La mia letterina a Babbo Natale, fatta su giocamizi.it");
+        setScaricata(true);
+      }, "Fatto."),
+    [esegui, pngDi, nome],
+  );
+
+  const scaricaBusta = useCallback(
+    () =>
+      esegui(async () => {
+        const pdf = await pngInPdf(await pngDi(busta), FOGLIO_A4.larghezza, FOGLIO_A4.altezza);
+        const url = URL.createObjectURL(pdf);
+        scaricaUrl(url, nomeFileLetterina(nome, "pdf").replace("letterina-", "busta-"));
+        setTimeout(() => URL.revokeObjectURL(url), 30_000);
+      }, "Fatto: la busta da colorare è nei download."),
+    [esegui, pngDi, nome],
+  );
+
+  const scaricaRisposta = useCallback(
+    () =>
+      esegui(async () => {
+        const pdf = await pngInPdf(await pngDi(foglioRisposta), FOGLIO_A4.larghezza, FOGLIO_A4.altezza);
+        const url = URL.createObjectURL(pdf);
+        scaricaUrl(url, "risposta-di-babbo-natale.pdf");
+        setTimeout(() => URL.revokeObjectURL(url), 30_000);
+      }, "Fatto: la risposta di Babbo Natale è nei download."),
+    [esegui, pngDi],
+  );
 
   const scegli = "rounded-bolla border-2 px-3 py-2 text-sm font-bold";
   const attivo = "border-viola bg-viola text-white";
@@ -123,12 +169,25 @@ export function EditorLetterina() {
             <FoglioLetterina dati={dati} />
           </div>
           <div className="mx-auto mt-4 grid max-w-xs gap-2">
-            <button type="button" onClick={scarica} className="rounded-bolla bg-viola px-5 py-3 font-extrabold text-white" data-scarica-letterina>
-              Scarica la letterina (A4)
+            <button type="button" onClick={scaricaPdf} className="rounded-bolla bg-viola px-5 py-3 font-extrabold text-white" data-scarica-letterina-pdf>
+              Scarica il PDF (A4)
             </button>
-            <button type="button" onClick={condividi} className="rounded-bolla border-2 border-viola px-5 py-2 font-extrabold text-viola">
-              Condividi o manda su WhatsApp
-            </button>
+            <div className="grid grid-cols-3 gap-2">
+              <button type="button" onClick={stampa} className="rounded-bolla border-2 border-viola px-2 py-2 text-sm font-extrabold text-viola" data-stampa-letterina>
+                Stampa
+              </button>
+              <button type="button" onClick={scarica} className="rounded-bolla border-2 border-viola px-2 py-2 text-sm font-extrabold text-viola" data-scarica-letterina>
+                Immagine
+              </button>
+              <button type="button" onClick={condividi} className="rounded-bolla border-2 border-viola px-2 py-2 text-sm font-extrabold text-viola">
+                Condividi
+              </button>
+            </div>
+            {avviso && (
+              <p role="status" className="text-center text-sm font-bold text-viola">
+                {avviso}
+              </p>
+            )}
             <p className="text-center text-xs text-notte-tenue">
               Nome e desideri restano su questo dispositivo: la letterina si crea qui, non sui nostri server.
             </p>
@@ -160,10 +219,10 @@ export function EditorLetterina() {
         </div>
 
         <fieldset className="grid gap-2">
-          <legend className="font-extrabold text-notte">2. La carta da lettera</legend>
+          <legend className="font-extrabold text-notte">2. La cornice</legend>
           <div className="flex flex-wrap gap-2">
             {CARTE.map((c) => (
-              <button key={c.tema} type="button" onClick={() => setCarta(c.tema)} className={`${scegli} ${carta === c.tema ? attivo : spento}`}>
+              <button key={c.tema} type="button" data-cornice-letterina={c.tema} onClick={() => setCarta(c.tema)} className={`${scegli} ${carta === c.tema ? attivo : spento}`}>
                 {c.etichetta}
               </button>
             ))}
@@ -239,7 +298,22 @@ export function EditorLetterina() {
         </div>
       )}
 
-      <section className="order-4 rounded-morbido border border-notte/10 bg-white p-5 lg:col-span-2" aria-labelledby="titolo-risposta">
+      <section className="order-4 rounded-morbido border border-notte/10 bg-white p-5 lg:col-span-2" aria-labelledby="titolo-busta" data-sezione-busta>
+        <h2 id="titolo-busta" className="text-xl font-extrabold text-notte">La busta da colorare</h2>
+        <div className="mt-3 grid gap-3 sm:grid-cols-[minmax(0,12rem)_1fr] sm:items-start">
+          <div ref={busta} className="overflow-hidden rounded-xl shadow [&_svg]:h-auto [&_svg]:w-full">
+            <FoglioBusta mittente={nome.trim()} />
+          </div>
+          <div className="grid gap-2">
+            <p className="text-notte">Si stampa su un A4, si colora, si ritaglia e si piega: dentro ci sta la letterina piegata in quattro.</p>
+            <button type="button" onClick={scaricaBusta} className="w-fit rounded-bolla bg-viola px-5 py-3 font-extrabold text-white" data-scarica-busta>
+              Scarica la busta (PDF)
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="order-5 rounded-morbido border border-notte/10 bg-white p-5 lg:col-span-2" aria-labelledby="titolo-risposta">
         <h2 id="titolo-risposta" className="text-xl font-extrabold text-notte">La risposta di Babbo Natale</h2>
         {rispostaPronta ? (
           <div className="mt-3 grid gap-3 sm:grid-cols-[minmax(0,12rem)_1fr] sm:items-start">
@@ -249,7 +323,7 @@ export function EditorLetterina() {
             <div className="grid gap-2">
               <p className="text-notte">Stampala, scrivi il nome a mano e lasciala sotto l&apos;albero la notte di Natale.</p>
               <button type="button" onClick={scaricaRisposta} className="w-fit rounded-bolla bg-viola px-5 py-3 font-extrabold text-white" data-scarica-risposta>
-                Scarica la risposta (A4)
+                Scarica la risposta (PDF)
               </button>
             </div>
           </div>

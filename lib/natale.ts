@@ -20,11 +20,14 @@ export const FASCE = [
 ] as const;
 export type Fascia = (typeof FASCE)[number]["id"];
 
-/** Le carte da lettera: i temi dei biglietti che stanno bene a Natale. */
+/** Le cornici della letterina: i motivi stanno in components/biglietti/motivi.tsx (le quattro «natale-*» sono solo cornici, non temi dei biglietti). */
 export const CARTE = [
-  { tema: "natale", etichetta: "Albero e renne" },
+  { tema: "natale", etichetta: "Albero e palline" },
+  { tema: "natale-neve", etichetta: "Pupazzi di neve" },
+  { tema: "natale-regali", etichetta: "Regali" },
+  { tema: "natale-dolci", etichetta: "Biscotti e dolci" },
+  { tema: "natale-renne", etichetta: "Renne" },
   { tema: "stelle-luna", etichetta: "Stelle e luna" },
-  { tema: "animali-foresta", etichetta: "Bosco d'inverno" },
 ] as const;
 
 /** Le frasi d'apertura, una si sceglie e si può cambiare a mano. */
@@ -113,7 +116,7 @@ export const RISPOSTA_BABBO_NATALE = [
 export const DATA_RISPOSTA = "2026-12-20";
 
 export const RISPOSTA_BREVE_LETTERINA =
-  "La letterina a Babbo Natale si scrive meglio in tre parti: una presentazione («sono…, ho … anni»), un racconto dell'anno e la lista dei desideri, al massimo tre-cinque. Si scrive tra fine novembre e l'8 dicembre e si lascia sotto l'albero o si spedisce. Con lo strumento di Giocamizi si compila dal telefono, si stampa in A4 o si scarica da colorare, gratis e senza registrazione.";
+  "La letterina a Babbo Natale si scrive meglio in tre parti: una presentazione («sono…, ho … anni»), un racconto dell'anno e la lista dei desideri, al massimo tre-cinque. Si scrive tra fine novembre e l'8 dicembre e si lascia sotto l'albero o si spedisce. Con lo strumento di Giocamizi si compila dal telefono, si scarica in PDF A4, si stampa o si fa da colorare, con la busta da colorare, gratis e senza registrazione.";
 
 export const FAQ_LETTERINA = [
   {
