@@ -246,6 +246,9 @@ export async function adminEsitoLogo(codice: string, id: number, esito: "accetta
 
 /** Le chiavi delle schede con un logo approvato (per sapere dove mostrarlo). */
 export async function chiaviConLogo(): Promise<Set<string>> {
+  // Nel server delle verifiche niente database (come in pubblicate()): la
+  // pagina delle risorse, precaricata dal menu, resterebbe appesa al timeout.
+  if (process.env.GIOCAMIZI_ADMIN_PROVA && !process.env.VERCEL) return new Set();
   const client = db();
   if (!client) return new Set();
   try {
