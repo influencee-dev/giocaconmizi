@@ -84,7 +84,7 @@ export default function Home() {
     { domanda: "I giochi funzionano sul telefono?", risposta: "Sì, su telefono, tablet, computer e LIM, direttamente dal browser: non c'è nessuna app da installare." },
     { domanda: "Come funziona l'invito di compleanno?", risposta: "Scegli il tema, scrivi nome, età, data e luogo, e lo mandi su WhatsApp o lo stampi. Gli invitati confermano con un tocco o inquadrando il QR." },
     { domanda: "Dove festeggiare un compleanno per bambini nella mia città?", risposta: `Nelle pagine Feste trovi ludoteche, parchi giochi al coperto, musei e sale feste di ${citta} città italiane, verificati uno per uno con il link al sito ufficiale.` },
-    { domanda: "Chi c'è dietro Giocamizi?", risposta: "Giorgia Palazzo, mamma di Domiziana e founder di Influencee, che l'ha ideato; il sito è gestito da Partidea SRL. Mizi, la pinguina, porta un pezzetto del nome di sua figlia." },
+    { domanda: "Chi c'è dietro Giocamizi?", risposta: "Giorgia Palazzo, docente universitaria, imprenditrice nel digitale, co-founder di Myndo e CEO di Partidea, che l'ha creato con la figlia Domiziana; il sito è gestito da Partidea SRL. Mizi, la pinguina, porta un pezzetto del nome di Domiziana." },
   ];
 
   const ALTRO = [
@@ -370,8 +370,8 @@ export default function Home() {
             <span className="w-fit rounded-full bg-white px-3.5 py-1 text-xs font-extrabold uppercase tracking-wide text-notte">Chi c&apos;è dietro</span>
             <h2 className="text-3xl font-black leading-tight tracking-tight text-notte sm:text-4xl">Una mamma, una figlia e una pinguina</h2>
             <p className="max-w-2xl text-lg text-notte-tenue">
-              Giocamizi è nato perché Domiziana non voleva fare i compiti. Ogni gioco viene provato da lei prima di
-              uscire, e ogni guida è scritta da Giorgia Palazzo con le fonti citate. Niente pubblicità, niente dati dei bambini.
+              Giocamizi è nato nell&apos;estate 2026, quando Domiziana non aveva voglia di fare i compiti. Le idee dei giochi
+              arrivano da lei, e ogni guida cita le sue fonti. Niente pubblicità, niente dati dei bambini.
             </p>
             <div className="flex flex-wrap gap-3">
               <BottoneFreccia href="/chi-siamo" variante="notte">La nostra storia</BottoneFreccia>

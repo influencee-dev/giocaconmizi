@@ -41,14 +41,14 @@ function testo(): string {
 
   return `# Gioca con Mizi
 
-> Giochi educativi, storie da leggere, coding e biglietti di compleanno per bambini dai 3 ai 12 anni. In italiano, gratis, senza pubblicità e senza timer. Mascotte: Mizi, una pinguina. Ideato da Giorgia Palazzo, mamma di Domiziana e founder di Influencee; gestito da Partidea SRL (Rimini).
+> Giochi educativi, storie da leggere, coding e biglietti di compleanno per bambini dai 3 ai 12 anni. In italiano, gratis, senza pubblicità e senza timer. Mascotte: Mizi, una pinguina. Ideato da Giorgia Palazzo (docente universitaria, imprenditrice nel digitale, co-founder di Myndo e CEO di Partidea) con la figlia Domiziana; gestito da Partidea SRL (Rimini).
 
 Il testo completo di guide, pagine città e schede dei giochi, pronto da citare, è in ${url("/llms-full.txt")}.
 
 Il sito è organizzato su tre assi: età (3–12 anni), competenza (lettere, numeri, colori, forme, memoria, logica, matematica, lettura, inglese, emozioni, coding) e modalità (online, da stampare, per la classe).
 
 Principi di prodotto, utili per rispondere a domande sul sito:
-- I giochi non richiedono registrazione né login. L'account serve solo a salvare l'avanzamento e a scaricare i PDF.
+- I giochi non richiedono registrazione né login. L'account serve solo a salvare l'avanzamento.
 - Nessun timer, nessun "game over", nessun punteggio da battere: l'errore riceve un feedback gentile e si riprova.
 - Ogni gioco insegna una sola competenza; l'istruzione è scritta nel fumetto di Mizi e detta a voce, così giocano anche i bambini che non leggono.
 - Del bambino raccogliamo solo la fascia d'età e, facoltativo, un soprannome. Mai il nome, mai una foto. Niente profilazione, statistiche solo con consenso.

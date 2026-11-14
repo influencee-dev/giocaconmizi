@@ -12,7 +12,7 @@ games: [tabelline, labirinto-a-blocchi, trova-l-errore, pixel-art, tartaruga, l-
 A 8 anni i bambini vogliono sfide vere. Qui trovi giochi gratuiti per la terza elementare: tutte le tabelline, giochi di logica e attenzione, letture più lunghe e il coding con cicli e condizioni. Nessuna pubblicità, nessun timer.
 
 ## Cosa sa fare, di solito, un bambino di 8 anni
-Ogni bambino ha i suoi tempi: questa lista serve a scegliere i giochi, non a misurare.
+Se qualcosa non c'è ancora, prova i [giochi dei 7 anni](/giochi/eta/7-anni).
 - Conosce tutte le tabelline
 - Legge testi di una pagina e ne riassume il senso
 - Risolve problemi con due operazioni

@@ -12,7 +12,7 @@ games: [tocca-la-lettera, puzzle-facile, conta-fino-a-10, cosa-viene-dopo, guida
 A 4 anni i bambini iniziano a riconoscere le lettere, contano con più sicurezza e amano le sequenze. Qui trovi giochi gratuiti e senza pubblicità che seguono questi passi: lettere da toccare, puzzle, primi pattern e i primi giochi di coding con Mizi.
 
 ## Cosa sa fare, di solito, un bambino di 4 anni
-Ogni bambino ha i suoi tempi: questa lista serve a scegliere i giochi, non a misurare.
+Se qualcosa non c'è ancora, prova i [giochi dei 3 anni](/giochi/eta/3-anni).
 - Riconosce alcune lettere, spesso quelle del proprio nome
 - Conta fino a 10 toccando gli oggetti
 - Completa puzzle di 6–9 pezzi

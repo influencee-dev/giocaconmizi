@@ -11,7 +11,7 @@ import { SOCIETA, TITOLARE } from "@/lib/legal";
 export const metadata: Metadata = {
   title: "Chi siamo: Giorgia, Domiziana e Mizi",
   description:
-    "Giocamizi (Gioca con Mizi) è nato da una mamma, Giorgia Palazzo, e da sua figlia Domiziana, che non voleva mai fare i compiti. Giochi gratis e senza pubblicità, provati da una bambina vera.",
+    "Giocamizi è nato nell'estate 2026 da Giorgia Palazzo, docente universitaria e imprenditrice nel digitale, e da sua figlia Domi, che non aveva voglia di fare i compiti. Giochi gratis e senza pubblicità.",
   alternates: { canonical: "/chi-siamo" },
   openGraph: { images: [{ url: "/immagini/giorgia-e-domiziana-giocamizi-960.webp", width: 960, height: 960 }] },
 };
@@ -27,23 +27,23 @@ const STORIA: { tono: Tono; tappa: string; titolo: string; testo: string }[] = [
   {
     tono: "rosa",
     tappa: "1",
-    titolo: "I compiti",
+    titolo: "Un'estate di compiti",
     testo:
-      "Mia figlia Domiziana non voleva mai fare i compiti. E io avevo voglia di fare qualcosa per lei.",
+      "Domi non aveva voglia di fare i compiti. Per spronarla ho iniziato a giocarci insieme. Io con lei preferisco cucinare, ma questa volta abbiamo pensato e costruito qualcosa insieme. Ed è stato bello.",
   },
   {
     tono: "giallo",
     tappa: "2",
-    titolo: "Imparare giocando",
+    titolo: "Le idee di Domi",
     testo:
-      "Così sono nati giochi gentili, uno per ogni cosa da imparare: senza pubblicità, senza timer e senza «hai perso».",
+      "Da lì abbiamo iniziato a parlare di più. Domi mi racconta cosa le piace e dove fa fatica, e da lì nascono i giochi.",
   },
   {
     tono: "azzurro",
     tappa: "3",
     titolo: "Nasce Mizi",
     testo:
-      "Cercando un nome l'abbiamo chiesto all'intelligenza artificiale: è uscita una piccola pinguina con i capelli di Domiziana. Si chiama Mizi, un pezzetto del suo nome.",
+      "La pinguina l'ha voluta Domi, perché è un animale che le piace. Le abbiamo dato i suoi capelli, e il nome è un pezzetto del suo: Domiziana, Mizi.",
   },
 ];
 
@@ -51,44 +51,44 @@ const PERSONE: { foto?: string; nome: string; ruolo: string; testo: string; tono
   {
     foto: FOTO.giorgia,
     nome: "Giorgia",
-    ruolo: "La mamma che l'ha inventato",
+    ruolo: "L'ha inventato",
     testo:
-      "Founder di Partidea e Influencee: nella vita fa comunicazione, qui fa la mamma che ha voglia di aiutare le altre mamme.",
+      "Docente universitaria, imprenditrice nel digitale, co-founder di Myndo e CEO di Partidea. Qui ci metto quello che serve a me da mamma.",
     tono: "rosa",
   },
   {
     foto: FOTO.domiziana,
-    nome: "Domiziana",
-    ruolo: "La tester ufficiale",
-    testo: "Ogni gioco lo prova lei prima che venga pubblicato: è il primo test di ogni novità.",
+    nome: "Domi",
+    ruolo: "Dà le idee",
+    testo: "Mi dice cosa le piace e dove fa fatica: da lì partono i giochi nuovi.",
     tono: "giallo",
   },
   {
     nome: "Mizi",
-    ruolo: "La maestra gentile",
-    testo: "Spiega a voce cosa fare, così giocano anche i bambini che non sanno ancora leggere. Non mette fretta e non sgrida mai.",
+    ruolo: "La pinguina dei giochi",
+    testo: "Spiega a voce cosa fare, così giocano anche i bambini che non sanno ancora leggere. Niente timer e niente «hai perso».",
     tono: "azzurro",
   },
 ];
 
 const REGOLE: [Tono, string][] = [
   ["azzurro", "Un gioco insegna una cosa sola, e la insegna bene."],
-  ["rosa", "Nessun timer, nessun «hai perso»: se sbaglia, si riprova."],
+  ["rosa", "Niente timer e niente «hai perso»: se sbagli, riprovi."],
   ["giallo", "La voce spiega cosa fare, così giocano anche i bambini che non leggono."],
-  ["viola", "Ogni gioco viene provato da una bambina vera, Domiziana, prima di essere pubblicato."],
-  ["arancione", "Le idee delle mamme diventano giochi: quello che serve davvero lo decidete voi."],
+  ["viola", "Niente pubblicità e niente dati dei bambini: il digitale va usato con cura."],
+  ["arancione", "Hai un'idea per un gioco? Scrivimi."],
 ];
 
 const FAQ = [
   {
     domanda: "Chi ha creato Giocamizi?",
     risposta:
-      "Giorgia Palazzo, mamma di Domiziana. Giocamizi è nato perché la figlia non voleva fare i compiti. Il sito è gestito da Partidea SRL, la società di cui Giorgia è founder.",
+      "Giorgia Palazzo, docente universitaria, imprenditrice nel digitale, co-founder di Myndo e CEO di Partidea, insieme alla figlia Domiziana. È nato nell'estate 2026, quando Domi non aveva voglia di fare i compiti. Il sito è gestito da Partidea SRL.",
   },
   {
     domanda: "Chi è Mizi?",
     risposta:
-      "Una piccola pinguina con i capelli di Domiziana: il suo nome è un pezzetto del nome della bambina. Nei giochi spiega a voce cosa fare e non sgrida mai.",
+      "Una pinguina che ha scelto Domiziana, perché le piace questo animale: ha i suoi capelli e il nome è un pezzetto del suo. Nei giochi spiega a voce cosa fare.",
   },
   {
     domanda: "Le foto dei bambini sul sito sono vere?",
@@ -115,7 +115,7 @@ export default function ChiSiamoPage() {
             mainEntity: {
               "@type": "Person",
               name: "Giorgia Palazzo",
-              description: "Mamma di Domiziana, ideatrice di Giocamizi (Gioca con Mizi), founder di Partidea e Influencee",
+              description: "Docente universitaria, imprenditrice nel digitale, co-founder di Myndo e CEO di Partidea; ha creato Giocamizi con la figlia Domiziana",
               image: url("/immagini/giorgia-palazzo-giocamizi.webp"),
               worksFor: { "@type": "Organization", name: SOCIETA.ragioneSociale },
             },
@@ -132,8 +132,8 @@ export default function ChiSiamoPage() {
               </span>
               <h1>Una mamma, una figlia e una pinguina</h1>
               <p className="text-notte-tenue">
-                Giocamizi è nato perché mia figlia non voleva mai fare i compiti. Io sono Giorgia, lei è Domiziana, e Mizi
-                porta un pezzetto del suo nome.
+                Giocamizi è nato nell&apos;estate 2026, quando mia figlia non aveva voglia di fare i compiti. Io sono Giorgia,
+                lei è Domi, e Mizi porta un pezzetto del suo nome.
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
                 <Link href="/giochi" className="rounded-2xl bg-viola px-6 py-3.5 font-extrabold text-white hover:bg-notte">
@@ -162,8 +162,8 @@ export default function ChiSiamoPage() {
         </section>
 
         <InBreve className="mx-auto mt-14 max-w-4xl">
-          Giocamizi è un&apos;idea di Giorgia Palazzo, founder di Partidea e Influencee, nata per la figlia Domiziana: Mizi, la
-          pinguina dei giochi, porta un pezzetto del suo nome. Il sito è gestito da {SOCIETA.ragioneSociale} ed è gratis e
+          Giocamizi è un&apos;idea di Giorgia Palazzo, docente universitaria, imprenditrice nel digitale, co-founder di Myndo e
+          CEO di Partidea, nata con la figlia Domiziana: Mizi, la pinguina dei giochi, porta un pezzetto del suo nome. Il sito è gestito da {SOCIETA.ragioneSociale} ed è gratis e
           senza pubblicità.
         </InBreve>
 
@@ -186,13 +186,13 @@ export default function ChiSiamoPage() {
         {/* La frase di Giorgia. */}
         <figure className="mx-auto mt-20 max-w-3xl rounded-[1.8rem] bg-white p-8 text-center sm:p-12">
           <blockquote className="text-2xl font-black leading-snug tracking-tight text-notte sm:text-3xl">
-            «Qui faccio la mamma che ha voglia di aiutare le altre mamme: questo sito lo costruiamo insieme.»
+            «Il digitale non è un problema: è un amplificatore. Va gestito con cura, ed è per questo che ho fatto Giocamizi.»
           </blockquote>
           <figcaption className="mt-5 flex items-center justify-center gap-3 font-bold text-notte-tenue">
             <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-white shadow">
               <Image src={FOTO.giorgia} alt="" fill sizes="48px" className="object-cover" />
             </span>
-            Giorgia Palazzo, mamma di Domiziana
+            Giorgia Palazzo
           </figcaption>
         </figure>
 
@@ -204,7 +204,7 @@ export default function ChiSiamoPage() {
               <li key={p.nome} className={`flex flex-col items-center gap-3 rounded-[1.6rem] border-2 p-6 text-center ${TONI[p.tono].card}`}>
                 <span className="relative flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-4 border-white bg-white shadow-md">
                   {p.foto ? (
-                    <Image src={p.foto} alt={`${p.nome}, ${p.ruolo.toLowerCase()} di Giocamizi`} fill sizes="112px" className="object-cover" />
+                    <Image src={p.foto} alt={`Foto di ${p.nome}`} fill sizes="112px" className="object-cover" />
                   ) : (
                     <MiziIntero className="h-24 w-auto" />
                   )}
@@ -245,7 +245,7 @@ export default function ChiSiamoPage() {
             <a href={`mailto:${TITOLARE.email}`} className="font-bold text-viola underline underline-offset-4">
               {TITOLARE.email}
             </a>
-            : questo sito lo costruiamo insieme.
+            .
           </p>
         </section>
 

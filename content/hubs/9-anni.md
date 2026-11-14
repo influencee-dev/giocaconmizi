@@ -12,7 +12,7 @@ games: [tartaruga, labirinto-a-blocchi, tabelline, pixel-art, trova-l-errore, pr
 Quarta elementare: logica, frazioni, inglese e ragionamento. I giochi di questa pagina sono gratuiti e senza pubblicità, pensati per chi vuole allenarsi senza sentirsi a scuola. Il coding con la tartaruga introduce gli angoli e i cicli annidati.
 
 ## Cosa sa fare, di solito, un bambino di 9 anni
-Ogni bambino ha i suoi tempi: questa lista serve a scegliere i giochi, non a misurare.
+Se qualcosa non c'è ancora, prova i [giochi dei 8 anni](/giochi/eta/8-anni).
 - Ragiona per ipotesi e verifica
 - Usa le quattro operazioni con numeri grandi
 - Legge e capisce un testo informativo

@@ -7,7 +7,7 @@ import { FormAccesso } from "./FormAccesso";
 export const metadata: Metadata = {
   title: "Accedi",
   description:
-    "Accedi con un link via email per salvare l'avanzamento e scaricare i PDF. I giochi restano gratis anche senza account.",
+    "Accedi con un link via email per salvare l'avanzamento. I giochi restano gratis anche senza account.",
   // Pagina di servizio: non deve competere con gli hub nei risultati di ricerca.
   robots: { index: false, follow: true },
 };
@@ -28,7 +28,7 @@ export default async function AccediPage({ searchParams }: { searchParams: Promi
           </div>
         </div>
         <p className="mt-5 text-lg text-notte">
-          Scrivi la tua email: ti mandiamo un link e con un tocco sei dentro. Serve a salvare i progressi dei bambini e a scaricare i PDF.
+          Scrivi la tua email: ti mandiamo un link e con un tocco sei dentro. Serve a salvare i progressi dei bambini.
         </p>
 
         <div className="mt-6">

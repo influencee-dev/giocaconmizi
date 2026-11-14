@@ -12,7 +12,7 @@ games: [abbina-i-colori, trova-la-forma, conta-fino-a-10, memory-animali, grande
 Qui trovi giochi educativi pensati per i bambini di 3 anni: colori, forme, animali, i primi numeri. Si giocano con un dito, la voce di Mizi spiega cosa fare e non c'è nessun timer. Sono gratuiti, senza pubblicità e si aprono subito dal telefono.
 
 ## Cosa sa fare, di solito, un bambino di 3 anni
-Ogni bambino ha i suoi tempi: questa lista serve a scegliere i giochi, non a misurare.
+Se qualcosa non c'è ancora, è normale: questi giochi partono proprio da lì.
 - Riconosce e nomina i colori principali
 - Distingue cerchio, quadrato e triangolo
 - Conta a voce fino a 5–10, anche saltando qualche numero
