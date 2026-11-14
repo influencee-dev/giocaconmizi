@@ -41,8 +41,14 @@ const colpi = new Map<string, number[]>();
 /** impronta → scadenza del blocco da trappola. */
 const bloccati = new Map<string, number>();
 
+/**
+ * Solo la pagina esatta (e la trappola). Dal 14/11/2026 le categorie e le
+ * schede delle risorse sono pagine pubbliche come quelle delle feste: con il
+ * limite a 40 al minuto un motore di ricerca o un'AI non verificata si
+ * fermerebbe a metà delle ~55 pagine (docs/piano-risorse-eventi.md).
+ */
 export function protetto(percorso: string): boolean {
-  return PERCORSI_PROTETTI.some((p) => percorso === p || percorso.startsWith(`${p}/`));
+  return percorso === PERCORSO_TRAPPOLA || PERCORSI_PROTETTI.includes(percorso);
 }
 
 export type Esito =

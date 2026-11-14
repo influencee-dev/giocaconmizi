@@ -41,8 +41,9 @@ Progetto `giocaconmizi` → **Firewall**:
    giorno, poi *Challenge*. Lascia passare i bot verificati (Google, Bing).
 2. **AI Bots** (managed ruleset): lasciare *Off* o *Log*: il sito vuole essere
    letto dagli assistenti AI (GEO). Decisione di Giorgia.
-3. **Regola personalizzata — limite**: se il percorso inizia con
-   `/risorse-educative-bambini` → *Rate limit*, finestra fissa 60 s,
+3. **Regola personalizzata — limite**: se il percorso è esattamente
+   `/risorse-educative-bambini` (dal 14/11/2026 categorie e schede sono pagine
+   pubbliche come le feste, docs/piano-risorse-eventi.md) → *Rate limit*, finestra fissa 60 s,
    100 richieste per IP, azione *Deny (429)*. Escludere i bot verificati.
 4. **Regola personalizzata — trappola**: se il percorso è
    `/risorse-educative-bambini/elenco-completo-archivio` → *Deny* (o *Log*
