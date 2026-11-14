@@ -15,6 +15,7 @@
     "date-pagine": "node scripts/date-pagine.mjs",
     "immagini": "tsx scripts/immagini.ts",
     "prompt-guide": "tsx scripts/prompt-guide.ts",
+    "registro": "python scripts/registro-prodotto.py",
     "prompt-del-giorno": "tsx scripts/prompt-del-giorno.ts",
     "foto-arrivate": "tsx scripts/foto-arrivate.ts",
     "articoli:compila": "node scripts/articoli/compila.mjs",

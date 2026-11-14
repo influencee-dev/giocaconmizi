@@ -189,6 +189,13 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   pubblicare: `npm run articoli:controlla -- <slug> --rete` (≥27.000 caratteri,
   fonti, prezzi datati, immagini autorizzate, autenticità): se fallisce, resta bozza.
 - Procedura completa del job quotidiano (9:00): `docs/routine-articoli.md`.
+- Registro del prodotto (14/11/2026, docs/registro-prodotto.md): tutto ciò che
+  si produce va tracciato nel Foglio «Piano editoriale Giocamizi · <data>» su
+  Drive (1 Progetti / 100 articoli approfonditi), scheda «Prodotto»; la prima
+  scheda ha il prompt per fare il piano successivo. Si ricostruisce dal repo con
+  `npm run registro -- <cartella>` (dai commit: messaggi chiari in italiano) e
+  si ricarica ogni sera alle 21:00 e dopo ogni pubblicazione importante; il
+  file vecchio prende «zz_SUPERATO — ».
 
 ## Co-work quotidiano (Routine delle 7:00 italiane)
 Un miglioramento al giorno, piccolo e finito, a rotazione:

@@ -112,7 +112,11 @@ Un giorno senza fonti sufficienti produce un report, non un articolo inventato.
 5. Se sono arrivati WebP nuovi: `npm run date-pagine` e le TRE verifiche di
    CLAUDE.md (una foto di una guida già online cambia la pagina). Poi commit
    (piano, coda, public/immagini), `git pull --rebase`, push su main, deploy READY.
-6. Nota in Bacheca: «AAAA-MM-GG 21:00 · Claude · Foto importate» (foto
+6. Registro del prodotto (docs/registro-prodotto.md): `npm run registro -- /tmp/registro`
+   (se manca: `pip install openpyxl`), carica il file .xlsx in Drive «1 Progetti /
+   100 articoli approfonditi» (id 1w7h_IGqfsTD5uiHQl03QsvJCeQAWN7sS) e rinomina
+   quello del giorno prima «zz_SUPERATO — …». Se Python non c'è, scrivilo nella nota.
+7. Nota in Bacheca: «AAAA-MM-GG 21:00 · Claude · Foto importate» (foto
    importate, foto che mancano ancora col loro nome, problemi).
 
 ## Non pestarsi i piedi con la routine delle 7:00
