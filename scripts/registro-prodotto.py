@@ -55,7 +55,7 @@ slug_articoli = {a["slug"] for a in articoli}
 
 # ── Guide brevi (lib/guide.ts) e giochi (games/registry.ts) ──────────────────
 guide = [
-    {"slug": m.group(1), "titolo": m.group(2)}
+    {"slug": m.group(1), "titolo": re.sub(r"\\u([0-9a-fA-F]{4})", lambda u: chr(int(u.group(1), 16)), m.group(2))}
     for m in re.finditer(r'^    slug: "([a-z0-9-]+)",\n(?:.*\n){0,2}?    titolo: "([^"]+)"', leggi("lib/guide.ts"), re.M)
     if m.group(1) not in slug_articoli
 ]
