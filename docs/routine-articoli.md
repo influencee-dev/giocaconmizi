@@ -27,6 +27,9 @@ pagine per Google: ogni articolo risolve un problema reale di un genitore.
   (vocali, messaggi, appunti suoi). Lunghezza = pensiero completo.
 - `spontanea` — osservazioni leggere: lunghezza adatta al contenuto.
 I 100 argomenti del piano sono tutti `pratica`.
+Ribilanciato il 14/11/2026 (richiesta di Giorgia): schermi 35, tavolo 15,
+famiglia 15, mamme imprenditrici 10, feste e compleanni 10, fuori casa 10,
+stagione 5. Gli argomenti tolti restano nel file come «sostituito».
 
 ## Esperienze personali: regola che blocca
 Mai inventare: dialoghi o emozioni di Domi, ricordi, test di giochi fatti da
@@ -134,7 +137,7 @@ descrizione: "…"                        # meta description ≤ 160
 rispostaBreve: "…"                      # 2–3 frasi citabili dalle AI
 keyword: "Roblox è sicuro per bambini"
 keywordSecondarie: ["…"]
-categoria: sicurezza-digitale           # guide-giochi | confronti | sicurezza-digitale | tavolo-offline | famiglia-abitudini | mamme-imprenditrici | rubrica
+categoria: sicurezza-digitale           # guide-giochi | confronti | sicurezza-digitale | tavolo-offline | famiglia-abitudini | mamme-imprenditrici | feste-compleanni | fuori-casa | stagionali | rubrica
 voce: pratica                           # pratica | personale | spontanea
 etaMin: 6
 etaMax: 12

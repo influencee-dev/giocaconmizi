@@ -1,7 +1,7 @@
 {
   "$schema": "Piano editoriale Giocamizi: un articolo al giorno. Regole in docs/routine-articoli.md; tipi in lib/piano-editoriale.ts.",
   "modalita": "pubblica-se-supera-i-controlli",
-  "aggiornato": "2026-11-13",
+  "aggiornato": "2026-11-14",
   "argomenti": [
     {
       "id": 1,
@@ -155,9 +155,9 @@
       ],
       "voce": "pratica",
       "priorita": 1,
-      "ordine": 7,
+      "ordine": 27,
       "stato": "da-fare",
-      "dataPianificata": "2026-11-13",
+      "dataPianificata": "2026-12-03",
       "fontiVerificateIl": null,
       "correlati": [],
       "pubblicataIl": null
@@ -198,9 +198,9 @@
       ],
       "voce": "pratica",
       "priorita": 1,
-      "ordine": 9,
+      "ordine": 28,
       "stato": "da-fare",
-      "dataPianificata": "2026-11-15",
+      "dataPianificata": "2026-12-04",
       "fontiVerificateIl": null,
       "correlati": [],
       "pubblicataIl": null
@@ -596,11 +596,12 @@
       "voce": "pratica",
       "priorita": 2,
       "ordine": 27,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2026-12-03",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 31,
@@ -619,11 +620,12 @@
       "voce": "pratica",
       "priorita": 2,
       "ordine": 28,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2026-12-04",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 12,
@@ -683,11 +685,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 31,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2026-12-07",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 54,
@@ -706,11 +709,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 32,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2026-12-08",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 28,
@@ -729,11 +733,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 33,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2026-12-09",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 67,
@@ -773,11 +778,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 35,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2026-12-11",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 81,
@@ -816,11 +822,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 37,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2026-12-13",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 29,
@@ -839,11 +846,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 38,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2026-12-14",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 91,
@@ -946,11 +954,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 43,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2026-12-19",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 69,
@@ -1053,11 +1062,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 48,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2026-12-24",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 92,
@@ -1117,11 +1127,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 51,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2026-12-27",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 61,
@@ -1160,13 +1171,14 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 53,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2026-12-29",
       "fontiVerificateIl": null,
       "correlati": [],
       "pubblicataIl": null,
       "guidaEsistente": "coding-per-bambini",
-      "azioneGuidaEsistente": "collega"
+      "azioneGuidaEsistente": "collega",
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 71,
@@ -1271,13 +1283,14 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 58,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-03",
       "fontiVerificateIl": null,
       "correlati": [],
       "pubblicataIl": null,
       "guidaEsistente": "coding-per-bambini",
-      "azioneGuidaEsistente": "collega"
+      "azioneGuidaEsistente": "collega",
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 93,
@@ -1338,11 +1351,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 61,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-06",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 65,
@@ -1381,11 +1395,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 63,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-08",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 73,
@@ -1426,11 +1441,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 65,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-10",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 84,
@@ -1469,11 +1485,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 67,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-12",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 94,
@@ -1536,11 +1553,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 70,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-15",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 37,
@@ -1559,11 +1577,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 71,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-16",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 78,
@@ -1601,11 +1620,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 73,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-18",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 85,
@@ -1643,11 +1663,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 75,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-20",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 95,
@@ -1706,11 +1727,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 78,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-23",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 42,
@@ -1769,11 +1791,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 81,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-26",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 86,
@@ -1809,11 +1832,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 83,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-28",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 96,
@@ -1851,11 +1875,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 85,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-30",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 44,
@@ -1871,11 +1896,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 86,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-01-31",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 21,
@@ -1893,11 +1919,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 87,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-02-01",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 87,
@@ -1935,11 +1962,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 89,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-02-03",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 97,
@@ -1977,11 +2005,12 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 91,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-02-05",
       "fontiVerificateIl": null,
       "correlati": [],
-      "pubblicataIl": null
+      "pubblicataIl": null,
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 23,
@@ -2064,13 +2093,14 @@
       "voce": "pratica",
       "priorita": 3,
       "ordine": 95,
-      "stato": "da-fare",
+      "stato": "sostituito",
       "dataPianificata": "2027-02-09",
       "fontiVerificateIl": null,
       "correlati": [],
       "pubblicataIl": null,
       "guidaEsistente": "coding-per-bambini",
-      "azioneGuidaEsistente": "collega"
+      "azioneGuidaEsistente": "collega",
+      "nota": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     },
     {
       "id": 25,
@@ -2171,6 +2201,636 @@
       "fontiVerificateIl": null,
       "correlati": [],
       "pubblicataIl": null
+    },
+    {
+      "id": 101,
+      "slug": "calendario-dell-avvento-fai-da-te-con-i-bambini",
+      "titolo": "Calendario dell'Avvento fai da te con i bambini",
+      "keyword": "calendario dell'avvento fai da te bambini",
+      "keywordSecondarie": [],
+      "categoria": "stagionali",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 10,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 1,
+      "ordine": 7,
+      "stato": "da-fare",
+      "dataPianificata": "2026-11-13",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 102,
+      "slug": "lettera-a-babbo-natale-come-scriverla-insieme-ai-bambini",
+      "titolo": "Lettera a Babbo Natale: come scriverla insieme ai bambini",
+      "keyword": "lettera a babbo natale bambini",
+      "keywordSecondarie": [],
+      "categoria": "stagionali",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 9,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 1,
+      "ordine": 9,
+      "stato": "da-fare",
+      "dataPianificata": "2026-11-15",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 103,
+      "slug": "regali-di-natale-per-bambini-sotto-i-20-euro",
+      "titolo": "Regali di Natale per bambini sotto i 20 euro",
+      "keyword": "regali natale bambini economici",
+      "keywordSecondarie": [],
+      "categoria": "stagionali",
+      "intento": "commerciale",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 1,
+      "ordine": 31,
+      "stato": "da-fare",
+      "dataPianificata": "2026-12-07",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 104,
+      "slug": "togliere-il-pannolino-quando-e-come-iniziare",
+      "titolo": "Togliere il pannolino: quando e come iniziare",
+      "keyword": "togliere il pannolino",
+      "keywordSecondarie": [],
+      "categoria": "famiglia-abitudini",
+      "intento": "informativo",
+      "etaMin": 2,
+      "etaMax": 4,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 1,
+      "ordine": 32,
+      "stato": "da-fare",
+      "dataPianificata": "2026-12-08",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 105,
+      "slug": "vacanze-di-natale-con-i-bambini-cosa-fare-in",
+      "titolo": "Vacanze di Natale con i bambini: cosa fare in casa e fuori",
+      "keyword": "cosa fare con i bambini a natale",
+      "keywordSecondarie": [],
+      "categoria": "stagionali",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 1,
+      "ordine": 33,
+      "stato": "da-fare",
+      "dataPianificata": "2026-12-09",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 106,
+      "slug": "come-organizzare-una-festa-di-compleanno-per-bambini",
+      "titolo": "Come organizzare una festa di compleanno per bambini",
+      "keyword": "organizzare festa compleanno bambini",
+      "keywordSecondarie": [],
+      "categoria": "feste-compleanni",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 35,
+      "stato": "da-fare",
+      "dataPianificata": "2026-12-11",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 107,
+      "slug": "fattorie-didattiche-cosa-sono-e-cosa-si-fa-con",
+      "titolo": "Fattorie didattiche: cosa sono e cosa si fa con i bambini",
+      "keyword": "fattorie didattiche bambini",
+      "keywordSecondarie": [],
+      "categoria": "fuori-casa",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 37,
+      "stato": "da-fare",
+      "dataPianificata": "2026-12-13",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 108,
+      "slug": "lavarsi-i-denti-senza-capricci-idee-per-bambini",
+      "titolo": "Lavarsi i denti senza capricci: idee per bambini",
+      "keyword": "bambini lavarsi i denti",
+      "keywordSecondarie": [],
+      "categoria": "famiglia-abitudini",
+      "intento": "informativo",
+      "etaMin": 2,
+      "etaMax": 7,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 38,
+      "stato": "da-fare",
+      "dataPianificata": "2026-12-14",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 109,
+      "slug": "sala-feste-per-bambini-cosa-chiedere-prima-di-prenotare",
+      "titolo": "Sala feste per bambini: cosa chiedere prima di prenotare",
+      "keyword": "sala feste bambini",
+      "keywordSecondarie": [],
+      "categoria": "feste-compleanni",
+      "intento": "commerciale",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 43,
+      "stato": "da-fare",
+      "dataPianificata": "2026-12-19",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 110,
+      "slug": "laboratori-per-bambini-nel-weekend-come-trovarli-in-citta",
+      "titolo": "Laboratori per bambini nel weekend: come trovarli in città",
+      "keyword": "laboratori per bambini weekend",
+      "keywordSecondarie": [],
+      "categoria": "fuori-casa",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 48,
+      "stato": "da-fare",
+      "dataPianificata": "2026-12-24",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 111,
+      "slug": "giochi-per-feste-di-compleanno-da-4-a-6",
+      "titolo": "Giochi per feste di compleanno da 4 a 6 anni",
+      "keyword": "giochi festa compleanno 4 6 anni",
+      "keywordSecondarie": [],
+      "categoria": "feste-compleanni",
+      "intento": "informativo",
+      "etaMin": 4,
+      "etaMax": 6,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 51,
+      "stato": "da-fare",
+      "dataPianificata": "2026-12-27",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 112,
+      "slug": "routine-della-nanna-come-renderla-piu-facile",
+      "titolo": "Routine della nanna: come renderla più facile",
+      "keyword": "routine nanna bambini",
+      "keywordSecondarie": [],
+      "categoria": "famiglia-abitudini",
+      "intento": "informativo",
+      "etaMin": 2,
+      "etaMax": 8,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 53,
+      "stato": "da-fare",
+      "dataPianificata": "2026-12-29",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 113,
+      "slug": "musei-a-misura-di-bambino-come-visitarli-senza-stress",
+      "titolo": "Musei a misura di bambino: come visitarli senza stress",
+      "keyword": "musei per bambini",
+      "keywordSecondarie": [],
+      "categoria": "fuori-casa",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 58,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-03",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 114,
+      "slug": "animatori-per-feste-di-bambini-costi-e-come-sceglierli",
+      "titolo": "Animatori per feste di bambini: costi e come sceglierli",
+      "keyword": "animatori feste bambini prezzi",
+      "keywordSecondarie": [],
+      "categoria": "feste-compleanni",
+      "intento": "commerciale",
+      "etaMin": 3,
+      "etaMax": 10,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 61,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-06",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 115,
+      "slug": "corsi-pomeridiani-per-bambini-come-sceglierli-senza-riempire-la",
+      "titolo": "Corsi pomeridiani per bambini: come sceglierli senza riempire la settimana",
+      "keyword": "corsi pomeridiani bambini",
+      "keywordSecondarie": [],
+      "categoria": "fuori-casa",
+      "intento": "informativo",
+      "etaMin": 4,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 63,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-08",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 116,
+      "slug": "inviti-di-compleanno-per-bambini-cosa-scrivere-e-quando",
+      "titolo": "Inviti di compleanno per bambini: cosa scrivere e quando mandarli",
+      "keyword": "inviti compleanno bambini",
+      "keywordSecondarie": [],
+      "categoria": "feste-compleanni",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 65,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-10",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 117,
+      "slug": "capricci-a-3-4-anni-cosa-fare-quando-esplode",
+      "titolo": "Capricci a 3-4 anni: cosa fare quando esplode tutto",
+      "keyword": "capricci bambini 3 anni",
+      "keywordSecondarie": [],
+      "categoria": "famiglia-abitudini",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 4,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 67,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-12",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 118,
+      "slug": "ludoteca-cos-e-e-quando-conviene",
+      "titolo": "Ludoteca: cos'è e quando conviene",
+      "keyword": "ludoteca bambini",
+      "keywordSecondarie": [],
+      "categoria": "fuori-casa",
+      "intento": "informativo",
+      "etaMin": 2,
+      "etaMax": 10,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 3,
+      "ordine": 70,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-15",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 119,
+      "slug": "giochi-per-feste-di-compleanno-da-7-a-10",
+      "titolo": "Giochi per feste di compleanno da 7 a 10 anni",
+      "keyword": "giochi festa compleanno 7 10 anni",
+      "keywordSecondarie": [],
+      "categoria": "feste-compleanni",
+      "intento": "informativo",
+      "etaMin": 7,
+      "etaMax": 10,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 3,
+      "ordine": 71,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-16",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 120,
+      "slug": "associazioni-per-famiglie-cosa-offrono-e-come-trovarle",
+      "titolo": "Associazioni per famiglie: cosa offrono e come trovarle",
+      "keyword": "associazioni per famiglie",
+      "keywordSecondarie": [],
+      "categoria": "fuori-casa",
+      "intento": "informativo",
+      "etaMin": 0,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 3,
+      "ordine": 73,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-18",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 121,
+      "slug": "costumi-di-carnevale-fai-da-te-per-bambini",
+      "titolo": "Costumi di Carnevale fai da te per bambini",
+      "keyword": "costumi carnevale fai da te bambini",
+      "keywordSecondarie": [],
+      "categoria": "stagionali",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 10,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 2,
+      "ordine": 75,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-20",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 122,
+      "slug": "pacchetti-festa-cosa-e-incluso-e-come-confrontarli",
+      "titolo": "Pacchetti festa: cosa è incluso e come confrontarli",
+      "keyword": "pacchetto festa compleanno bambini",
+      "keywordSecondarie": [],
+      "categoria": "feste-compleanni",
+      "intento": "commerciale",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 3,
+      "ordine": 78,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-23",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 123,
+      "slug": "teatro-per-bambini-l-eta-giusta-per-il-primo",
+      "titolo": "Teatro per bambini: l'età giusta per il primo spettacolo",
+      "keyword": "teatro per bambini",
+      "keywordSecondarie": [],
+      "categoria": "fuori-casa",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 3,
+      "ordine": 81,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-26",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 124,
+      "slug": "mettere-in-ordine-i-giochi-come-coinvolgere-i-bambini",
+      "titolo": "Mettere in ordine i giochi: come coinvolgere i bambini",
+      "keyword": "bambini mettere in ordine i giochi",
+      "keywordSecondarie": [],
+      "categoria": "famiglia-abitudini",
+      "intento": "informativo",
+      "etaMin": 2,
+      "etaMax": 8,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 3,
+      "ordine": 83,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-28",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 125,
+      "slug": "torta-di-compleanno-per-bambini-idee-semplici-da-fare",
+      "titolo": "Torta di compleanno per bambini: idee semplici da fare a casa",
+      "keyword": "torta compleanno bambini facile",
+      "keywordSecondarie": [],
+      "categoria": "feste-compleanni",
+      "intento": "informativo",
+      "etaMin": 1,
+      "etaMax": 10,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 3,
+      "ordine": 85,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-30",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 126,
+      "slug": "gite-di-un-giorno-con-i-bambini-come-organizzarle",
+      "titolo": "Gite di un giorno con i bambini: come organizzarle",
+      "keyword": "gite con bambini",
+      "keywordSecondarie": [],
+      "categoria": "fuori-casa",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 3,
+      "ordine": 86,
+      "stato": "da-fare",
+      "dataPianificata": "2027-01-31",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 127,
+      "slug": "festa-di-compleanno-all-aperto-idee-e-cosa-non",
+      "titolo": "Festa di compleanno all'aperto: idee e cosa non dimenticare",
+      "keyword": "festa compleanno all'aperto bambini",
+      "keywordSecondarie": [],
+      "categoria": "feste-compleanni",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 3,
+      "ordine": 87,
+      "stato": "da-fare",
+      "dataPianificata": "2027-02-01",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 128,
+      "slug": "biblioteche-per-bambini-letture-laboratori-e-prestiti",
+      "titolo": "Biblioteche per bambini: letture, laboratori e prestiti",
+      "keyword": "biblioteca bambini",
+      "keywordSecondarie": [],
+      "categoria": "fuori-casa",
+      "intento": "informativo",
+      "etaMin": 0,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 3,
+      "ordine": 89,
+      "stato": "da-fare",
+      "dataPianificata": "2027-02-03",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 129,
+      "slug": "regalo-di-gruppo-per-la-festa-come-organizzarlo-tra",
+      "titolo": "Regalo di gruppo per la festa: come organizzarlo tra genitori",
+      "keyword": "regalo di gruppo compleanno",
+      "keywordSecondarie": [],
+      "categoria": "feste-compleanni",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 3,
+      "ordine": 91,
+      "stato": "da-fare",
+      "dataPianificata": "2027-02-05",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
+    },
+    {
+      "id": 130,
+      "slug": "centri-estivi-come-sceglierli-e-quando-iscriversi",
+      "titolo": "Centri estivi: come sceglierli e quando iscriversi",
+      "keyword": "centri estivi bambini",
+      "keywordSecondarie": [],
+      "categoria": "fuori-casa",
+      "intento": "informativo",
+      "etaMin": 3,
+      "etaMax": 12,
+      "prodotti": [],
+      "voce": "pratica",
+      "priorita": 3,
+      "ordine": 95,
+      "stato": "da-fare",
+      "dataPianificata": "2027-02-09",
+      "fontiVerificateIl": null,
+      "correlati": [],
+      "pubblicataIl": null,
+      "nota": "Aggiunto nel ribilanciamento del 14/11/2026"
     }
   ],
   "storicoSostituzioni": [
@@ -2178,6 +2838,156 @@
       "id": 1,
       "data": "2026-11-07",
       "motivo": "Unito a «Roblox è sicuro per bambini?», keyword prioritaria: evita due pagine sullo stesso intento."
+    },
+    {
+      "id": 5,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 6,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 9,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 11,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 13,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 14,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 15,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 18,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 19,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 20,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 21,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 22,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 24,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 28,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 29,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 30,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 32,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 33,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 34,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 35,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 36,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 37,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 41,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 43,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 44,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 45,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 54,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 55,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 40,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
+    },
+    {
+      "id": 31,
+      "data": "2026-11-14",
+      "motivo": "Ribilanciamento 14/11/2026: meno schermi, più feste, territorio, stagione e famiglia"
     }
   ]
 }

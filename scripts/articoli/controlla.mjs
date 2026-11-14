@@ -18,7 +18,7 @@ const leggi = (f) => fs.readFileSync(path.join(RADICE, f), "utf8");
 const MINIMO_CARATTERI = 27000;
 const MINIMO_FONTI = 6;
 const VOCI = ["pratica", "personale", "spontanea"];
-const CATEGORIE = ["guide-giochi", "confronti", "sicurezza-digitale", "tavolo-offline", "famiglia-abitudini", "mamme-imprenditrici", "rubrica"];
+const CATEGORIE = ["guide-giochi", "confronti", "sicurezza-digitale", "tavolo-offline", "famiglia-abitudini", "mamme-imprenditrici", "feste-compleanni", "fuori-casa", "stagionali", "rubrica"];
 const SKILL = leggi("games/registry.ts").match(/export type Skill =([^;]+);/)[1].match(/"([a-z]+)"/g).map((s) => s.slice(1, -1));
 const GIOCHI_LIVE = [...leggi("games/registry.ts").matchAll(/slug: "([a-z0-9-]+)"[^\n]*status: "live"/g)].map((m) => m[1]);
 const GUIDE_BREVI = [...leggi("lib/guide.ts").matchAll(/^    slug: "([a-z0-9-]+)"/gm)].map((m) => m[1]);
