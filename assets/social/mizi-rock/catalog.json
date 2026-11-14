@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "brand": "Giocamizi",
+  "character": "Mizi",
+  "updated": "2026-11-14",
+  "archive_new_generated_images_at_end": true,
+  "canonical_character_reference": "public/mizi/mizi-intera.webp",
+  "assets": [
+    {
+      "id": "mizi-rock-01-apertura",
+      "path": "assets/social/mizi-rock/2026-11-14-letterina/mizi-rock-01-apertura.webp",
+      "raw_url": "https://raw.githubusercontent.com/influencee-dev/giocaconmizi/main/assets/social/mizi-rock/2026-11-14-letterina/mizi-rock-01-apertura.webp",
+      "width": 941,
+      "height": 1672,
+      "mime_type": "image/webp",
+      "sha256": "6c4a8610041250e3db1b559d832b9a17ef100b17a8e64ef332a29ddcca5aa960",
+      "description": "Mizi rock suona una matita viola come una chitarra, con una zampa sull'amplificatore.",
+      "alt_text": "Mizi rock suona una matita viola come una chitarra, con una zampa sull'amplificatore.",
+      "tags": [
+        "Mizi",
+        "pinguina",
+        "Natale",
+        "letterina",
+        "2D",
+        "rock",
+        "energia",
+        "creatività",
+        "inizio"
+      ],
+      "created": "2026-11-14",
+      "status": "direzione_visiva_apprezzata_dall_utente",
+      "uses": [
+        "post",
+        "carosello",
+        "copertina",
+        "storyboard"
+      ],
+      "video_continuity": "da_uniformare_prima_del_montaggio",
+      "provenance": "Adattamento AI originale della Mizi autentica del repository; copia WebP qualità 95 a piena risoluzione."
+    },
+    {
+      "id": "mizi-rock-02-pasticcio",
+      "path": "assets/social/mizi-rock/2026-11-14-letterina/mizi-rock-02-pasticcio.webp",
+      "raw_url": "https://raw.githubusercontent.com/influencee-dev/giocaconmizi/main/assets/social/mizi-rock/2026-11-14-letterina/mizi-rock-02-pasticcio.webp",
+      "width": 941,
+      "height": 1672,
+      "mime_type": "image/webp",
+      "sha256": "c1ab96018d7c6cad972dc04478c9665ae25b684b405cf8e12baba657bd704f64",
+      "description": "Mizi sorpresa cerca di afferrare tre fogli che volano nella stanza.",
+      "alt_text": "Mizi sorpresa cerca di afferrare tre fogli che volano nella stanza.",
+      "tags": [
+        "Mizi",
+        "pinguina",
+        "Natale",
+        "letterina",
+        "2D",
+        "pasticcio",
+        "errore",
+        "sorpresa",
+        "fogli"
+      ],
+      "created": "2026-11-14",
+      "status": "direzione_visiva_apprezzata_dall_utente",
+      "uses": [
+        "post",
+        "carosello",
+        "copertina",
+        "storyboard"
+      ],
+      "video_continuity": "da_uniformare_prima_del_montaggio",
+      "provenance": "Adattamento AI originale della Mizi autentica del repository; copia WebP qualità 95 a piena risoluzione."
+    },
+    {
+      "id": "mizi-rock-03-reazione",
+      "path": "assets/social/mizi-rock/2026-11-14-letterina/mizi-rock-03-reazione.webp",
+      "raw_url": "https://raw.githubusercontent.com/influencee-dev/giocaconmizi/main/assets/social/mizi-rock/2026-11-14-letterina/mizi-rock-03-reazione.webp",
+      "width": 941,
+      "height": 1672,
+      "mime_type": "image/webp",
+      "sha256": "f666750ff8eeb30af36848dc456575c55399d4da8a5a3817098d086cd93955d6",
+      "description": "Mizi incrocia gli occhi per guardare una stellina di carta appiccicata sul becco.",
+      "alt_text": "Mizi incrocia gli occhi per guardare una stellina di carta appiccicata sul becco.",
+      "tags": [
+        "Mizi",
+        "pinguina",
+        "Natale",
+        "letterina",
+        "2D",
+        "gag",
+        "stellina",
+        "ironia",
+        "reazione"
+      ],
+      "created": "2026-11-14",
+      "status": "direzione_visiva_apprezzata_dall_utente",
+      "uses": [
+        "post",
+        "carosello",
+        "copertina",
+        "storyboard"
+      ],
+      "video_continuity": "da_uniformare_prima_del_montaggio",
+      "provenance": "Adattamento AI originale della Mizi autentica del repository; copia WebP qualità 95 a piena risoluzione."
+    },
+    {
+      "id": "mizi-rock-04-dolce",
+      "path": "assets/social/mizi-rock/2026-11-14-letterina/mizi-rock-04-dolce.webp",
+      "raw_url": "https://raw.githubusercontent.com/influencee-dev/giocaconmizi/main/assets/social/mizi-rock/2026-11-14-letterina/mizi-rock-04-dolce.webp",
+      "width": 941,
+      "height": 1672,
+      "mime_type": "image/webp",
+      "sha256": "26ef5c42dd43e3ce2e7899afb4b1bd6c3aefb5380d7ef54c5005dd55ec1a70ce",
+      "description": "Mizi tiene una busta vicino al cuore e manda un bacio dopo aver riordinato i fogli.",
+      "alt_text": "Mizi tiene una busta vicino al cuore e manda un bacio dopo aver riordinato i fogli.",
+      "tags": [
+        "Mizi",
+        "pinguina",
+        "Natale",
+        "letterina",
+        "2D",
+        "dolcezza",
+        "abbraccio",
+        "letterina",
+        "finale"
+      ],
+      "created": "2026-11-14",
+      "status": "direzione_visiva_apprezzata_dall_utente",
+      "uses": [
+        "post",
+        "carosello",
+        "copertina",
+        "storyboard"
+      ],
+      "video_continuity": "da_uniformare_prima_del_montaggio",
+      "provenance": "Adattamento AI originale della Mizi autentica del repository; copia WebP qualità 95 a piena risoluzione."
+    }
+  ]
+}
