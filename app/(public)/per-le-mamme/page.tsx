@@ -134,6 +134,13 @@ export default function PerLeMammePage() {
           Cerchi idee da leggere o attività per i tuoi bambini? Abbiamo raccolto siti per famiglie,
           scuole e laboratori in{" "}
           <Link
+            href="/risorse-educative-bambini/blog-per-genitori"
+            className="font-bold text-notte underline decoration-viola decoration-2 underline-offset-4"
+          >
+            blog e magazine per genitori
+          </Link>{" "}
+          e in tutte le{" "}
+          <Link
             href="/risorse-educative-bambini"
             className="font-bold text-notte underline decoration-viola decoration-2 underline-offset-4"
           >

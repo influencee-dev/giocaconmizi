@@ -1,83 +1,66 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { TestataPagina } from "@/components/vetrina";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
-import { Briciole } from "@/components/directory/Briciole";
+import { Briciole, InBreve } from "@/components/directory/Briciole";
+import { Illustrazione } from "@/components/directory/Illustrazione";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
-import { TITOLARE } from "@/lib/legal";
+import { CardRisorsaDirectory } from "@/components/risorse/CardRisorsaDirectory";
+import { CtaRisorsa, NavCategorieRisorse } from "@/components/risorse/Directory";
 import { site, url } from "@/lib/seo";
 import { PERCORSO_TRAPPOLA } from "@/lib/protezione/limiti";
-import { COLORI, CardRisorsa } from "@/components/risorse/CardRisorsa";
-import { risorseVisibili, type RisorsaVista } from "@/lib/risorse-reclamo";
+import { risorseVisibili } from "@/lib/risorse-reclamo";
+import { DISCLAIMER, FAQ_RISORSE, LINK_CONTROLLATI, PERCORSO_RISORSE, RISPOSTA_BREVE } from "@/lib/risorse-educative";
 import {
-  DISCLAIMER,
-  FAQ_RISORSE,
-  LINK_CONTROLLATI,
-  ORDINE_SEZIONI,
-  PERCORSO_RISORSE,
-  RISPOSTA_BREVE,
-  SEZIONI,
-  eSezione,
-  paginaDi,
-  percorsoRisorsa,
-  principaliDi,
-  type Sezione,
-} from "@/lib/risorse-educative";
+  categorieAttive,
+  listingRisorse,
+  percorsoCategoriaRisorse,
+  percorsoListingRisorse,
+  risorseDi,
+  type Ambito,
+} from "@/lib/risorse-categorie";
 
 /**
- * Hub «Risorse educative consigliate». HTML generato sul server: la vista
- * completa (indicizzabile) mostra ogni scheda una volta, nella sua sezione
- * principale; la vista filtrata (?sezione=…&pagina=…) è paginata sul server,
- * noindex,follow e col canonical verso l'hub. Nessun JSON con l'elenco: il
- * browser riceve solo le schede che vede.
+ * Hub della directory delle risorse educative (14/11/2026): come /feste,
+ * categorie → province → schede. Ogni realtà ha la sua scheda; le categorie
+ * nascono da sole alla prima scheda (lib/risorse-categorie.ts).
  */
 
-type Parametri = Promise<{ sezione?: string | string[]; pagina?: string | string[] }>;
+export const revalidate = 600;
 
 const TITOLO = "Risorse educative per bambini e insegnanti | Gioca con Mizi";
 const DESCRIZIONE =
-  "Scopri risorse educative, scuole, attività e siti utili per bambini, famiglie e insegnanti: lettura, creatività e coding.";
+  "Scuole paritarie, cooperative, blog per genitori, schede per insegnanti, coding e fiabe: la guida alle risorse educative per bambini da 3 a 12 anni, divisa per categoria e provincia.";
 const H1 = "Risorse educative per bambini, famiglie e insegnanti";
 
-function leggi(p: Awaited<Parametri>) {
-  const sezione = Array.isArray(p.sezione) ? p.sezione[0] : p.sezione;
-  const pagina = Array.isArray(p.pagina) ? p.pagina[0] : p.pagina;
-  return { sezione, pagina };
-}
+export const metadata: Metadata = {
+  // absolute: il title è già completo, senza il suffisso del layout.
+  title: { absolute: TITOLO },
+  description: DESCRIZIONE,
+  alternates: { canonical: PERCORSO_RISORSE },
+  openGraph: { title: TITOLO, description: DESCRIZIONE, url: PERCORSO_RISORSE, type: "website" },
+};
 
-export async function generateMetadata({ searchParams }: { searchParams: Parametri }): Promise<Metadata> {
-  const { sezione, pagina } = leggi(await searchParams);
-  const filtrata = sezione !== undefined || pagina !== undefined;
-  return {
-    // absolute: il title richiesto è già completo, senza il suffisso del layout.
-    title: { absolute: TITOLO },
-    description: DESCRIZIONE,
-    alternates: { canonical: PERCORSO_RISORSE },
-    // Le viste filtrate non competono con l'hub: si seguono i link ma non si indicizzano.
-    robots: filtrata ? { index: false, follow: true } : { index: true, follow: true },
-    openGraph: { title: TITOLO, description: DESCRIZIONE, url: PERCORSO_RISORSE, type: "website" },
-  };
-}
+const AMBITI: { id: Ambito; titolo: string; testo: string }[] = [
+  { id: "online", titolo: "Da usare da casa o in classe", testo: "Siti, blog e materiali che si usano online, in tutta Italia." },
+  { id: "territorio", titolo: "Sul territorio", testo: "Scuole, cooperative e realtà con una sede, provincia per provincia." },
+];
 
-export default async function RisorseEducativePage({ searchParams }: { searchParams: Parametri }) {
-  const { sezione, pagina } = leggi(await searchParams);
-  const filtro = eSezione(sezione) ? sezione : null;
-  const numero = pagina === undefined ? 1 : Number(pagina);
-  // Le risorse con sopra le risposte accettate (reclamate, logo, rimozioni).
+export default async function RisorseEducativePage() {
   const tutte = await risorseVisibili();
-  const risultati = filtro ? paginaDi(filtro, numero, tutte) : null;
-  if (filtro && !risultati) notFound();
-
-  // Le schede che il JSON-LD elenca sono esattamente quelle visibili.
-  const visibili: RisorsaVista[] = risultati
-    ? risultati.voci
-    : ORDINE_SEZIONI.flatMap((s) => principaliDi(s, tutte));
+  const categorie = categorieAttive(tutte);
+  const listing = listingRisorse(tutte);
+  // In evidenza prima le schede verificate dalle realtà, poi una per categoria.
+  const verificate = tutte.filter((r) => r.reclamata);
+  const evidenza = [
+    ...verificate,
+    ...categorie.map((c) => risorseDi(c.slug, tutte)[0]!).filter((r) => !r.reclamata),
+  ].slice(0, 6);
 
   return (
     <Contenitore largo className="pb-10 pt-8">
       <JsonLd data={jsonLdBreadcrumb([{ nome: "Risorse educative", percorso: PERCORSO_RISORSE }])} />
-      <JsonLd data={jsonLdCollezione(visibili)} />
+      <JsonLd data={jsonLdCollezione(categorie.map((c) => ({ nome: c.nome, percorso: percorsoCategoriaRisorse(c) })))} />
       <JsonLd data={jsonLdFaq([...FAQ_RISORSE])} />
 
       <div className="mb-4">
@@ -86,80 +69,80 @@ export default async function RisorseEducativePage({ searchParams }: { searchPar
 
       <TestataPagina occhiello="Risorse educative consigliate" tono="verde" foto="I-04">
         <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">{H1}</h1>
-        <p className="max-w-2xl text-lg font-semibold text-notte">{RISPOSTA_BREVE}</p>
-        <p className="max-w-2xl text-notte-tenue">
-          Qui raccogliamo {tutte.length} realtà, siti e progetti utili a bambini, famiglie e
-          insegnanti: idee per leggere, creare, imparare con il digitale e scoprire attività sul
-          territorio.
+        <p className="max-w-2xl text-lg font-semibold text-notte">
+          {tutte.length} scuole, cooperative, siti e progetti utili a bambini, famiglie e insegnanti, divisi in{" "}
+          {categorie.length} categorie. Ogni realtà ha la sua scheda e può reclamarla gratis.
         </p>
       </TestataPagina>
 
-      <p className="max-w-3xl rounded-[1.2rem] border border-notte/10 bg-white p-5 text-notte-tenue">
-        {DISCLAIMER} Link controllati il {LINK_CONTROLLATI}.
-      </p>
+      <InBreve testo={RISPOSTA_BREVE} />
 
-      {/* Filtri: semplici link, funzionano senza JavaScript e con ogni lettore di schermo. */}
-      <nav aria-label="Filtra le risorse per sezione" className="mt-8" id="elenco">
-        <p className="mb-3 font-extrabold text-notte">Filtra per sezione</p>
-        <ul className="flex flex-wrap gap-2.5">
-          <li>
-            <Link
-              href={`${PERCORSO_RISORSE}#elenco`}
-              aria-current={!filtro ? "page" : undefined}
-              className={chip(!filtro)}
-            >
-              Tutte
-            </Link>
-          </li>
-          {ORDINE_SEZIONI.map((s) => (
-            <li key={s}>
+      <div className="mt-8">
+        <NavCategorieRisorse categorie={categorie} />
+      </div>
+
+      {AMBITI.map((a) => {
+        const qui = categorie.filter((c) => c.ambito === a.id);
+        if (!qui.length) return null;
+        return (
+          <section key={a.id} className="mt-10" aria-labelledby={`ambito-${a.id}`}>
+            <h2 id={`ambito-${a.id}`} className="text-[1.75rem] font-black leading-tight tracking-tight text-notte sm:text-4xl">
+              {a.titolo}
+            </h2>
+            <p className="mb-5 mt-1 max-w-2xl text-notte-tenue">{a.testo}</p>
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {qui.map((c) => (
+                <li key={c.slug}>
+                  <Link
+                    href={percorsoCategoriaRisorse(c)}
+                    data-tap
+                    className="flex h-full flex-col overflow-hidden rounded-[1.4rem] border border-notte/10 bg-white transition-colors hover:border-viola"
+                  >
+                    <Illustrazione colore={c.colore} icona={c.icona} alta="h-28" />
+                    <span className="flex flex-1 flex-col gap-1 p-4">
+                      <span className="flex items-center justify-between gap-2">
+                        <span className="text-lg font-black leading-tight text-notte">{c.nome}</span>
+                        <span className="shrink-0 text-xs font-extrabold text-viola">{risorseDi(c.slug, tutte).length} ›</span>
+                      </span>
+                      <span className="text-sm text-notte-tenue">{c.sottotitolo}</span>
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        );
+      })}
+
+      {listing.length > 0 && (
+        <section className="mt-10">
+          <TitoloSezione>Le province con più realtà</TitoloSezione>
+          <div className="flex flex-wrap gap-2">
+            {listing.map((l) => (
               <Link
-                href={`${PERCORSO_RISORSE}?sezione=${s}#elenco`}
-                aria-current={filtro === s ? "page" : undefined}
-                className={chip(filtro === s)}
+                key={`${l.categoria.slug}-${l.slug}`}
+                href={percorsoListingRisorse(l.categoria, l.slug)}
+                className="rounded-bolla border-2 border-crema-scuro bg-white px-4 py-2 font-bold text-notte hover:border-viola"
               >
-                <span aria-hidden className={`h-3 w-3 shrink-0 rounded-full ${COLORI[s].pallino}`} />
-                {SEZIONI[s].nome}
+                {l.categoria.breve} a {l.provincia} <span className="text-viola">({l.n})</span>
               </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section className="mt-10">
+        <TitoloSezione>In evidenza</TitoloSezione>
+        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {evidenza.map((r) => (
+            <li key={r.slug}>
+              <CardRisorsaDirectory r={r} />
             </li>
           ))}
         </ul>
-      </nav>
+      </section>
 
-      {risultati && filtro ? (
-        <section className="mt-10" aria-labelledby="titolo-filtro">
-          <h2 id="titolo-filtro" className="mb-2 text-[1.75rem] font-black leading-tight tracking-tight text-notte sm:text-4xl">
-            {SEZIONI[filtro].nome}
-          </h2>
-          <p className="mb-5 max-w-2xl text-notte-tenue">{SEZIONI[filtro].descrizione}</p>
-          <p className="mb-4 text-sm font-bold text-notte-tenue" role="status">
-            {risultati.totale} risorse · pagina {risultati.pagina} di {risultati.pagine}
-          </p>
-          <Elenco voci={risultati.voci} />
-          {risultati.pagine > 1 && <Paginazione sezione={filtro} pagina={risultati.pagina} pagine={risultati.pagine} />}
-        </section>
-      ) : (
-        ORDINE_SEZIONI.map((s) => (
-          <section key={s} id={s} className="mt-12 scroll-mt-28" aria-labelledby={`titolo-${s}`}>
-            <div className="mb-1 flex items-center gap-3">
-              <span aria-hidden className={`h-4 w-4 shrink-0 rounded-full ${COLORI[s].pallino}`} />
-              <h2 id={`titolo-${s}`} className="text-[1.75rem] font-black leading-tight tracking-tight text-notte sm:text-4xl">
-                {SEZIONI[s].nome}
-              </h2>
-            </div>
-            <p className="mb-5 max-w-2xl text-notte-tenue">{SEZIONI[s].descrizione}</p>
-            <Elenco voci={principaliDi(s, tutte)} />
-            <p className="mt-4">
-              <Link
-                href={`${PERCORSO_RISORSE}?sezione=${s}#elenco`}
-                className="font-bold text-notte underline decoration-viola decoration-2 underline-offset-4 hover:text-viola"
-              >
-                Vedi tutte le risorse «{SEZIONI[s].breve}», anche quelle di altre sezioni
-              </Link>
-            </p>
-          </section>
-        ))
-      )}
+      <CtaRisorsa />
 
       {/*
         Trappola per bot (honeypot): nascosta a chi naviga e agli screen reader
@@ -195,100 +178,37 @@ export default async function RisorseEducativePage({ searchParams }: { searchPar
             in stampatello, minuscolo o corsivo, con lettura ad alta voce.
           </li>
           <li>
-            <Link href="/guide" className="font-bold text-notte underline decoration-viola decoration-2 underline-offset-4">
-              Guide per i genitori
+            <Link href="/feste" className="font-bold text-notte underline decoration-viola decoration-2 underline-offset-4">
+              Feste di compleanno per bambini
             </Link>{" "}
-            con risposte brevi e giochi collegati.
+            città per città: ludoteche, sale feste, fattorie didattiche e laser game.
           </li>
         </ul>
       </section>
 
-      <section className="mt-12 rounded-[1.4rem] border border-notte/10 bg-white p-5">
-        <p className="font-extrabold text-notte">Segnala una risorsa o una correzione</p>
-        <p className="mt-1 text-notte-tenue">
-          Gestisci una delle realtà elencate e vuoi correggere o togliere la scheda, oppure conosci un
-          progetto utile? Scrivi a{" "}
-          <a href={`mailto:${TITOLARE.email}`} className="font-bold text-notte underline decoration-viola decoration-2 underline-offset-4">
-            {TITOLARE.email}
-          </a>
-          .
-        </p>
-        <p className="mt-3 text-sm text-notte-tenue">{DISCLAIMER}</p>
-      </section>
+      <p className="mt-10 max-w-3xl text-sm text-notte-tenue">
+        {DISCLAIMER} Link controllati il {LINK_CONTROLLATI}.
+      </p>
     </Contenitore>
   );
 }
 
-function chip(attivo: boolean) {
-  return `inline-flex min-h-12 items-center gap-2 rounded-bolla border-2 px-4 py-2 text-[15px] font-bold transition-colors ${
-    attivo ? "border-notte bg-notte text-white" : "border-crema-scuro bg-white text-notte hover:border-viola"
-  }`;
-}
-
-function Elenco({ voci }: { voci: RisorsaVista[] }) {
-  return (
-    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {voci.map((r) => (
-        <li key={r.url}>
-          <CardRisorsa risorsa={r} reclamata={r.reclamata} logo={r.logo} />
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function Paginazione({ sezione, pagina, pagine }: { sezione: Sezione; pagina: number; pagine: number }) {
-  const href = (n: number) => `${PERCORSO_RISORSE}?sezione=${sezione}${n > 1 ? `&pagina=${n}` : ""}#elenco`;
-  return (
-    <nav aria-label="Pagine dei risultati" className="mt-8">
-      <ul className="flex flex-wrap items-center gap-2">
-        {pagina > 1 && (
-          <li>
-            <Link href={href(pagina - 1)} rel="prev" className={chip(false)}>
-              ← Precedente
-            </Link>
-          </li>
-        )}
-        {Array.from({ length: pagine }, (_, i) => i + 1).map((n) => (
-          <li key={n}>
-            <Link href={href(n)} aria-current={n === pagina ? "page" : undefined} aria-label={`Pagina ${n}`} className={chip(n === pagina)}>
-              {n}
-            </Link>
-          </li>
-        ))}
-        {pagina < pagine && (
-          <li>
-            <Link href={href(pagina + 1)} rel="next" className={chip(false)}>
-              Successiva →
-            </Link>
-          </li>
-        )}
-      </ul>
-    </nav>
-  );
-}
-
-/** CollectionPage + ItemList: solo le schede visibili, con la stessa descrizione della card. */
-function jsonLdCollezione(voci: RisorsaVista[]) {
+/** CollectionPage con l'elenco delle categorie che esistono davvero. */
+function jsonLdCollezione(voci: { nome: string; percorso: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "@id": url(PERCORSO_RISORSE),
     url: url(PERCORSO_RISORSE),
     name: H1,
-    description: "Una raccolta di risorse esterne utili per bambini, famiglie e insegnanti.",
+    description: DESCRIZIONE,
     inLanguage: site.lingua,
     isPartOf: { "@type": "WebSite", name: site.nome, url: url("/") },
     mainEntity: {
       "@type": "ItemList",
-      name: "Risorse educative selezionate",
+      name: "Categorie delle risorse educative",
       numberOfItems: voci.length,
-      itemListElement: voci.map((r, i) => ({
-        "@type": "ListItem",
-        position: i + 1,
-        // Chi ha reclamato la scheda ha la pagina propria su Giocamizi.
-        item: { "@type": "WebPage", name: r.nome, url: r.reclamata ? url(percorsoRisorsa(r)) : r.url, description: r.descrizione },
-      })),
+      itemListElement: voci.map((v, i) => ({ "@type": "ListItem", position: i + 1, name: v.nome, url: url(v.percorso) })),
     },
   };
 }

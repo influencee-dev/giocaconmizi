@@ -6,6 +6,8 @@ import { CATEGORIE_ATTIVE, LISTING, SCHEDE } from "@/lib/directory";
 import { temi } from "@/lib/biglietti";
 import { url } from "@/lib/seo";
 import { contaRisorse } from "@/lib/risorse-educative";
+import { RISORSE } from "@/lib/risorse-educative-dati";
+import { categorieAttive, listingRisorse, percorsoCategoriaRisorse, percorsoListingRisorse, risorseDi } from "@/lib/risorse-categorie";
 
 /**
  * llms.txt generato dal registry (llmstxt.org): la mappa del sito per gli
@@ -100,7 +102,9 @@ ${LISTING.map((l) => `- [${l.categoria.nome} a ${l.citta}](${url(`/${l.categoria
 - [Metodo](${url("/metodo")}): come scegliamo e costruiamo i giochi.
 - [Perché lo facciamo](${url("/perche-lo-facciamo")}): perché è gratis e senza pubblicità.
 - [Per insegnanti](${url("/per-insegnanti")}): uso in classe, senza registrazione.
-- [Risorse educative consigliate](${url("/risorse-educative-bambini")}): ${contaRisorse()} siti, scuole, cooperative e progetti esterni utili a bambini, famiglie e insegnanti, divisi in cinque sezioni (famiglie e genitori; insegnanti e scuola primaria; scuole, nidi, cooperative e territorio; coding, STEM e digitale; lettura, storie e creatività). Link ai siti ufficiali: la presenza non implica partnership, approvazione o sponsorizzazione.
+- [Risorse educative consigliate](${url("/risorse-educative-bambini")}): ${contaRisorse()} siti, scuole, cooperative e progetti esterni utili a bambini, famiglie e insegnanti, divisi per categoria e provincia, ognuno con la sua scheda (cosa fa, per chi, costi, sito ufficiale). Le realtà possono reclamare la scheda gratis. La presenza non implica partnership, approvazione o sponsorizzazione.
+${categorieAttive(RISORSE).map((c) => `  - [${c.titolo}](${url(percorsoCategoriaRisorse(c))}): ${risorseDi(c.slug, RISORSE).length} realtà. ${c.rispostaBreve}`).join("\n")}
+${listingRisorse(RISORSE).map((l) => `  - [${l.categoria.nome} a ${l.provincia} e provincia](${url(percorsoListingRisorse(l.categoria, l.slug))}): ${l.n} realtà.`).join("\n")}
 - [Per le mamme](${url("/per-le-mamme")}): la rete delle mamme — associazioni, community locali, gruppi d'ascolto e locali family-friendly con nursery o area giochi. Inserimento gratuito su segnalazione.
 - [Chi siamo](${url("/chi-siamo")})
 - [Privacy](${url("/privacy")}) · [Cookie](${url("/cookie")})

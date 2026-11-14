@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CtaAttivita } from "@/components/directory/Briciole";
 import { notFound } from "next/navigation";
 import { CITTA_FESTE, cittaFeste } from "@/lib/feste";
 import { categoriaDi, slugify } from "@/lib/directory";
@@ -246,6 +247,7 @@ export default async function FestaCittaPage({
           ))}
         </section>
       )}
+      <CtaAttivita />
     </Contenitore>
   );
 }

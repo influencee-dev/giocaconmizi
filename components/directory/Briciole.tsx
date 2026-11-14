@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PERCORSO_COME_RECLAMARE } from "@/lib/reclamo";
 
 /** Il percorso visibile (Home › Ludoteche › Milano), gemello del JSON-LD. */
 export function Briciole({ voci }: { voci: { nome: string; href?: string }[] }) {
@@ -29,7 +30,6 @@ export function InBreve({ testo }: { testo: string }) {
   );
 }
 
-/** L'invito alle attività: iscriversi o reclamare la scheda già creata. */
 /** Il richiamo per le attività. Sulla scheda di un locale (`scheda`) porta al modulo con quella scheda già scelta. */
 export function CtaAttivita({ scheda }: { scheda?: string } = {}) {
   return (
@@ -41,6 +41,9 @@ export function CtaAttivita({ scheda }: { scheda?: string } = {}) {
             ? "La scheda è gratuita: chiedi di gestirla per correggerla, completarla o aggiungere le foto."
             : "La scheda è gratuita: chiedi di gestirla o aggiungi la tua attività, anche se è un'associazione o un laboratorio."}
         </p>
+        <Link href={PERCORSO_COME_RECLAMARE} className="mt-2 inline-block text-sm font-extrabold text-viola underline decoration-2 underline-offset-4">
+          Come funziona, passo per passo
+        </Link>
       </div>
       <Link href={scheda ? `/aggiungi-attivita?scheda=${encodeURIComponent(scheda)}` : "/aggiungi-attivita"} className="shrink-0 rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white" data-cta-attivita>
         {scheda ? "Gestisci la scheda" : "Aggiungi o gestisci"}

@@ -1,8 +1,9 @@
 /**
  * Risorse educative consigliate — l'hub /risorse-educative-bambini.
  *
- * Una sola pagina, divisa in cinque sezioni filtrabili: niente pagine
- * sottili per ogni risorsa (le schede vivono tutte qui). I dati pubblici
+ * Dal 14/11/2026 è una directory come quella delle feste: categorie,
+ * province e una scheda per ogni realtà (lib/risorse-categorie.ts). Le
+ * cinque SEZIONI restano come temi della card e per i dati del foglio. I dati pubblici
  * stanno in lib/risorse-educative-dati.ts; l'archivio completo (con email e
  * note di outreach) resta nel foglio privato di Giorgia e NON entra nel repo.
  *
@@ -82,7 +83,7 @@ export const AVVISO_LINK =
   "Link esterno: la presenza non implica partnership, approvazione o sponsorizzazione.";
 
 export const RISPOSTA_BREVE =
-  "Gioca con Mizi raccoglie risorse esterne utili per imparare, giocare e trovare idee educative per bambini. Puoi esplorare siti per famiglie, insegnanti, scuole e attività divisi per tema e modalità di utilizzo.";
+  "Gioca con Mizi raccoglie scuole paritarie, cooperative educative, blog per genitori, schede per insegnanti, progetti di coding e siti di fiabe utili ai bambini da 3 a 12 anni. Ogni realtà ha una scheda con cosa fa, per chi e il sito ufficiale; quelle sul territorio sono divise per provincia.";
 
 export const DISCLAIMER =
   "Le informazioni arrivano dai siti ufficiali delle realtà elencate: prima di usare un servizio verifica modalità, costi, privacy e disponibilità direttamente alla fonte. Una scheda non implica collaborazione o approvazione reciproca, salvo indicazione esplicita.";
@@ -107,7 +108,7 @@ export const FAQ_RISORSE = [
   {
     domanda: "Posso segnalare una risorsa o chiedere una correzione?",
     risposta:
-      "Sì. Se gestisci una delle realtà elencate, tocca «È la tua realtà? Reclama la scheda» sotto la sua card: dopo un controllo ricevi un link personale per correggerla, aggiungere logo e contatti e avere una pagina tua, oppure per toglierla. Per segnalare un progetto nuovo scrivi al contatto indicato in fondo alla pagina.",
+      "Sì. Se gestisci una delle realtà elencate, apri la sua scheda e tocca «Reclama la scheda»: dopo un controllo ricevi un link personale per correggerla, aggiungere logo e contatti e prendere il bollino «verificata», oppure per toglierla. Per proporre un progetto nuovo usa «Reclama o proponi» in fondo alla pagina.",
   },
 ] as const;
 
@@ -116,7 +117,7 @@ export const PER_PAGINA = 12;
 
 /** La chiave della scheda nel database (stesse tabelle delle attività). */
 export const chiaveRisorsa = (r: Pick<Risorsa, "slug">) => `risorse/${r.slug}`;
-/** La pagina propria: esiste solo per le risorse che hanno reclamato la scheda. */
+/** La scheda di ogni risorsa (indirizzo stabile, quello che parte nelle email). */
 export const percorsoRisorsa = (r: Pick<Risorsa, "slug">) => `${PERCORSO_RISORSE}/${r.slug}`;
 export const risorsaDaSlug = (slug: string) => RISORSE.find((r) => r.slug === slug);
 export const risorsaDaChiave = (chiave: string) => RISORSE.find((r) => chiaveRisorsa(r) === chiave);

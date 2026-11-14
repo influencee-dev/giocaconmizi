@@ -11,6 +11,7 @@ import { chiaveScheda, pubblicate } from "@/lib/directory-db";
 import { dataDi, dataGioco } from "@/lib/date-pagine";
 import { fotoDellaPagina, fotoGuida } from "@/lib/foto";
 import { percorsoRisorsa } from "@/lib/risorse-educative";
+import { categorieAttive, listingRisorse, percorsoCategoriaRisorse, percorsoListingRisorse } from "@/lib/risorse-categorie";
 import { risorseVisibili } from "@/lib/risorse-reclamo";
 
 /**
@@ -23,7 +24,7 @@ export const revalidate = 600;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const risposte = await pubblicate();
   const tolta = (s: (typeof SCHEDE)[number]) => risposte.get(chiaveScheda(s))?.tipo === "rimuovi";
-  const reclamate = (await risorseVisibili()).filter((r) => r.reclamata);
+  const risorse = await risorseVisibili();
   // Date vere (lib/date-pagine.json, dalla storia git): Google ignora i
   // lastmod di una sitemap che dice "modificato adesso" su ogni pagina.
   // Dove una data non c'è, niente lastmod: meglio di uno falso.
@@ -52,7 +53,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/feste": [ultimaCitta],
     "/metodo": ["content/hubs/metodo.md"],
     "/perche-lo-facciamo": ["content/hubs/perche-lo-facciamo.md"],
-    "/risorse-educative-bambini": ["lib/risorse-educative-dati.ts", "lib/risorse-educative.ts"],
+    "/risorse-educative-bambini": ["lib/risorse-educative-dati.ts", "lib/risorse-educative.ts", "lib/risorse-categorie.ts"],
   };
   const ALIAS_COMPETENZA: Record<string, string[]> = {
     lettere: ["alfabeto", "fonetica", "lettura"],
@@ -159,12 +160,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
-    // Le risorse educative che hanno reclamato la scheda hanno la pagina propria.
-    // Niente lastmod: la data vera è quella della decisione nel database.
-    ...reclamate.map((r) => ({
+    // La directory delle risorse educative: categorie, province e la scheda di
+    // ogni realtà (lib/risorse-categorie.ts). Le rimosse sono già fuori.
+    ...categorieAttive(risorse).map((c) => ({
+      url: url(percorsoCategoriaRisorse(c)),
+      lastModified: dataDi("lib/risorse-categorie.ts", "lib/risorse-educative-dati.ts"),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    ...listingRisorse(risorse).map((l) => ({
+      url: url(percorsoListingRisorse(l.categoria, l.slug)),
+      lastModified: dataDi("lib/risorse-categorie.ts", "lib/risorse-educative-dati.ts"),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    // Niente lastmod sulle schede: per le reclamate la data vera è quella della decisione nel database.
+    ...risorse.map((r) => ({
       url: url(percorsoRisorsa(r)),
       changeFrequency: "monthly" as const,
-      priority: 0.5,
+      priority: r.reclamata ? 0.6 : 0.5,
     })),
 
     // Le guide per i genitori: contenuto evergreen, priorità alta (AEO)

@@ -9,6 +9,7 @@ import { CENTRO_CITTA } from "@/lib/coordinate-citta";
 import { MappaLocali } from "@/components/mappa/MappaLocali";
 import { Contenitore, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
+import { CtaAttivita } from "@/components/directory/Briciole";
 
 export const metadata: Metadata = {
   title: "Feste di compleanno per bambini: le location città per città",
@@ -120,6 +121,8 @@ export default function FestePage() {
           Crea l&apos;invito
         </Link>
       </section>
+
+      <CtaAttivita />
     </Contenitore>
   );
 }
