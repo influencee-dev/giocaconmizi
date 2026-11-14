@@ -17,6 +17,17 @@ export const FASCE = [
 
 export type Fascia = (typeof FASCE)[number]["id"];
 
+/** Le cornici della letterina: i motivi stanno in components/biglietti/motivi.tsx. */
+export const CORNICI = [
+  { id: "natale", etichetta: "Albero e palline" },
+  { id: "natale-neve", etichetta: "Pupazzi di neve" },
+  { id: "natale-regali", etichetta: "Regali" },
+  { id: "natale-dolci", etichetta: "Biscotti e dolci" },
+  { id: "natale-renne", etichetta: "Renne" },
+] as const;
+
+export type Cornice = (typeof CORNICI)[number]["id"];
+
 export type GruppoFrasi = "presentazione" | "anno" | "domanda" | "pensiero" | "chiusura";
 
 export const GRUPPI: { id: GruppoFrasi; titolo: string }[] = [

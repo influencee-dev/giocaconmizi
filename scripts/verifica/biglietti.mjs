@@ -271,7 +271,11 @@ const fondo = await page.evaluate(() => {
   const righe = [...svg.querySelectorAll("[data-letterina-testo] text")];
   return Math.max(...righe.map((t) => Number(t.getAttribute("y"))));
 });
-ok("letterina: con tutto spuntato il testo resta sopra la firma", corpo >= 50 && fondo < 3508 * 0.935 - 470, `corpo ${corpo}, ultima riga a y=${fondo}`);
+ok("letterina: con tutto spuntato il testo resta sopra la firma", corpo >= 50 && fondo < 3508 * (0.085 + 0.83) - 470, `corpo ${corpo}, ultima riga a y=${fondo}`);
+await page.locator("[data-cornice-letterina='natale-renne']").tap();
+await page.waitForTimeout(150);
+ok("letterina: si cambia la cornice (5 a scelta)",
+  (await page.locator("[data-cornice-letterina]").count()) === 5 && (await lettera.getAttribute("data-cornice")) === "natale-renne");
 const attesaPdf = page.waitForEvent("download", { timeout: 15000 }).catch(() => null);
 await page.locator("[data-scarica-letterina-pdf]").tap();
 const pdf = await attesaPdf;

@@ -17,8 +17,9 @@ export type ModoLetterina = "scritta" | "righe";
 const { larghezza: W, altezza: H } = FOGLIO_A4;
 const FAMIGLIA = "Nunito, ui-sans-serif, system-ui, sans-serif";
 
-const PANNELLO = { x: W * 0.08, y: H * 0.06, w: W * 0.84, h: H * 0.875 };
-const MARGINE = 140;
+// Il foglio chiaro lascia libero un bordo largo: la cornice deve vedersi tutta.
+const PANNELLO = { x: W * 0.125, y: H * 0.085, w: W * 0.75, h: H * 0.83 };
+const MARGINE = 115;
 const TESTO_X = PANNELLO.x + MARGINE;
 const TESTO_W = PANNELLO.w - MARGINE * 2;
 const TITOLO_Y = PANNELLO.y + 300;
@@ -72,12 +73,14 @@ export function FoglioLetterina({
   testo,
   variante,
   modo,
+  cornice = "natale",
 }: {
   testo: TestoLetterina;
   variante: Variante;
   modo: ModoLetterina;
+  cornice?: string;
 }) {
-  const colore = inchiostro("natale", variante === "colorato" ? "chiaro" : variante);
+  const colore = inchiostro(cornice, variante === "colorato" ? "chiaro" : variante);
   const daColorare = variante === "colorare";
   const stella = daColorare ? "#FFFFFF" : "#E4A11B";
 
@@ -89,9 +92,10 @@ export function FoglioLetterina({
       xmlns="http://www.w3.org/2000/svg"
       data-foglio-letterina={modo}
       data-variante={variante}
+      data-cornice={cornice}
     >
       {daColorare && <style>{CSS_DA_COLORARE}</style>}
-      <Sfondo tema="natale" variante={variante} larghezza={W} altezza={H} />
+      <Sfondo tema={cornice} variante={variante} larghezza={W} altezza={H} />
       <rect
         x={PANNELLO.x}
         y={PANNELLO.y}

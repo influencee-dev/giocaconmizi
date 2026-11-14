@@ -5,7 +5,9 @@ import { FOGLIO_A4 } from "@/components/biglietti/Etichette";
 import { VARIANTI, type Variante } from "@/components/biglietti/Sfondo";
 import { FoglioBusta } from "@/components/natale/FoglioBusta";
 import { FoglioLetterina, type ModoLetterina } from "@/components/natale/FoglioLetterina";
+import { MOTIVI } from "@/components/biglietti/motivi";
 import {
+  CORNICI,
   ESEMPI_DESIDERI,
   FASCE,
   FRASI,
@@ -18,6 +20,7 @@ import {
   frasiIniziali,
   nomePulito,
   testoLetterina,
+  type Cornice,
   type Fascia,
   type GruppoFrasi,
   type SceltaLetterina,
@@ -55,6 +58,7 @@ export function EditorLetterina() {
   });
   const [variante, setVariante] = useState<Variante>("chiaro");
   const [modo, setModo] = useState<ModoLetterina>("scritta");
+  const [cornice, setCornice] = useState<Cornice>("natale");
   const [stato, setStato] = useState("");
   const foglio = useRef<HTMLDivElement>(null);
   const busta = useRef<HTMLDivElement>(null);
@@ -145,7 +149,7 @@ export function EditorLetterina() {
             className="mx-auto max-w-sm overflow-hidden rounded-morbido bg-white shadow-lg [&>svg]:h-full [&>svg]:w-full"
             style={{ aspectRatio: `${W} / ${H}` }}
           >
-            <FoglioLetterina testo={testo} variante={variante} modo={modo} />
+            <FoglioLetterina testo={testo} variante={variante} modo={modo} cornice={cornice} />
           </div>
           <div className="mt-4 flex flex-wrap justify-center gap-2">
             <button type="button" onClick={scaricaPdf} className="rounded-bolla bg-rosa px-6 py-4 text-lg font-extrabold text-white" data-scarica-letterina-pdf>
@@ -231,6 +235,24 @@ export function EditorLetterina() {
                 data-modo-letterina={m.id}
               >
                 {m.etichetta}
+              </button>
+            ))}
+          </div>
+          <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-5" role="radiogroup" aria-label="Cornice">
+            {CORNICI.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                role="radio"
+                aria-checked={cornice === c.id}
+                onClick={() => setCornice(c.id)}
+                className={`flex flex-col items-center gap-1 rounded-morbido border-4 bg-white p-2 text-xs font-bold text-notte ${cornice === c.id ? "border-viola" : "border-crema-scuro"}`}
+                data-cornice-letterina={c.id}
+              >
+                <svg viewBox="0 0 40 40" className="h-12 w-12" aria-hidden>
+                  {MOTIVI[c.id].motivo(MOTIVI[c.id].tinte)}
+                </svg>
+                {c.etichetta}
               </button>
             ))}
           </div>
