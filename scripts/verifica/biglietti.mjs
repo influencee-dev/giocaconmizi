@@ -308,8 +308,10 @@ await page.waitForTimeout(150);
 ok("letterina: passo 4, l'idea toccata diventa il primo desiderio",
   (await page.locator("form[data-passo='3']").count()) === 1 && (await page.locator("#letterina-desiderio-1").inputValue()).length > 0);
 await page.locator("[data-avanti]").tap();
-await page.locator("[data-navigazione-passi]").scrollIntoViewIfNeeded();
-ok("letterina: la miniatura resta in vista mentre si scrive", await page.locator("[data-miniatura-letterina]").isVisible());
+ok("letterina: accanto a Mizi c'è la letterina in piccolo", await page.locator("[data-miniatura-guida]").isVisible());
+await page.locator("[data-sezione-busta]").scrollIntoViewIfNeeded();
+ok("letterina: lontano da Mizi la miniatura fissa resta in vista",
+  await page.locator("[data-miniatura-letterina]").waitFor({ state: "visible", timeout: 3000 }).then(() => true, () => false));
 await page.locator("[data-miniatura-letterina]").tap();
 ok("letterina: toccando la miniatura si apre a tutto schermo",
   (await page.locator("[data-letterina-grande] [data-foglio-letterina]").count()) === 1);
