@@ -194,6 +194,8 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   lib/guide.ts (stesso slug di una guida breve = la sostituisce). Pagina:
   `components/guide/Approfondimento.tsx`; stili `.articolo` in globals.css.
 - Piano dei 100 articoli: `content/piano-editoriale.json`, uno al giorno
+  (ribilanciato il 14/11/2026: meno schermi, più feste, territorio, stagione e
+  famiglia; categorie nuove feste-compleanni, fuori-casa, stagionali)
   (`npm run articoli:piano -- prossimo | stato | segna`). Cancello prima di
   pubblicare: `npm run articoli:controlla -- <slug> --rete` (≥27.000 caratteri,
   fonti, prezzi datati, immagini autorizzate, autenticità): se fallisce, resta bozza.
@@ -221,6 +223,17 @@ ancora veri: se no, versione nuova con la data. Alla fine lascia una nota
 («AAAA-MM-GG 07:00 · Claude · Miglioramento», docs/bacheca.md).
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
+
+## Canzoni di Mizi (14/11/2026)
+- Su Drive: 2 Aree → Giocamizi · Social → «Canzoni di Mizi» (id
+  1VnaChhQWdr6zhvQZom9cMat9jmIiRvDv): guida «00 Come funzionano le canzoni di
+  Mizi», schede in «01 Schede canzoni», file finiti in «99 Canzoni pronte».
+- Una canzone a settimana insieme al post della settimana, SOLO se c'è il file
+  `canzone-NN-slug.mp4`; se manca, slitta. Testi e melodie originali (mai copiare
+  canzoni esistenti, mai nomi di artisti nei prompt); niente Domiziana nei video.
+  Musica con Suno (piano a pagamento), video con CapCut: li fa Giorgia o la sua
+  automazione. Claude scrive le schede nuove quando le 10 finiscono.
+  Elenco e stati in `content/canzoni-mizi.json` (scheda-pronta → pubblicata).
 
 ## Il Natale di Mizi (/natale, 14/11/2026)
 - Lo porta avanti SOLO la chat del co-work quotidiano (Decisione su Drive del

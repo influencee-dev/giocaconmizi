@@ -62,6 +62,9 @@ const HASHTAG_CATEGORIA: Record<string, string[]> = {
   "tavolo-offline": ["#giochidatavolo", "#giochiinfamiglia"],
   "famiglia-abitudini": ["#giochiinfamiglia", "#genitorialita"],
   "mamme-imprenditrici": ["#mammeimprenditrici", "#lavoroefamiglia"],
+  "feste-compleanni": ["#festadicompleanno", "#compleannobambini"],
+  "fuori-casa": ["#bambiniincitta", "#attivitaperbambini"],
+  stagionali: ["#ideeperbambini", "#famiglia"],
 };
 const HASHTAG_SKILL: Partial<Record<string, string[]>> = {
   matematica: ["#matematica", "#tabelline"],
