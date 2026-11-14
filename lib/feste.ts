@@ -7,6 +7,11 @@
 // - descrizioni fedeli a ciò che le fonti dicono, senza promesse nostre;
 // - niente personaggi protetti da copyright nelle NOSTRE descrizioni;
 // - il reel Instagram si aggiunge solo con l'URL vero del post (campo reel).
+//
+// Città già provate e SCARTATE (meno di 2 locali solidi con segnali recenti):
+// non ritentarle prima di qualche mese. Pescara, Sassari, Barletta, Pistoia,
+// Terni, Matera, L'Aquila, Potenza, Marsala, Faenza, Legnano, Avellino
+// (entro il 13/11/2026); Cinisello Balsamo, Torre del Greco, Olbia (14/11/2026).
 
 export interface LocaleFesta {
   nome: string;
@@ -2417,6 +2422,24 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "C'è un posto al coperto per una festa d'inverno a Benevento?", risposta: "Sì: la Ludoteca Un Due Tre Stella è uno spazio al chiuso pensato per i più piccoli. Alla Fattoria La Cinta molte attività si fanno all'aperto: d'inverno chiedete quali si possono fare al coperto." },
       { domanda: "Per che età vanno bene?", risposta: "La ludoteca si rivolge ai bambini fino a circa 7 anni; i laboratori in fattoria piacciono anche ai più grandi. Quando prenotate, dite l'età dei bambini." },
       { domanda: "Posso portare la torta?", risposta: "Le fonti non lo dicono: chiedetelo quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "fiumicino",
+    citta: "Fiumicino",
+    aggiornata: "2026-11-14",
+    rispostaBreve: "A Fiumicino la festa di compleanno per bambini si fa in campagna, all'agriturismo Casale Traiano lungo via Portuense, oppure al coperto in una pizzeria con area giochi interna come Buffalo Kids 2.0, in via Valderòa. Nella bella stagione c'è anche il Parco Avventura nella pineta di Fregene, con le feste divise per altezza dei bambini.",
+    intro: "Nel comune di Fiumicino le feste per bambini si dividono tra la campagna dell'entroterra, le sale al chiuso in città e la pineta di Fregene. Qui trovate un agriturismo con gli animali, una pizzeria con gonfiabile e campetto e un parco avventura all'aperto.",
+    locali: [
+      { nome: "Casale Traiano", zona: "Fiumicino, lungo via Portuense", tipo: "agriturismo biologico in campagna, con animali e feste di compleanno", descrizione: "Un agriturismo biologico nella campagna di Fiumicino, con una pagina dedicata alle feste di compleanno per tutte le età: natura, animali, giochi e cucina con ingredienti biologici e locali. I bambini possono visitare la fattoria e avvicinare gli animali; menu, allestimenti e attività si personalizzano." },
+      { nome: "Buffalo Kids 2.0", zona: "Fiumicino, via Valderòa", tipo: "pizzeria e braceria con gonfiabile, campetto e playground interni", descrizione: "Un ristorante, braceria e pizzeria con uno spazio giochi interno: un gonfiabile, un campetto da calcetto e un playground con le palline. Le feste di compleanno si fanno il pomeriggio con lo spazio giochi riservato, scegliendo tra tre tipi di catering oppure il solo affitto della sala." },
+      { nome: "Parco Avventura Fregene", zona: "Fregene, frazione di Fiumicino, nella pineta di via della Veneziana", tipo: "centro sportivo all'aperto: parco avventura nella pineta con feste di compleanno", descrizione: "Un parco avventura nella pineta di Fregene, con percorsi sugli alberi e attività all'aperto. Ha una sezione dedicata alle feste di compleanno, con preventivo su richiesta: i partecipanti sono divisi per altezza (Baby sotto i 115 cm, Junior fino a 139 cm) e la festa si concorda con la reception." },
+    ],
+    faq: [
+      { domanda: "C'è un posto al coperto per una festa d'inverno a Fiumicino?", risposta: "Sì: Buffalo Kids 2.0 ha uno spazio giochi interno con gonfiabile, campetto e playground, riservato alla festa il pomeriggio. Il Parco Avventura di Fregene invece è all'aperto: va bene nella bella stagione." },
+      { domanda: "Per che età vanno bene?", risposta: "Al Parco Avventura di Fregene i percorsi dipendono dall'altezza: Baby sotto i 115 cm, Junior da 115 a 139 cm. Casale Traiano propone feste per tutte le età. Per Buffalo Kids 2.0 dite l'età dei bambini quando prenotate." },
+      { domanda: "Posso portare la torta?", risposta: "Al Parco Avventura di Fregene chi festeggia con le loro formule può lasciare la torta nei frigoriferi del parco, se c'è posto. Per Casale Traiano e Buffalo Kids 2.0 le fonti non lo dicono: chiedetelo quando prenotate." },
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
