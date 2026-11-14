@@ -255,8 +255,12 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 - Bottoni d'azione con testo bianco: bg-rosa-forte / bg-viola-forte /
   bg-verde-forte (contrasto ≥ 4,5:1), non le tinte chiare del brand.
 - Bersagli da toccare almeno 56 px (min-h-14) negli strumenti per bambini.
-- Ancora da fare (ordine dello studio): letterina a passi con Mizi e voce,
-  modalità bambino/grande, invito a passi diviso in «biglietto» e «kit festa».
+- Fatto tutto l'ordine dello studio: letterina a passi con Mizi e voce;
+  desideri a figura (DESIDERI_FIGURA in lib/natale.ts); invito a passi
+  (Editor `parte="biglietto"`, 7 passi, 8 sfondi in vista + «Vedi tutti»,
+  «Vedi tutto in una pagina») e kit della festa su /biglietti/kit-festa
+  (Editor `parte="kit"`, arriva col biglietto in ?b=, senza foto né nomi
+  degli invitati). Le prove sull'invito toccano prima [data-vedi-tutto].
 
 ## Instagram (8/11/2026, docs/instagram.md)
 - Post del giorno da `lib/social/post.ts` (carosello da articolo, foto di una

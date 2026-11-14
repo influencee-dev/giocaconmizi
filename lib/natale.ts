@@ -112,6 +112,26 @@ export const IDEE_DESIDERI: Record<Fascia, string[]> = {
   grandi: ["un romanzo nuovo", "un set da disegno", "un gioco di costruzioni", "una gita in montagna", "più tempo insieme in famiglia"],
 };
 
+/**
+ * I desideri a figura (studio UX del 14/11/2026, «modalità bambino»): chi non
+ * sa ancora leggere tocca un disegno, Mizi dice la parola e il desiderio entra
+ * nella lettera. Le icone sono quelle del sito (public/icone, licenza MIT).
+ */
+export const DESIDERI_FIGURA = [
+  { icona: "libro", testo: "un libro" },
+  { icona: "orsetto", testo: "un peluche morbido" },
+  { icona: "pallone", testo: "un pallone" },
+  { icona: "puzzle", testo: "un puzzle" },
+  { icona: "tavolozza", testo: "i colori per disegnare" },
+  { icona: "robot", testo: "un robot giocattolo" },
+  { icona: "razzo", testo: "un razzo giocattolo" },
+  { icona: "castello", testo: "un castello da costruire" },
+  { icona: "unicorno", testo: "un unicorno di peluche" },
+  { icona: "telescopio", testo: "un telescopio per guardare le stelle" },
+  { icona: "ghiaccio", testo: "la neve" },
+  { icona: "cuore-viola", testo: "tanti abbracci" },
+] as const;
+
 /** Sostituisce {nome} e {eta} senza lasciare segnaposto vuoti. */
 export function riempi(frase: string, nome: string, eta: string): string {
   const n = nome.trim();
