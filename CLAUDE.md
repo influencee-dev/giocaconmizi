@@ -142,6 +142,15 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   FOTOGRAFIE con la data nel titolo: il connettore Drive crea, rinomina e
   sposta ma non modifica, quindi quando cambiano i fatti si crea la versione
   nuova e la vecchia prende «zz_SUPERATO — » davanti al titolo.
+- «La mappa di Giocamizi» (14/11/2026, regola di Giorgia): la pagina privata
+  https://claude.ai/artifact/6QKg2emJDB3HrZsYY7F67K (cosa c'è, a chi serve,
+  semaforo, modello di business, contenuti da usare settimana per settimana).
+  Ogni volta che va online qualcosa di nuovo (pagina, strumento, sezione,
+  prodotto) o cambia una decisione di business, si aggiorna: strumento Artifact
+  azione «read» sull'URL, si modifica l'HTML, si ripubblica con lo stesso «url».
+  Ogni lunedì revisione completa con i numeri veri del repo e copia su Drive in
+  3 Risorse come «05 Mappa di Giocamizi (AAAA-MM-GG)» (la vecchia prende
+  «zz_SUPERATO — »). La fa la routine locale «Mappa di Giocamizi · lunedì».
 - «0 Richieste di Giorgia» (id 1UWRDMZzDF5Rpbh17amd_KrCjXwbNKr9v): una modifica
   al sito per documento («AAAA-MM-GG · pagina · cosa»). Le aperte sono quelle che
   non iniziano con «FATTO», «DA CHIARIRE» o «00». Fatta la modifica (con le
