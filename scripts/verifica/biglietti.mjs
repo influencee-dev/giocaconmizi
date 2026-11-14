@@ -290,6 +290,16 @@ await page.waitForTimeout(200);
 ok("letterina: a righe e da colorare, senza testo già scritto",
   (await lettera.locator("[data-letterina-righe]").count()) === 1 && (await lettera.locator("[data-letterina-testo]").count()) === 0 &&
   (await lettera.getAttribute("data-variante")) === "colorare" && (await lettera.locator(".dc-linea").count()) > 5);
+const bustaF = page.locator("[data-foglio-busta]");
+ok("busta: da colorare, col mittente e «A: Babbo Natale»",
+  (await bustaF.count()) === 1 && (await bustaF.locator(".dc-linea").count()) > 5 &&
+  (await bustaF.locator("[data-busta-mittente]").textContent()) === "Da: Sofiella" &&
+  (await bustaF.locator("[data-busta-destinatario]").textContent()) === "A: Babbo Natale");
+const attesaBusta = page.waitForEvent("download", { timeout: 15000 }).catch(() => null);
+await page.locator("[data-scarica-busta]").tap();
+const bustaPdf = await attesaBusta;
+const byteBusta = bustaPdf ? readFileSync(await bustaPdf.path()) : null;
+ok("busta: PDF A4", byteBusta && byteBusta.subarray(0, 5).toString() === "%PDF-" && byteBusta.toString("latin1").includes("/MediaBox [0 0 595.28 841.89]"));
 ok("letterina: il nome del bambino non è mai uscito dalla pagina", richiesteConNome.length === 0, richiesteConNome.join(", "));
 await page.goto(`${BASE}/natale/come-scrivere-la-letterina`, { waitUntil: "networkidle" });
 ok("come scrivere la letterina: tre esempi completi, uno per fascia",

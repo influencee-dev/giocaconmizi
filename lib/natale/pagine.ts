@@ -12,7 +12,7 @@ export const PAGINE_NATALE = [
   {
     percorso: "/natale",
     titolo: "Il Natale di Mizi",
-    descrizione: "Letterina a Babbo Natale da stampare, biglietti di auguri e idee per il Natale dei bambini, gratis.",
+    descrizione: "Letterina a Babbo Natale da stampare con la busta da colorare, biglietti di auguri e idee per il Natale dei bambini, gratis.",
   },
   {
     percorso: "/natale/lettera-a-babbo-natale",
@@ -28,7 +28,7 @@ export const PAGINE_NATALE = [
 ] as const;
 
 export const RISPOSTA_LETTERINA =
-  "Per scrivere la lettera a Babbo Natale da stampare: scegli l'età, scrivi il nome (o lascialo vuoto e completalo a penna), tocca le frasi pronte e aggiungi fino a cinque desideri. Poi scarichi il PDF A4 o la stampi subito. C'è anche il foglio a righe da scrivere a mano e la versione da colorare. È gratis e il nome del bambino non lascia il tuo telefono.";
+  "Per scrivere la lettera a Babbo Natale da stampare: scegli l'età, scrivi il nome (o lascialo vuoto e completalo a penna), tocca le frasi pronte e aggiungi fino a cinque desideri. Poi scarichi il PDF A4 o la stampi subito. C'è anche il foglio a righe da scrivere a mano, la versione da colorare e la busta da colorare, ritagliare e piegare. È gratis e il nome del bambino non lascia il tuo telefono.";
 
 export const FAQ_LETTERINA = [
   {
@@ -45,6 +45,11 @@ export const FAQ_LETTERINA = [
     domanda: "Mio figlio vuole scriverla da solo: c'è un foglio a righe?",
     risposta:
       "Sì: scegli «A righe, da scrivere a mano». Il foglio ha già «Caro Babbo Natale» in alto, l'inizio «Mi chiamo… e ho… anni», le righe per il testo e cinque righe con la stellina per i desideri.",
+  },
+  {
+    domanda: "C'è anche la busta per la letterina?",
+    risposta:
+      "Sì, da colorare: si stampa su un foglio A4, si ritaglia sulla linea continua e si piega sui trattini. Davanti c'è «A: Babbo Natale, Polo Nord», il francobollo da colorare e il nome di chi scrive; dentro ci sta la letterina piegata in quattro.",
   },
   {
     domanda: "Il nome e i desideri del bambino finiscono su internet?",
@@ -144,7 +149,7 @@ export const FAQ_HUB_NATALE = [
   {
     domanda: "Cosa trovo nel Natale di Mizi?",
     risposta:
-      "La letterina a Babbo Natale da scrivere e stampare (anche a righe e da colorare), una guida con gli esempi per età e i biglietti di auguri di Natale da personalizzare. Tutto gratis, senza registrazione e senza pubblicità.",
+      "La letterina a Babbo Natale da scrivere e stampare (anche a righe e da colorare) con la sua busta da colorare, una guida con gli esempi per età e i biglietti di auguri di Natale da personalizzare. Tutto gratis, senza registrazione e senza pubblicità.",
   },
   {
     domanda: "Serve registrarsi o lasciare l'email?",

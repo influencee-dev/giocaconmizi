@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { FOGLIO_A4 } from "@/components/biglietti/Etichette";
 import { VARIANTI, type Variante } from "@/components/biglietti/Sfondo";
+import { FoglioBusta } from "@/components/natale/FoglioBusta";
 import { FoglioLetterina, type ModoLetterina } from "@/components/natale/FoglioLetterina";
 import {
   ESEMPI_DESIDERI,
@@ -56,6 +57,7 @@ export function EditorLetterina() {
   const [modo, setModo] = useState<ModoLetterina>("scritta");
   const [stato, setStato] = useState("");
   const foglio = useRef<HTMLDivElement>(null);
+  const busta = useRef<HTMLDivElement>(null);
 
   const testo = useMemo(() => testoLetterina(scelta), [scelta]);
   const nomeFile = nomePulito(scelta.nome);
@@ -79,6 +81,12 @@ export function EditorLetterina() {
   const png = useCallback(async () => {
     const svg = foglio.current?.querySelector("svg");
     if (!svg) throw new Error("foglio non pronto");
+    return foglioInPng(svg, W, H);
+  }, []);
+
+  const pngBusta = useCallback(async () => {
+    const svg = busta.current?.querySelector("svg");
+    if (!svg) throw new Error("busta non pronta");
     return foglioInPng(svg, W, H);
   }, []);
 
@@ -107,6 +115,16 @@ export function EditorLetterina() {
     }, "Fatto: trovi il PDF nei download, pronto da stampare in A4.");
 
   const stampa = () => esegui(async () => stampaImmagine(await png()), "Si apre la finestra di stampa: scegli A4.");
+
+  const scaricaBusta = () =>
+    esegui(async () => {
+      const pdf = await pngInPdf(await pngBusta(), W, H);
+      const url = URL.createObjectURL(pdf);
+      scaricaUrl(url, nomeFileLetterina(nomeFile, "pdf").replace("letterina-", "busta-"));
+      setTimeout(() => URL.revokeObjectURL(url), 30_000);
+    }, "Fatto: la busta da colorare è nei download.");
+
+  const stampaBusta = () => esegui(async () => stampaImmagine(await pngBusta()), "Si apre la finestra di stampa della busta: scegli A4.");
 
   const condividi = () =>
     esegui(async () => {
@@ -300,6 +318,31 @@ export function EditorLetterina() {
             </section>
           </>
         )}
+
+        <section data-sezione-busta>
+          <h2 className="text-xl font-extrabold text-notte">{modo === "scritta" ? "5" : "3"}. La busta da colorare</h2>
+          <p className="mt-1 text-sm text-notte-tenue">
+            Si stampa su un A4, si colora, si ritaglia e si piega: dentro ci sta la letterina piegata in quattro.
+            Davanti c&apos;è «A: Babbo Natale» e il francobollo da colorare{scelta.nome.trim() ? ", con il nome di chi scrive" : ""}.
+          </p>
+          <div className="mt-3 grid items-start gap-4 sm:grid-cols-[10rem_1fr]">
+            <div
+              ref={busta}
+              className="w-40 overflow-hidden rounded-morbido border-2 border-crema-scuro bg-white [&>svg]:h-full [&>svg]:w-full"
+              style={{ aspectRatio: `${W} / ${H}` }}
+            >
+              <FoglioBusta mittente={nomePulito(scelta.nome)} />
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button type="button" onClick={scaricaBusta} className="rounded-bolla bg-rosa px-5 py-3 font-extrabold text-white" data-scarica-busta>
+                Scarica la busta (PDF)
+              </button>
+              <button type="button" onClick={stampaBusta} className="rounded-bolla bg-viola px-5 py-3 font-extrabold text-white" data-stampa-busta>
+                Stampa la busta
+              </button>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

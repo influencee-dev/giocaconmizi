@@ -17,7 +17,7 @@ const PEZZI = [
   {
     href: "/natale/lettera-a-babbo-natale",
     nome: "Lettera a Babbo Natale",
-    testo: "Frasi pronte per età, carta di Natale, PDF da stampare. Anche a righe e da colorare.",
+    testo: "Frasi pronte per età, carta di Natale, PDF da stampare. Anche a righe, da colorare e con la busta.",
     dato: "data-natale-letterina",
   },
   {
