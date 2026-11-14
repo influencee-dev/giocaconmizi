@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SENZA_PRECARICO } from "@/lib/precarico";
 import type { ReactNode } from "react";
 import { SOCIETA, TITOLARE } from "@/lib/legal";
 import type { CodiceFoto } from "@/lib/foto";
@@ -141,7 +142,7 @@ export function Piede({ logo }: { logo: ReactNode }) {
             <div key={col.titolo} className="flex flex-col gap-2.5">
               <p className="font-black text-notte">{col.titolo}</p>
               {col.voci.map(([href, nome]) => (
-                <Link key={href} href={href} className="text-[15px] text-notte-tenue hover:text-viola">
+                <Link key={href} href={href} prefetch={SENZA_PRECARICO.has(href) ? false : undefined} className="text-[15px] text-notte-tenue hover:text-viola">
                   {nome}
                 </Link>
               ))}

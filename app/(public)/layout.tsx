@@ -13,6 +13,7 @@ import { BarraSchede } from "@/components/app/BarraSchede";
 import { Benvenuto } from "@/components/app/Benvenuto";
 import { Freccia } from "@/components/vetrina";
 import { MenuMobile } from "@/components/vetrina/MenuMobile";
+import { SENZA_PRECARICO } from "@/lib/precarico";
 
 // Il Natale entra nel menu solo in stagione (lib/natale.ts).
 const MENU = [
@@ -60,9 +61,9 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
           <Logo />
           <nav aria-label="Principale" className="hidden items-center gap-1 lg:flex">
             {MENU.map((m) => (
-              // /natale si rigenera da sola (ISR): niente precaricamento automatico,
-              // che sul server di prova resta appeso (come le risorse educative).
-              <Link key={m.href} href={m.href} prefetch={m.href === "/natale" ? false : undefined} className="rounded-xl px-3.5 py-2 text-[15px] font-bold text-notte hover:text-viola">
+              // /natale e le risorse si rigenerano da sole (ISR): niente precaricamento
+              // automatico, che sul server di prova resta appeso (lib/precarico.ts).
+              <Link key={m.href} href={m.href} prefetch={SENZA_PRECARICO.has(m.href) ? false : undefined} className="rounded-xl px-3.5 py-2 text-[15px] font-bold text-notte hover:text-viola">
                 {m.nome}
               </Link>
             ))}

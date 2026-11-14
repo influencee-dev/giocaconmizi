@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Freccia } from "./freccia";
+import { SENZA_PRECARICO } from "@/lib/precarico";
 
 /**
  * Il menu del telefono e del tablet. Si chiude da solo quando cambi pagina
@@ -58,7 +59,7 @@ export function MenuMobile({ voci }: { voci: { href: string; nome: string }[] })
           <Link
             key={m.href}
             href={m.href}
-            prefetch={m.href === "/natale" ? false : undefined}
+            prefetch={SENZA_PRECARICO.has(m.href) ? false : undefined}
             onClick={() => setAperto(false)}
             aria-current={percorso === m.href ? "page" : undefined}
             className="rounded-xl px-4 py-3 text-lg font-extrabold text-notte hover:bg-crema aria-[current=page]:bg-crema aria-[current=page]:text-viola"
