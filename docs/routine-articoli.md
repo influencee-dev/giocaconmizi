@@ -27,6 +27,9 @@ pagine per Google: ogni articolo risolve un problema reale di un genitore.
   (vocali, messaggi, appunti suoi). Lunghezza = pensiero completo.
 - `spontanea` — osservazioni leggere: lunghezza adatta al contenuto.
 I 100 argomenti del piano sono tutti `pratica`.
+Ribilanciato il 14/11/2026 (richiesta di Giorgia): schermi 35, tavolo 15,
+famiglia 15, mamme imprenditrici 10, feste e compleanni 10, fuori casa 10,
+stagione 5. Gli argomenti tolti restano nel file come «sostituito».
 
 ## Esperienze personali: regola che blocca
 Mai inventare: dialoghi o emozioni di Domi, ricordi, test di giochi fatti da
@@ -112,7 +115,11 @@ Un giorno senza fonti sufficienti produce un report, non un articolo inventato.
 5. Se sono arrivati WebP nuovi: `npm run date-pagine` e le TRE verifiche di
    CLAUDE.md (una foto di una guida già online cambia la pagina). Poi commit
    (piano, coda, public/immagini), `git pull --rebase`, push su main, deploy READY.
-6. Nota in Bacheca: «AAAA-MM-GG 21:00 · Claude · Foto importate» (foto
+6. Registro del prodotto (docs/registro-prodotto.md): `npm run registro -- /tmp/registro`
+   (se manca: `pip install openpyxl`), carica il file .xlsx in Drive «1 Progetti /
+   100 articoli approfonditi» (id 1w7h_IGqfsTD5uiHQl03QsvJCeQAWN7sS) e rinomina
+   quello del giorno prima «zz_SUPERATO — …». Se Python non c'è, scrivilo nella nota.
+7. Nota in Bacheca: «AAAA-MM-GG 21:00 · Claude · Foto importate» (foto
    importate, foto che mancano ancora col loro nome, problemi).
 
 ## Non pestarsi i piedi con la routine delle 7:00
@@ -134,7 +141,7 @@ descrizione: "…"                        # meta description ≤ 160
 rispostaBreve: "…"                      # 2–3 frasi citabili dalle AI
 keyword: "Roblox è sicuro per bambini"
 keywordSecondarie: ["…"]
-categoria: sicurezza-digitale           # guide-giochi | confronti | sicurezza-digitale | tavolo-offline | famiglia-abitudini | mamme-imprenditrici | rubrica
+categoria: sicurezza-digitale           # guide-giochi | confronti | sicurezza-digitale | tavolo-offline | famiglia-abitudini | mamme-imprenditrici | feste-compleanni | fuori-casa | stagionali | rubrica
 voce: pratica                           # pratica | personale | spontanea
 etaMin: 6
 etaMax: 12

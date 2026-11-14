@@ -150,6 +150,15 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   FOTOGRAFIE con la data nel titolo: il connettore Drive crea, rinomina e
   sposta ma non modifica, quindi quando cambiano i fatti si crea la versione
   nuova e la vecchia prende «zz_SUPERATO — » davanti al titolo.
+- «La mappa di Giocamizi» (14/11/2026, regola di Giorgia): la pagina privata
+  https://claude.ai/artifact/6QKg2emJDB3HrZsYY7F67K (cosa c'è, a chi serve,
+  semaforo, modello di business, contenuti da usare settimana per settimana).
+  Ogni volta che va online qualcosa di nuovo (pagina, strumento, sezione,
+  prodotto) o cambia una decisione di business, si aggiorna: strumento Artifact
+  azione «read» sull'URL, si modifica l'HTML, si ripubblica con lo stesso «url».
+  Ogni lunedì revisione completa con i numeri veri del repo e copia su Drive in
+  3 Risorse come «05 Mappa di Giocamizi (AAAA-MM-GG)» (la vecchia prende
+  «zz_SUPERATO — »). La fa la routine locale «Mappa di Giocamizi · lunedì».
 - «0 Richieste di Giorgia» (id 1UWRDMZzDF5Rpbh17amd_KrCjXwbNKr9v): una modifica
   al sito per documento («AAAA-MM-GG · pagina · cosa»). Le aperte sono quelle che
   non iniziano con «FATTO», «DA CHIARIRE» o «00». Fatta la modifica (con le
@@ -193,10 +202,19 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   lib/guide.ts (stesso slug di una guida breve = la sostituisce). Pagina:
   `components/guide/Approfondimento.tsx`; stili `.articolo` in globals.css.
 - Piano dei 100 articoli: `content/piano-editoriale.json`, uno al giorno
+  (ribilanciato il 14/11/2026: meno schermi, più feste, territorio, stagione e
+  famiglia; categorie nuove feste-compleanni, fuori-casa, stagionali)
   (`npm run articoli:piano -- prossimo | stato | segna`). Cancello prima di
   pubblicare: `npm run articoli:controlla -- <slug> --rete` (≥27.000 caratteri,
   fonti, prezzi datati, immagini autorizzate, autenticità): se fallisce, resta bozza.
 - Procedura completa del job quotidiano (9:00): `docs/routine-articoli.md`.
+- Registro del prodotto (14/11/2026, docs/registro-prodotto.md): tutto ciò che
+  si produce va tracciato nel Foglio «Piano editoriale Giocamizi · <data>» su
+  Drive (1 Progetti / 100 articoli approfonditi), scheda «Prodotto»; la prima
+  scheda ha il prompt per fare il piano successivo. Si ricostruisce dal repo con
+  `npm run registro -- <cartella>` (dai commit: messaggi chiari in italiano) e
+  si ricarica ogni sera alle 21:00 e dopo ogni pubblicazione importante; il
+  file vecchio prende «zz_SUPERATO — ».
 
 ## Co-work quotidiano (Routine delle 7:00 italiane)
 Un miglioramento al giorno, piccolo e finito, a rotazione:
@@ -213,6 +231,40 @@ ancora veri: se no, versione nuova con la data. Alla fine lascia una nota
 («AAAA-MM-GG 07:00 · Claude · Miglioramento», docs/bacheca.md).
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
+
+## Canzoni di Mizi (14/11/2026)
+- Su Drive: 2 Aree → Giocamizi · Social → «Canzoni di Mizi» (id
+  1VnaChhQWdr6zhvQZom9cMat9jmIiRvDv): guida «00 Come funzionano le canzoni di
+  Mizi», schede in «01 Schede canzoni», file finiti in «99 Canzoni pronte».
+- Una canzone a settimana insieme al post della settimana, SOLO se c'è il file
+  `canzone-NN-slug.mp4`; se manca, slitta. Testi e melodie originali (mai copiare
+  canzoni esistenti, mai nomi di artisti nei prompt); niente Domiziana nei video.
+  Musica con Suno (piano a pagamento), video con CapCut: li fa Giorgia o la sua
+  automazione. Claude scrive le schede nuove quando le 10 finiscono.
+  Elenco e stati in `content/canzoni-mizi.json` (scheda-pronta → pubblicata).
+
+## Il Natale di Mizi (/natale, 14/11/2026)
+- Lo porta avanti SOLO la chat del co-work quotidiano (Decisione su Drive del
+  14/11): le altre chat non toccano /natale, components/natale, lib/natale.ts,
+  lib/natale-esporta.ts, lib/eventi-natale.ts; scrivono in «0 Richieste».
+- Letterina: /natale/letterina-babbo-natale (lib/natale.ts + components/natale/).
+  Sette carte (motivi natale, natale-neve/regali/dolci/renne in motivi.tsx,
+  più stelle-luna e animali-foresta), PDF A4 scritto a mano (lib/natale-esporta.ts),
+  stampa, condivisione, busta da colorare (FoglioBusta), risposta di Babbo
+  Natale dal 20/12. Gli esempi «come scrivere» stanno nella pagina stessa
+  (#come-si-scrive): niente pagina doppia. Riquadro in home e voce «Natale»
+  nel menu solo in stagione (inStagioneNatale, 1/11–15/1).
+- I link a /natale hanno prefetch={false}: la pagina è ISR e sul server di
+  prova il precaricamento resta appeso e blocca networkidle nelle batterie.
+
+## Studio UX degli strumenti (14/11/2026, Drive 1 Progetti)
+- Messaggio «Fatto!» comune: `annuncia(testo, festa)` + <MessaggioEsito />
+  (components/ui/Esito.tsx), fisso in basso con i coriandoli.
+- Bottoni d'azione con testo bianco: bg-rosa-forte / bg-viola-forte /
+  bg-verde-forte (contrasto ≥ 4,5:1), non le tinte chiare del brand.
+- Bersagli da toccare almeno 56 px (min-h-14) negli strumenti per bambini.
+- Ancora da fare (ordine dello studio): letterina a passi con Mizi e voce,
+  modalità bambino/grande, invito a passi diviso in «biglietto» e «kit festa».
 
 ## Instagram (8/11/2026, docs/instagram.md)
 - Post del giorno da `lib/social/post.ts` (carosello da articolo, foto di una

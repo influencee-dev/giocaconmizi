@@ -58,6 +58,7 @@ export function MenuMobile({ voci }: { voci: { href: string; nome: string }[] })
           <Link
             key={m.href}
             href={m.href}
+            prefetch={m.href === "/natale" ? false : undefined}
             onClick={() => setAperto(false)}
             aria-current={percorso === m.href ? "page" : undefined}
             className="rounded-xl px-4 py-3 text-lg font-extrabold text-notte hover:bg-crema aria-[current=page]:bg-crema aria-[current=page]:text-viola"

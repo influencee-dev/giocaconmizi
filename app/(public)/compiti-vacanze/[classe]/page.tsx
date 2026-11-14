@@ -51,7 +51,7 @@ export default async function CompitiVacanzePage({ params }: Params) {
     {
       domanda: `I compiti delle vacanze per la ${nome} sono gratis?`,
       risposta:
-        "Sì. Gli esercizi online sono gratuiti e senza pubblicità. Le schede da stampare in PDF sono un prodotto a parte.",
+        "Sì. Gli esercizi online sono gratuiti e senza pubblicità.",
     },
     {
       domanda: "Quanto tempo al giorno?",
@@ -61,7 +61,7 @@ export default async function CompitiVacanzePage({ params }: Params) {
     {
       domanda: "Servono un account o un login?",
       risposta:
-        "No. Gli esercizi si aprono e si fanno subito. L'account serve solo per salvare l'avanzamento e scaricare i PDF.",
+        "No. Gli esercizi si aprono e si fanno subito. L'account serve solo per salvare l'avanzamento.",
     },
     {
       domanda: "Funzionano dal telefono?",

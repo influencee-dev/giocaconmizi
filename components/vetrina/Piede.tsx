@@ -33,6 +33,7 @@ export const COLONNE: { titolo: string; voci: [string, string][] }[] = [
   {
     titolo: "Feste",
     voci: [
+      ["/natale", "Natale con Mizi"],
       ["/biglietti", "Inviti di compleanno"],
       ["/feste", "Feste per città"],
       ["/ludoteche", "Ludoteche"],
@@ -102,7 +103,7 @@ export function Piede({ logo }: { logo: ReactNode }) {
         <div className="flex flex-col gap-5">
           {logo}
           <p className="max-w-sm text-[15px] leading-relaxed text-notte-tenue">
-            Giochi educativi, storie e feste per bambini dai 3 ai 12 anni. Un&apos;idea di una mamma, Giorgia, per la figlia
+            Giochi educativi, storie e feste per bambini dai 3 ai 12 anni. Un&apos;idea di Giorgia Palazzo, nata con la figlia
             Domiziana: da lei viene il nome di Mizi.
           </p>
           <ul className="flex flex-wrap gap-2">

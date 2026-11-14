@@ -11,6 +11,7 @@ import { Etichette, FOGLIO_A4, MAX_ETICHETTE, nomiOspiti } from "./Etichette";
 import { FoglioFestone, PER_FOGLIO, TESTI_FESTONE, bandierine, fogli, type TestoFestone } from "./Festone";
 import { FoglioTopper, anniTopper } from "./Topper";
 import { FoglioSegnaposto, SEGNAPOSTO_PER_FOGLIO, fogliSegnaposto } from "./Segnaposto";
+import { annuncia, MessaggioEsito } from "@/components/ui/Esito";
 import { FoglioCaccia, INDIZI_PRONTI, MAX_CARATTERI_INDIZIO, NUMERO_INDIZI, indiziDaStampare } from "./Caccia";
 
 /**
@@ -188,6 +189,7 @@ export function Editor() {
     link.download = `${dati.tipo}-${dati.nome || "compleanno"}.png`.toLowerCase().replace(/\s+/g, "-");
     link.href = png;
     link.click();
+    annuncia("Fatto! Lo trovi nei download.", true);
   }, [altezza, larghezza, dati.nome, dati.tipo]);
 
   /* Solo per l'A6, il formato di carta: 4 copie su un foglio A4 da ritagliare. */
@@ -199,6 +201,7 @@ export function Editor() {
     link.download = `foglio-a4-${dati.tipo}-${dati.nome || "compleanno"}.png`.toLowerCase().replace(/\s+/g, "-");
     link.href = png;
     link.click();
+    annuncia("Fatto! Lo trovi nei download.", true);
   }, [altezza, larghezza, dati.nome, dati.tipo]);
 
   const scaricaEtichette = useCallback(async () => {
@@ -209,6 +212,7 @@ export function Editor() {
     link.download = `etichette-${dati.nome || "festa"}.png`.toLowerCase().replace(/\s+/g, "-");
     link.href = png;
     link.click();
+    annuncia("Fatto! Lo trovi nei download.", true);
   }, [dati.nome]);
 
   const scaricaFestone = useCallback(
@@ -220,6 +224,7 @@ export function Editor() {
       link.download = `festone-${dati.nome || "compleanno"}-${pagina}.png`.toLowerCase().replace(/\s+/g, "-");
       link.href = png;
       link.click();
+    annuncia("Fatto! Lo trovi nei download.", true);
     },
     [dati.nome],
   );
@@ -232,6 +237,7 @@ export function Editor() {
     link.download = `topper-torta-${dati.nome || "compleanno"}.png`.toLowerCase().replace(/\s+/g, "-");
     link.href = png;
     link.click();
+    annuncia("Fatto! Lo trovi nei download.", true);
   }, [dati.nome]);
 
   const scaricaSegnaposto = useCallback(
@@ -243,6 +249,7 @@ export function Editor() {
       link.download = `segnaposto-${dati.nome || "festa"}-${pagina}.png`.toLowerCase().replace(/\s+/g, "-");
       link.href = png;
       link.click();
+    annuncia("Fatto! Lo trovi nei download.", true);
     },
     [dati.nome],
   );
@@ -255,6 +262,7 @@ export function Editor() {
     link.download = `caccia-al-tesoro-${dati.nome || "festa"}.png`.toLowerCase().replace(/\s+/g, "-");
     link.href = png;
     link.click();
+    annuncia("Fatto! Lo trovi nei download.", true);
   }, [dati.nome]);
 
   const salvaNelLink = useCallback(() => {
@@ -263,6 +271,7 @@ export function Editor() {
     window.history.replaceState(null, "", url);
     void navigator.clipboard?.writeText(window.location.href).catch(() => undefined);
     setCopiato(true);
+    annuncia("Link copiato: incollalo dove vuoi per ritrovare il biglietto.");
     window.setTimeout(() => setCopiato(false), 2500);
   }, [dati]);
 
@@ -288,6 +297,7 @@ export function Editor() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_minmax(0,22rem)]">
+      <MessaggioEsito />
       {/* Anteprima */}
       <div className="order-1 lg:order-2">
         <div className="lg:sticky lg:top-20">
@@ -312,7 +322,7 @@ export function Editor() {
             <button
               type="button"
               onClick={scarica}
-              className="rounded-bolla bg-rosa px-6 py-4 text-lg font-extrabold text-white"
+              className="rounded-bolla bg-rosa-forte px-6 py-4 text-lg font-extrabold text-white"
             >
               Scarica
             </button>
@@ -320,7 +330,7 @@ export function Editor() {
               <button
                 type="button"
                 onClick={scaricaFoglio}
-                className="rounded-bolla bg-viola px-5 py-4 font-extrabold text-white"
+                className="rounded-bolla bg-viola-forte px-5 py-4 font-extrabold text-white"
               >
                 Foglio A4 (4 copie)
               </button>
@@ -328,7 +338,7 @@ export function Editor() {
             <button
               type="button"
               onClick={mandaSuWhatsApp}
-              className="rounded-bolla bg-verde px-5 py-4 font-extrabold text-white"
+              className="rounded-bolla bg-verde-forte px-5 py-4 font-extrabold text-white"
             >
               Invia su WhatsApp
             </button>
@@ -347,6 +357,12 @@ export function Editor() {
               {copiato ? "Link copiato" : "Salva il link"}
             </button>
           </div>
+          {dati.tipo === "invito" && (dati.luogo || dati.conferma) && (
+            <p className="mt-2 text-center text-sm text-notte-tenue" data-nota-link>
+              «Salva il link» e l&apos;invito digitale contengono quello che hai scritto, anche indirizzo e
+              telefono: mandali solo agli invitati.
+            </p>
+          )}
           {formato === "a6" && (
             <p className="mt-2 text-center text-sm text-notte-tenue">
               Il foglio A4 ha quattro copie coi segni di taglio: stampa e ritaglia.
@@ -426,7 +442,12 @@ export function Editor() {
 
           <div className="flex flex-col gap-2">
             <span className="font-bold text-notte">Frase</span>
-            {fraseSuggerite.map((f) => (
+            {!dati.nome.trim() && (
+              <p className="rounded-morbido bg-crema p-3 text-sm text-notte-tenue" data-frasi-dopo-il-nome>
+                Scrivi prima il nome: qui compaiono le frasi pronte, già con il nome dentro.
+              </p>
+            )}
+            {dati.nome.trim() && fraseSuggerite.map((f) => (
               <button
                 key={f}
                 type="button"
@@ -606,7 +627,7 @@ export function Editor() {
             type="button"
             onClick={scaricaEtichette}
             disabled={nomi.length === 0}
-            className="rounded-bolla bg-viola px-5 py-4 font-extrabold text-white disabled:opacity-50"
+            className="rounded-bolla bg-viola-forte px-5 py-4 font-extrabold text-white disabled:opacity-50"
           >
             Scarica le etichette (A4)
           </button>
@@ -653,7 +674,7 @@ export function Editor() {
                     key={i}
                     type="button"
                     onClick={() => scaricaFestone(i + 1)}
-                    className="rounded-bolla bg-viola px-5 py-3 font-extrabold text-white"
+                    className="rounded-bolla bg-viola-forte px-5 py-3 font-extrabold text-white"
                   >
                     Scarica il foglio {i + 1} di {fogliDelFestone.length}
                   </button>
@@ -687,7 +708,7 @@ export function Editor() {
               ? `Il disco grande dice ${anniTopper(dati.eta)}${dati.nome.trim() ? ` e ${dati.nome.trim()}` : ""}.`
               : "Senza l'età (punto 3) al posto del numero c'è una stella."}
           </p>
-          <button type="button" onClick={scaricaTopper} className="rounded-bolla bg-viola px-5 py-4 font-extrabold text-white" data-scarica-topper>
+          <button type="button" onClick={scaricaTopper} className="rounded-bolla bg-viola-forte px-5 py-4 font-extrabold text-white" data-scarica-topper>
             Scarica il topper (A4)
           </button>
           {/* Il foglio vero, fuori dallo schermo: serve solo per generare il PNG. */}
@@ -712,7 +733,7 @@ export function Editor() {
                   key={i}
                   type="button"
                   onClick={() => void scaricaSegnaposto(i + 1)}
-                  className="rounded-bolla bg-viola px-5 py-4 font-extrabold text-white"
+                  className="rounded-bolla bg-viola-forte px-5 py-4 font-extrabold text-white"
                   data-scarica-segnaposto={i + 1}
                 >
                   {tutti.length === 1 ? "Scarica i segnaposto (A4)" : `Scarica i segnaposto, foglio ${i + 1} di ${tutti.length}`}
@@ -751,7 +772,7 @@ export function Editor() {
               </label>
             ))}
           </div>
-          <button type="button" onClick={scaricaCaccia} className="rounded-bolla bg-viola px-5 py-4 font-extrabold text-white" data-scarica-caccia>
+          <button type="button" onClick={scaricaCaccia} className="rounded-bolla bg-viola-forte px-5 py-4 font-extrabold text-white" data-scarica-caccia>
             Scarica la caccia al tesoro (A4)
           </button>
           {/* Il foglio vero, fuori dallo schermo: serve solo per generare il PNG. */}
@@ -790,7 +811,7 @@ function Campo({
       <input
         type="text"
         value={valore}
-        placeholder={placeholder}
+        placeholder={placeholder ? `es. ${placeholder}` : undefined}
         onChange={(e) => onCambia(e.target.value)}
         className="rounded-morbido border-2 border-crema-scuro bg-white px-4 py-3 text-lg text-notte"
         style={{ minHeight: "3.25rem" }}
@@ -817,7 +838,7 @@ function Scelte({
           onClick={() => onCambia(o.id)}
           aria-pressed={valore === o.id}
           className={`rounded-bolla px-4 py-3 font-bold ${
-            valore === o.id ? "bg-viola text-white" : "border-2 border-crema-scuro bg-white text-notte"
+            valore === o.id ? "bg-viola-forte text-white" : "border-2 border-crema-scuro bg-white text-notte"
           }`}
           style={{ minHeight: "3rem", minWidth: 0 }}
         >

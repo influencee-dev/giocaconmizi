@@ -19,6 +19,11 @@
   /* Verde e rosso solo per il feedback dei giochi, mai per il brand */
   --color-verde: #4caf6d;
   --color-rosso: #e8474b;
+  /* Versioni scure per i bottoni d'azione con il testo bianco: contrasto
+     almeno 4,5:1 (WCAG 1.4.3), studio UX del 14/11/2026. */
+  --color-rosa-forte: #c42a6b;
+  --color-verde-forte: #2f7a4a;
+  --color-viola-forte: #7b4cc4;
 
   --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
   --font-lettura: var(--font-lexend), var(--font-nunito), ui-sans-serif, sans-serif;
@@ -97,6 +102,16 @@ a[role="button"],
   height: 1.25rem;
   border-radius: 2px;
   animation: cade 2.4s linear infinite;
+}
+
+/* Coriandoli che cadono una volta sola: la festa dopo un download. */
+.coriandolo-uno {
+  position: absolute;
+  top: -1.5rem;
+  width: 0.6rem;
+  height: 1rem;
+  border-radius: 2px;
+  animation: cade 1.6s ease-in forwards;
 }
 
 @keyframes comparsa {

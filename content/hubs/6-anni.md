@@ -12,7 +12,7 @@ games: [leggi-e-rispondi, unisci-le-sillabe, addizioni-entro-20, l-orologio, ort
 Prima elementare: si impara a leggere e a scrivere, si contano i primi numeri a due cifre. Qui trovi giochi gratuiti che seguono il programma della prima classe, storie da leggere in stampatello e in corsivo, e il labirinto a blocchi per iniziare il coding come si fa a scuola.
 
 ## Cosa sa fare, di solito, un bambino di 6 anni
-Ogni bambino ha i suoi tempi: questa lista serve a scegliere i giochi, non a misurare.
+Se qualcosa non c'è ancora, prova i [giochi dei 5 anni](/giochi/eta/5-anni).
 - Legge parole e frasi brevi in stampatello
 - Scrive il proprio nome e parole semplici
 - Fa addizioni e sottrazioni entro il 20

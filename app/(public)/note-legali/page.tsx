@@ -36,8 +36,8 @@ export default function NoteLegaliPage() {
           Giocamizi (giocamizi.it), chiamato anche Gioca con Mizi, è gestito da{" "}
           {SOCIETA.ragioneSociale}, sede legale {SOCIETA.sede}, P.IVA e codice fiscale{" "}
           {SOCIETA.piva}, iscritta al Registro delle imprese della Romagna (REA {SOCIETA.rea}),
-          capitale sociale {SOCIETA.capitale}. Il sito è un&apos;idea di Giorgia Palazzo, founder
-          di Partidea e Influencee e mamma di Domiziana. I contenuti sono gratuiti, il sito non
+          capitale sociale {SOCIETA.capitale}. Il sito è un&apos;idea di Giorgia Palazzo, docente
+          universitaria, imprenditrice nel digitale, co-founder di Myndo e CEO di Partidea, mamma di Domiziana. I contenuti sono gratuiti, il sito non
           ospita pubblicità e non ha accordi commerciali con le attività citate. Contatto unico
           per ogni comunicazione, anche da parte delle autorità: <Email />.
         </p>

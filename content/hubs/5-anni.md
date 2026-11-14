@@ -12,7 +12,7 @@ games: [lettera-iniziale, unisci-le-sillabe, unisci-i-puntini, trova-le-differen
 A 5 anni si prepara l'ingresso in prima elementare. I giochi di questa pagina lavorano proprio su quello che serve: i suoni iniziali delle parole, le prime sillabe, i numeri fino a 20, l'attenzione e la logica. Tutto gratis, senza pubblicità, con Mizi che guida a voce.
 
 ## Cosa sa fare, di solito, un bambino di 5 anni
-Ogni bambino ha i suoi tempi: questa lista serve a scegliere i giochi, non a misurare.
+Se qualcosa non c'è ancora, prova i [giochi dei 4 anni](/giochi/eta/4-anni).
 - Riconosce il suono iniziale delle parole (M come mela)
 - Unisce due sillabe per formare parole semplici
 - Conta fino a 20 e riconosce i numeri scritti

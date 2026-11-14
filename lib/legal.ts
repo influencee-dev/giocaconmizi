@@ -21,7 +21,7 @@ export const SOCIETA = {
 
 export const TITOLARE = {
   nome: "Partidea SRL",
-  ruolo: `con sede in ${SOCIETA.sede}, P.IVA ${SOCIETA.piva}. Giocamizi è un'idea di Giorgia Palazzo, founder di Partidea e Influencee e mamma di Domiziana, da cui viene il nome di Mizi`,
+  ruolo: `con sede in ${SOCIETA.sede}, P.IVA ${SOCIETA.piva}. Giocamizi è un'idea di Giorgia Palazzo, docente universitaria, imprenditrice nel digitale, co-founder di Myndo e CEO di Partidea, mamma di Domiziana, da cui viene il nome di Mizi`,
   // NOTA: casella da attivare sul dominio giocamizi.it (comprato il 24/10/2026).
   email: "ciao@giocamizi.it",
 } as const;

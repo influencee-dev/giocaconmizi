@@ -1,28 +1,28 @@
 ---
 title: "Perché lo facciamo"
 slug: perche-lo-facciamo
-description: "Gioca con Mizi è nato per una bambina e i suoi compiti delle vacanze. Niente pubblicità, giochi gratis, e una parte di ogni libro venduto va a un'associazione per l'infanzia."
+description: "Perché Giocamizi è gratis, senza pubblicità e senza dati dei bambini: lo spiega Giorgia Palazzo, che l'ha creato con sua figlia."
 ---
 
 # Perché lo facciamo
 
-Questo sito è nato in estate, con una bambina seduta al tavolo della cucina e un libro dei compiti delle vacanze aperto davanti. Cercavamo giochi online che l'aiutassero a leggere e contare senza annoiarla. Abbiamo trovato pubblicità, timer, personaggi di cartoni animati e poco altro.
+Giocamizi è nato nell'estate 2026: mia figlia Domi non aveva voglia di fare i compiti e io, per spronarla, ho iniziato a giocarci insieme.
 
-Così abbiamo costruito Gioca con Mizi.
+Poi ci ho messo dentro le cose che servono a me, da mamma e da professionista: i posti dove portarla nel weekend, le idee per la sua festa, i consigli che ci scambiamo tra mamme. Parlo soprattutto alle mamme perché è con loro che parlo ogni giorno, ma questo è un posto per tutti i genitori.
 
-## Tre promesse
+## Tre cose che non cambiano
 
-**I giochi sono gratuiti e senza pubblicità.** Non c'è un banner, non c'è un video da saltare, non c'è un account da creare. Si apre e si gioca.
+**I giochi sono gratis e senza pubblicità.** Niente banner, niente video da saltare, niente account da creare. Si apre e si gioca.
 
-**I dati dei bambini restano a casa.** Non chiediamo il nome dei bambini, non chiediamo la data di nascita. Se vuoi ricevere le novità ci lasci la tua email, e basta.
+**I dati dei bambini restano a casa.** Non chiedo il nome dei bambini, né la data di nascita. Se vuoi le novità mi lasci la tua email, e basta.
 
-**Una parte di quello che guadagniamo va a chi aiuta i bambini.** Il sito si sostiene vendendo libri da colorare, quaderni di attività e storie in PDF, tutti fatti da noi. Una quota fissa di ogni vendita è destinata a un'associazione che si occupa di infanzia. Qui sotto, mese per mese, pubblichiamo quanto abbiamo donato.
+**Il digitale si usa con cura.** Per me il digitale non è un problema: è un amplificatore. Ma va gestito con cura, e per questo qui non ci sono timer, trucchi per farti restare o «hai perso».
 
-## Donato finora
-*(aggiornato ogni mese)*
+## E i soldi?
+Non l'ho fatto per guadagnare. Dietro c'è lavoro e tempo, quindi se un giorno chiederò qualcosa sarà un sostegno al sito, e lo dirò chiaramente.
 
 ## Chi c'è dietro
-Gioca con Mizi è un progetto di Giorgia Palazzo, docente universitaria e imprenditrice nel digitale, e del team di Partidea. [Chi siamo →](/chi-siamo)
+Io, Giorgia Palazzo: docente universitaria, imprenditrice nel digitale, co-founder di Myndo e CEO di Partidea. Il sito lo gestisce Partidea SRL. [Chi siamo →](/chi-siamo)
 
 ## Vuoi collaborare?
-Se rappresenti un'associazione per l'infanzia, una scuola o un nido, scrivici: cerchiamo realtà trasparenti con cui crescere insieme.
+Sei un'associazione, una scuola o un'attività per bambini? Scrivimi a [ciao@giocamizi.it](mailto:ciao@giocamizi.it).

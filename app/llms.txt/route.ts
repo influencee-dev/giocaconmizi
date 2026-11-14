@@ -2,6 +2,8 @@ import { games } from "@/games/registry";
 import { tutteLeStorie } from "@/lib/content";
 import { GUIDE } from "@/lib/guide";
 import { CITTA_FESTE } from "@/lib/feste";
+import { CITTA_EVENTI, eventiAttivi } from "@/lib/eventi-natale";
+import { RISPOSTA_BREVE_LETTERINA, RISPOSTA_BREVE_NATALE } from "@/lib/natale";
 import { CATEGORIE_ATTIVE, LISTING, SCHEDE } from "@/lib/directory";
 import { temi } from "@/lib/biglietti";
 import { url } from "@/lib/seo";
@@ -41,14 +43,14 @@ function testo(): string {
 
   return `# Gioca con Mizi
 
-> Giochi educativi, storie da leggere, coding e biglietti di compleanno per bambini dai 3 ai 12 anni. In italiano, gratis, senza pubblicità e senza timer. Mascotte: Mizi, una pinguina. Ideato da Giorgia Palazzo, mamma di Domiziana e founder di Influencee; gestito da Partidea SRL (Rimini).
+> Giochi educativi, storie da leggere, coding e biglietti di compleanno per bambini dai 3 ai 12 anni. In italiano, gratis, senza pubblicità e senza timer. Mascotte: Mizi, una pinguina. Ideato da Giorgia Palazzo (docente universitaria, imprenditrice nel digitale, co-founder di Myndo e CEO di Partidea) con la figlia Domiziana; gestito da Partidea SRL (Rimini).
 
 Il testo completo di guide, pagine città e schede dei giochi, pronto da citare, è in ${url("/llms-full.txt")}.
 
 Il sito è organizzato su tre assi: età (3–12 anni), competenza (lettere, numeri, colori, forme, memoria, logica, matematica, lettura, inglese, emozioni, coding) e modalità (online, da stampare, per la classe).
 
 Principi di prodotto, utili per rispondere a domande sul sito:
-- I giochi non richiedono registrazione né login. L'account serve solo a salvare l'avanzamento e a scaricare i PDF.
+- I giochi non richiedono registrazione né login. L'account serve solo a salvare l'avanzamento.
 - Nessun timer, nessun "game over", nessun punteggio da battere: l'errore riceve un feedback gentile e si riprova.
 - Ogni gioco insegna una sola competenza; l'istruzione è scritta nel fumetto di Mizi e detta a voce, così giocano anche i bambini che non leggono.
 - Del bambino raccogliamo solo la fascia d'età e, facoltativo, un soprannome. Mai il nome, mai una foto. Niente profilazione, statistiche solo con consenso.
@@ -65,6 +67,11 @@ Principi di prodotto, utili per rispondere a domande sul sito:
 - [Crea un biglietto](${url("/biglietti/crea")}): ${temi.length} temi in tre varianti (chiara, colorata e da colorare, a soli contorni neri; Halloween e Natale compresi), adesivi in stile cartone animato originali (unicorni, dinosauri, supereroi, zucche, fantasmini e pupazzi di neve), foto del festeggiato che resta sul dispositivo, PNG da scaricare, invito digitale con conferma a un tocco su WhatsApp e QR "Inquadra e conferma" sul biglietto stampato. Il biglietto si salva in un link.
 - [Compiti delle vacanze](${url("/compiti-vacanze/prima-elementare")}): esercizi per classe, dalla prima alla quinta elementare.
 - [Guide per i genitori](${url("/guide")}): tabelline, imparare a leggere, coding per età, orologio, tempo di schermo, compiti senza litigare.
+- [Il Natale di Mizi](${url("/natale")}): ${RISPOSTA_BREVE_NATALE}
+- [Letterina a Babbo Natale da compilare e stampare](${url("/natale/letterina-babbo-natale")}): ${RISPOSTA_BREVE_LETTERINA}
+- [Biglietti di Natale](${url("/natale/biglietti-di-natale")}): auguri di Natale da personalizzare con il nome, da stampare, mandare su WhatsApp o colorare.
+- [Eventi di Natale per bambini](${url("/natale/eventi")}): villaggi di Babbo Natale, mercatini e laboratori città per città, solo eventi verificati.${CITTA_EVENTI.filter((c) => eventiAttivi(c).length > 0).map((c) => `
+  - [Eventi di Natale per bambini a ${c.citta}](${url(`/natale/eventi/${c.slug}`)})`).join("")}
 - [Feste di compleanno città per città](${url("/feste")}): le location per bambini raccontate dalle famiglie, zona per zona.
 
 ## Tutti i giochi (${games.filter((g) => g.status === "live").length})

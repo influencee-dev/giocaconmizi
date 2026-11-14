@@ -1,3 +1,4 @@
+import { inStagioneNatale } from "@/lib/natale";
 import Image from "next/image";
 import Link from "next/link";
 import { JsonLd, jsonLdSito } from "@/components/seo/JsonLd";
@@ -13,8 +14,10 @@ import { Benvenuto } from "@/components/app/Benvenuto";
 import { Freccia } from "@/components/vetrina";
 import { MenuMobile } from "@/components/vetrina/MenuMobile";
 
+// Il Natale entra nel menu solo in stagione (lib/natale.ts).
 const MENU = [
   { href: "/giochi", nome: "Giochi" },
+  ...(inStagioneNatale() ? [{ href: "/natale", nome: "Natale" }] : []),
   { href: "/feste", nome: "Feste" },
   { href: "/guide", nome: "Guide" },
   { href: "/storie", nome: "Storie" },
@@ -57,7 +60,9 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
           <Logo />
           <nav aria-label="Principale" className="hidden items-center gap-1 lg:flex">
             {MENU.map((m) => (
-              <Link key={m.href} href={m.href} className="rounded-xl px-3.5 py-2 text-[15px] font-bold text-notte hover:text-viola">
+              // /natale si rigenera da sola (ISR): niente precaricamento automatico,
+              // che sul server di prova resta appeso (come le risorse educative).
+              <Link key={m.href} href={m.href} prefetch={m.href === "/natale" ? false : undefined} className="rounded-xl px-3.5 py-2 text-[15px] font-bold text-notte hover:text-viola">
                 {m.nome}
               </Link>
             ))}

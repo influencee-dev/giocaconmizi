@@ -12,7 +12,7 @@ games: [tabelline, ortografia-c-ch-g-gh, leggi-e-rispondi, l-orologio, labirinto
 In seconda elementare arrivano le tabelline, l'ortografia con C/CH e G/GH, la lettura scorrevole. Questi giochi gratuiti lavorano su ciascuna di queste cose, una alla volta, con Mizi che festeggia ogni progresso. In più storie un po' più lunghe e il coding con cicli e ripetizioni.
 
 ## Cosa sa fare, di solito, un bambino di 7 anni
-Ogni bambino ha i suoi tempi: questa lista serve a scegliere i giochi, non a misurare.
+Se qualcosa non c'è ancora, prova i [giochi dei 6 anni](/giochi/eta/6-anni).
 - Legge un testo breve in autonomia e risponde a domande
 - Conosce le tabelline del 2, 3, 5 e 10
 - Distingue i suoni duri e dolci (C/CH, G/GH)
