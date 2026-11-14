@@ -35,6 +35,11 @@
   "app/(public)/iscrizione-confermata/page.tsx": "2026-11-07",
   "app/(public)/la-tua-scheda/[codice]/page.tsx": "2026-11-08",
   "app/(public)/metodo/page.tsx": "2026-10-31",
+  "app/(public)/natale/biglietti-di-natale/page.tsx": "2026-11-14",
+  "app/(public)/natale/eventi/[citta]/page.tsx": "2026-11-14",
+  "app/(public)/natale/eventi/page.tsx": "2026-11-14",
+  "app/(public)/natale/letterina-babbo-natale/page.tsx": "2026-11-14",
+  "app/(public)/natale/page.tsx": "2026-11-14",
   "app/(public)/note-legali/page.tsx": "2026-11-02",
   "app/(public)/page.tsx": "2026-11-03",
   "app/(public)/per-insegnanti/page.tsx": "2026-11-08",
@@ -51,7 +56,7 @@
   "app/(public)/storie/page.tsx": "2026-10-31",
   "app/(public)/storie/stampatello/page.tsx": "2026-08-23",
   "app/(public)/termini-attivita/page.tsx": "2026-11-08",
-  "cards/registry.ts": "2026-10-08",
+  "cards/registry.ts": "2026-11-14",
   "content/games/abbina-i-colori.md": "2026-08-23",
   "content/games/addizioni-entro-20.md": "2026-08-23",
   "content/games/colora-con-mizi.md": "2026-11-03",
@@ -156,6 +161,6 @@
   "games/unisci-i-puntini": "2026-10-11",
   "games/unisci-le-sillabe": "2026-10-11",
   "games/vesti-mizi": "2026-11-03",
-  "lib/biglietti.ts": "2026-10-26",
+  "lib/biglietti.ts": "2026-11-14",
   "lib/esempi.ts": "2026-08-23"
 }
