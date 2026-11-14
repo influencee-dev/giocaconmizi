@@ -219,6 +219,9 @@ export function Biglietto({
           testo={dati.frase}
           x={centroX}
           y={u * 65}
+          // L'ultima riga della frase deve restare sopra quello che viene dopo
+          // (data, indirizzo o firma): se non ci sta, la frase si rimpicciolisce.
+          fondoMax={(dati.data || dati.ora ? u * 79 : righeLuogo.length ? u * 84 : dati.firma ? u * 86 : u * 96) - u * 5}
           larghezzaMax={larghezza * 0.78}
           dimensione={u * 4}
           interlinea={u * 5.4}
@@ -236,6 +239,7 @@ export function Biglietto({
           fontSize={corpoCheEntra(rigaQuando, u * 4.2, larghezzaUtile)}
           fontWeight="800"
           fill={testo}
+          data-riga-quando
         >
           {rigaQuando}
         </text>
@@ -326,37 +330,57 @@ function ParagrafoSvg({
   testo,
   x,
   y,
+  fondoMax = Infinity,
   larghezzaMax,
-  dimensione,
-  interlinea,
+  dimensione: dimensioneMax,
+  interlinea: interlineaMax,
   colore,
   famiglia,
 }: {
   testo: string;
   x: number;
   y: number;
+  /** La linea di base più bassa permessa all'ultima riga. */
+  fondoMax?: number;
   larghezzaMax: number;
   dimensione: number;
   interlinea: number;
   colore: string;
   famiglia: string;
 }) {
-  const perRiga = Math.max(12, Math.floor(larghezzaMax / (dimensione * 0.52)));
-  const righe: string[] = [];
-  let corrente = "";
-
-  for (const parola of testo.split(/\s+/)) {
-    const provvisoria = corrente ? `${corrente} ${parola}` : parola;
-    if (provvisoria.length > perRiga && corrente) {
-      righe.push(corrente);
-      corrente = parola;
-    } else {
-      corrente = provvisoria;
+  const aCapo = (corpo: number) => {
+    const perRiga = Math.max(12, Math.floor(larghezzaMax / (corpo * 0.52)));
+    const righe: string[] = [];
+    let corrente = "";
+    for (const parola of testo.split(/\s+/)) {
+      const provvisoria = corrente ? `${corrente} ${parola}` : parola;
+      if (provvisoria.length > perRiga && corrente) {
+        righe.push(corrente);
+        corrente = parola;
+      } else {
+        corrente = provvisoria;
+      }
     }
-  }
-  if (corrente) righe.push(corrente);
+    if (corrente) righe.push(corrente);
+    return righe;
+  };
 
-  const visibili = righe.slice(0, 4);
+  // Si parte dal corpo pieno e si scende a piccoli passi finché la frase
+  // (al massimo 4 righe) finisce sopra fondoMax; sotto il 62% ci si ferma e
+  // si tengono solo le righe che entrano.
+  const rapporto = interlineaMax / dimensioneMax;
+  let dimensione = dimensioneMax;
+  let righe = aCapo(dimensione);
+  while (
+    dimensione > dimensioneMax * 0.62 &&
+    (righe.length > 4 || y + (Math.min(righe.length, 4) - 1) * dimensione * rapporto > fondoMax)
+  ) {
+    dimensione -= dimensioneMax * 0.04;
+    righe = aCapo(dimensione);
+  }
+  const interlinea = dimensione * rapporto;
+  const entrano = Math.max(1, Math.floor((fondoMax - y) / interlinea) + 1);
+  const visibili = righe.slice(0, Math.min(4, entrano));
 
   return (
     <>
@@ -369,6 +393,7 @@ function ParagrafoSvg({
           fontFamily={famiglia}
           fontSize={dimensione}
           fill={colore}
+          data-riga-frase
         >
           {riga}
         </text>

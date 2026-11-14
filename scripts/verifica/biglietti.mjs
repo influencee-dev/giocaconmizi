@@ -177,14 +177,21 @@ await page.waitForTimeout(400);
 ok("invito digitale con bottone conferma",
   (await page.getByRole("button", { name: /Confermo, ci saremo/ }).count()) === 1);
 
-// Frasi a tema: col tema halloween la prima frase proposta è a tema
+// Frasi pronte solo dopo il nome (niente «{nome}» a vista, studio UX 14/11)
 await page.goto(`${BASE}/biglietti/crea?tema=halloween`, { waitUntil: "networkidle" });
 await page.waitForTimeout(400);
+ok("frasi pronte: senza nome c'è l'invito a scriverlo, niente {nome}",
+  (await page.locator("[data-frasi-dopo-il-nome]").count()) === 1 && (await page.locator("button:has-text('{nome}')").count()) === 0);
+await page.getByLabel("Nome", { exact: true }).fill("Margherita");
+await page.waitForTimeout(200);
+// Frasi a tema: col tema halloween la prima frase proposta è a tema
 ok("frasi a tema (halloween)", await page.locator("button:has-text('Dolcetto o scherzetto')").count());
 
 // Tema natale: frase dedicata e i tre adesivi nuovi a catalogo
 await page.goto(`${BASE}/biglietti/crea?tema=natale`, { waitUntil: "networkidle" });
 await page.waitForTimeout(400);
+await page.getByLabel("Nome", { exact: true }).fill("Margherita");
+await page.waitForTimeout(200);
 ok("frasi a tema (natale)", await page.getByRole("button", { name: /sotto l'albero/ }).count());
 ok("adesivi di natale a catalogo",
   (await page.getByRole("button", { name: "Aggiungi Pupazzo di neve" }).count()) &&
@@ -192,6 +199,41 @@ ok("adesivi di natale a catalogo",
   (await page.getByRole("button", { name: "Aggiungi Fiocco di neve" }).count()));
 ok("adesivi del tema in testa (natale)",
   (await page.locator("button[aria-label^='Aggiungi ']").first().getAttribute("aria-label")) === "Aggiungi Alberello");
+
+// La frase non deve mai toccare la data (difetto trovato il 14/11): tutte le
+// frasi pronte, nome lungo, in tutti e quattro i formati.
+await page.goto(`${BASE}/biglietti/crea`, { waitUntil: "networkidle" });
+await page.getByLabel("Nome", { exact: true }).fill("Margherita");
+await page.getByLabel("Età", { exact: true }).fill("10");
+await page.getByLabel("Data", { exact: true }).fill("sabato 20 dicembre");
+await page.getByLabel("Ora", { exact: true }).fill("dalle 16 alle 19");
+await page.getByLabel("Dove", { exact: true }).fill("Via Roma 1, Milano");
+await page.waitForTimeout(200);
+const sovrapposte = [];
+for (const formato of ["A6 da stampare", "A5 da stampare", "WhatsApp e storie", "Quadrato"]) {
+  await page.getByRole("button", { name: formato }).tap();
+  const frasi = page.locator("button.text-left.text-sm");
+  const quante = await frasi.count();
+  for (let i = 0; i < quante; i++) {
+    await frasi.nth(i).tap();
+    await page.waitForTimeout(60);
+    const esito = await page.evaluate(() => {
+      const svg = document.querySelector(".lg\\:sticky svg") ?? document.querySelector("svg[aria-label^='Biglietto per']");
+      const righe = [...svg.querySelectorAll("[data-riga-frase]")];
+      const quando = svg.querySelector("[data-riga-quando]");
+      if (!righe.length || !quando) return null;
+      const fondo = Math.max(...righe.map((r) => { const b = r.getBBox(); return b.y + b.height; }));
+      return { fondo, cima: quando.getBBox().y, frase: righe.map((r) => r.textContent).join(" ") };
+    });
+    if (esito && esito.fondo > esito.cima) sovrapposte.push(`${formato}: «${esito.frase}»`);
+  }
+}
+ok("la frase non tocca mai la data (tutte le frasi pronte, 4 formati)", sovrapposte.length === 0, sovrapposte.join(" | "));
+const attesaEsito = page.waitForEvent("download", { timeout: 10000 }).catch(() => null);
+await page.getByRole("button", { name: "Scarica", exact: true }).tap();
+await attesaEsito;
+ok("dopo «Scarica» compare il messaggio «Fatto!» in basso",
+  await page.locator("[data-esito]").filter({ hasText: "Fatto!" }).isVisible());
 
 // Da colorare: dal link della pagina SEO il tool si apre già in modalità
 // contorni; il PNG scaricato deve essere bianco e nero (quasi nessun pixel
