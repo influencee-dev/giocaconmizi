@@ -78,10 +78,18 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   codici veri non vanno MAI nel repo. Le pagine pubbliche leggono le
   risposte accettate con `pubblicate()` (lib/directory-db.ts) e si
   rigenerano ogni 10 minuti o subito dopo una decisione.
-- `lib/risorse-educative.ts` + `lib/risorse-educative-dati.ts` — l'hub
-  /risorse-educative-bambini (5 sezioni filtrabili; pagina propria
-  /risorse-educative-bambini/<slug> SOLO per chi reclama la scheda e viene
-  approvato). Reclamo come le attività: «È la tua realtà?» → Candidature →
+- `lib/risorse-educative.ts` + `lib/risorse-educative-dati.ts` +
+  `lib/risorse-categorie.ts` — dal 14/11/2026 una directory come le feste
+  (docs/piano-risorse-eventi.md): /risorse-educative-bambini → /<categoria>
+  → /<categoria>/<provincia> (≥2 schede) e la scheda di OGNI realtà su
+  /risorse-educative-bambini/<slug> (il link delle email: senza categoria
+  nell'indirizzo apposta). Categoria nuova = una voce in CATEGORIE_RISORSE,
+  appare da sola alla prima scheda. Anti-scraping solo sull'hub esatto.
+  Anteprime dei siti (decisione di Giorgia del 14/11/2026, eccezione alla
+  regola «mai foto dai siti»): screenshot ritagliati SOLO delle risorse
+  online (blog, portali), mai di scuole/nidi/cooperative, guardati uno per
+  uno (niente volti di bambini, personaggi protetti, banner cookie; mai
+  cliccare «Accetta» a nome di nessuno): `lib/risorse-anteprime.ts`. Reclamo come le attività: «È la tua realtà?» → Candidature →
   link personale da /admin/[codice]/risorse (chiave `risorse/<slug>` in
   dir_inviti/dir_richieste) → la realtà completa la scheda e carica il logo
   (ricodificato in WebP, approvato da Giorgia, servito da /loghi/risorse/).

@@ -5,6 +5,7 @@ import { LogoRisorsa } from "./CardRisorsa";
 import { percorsoRisorsa } from "@/lib/risorse-educative";
 import { categoriaDiRisorsa } from "@/lib/risorse-categorie";
 import type { RisorsaVista } from "@/lib/risorse-reclamo";
+import { anteprimaSito } from "@/lib/risorse-anteprime";
 
 /**
  * La card di una risorsa nella directory, gemella di CardRicerca delle feste:
@@ -15,6 +16,7 @@ import type { RisorsaVista } from "@/lib/risorse-reclamo";
 export function CardRisorsaDirectory({ r }: { r: RisorsaVista }) {
   const cat = categoriaDiRisorsa(r);
   const href = percorsoRisorsa(r);
+  const foto = anteprimaSito(r.slug);
   return (
     <article
       data-risultato={r.slug}
@@ -22,7 +24,19 @@ export function CardRisorsaDirectory({ r }: { r: RisorsaVista }) {
     >
       <div className="relative">
         <Link href={href} className="block" tabIndex={-1} aria-hidden>
-          <Illustrazione colore={cat.colore} icona={cat.icona} alta="h-36" />
+          {foto ? (
+            // eslint-disable-next-line @next/next/no-img-element -- WebP già ottimizzati, servito dal nostro dominio
+            <img
+              src={foto.src}
+              srcSet={foto.srcSet}
+              sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
+              alt={`La homepage del sito di ${r.nome}`}
+              loading="lazy"
+              className="aspect-[16/9] w-full border-b border-notte/10 object-cover object-top"
+            />
+          ) : (
+            <Illustrazione colore={cat.colore} icona={cat.icona} alta="h-36" />
+          )}
         </Link>
         <span className="absolute left-3 top-3 flex flex-wrap gap-1.5">
           <span className="rounded-full bg-white px-2.5 py-0.5 text-xs font-extrabold text-notte">{cat.breve}</span>

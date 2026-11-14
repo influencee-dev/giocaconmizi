@@ -12,6 +12,7 @@ import { CardRisorsaDirectory } from "@/components/risorse/CardRisorsaDirectory"
 import { CtaRisorsa, NavCategorieRisorse } from "@/components/risorse/Directory";
 import { url } from "@/lib/seo";
 import { RISORSE } from "@/lib/risorse-educative-dati";
+import { DATA_ANTEPRIME, anteprimaSito } from "@/lib/risorse-anteprime";
 import { AVVISO_LINK, DISCLAIMER, PERCORSO_RISORSE, chiaveRisorsa, dominio, percorsoRisorsa } from "@/lib/risorse-educative";
 import { linkSocial, risorseVisibili, type RisorsaVista } from "@/lib/risorse-reclamo";
 import {
@@ -201,6 +202,7 @@ function ComeScegliere({ cat }: { cat: CategoriaRisorsa }) {
 function PaginaScheda({ r, tutte }: { r: RisorsaVista; tutte: RisorsaVista[] }) {
   const cat = categoriaDiRisorsa(r);
   const prov = provinciaDi(r);
+  const foto = anteprimaSito(r.slug);
   const e = r.extra;
   const social = (["instagram", "facebook", "tiktok", "youtube"] as const)
     .map((c) => ({ campo: c, href: linkSocial(c, e[c]) }))
@@ -239,7 +241,23 @@ function PaginaScheda({ r, tutte }: { r: RisorsaVista; tutte: RisorsaVista[] }) 
 
       <header className="overflow-hidden rounded-[1.8rem] border border-notte/10 bg-white">
         <div className="relative">
-          <Illustrazione colore={cat.colore} icona={cat.icona} alta="h-40 sm:h-52" grande />
+          {foto ? (
+            <figure>
+              {/* eslint-disable-next-line @next/next/no-img-element -- WebP già ottimizzati, servito dal nostro dominio */}
+              <img
+                src={foto.src}
+                srcSet={foto.srcSet}
+                sizes="(min-width: 1280px) 1200px, 100vw"
+                alt={`La homepage del sito di ${r.nome}`}
+                className="aspect-[16/9] max-h-[26rem] w-full border-b border-notte/10 object-cover object-top"
+              />
+              <figcaption className="px-6 pt-3 text-xs font-semibold text-notte-tenue sm:px-8">
+                Anteprima della homepage di {dominio(r.url)}, fotografata il {DATA_ANTEPRIME}.
+              </figcaption>
+            </figure>
+          ) : (
+            <Illustrazione colore={cat.colore} icona={cat.icona} alta="h-40 sm:h-52" grande />
+          )}
           <span className="absolute left-4 top-4 flex flex-wrap gap-1.5">
             <Link href={percorsoCategoriaRisorse(cat)} className="rounded-full bg-white px-3 py-1 text-xs font-extrabold text-notte">
               {cat.nome}
