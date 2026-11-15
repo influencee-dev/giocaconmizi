@@ -1,0 +1,38 @@
+{
+ "secondi": 95,
+ "caricato": "2026-11-16",
+ "capitoli": [
+  {
+   "da": 0,
+   "titolo": "Ciao, sono Mizi"
+  },
+  {
+   "da": 18,
+   "titolo": "1 · Cerca la tua attività"
+  },
+  {
+   "da": 27,
+   "titolo": "2 · Tocca «Reclama la scheda»"
+  },
+  {
+   "da": 35,
+   "titolo": "3 · Compila il modulo"
+  },
+  {
+   "da": 48,
+   "titolo": "4 · Controlliamo noi, a mano"
+  },
+  {
+   "da": 56,
+   "titolo": "5 · Ricevi il tuo link personale"
+  },
+  {
+   "da": 63,
+   "titolo": "6 · Approva, completa o togli"
+  },
+  {
+   "da": 76,
+   "titolo": "7 · La tua scheda è verificata"
+  }
+ ]
+}

@@ -1,1 +1,81 @@
-[]
+[
+ {
+  "slug": "come-reclamare-la-scheda",
+  "gruppo": "partner",
+  "titolo": "Come reclamare la scheda della tua attività",
+  "ordine": 1,
+  "descrizione": "Mizi ti mostra, passo per passo, come trovare la tua scheda su Giocamizi, reclamarla e completarla. Gratis.",
+  "rispostaBreve": "Per reclamare la scheda della tua attività su Giocamizi: apri la scheda, tocca «Reclama la scheda», compila il modulo con nome ed email. Dopo un controllo a mano ricevi un link personale per approvarla, completarla con contatti, orari e logo, o toglierla. È gratis, senza commissioni.",
+  "video": {
+   "src": "/video/come-reclamare-la-scheda.mp4",
+   "poster": "/video/come-reclamare-la-scheda.webp",
+   "sottotitoli": "/video/come-reclamare-la-scheda.vtt",
+   "durata": "PT1M35S",
+   "secondi": 95,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Hai un'attività per bambini, una scuola o un progetto educativo? Forse su Giocamizi la tua scheda c'è già. Ti faccio vedere come reclamarla: è gratis, e ci vogliono pochi minuti!",
+    "Per prima cosa, cerca la tua attività. Le feste sono divise per città, e le risorse educative per categoria e provincia.",
+    "Apri la tua scheda e scorri fino in fondo: lì c'è il bottone «Reclama la scheda».",
+    "Si apre un modulo, con la tua scheda già scelta. Scrivi il tuo nome, l'email e, se vuoi, un telefono. Non preoccuparti: restano privati e non finiscono sul sito.",
+    "Poi il team di Giocamizi controlla a mano che sia proprio la tua realtà. Niente va online da solo!",
+    "A quel punto ti arriva un'email con il tuo link personale. Niente password da ricordare!",
+    "Dal link vedi la scheda proprio come la vedono le famiglie. Puoi approvarla, completarla con descrizione, contatti, orari e logo, oppure chiedere di toglierla.",
+    "Quando le modifiche sono approvate, la tua scheda prende il bollino «Verificata». Ed è gratis, davvero: nessuna commissione e nessuna pubblicità.",
+    "Trovi tutti i passaggi su giocamizi.it, nella pagina «Come reclamare la scheda». Ti aspetto! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 18,
+    "titolo": "1 · Cerca la tua attività"
+   },
+   {
+    "da": 27,
+    "titolo": "2 · Tocca «Reclama la scheda»"
+   },
+   {
+    "da": 35,
+    "titolo": "3 · Compila il modulo"
+   },
+   {
+    "da": 48,
+    "titolo": "4 · Controlliamo noi, a mano"
+   },
+   {
+    "da": 56,
+    "titolo": "5 · Ricevi il tuo link personale"
+   },
+   {
+    "da": 63,
+    "titolo": "6 · Approva, completa o togli"
+   },
+   {
+    "da": 76,
+    "titolo": "7 · La tua scheda è verificata"
+   }
+  ],
+  "pagina": {
+   "href": "/come-reclamare-la-scheda",
+   "testo": "Tutti i passi scritti e le domande frequenti"
+  },
+  "faq": [
+   {
+    "domanda": "Reclamare la scheda costa qualcosa?",
+    "risposta": "No. La scheda è gratuita e lo resta: nessuna commissione sulle prenotazioni e nessuna pubblicità."
+   },
+   {
+    "domanda": "Quanto tempo ci vuole?",
+    "risposta": "Il modulo si compila in due minuti. Il controllo lo facciamo a mano e ti scriviamo appena è fatto; dopo, le modifiche accettate vanno online in pochi minuti."
+   },
+   {
+    "domanda": "Email e telefono finiscono sul sito?",
+    "risposta": "No: quelli che scrivi nel modulo restano nel nostro archivio privato. Sul sito compaiono solo i contatti che decidi tu di mostrare dal link personale."
+   }
+  ]
+ }
+]
