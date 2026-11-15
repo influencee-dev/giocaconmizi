@@ -26,12 +26,14 @@ parole = [p for p in ((norm(w["word"]), w["start"], w["end"]) for w in tr["words
 dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", intera], capture_output=True, text=True).stdout)
 inizi = [0.0]; k = 0
 for f in testi[1:]:
-    attese = [a for a in (norm(w) for w in f.replace("giocamizi punto it", "giocamizi").split()) if a][:3]
+    # confronto le lettere di seguito (senza spazi né apostrofi): «un'attività»
+    # trascritto «un attività» combacia lo stesso
+    obiettivo = norm("".join(f.replace("giocamizi punto it", "giocamizi").split()))[:12]
     trovato = None
     for j in range(k, len(parole)):
-        if parole[j][0] != attese[0] and not (len(attese[0]) > 3 and parole[j][0][:4] == attese[0][:4]): continue
-        punti = sum(1 for a, p in zip(attese, parole[j:j + len(attese)]) if a == p[0] or (len(a) > 3 and a[:4] == p[0][:4]))
-        if punti >= min(2, len(attese)): trovato = j; break
+        seguito = "".join(p[0] for p in parole[j:j + 6])
+        if seguito.startswith(obiettivo) or (len(obiettivo) >= 8 and seguito[:10] == obiettivo[:10]):
+            trovato = j; break
     if trovato is None: raise SystemExit(f"frase non trovata nella registrazione: {f[:50]}")
     k = trovato + 1; inizi.append(parole[trovato][1])
 for n, a in enumerate(inizi):
