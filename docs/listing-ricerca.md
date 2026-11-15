@@ -199,6 +199,67 @@ regola «niente foto prese dai social».
 Così il «guardare i reel» che vede la mamma e il «leggere i reel» che fa l'AI usano
 solo strade ufficiali, senza scaricare né copiare niente.
 
+## 5b. Booking e gli altri siti più indicizzati: cosa prendiamo
+
+Ricerca del 16/11/2026 sulle guide ufficiali per chi pubblica e sulle pagine
+pubbliche di Booking, Peerspace (affitto di spazi per eventi), Airbnb Esperienze,
+GetYourGuide, GigSalad (animatori per feste), Google Business Profile e di qualche
+regolamento italiano di feste. Da qui le pagine non si aprono, quindi ho preso la
+struttura dalle guide dei siti e dai risultati di ricerca, non dall'HTML.
+
+| Sito | Cosa fa bene | Cosa prendiamo per Giocamizi |
+|---|---|---|
+| **Booking** | Servizi scelti da un elenco fisso, che diventano filtri. Le regole della struttura (orari, bambini, animali) stanno in una sezione a parte. Il «punteggio della pagina» spinge il gestore a completarla. La descrizione è lunga e parte dai punti di forza. | servizi da elenco fisso, non da testo libero; una sezione **«Regole»** separata; la **barra di completezza** nel backend; i punti di forza in alto |
+| **Peerspace** | La capienza dichiarata deve corrispondere alle foto. Tra i servizi va solo ciò che è compreso nel prezzo; gli extra a pagamento stanno a parte, ognuno con il suo prezzo. Ci sono le ore minime. Il principio guida: «il cliente deve poter calcolare il costo totale senza sorprese». Ha FAQ dell'evento su cibo e bevande e una guida per gli eventi all'aperto. | **«Incluso nel prezzo» e «Extra a pagamento»** separati; **durata o ore minime**; un **costo stimato** quando i dati ci sono; il campo **«se piove»** per gli spazi all'aperto |
+| **Airbnb Esperienze / GetYourGuide** | I dati chiave stanno in alto: durata, dimensione del gruppo, cibo incluso. Poi «cosa è incluso / non incluso» e una sezione «cosa sapere» con cancellazione, età minima, cosa portare, accessibilità, punto d'incontro e meteo. | una riga di **dati chiave** in testa; **«Cosa è incluso / non incluso»**; un blocco **«Prima di andare»** con cosa portare, cosa indossare, età e altezza minime, accessibilità, come arrivare e cancellazione |
+| **GigSalad** (animatori) | Raggio di trasferta e costo dello spostamento. Prezzo «a partire da» oppure «contattaci». Pacchetti adattati all'età. Durata tipica dello spettacolo. Video e foto del lavoro. | per gli animatori: **zona servita in km e costo di trasferta**; **pacchetti per fascia d'età**; durata; portfolio con video incorporati |
+| **Google Business Profile** | Attributi da un elenco fisso per categoria. Quelli «oggettivi» li sceglie l'attività; quelli «soggettivi», come «adatto ai bambini», nascono dalle opinioni dei clienti. Ci sono attributi per famiglie (attività per bambini, seggioloni, fasciatoio o nursery, bambini ammessi). Un attributo falso fa sospendere il profilo. | solo attributi **oggettivi**, mai giudizi; **nomi dei campi allineati a quelli di Google**, così l'attività li copia nei due sensi; il link alla sua scheda Google fra i contatti |
+| **Regolamenti italiani** (piscina comunale di Milano, ludoteche) | Prezzi del tipo «quota fissa fino a 15 bambini, poi 12 € per ogni bambino in più». Feste solo sabato e domenica pomeriggio. Caparra del 50%. Orario di chiusura. Responsabilità per i danni. | un **modello di prezzo** con tre forme: a bambino, a festa fino a N bambini più un supplemento per ogni bambino in più, oppure a ora con un minimo di ore; i giorni in cui si fanno le feste; caparra; orario limite |
+
+### Campi in più che entrano nel § 3a
+
+- **Modello di prezzo:** a bambino / a festa fino a N bambini + supplemento per
+  ogni bambino in più / a ora con minimo di ore. Vale la decisione del 16/11: il
+  prezzo c'è solo con la sua data, altrimenti «Richiedi».
+- **Extra a pagamento:** una lista di voci, ognuna con il suo prezzo (truccabimbi,
+  torta, gadget…), separata da «Incluso nel prezzo».
+- **Giorni in cui si fanno le feste** e **orario limite**.
+- **Prima di andare:** cosa portare, cosa indossare, età o altezza minime.
+- **Come arrivare:** mezzi pubblici, parcheggio, punto d'incontro per gli spazi grandi.
+- **Se piove:** solo per gli spazi all'aperto.
+- **Animatori:** zona servita in km e costo di trasferta.
+- **Collegamenti:** link alla scheda Google dell'attività.
+- **Foto:** almeno 3 foto caricate dall'attività per il badge «Foto dell'attività».
+  La capienza dichiarata deve essere credibile rispetto alle foto, e lo controlla
+  Giorgia quando accetta.
+
+### Come vanno in testa alla scheda (ordine finale per il lotto C)
+
+1. **Dati chiave in una riga:** età · bambini min-max · durata · coperto/aperto ·
+   prezzo da (con data) oppure «Prezzo su richiesta».
+2. Punti di forza: 3 voci, scelte dall'attività fra i suoi servizi.
+3. Il bottone «Richiedi» / WhatsApp.
+4. Il resto, come nel lotto C del prompt: pacchetti, incluso ed extra, spazi e
+   servizi, regole, prima di andare, reel, domande frequenti, mappa.
+
+### Cosa rende questi siti così indicizzati (e cosa ci serve)
+
+- **Una pagina per ogni scheda**, più pagine per città e categoria. Da noi c'è già.
+- **Dati strutturati completi:** `LocalBusiness` nel sottotipo giusto (ChildCare,
+  AmusementPark, EntertainmentBusiness, Restaurant…), `amenityFeature` per i
+  servizi, `openingHoursSpecification` per gli orari, `Offer` con
+  `priceSpecification` e la data del prezzo, `VideoObject` per i video incorporati,
+  `sameAs` per i social, `geo`.
+- **Freschezza visibile:** «Aggiornata il …» in pagina e `dateModified` nel JSON-LD.
+- **Testo unico per ogni scheda**, non lo stesso modello ripetuto: per questo la
+  descrizione la scrive l'attività (o l'AI con la sua revisione) e i campi
+  arricchiscono la pagina invece di sostituirla.
+- **FAQ:** dal 2023 Google mostra le FAQ come risultato arricchito quasi solo per
+  i siti istituzionali e sanitari. Le teniamo comunque, perché le AI le citano
+  (AEO), ma non contiamo su un effetto in Google.
+- Booking e gli altri si reggono molto sulle **recensioni**. Noi non le facciamo:
+  il nostro segnale di fiducia è «verificata dall'attività» più la data.
+
 ## 6. Domande per Giorgia (servono prima del lotto B)
 
 1. **Campi obbligatori:** bastano età, coperto/aperto, «fanno feste» e descrizione,
@@ -222,5 +283,8 @@ solo strade ufficiali, senza scaricare né copiare niente.
 9. **matrimonio.com:** puoi aprirmi l'accesso al sito nelle impostazioni di rete
    della sessione, o mandarmi 3-4 schermate di una scheda? Così ricontrollo la
    parte «da ricontrollare» del § 2.
-10. **Ordine dei lotti:** dopo il B, vuoi prima la pagina pubblica (C) o il modulo
+10. **Costo stimato:** quando l'attività ha dato prezzo e modello, mostriamo
+    «per 20 bambini circa X € (prezzi comunicati a …)»? Alla mamma serve, ma è una
+    stima e va scritto chiaramente.
+11. **Ordine dei lotti:** dopo il B, vuoi prima la pagina pubblica (C) o il modulo
     dell'attività (D)?
