@@ -27,6 +27,9 @@ const CSP = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Le foto esistono già in più larghezze (public/immagini): <Image> prende
+  // direttamente il file giusto, senza /_next/image (lib/caricatore-immagini.ts).
+  images: { loader: "custom", loaderFile: "./lib/caricatore-immagini.ts" },
   // Le pagine pubbliche sono statiche/ISR: velocità = SEO + bambini impazienti (piano §4.1).
   experimental: {
     optimizePackageImports: ["@supabase/supabase-js"],
@@ -68,6 +71,12 @@ const nextConfig: NextConfig = {
     return [
       // La voce registrata di Mizi: il nome del file è la frase e la cartella è
       // la versione della voce, quindi un file non cambia mai.
+      // Le foto: un giorno in memoria, poi il telefono ricontrolla mentre mostra
+      // quella che ha (una foto rifatta con lo stesso nome arriva entro un giorno).
+      {
+        source: "/immagini/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }],
+      },
       {
         source: "/voce/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],

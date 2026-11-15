@@ -5,6 +5,7 @@
   "description": "Gioca con Mizi — giochi educativi, storie, coding e biglietti per bambini 3–12 anni. Gratis, senza pubblicità.",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/varianti-immagini.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",

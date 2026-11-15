@@ -268,6 +268,15 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 - L'invito alle novità dopo il secondo gioco (components/form/DopoIlGioco.tsx)
   ora è sopra lo schermo di gioco: prima era nascosto sotto.
 
+## Foto servite dai nostri file, senza /_next/image (15/11/2026)
+- `<Image>` usa il caricatore lib/caricatore-immagini.ts (next.config.ts,
+  loader «custom»): per `/immagini/<nome>-<L>.webp` sceglie tra le larghezze
+  che esistono davvero (lib/immagini-varianti.json, rigenerato dal «prebuild»);
+  il resto (logo, ritratti) si serve com'è. Motivo: su iPhone le foto passate
+  dal servizio di Vercel non si vedevano, anche se dal server uscivano giuste.
+- Una foto nuova deve avere le sue varianti in public/immagini (le fa
+  `npm run foto-arrivate`): niente più ridimensionamento al volo.
+
 ## Canzoni di Mizi (14/11/2026)
 - Su Drive: 2 Aree → Giocamizi · Social → «Canzoni di Mizi» (id
   1VnaChhQWdr6zhvQZom9cMat9jmIiRvDv): guida «00 Come funzionano le canzoni di

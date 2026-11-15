@@ -102,6 +102,35 @@ for (const v of conImmagini) {
 }
 ok("sitemap immagini: ogni foto risponde e sta nella sua pagina", immaginiStorte.length === 0, immaginiStorte.slice(0, 3).join(" | "));
 
+// 2-quater. Le foto si servono dai nostri file già pronti nelle varie misure
+// (lib/caricatore-immagini.ts), mai da /_next/image: dal 15/11/2026, quando
+// su iPhone le foto passate da quel servizio non si vedevano. Ogni indirizzo
+// di immagine scritto nelle pagine deve rispondere con un'immagine.
+{
+  const pagineConFoto = ["/", "/giochi", "/feste", "/guide", "/guide/tabelline-senza-lacrime", "/chi-siamo", "/storie", "/biglietti", "/coding"];
+  const daServizio = [];
+  const indirizzi = new Set();
+  for (const percorso of pagineConFoto) {
+    const html = (await testo(percorso)).replace(/&amp;/g, "&");
+    if (html.includes("/_next/image")) daServizio.push(percorso);
+    for (const m of html.matchAll(/<img\b[^>]*>/g)) {
+      const src = m[0].match(/\ssrc="([^"]+)"/)?.[1];
+      const srcset = m[0].match(/\ssrcSet="([^"]+)"/i)?.[1] ?? "";
+      for (const u of [src, ...srcset.split(",").map((x) => x.trim().split(/\s+/)[0])]) if (u?.startsWith("/")) indirizzi.add(u);
+    }
+  }
+  ok("foto: nessuna pagina passa da /_next/image", daServizio.length === 0, daServizio.join(", "));
+  const rotte = [];
+  for (const u of indirizzi) {
+    const r = await fetch(`${BASE}${u}`);
+    if (!r.ok || !r.headers.get("content-type")?.startsWith("image/")) rotte.push(`${u}: ${r.status}`);
+  }
+  ok("foto: ogni immagine scritta nelle pagine risponde", indirizzi.size > 40 && rotte.length === 0, `${indirizzi.size} indirizzi; ${rotte.slice(0, 3).join(" | ")}`);
+  const hero = (await testo("/feste")).match(/<img[^>]*festa-di-compleanno-per-bambini-ludoteca[^>]*>/)?.[0] ?? "";
+  ok("foto: sul telefono arriva la misura giusta, non sempre la più grande",
+    /ludoteca-480\.webp 256w/.test(hero) && /ludoteca-640\.webp 640w/.test(hero) && /ludoteca-1440\.webp 1200w/.test(hero), hero.slice(0, 200));
+}
+
 // 3. Ogni pagina della sitemap: 200, un solo canonical, su sé stessa e sul
 // dominio; og:url coerente; i JSON-LD non citano altri domini del sito.
 const problemi = [];
