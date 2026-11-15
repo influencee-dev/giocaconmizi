@@ -5,7 +5,7 @@
   "app/(public)/admin/[codice]/candidature/page.tsx": "2026-11-08",
   "app/(public)/admin/[codice]/immagini/page.tsx": "2026-11-02",
   "app/(public)/admin/[codice]/iscritti/page.tsx": "2026-11-11",
-  "app/(public)/admin/[codice]/page.tsx": "2026-11-08",
+  "app/(public)/admin/[codice]/page.tsx": "2026-11-15",
   "app/(public)/admin/[codice]/posizioni/page.tsx": "2026-11-02",
   "app/(public)/admin/[codice]/risorse/page.tsx": "2026-11-08",
   "app/(public)/admin/[codice]/schede/[citta]/[slug]/page.tsx": "2026-11-02",

@@ -288,3 +288,35 @@ struttura dalle guide dei siti e dai risultati di ricerca, non dall'HTML.
     stima e va scritto chiaramente.
 11. **Ordine dei lotti:** dopo il B, vuoi prima la pagina pubblica (C) o il modulo
     dell'attività (D)?
+
+## 7. Lotto B (16/11/2026): cosa è stato fatto
+
+Giorgia ha detto «fai il resto» senza rispondere alle altre domande. Sono partito
+con queste scelte, che si possono cambiare in un punto solo (`lib/scheda-campi.ts`):
+
+| Domanda del § 6 | Scelta per partire |
+|---|---|
+| 1. Obbligatori | descrizione, età, «fate feste», coperto/aperto (più nome, categoria e città, che ci sono già) |
+| 2. Prezzi | decisa da Giorgia: con il mese se l'attività lo inserisce, altrimenti «Prezzo su richiesta» |
+| 3. Preventivo | per ora «Richiedi» porta a WhatsApp o al telefono. Il modulo vero arriva con l'area attività delle richieste |
+| 4. Fasce di bambini | fino a 15 / 15-30 / oltre 30 |
+| 5. Nidi | restano nelle risorse educative, nessuna categoria nuova |
+| 6. Foto dei bambini | campo facoltativo, a scelta tra tre risposte |
+| 7. Copertina dei reel | il riquadro di Giocamizi, come oggi: niente immagini dai social prima del tocco |
+| 8. Instagram | per ora si incollano i link; il collegamento dell'account arriva con il lotto E |
+| 9. matrimonio.com | ancora da ricontrollare |
+| 10. Stima della spesa | rimandata (Giorgia: «non so, per ora no») |
+| 11. Ordine | C (pagina pubblica), poi D (modulo dell'attività) |
+
+**File nuovi o toccati:**
+- **`lib/scheda-campi.ts`:**
+  - 57 campi: comuni, della festa, per categoria;
+  - per ognuno tipo, livello, gruppo, filtro, AEO, la domanda «da chiedere» e l'aiuto per l'attività;
+  - le funzioni `validaScheda` (pulisce quello che arriva dal modulo o dall'AI), `completezza` (barra con le percentuali), `daChiedere`, `testoPrezzo` (prezzo con mese oppure «Prezzo su richiesta»), `videoRiconosciuto` (reel Instagram, YouTube in modalità senza cookie, TikTok) e `riepilogoScheda`.
+- **`supabase/scheda-dati.sql`:** le bozze (`dir_bozze`, `dir_salva_bozza`, `dir_leggi_bozza`). Alza anche il limite di una risposta a 60 KB e cancella la bozza quando l'attività invia. **Va incollato da Giorgia**, dopo `directory.sql`.
+- **`lib/directory-db.ts`:**
+  - la scheda estesa viaggia in `dati.estesa` delle risposte che ci sono già, quindi non serve una tabella nuova per i dati pubblici;
+  - ci sono `salvaBozza` e `leggiBozza`, che nel server delle verifiche tengono la bozza in memoria.
+- **Pannello `/admin/[codice]`:** se una risposta contiene la scheda estesa, Giorgia la vede in parole, campo per campo, con l'indicazione «proposto dall'AI» dove serve.
+
+Ancora nessuna pagina pubblica cambiata: lo fa il lotto C.

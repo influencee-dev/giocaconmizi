@@ -4,6 +4,7 @@ import { SCHEDE, percorsoScheda } from "@/lib/directory";
 import { adminDati } from "@/lib/directory-db";
 import { risorsaDaChiave } from "@/lib/risorse-educative";
 import { adminValido } from "@/lib/admin";
+import { eSchedaEstesa, riepilogoScheda } from "@/lib/scheda-campi";
 import { Contenitore } from "@/components/ui";
 import { decidi } from "./azioni";
 import { MenuAdmin } from "./MenuAdmin";
@@ -33,7 +34,7 @@ export default async function AdminPage({ params }: { params: Promise<{ codice: 
     const r = chiave.startsWith("risorse/") ? risorsaDaChiave(chiave) : undefined;
     if (r) return { nome: r.nome, citta: "Risorsa educativa", href: `/risorse-educative-bambini#elenco` };
     const s = SCHEDE.find((x) => `${x.cittaSlug}/${x.slug}` === chiave);
-    return s && { nome: s.nome, citta: s.citta, href: percorsoScheda(s) };
+    return s && { nome: s.nome, citta: s.citta, href: percorsoScheda(s), categoria: s.categoria.slug };
   };
   const attesa = dati.richieste.filter((r) => r.stato === "in_attesa");
   const conta = (stato: string) => dati.inviti.filter((i) => i.stato === stato).length;
@@ -75,12 +76,27 @@ export default async function AdminPage({ params }: { params: Promise<{ codice: 
               <p className="mt-1 text-sm font-semibold text-notte-tenue">
                 {r.referente || "—"} · {r.email} · {quando(r.creato_il)} · termini {r.termini_accettati ? "accettati" : "no"}
               </p>
-              {Object.keys(r.dati).length > 0 && (
+              {Object.keys(r.dati).some((k) => k !== "estesa") && (
                 <dl className="mt-3 grid gap-2 sm:grid-cols-2">
-                  {Object.entries(r.dati).map(([k, v]) => (
-                    <div key={k} className="rounded-xl bg-crema px-3 py-2">
-                      <dt className="text-xs font-extrabold uppercase text-notte-tenue">{k}</dt>
-                      <dd className="whitespace-pre-line text-sm text-notte">{v}</dd>
+                  {Object.entries(r.dati)
+                    .filter(([k, v]) => k !== "estesa" && typeof v === "string")
+                    .map(([k, v]) => (
+                      <div key={k} className="rounded-xl bg-crema px-3 py-2">
+                        <dt className="text-xs font-extrabold uppercase text-notte-tenue">{k}</dt>
+                        <dd className="whitespace-pre-line text-sm text-notte">{v as string}</dd>
+                      </div>
+                    ))}
+                </dl>
+              )}
+              {eSchedaEstesa(r.dati.estesa) && (
+                <dl className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {riepilogoScheda(s && "categoria" in s ? (s.categoria ?? "") : "", r.dati.estesa).map((c) => (
+                    <div key={c.id} className="rounded-xl bg-crema px-3 py-2">
+                      <dt className="text-xs font-extrabold uppercase text-notte-tenue">
+                        {c.gruppo} · {c.etichetta}
+                        {c.ai && <span className="ml-1 text-viola">(proposto dall&apos;AI)</span>}
+                      </dt>
+                      <dd className="whitespace-pre-line text-sm text-notte">{c.valore}</dd>
                     </div>
                   ))}
                 </dl>

@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { SUPABASE_ANON_KEY, SUPABASE_URL, supabaseConfigurato } from "@/lib/supabase/config";
 import type { Scheda } from "@/lib/directory";
+import type { SchedaEstesa } from "@/lib/scheda-campi";
 
 /**
  * L'area delle attività sul database (supabase/directory.sql).
@@ -29,7 +30,11 @@ export const CAMPI = [
   "facebook", "tiktok", "video", "orari", "pacchetti",
 ] as const;
 export type Campo = (typeof CAMPI)[number];
-export type DatiModifica = Partial<Record<Campo, string>>;
+/**
+ * I campi a testo libero di oggi, più la scheda estesa (lib/scheda-campi.ts)
+ * sotto la chiave «estesa»: viaggiano insieme in dir_richieste.dati.
+ */
+export type DatiModifica = Partial<Record<Campo, string>> & { estesa?: SchedaEstesa };
 
 export interface Pubblicata {
   tipo: "approva" | "modifica" | "rimuovi";
@@ -127,6 +132,40 @@ export async function adminEsito(codice: string, id: number, esito: "accettata" 
   if (!client) return false;
   const { error } = await client.rpc("dir_admin_esito", { p_codice: codice, p_id: id, p_esito: esito, p_nota: nota });
   return !error;
+}
+
+// ---------- Bozze della scheda estesa (supabase/scheda-dati.sql) ----------
+
+/** Solo nel server delle verifiche: le bozze restano in memoria, per codice. */
+const bozzeProva: Map<string, SchedaEstesa> = ((globalThis as { __bozzeProva?: Map<string, SchedaEstesa> }).__bozzeProva ??= new Map());
+
+/** L'attività salva a metà: una bozza per scheda, sovrascritta a ogni salvataggio. */
+export async function salvaBozza(codice: string, scheda: SchedaEstesa) {
+  if (inProva() && [INVITO_PROVA.codice, INVITO_PROVA_RISORSA.codice].includes(codice)) {
+    bozzeProva.set(codice, scheda);
+    return { ok: true as const };
+  }
+  const client = db();
+  if (!client) return { ok: false as const, errore: "Il servizio non è disponibile in questo momento." };
+  try {
+    const { error } = await client.rpc("dir_salva_bozza", { p_codice: codice, p_dati: scheda });
+    return error ? { ok: false as const, errore: error.message } : { ok: true as const };
+  } catch {
+    return { ok: false as const, errore: "Il servizio non è disponibile in questo momento." };
+  }
+}
+
+/** La bozza salvata, o null se non c'è (o se l'SQL delle bozze non è ancora stato incollato). */
+export async function leggiBozza(codice: string): Promise<SchedaEstesa | null> {
+  if (inProva() && bozzeProva.has(codice)) return bozzeProva.get(codice)!;
+  const client = db();
+  if (!client) return null;
+  try {
+    const { data, error } = await client.rpc("dir_leggi_bozza", { p_codice: codice });
+    return error || !data ? null : (data as SchedaEstesa);
+  } catch {
+    return null;
+  }
 }
 
 // ---------- Candidature: le attività che si propongono da sole (/aggiungi-attivita) ----------
