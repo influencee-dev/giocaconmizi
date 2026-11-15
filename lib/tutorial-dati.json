@@ -77,5 +77,80 @@
     "risposta": "No: quelli che scrivi nel modulo restano nel nostro archivio privato. Sul sito compaiono solo i contatti che decidi tu di mostrare dal link personale."
    }
   ]
+ },
+ {
+  "slug": "come-aggiungere-un-attivita",
+  "gruppo": "partner",
+  "titolo": "Come aggiungere un'attività che non c'è ancora",
+  "ordine": 3,
+  "descrizione": "Mizi ti mostra come proporre su Giocamizi un'attività per bambini che non c'è ancora, o chiedere l'accesso a una scheda esistente.",
+  "rispostaBreve": "Per aggiungere un'attività su Giocamizi apri la pagina «Aggiungi la tua attività», scegli «Aggiungere la mia attività», scrivi nome, categoria, città e una breve descrizione, poi i tuoi contatti. Il team la controlla a mano e ti scrive quando la scheda è online. È gratis.",
+  "video": {
+   "src": "/video/come-aggiungere-un-attivita.mp4",
+   "poster": "/video/come-aggiungere-un-attivita.webp",
+   "sottotitoli": "/video/come-aggiungere-un-attivita.vtt",
+   "durata": "PT1M42S",
+   "secondi": 102,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! La tua ludoteca, la tua sala feste o il tuo laboratorio non sono ancora su Giocamizi? Ti faccio vedere come aggiungerli. È gratis, e dal telefono va benissimo!",
+    "Vai sulla pagina «Aggiungi la tua attività». In alto vedi i tre passi: compili il modulo, il team controlla, e poi sei online.",
+    "Prima scegli cosa vuoi fare. Tocca «Aggiungere la mia attività», se su Giocamizi non c'è ancora.",
+    "Scrivi il nome, scegli la categoria e la città. Poi racconta in due o tre frasi cosa fate per i bambini. Se vuoi, apri la riga sotto e aggiungi indirizzo, età, sito e social.",
+    "Poi dicci chi sei: nome, email e, se vuoi, il telefono. Servono solo per risponderti, e non vanno sulla scheda se non ce lo chiedi. Spunta la conferma e tocca «Proponi la mia attività».",
+    "E se la tua attività c'è già? Scegli «La mia attività c'è già», cercala per nome o città, e toccala nell'elenco.",
+    "Poi il team di Giocamizi la controlla a mano: guarda che l'attività sia vera e adatta ai bambini. Niente va online da solo!",
+    "Intanto ti arriva un'email di conferma. E quando la scheda è online, ti scriviamo di nuovo, con il link per vederla.",
+    "Ti aspetto su giocamizi.it, nella pagina «Aggiungi attività». Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 17,
+    "titolo": "1 · Apri «Aggiungi la tua attività»"
+   },
+   {
+    "da": 28,
+    "titolo": "2 · Scegli «Aggiungere la mia attività»"
+   },
+   {
+    "da": 36,
+    "titolo": "3 · Racconta la tua attività"
+   },
+   {
+    "da": 51,
+    "titolo": "4 · Dicci chi sei"
+   },
+   {
+    "da": 56,
+    "titolo": "5 · C'è già? Cercala"
+   },
+   {
+    "da": 78,
+    "titolo": "6 · Controlliamo noi, a mano"
+   },
+   {
+    "da": 88,
+    "titolo": "7 · Ti scriviamo quando sei online"
+   }
+  ],
+  "pagina": {
+   "href": "/aggiungi-attivita",
+   "testo": "Aggiungi la tua attività"
+  },
+  "faq": [
+   {
+    "domanda": "Aggiungere un'attività costa qualcosa?",
+    "risposta": "No, la scheda è gratuita: nessuna commissione e nessuna pubblicità."
+   },
+   {
+    "domanda": "I miei contatti finiscono sul sito?",
+    "risposta": "Email e telefono del modulo servono per risponderti e restano nel nostro archivio privato; sulla scheda compaiono solo i contatti che decidi di mostrare."
+   }
+  ]
  }
 ]

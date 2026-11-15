@@ -1,0 +1,38 @@
+{
+ "secondi": 102,
+ "caricato": "2026-11-16",
+ "capitoli": [
+  {
+   "da": 0,
+   "titolo": "Ciao, sono Mizi"
+  },
+  {
+   "da": 17,
+   "titolo": "1 · Apri «Aggiungi la tua attività»"
+  },
+  {
+   "da": 28,
+   "titolo": "2 · Scegli «Aggiungere la mia attività»"
+  },
+  {
+   "da": 36,
+   "titolo": "3 · Racconta la tua attività"
+  },
+  {
+   "da": 51,
+   "titolo": "4 · Dicci chi sei"
+  },
+  {
+   "da": 56,
+   "titolo": "5 · C'è già? Cercala"
+  },
+  {
+   "da": 78,
+   "titolo": "6 · Controlliamo noi, a mano"
+  },
+  {
+   "da": 88,
+   "titolo": "7 · Ti scriviamo quando sei online"
+  }
+ ]
+}
