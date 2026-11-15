@@ -2,7 +2,9 @@
 # Giro di accordi semplice (Do - La min - Fa - Sol), arpeggi in croma, 104 bpm.
 import numpy as np, wave, sys
 SR = 44100
-DUR = float(sys.argv[1]) + 2 if len(sys.argv) > 1 else 96.5  # durata del video + 2 s
+# python3 musica.py <durata del video in secondi> <file di uscita.wav>
+DUR = float(sys.argv[1]) + 2
+USCITA = sys.argv[2] if len(sys.argv) > 2 else 'musica.wav'
 BPM = 104
 beat = 60 / BPM
 N = int(SR * DUR)
@@ -61,7 +63,7 @@ mix /= np.max(np.abs(mix)) + 1e-9
 fade = np.ones(N); fi = int(SR * 1.5); fo = int(SR * 3)
 fade[:fi] = np.linspace(0, 1, fi); fade[-fo:] = np.linspace(1, 0, fo)
 mix *= fade[:, None] * .9
-with wave.open('musica.wav', 'wb') as w:
+with wave.open(USCITA, 'wb') as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
     w.writeframes((mix * 32767).astype(np.int16).tobytes())
 print('ok', DUR)

@@ -1,0 +1,47 @@
+{
+  "slug": "come-reclamare-la-scheda",
+  "titolo": "Come reclamare la scheda della tua attività",
+  "gruppo": "partner",
+  "schermate": {
+    "feste": { "url": "/feste" },
+    "risorse": { "url": "/risorse-educative-bambini" },
+    "scheda": { "url": "/risorse-educative-bambini/maestra-giulia", "selettori": ["a[data-cta-attivita]"] },
+    "modulo": {
+      "url": "/aggiungi-attivita?scheda=risorse%2Fmaestra-giulia",
+      "azioni": [
+        { "riempi": "input[name=referente]", "valore": "Giulia Rossi" },
+        { "riempi": "input[name=email]", "valore": "giulia@esempio.it" },
+        { "riempi": "input[name=telefono]", "valore": "333 000 0000" }
+      ],
+      "selettori": ["input[name=referente]", "input[name=email]", "input[name=telefono]"]
+    },
+    "link": {
+      "url": "/la-tua-scheda/prova-risorsa-locale-000000000000",
+      "selettori": ["button:has-text(\"Approvo\")", "button:has-text(\"Voglio completarla\")", "button:has-text(\"Non voglio comparire\")"]
+    }
+  },
+  "scene": [
+    { "tipo": "intro", "etichetta": "Per attività e realtà educative", "titolo": "Come reclamare la tua scheda su Giocamizi", "sottotitolo": "Gratis, in pochi minuti.",
+      "voce": "Ciao, sono Mizi! Hai un'attività per bambini, una scuola o un progetto educativo? Forse su Giocamizi la tua scheda c'è già. Ti faccio vedere come reclamarla: è gratis, e ci vogliono pochi minuti!" },
+    { "tipo": "due", "passo": 1, "titolo": "Cerca la tua attività", "testo": "Feste per città, risorse educative per categoria e provincia.", "schermate": ["feste", "risorse"],
+      "voce": "Per prima cosa, cerca la tua attività. Le feste sono divise per città, e le risorse educative per categoria e provincia." },
+    { "tipo": "telefono", "passo": 2, "titolo": "Tocca «Reclama la scheda»", "testo": "Il bottone è in fondo, in ogni scheda.", "schermata": "scheda", "evidenzia": ["a[data-cta-attivita]"],
+      "voce": "Apri la tua scheda e scorri fino in fondo: lì c'è il bottone «Reclama la scheda»." },
+    { "tipo": "telefono", "passo": 3, "titolo": "Compila il modulo", "testo": "Nome, email e telefono: restano privati, non vanno sul sito.", "schermata": "modulo",
+      "evidenzia": ["input[name=referente]", "input[name=email]", "input[name=telefono]"], "nota": "Dati privati, mai pubblicati", "notaIcona": "chiave",
+      "voce": "Si apre un modulo, con la tua scheda già scelta. Scrivi il tuo nome, l'email e, se vuoi, un telefono. Non preoccuparti: restano privati e non finiscono sul sito." },
+    { "tipo": "carta", "passo": 4, "titolo": "Controlliamo noi, a mano", "testo": "Niente va online da solo.",
+      "carta": { "icona": "lente", "titolo": "Verifica in corso…", "testo": "Controlliamo sul sito ufficiale che la scheda sia proprio tua.", "spunta": true },
+      "voce": "Poi il team di Giocamizi controlla a mano che sia proprio la tua realtà. Niente va online da solo!" },
+    { "tipo": "carta", "passo": 5, "titolo": "Ricevi il tuo link personale", "testo": "Arriva via email. Nessuna password.",
+      "carta": { "icona": "cassetta-posta", "titolo": "Giocamizi", "sotto": "ciao@giocamizi.it", "testo": "Ecco il link della tua scheda: aprilo per approvarla o completarla.", "bottone": "Apri la tua scheda" },
+      "voce": "A quel punto ti arriva un'email con il tuo link personale. Niente password da ricordare!" },
+    { "tipo": "telefono", "passo": 6, "titolo": "Approva, completa o togli", "testo": "Descrizione, contatti, orari, logo: decidi tu cosa mostrare.", "schermata": "link",
+      "evidenzia": ["button:has-text(\"Approvo\")", "button:has-text(\"Voglio completarla\")", "button:has-text(\"Non voglio comparire\")"],
+      "voce": "Dal link vedi la scheda proprio come la vedono le famiglie. Puoi approvarla, completarla con descrizione, contatti, orari e logo, oppure chiedere di toglierla." },
+    { "tipo": "telefono", "passo": 7, "titolo": "La tua scheda è verificata", "testo": "Gratis e per sempre: nessuna commissione, nessuna pubblicità.", "schermata": "scheda", "scorri": null, "bollino": "✓ Scheda verificata", "entraDaSinistra": true,
+      "voce": "Quando le modifiche sono approvate, la tua scheda prende il bollino «Verificata». Ed è gratis, davvero: nessuna commissione e nessuna pubblicità." },
+    { "tipo": "finale", "url": "giocamizi.it/come-reclamare-la-scheda", "sotto": "Tutti i passi scritti, gratis.",
+      "voce": "Trovi tutti i passaggi su giocamizi punto it, nella pagina «Come reclamare la scheda». Ti aspetto! Ciao ciao!" }
+  ]
+}

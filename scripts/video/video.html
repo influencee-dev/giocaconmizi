@@ -3,9 +3,11 @@
 <head>
 <meta charset="utf-8">
 <!--
-  Le scene del video tutorial (docs/video-tutorial.md). Due formati dallo stesso file:
-  orizzontale 1280×720 (sito) e verticale 540×960 con #verticale (Reel e storie).
-  I segnaposto __BOX__, __VOCI__, __TESTI__ li riempie prepara.py.
+  Il motore delle scene dei video di Mizi (docs/video-tutorial.md). Legge la
+  scheda del video (content/video/<slug>.json → __SPEC__), le posizioni degli
+  elementi nelle schermate (__BOX__) e la durata di ogni frase (__VOCI__).
+  Due formati dallo stesso file: orizzontale 1280×720, verticale 540×960 (#verticale).
+  Tipi di scena: intro · telefono · due · carta · finale (sempre l'ultima).
 -->
 <style>
 @font-face { font-family: Nunito; src: url(asset/nunito-600.ttf); font-weight: 600; }
@@ -32,17 +34,19 @@ body.v { width: 540px; height: 960px; }
 .carta { position: absolute; background: #fff; border-radius: 30px; box-shadow: 0 30px 60px -28px rgba(31,36,48,.45); }
 .etichetta { display: inline-flex; align-items: center; gap: 10px; background: #E3F4E8; color: #2E7D4A; font-weight: 800; font-size: 26px; padding: 10px 20px; border-radius: 16px; }
 .v .etichetta { font-size: 20px; padding: 8px 14px; }
-#sottotitoli { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); width: max-content; max-width: 1040px; text-align: center; font-weight: 800; font-size: 27px; line-height: 1.3; color: #fff; background: rgba(31,36,48,.82); padding: 10px 22px; border-radius: 16px; }
-.v #sottotitoli { bottom: auto; top: 246px; max-width: 480px; font-size: 21px; padding: 8px 16px; z-index: 5; }
-#barra { position: absolute; left: 0; top: 0; height: 8px; background: #7E4FC4; }
-#logo { position: absolute; right: 36px; top: 26px; height: 46px; }
+.viola { position: absolute; inset: 0; background: #7E4FC4; overflow: hidden; }
+.viola .bolla { background: rgba(255,255,255,.12); }
+#sottotitoli { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); width: max-content; max-width: 1040px; text-align: center; font-weight: 800; font-size: 27px; line-height: 1.3; color: #fff; background: rgba(31,36,48,.82); padding: 10px 22px; border-radius: 16px; z-index: 5; }
+.v #sottotitoli { bottom: auto; top: 246px; max-width: 480px; font-size: 21px; padding: 8px 16px; }
+#barra { position: absolute; left: 0; top: 0; height: 8px; background: #7E4FC4; z-index: 6; }
+#logo { position: absolute; right: 36px; top: 26px; height: 46px; z-index: 4; }
 .v #logo { right: auto; left: 50%; transform: translateX(-50%); top: 26px; height: 40px; }
 </style>
 </head>
 <body>
 <div id="palco">
-  <div class="bolla b1" style="width:520px;height:520px;left:-160px;top:-200px;background:#FCE1EC"></div>
-  <div class="bolla b2" style="width:420px;height:420px;right:-120px;bottom:-170px;background:#E1F3FB"></div>
+  <div class="bolla" style="width:520px;height:520px;left:-160px;top:-200px;background:#FCE1EC"></div>
+  <div class="bolla" style="width:420px;height:420px;right:-120px;bottom:-170px;background:#E1F3FB"></div>
   <div class="bolla b3" style="width:120px;height:120px;right:380px;top:70px;background:#FEF3D1"></div>
   <div id="scene"></div>
   <img id="logo" src="asset/giocamizi-logo-orizzontale.webp" alt="">
@@ -51,13 +55,14 @@ body.v { width: 540px; height: 960px; }
 </div>
 <script>
 const V = location.hash === '#verticale';
-if (V) { document.body.classList.add('v'); document.querySelector('.b3').style.right = '60px'; document.querySelector('.b3').style.top = '170px'; }
-const W = V ? 540 : 1280;
+if (V) { document.body.classList.add('v'); const b3 = document.querySelector('.b3'); b3.style.right = '60px'; b3.style.top = '170px'; }
+const W = V ? 540 : 1280, H = V ? 960 : 720;
+const SPEC = __SPEC__;
 const BOX = __BOX__;
 const VOCI = __VOCI__;
-const TESTI = __TESTI__;
-const S = 276 / 390; // scala dello screenshot dentro il telefono
-const P = (o, v) => (V ? v : o); // posizione: orizzontale o verticale
+const S = 276 / 390;          // scala della schermata dentro il telefono
+const VISIBILE = 588 / S;     // quanta pagina si vede nel telefono (px della pagina)
+const P = (o, v) => (V ? v : o);
 
 // --- utilità ---
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
@@ -66,203 +71,162 @@ const out = (x) => 1 - Math.pow(1 - clamp(x), 3);
 const back = (x) => { x = clamp(x); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
 const tra = (t, a, b) => clamp((t - a) / (b - a));
 const el = (html) => { const d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstChild; };
-
+const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const ANTICIPO = 0.5, CODA = 0.6, PUSH = 0.7;
 
-function telefono(nome, x, y, cls = '') {
-  return `<div class="telefono ${cls}" style="left:${x}px;top:${y}px"><div class="schermo"><img class="pagina" src="schermi/${nome}.png"><div class="anelli"></div></div></div>`;
+const TEL = P([840, 92], [148, 330]);
+function telefono(nome, x, y) {
+  return `<div class="telefono" style="left:${x}px;top:${y}px"><div class="schermo"><img class="pagina" src="schermi/${nome}.png"><div class="anelli"></div></div></div>`;
 }
-const TEL = P([840, 92], [148, 330]); // dove sta il telefono singolo
+const box = (schermata, sel) => BOX[schermata]?.sel?.[sel] ?? null;
+// lo scorrimento che porta l'elemento al 40% del telefono, senza uscire dalla pagina
+function scorrimentoPer(schermata, sel) {
+  const b = sel && box(schermata, sel);
+  if (!b) return 0;
+  const max = Math.max(0, (BOX[schermata]?.altezza ?? 0) - VISIBILE);
+  return clamp(b.y - VISIBILE * .4, 0, max);
+}
 function scorri(sc, y) { sc.querySelector('img.pagina').style.transform = `translateY(${-y * S}px)`; }
-function anello(sc, b, scrollY, vis, pad = 8) {
+function anello(sc, b, scrollY, vis, pad = 7) {
   const a = sc.querySelector('.anelli');
   if (!a.firstChild) a.innerHTML = '<div class="anello"></div>';
   const r = a.firstChild;
+  if (!b) { r.style.opacity = 0; return; }
   const sc2 = 1 + 0.06 * Math.sin(vis * Math.PI * 4);
   r.style.left = (b.x * S - pad) + 'px'; r.style.top = ((b.y - scrollY) * S - pad) + 'px';
   r.style.width = (b.w * S + pad * 2) + 'px'; r.style.height = (b.h * S + pad * 2) + 'px';
   r.style.opacity = vis > 0 ? 1 : 0; r.style.transform = `scale(${vis > 0 ? sc2 : .6})`;
   r.style.boxShadow = `0 0 0 9999px rgba(31,36,48,${.38 * clamp(vis * 3)})`;
 }
-function passoHTML(n, titolo, testo) {
-  return `<div class="passo"><div class="numero">${n}</div><div class="titolo">${titolo}</div><div class="testo">${testo}</div></div>`;
+function passoHTML(sc) {
+  return `<div class="passo">${sc.passo ? `<div class="numero">${sc.passo}</div>` : ''}<div class="titolo">${esc(sc.titolo)}</div><div class="testo">${esc(sc.testo)}</div></div>`;
 }
 function entra(nodo, t, ritardo, dx = 0, dy = 40) {
   const p = out(tra(t, ritardo, ritardo + .6));
   nodo.style.opacity = p; nodo.style.transform = `translate(${dx * (1 - p)}px, ${dy * (1 - p)}px)`;
 }
-const entraPasso = (sc, t) => [...sc.querySelector('.passo').children].forEach((c, i) => entra(c, t, .2 + i * .2));
+const entraPasso = (n, t) => { const p = n.querySelector('.passo'); if (p) [...p.children].forEach((c, i) => entra(c, t, .2 + i * .2)); };
 
-// --- le scene: durata = voce + anticipo + coda ---
-const SCENE = [
-  { // 0 introduzione
-    html: `<div>
+// --- i tipi di scena ---
+const TIPI = {
+  intro: {
+    html: (sc) => `<div>
       <img class="mizi" src="asset/mizi-intera.webp" style="position:absolute;left:${P(820, 120)}px;top:${P(120, 420)}px;width:${P(360, 300)}px">
       <div class="passo" style="top:${P(170, 110)}px;width:${P(700, 472)}px">
-        <div class="etichetta" style="background:#FCE1EC;color:#B03A6F">Per attività e realtà educative</div>
-        <div class="titolo" style="font-size:${P(68, 44)}px">Come reclamare la tua scheda su Giocamizi</div>
-        <div class="testo" style="display:block;font-size:${P(26, 22)}px">Gratis, in pochi minuti.</div>
+        ${sc.etichetta ? `<div class="etichetta" style="background:#FCE1EC;color:#B03A6F">${esc(sc.etichetta)}</div>` : ''}
+        <div class="titolo" style="font-size:${P(68, 44)}px">${esc(sc.titolo)}</div>
+        ${sc.sottotitolo ? `<div class="testo" style="display:block;font-size:${P(26, 22)}px">${esc(sc.sottotitolo)}</div>` : ''}
       </div></div>`,
-    anima(sc, t) {
-      const m = sc.querySelector('.mizi');
+    anima(n, t) {
+      const m = n.querySelector('.mizi');
       const p = back(tra(t, .2, 1.1));
       m.style.transform = `translateY(${(1 - p) * 300}px) rotate(${Math.sin(t * 2) * 3}deg)`;
-      [...sc.querySelector('.passo').children].forEach((c, i) => entra(c, t, .3 + i * .25, -60, 0));
+      [...n.querySelector('.passo').children].forEach((c, i) => entra(c, t, .3 + i * .25, -60, 0));
     },
   },
-  { // 1 cerca
-    html: `<div>${passoHTML(1, 'Cerca la tua attività', 'Feste per città, risorse educative per categoria e provincia.')}
-      ${telefono('feste', P(660, 22), P(92, 350), 'piccolo')}${telefono('risorse', P(920, 278), P(92, 350), 'piccolo')}</div>`,
-    anima(sc, t) {
-      const [a, b] = sc.querySelectorAll('.telefono');
+  telefono: {
+    html: (sc) => `<div>${passoHTML(sc)}${telefono(sc.schermata, ...TEL)}
+      ${sc.bollino ? `<div class="etichetta bollino" style="position:absolute;left:${P(760, 80)}px;top:${P(430, 640)}px;font-size:${P(30, 26)}px;box-shadow:0 20px 40px -20px rgba(31,36,48,.5);z-index:2">${esc(sc.bollino)}</div>` : ''}
+      ${sc.nota ? `<div class="carta nota" style="left:${P(80, 70)}px;top:${P(470, 760)}px;padding:${P('16px 24px', '12px 18px')};display:flex;align-items:center;gap:14px;z-index:2">${sc.notaIcona ? `<img src="asset/${sc.notaIcona}.png" style="width:${P(44, 36)}px">` : ''}<b style="font-size:${P(24, 20)}px">${esc(sc.nota)}</b></div>` : ''}</div>`,
+    anima(n, t, sc, d) {
+      const ph = n.querySelector('.telefono');
+      const ev = (sc.evidenzia ?? []).map((s) => box(sc.schermata, s));
+      const fine = scorrimentoPer(sc.schermata, sc.scorri ?? sc.evidenzia?.[0]);
+      const y = fine * ease(tra(t, .5, Math.min(3.2, d * .35)));
+      scorri(ph, y);
+      if (sc.entraDaSinistra) { const pp = out(tra(t, .2, 1)); ph.style.transform = `translateX(${(1 - pp) * -300}px)`; }
+      // un elemento evidenziato alla volta, distribuiti sul resto della frase
+      if (ev.length) {
+        const da = d * .3, quota = (d * .95 - da) / ev.length;
+        const i = Math.min(ev.length - 1, Math.max(0, Math.floor((t - da) / quota)));
+        anello(ph, ev[i], y, t > da ? tra(t, da, da + .4) : 0);
+      }
+      const b = n.querySelector('.bollino');
+      if (b) { const p = back(tra(t, d * .3, d * .3 + .8)); b.style.transform = `scale(${p}) rotate(${-4 * p}deg)`; b.style.opacity = p > 0 ? 1 : 0; }
+      const no = n.querySelector('.nota'); if (no) entra(no, t, d * .6, -80, 0);
+      entraPasso(n, t);
+    },
+  },
+  due: {
+    html: (sc) => `<div>${passoHTML(sc)}${telefono(sc.schermate[0], P(660, 22), P(92, 350))}${telefono(sc.schermate[1], P(920, 278), P(92, 350))}</div>`,
+    anima(n, t, sc, d) {
+      const [a, b] = n.querySelectorAll('.telefono');
       if (V) { a.style.scale = '.7'; b.style.scale = '.7'; }
       const pa = out(tra(t, .3, 1.1)), pb = out(tra(t, .7, 1.5));
       a.style.transform = `translateX(${(1 - pa) * 700}px) rotate(-4deg)`;
       b.style.transform = `translateX(${(1 - pb) * 700}px) rotate(4deg)`;
-      scorri(a, 380 * ease(tra(t, 1.5, 5)));
-      scorri(b, 420 * ease(tra(t, 2.5, 6.5)));
-      entraPasso(sc, t);
+      const ya = sc.scorri?.[0] ? scorrimentoPer(sc.schermate[0], sc.scorri[0]) : 380;
+      const yb = sc.scorri?.[1] ? scorrimentoPer(sc.schermate[1], sc.scorri[1]) : 420;
+      scorri(a, ya * ease(tra(t, 1.5, d * .55)));
+      scorri(b, yb * ease(tra(t, 2.5, d * .75)));
+      entraPasso(n, t);
     },
   },
-  { // 2 bottone
-    html: `<div>${passoHTML(2, P('Apri la scheda e tocca «Reclama la scheda»', 'Tocca «Reclama la scheda»'), 'Il bottone è in fondo, in ogni scheda.')}${telefono('scheda', ...TEL)}</div>`,
-    anima(sc, t) {
-      const ph = sc.querySelector('.telefono');
-      const b = BOX.scheda.evidenza;
-      const fine = b.y - 380;
-      const y = fine * ease(tra(t, .6, 3.6));
-      scorri(ph, y);
-      const z = 1 + .05 * ease(tra(t, 3.8, 4.6));
-      ph.style.transform = `scale(${z})`; ph.style.transformOrigin = '50% 50%';
-      anello(ph, b, y, tra(t, 3.8, 6.5) * (t > 3.8 ? 1 : 0));
-      entraPasso(sc, t);
+  carta: {
+    html: (sc) => {
+      const c = sc.carta ?? {};
+      return `<div>${passoHTML(sc)}
+        <div class="carta grande" style="left:${P(700, 30)}px;top:${P(140, 390)}px;width:${P(480, 480)}px;padding:30px">
+          <div style="display:flex;align-items:center;gap:14px">${c.icona ? `<img class="ic" src="asset/${c.icona}.png" style="width:72px">` : ''}<div><div style="font-weight:800;font-size:26px">${esc(c.titolo)}</div>${c.sotto ? `<div style="font-weight:600;font-size:18px;color:#4A4F5C">${esc(c.sotto)}</div>` : ''}</div></div>
+          ${c.testo ? `<div style="margin-top:18px;font-weight:600;font-size:21px;line-height:1.35;color:#4A4F5C">${esc(c.testo)}</div>` : ''}
+          ${c.bottone ? `<div class="bottone" style="margin-top:22px;background:#7E4FC4;color:#fff;font-weight:800;font-size:24px;padding:16px;border-radius:18px;text-align:center">${esc(c.bottone)}</div>` : ''}
+          ${c.spunta ? `<img class="spunta" src="asset/spunta.png" style="width:80px;position:absolute;right:26px;top:-28px">` : ''}
+        </div></div>`;
     },
-  },
-  { // 3 modulo
-    html: `<div>${passoHTML(3, 'Compila il modulo', 'Nome, email e telefono: restano privati, non vanno sul sito.')}
-      ${telefono('modulo', ...TEL)}
-      <div class="carta privati" style="left:${P(80, 70)}px;top:${P(470, 760)}px;padding:${P('16px 24px', '12px 18px')};display:flex;align-items:center;gap:14px;z-index:2"><img src="asset/chiave.png" style="width:${P(44, 36)}px"><b style="font-size:${P(24, 20)}px">Dati privati, mai pubblicati</b></div></div>`,
-    anima(sc, t) {
-      const ph = sc.querySelector('.telefono');
-      const campi = BOX.modulo.campi.filter(Boolean);
-      const fine = campi[0].y - 300;
-      const y = fine * ease(tra(t, .5, 2.8));
-      scorri(ph, y);
-      // un campo alla volta, in tempo con la voce
-      const d = VOCI[3];
-      const i = t < d * .45 ? 0 : t < d * .55 ? 1 : 2;
-      anello(ph, campi[i], y, t > d * .3 ? tra(t, d * .3, d * .3 + .4) : 0, 6);
-      entraPasso(sc, t);
-      entra(sc.querySelector('.privati'), t, d * .6, -80, 0);
-    },
-  },
-  { // 4 controllo
-    html: `<div>${passoHTML(4, 'Controlliamo noi, a mano', 'Niente va online da solo.')}
-      <div class="carta controllo" style="left:${P(720, 70)}px;top:${P(150, 390)}px;width:${P(440, 400)}px;height:${P(360, 340)}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">
-        <img class="lente" src="asset/lente.png" style="width:150px">
-        <div style="font-weight:800;font-size:30px">Verifica in corso…</div>
-        <img class="spunta" src="asset/spunta.png" style="width:90px;position:absolute;right:34px;top:30px">
-      </div></div>`,
-    anima(sc, t) {
-      const c = sc.querySelector('.controllo');
-      const p = back(tra(t, .3, 1.1));
-      c.style.transform = `scale(${.4 + .6 * p})`; c.style.opacity = clamp(p * 2);
-      sc.querySelector('.lente').style.transform = `translate(${Math.sin(t * 2.4) * 46}px, ${Math.cos(t * 3.1) * 20}px)`;
-      const s = sc.querySelector('.spunta');
-      const ps = back(tra(t, VOCI[4] * .62, VOCI[4] * .62 + .7));
-      s.style.transform = `scale(${ps})`; s.style.opacity = ps > 0 ? 1 : 0;
-      entraPasso(sc, t);
-    },
-  },
-  { // 5 email
-    html: `<div>${passoHTML(5, 'Ricevi il tuo link personale', 'Arriva via email. Nessuna password.')}
-      <div class="carta busta" style="left:${P(700, 30)}px;top:${P(140, 390)}px;width:${P(480, 480)}px;padding:30px">
-        <div style="display:flex;align-items:center;gap:14px"><img src="asset/cassetta-posta.png" style="width:60px"><div><div style="font-weight:800;font-size:24px">Giocamizi</div><div style="font-weight:600;font-size:18px;color:#4A4F5C">ciao@giocamizi.it</div></div></div>
-        <div style="margin-top:20px;font-weight:800;font-size:26px">Ecco il link della tua scheda</div>
-        <div style="margin-top:8px;font-weight:600;font-size:20px;color:#4A4F5C">Aprilo per approvarla o completarla.</div>
-        <div class="bottone" style="margin-top:22px;background:#7E4FC4;color:#fff;font-weight:800;font-size:24px;padding:16px;border-radius:18px;text-align:center">Apri la tua scheda</div>
-      </div></div>`,
-    anima(sc, t) {
-      const c = sc.querySelector('.busta');
+    anima(n, t, sc, d) {
+      const c = n.querySelector('.grande');
       const p = out(tra(t, .3, 1.2));
       c.style.transform = `translateY(${(1 - p) * 500}px) rotate(${(1 - p) * 8}deg)`;
-      const bt = sc.querySelector('.bottone');
-      const pulse = t > 2.5 ? 1 + .05 * Math.sin((t - 2.5) * 6) : 1;
-      bt.style.transform = `scale(${pulse})`;
-      bt.style.boxShadow = t > 2.5 ? `0 0 0 ${6 + 4 * Math.sin((t - 2.5) * 6)}px rgba(242,138,178,.6)` : 'none';
-      entraPasso(sc, t);
+      const ic = n.querySelector('.ic'); if (ic) ic.style.transform = `rotate(${Math.sin(t * 2.4) * 8}deg)`;
+      const bt = n.querySelector('.bottone');
+      if (bt) { const on = t > d * .4; bt.style.transform = `scale(${on ? 1 + .05 * Math.sin((t - d * .4) * 6) : 1})`; bt.style.boxShadow = on ? `0 0 0 ${6 + 4 * Math.sin((t - d * .4) * 6)}px rgba(242,138,178,.6)` : 'none'; }
+      const s = n.querySelector('.spunta'); if (s) { const ps = back(tra(t, d * .6, d * .6 + .7)); s.style.transform = `scale(${ps})`; s.style.opacity = ps > 0 ? 1 : 0; }
+      entraPasso(n, t);
     },
   },
-  { // 6 il link
-    html: `<div>${passoHTML(6, 'Approva, completa o togli', 'Descrizione, contatti, orari, logo: decidi tu cosa mostrare.')}${telefono('link', ...TEL)}</div>`,
-    anima(sc, t) {
-      const ph = sc.querySelector('.telefono');
-      const sc6 = BOX.link.scelte;
-      const y = (sc6[0].y - 200) * ease(tra(t, .6, 3));
-      scorri(ph, y);
-      const d = VOCI[6];
-      const i = t < d * .42 ? 0 : t < d * .78 ? 1 : 2;
-      anello(ph, sc6[Math.min(i, sc6.length - 1)], y, t > d * .29 ? tra(t, d * .29, d * .29 + .4) : 0, 6);
-      entraPasso(sc, t);
-    },
-  },
-  { // 7 verificata
-    html: `<div>${passoHTML(7, 'La tua scheda è verificata', 'Gratis e per sempre: nessuna commissione, nessuna pubblicità.')}
-      ${telefono('scheda', ...TEL)}
-      <div class="etichetta bollino" style="position:absolute;left:${P(760, 80)}px;top:${P(430, 640)}px;font-size:${P(30, 26)}px;box-shadow:0 20px 40px -20px rgba(31,36,48,.5);z-index:2">✓ Scheda verificata</div>
-      <img class="stella" src="asset/stella.png" style="position:absolute;left:${P(1120, 420)}px;top:${P(380, 560)}px;width:70px;z-index:2">
-      <img class="cuore" src="asset/cuore-viola.png" style="position:absolute;left:${P(740, 60)}px;top:${P(140, 380)}px;width:60px;z-index:2"></div>`,
-    anima(sc, t) {
-      const ph = sc.querySelector('.telefono');
-      scorri(ph, 0);
-      const pp = out(tra(t, .2, 1));
-      ph.style.transform = `translateX(${(1 - pp) * -300}px)`;
-      const b = sc.querySelector('.bollino');
-      const p = back(tra(t, 1.8, 2.6));
-      b.style.transform = `scale(${p}) rotate(${-4 * p}deg)`; b.style.opacity = p > 0 ? 1 : 0;
-      for (const [s, r] of [[sc.querySelector('.stella'), 2.4], [sc.querySelector('.cuore'), 2.8]]) {
-        const q = back(tra(t, r, r + .6));
-        s.style.transform = `scale(${q}) rotate(${Math.sin(t * 3) * 10}deg)`; s.style.opacity = q > 0 ? 1 : 0;
-      }
-      entraPasso(sc, t);
-    },
-  },
-  { // 8 chiusura
-    html: `<div>
-      <img class="mizi" src="asset/mizi-intera.webp" style="position:absolute;left:${P(120, 140)}px;top:${P(150, 450)}px;width:${P(340, 260)}px">
-      <div class="passo" style="left:${P(540, 34)}px;top:${P(190, 100)}px;width:${P(660, 472)}px">
-        <div class="titolo" style="font-size:${P(56, 38)}px">Tutti i passaggi su</div>
-        <div class="carta url" style="position:relative;margin-top:24px;padding:${P('22px 28px', '16px 20px')};font-weight:800;font-size:${P(34, 19)}px;color:#7E4FC4;white-space:nowrap">giocamizi.it/come-reclamare-la-scheda</div>
-        <div class="testo" style="display:block">Ti aspettiamo!</div>
+  // Il finale uguale per tutti i video: schermata viola, Mizi, l'indirizzo del sito.
+  finale: {
+    html: (sc) => `<div><div class="viola">
+        <div class="bolla" style="width:${P(520, 420)}px;height:${P(520, 420)}px;left:-140px;bottom:-200px"></div>
+        <div class="bolla" style="width:${P(300, 240)}px;height:${P(300, 240)}px;right:-60px;top:-80px"></div>
+        <div class="bolla" style="width:90px;height:90px;right:${P(420, 60)}px;top:${P(560, 560)}px"></div>
+        <img class="mizi" src="asset/mizi-intera.webp" style="position:absolute;left:${P(150, 130)}px;top:${P(170, 470)}px;width:${P(340, 280)}px">
+        <div class="blocco" style="position:absolute;left:${P(560, 34)}px;top:${P(200, 110)}px;width:${P(640, 472)}px;color:#fff">
+          <div style="font-weight:800;font-size:${P(34, 26)}px;opacity:.9">${esc(sc.sopra ?? 'Ti aspetto su')}</div>
+          <div style="margin-top:12px;font-weight:800;font-size:${P(72, 52)}px;line-height:1">giocamizi.it</div>
+          <div class="pill" style="margin-top:26px;display:inline-block;background:#fff;color:#7E4FC4;font-weight:800;font-size:${P(28, 20)}px;padding:${P('16px 26px', '12px 18px')};border-radius:999px;white-space:nowrap">${esc(sc.url ?? 'giocamizi.it')}</div>
+          <div style="margin-top:22px;font-weight:600;font-size:${P(24, 19)}px;opacity:.9">${esc(sc.sotto ?? 'Gratis, senza pubblicità.')}</div>
+        </div>
       </div></div>`,
-    anima(sc, t) {
-      const m = sc.querySelector('.mizi');
+    anima(n, t) {
+      const m = n.querySelector('.mizi');
       const p = back(tra(t, .2, 1));
-      m.style.transform = `scale(${p}) rotate(${Math.sin(t * 2.2) * 4}deg)`;
-      [...sc.querySelector('.passo').children].forEach((c, i) => entra(c, t, .4 + i * .3, 60, 0));
+      m.style.transform = `scale(${p}) rotate(${Math.sin(t * 2.2) * 5}deg) translateY(${Math.sin(t * 3) * 6}px)`;
+      [...n.querySelector('.blocco').children].forEach((c, i) => entra(c, t, .3 + i * .25, 60, 0));
+      const pill = n.querySelector('.pill');
+      if (t > 1.6) pill.style.boxShadow = `0 0 0 ${6 + 5 * Math.sin((t - 1.6) * 5)}px rgba(255,255,255,.35)`;
     },
   },
-];
+};
 
-// tempi
+const SCENE = SPEC.scene;
 let inizio = 0;
 const TEMPI = SCENE.map((s, i) => { const d = VOCI[i] + ANTICIPO + CODA; const r = { inizio, dur: d, voce: inizio + ANTICIPO }; inizio += d; return r; });
 const DURATA = inizio;
 window.DURATA = DURATA; window.TEMPI = TEMPI;
 
 const contenitore = document.getElementById('scene');
-const nodi = SCENE.map((s) => { const n = document.createElement('div'); n.className = 'scena'; n.appendChild(el(s.html)); n.style.display = 'none'; contenitore.appendChild(n); return n; });
+const nodi = SCENE.map((s) => { const n = document.createElement('div'); n.className = 'scena'; n.appendChild(el(TIPI[s.tipo].html(s))); n.style.display = 'none'; contenitore.appendChild(n); return n; });
 
 // sottotitoli: la frase della scena divisa in pezzi, in proporzione al tempo della voce
 const LUNGO = V ? 34 : 46;
-const PEZZI = TESTI.map((f) => {
-  const parole = f.split(' '); const pezzi = []; let cur = [];
+const PEZZI = SCENE.map((s) => {
+  const parole = String(s.voce).replace(/giocamizi punto it/gi, 'giocamizi.it').split(' '); const pezzi = []; let cur = [];
   for (const p of parole) { cur.push(p); if (cur.join(' ').length > LUNGO || /[.:!?]$/.test(p)) { pezzi.push(cur.join(' ')); cur = []; } }
   if (cur.length) pezzi.push(cur.join(' '));
   const tot = pezzi.reduce((a, p) => a + p.length, 0); let acc = 0;
   return pezzi.map((p) => { const a = acc / tot; acc += p.length; return { testo: p, da: a, a: acc / tot }; });
 });
-window.PEZZI = PEZZI;
 
 window.render = (t) => {
   SCENE.forEach((s, i) => {
@@ -278,17 +242,21 @@ window.render = (t) => {
     if (lt < 0) { const prevDir = (i - 1) % 2 === 0 ? -1 : 1; x = -prevDir * W * (1 - ease(1 + lt / PUSH)); }
     if (lt > dur - PUSH && i < SCENE.length - 1) x = dir * W * ease((lt - (dur - PUSH)) / PUSH);
     n.style.transform = `translateX(${x}px)`;
-    s.anima(n, Math.max(0, lt));
+    TIPI[s.tipo].anima(n, Math.max(0, lt), s, VOCI[i]);
   });
-  let testo = '';
+  let testo = '', ora = -1;
   TEMPI.forEach((tm, i) => {
+    if (t >= tm.inizio && t < tm.inizio + tm.dur) ora = i;
     const f = (t - tm.voce) / VOCI[i];
     if (f >= 0 && f <= 1.02) testo = (PEZZI[i].find((p) => f >= p.da && f < p.a + .02) || PEZZI[i][PEZZI[i].length - 1]).testo;
   });
   const st = document.getElementById('sottotitoli');
   st.textContent = testo; st.style.opacity = testo ? 1 : 0;
-  // nel verticale, nella prima e nell'ultima scena (senza telefono) i sottotitoli scendono sotto i titoli
-  if (V) { const ora = TEMPI.findIndex((x) => t >= x.inizio && t < x.inizio + x.dur); st.style.top = ora === 0 || ora === SCENE.length - 1 ? '760px' : '246px'; }
+  // nel verticale, dove non c'è il telefono (intro e finale), i sottotitoli scendono sotto i titoli
+  const tipo = SCENE[ora]?.tipo;
+  if (V) st.style.top = tipo === 'intro' || tipo === 'finale' ? '780px' : '246px';
+  // nel finale il logo colorato lascia il posto alla scritta bianca
+  document.getElementById('logo').style.opacity = tipo === 'finale' ? 0 : 1;
   document.getElementById('barra').style.width = (t / DURATA * W) + 'px';
 };
 render(0);
