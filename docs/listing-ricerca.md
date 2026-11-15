@@ -96,7 +96,7 @@ Legenda:
 | Festa | Torta o cibo da casa | scelta: sì / sì con supplemento / no | Co | — | sì |
 | Festa | Allergie e menu speciali | scelta + nota | Co | — | sì |
 | Festa | Tema personalizzato | sì/no + elenco temi | Fa | sì (tema) | — |
-| Prezzi | Prezzo «da» | numero + unità (a bambino / a festa) | Co | sì (fasce) | sì |
+| Prezzi | Prezzo «da» | numero + unità (a bambino / a festa) | Fa (se manca: «Richiedi») | sì (fasce) | sì |
 | Prezzi | Data del prezzo | data (obbligatoria se c'è un prezzo) | Ob* | — | sì |
 | Prezzi | Pacchetti | lista: nome, prezzo, cosa comprende, bambini min/max, durata | Fa | — | sì (Offer) |
 | Prenotare | Caparra | testo breve (es. «50% alla prenotazione») | Co | — | sì |
@@ -117,8 +117,13 @@ Legenda:
 | Media | Reel e video: Instagram, YouTube, TikTok | link (vedi § 5) | Fa | — | — |
 | Fiducia | «Verificata dall'attività» e «Aggiornata il …» | automatici | — | sì (verificate) | sì |
 
-\* La data del prezzo è obbligatoria solo se c'è un prezzo: senza data, il prezzo
-non si mostra.
+\* **Decisione di Giorgia (16/11/2026):** il prezzo non è obbligatorio.
+- **Se l'attività inserisce il prezzo**, si mostra sempre con la data in cui l'ha
+  comunicato, per esempio «da 15 € a bambino · prezzo comunicato a novembre
+  2026». Per questo la data diventa obbligatoria.
+- **Se il prezzo non c'è**, la scheda mostra «Prezzo su richiesta» con il bottone
+  «Richiedi». Nel filtro per fascia di prezzo compaiono solo le schede che hanno
+  un prezzo.
 
 ### 3b. Campi in più per categoria
 
@@ -198,8 +203,9 @@ solo strade ufficiali, senza scaricare né copiare niente.
 
 1. **Campi obbligatori:** bastano età, coperto/aperto, «fanno feste» e descrizione,
    o vuoi rendere obbligatorio anche il prezzo «da»?
-2. **Prezzi:** li mostriamo sempre con la data («prezzo da 15 € a bambino,
-   comunicato a novembre 2026»)? Senza data non li mostrerei.
+2. ~~**Prezzi**~~ **Decisa il 16/11:** il prezzo si mostra con la data se
+   l'attività lo inserisce, altrimenti compare «Prezzo su richiesta» con il
+   bottone «Richiedi» (vedi § 3a).
 3. **Richiesta di preventivo:** la vuoi già adesso (la mamma scrive data, numero di
    bambini e messaggio, l'attività riceve un'email) o la lasciamo all'area attività
    con le richieste, che è un progetto a parte?
