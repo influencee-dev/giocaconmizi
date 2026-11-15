@@ -1,0 +1,38 @@
+{
+ "secondi": 102,
+ "caricato": "2026-11-16",
+ "capitoli": [
+  {
+   "da": 0,
+   "titolo": "Ciao, sono Mizi"
+  },
+  {
+   "da": 17,
+   "titolo": "1 · La pagina «Per insegnanti»"
+  },
+  {
+   "da": 31,
+   "titolo": "2 · Scegli la competenza"
+  },
+  {
+   "da": 43,
+   "titolo": "3 · Un gioco, una competenza"
+  },
+  {
+   "da": 53,
+   "titolo": "4 · Tocca «Gioca»"
+  },
+  {
+   "da": 64,
+   "titolo": "5 · Si gioca subito"
+  },
+  {
+   "da": 74,
+   "titolo": "6 · Basta un link"
+  },
+  {
+   "da": 84,
+   "titolo": "7 · Compiti e siti utili"
+  }
+ ]
+}
