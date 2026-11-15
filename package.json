@@ -22,7 +22,8 @@
     "articoli:controlla": "node scripts/articoli/controlla.mjs",
     "articoli:piano": "node scripts/articoli/piano.mjs",
     "foto:prenota": "tsx scripts/foto-prenota.ts",
-    "foto:genera": "tsx scripts/foto-genera.ts"
+    "foto:genera": "tsx scripts/foto-genera.ts",
+    "voce": "tsx scripts/voce-genera.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.2",

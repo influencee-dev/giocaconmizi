@@ -27,7 +27,7 @@ export const TITOLARE = {
 } as const;
 
 /** Data dell'ultima revisione delle informative (si aggiorna a ogni modifica). */
-export const AGGIORNATA = "8 novembre 2026";
+export const AGGIORNATA = "15 novembre 2026";
 
 export interface VoceRegistro {
   nome: string;
@@ -55,7 +55,17 @@ export const REGISTRO: VoceRegistro[] = [
     quando: "Alla fine del primo gioco completato",
   },
   {
-    nome: "mizi.form-proposto",
+    nome: "giocamizi-album",
+    tipo: "localStorage",
+    scopo:
+      "L'album di Mizi: ricorda quali giochi sono stati finiti su questo dispositivo, con quante stelle, e quanti giochi diversi oggi, per mostrare le figurine e la coccarda del giorno. Non contiene nomi e non viene inviato a nessuno.",
+    durata: "Finché non svuoti l'album (dalla pagina dell'album) o cancelli i dati del browser",
+    necessario: true,
+    chi: "noi",
+    quando: "Alla fine del primo gioco completato",
+  },
+  {
+    nome: "mizi.form-proposto-2",
     tipo: "localStorage",
     scopo:
       "Ricorda che l'invito a iscriversi alle novità è già comparso, così non te lo riproponiamo a ogni partita.",

@@ -11,6 +11,9 @@ const { ok, chiudi } = contatore();
 const page = await b.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 let erroriJs = 0;
 page.on("pageerror", () => erroriJs++);
+// L'invito alle novità compare sopra la festa dopo il secondo gioco: qui si
+// finiscono molti giochi di fila, quindi lo si dà per già visto (ha la sua prova in fondo).
+await page.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
 await page.goto(`${BASE}/giochi/prime-parole-inglese/gioca`, { waitUntil: "networkidle" });
 await page.waitForTimeout(800);
 let round = 0;
@@ -40,7 +43,7 @@ for (let tocchi = 0; tocchi < 40 && !vinta; tocchi++) {
   if (!(await libero.count().catch(() => 0))) break;
   await libero.tap().catch(() => {});
   await page.waitForTimeout(1300);
-  vinta = await page.locator("text=Bravissimo!").isVisible().catch(() => false);
+  vinta = await page.locator("[data-festa]").isVisible().catch(() => false);
 }
 ok("orologio: partita completa fino alla festa", vinta && erroriJs === primaOrologio);
 
@@ -168,7 +171,7 @@ for (let f = 0; f < 5; f++) {
 }
 ok(
   "puntini: cinque figure completate fino alla festa",
-  await page.locator("text=Bravissimo!").isVisible().catch(() => false),
+  await page.locator("[data-festa]").isVisible().catch(() => false),
 );
 
 // Cosa manca?: partita completa. Il mancante non è scritto da nessuna parte:
@@ -198,7 +201,7 @@ for (let r = 0; r < 8; r++) {
 ok("cosa manca: otto vassoi risolti", vassoi === 8, `${vassoi}/8`);
 ok(
   "cosa manca: festa finale",
-  await page.locator("text=Bravissimo!").isVisible().catch(() => false),
+  await page.locator("[data-festa]").isVisible().catch(() => false),
 );
 
 // Il salvadanaio: partita completa. Il prezzo sta in data-prezzo (centesimi);
@@ -236,7 +239,7 @@ for (let r = 0; r < 8; r++) {
 }
 ok("salvadanaio: troppo → togli una moneta → paga", autocorretto);
 ok("salvadanaio: otto acquisti fino alla festa",
-  pagamenti === 8 && (await page.locator("text=Bravissimo!").isVisible().catch(() => false)), `${pagamenti}/8`);
+  pagamenti === 8 && (await page.locator("[data-festa]").isVisible().catch(() => false)), `${pagamenti}/8`);
 
 // La pizza delle frazioni: partita completa. La frazione giusta sta in
 // data-frazione. Nel primo round "leggi" si sceglie apposta una sbagliata
@@ -287,7 +290,7 @@ for (let r = 0; r < 8; r++) {
 ok("pizza delle frazioni: risposta sbagliata → aiuto, il round resta", aiutoLeggi);
 ok("pizza delle frazioni: una fetta di troppo → «Sono troppe» → togli", aiutoFai);
 ok("pizza delle frazioni: otto pizze fino alla festa",
-  pizzeFatte === 8 && (await page.locator("text=Bravissimo!").isVisible().catch(() => false)), `${pizzeFatte}/8`);
+  pizzeFatte === 8 && (await page.locator("[data-festa]").isVisible().catch(() => false)), `${pizzeFatte}/8`);
 
 // Il catalogo dei giochi: il filtro per competenza restringe la griglia
 await page.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
@@ -379,7 +382,7 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   ok("vesti Mizi: «Salva la foto» scarica un PNG", foto?.suggestedFilename() === "mizi-vestita-giocamizi.png");
   await page.locator("[data-fatto]").tap();
   await page.waitForTimeout(1900);
-  ok("vesti Mizi: fino alla festa, senza errori", (await page.locator("text=Bravissimo!").isVisible().catch(() => false)) && erroriJs === prima);
+  ok("vesti Mizi: fino alla festa, senza errori", (await page.locator("[data-festa]").isVisible().catch(() => false)) && erroriJs === prima);
 }
 
 // Colora con Mizi: secchiello, pennello col dito, annulla, salva, sei disegni.
@@ -407,7 +410,174 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   ok("colora: «Salva» scarica il disegno in PNG", (await scarico)?.suggestedFilename() === "mizi-colorato-giocamizi.png");
   for (let k = 0; k < 6; k++) { await page.locator("[data-fatto]").tap(); await page.waitForTimeout(400); }
   await page.waitForTimeout(600);
-  ok("colora: sei disegni fino alla festa, senza errori", (await page.locator("text=Bravissimo!").isVisible().catch(() => false)) && erroriJs === prima);
+  ok("colora: sei disegni fino alla festa, senza errori", (await page.locator("[data-festa]").isVisible().catch(() => false)) && erroriJs === prima);
+}
+
+// ── Memory degli animali (upgrade del 15/11/2026) + album di Mizi ──
+// Tre livelli che crescono, la sbirciata a 3 anni, ogni frase detta è nel
+// copione della voce registrata, la festa dà la figurina e il prossimo gioco.
+{
+  const { readFileSync, existsSync } = await import("node:fs");
+  const copione = JSON.parse(readFileSync("content/voce-mizi.json", "utf8"));
+  const nelCopione = new Set(Object.values(copione.frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
+  const registrate = JSON.parse(readFileSync("lib/voce-registrata.json", "utf8"));
+  ok("voce: ogni frase segnata come registrata ha il suo file",
+    registrate.frasi.every((id) => existsSync(`public/voce/v${registrate.versione}/${id}.mp3`)), `${registrate.frasi.length} frasi`);
+
+  const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctx.addInitScript(() => { window.__voceMizi = []; });
+  const m = await ctx.newPage();
+  let erroriM = 0;
+  m.on("pageerror", () => erroriM++);
+
+  /** Gioca un livello ricordando ogni carta vista; `smemorato` gira sempre le prime due coperte (o quelle che ballano). */
+  const giocaLivello = async (smemorato = false) => {
+    const campo = m.locator("[data-memory]");
+    await m.locator("[data-memory][data-fase='gioca']").waitFor({ timeout: 10000 });
+    const livello = await campo.getAttribute("data-livello");
+    const carte = m.locator("[data-carta]");
+    const n = await carte.count();
+    const visti = {};
+    let aiuti = 0;
+    for (let giro = 0; giro < 80; giro++) {
+      if ((await campo.getAttribute("data-livello")) !== livello || (await campo.getAttribute("data-fase")) === "finito") break;
+      if ((await campo.getAttribute("data-fase")) !== "gioca") { await m.waitForTimeout(200); continue; }
+      const coperte = [];
+      for (let i = 0; i < n; i++) if ((await carte.nth(i).getAttribute("data-stato")) === "coperta") coperte.push(i);
+      if (coperte.length < 2) { await m.waitForTimeout(200); continue; }
+      let a, due;
+      if (smemorato) {
+        const ballano = [];
+        for (const i of coperte) if (await carte.nth(i).getAttribute("data-aiuto")) ballano.push(i);
+        if (ballano.length === 2) aiuti++;
+        [a, due] = ballano.length === 2 ? ballano : coperte;
+      } else {
+        const perNome = {};
+        for (const i of coperte) if (visti[i]) (perNome[visti[i]] ??= []).push(i);
+        const coppia = Object.values(perNome).find((v) => v.length === 2);
+        if (coppia) [a, due] = coppia; else a = coperte.find((i) => !visti[i]) ?? coperte[0];
+      }
+      await carte.nth(a).tap(); await m.waitForTimeout(120);
+      visti[a] = await carte.nth(a).getAttribute("aria-label");
+      due ??= coperte.find((i) => i !== a && visti[i] === visti[a]) ?? coperte.find((i) => i !== a && !visti[i]) ?? coperte.find((i) => i !== a);
+      await carte.nth(due).tap(); await m.waitForTimeout(120);
+      visti[due] = await carte.nth(due).getAttribute("aria-label");
+      await m.waitForTimeout(1400);
+    }
+    return { n, aiuti };
+  };
+
+  await m.goto(`${BASE}/giochi/memory-animali/gioca?eta=3`, { waitUntil: "networkidle" });
+  ok("memory: a 3 anni si comincia guardando le carte scoperte",
+    (await m.locator("[data-memory]").getAttribute("data-fase")) === "guarda" && (await m.locator("[data-carta][data-stato='coperta']").count()) === 0);
+  const misure = [];
+  for (let l = 0; l < 3; l++) misure.push((await giocaLivello()).n);
+  const festa = await m.locator("[data-festa]").waitFor({ timeout: 8000 }).then(() => true, () => false);
+  await m.waitForTimeout(900);
+  ok("memory: tre livelli che crescono (4, 6, 8 carte) fino alla festa", festa && misure.join() === "4,6,8" && erroriM === 0, misure.join());
+  const detto = await m.evaluate(() => window.__voceMizi.map((v) => v.testo));
+  const fuori = [...new Set(detto.filter((t) => !nelCopione.has(t)))];
+  ok("memory: tutto quello che Mizi dice è nel copione della voce registrata", detto.length > 15 && fuori.length === 0, fuori.join(" | "));
+  ok("memory: ogni carta girata dice il suo animale", detto.some((t) => /^(Il|La|L')[ a-z']+$/.test(t)) && detto.some((t) => t.endsWith("Coppia trovata.")));
+  const prossimo = m.locator("[data-prossimo-gioco]");
+  ok("festa: figurina nuova, 1 nell'album, tre stelle per chi ricorda tutto",
+    (await m.locator("[data-figurina]").getAttribute("data-figurina")) === "nuova" &&
+    (await m.locator("[data-figurine]").getAttribute("data-figurine")) === "1" &&
+    (await m.locator("[data-stelle]").getAttribute("data-stelle")) === "3" &&
+    (await m.locator("[data-oggi]").getAttribute("data-oggi")) === "1");
+  const hrefProssimo = await prossimo.getAttribute("href");
+  ok("festa: propone un altro gioco adatto ai 3 anni, e «Ancora» resta",
+    /^\/giochi\/(?!memory-animali)[a-z0-9-]+\/gioca\?eta=3$/.test(hrefProssimo ?? "") && (await m.locator("[data-ancora]").count()) === 1, hrefProssimo);
+  ok("festa: la frase finale parla della figurina nuova", detto.at(-1)?.includes("figurina nuova") || (await m.evaluate(() => window.__voceMizi.at(-1).testo)).includes("figurina nuova"));
+
+  await m.locator("[data-ancora]").tap();
+  await m.waitForTimeout(500);
+  ok("memory: «Ancora» riparte dal livello 1 e la festa sparisce",
+    (await m.locator("[data-memory]").getAttribute("data-livello")) === "1" && (await m.locator("[data-festa]").count()) === 0);
+
+  // Lo smemorato: dopo tre tentativi a vuoto due carte ballano, e si arriva in fondo lo stesso.
+  let aiuti = 0;
+  for (let l = 0; l < 3; l++) aiuti += (await giocaLivello(true)).aiuti;
+  await m.locator("[data-festa]").waitFor({ timeout: 8000 }).catch(() => {});
+  await m.waitForTimeout(700);
+  ok("memory: dopo tre errori di fila Mizi aiuta, e chi sbaglia finisce comunque (con meno stelle)",
+    aiuti > 0 && Number(await m.locator("[data-stelle]").getAttribute("data-stelle").catch(() => 0)) < 3 &&
+    (await m.locator("[data-figurina]").getAttribute("data-figurina")) === "gia", `${aiuti} aiuti`);
+
+  // Coccarda del giorno: altri due giochi già finiti oggi, il Memory è il terzo.
+  await m.evaluate(() => {
+    const a = JSON.parse(localStorage.getItem("giocamizi-album"));
+    const d = new Date();
+    const g = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    a.giochi["conta-fino-a-10"] = { stelle: 2, volte: 1, ultimo: g };
+    a.giochi["abbina-i-colori"] = { stelle: 3, volte: 1, ultimo: g };
+    a.oggi = { giorno: g, slug: ["conta-fino-a-10", "abbina-i-colori"] };
+    a.coccarde = 0;
+    localStorage.setItem("giocamizi-album", JSON.stringify(a));
+  });
+  await m.goto(`${BASE}/giochi/memory-animali/gioca?eta=3`, { waitUntil: "networkidle" });
+  for (let l = 0; l < 3; l++) await giocaLivello();
+  await m.locator("[data-festa]").waitFor({ timeout: 8000 }).catch(() => {});
+  await m.waitForTimeout(900);
+  ok("album: il terzo gioco diverso del giorno regala la coccarda",
+    (await m.locator("[data-oggi]").getAttribute("data-oggi")) === "3" && (await m.locator("[data-oggi]").textContent()).includes("Coccarda di oggi conquistata") &&
+    (await m.evaluate(() => window.__voceMizi.at(-1).testo)).includes("coccarda"));
+  const versoIlProssimo = await m.locator("[data-prossimo-gioco]").getAttribute("href");
+  await Promise.all([m.waitForURL((u) => !u.pathname.includes("memory-animali"), { timeout: 10000 }).catch(() => {}), m.locator("[data-prossimo-gioco]").tap()]);
+  ok("festa: «Prossimo gioco» porta dritto a giocare", `${new URL(m.url()).pathname}${new URL(m.url()).search}` === versoIlProssimo, m.url());
+
+  await m.goto(`${BASE}/giochi/album`, { waitUntil: "networkidle" });
+  await m.locator("[data-album='pronto']").waitFor({ timeout: 5000 }).catch(() => {});
+  const album = await m.evaluate(() => ({
+    prese: document.querySelectorAll("[data-figurina='presa']").length,
+    tutte: document.querySelectorAll("[data-figurina]").length,
+    oggi: document.querySelector("[data-oggi]")?.getAttribute("data-oggi"),
+    coccarde: document.querySelector("[data-conto='coccarde'] dd")?.textContent,
+    proposte: [...document.querySelectorAll("[data-proposta]")].map((x) => x.getAttribute("data-proposta")),
+    sbordo: document.documentElement.scrollWidth - window.innerWidth,
+  }));
+  ok("album: 3 figurine prese su 38, coccarda contata, tre giochi nuovi da provare",
+    album.prese === 3 && album.tutte === 38 && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
+    !album.proposte.some((s) => ["memory-animali", "conta-fino-a-10", "abbina-i-colori"].includes(s)) && album.sbordo <= 0, JSON.stringify(album));
+  await m.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
+  await m.waitForTimeout(400);
+  ok("catalogo: la fascia dell'album e le stelle sui giochi già finiti",
+    (await m.locator("[data-fascia-album]").getAttribute("data-fascia-album")) === "3" && (await m.locator("[data-stelle-gioco]").count()) === 3);
+
+  // Demo (per i reel): prima si bloccava alla seconda carta. E non riempie l'album.
+  const d = await ctx.newPage();
+  await d.goto(`${BASE}/giochi/memory-animali/gioca?eta=3&demo=1`, { waitUntil: "networkidle" });
+  await d.evaluate(() => localStorage.removeItem("giocamizi-album"));
+  await d.reload({ waitUntil: "networkidle" });
+  const demoFinita = await d.locator("[data-festa]").waitFor({ timeout: 90000 }).then(() => true, () => false);
+  ok("memory: la demo arriva in fondo da sola e non tocca l'album",
+    demoFinita && (await d.locator("[data-esito-album]").count()) === 0 && (await d.evaluate(() => localStorage.getItem("giocamizi-album"))) === null);
+  await d.close();
+
+  // Tre tocchi nello stesso istante: restano scoperte due carte, mai tre.
+  await m.goto(`${BASE}/giochi/memory-animali/gioca?eta=5`, { waitUntil: "networkidle" });
+  await m.locator("[data-memory][data-fase='gioca']").waitFor({ timeout: 5000 });
+  await m.evaluate(() => { const c = [...document.querySelectorAll("[data-carta]")]; c[0].click(); c[1].click(); c[2].click(); });
+  await m.waitForTimeout(150);
+  ok("memory: tre tocchi insieme scoprono due carte, non tre", (await m.locator("[data-carta]:not([data-stato='coperta'])").count()) === 2);
+  await ctx.close();
+
+  // L'invito alle novità dopo il secondo gioco: deve stare SOPRA la festa (prima finiva sotto e nessuno lo vedeva).
+  const ctxForm = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const f = await ctxForm.newPage();
+  await f.goto(`${BASE}/giochi/memory-animali/gioca?eta=3&demo=1`, { waitUntil: "networkidle" });
+  await f.evaluate(() => localStorage.setItem("mizi.partite", JSON.stringify(["un-gioco"])));
+  await f.locator("[data-festa]").waitFor({ timeout: 90000 }).catch(() => {});
+  const invito = f.locator("[data-dopo-il-gioco]");
+  const comparso = await invito.waitFor({ timeout: 8000 }).then(() => true, () => false);
+  const inCima = comparso && (await f.evaluate(() => {
+    const titolo = [...document.querySelectorAll("[data-dopo-il-gioco] *")].find((e) => e.textContent?.trim() === "Vi mandiamo i giochi nuovi?");
+    if (!titolo) return false;
+    const r = titolo.getBoundingClientRect();
+    return titolo.contains(document.elementFromPoint(r.x + 4, r.y + r.height / 2));
+  }));
+  ok("dopo il secondo gioco l'invito alle novità si vede davvero, sopra la festa", comparso && inCima);
+  await ctxForm.close();
 }
 
 await b.close();

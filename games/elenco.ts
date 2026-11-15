@@ -1,3 +1,6 @@
+import { games } from "./registry";
+import type { GiocoBreve } from "@/lib/album";
+
 /**
  * Slug dei giochi che hanno un componente giocabile.
  *
@@ -48,3 +51,10 @@ export const slugGiocabili = [
 
 export const giocabile = (slug: string): boolean =>
   (slugGiocabili as readonly string[]).includes(slug);
+
+/** I giochi giocabili in forma breve (per l'album e il «prossimo gioco»), nell'ordine del registro. */
+export function giochiBrevi(): GiocoBreve[] {
+  return games
+    .filter((g) => g.status === "live" && giocabile(g.slug))
+    .map(({ slug, title, skill, ageMin, ageMax }) => ({ slug, title, skill, ageMin, ageMax }));
+}
