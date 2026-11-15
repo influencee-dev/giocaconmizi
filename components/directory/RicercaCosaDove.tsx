@@ -31,17 +31,26 @@ export function RicercaCosaDove({
   categoria = TUTTI,
   citta = "",
   grande = false,
+  compatta = false,
 }: {
   cosa: VoceCosa[];
   dove: VoceDove[];
   categoria?: string;
   citta?: string;
   grande?: boolean;
+  /**
+   * Nei risultati, su telefono: una riga sola («Ludoteche · Milano · Cambia»)
+   * che si apre al tocco. La ricerca intera occupava tutto il primo schermo e
+   * spingeva i risultati sotto.
+   */
+  compatta?: boolean;
 }) {
   const router = useRouter();
   const [cat, setCat] = useState(categoria);
   const [testo, setTesto] = useState(dove.find((d) => d.slug === citta)?.nome ?? "");
   const [avviso, setAvviso] = useState("");
+  const [aperta, setAperta] = useState(!compatta);
+  const chiusa = compatta && !aperta;
 
   const cerca = () => {
     const t = testo.trim().toLowerCase();
@@ -58,13 +67,28 @@ export function RicercaCosaDove({
   const campo = grande ? "py-3.5 text-lg" : "py-2.5 text-base";
   return (
     <div className="w-full">
+      {chiusa && (
+        <button
+          type="button"
+          onClick={() => setAperta(true)}
+          aria-expanded={false}
+          className="flex min-h-14 w-full items-center gap-3 rounded-full bg-white px-5 text-left shadow-[0_10px_30px_-16px_rgba(31,36,48,0.45)] sm:hidden"
+          data-ricerca-compatta
+        >
+          <Search className="h-5 w-5 shrink-0 text-notte" strokeWidth={2.6} aria-hidden />
+          <span className="min-w-0 flex-1 truncate text-base font-extrabold text-notte">
+            {cosa.find((c) => c.slug === cat)?.nome ?? "Tutti i posti"} · {testo || "tutta Italia"}
+          </span>
+          <span className="shrink-0 text-sm font-extrabold text-viola-forte">Cambia</span>
+        </button>
+      )}
       <form
         role="search"
         onSubmit={(e) => {
           e.preventDefault();
           cerca();
         }}
-        className={`flex w-full flex-col gap-2 rounded-[1.4rem] bg-white p-2 shadow-[0_14px_40px_-16px_rgba(31,36,48,0.45)] sm:flex-row sm:items-center sm:gap-0 sm:rounded-full ${grande ? "max-w-3xl" : "max-w-4xl"}`}
+        className={`${chiusa ? "hidden sm:flex" : "flex"} w-full flex-col gap-2 rounded-[1.4rem] bg-white p-2 shadow-[0_14px_40px_-16px_rgba(31,36,48,0.45)] sm:flex-row sm:items-center sm:gap-0 sm:rounded-full ${grande ? "max-w-3xl" : "max-w-4xl"}`}
       >
         <label className="flex min-w-0 flex-1 flex-col px-4 sm:border-r sm:border-notte/10">
           <span className="pt-1 text-[11px] font-black uppercase tracking-wide text-notte-tenue">Cosa cerchi</span>

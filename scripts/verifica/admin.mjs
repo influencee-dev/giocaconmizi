@@ -110,10 +110,26 @@ ok("piè di pagina: dati della società e quattro porte", piede.includes("044055
 await page.goto(`${BASE}/sale-feste/milano`, { waitUntil: "networkidle" });
 const risultati = async () => Number(await page.locator("[data-risultati]").getAttribute("data-risultati"));
 const prima = await risultati();
-await page.getByRole("button", { name: /^Per la festa/ }).tap();
-await page.locator("[data-tendina]").getByLabel(/Animazione inclusa/).check();
+// Filtri per il telefono (15/11/2026): «Filtri» apre un foglio dal basso che
+// sta tutto nello schermo; le pillole si accendono e «Mostra N posti» chiude.
+ok("listing: su telefono la ricerca è una riga sola, i filtri sono subito sotto",
+  (await page.locator("[data-ricerca-compatta]").isVisible()) && (await page.locator("[data-apri-filtri]").boundingBox()).y < 760);
+await page.locator("[data-apri-filtri]").tap();
+const foglio = page.locator("[data-foglio-filtri] [role='dialog']");
+const riquadro = await foglio.boundingBox();
+ok("listing: il foglio dei filtri sta nello schermo, con «Mostra» in vista",
+  riquadro && riquadro.y >= 0 && riquadro.y + riquadro.height <= 845 && (await page.locator("[data-mostra-risultati]").isVisible()) &&
+  (await page.locator("[data-gruppo-filtri]").count()) >= 3);
+await foglio.getByLabel(/Animazione inclusa/).check({ force: true });
 await page.waitForTimeout(300);
 const dopo = await risultati();
+ok("listing: «Mostra N posti» dice quanti restano e chiude il foglio",
+  (await page.locator("[data-mostra-risultati]").textContent()).includes(String(dopo)));
+await page.locator("[data-mostra-risultati]").tap();
+await page.waitForTimeout(200);
+ok("listing: chiuso il foglio, «Filtri» mostra quanti sono accesi e la pillola rapida è accesa",
+  (await page.locator("[data-foglio-filtri]").count()) === 0 && (await page.locator("[data-apri-filtri]").textContent()).includes("1") &&
+  (await page.locator("[data-filtro-rapido='animazione']").getAttribute("aria-pressed")) === "true");
 ok("listing: il filtro esperienze restringe i risultati", prima > dopo && dopo >= 1, `${dopo}/${prima}`);
 ok("listing: il filtro finisce nell'indirizzo", page.url().includes("servizi=animazione"));
 await page.goto(`${BASE}/sale-feste/milano?servizi=animazione`, { waitUntil: "networkidle" });

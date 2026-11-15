@@ -82,8 +82,8 @@ export default async function ListingPage({ params }: P) {
         }}
       />
 
-      <div className={`-mx-4 -mt-8 mb-6 px-4 pb-6 pt-6 sm:mx-0 sm:rounded-b-[2rem] sm:px-8`} style={{ background: "#F0E8FA" }}>
-        <RicercaCosaDove {...vociRicerca()} categoria={cat.slug} citta={citta} />
+      <div className={`-mx-4 -mt-8 mb-6 px-4 pb-4 pt-4 sm:mx-0 sm:rounded-b-[2rem] sm:px-8 sm:pb-6 sm:pt-6`} style={{ background: "#F0E8FA" }}>
+        <RicercaCosaDove {...vociRicerca()} categoria={cat.slug} citta={citta} compatta />
       </div>
       <Briciole voci={[{ nome: cat.nome, href: `/${cat.slug}` }, { nome: nomeCitta }]} />
       <h1 className="mt-3 text-3xl font-black tracking-tight text-notte sm:text-5xl">

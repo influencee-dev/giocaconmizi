@@ -1,8 +1,8 @@
 "use client";
 
-import { ChevronDown, Heart, X } from "lucide-react";
+import { Check, Heart, Map as IconaMappa, SlidersHorizontal, X } from "lucide-react";
 import { Icona, type NomeIcona } from "@/components/icone";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { DatiCard } from "@/lib/directory";
 import { ESPERIENZE, GRUPPI, type IdEsperienza } from "@/lib/esperienze";
 import type { IdEtichetta } from "@/lib/etichette";
@@ -12,18 +12,22 @@ import { MappaLocali, type Punto } from "@/components/mappa/MappaLocali";
 import type { Posizione } from "@/lib/posizioni";
 
 /**
- * I risultati di ricerca con l'impostazione di matrimonio.com e lo stile di
- * Giocamizi: una fila orizzontale di filtri a tendina (Per la festa, Per
- * giocare, Comodità, Tipo, Zona), i filtri attivi come pillole da togliere,
- * conteggio, ordinamento e l'interruttore «Mappa» che affianca la mappa ai
- * risultati; i risultati sono una griglia di card verticali.
+ * I risultati di ricerca di una categoria in una città.
+ *
+ * Filtri pensati per il telefono in una mano (15/11/2026, prima erano tendine
+ * con caselline che su telefono si aprivano sotto il bordo dello schermo):
+ * - nella barra, sempre in vista: «Filtri» (apre tutto), «Mappa», e i filtri
+ *   più usati come pillole da accendere con un tocco;
+ * - «Filtri» apre un foglio dal basso con tutti i gruppi (per la festa, per
+ *   giocare, comodità, dove, tipo di posto, zona): pillole grandi, col numero
+ *   di posti che resterebbero, e in fondo «Mostra N posti».
  * I filtri usano SOLO ciò che è scritto nelle schede (lib/esperienze.ts) e
  * finiscono nell'indirizzo (?servizi=…&tipo=…&zona=…) per condividere la
  * ricerca; la pagina indicizzata resta una.
  */
 
 type Ordine = "consigliati" | "contatti" | "nome";
-type Tendina = (typeof GRUPPI)[number] | "Tipo" | "Zona";
+type Tendina = (typeof GRUPPI)[number] | "Tipo di posto" | "Zona";
 
 const scambia = <T,>(lista: T[], v: T) => (lista.includes(v) ? lista.filter((x) => x !== v) : [...lista, v]);
 
@@ -43,7 +47,8 @@ export function ListingFiltrato({
   const [tipi, setTipi] = useState<IdEtichetta[]>([]);
   const [zone, setZone] = useState<string[]>([]);
   const [ordine, setOrdine] = useState<Ordine>("consigliati");
-  const [aperta, setAperta] = useState<Tendina | null>(null);
+  const [foglio, setFoglio] = useState(false);
+  const chiudiFoglio = useRef<HTMLButtonElement>(null);
   const [conMappa, setConMappa] = useState(false);
   const [soloSalvati, setSoloSalvati] = useState(false);
   const [salvati, setSalvati] = useState<string[]>([]);
@@ -131,7 +136,7 @@ export function ListingFiltrato({
         })),
     })),
     {
-      id: "Tipo" as Tendina,
+      id: "Tipo di posto" as Tendina,
       voci:
         tuttiTipi.length > 1
           ? tuttiTipi.map((t) => ({ chiave: t.id, nome: t.nome, icona: t.icona, n: conta.tipo(t.id), on: tipi.includes(t.id), cambia: () => setTipi((l) => scambia(l, t.id)) }))
@@ -151,95 +156,162 @@ export function ListingFiltrato({
     ...tipi.map((id) => ({ nome: tuttiTipi.find((t) => t.id === id)?.nome ?? id, togli: () => setTipi((l) => l.filter((x) => x !== id)) })),
     ...zone.map((z) => ({ nome: z, togli: () => setZone((l) => l.filter((x) => x !== z)) })),
   ];
-  const tendinaAperta = tendine.find((t) => t.id === aperta);
+  const attivi = servizi.length + tipi.length + zone.length;
+  // Le pillole rapide della barra: i servizi accesi, poi i più presenti nelle schede.
+  const rapidi = [...presenti]
+    .map((e) => ({ e, n: conta.servizio(e.id), on: servizi.includes(e.id) }))
+    .filter((x) => x.on || x.n > 0)
+    .sort((a, b) => Number(b.on) - Number(a.on) || b.n - a.n)
+    .slice(0, 6);
+  const quantiSalvati = salvati.filter((k) => schede.some((sc) => sc.chiave === k)).length;
+
+  // Foglio aperto: la pagina sotto non scorre, Esc chiude, il fuoco va sulla X.
+  useEffect(() => {
+    if (!foglio) return;
+    const prima = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    chiudiFoglio.current?.focus();
+    const tasto = (e: KeyboardEvent) => e.key === "Escape" && setFoglio(false);
+    window.addEventListener("keydown", tasto);
+    return () => {
+      document.body.style.overflow = prima;
+      window.removeEventListener("keydown", tasto);
+    };
+  }, [foglio]);
 
   return (
     <div className="flex flex-col gap-4">
-      {/* La fila dei filtri, come matrimonio.com: bottoni a tendina che scorrono. */}
-      <div className="sticky top-[5.25rem] z-30 rounded-2xl border border-notte/10 bg-crema/95 px-3 py-3 backdrop-blur sm:px-4">
-        <div className="flex items-center gap-2 overflow-x-auto" role="toolbar" aria-label="Filtri">
-          {tendine.map((t) => {
-            const attiviQui = t.voci.filter((v) => v.on).length;
-            const sopra = aperta === t.id;
-            return (
-              <button
-                key={t.id}
-                type="button"
-                aria-expanded={sopra}
-                onClick={() => setAperta(sopra ? null : t.id)}
-                className={`flex shrink-0 items-center gap-1.5 rounded-full border-2 px-4 py-2 text-sm font-extrabold ${
-                  attiviQui ? "border-viola bg-viola text-white" : sopra ? "border-notte bg-white text-notte" : "border-crema-scuro bg-white text-notte"
-                }`}
-              >
-                {t.id}
-                {attiviQui > 0 && <span className="rounded-full bg-white px-1.5 text-xs text-viola">{attiviQui}</span>}
-                <ChevronDown className={`h-4 w-4 transition-transform ${sopra ? "rotate-180" : ""}`} strokeWidth={2.6} aria-hidden />
-              </button>
-            );
-          })}
-          {salvati.some((k) => schede.some((s) => s.chiave === k)) && (
-            <button
-              type="button"
-              aria-pressed={soloSalvati}
-              onClick={() => setSoloSalvati((v) => !v)}
-              className={`flex shrink-0 items-center gap-1.5 rounded-full border-2 px-4 py-2 text-sm font-extrabold ${
-                soloSalvati ? "border-rosa bg-rosa text-white" : "border-crema-scuro bg-white text-notte"
-              }`}
-            >
-              <Heart className="h-4 w-4" fill="currentColor" aria-hidden /> Salvati ({salvati.filter((k) => schede.some((s) => s.chiave === k)).length})
-            </button>
-          )}
+      {/* La barra: «Filtri» e «Mappa» fermi a sinistra, i filtri più usati scorrono accanto. */}
+      <div className="sticky top-[5.25rem] z-30 rounded-2xl border border-notte/10 bg-crema/95 p-2 backdrop-blur sm:p-3" role="toolbar" aria-label="Filtri">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setFoglio(true)}
+            aria-haspopup="dialog"
+            aria-expanded={foglio}
+            className={`flex min-h-12 shrink-0 items-center gap-2 rounded-full border-2 px-4 text-base font-extrabold ${
+              attivi ? "border-viola-forte bg-viola-forte text-white" : "border-notte bg-white text-notte"
+            }`}
+            data-apri-filtri
+          >
+            <SlidersHorizontal className="h-5 w-5" strokeWidth={2.6} aria-hidden />
+            Filtri
+            {attivi > 0 && <span className="rounded-full bg-white px-2 text-sm text-viola-forte">{attivi}</span>}
+          </button>
           {mappaPossibile && (
             <button
               type="button"
               role="switch"
               aria-checked={conMappa}
               onClick={() => setConMappa((v) => !v)}
-              className="ml-auto flex shrink-0 items-center gap-2 rounded-full border-2 border-notte bg-white px-4 py-2 text-sm font-extrabold text-notte"
+              className={`flex min-h-12 shrink-0 items-center gap-2 rounded-full border-2 px-4 text-base font-extrabold ${
+                conMappa ? "border-notte bg-notte text-white" : "border-notte bg-white text-notte"
+              }`}
               data-interruttore-mappa
             >
-              <span className={`relative h-5 w-9 rounded-full transition-colors ${conMappa ? "bg-viola" : "bg-notte/20"}`}>
-                <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition-all ${conMappa ? "left-[1.1rem]" : "left-0.5"}`} />
-              </span>
+              <IconaMappa className="h-5 w-5" strokeWidth={2.4} aria-hidden />
               Mappa
             </button>
           )}
-        </div>
-
-        {tendinaAperta && (
-          <div className="mt-3 rounded-2xl border border-notte/10 bg-white p-4" data-tendina={tendinaAperta.id}>
-            <div className="grid gap-x-6 sm:grid-cols-2 lg:grid-cols-3">
-              {tendinaAperta.voci.map((v) => (
-                <label
-                  key={v.chiave}
-                  className={`flex cursor-pointer items-center gap-2.5 py-2 text-sm font-semibold ${v.n === 0 && !v.on ? "text-notte/35" : "text-notte"}`}
+          <div className="relative min-w-0 flex-1">
+            <div className="flex items-center gap-2 overflow-x-auto pr-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" data-filtri-rapidi>
+              {quantiSalvati > 0 && (
+                <button
+                  type="button"
+                  aria-pressed={soloSalvati}
+                  onClick={() => setSoloSalvati((v) => !v)}
+                  className={`flex min-h-12 shrink-0 items-center gap-1.5 rounded-full border-2 px-4 text-sm font-extrabold ${
+                    soloSalvati ? "border-rosa-forte bg-rosa-forte text-white" : "border-crema-scuro bg-white text-notte"
+                  }`}
                 >
-                  <input
-                    type="checkbox"
-                    checked={v.on}
-                    onChange={v.cambia}
-                    disabled={v.n === 0 && !v.on}
-                    className="h-5 w-5 shrink-0 accent-[#9B6DD6]"
-                  />
-                  <span className="flex-1">
-                    {v.icona && <Icona nome={v.icona} className="mr-1 h-5 w-5 align-[-4px]" />}
-                    {v.nome}
-                  </span>
-                  <span className="text-xs font-bold text-notte-tenue">{v.n}</span>
-                </label>
+                  <Heart className="h-4 w-4" fill="currentColor" aria-hidden /> Salvati ({quantiSalvati})
+                </button>
+              )}
+              {rapidi.map(({ e, on }) => (
+                <button
+                  key={e.id}
+                  type="button"
+                  aria-pressed={on}
+                  onClick={() => setServizi((l) => scambia(l, e.id))}
+                  className={`flex min-h-12 shrink-0 items-center gap-1.5 rounded-full border-2 px-4 text-sm font-extrabold ${
+                    on ? "border-viola-forte bg-viola-forte text-white" : "border-crema-scuro bg-white text-notte"
+                  }`}
+                  data-filtro-rapido={e.id}
+                >
+                  {on ? <Check className="h-4 w-4" strokeWidth={3} aria-hidden /> : <Icona nome={e.icona} className="h-5 w-5" />}
+                  {e.nome}
+                </button>
               ))}
             </div>
-            <div className="mt-3 flex items-center justify-between gap-3 border-t border-notte/10 pt-3">
-              <p className="text-xs text-notte-tenue">
-                Se un servizio non è indicato non vuol dire che manchi: nella scheda trovi le domande da fare.
+            {/* La sfumatura a destra dice che la fila continua. */}
+            <span aria-hidden className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-crema to-transparent" />
+          </div>
+        </div>
+      </div>
+
+      {foglio && (
+        <div className="fixed inset-0 z-[70] flex items-end justify-center sm:items-center sm:p-6" data-foglio-filtri>
+          <button type="button" aria-label="Chiudi i filtri" onClick={() => setFoglio(false)} className="absolute inset-0 bg-notte/50" style={{ minHeight: 0 }} />
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Filtri"
+            className="relative flex max-h-[88dvh] w-full flex-col rounded-t-[1.8rem] bg-crema shadow-2xl sm:max-w-2xl sm:rounded-[1.8rem]"
+            style={{ animation: "comparsa 0.15s ease-out" }}
+          >
+            <div className="flex items-center justify-between gap-3 border-b border-notte/10 px-5 py-4">
+              <h2 className="text-2xl font-black text-notte">Filtri</h2>
+              <button
+                ref={chiudiFoglio}
+                type="button"
+                onClick={() => setFoglio(false)}
+                aria-label="Chiudi"
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-notte"
+              >
+                <X className="h-6 w-6" strokeWidth={2.6} aria-hidden />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-6 overflow-y-auto px-5 py-5">
+              {tendine.map((t) => (
+                <fieldset key={t.id} data-gruppo-filtri={t.id}>
+                  <legend className="mb-2 text-lg font-black text-notte">{t.id}</legend>
+                  <div className="flex flex-wrap gap-2">
+                    {t.voci.map((v) => {
+                      const spenta = v.n === 0 && !v.on;
+                      return (
+                        <label
+                          key={v.chiave}
+                          className={`flex min-h-12 cursor-pointer items-center gap-2 rounded-full border-2 px-4 text-base font-extrabold has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-notte ${
+                            v.on ? "border-viola-forte bg-viola-forte text-white" : spenta ? "border-crema-scuro bg-crema text-notte/35" : "border-crema-scuro bg-white text-notte"
+                          }`}
+                        >
+                          <input type="checkbox" checked={v.on} onChange={v.cambia} disabled={spenta} className="sr-only" />
+                          {v.on ? <Check className="h-5 w-5" strokeWidth={3} aria-hidden /> : v.icona ? <Icona nome={v.icona} className={`h-5 w-5 ${spenta ? "opacity-40" : ""}`} /> : null}
+                          <span>{v.nome}</span>
+                          <span className={`text-sm font-bold ${v.on ? "text-white/80" : "text-notte-tenue"}`}>{v.n}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </fieldset>
+              ))}
+              <p className="text-sm text-notte-tenue">
+                Se un servizio non è indicato non vuol dire che manchi: nella scheda trovi le domande da fare al locale.
               </p>
-              <button type="button" onClick={() => setAperta(null)} className="shrink-0 rounded-xl bg-viola px-4 py-2 text-sm font-black text-white">
-                Mostra {visibili.length}
+            </div>
+
+            <div className="flex items-center gap-3 border-t border-notte/10 bg-white px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:rounded-b-[1.8rem]">
+              <button type="button" onClick={azzera} disabled={attivi === 0} className="min-h-14 shrink-0 px-2 text-base font-extrabold text-viola-forte underline underline-offset-4 disabled:text-notte/30 disabled:no-underline">
+                Togli tutti
+              </button>
+              <button type="button" onClick={() => setFoglio(false)} className="min-h-14 flex-1 rounded-full bg-viola-forte px-5 text-lg font-black text-white" data-mostra-risultati>
+                {visibili.length === 0 ? "Nessun posto così" : visibili.length === 1 ? "Mostra 1 posto" : `Mostra ${visibili.length} posti`}
               </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-lg font-black text-notte" aria-live="polite" data-risultati={visibili.length}>

@@ -268,6 +268,17 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 - L'invito alle novità dopo il secondo gioco (components/form/DopoIlGioco.tsx)
   ora è sopra lo schermo di gioco: prima era nascosto sotto.
 
+## Filtri dei listing della directory (15/11/2026)
+- components/directory/ListingFiltrato.tsx: barra con «Filtri» (apre un foglio
+  dal basso con tutti i gruppi, pillole grandi e «Mostra N posti»), «Mappa» e
+  i filtri più usati come pillole rapide. Niente più tendine con caselline:
+  su telefono si aprivano sotto il bordo dello schermo.
+- RicercaCosaDove `compatta`: nei risultati, su telefono, è una riga sola.
+- Routine «Giocamizi · Due giochi al giorno» (11:23, sessione nuova, ambiente
+  «Giocamizi»): segue la coda della skill game-designer-mizi. Voce «sage».
+- Proposta dei tipi di attività nuovi: Drive, 1 Progetti, «Mappa dei tipi di
+  attività da inserire» (da decidere con Giorgia, niente è stato creato).
+
 ## Foto servite dai nostri file, senza /_next/image (15/11/2026)
 - `<Image>` usa il caricatore lib/caricatore-immagini.ts (next.config.ts,
   loader «custom»): per `/immagini/<nome>-<L>.webp` sceglie tra le larghezze
