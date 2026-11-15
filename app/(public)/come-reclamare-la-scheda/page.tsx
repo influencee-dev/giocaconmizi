@@ -134,7 +134,7 @@ export default function ComeReclamare() {
 
       <section className="mt-8" aria-labelledby="titolo-video">
         <h2 id="titolo-video" className="text-2xl font-black text-notte sm:text-3xl">
-          Guarda come si fa (1 minuto e mezzo)
+          Guarda come si fa (meno di 2 minuti)
         </h2>
         <video
           controls

@@ -1,8 +1,8 @@
 # Musichetta originale per il video: marimba, basso e un piccolo sonaglio.
 # Giro di accordi semplice (Do - La min - Fa - Sol), arpeggi in croma, 104 bpm.
-import numpy as np, wave
+import numpy as np, wave, sys
 SR = 44100
-DUR = 96.5
+DUR = float(sys.argv[1]) + 2 if len(sys.argv) > 1 else 96.5  # durata del video + 2 s
 BPM = 104
 beat = 60 / BPM
 N = int(SR * DUR)
