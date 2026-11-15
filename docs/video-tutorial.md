@@ -14,10 +14,12 @@ public/icone usate nelle scene).
 
 1. **Testi**: `testi.json`, una frase per scena (per la pronuncia scrivere
    «giocamizi punto it»: nei sottotitoli diventa giocamizi.it).
-2. **Voce**: `python3 voce.py shimmer` → `voce/<n>.wav` (una chiamata per
-   frase a `https://api.openai.com/v1/audio/speech`, modello gpt-4o-mini-tts,
-   voce in uso: shimmer (15/11), istruzioni «mamma che parla a un'altra
-   mamma, calda ed empatica, non da spot»). La chiave è un segreto
+2. **Voce di Mizi**: `python3 voce.py` → `voce/<n>.wav`. Parla SEMPRE Mizi,
+   pinguina-bambina di ~10 anni, in prima persona (decisione di Giorgia del
+   15/11/2026: voce «sage» di gpt-4o-mini-tts, istruzioni fisse in voce.py).
+   Tutto il testo in UNA chiamata (la voce resta uguale), poi whisper-1 dà i
+   tempi delle parole e lo script taglia frase per frase: controllare che le
+   durate stampate siano sensate (una frase di 1 secondo = taglio sbagliato). La chiave è un segreto
    dell'ambiente cloud «Giocamizi» (la mette il proxy: header
    `Authorization: Bearer proxy-injected`), mai nel repo né in chat.
 3. **Schermate**: build fresca, server di prova con `GIOCAMIZI_ADMIN_PROVA`
@@ -36,6 +38,10 @@ public/icone usate nelle scene).
    `sottotitoli.vtt`.
 6. **Montaggio**: ffmpeg, H.264 + AAC, `-movflags +faststart`, CRF ~24
    (il file deve restare sotto i 10 MB); poster = un fotogramma in WebP.
+8. **Second brain**: ogni video finito (16:9 e 9:16) si carica su Drive in
+   2 Aree → Giocamizi · Video (cartelle «16x9 · Tutorial per partner»,
+   «16x9 · Tutorial per utenti», «9x16 · Reel e storie»), nome
+   «AAAA-MM-GG · titolo · 16x9.mp4», e si aggiorna «01 Catalogo dei video».
 7. Sul sito va solo l'orizzontale: copiare mp4, vtt e poster in `public/video/`. Il verticale va su Drive (2 Aree → Giocamizi · Social) per Instagram, aggiornare durata e testo in
    lib/reclamo.ts, verifiche di sempre.
 

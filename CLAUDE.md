@@ -232,6 +232,18 @@ ancora veri: se no, versione nuova con la data. Alla fine lascia una nota
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 
+## Video di Mizi (15/11/2026, docs/video-tutorial.md)
+- Nei video parla SEMPRE Mizi, in prima persona: pinguina-bambina di ~10 anni,
+  voce «sage» di OpenAI scelta da Giorgia, tutto il testo in UNA registrazione
+  (scripts/video/voce.py). Scene animate con le schermate vere del sito, musica
+  originale scritta col codice, sottotitoli; sempre 16:9 (sito) e 9:16 (social).
+- Ogni video finito si carica su Drive in 2 Aree → «Giocamizi · Video»
+  (id 1vcpiq2FvnCB4-6zasNgovGeC6MG3_KqQ): «16x9 · Tutorial per partner»,
+  «16x9 · Tutorial per utenti», «9x16 · Reel e storie», «99 Voce di Mizi»
+  (campione ufficiale). Cosa fare dopo: «01 Catalogo dei video» (crearne la
+  versione nuova con la data quando cambia). Chiave OpenAI: segreto
+  dell'ambiente cloud «Giocamizi», il proxy la mette da solo.
+
 ## Canzoni di Mizi (14/11/2026)
 - Su Drive: 2 Aree → Giocamizi · Social → «Canzoni di Mizi» (id
   1VnaChhQWdr6zhvQZom9cMat9jmIiRvDv): guida «00 Come funzionano le canzoni di
