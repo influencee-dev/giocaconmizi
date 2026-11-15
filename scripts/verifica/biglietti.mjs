@@ -149,6 +149,19 @@ ok("kit: arriva col nome e lo sfondo del biglietto",
   (await page.getByLabel("Nome", { exact: true }).inputValue()) === "Domiziana" &&
   (await page.getByRole("button", { name: "Dinosauri", exact: true }).getAttribute("aria-pressed")) === "true");
 
+// Dalle pagine a tema (es. Biglietti di Natale) tipo e sfondo sono già scelti:
+// si parte dal passo delle scritte.
+await page.goto(`${BASE}/biglietti/crea?tipo=auguri&tema=natale`, { waitUntil: "networkidle" });
+await page.waitForTimeout(300);
+ok("dalla pagina a tema si parte dalle scritte, con lo sfondo già scelto",
+  (await page.locator("[data-passo='2']").count()) === 1 &&
+  (await page.locator("[data-mizi-guida]").textContent()).includes("già pronto") &&
+  (await page.getByLabel("Nome", { exact: true }).count()) === 1);
+await page.locator("[data-indietro]").tap();
+await page.waitForTimeout(150);
+ok("…e tornando indietro lo sfondo di Natale è quello scelto",
+  (await page.getByRole("button", { name: "Natale", exact: true }).getAttribute("aria-pressed")) === "true");
+
 // Il resto delle prove sull'invito, con tutto in una pagina
 await page.goto(`${BASE}/biglietti/crea`, { waitUntil: "networkidle" });
 await page.locator("[data-vedi-tutto]").tap();

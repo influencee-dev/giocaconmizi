@@ -4,7 +4,8 @@
 #   00 Leggimi e prompt  come si legge il file + il prompt per fare il piano successivo
 #   Piano                gli argomenti ancora da scrivere (content/piano-editoriale.json)
 #   Prodotto             il registro di ciò che è stato prodotto, giorno per giorno
-#   Inventario           tutto ciò che è online oggi (articoli, guide, giochi) con l'indirizzo
+#   Inventario           tutto ciò che è online oggi (articoli, guide, giochi, storie,
+#                        feste per città, biglietti, rete mamme, Natale) con l'indirizzo
 #
 #   npm run registro -- <cartella di uscita>
 #
@@ -66,6 +67,39 @@ giochi = [
         leggi("games/registry.ts"),
     )
 ]
+
+# ── Storie, feste per città e pagine fisse (richiesta del 14/11) ──────────────
+def nata_il(percorso: str) -> str:
+    """Il giorno in cui il file è entrato nel repo (vuoto se la storia git è tagliata)."""
+    r = subprocess.run(["git", "log", "--diff-filter=A", "--format=%as", "--", percorso], cwd=RADICE, capture_output=True, text=True)
+    righe = r.stdout.split()
+    return righe[-1] if righe else ""
+
+
+storie = []
+for f in sorted((RADICE / "content/stories").glob("*.md")):
+    if f.name.startswith("_"):
+        continue
+    testa = f.read_text(encoding="utf-8").split("\n---", 1)[0]
+    storie.append({"slug": f.stem, "titolo": campo(testa, "title"), "eta": campo(testa, "age"), "tema": campo(testa, "theme"), "data": nata_il(f"content/stories/{f.name}")})
+
+citta_feste = [
+    {"slug": m.group(1), "citta": m.group(2), "data": m.group(3)}
+    for m in re.finditer(r"""^    slug: ["']([a-z0-9-]+)["'],\n    citta: ["']([^"'\n]+)["'],\n    aggiornata: ["']([0-9-]+)["']""", leggi("lib/feste.ts"), re.M)
+]
+
+# Pagine fisse che i post usano come punto di partenza: [tipo, titolo, indirizzo, età, tema, file della pagina]
+PAGINE = [
+    ["Rete mamme", "La rete delle mamme", "/per-le-mamme", "", "famiglie", "app/(public)/per-le-mamme/page.tsx"],
+    ["Biglietti", "Biglietti di compleanno", "/biglietti", "1–12", "feste", "app/(public)/biglietti/page.tsx"],
+    ["Biglietti", "Crea un invito o un biglietto", "/biglietti/crea", "1–12", "feste", "app/(public)/biglietti/crea/page.tsx"],
+    ["Biglietti", "Il kit della festa", "/biglietti/kit-festa", "1–12", "feste", "app/(public)/biglietti/kit-festa/page.tsx"],
+    ["Natale", "Il Natale di Mizi", "/natale", "3–10", "Natale", "app/(public)/natale/page.tsx"],
+    ["Natale", "La letterina a Babbo Natale", "/natale/letterina-babbo-natale", "3–10", "Natale", "app/(public)/natale/letterina-babbo-natale/page.tsx"],
+    ["Natale", "Biglietti di Natale", "/natale/biglietti-di-natale", "1–12", "Natale", "app/(public)/natale/biglietti-di-natale/page.tsx"],
+    ["Natale", "Eventi di Natale per bambini", "/natale/eventi", "", "Natale", "app/(public)/natale/eventi/page.tsx"],
+]
+pagine = [r for r in PAGINE if (RADICE / r[5]).exists()]
 
 # ── Il piano: cosa resta da scrivere ─────────────────────────────────────────
 piano = json.loads(leggi("content/piano-editoriale.json"))
@@ -191,10 +225,13 @@ inventario = (
     [["Articolo", a["titolo"], f'{SITO}/guide/{a["slug"]}', a["eta"], a["categoria"], a["data"]] for a in sorted(articoli, key=lambda a: a["data"], reverse=True)]
     + [["Guida", g["titolo"], f'{SITO}/guide/{g["slug"]}', "", "", ""] for g in guide]
     + [["Gioco", g["titolo"], f'{SITO}/giochi/{g["slug"]}', g["eta"], g["abilita"], ""] for g in giochi]
+    + [["Storia", st["titolo"], f'{SITO}/storie/{st["slug"]}', st["eta"], st["tema"], st["data"]] for st in storie]
+    + [["Feste in città", f'Feste di compleanno a {c["citta"]}', f'{SITO}/feste/{c["slug"]}', "", "feste", c["data"]] for c in sorted(citta_feste, key=lambda c: c["citta"])]
+    + [[t, titolo, f"{SITO}{indirizzo}", eta, tema, nata_il(file)] for t, titolo, indirizzo, eta, tema, file in pagine]
 )
 scheda(wb, "Inventario", ["Tipo", "Titolo", "Indirizzo", "Età", "Tema o abilità", "Pubblicato il"], inventario, [12, 62, 60, 8, 24, 14])
 
 uscita = Path(sys.argv[1] if len(sys.argv) > 1 else ".") / f"Piano editoriale Giocamizi · {OGGI}.xlsx"
 uscita.parent.mkdir(parents=True, exist_ok=True)
 wb.save(uscita)
-print(json.dumps({"file": str(uscita).replace("\\", "/"), "piano": len(da_fare), "prodotto": len(prodotto), "articoli": len(articoli), "guide": len(guide), "giochi": len(giochi)}, ensure_ascii=False))
+print(json.dumps({"file": str(uscita).replace("\\", "/"), "piano": len(da_fare), "prodotto": len(prodotto), "articoli": len(articoli), "guide": len(guide), "giochi": len(giochi), "storie": len(storie), "citta": len(citta_feste), "pagine": len(pagine)}, ensure_ascii=False))

@@ -11,7 +11,8 @@
 // Città già provate e SCARTATE (meno di 2 locali solidi con segnali recenti):
 // non ritentarle prima di qualche mese. Pescara, Sassari, Barletta, Pistoia,
 // Terni, Matera, L'Aquila, Potenza, Marsala, Faenza, Legnano, Avellino
-// (entro il 13/11/2026); Cinisello Balsamo, Torre del Greco, Olbia (14/11/2026).
+// (entro il 13/11/2026); Cinisello Balsamo, Torre del Greco, Olbia (14/11/2026);
+// Giugliano in Campania (15/11/2026).
 
 export interface LocaleFesta {
   nome: string;
@@ -2440,6 +2441,40 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "C'è un posto al coperto per una festa d'inverno a Fiumicino?", risposta: "Sì: Buffalo Kids 2.0 ha uno spazio giochi interno con gonfiabile, campetto e playground, riservato alla festa il pomeriggio. Il Parco Avventura di Fregene invece è all'aperto: va bene nella bella stagione." },
       { domanda: "Per che età vanno bene?", risposta: "Al Parco Avventura di Fregene i percorsi dipendono dall'altezza: Baby sotto i 115 cm, Junior da 115 a 139 cm. Casale Traiano propone feste per tutte le età. Per Buffalo Kids 2.0 dite l'età dei bambini quando prenotate." },
       { domanda: "Posso portare la torta?", risposta: "Al Parco Avventura di Fregene chi festeggia con le loro formule può lasciare la torta nei frigoriferi del parco, se c'è posto. Per Casale Traiano e Buffalo Kids 2.0 le fonti non lo dicono: chiedetelo quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "forli",
+    citta: "Forlì",
+    aggiornata: "2026-11-15",
+    rispostaBreve: "A Forlì la festa di compleanno per bambini si fa al coperto da Happyland, il parco giochi dietro il Palafiera di via Punta di Ferro, con gonfiabili e attrazioni per bambini da 0 a 10 anni. Nella bella stagione c'è anche Gommolandia, la città gonfiabile all'aperto nel Parco Urbano Franco Agosto, con sconti per le feste di compleanno.",
+    intro: "A Forlì le feste per bambini si dividono tra il grande parco giochi al coperto vicino alla Fiera, buono tutto l'anno, e i gonfiabili all'aperto del Parco Urbano, per la primavera e l'estate. Qui trovate tutti e due, con quello che dicono le fonti.",
+    locali: [
+      { nome: "Happyland", zona: "Forlì, via Punta di Ferro, dietro il Palafiera", tipo: "parco giochi al coperto con gonfiabili e area per i più piccoli", sito: "https://www.happylandforli.it/", descrizione: "Un parco giochi al coperto nell'area della Fiera di Forlì, che si presenta come il più grande dell'Emilia-Romagna: circa 1.500 mq di gonfiabili e attrazioni per bambini da 0 a 10 anni, con uno spazio dedicato ai più piccoli. Organizza feste di compleanno; il sito indica un prezzo per ogni bambino invitato, con ingresso per tutto l'orario di apertura e un numero minimo di bambini." },
+      { nome: "Gommolandia", zona: "Forlì, Parco Urbano Franco Agosto, viale dell'Appennino", tipo: "parco giochi gonfiabile all'aperto nel parco urbano", descrizione: "Una città gonfiabile all'aperto dentro il Parco Urbano Franco Agosto, la più conosciuta di Forlì. È aperta tutti i giorni nella bella stagione, tempo permettendo, con l'orario estivo fino a sera, e fa sconti speciali per le feste di compleanno e per le scolaresche. Essendo all'aperto, va bene da primavera a fine estate." },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno d'inverno a Forlì?", risposta: "Al coperto da Happyland, il parco giochi dietro il Palafiera di via Punta di Ferro, con gonfiabili e attrazioni per bambini fino a 10 anni. Gommolandia invece è all'aperto: va bene nella bella stagione." },
+      { domanda: "Per che età vanno bene?", risposta: "Happyland è pensato per bambini da 0 a 10 anni e ha uno spazio per i più piccoli. Per Gommolandia le fonti non danno un'età precisa: chiedete quando prenotate." },
+      { domanda: "Quanto costa?", risposta: "Happyland indica sul suo sito un prezzo per ogni bambino invitato, con un minimo di bambini; Gommolandia fa sconti per i compleanni. I prezzi cambiano: chiedete sempre un preventivo scritto." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "ancona",
+    citta: "Ancona",
+    aggiornata: "2026-11-15",
+    rispostaBreve: "Ad Ancona la festa di compleanno per bambini si fa in una sala feste con gonfiabili, come Magic Land alla Baraccola Nord, oppure in un parco giochi al coperto come Playland in via Achille Grandi, oltre 800 mq per bambini da 0 a 13 anni con sale riservate alle feste. Tutti e due sono al chiuso, quindi vanno bene tutto l'anno.",
+    intro: "Ad Ancona gli spazi per le feste dei bambini stanno soprattutto nella zona della Baraccola e verso Ancona sud, comodi da raggiungere in auto. Qui trovate una sala feste con gonfiabili e area morbida e un grande parco giochi al coperto.",
+    locali: [
+      { nome: "Magic Land", zona: "Ancona, Baraccola Nord, via Vecchia del Pinocchio", tipo: "sala feste con gonfiabili e area morbida", sito: "https://salafesteancona.it/", descrizione: "Una sala pensata per le feste dei bambini, climatizzata, con gonfiabili professionali, scivoli e area morbida. I pacchetti per i compleanni comprendono allestimento, animazione e merenda a buffet; nello stesso posto c'è una seconda sala, Space, per le feste dei grandi. Ha il parcheggio." },
+      { nome: "Playland", zona: "Ancona, via Achille Grandi", tipo: "parco giochi al coperto con sale feste", descrizione: "Un parco giochi al coperto di oltre 800 mq per bambini da 0 a 13 anni e i loro accompagnatori, con sale riservate alle feste di compleanno. Le guide locali delle famiglie di Ancona lo citano tra le sale feste della città, con animazione e catering." },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno per bambini ad Ancona?", risposta: "In una sala feste con gonfiabili come Magic Land alla Baraccola Nord, oppure in un parco giochi al coperto come Playland in via Achille Grandi. Sono tutti e due al chiuso." },
+      { domanda: "Per che età vanno bene?", risposta: "Playland accoglie bambini da 0 a 13 anni. Magic Land è pensata per le feste dei bambini, con area morbida per i più piccoli: dite l'età quando prenotate." },
+      { domanda: "Cosa comprende la festa?", risposta: "Magic Land propone pacchetti con allestimento, animazione e merenda a buffet. Per Playland le guide parlano di animazione e catering: fatevi dire per iscritto cosa è compreso, torta inclusa." },
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
