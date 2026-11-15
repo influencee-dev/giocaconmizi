@@ -1,0 +1,170 @@
+{
+  "slug": "le-storie",
+  "titolo": "Le storie di Giocamizi: tre caratteri e la lettura ad alta voce",
+  "gruppo": "utenti",
+  "ordine": 7,
+  "descrizione": "Mizi ti mostra le storie di Giocamizi: in stampatello, minuscolo o corsivo, con le lettere grandi e la lettura ad alta voce.",
+  "rispostaBreve": "Le storie di Giocamizi sono brevi e gratuite: si scelgono per età o per carattere e ognuna si legge in stampatello maiuscolo, minuscolo o corsivo, con tre grandezze del testo. Con «Ascolta» la storia si legge ad alta voce. Ogni storia indica età e minuti di lettura.",
+  "pagina": {
+    "href": "/storie",
+    "testo": "Tutte le storie"
+  },
+  "faq": [
+    {
+      "domanda": "Le storie sono gratis?",
+      "risposta": "Sì, come tutto Giocamizi, senza pubblicità."
+    }
+  ],
+  "schermate": {
+    "storie": {
+      "url": "/storie",
+      "selettori": [
+        "a[href=\"/storie/eta/6-anni\"]",
+        "a[href=\"/storie/corsivo\"]"
+      ]
+    },
+    "storia": {
+      "url": "/storie/mizi-impara-a-nuotare",
+      "selettori": [
+        "[aria-label=\"Scegli il carattere\"]",
+        "article[data-carattere=\"stampatello\"]"
+      ]
+    },
+    "minuscolo": {
+      "url": "/storie/mizi-impara-a-nuotare",
+      "azioni": [
+        {
+          "clicca": "[aria-label=\"Scegli il carattere\"] button:has-text(\"minuscolo\")"
+        }
+      ],
+      "selettori": [
+        "article[data-carattere=\"minuscolo\"]"
+      ]
+    },
+    "corsivo": {
+      "url": "/storie/mizi-impara-a-nuotare",
+      "azioni": [
+        {
+          "clicca": "[aria-label=\"Scegli il carattere\"] button:has-text(\"corsivo\")"
+        }
+      ],
+      "selettori": [
+        "article[data-carattere=\"corsivo\"]"
+      ]
+    },
+    "grande": {
+      "url": "/storie/mizi-impara-a-nuotare",
+      "azioni": [
+        {
+          "clicca": "button[aria-label=\"Testo enorme\"]"
+        }
+      ],
+      "selettori": [
+        "[aria-label=\"Dimensione del testo\"]"
+      ]
+    },
+    "ascolta": {
+      "url": "/storie/mizi-impara-a-nuotare",
+      "azioni": [
+        {
+          "clicca": "button:has-text(\"Ascolta\")"
+        }
+      ],
+      "selettori": [
+        "button:has-text(\"Ferma\")"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Da leggere insieme",
+      "titolo": "Le storie di Giocamizi",
+      "sottotitolo": "Un testo, tre caratteri.",
+      "voce": "Ciao, sono Mizi! Ti piacciono le storie? Su Giocamizi ce ne sono tante, brevi, da leggere insieme. E c'è un trucco: ogni storia si legge in tre caratteri diversi!"
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Scegli per età o per carattere",
+      "testo": "5, 6 o 7 anni; stampatello, minuscolo, corsivo.",
+      "schermata": "storie",
+      "evidenzia": [
+        "a[href=\"/storie/eta/6-anni\"]",
+        "a[href=\"/storie/corsivo\"]"
+      ],
+      "voce": "Apri la pagina Storie. Puoi sceglierle per età, cinque, sei o sette anni, oppure per carattere. Più giù le trovi tutte, una dopo l'altra."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Parte in stampatello",
+      "testo": "Il carattere di chi inizia a leggere.",
+      "schermata": "storia",
+      "evidenzia": [
+        "[aria-label=\"Scegli il carattere\"]",
+        "article[data-carattere=\"stampatello\"]"
+      ],
+      "voce": "Apri una storia, per esempio la mia: «Mizi impara a nuotare». In alto ci sono i bottoni dei caratteri. Si parte in stampatello maiuscolo, il carattere di chi comincia a leggere."
+    },
+    {
+      "tipo": "due",
+      "passo": 3,
+      "titolo": "Minuscolo e corsivo",
+      "testo": "Per la prima e la seconda elementare.",
+      "schermate": [
+        "minuscolo",
+        "corsivo"
+      ],
+      "scorri": [
+        "article[data-carattere=\"minuscolo\"]",
+        "article[data-carattere=\"corsivo\"]"
+      ],
+      "voce": "Con un tocco la stessa storia diventa in minuscolo, per la prima elementare, o in corsivo, per la seconda. Il testo è sempre lo stesso: cambiano solo le lettere."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 4,
+      "titolo": "Lettere più grandi",
+      "testo": "Tre grandezze, a tua scelta.",
+      "schermata": "grande",
+      "evidenzia": [
+        "[aria-label=\"Dimensione del testo\"]"
+      ],
+      "voce": "Le lettere sono troppo piccole? Tocca una delle tre A e il testo diventa più grande."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 5,
+      "titolo": "Tocca «Ascolta»",
+      "testo": "La storia si legge ad alta voce.",
+      "schermata": "ascolta",
+      "evidenzia": [
+        "button:has-text(\"Ferma\")"
+      ],
+      "nota": "«Ferma» per fermarla",
+      "notaIcona": "altoparlante",
+      "voce": "E se vuoi ascoltarla, tocca «Ascolta»: la storia si legge ad alta voce, e tu segui le parole con il dito. Per fermarla, tocca «Ferma»."
+    },
+    {
+      "tipo": "carta",
+      "passo": 6,
+      "titolo": "Una storia a sera",
+      "testo": "Età e minuti di lettura, sempre scritti.",
+      "carta": {
+        "icona": "libro",
+        "titolo": "Mizi impara a nuotare",
+        "sotto": "6 anni · 5 minuti di lettura",
+        "testo": "Ogni storia dice per che età è e quanti minuti ci vogliono.",
+        "spunta": true
+      },
+      "voce": "In ogni storia c'è scritto per che età è e quanti minuti ci vogliono. Perfetta da leggere stasera, prima della nanna!"
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/storie",
+      "sotto": "Gratis, con il pulsante Ascolta.",
+      "voce": "Le storie ti aspettano su giocamizi punto it, nella pagina Storie. Buona lettura! Ciao ciao!"
+    }
+  ]
+}

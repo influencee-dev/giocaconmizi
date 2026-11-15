@@ -1,0 +1,266 @@
+{
+  "slug": "il-profilo-della-famiglia",
+  "titolo": "Il profilo della famiglia e l'album di Mizi",
+  "gruppo": "utenti",
+  "ordine": 8,
+  "descrizione": "Mizi ti mostra come creare il profilo della famiglia su Giocamizi e dove restano i dati: sul tuo telefono.",
+  "rispostaBreve": "Il profilo della famiglia di Giocamizi si crea dal telefono in pochi passi: il tuo nome, il nome e l'età del bimbo, l'email. Profilo e album di Mizi restano solo sul telefono, senza account; l'email arriva a Giocamizi solo se scegli la posta di Mizi. Si cancella con «Cancella i miei dati».",
+  "pagina": {
+    "href": "/profilo",
+    "testo": "Il tuo profilo"
+  },
+  "faq": [
+    {
+      "domanda": "I nomi dei bambini arrivano a Giocamizi?",
+      "risposta": "No: restano solo sul tuo telefono."
+    },
+    {
+      "domanda": "Serve un account?",
+      "risposta": "No, il profilo vive sul telefono."
+    }
+  ],
+  "schermate": {
+    "vuoto": {
+      "url": "/profilo",
+      "selettori": [
+        "[data-crea-profilo]"
+      ]
+    },
+    "nome": {
+      "url": "/profilo",
+      "azioni": [
+        {
+          "clicca": "[data-crea-profilo]"
+        },
+        {
+          "riempi": "input[data-campo=\"mamma\"]",
+          "valore": "Giulia"
+        }
+      ],
+      "selettori": [
+        "input[data-campo=\"mamma\"]"
+      ]
+    },
+    "bimbo": {
+      "url": "/profilo",
+      "azioni": [
+        {
+          "clicca": "[data-crea-profilo]"
+        },
+        {
+          "riempi": "input[data-campo=\"mamma\"]",
+          "valore": "Giulia"
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "riempi": "input[data-campo=\"bimbo-0\"]",
+          "valore": "Leo"
+        },
+        {
+          "clicca": "[data-eta=\"5\"]"
+        }
+      ],
+      "selettori": [
+        "input[data-campo=\"bimbo-0\"]",
+        "[data-eta=\"5\"]"
+      ]
+    },
+    "email": {
+      "url": "/profilo",
+      "azioni": [
+        {
+          "clicca": "[data-crea-profilo]"
+        },
+        {
+          "riempi": "input[data-campo=\"mamma\"]",
+          "valore": "Giulia"
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "riempi": "input[data-campo=\"bimbo-0\"]",
+          "valore": "Leo"
+        },
+        {
+          "clicca": "[data-eta=\"5\"]"
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "riempi": "input[data-campo=\"email\"]",
+          "valore": "giulia@esempio.it"
+        }
+      ],
+      "selettori": [
+        "input[data-campo=\"email\"]",
+        "[data-spunta=\"posta\"]"
+      ]
+    },
+    "pronto": {
+      "url": "/profilo",
+      "azioni": [
+        {
+          "clicca": "[data-crea-profilo]"
+        },
+        {
+          "riempi": "input[data-campo=\"mamma\"]",
+          "valore": "Giulia"
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "riempi": "input[data-campo=\"bimbo-0\"]",
+          "valore": "Leo"
+        },
+        {
+          "clicca": "[data-eta=\"5\"]"
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "riempi": "input[data-campo=\"email\"]",
+          "valore": "giulia@esempio.it"
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "clicca": "[data-avanti]"
+        }
+      ],
+      "selettori": [
+        "section[aria-label=\"I tuoi bimbi\"]"
+      ]
+    },
+    "profilo": {
+      "url": "/profilo",
+      "selettori": [
+        "section[aria-label=\"I tuoi bimbi\"]",
+        "section[aria-label=\"La posta di Mizi\"]",
+        "section[aria-label=\"I tuoi dati\"]",
+        "[data-cancella]"
+      ]
+    },
+    "home": {
+      "url": "/",
+      "selettori": [
+        "[data-saluto]"
+      ]
+    },
+    "album": {
+      "url": "/giochi/album",
+      "selettori": [
+        "[data-conto=\"figurine\"]"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per mamme e papà",
+      "titolo": "Il profilo della famiglia",
+      "sottotitolo": "Resta solo sul tuo telefono.",
+      "voce": "Ciao, sono Mizi! Con il profilo ti saluto per nome e ti propongo i giochi giusti per l'età del tuo bimbo. Ti faccio vedere come si crea, e dove restano i tuoi dati."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Apri «Profilo»",
+      "testo": "Si crea dal telefono.",
+      "schermata": "vuoto",
+      "evidenzia": [
+        "[data-crea-profilo]"
+      ],
+      "voce": "Dal telefono apri la pagina Profilo e tocca «Crea il profilo». Si fa dal telefono, non dal computer."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Il tuo nome",
+      "testo": "Anche solo quello di battesimo.",
+      "schermata": "nome",
+      "evidenzia": [
+        "input[data-campo=\"mamma\"]"
+      ],
+      "voce": "Prima ti chiedo come ti chiami. Così, quando apri Giocamizi, ti saluto per nome."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 3,
+      "titolo": "Il tuo bimbo",
+      "testo": "Nome ed età. Se sono di più, li aggiungi.",
+      "schermata": "bimbo",
+      "evidenzia": [
+        "input[data-campo=\"bimbo-0\"]",
+        "[data-eta=\"5\"]"
+      ],
+      "nota": "I nomi restano sul telefono",
+      "notaIcona": "chiave",
+      "voce": "Poi scrivi il nome del tuo bimbo e tocca la sua età. Se hai più bimbi, puoi aggiungerli. I nomi restano solo sul tuo telefono: a noi non arrivano."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 4,
+      "titolo": "L'email e la posta di Mizi",
+      "testo": "La posta è facoltativa.",
+      "schermata": "email",
+      "evidenzia": [
+        "input[data-campo=\"email\"]",
+        "[data-spunta=\"posta\"]"
+      ],
+      "voce": "Ultima cosa, l'email. Anche lei resta sul telefono: arriva a noi solo se scegli la posta di Mizi, un gioco nuovo a settimana. È facoltativa."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 5,
+      "titolo": "Cambia quando vuoi",
+      "testo": "Nomi, età, bimbi e posta di Mizi.",
+      "schermata": "profilo",
+      "evidenzia": [
+        "section[aria-label=\"I tuoi bimbi\"]",
+        "section[aria-label=\"La posta di Mizi\"]"
+      ],
+      "voce": "Nella pagina Profilo puoi cambiare tutto: il nome, l'email, l'età, aggiungere un bimbo o scegliere per chi sono i giochi. E la posta di Mizi la accendi quando vuoi."
+    },
+    {
+      "tipo": "due",
+      "passo": 6,
+      "titolo": "Il saluto e l'album",
+      "testo": "I giochi per la sua età e una figurina per ogni gioco.",
+      "schermate": [
+        "home",
+        "album"
+      ],
+      "scorri": [
+        "[data-saluto]",
+        "[data-conto=\"figurine\"]"
+      ],
+      "voce": "Ora la home ti saluta per nome e ti mostra i giochi per l'età del tuo bimbo. E nell'album di Mizi, ogni gioco finito regala una figurina!"
+    },
+    {
+      "tipo": "telefono",
+      "passo": 7,
+      "titolo": "Tutto resta sul telefono",
+      "testo": "Profilo e album: niente account.",
+      "schermata": "profilo",
+      "scorri": "[data-cancella]",
+      "evidenzia": [
+        "section[aria-label=\"I tuoi dati\"]",
+        "[data-cancella]"
+      ],
+      "voce": "Profilo e album restano solo su questo telefono, e non serve un account. Se vuoi, tocca «Cancella i miei dati» e il profilo sparisce dal telefono."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/profilo",
+      "sotto": "Si crea dal telefono, in 30 secondi.",
+      "voce": "Crea il tuo profilo su giocamizi punto it, dal telefono. Ti aspetto! Ciao ciao!"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 // Le schermate del video: node schermi.mjs <scheda.json> <cartella-lavoro> [base]
 // Apre ogni pagina della scheda dal server di prova (base, di solito http://localhost:3100),
-// fa le azioni (riempire campi con dati finti), nasconde le barre fisse in basso,
+// fa le azioni (riempi/scegli campi con dati finti, clicca, attendi), nasconde le barre fisse in basso,
 // fotografa la pagina intera e salva dove stanno gli elementi da evidenziare (box.json).
 import { chromium } from 'playwright-core';
 import fs from 'node:fs';
@@ -22,9 +22,13 @@ for (const [nome, s] of Object.entries(spec.schermate)) {
   await p.waitForTimeout(800);
   for (const a of s.azioni ?? []) {
     if (a.riempi) await p.fill(a.riempi, a.valore);
+    if (a.scegli) await p.selectOption(a.scegli, a.valore);
     if (a.clicca) { await p.click(a.clicca); await p.waitForTimeout(600); }
     if (a.attendi) await p.waitForTimeout(a.attendi);
   }
+  // in cima prima dello scatto: la testata fissa deve stare in alto, non dove ci ha portato la compilazione
+  await p.evaluate(() => window.scrollTo(0, 0));
+  await p.waitForTimeout(300);
   await p.evaluate(() => { for (const e of document.querySelectorAll('body *')) { const st = getComputedStyle(e); if ((st.position === 'fixed' || st.position === 'sticky') && e.getBoundingClientRect().top > 120) e.style.setProperty('display', 'none', 'important'); } });
   await p.waitForTimeout(200);
   await p.screenshot({ path: `${cartella}/schermi/${nome}.png`, fullPage: true });

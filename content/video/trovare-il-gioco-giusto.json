@@ -1,0 +1,165 @@
+{
+  "slug": "trovare-il-gioco-giusto",
+  "titolo": "Come trovare il gioco giusto per il tuo bimbo",
+  "gruppo": "utenti",
+  "ordine": 5,
+  "descrizione": "Mizi ti mostra come trovare il gioco giusto su Giocamizi per età e per competenza, e come si gioca.",
+  "rispostaBreve": "Per trovare il gioco giusto su Giocamizi apri «Giochi» e scegli l'età e cosa allenare (lettere, numeri, colori e forme, logica, coding), oppure usa le pagine per età e per competenza. Nel gioco Mizi spiega a voce cosa fare; non ci sono timer né punteggi da battere.",
+  "pagina": {
+    "href": "/giochi",
+    "testo": "Tutti i giochi"
+  },
+  "faq": [
+    {
+      "domanda": "Per che età sono i giochi?",
+      "risposta": "Dai 3 ai 12 anni; ogni gioco dice l'età e quanti minuti dura."
+    },
+    {
+      "domanda": "I giochi hanno timer o classifiche?",
+      "risposta": "No: niente timer, niente punteggi da battere, niente pubblicità."
+    }
+  ],
+  "schermate": {
+    "giochi": {
+      "url": "/giochi",
+      "selettori": [
+        "h2:has-text(\"Dai 3 ai 5 anni\")"
+      ]
+    },
+    "filtrati": {
+      "url": "/giochi",
+      "azioni": [
+        {
+          "clicca": "button:has-text(\"3–5 anni\")"
+        },
+        {
+          "clicca": "button:has-text(\"colori e forme\")"
+        }
+      ],
+      "selettori": [
+        "section[aria-live=\"polite\"]"
+      ]
+    },
+    "eta": {
+      "url": "/giochi/eta/3-anni",
+      "selettori": [
+        "a[href=\"/giochi/trova-la-forma\"]"
+      ]
+    },
+    "competenza": {
+      "url": "/giochi/competenza/forme",
+      "selettori": [
+        "a[href=\"/giochi/trova-la-forma\"]"
+      ]
+    },
+    "gioco": {
+      "url": "/giochi/trova-la-forma",
+      "selettori": [
+        "a[href=\"/giochi/trova-la-forma/gioca\"]",
+        "a[href=\"/giochi/trova-la-forma/gioca?eta=4\"]"
+      ]
+    },
+    "gioca": {
+      "url": "/giochi/trova-la-forma/gioca",
+      "azioni": [
+        {
+          "attendi": 1500
+        }
+      ],
+      "selettori": [
+        "button[aria-label=\"Ripeti l'istruzione a voce\"]"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per bambini dai 3 ai 12 anni",
+      "titolo": "Come trovare il gioco giusto",
+      "sottotitolo": "Per età e per competenza.",
+      "voce": "Ciao, sono Mizi! Su Giocamizi ci sono tanti giochi, dai tre ai dodici anni. Ti faccio vedere come trovare quello giusto per il tuo bimbo, in un attimo."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Apri «Giochi»",
+      "testo": "Divisi in tre fasce d'età.",
+      "schermata": "giochi",
+      "evidenzia": [
+        "h2:has-text(\"Dai 3 ai 5 anni\")"
+      ],
+      "voce": "Apri la pagina Giochi. Senza filtri li trovi divisi in tre gruppi: dai tre ai cinque anni, dai sei agli otto, e dai nove in su."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Scegli età e competenza",
+      "testo": "Due file di bottoni: l'età e cosa allenare.",
+      "schermata": "filtrati",
+      "evidenzia": [
+        "section[aria-live=\"polite\"]"
+      ],
+      "voce": "In alto ci sono due file di bottoni. Nella prima scegli l'età, nella seconda cosa allenare: lettere, numeri, colori e forme, logica, coding. E restano solo i giochi giusti."
+    },
+    {
+      "tipo": "due",
+      "passo": 3,
+      "titolo": "Una pagina per ogni età",
+      "testo": "Dai 3 ai 12 anni, e una per ogni competenza.",
+      "schermate": [
+        "eta",
+        "competenza"
+      ],
+      "scorri": [
+        "a[href=\"/giochi/trova-la-forma\"]",
+        "a[href=\"/giochi/trova-la-forma\"]"
+      ],
+      "voce": "C'è anche una pagina per ogni età, dai tre ai dodici anni, e una per ogni competenza: per esempio le forme."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 4,
+      "titolo": "Apri il gioco e premi «Gioca»",
+      "testo": "Puoi scegliere anche gli anni: il gioco si adatta.",
+      "schermata": "gioco",
+      "evidenzia": [
+        "a[href=\"/giochi/trova-la-forma/gioca\"]",
+        "a[href=\"/giochi/trova-la-forma/gioca?eta=4\"]"
+      ],
+      "voce": "Tocca un gioco: vedi per che età è e quanti minuti dura. Poi premi «Gioca». Con i numeri qui sotto scegli quanti anni ha il tuo bimbo, e il gioco si adatta."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 5,
+      "titolo": "Ti dico io cosa fare",
+      "testo": "A voce, e scritto nel fumetto.",
+      "schermata": "gioca",
+      "scorri": null,
+      "evidenzia": [
+        "button[aria-label=\"Ripeti l'istruzione a voce\"]"
+      ],
+      "nota": "Tocca l'altoparlante per riascoltare",
+      "notaIcona": "altoparlante",
+      "voce": "Dentro il gioco parlo io: ti dico a voce cosa fare, e lo scrivo anche nel fumetto. Non hai sentito? Tocca l'altoparlante e lo ripeto."
+    },
+    {
+      "tipo": "carta",
+      "passo": 6,
+      "titolo": "Niente fretta",
+      "testo": "Per uscire: la X in alto a sinistra.",
+      "carta": {
+        "icona": "tartaruga",
+        "titolo": "Nessun timer",
+        "testo": "Nessun punteggio da battere: si gioca finché si ha voglia.",
+        "spunta": true
+      },
+      "voce": "E non c'è nessun timer e nessun punteggio da battere: si gioca finché si ha voglia. Per uscire, tocca la X in alto a sinistra."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/giochi",
+      "sotto": "Gratis, senza pubblicità.",
+      "voce": "Tutti i giochi ti aspettano su giocamizi punto it, nella pagina Giochi. Vieni a giocare con me! Ciao ciao!"
+    }
+  ]
+}

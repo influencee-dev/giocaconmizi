@@ -1,0 +1,180 @@
+{
+  "slug": "dove-festeggiare",
+  "titolo": "Dove festeggiare il compleanno nella tua città",
+  "gruppo": "utenti",
+  "ordine": 3,
+  "descrizione": "Mizi ti mostra come trovare su Giocamizi ludoteche, sale feste e spazi gioco per il compleanno, città per città.",
+  "rispostaBreve": "Per trovare dove festeggiare un compleanno su Giocamizi apri «Feste», scegli la tua città o usa la ricerca «Cosa cerchi · Dove». Apri la scheda del posto per vedere cosa offre e cosa chiedere prima di prenotare; prezzi e disponibilità si chiedono direttamente al locale. Nessuna commissione.",
+  "pagina": {
+    "href": "/feste",
+    "testo": "Le feste città per città"
+  },
+  "faq": [
+    {
+      "domanda": "Giocamizi prende commissioni dai locali?",
+      "risposta": "No: prezzi e prenotazioni si fanno direttamente con il locale."
+    },
+    {
+      "domanda": "Dove finiscono i posti salvati col cuoricino?",
+      "risposta": "Restano solo sul tuo telefono."
+    }
+  ],
+  "schermate": {
+    "feste": {
+      "url": "/feste",
+      "selettori": [
+        "a[href=\"/feste/milano\"]"
+      ]
+    },
+    "citta": {
+      "url": "/feste/milano",
+      "selettori": [
+        "p:has-text(\"In breve\")",
+        "a[href=\"/ludoteche/milano/il-nano-gigante\"]"
+      ]
+    },
+    "ricerca": {
+      "url": "/ludoteche",
+      "azioni": [
+        {
+          "riempi": "input[list=ricerca-citta]",
+          "valore": "Milano"
+        }
+      ],
+      "selettori": [
+        "form[role=search] select",
+        "input[list=ricerca-citta]",
+        "form[role=search] button[type=submit]"
+      ]
+    },
+    "elenco": {
+      "url": "/ludoteche/milano",
+      "azioni": [
+        {
+          "clicca": "[data-salva]"
+        }
+      ],
+      "selettori": [
+        "[data-risultato]",
+        "[data-salva]"
+      ]
+    },
+    "scheda": {
+      "url": "/ludoteche/milano/il-nano-gigante",
+      "selettori": [
+        "section[data-cosa-offre]",
+        "p:has-text(\"Da chiedere al locale\")",
+        "h2:has-text(\"Cosa chiedere prima di prenotare\")"
+      ]
+    },
+    "contatti": {
+      "url": "/sale-feste/milano/effetto-magia",
+      "selettori": [
+        "p:has-text(\"Contatta l'attività\")",
+        "a[data-traccia=sito]",
+        "a[data-traccia=invito]"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per le famiglie",
+      "titolo": "Dove festeggiare il compleanno",
+      "sottotitolo": "Ludoteche, sale feste e spazi gioco, città per città.",
+      "voce": "Ciao, sono Mizi! Cerchi un posto per la festa di compleanno? Su Giocamizi trovi ludoteche, sale feste e spazi gioco, città per città. Ti faccio vedere come si cerca!"
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Apri «Feste»",
+      "testo": "Scegli la tua città dall'elenco.",
+      "schermata": "feste",
+      "evidenzia": [
+        "a[href=\"/feste/milano\"]"
+      ],
+      "voce": "Apri la pagina Feste e scegli la tua città dall'elenco. Io scelgo Milano!"
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "La pagina della città",
+      "testo": "In breve, poi le location zona per zona.",
+      "schermata": "citta",
+      "evidenzia": [
+        "p:has-text(\"In breve\")",
+        "a[href=\"/ludoteche/milano/il-nano-gigante\"]"
+      ],
+      "voce": "Nella pagina della città c'è un riassunto in breve, e poi le location zona per zona, con il tipo di spazio. Così parti dal tuo quartiere."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 3,
+      "titolo": "Cosa cerchi · Dove",
+      "testo": "Il tipo di posto e la città, poi «Cerca».",
+      "schermata": "ricerca",
+      "evidenzia": [
+        "form[role=search] select",
+        "input[list=ricerca-citta]",
+        "form[role=search] button[type=submit]"
+      ],
+      "voce": "Cerchi un tipo di posto preciso? Usa la ricerca: in «Cosa cerchi» c'è il tipo, per esempio le ludoteche. In «Dove» scrivi la città, e tocca Cerca."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 4,
+      "titolo": "Salva quelli che ti piacciono",
+      "testo": "Il cuoricino ricorda i posti sul tuo telefono.",
+      "schermata": "elenco",
+      "evidenzia": [
+        "[data-risultato]",
+        "[data-salva]"
+      ],
+      "voce": "Ecco i posti della città, con la zona e quello che offrono. Col cuoricino salvi quelli che ti piacciono: restano sul tuo telefono."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 5,
+      "titolo": "Apri la scheda",
+      "testo": "Cosa offre e cosa chiedere prima di prenotare.",
+      "schermata": "scheda",
+      "evidenzia": [
+        "section[data-cosa-offre]",
+        "p:has-text(\"Da chiedere al locale\")",
+        "h2:has-text(\"Cosa chiedere prima di prenotare\")"
+      ],
+      "voce": "Apri una scheda: vedi cosa offre il posto, e le domande utili da fare prima di prenotare."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 6,
+      "titolo": "Contatta il locale",
+      "testo": "Prezzi e disponibilità si chiedono direttamente.",
+      "schermata": "contatti",
+      "evidenzia": [
+        "p:has-text(\"Contatta l'attività\")",
+        "a[data-traccia=sito]"
+      ],
+      "nota": "Nessuna commissione",
+      "notaIcona": "cuore-viola",
+      "voce": "Prezzi e posti liberi li chiedi direttamente al locale, dal riquadro «Contatta l'attività». Lì trovi il sito, e quando il locale completa la scheda anche WhatsApp o telefono. Noi non prendiamo commissioni."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 7,
+      "titolo": "E poi l'invito",
+      "testo": "Gratis, con la conferma su WhatsApp.",
+      "schermata": "contatti",
+      "evidenzia": [
+        "a[data-traccia=invito]"
+      ],
+      "voce": "Hai scelto il posto? Dalla scheda prepari subito l'invito, gratis, con la conferma su WhatsApp."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/feste",
+      "sotto": "Gratis, senza commissioni.",
+      "voce": "Trovi tutte le città su giocamizi punto it, nella pagina Feste. Buona festa! Ciao ciao!"
+    }
+  ]
+}
