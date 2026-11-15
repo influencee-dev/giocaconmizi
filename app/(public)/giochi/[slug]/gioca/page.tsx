@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { games } from "@/games/registry";
-import { giocabile } from "@/games/elenco";
+import { giocabile, giochiBrevi } from "@/games/elenco";
 import { Giocatore } from "./Giocatore";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -44,6 +44,7 @@ export default async function GiocaPage({ params, searchParams }: Params & Query
       eta={etaGioco}
       difficolta={gioco.difficulty}
       demo={demo === "1"}
+      giochi={giochiBrevi()}
     />
   );
 }

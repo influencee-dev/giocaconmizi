@@ -6,8 +6,10 @@ import type { GameProps } from "@/games/_engine/tipi";
 
 /**
  * Memory degli animali (3–5 anni).
- * Il nome dell'animale viene detto a voce a ogni coppia trovata: si allena la
- * memoria visiva e intanto si arricchisce il vocabolario.
+ * Il nome dell'animale viene detto a voce a ogni carta girata: si allena la
+ * memoria visiva e intanto si arricchisce il vocabolario. Tre livelli che
+ * crescono (games/_engine/Memory.tsx). I nomi stanno anche in
+ * content/voce-mizi.json: un animale nuovo = una frase da registrare.
  */
 
 const ANIMALI: { id: NomeFigura; nome: string }[] = [
@@ -21,6 +23,7 @@ const ANIMALI: { id: NomeFigura; nome: string }[] = [
   { id: "orso", nome: "L'orso" },
   { id: "pesce", nome: "Il pesce" },
   { id: "gallo", nome: "Il gallo" },
+  { id: "pinguino", nome: "Il pinguino" },
 ];
 
 export default function Game(props: GameProps) {

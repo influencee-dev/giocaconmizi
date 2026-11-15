@@ -1,0 +1,43 @@
+{
+  "versione": 1,
+  "modello": "gpt-4o-mini-tts",
+  "voce": "coral",
+  "intonazione": 2,
+  "istruzioni": "Sei Mizi, una bambina italiana di sette anni, allegra e curiosa, che gioca con un'amica più piccola e la incoraggia. Voce chiara, acuta e squillante da bambina, con entusiasmo vero: mai un'adulta che imita una bambina, mai il tono di uno spot. Parla con calma e scandisci bene ogni parola, con pronuncia italiana perfetta e accento neutro. Sorridi mentre parli. Le frasi che finiscono col punto esclamativo sono feste: dille con gioia.",
+  "frasi": {
+    "comuni": [
+      "Evviva! Ce l'hai fatta!",
+      "Evviva! Ce l'hai fatta! Hai una figurina nuova!",
+      "Evviva! Hai vinto la coccarda di oggi!"
+    ],
+    "memory-animali": [
+      "Guarda bene dove sono gli animali!",
+      "Tocca due carte uguali: trova le coppie!",
+      "Più carte, più memoria: trova tutte le coppie!",
+      "Livello superato! Adesso ci sono più carte.",
+      "Ti aiuto io: guarda le due carte che ballano!",
+      "Il gatto",
+      "Il cane",
+      "La mucca",
+      "La pecora",
+      "La papera",
+      "La rana",
+      "L'ape",
+      "L'orso",
+      "Il pesce",
+      "Il gallo",
+      "Il pinguino",
+      "Il gatto! Coppia trovata.",
+      "Il cane! Coppia trovata.",
+      "La mucca! Coppia trovata.",
+      "La pecora! Coppia trovata.",
+      "La papera! Coppia trovata.",
+      "La rana! Coppia trovata.",
+      "L'ape! Coppia trovata.",
+      "L'orso! Coppia trovata.",
+      "Il pesce! Coppia trovata.",
+      "Il gallo! Coppia trovata.",
+      "Il pinguino! Coppia trovata."
+    ]
+  }
+}

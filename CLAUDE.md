@@ -232,6 +232,7 @@ ancora veri: se no, versione nuova con la data. Alla fine lascia una nota
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 
+<<<<<<< HEAD
 ## Video di Mizi (15/11/2026, docs/video-tutorial.md)
 - Nei video parla SEMPRE Mizi, in prima persona: pinguina-bambina di ~10 anni,
   voce «sage» di OpenAI scelta da Giorgia, tutto il testo in UNA registrazione
@@ -243,6 +244,24 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   (campione ufficiale). Cosa fare dopo: «01 Catalogo dei video» (crearne la
   versione nuova con la data quando cambia). Chiave OpenAI: segreto
   dell'ambiente cloud «Giocamizi», il proxy la mette da solo.
+=======
+## Giochi: upgrade uno alla volta, voce registrata, album di Mizi (15/11/2026)
+- Metodo e coda in `.claude/skills/game-designer-mizi/SKILL.md` (da leggere prima
+  di toccare un gioco). Fatto: memory-animali (3 livelli, aiuto, suoni).
+- Voce: `parla()` in lib/audio.ts suona il file registrato se la frase è in
+  lib/voce-registrata.json (generato), altrimenti la sintesi del telefono.
+  Copione in content/voce-mizi.json; `npm run voce` registra con OpenAI (voce da
+  bambina; serve il segreto di rete api.openai.com nell'ambiente della sessione).
+  `{ accoda: true }` = non tagliare la frase in corso. Suoni: lib/suoni.ts.
+- Album di Mizi: lib/album.ts (localStorage «giocamizi-album», in lib/legal.ts).
+  Figurina per ogni gioco finito, coccarda per 3 giochi diversi in un giorno,
+  «Prossimo gioco» nella festa del guscio (components/game-shell). Pagina
+  /giochi/album (noindex), fascia e stelle nel catalogo. Mai serie, punti che
+  scadono, classifiche.
+- La festa si riconosce da `[data-festa]` (non più dal testo «Bravissimo!»).
+- L'invito alle novità dopo il secondo gioco (components/form/DopoIlGioco.tsx)
+  ora è sopra lo schermo di gioco: prima era nascosto sotto.
+>>>>>>> origin/main
 
 ## Canzoni di Mizi (14/11/2026)
 - Su Drive: 2 Aree → Giocamizi · Social → «Canzoni di Mizi» (id

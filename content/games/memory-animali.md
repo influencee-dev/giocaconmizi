@@ -5,12 +5,12 @@ ageMin: 3
 ageMax: 5
 skill: memoria
 subskill: "memoria visiva e attenzione sostenuta"
-description: "Memory online gratis per bambini dai 3 ai 5 anni: trova le coppie di animali. Senza pubblicità, senza timer, con il nome detto a voce."
+description: "Memory online gratis per bambini dai 3 ai 5 anni: trova le coppie di animali in tre livelli. Senza pubblicità, senza timer, con i nomi detti a voce."
 ---
 
 # Memory degli animali
 
-Le carte sono coperte: se ne girano due alla volta per trovare le coppie. Quando la coppia è giusta, la voce dice il nome dell'animale e le carte restano scoperte. La griglia parte da sei carte e cresce con l'età, non con il tempo: non c'è nessun cronometro e nessun punteggio da battere.
+Le carte sono coperte: se ne girano due alla volta per trovare le coppie. Ogni carta girata dice il nome del suo animale, e quando la coppia è giusta le carte restano scoperte. La partita ha tre livelli che crescono con le carte, non con il tempo: a tre anni si parte da quattro carte e si arriva a otto, dai cinque anni si arriva a sedici. Non c'è nessun cronometro. Se la coppia non salta fuori dopo tre tentativi, Mizi ne fa ballare due per dare una mano.
 
 ## Cosa impara
 - Tiene a mente dove ha visto una carta e la ritrova dopo qualche mossa: è memoria di lavoro
@@ -25,10 +25,10 @@ Le carte sono coperte: se ne girano due alla volta per trovare le coppie. Quando
 ## Domande frequenti
 
 **Da che età si può giocare a memory?**
-Dai tre anni con sei carte. A quattro o cinque anni si arriva tranquillamente a otto o dodici carte.
+Dai tre anni, cominciando con quattro carte: qui il primo livello le mostra anche un momento scoperte. A quattro o cinque anni si arriva tranquillamente a dodici o sedici carte.
 
 **Quante carte sono giuste per un bambino di 3 anni?**
-Sei, cioè tre coppie. Se le trova tutte senza sforzo, si passa a otto.
+Quattro per cominciare, cioè due coppie; poi sei e otto. Qui i tre livelli salgono proprio così, e si passa al successivo solo dopo aver trovato tutte le coppie.
 
 **Il memory serve davvero a migliorare la memoria?**
 Allena la memoria visiva a breve termine e l'attenzione. Non rende un bambino "più intelligente", ma è un ottimo esercizio e piace.

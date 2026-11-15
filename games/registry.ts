@@ -20,7 +20,7 @@ export interface GameMeta {
 
 export const games: GameMeta[] = [
   // 3–4 anni
-  { slug: "memory-animali", title: "Memory degli animali", ageMin: 3, ageMax: 5, skill: "memoria", subskill: "memoria visiva", difficulty: 1, minutes: 4, mechanic: "Griglia 2x3 → 3x4 di carte coperte con animali; trova le coppie; Mizi esulta a ogni coppia.", status: "live" },
+  { slug: "memory-animali", title: "Memory degli animali", ageMin: 3, ageMax: 5, skill: "memoria", subskill: "memoria visiva", difficulty: 1, minutes: 4, mechanic: "Tre livelli di carte coperte con animali (4-6-8 carte a 3 anni, fino a 8-12-16 dai 5); ogni carta girata dice il nome; dopo tre tentativi a vuoto due carte ballano; a 3-4 anni il primo livello si guarda scoperto.", status: "live" },
   { slug: "abbina-i-colori", title: "Abbina i colori", ageMin: 3, ageMax: 4, skill: "colori", subskill: "riconoscimento colori primari e secondari", difficulty: 1, minutes: 3, mechanic: "Oggetto colorato al centro; tocca il secchiello dello stesso colore tra 3 → 5 opzioni.", status: "live" },
   { slug: "trova-la-forma", title: "Trova la forma", ageMin: 3, ageMax: 5, skill: "forme", subskill: "cerchio, quadrato, triangolo, rettangolo, stella", difficulty: 1, minutes: 3, mechanic: "Voce dice la forma; tocca la forma giusta tra 3 → 6; poi trascina la forma nel buco giusto.", status: "live" },
   { slug: "conta-fino-a-10", title: "Conta fino a 10", ageMin: 3, ageMax: 5, skill: "numeri", subskill: "conteggio e corrispondenza quantità-numero", difficulty: 1, minutes: 4, mechanic: "Gruppo di pesci (1–10); tocca ogni pesce per contarli con la voce; poi scegli il numero giusto tra 3.", status: "live" },

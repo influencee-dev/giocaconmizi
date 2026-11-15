@@ -81,6 +81,7 @@ export function CardGioco({
   minuti,
   illustrazione,
   compatta = false,
+  stelle,
 }: {
   slug: string;
   titolo: string;
@@ -91,6 +92,8 @@ export function CardGioco({
   illustrazione?: ReactNode;
   /** Variante stretta per il catalogo: 2 colonne anche sul telefono. */
   compatta?: boolean;
+  /** Le stelle prese nell'album di Mizi (1-3), se il gioco è già stato finito. */
+  stelle?: number;
 }) {
   if (compatta) {
     return (
@@ -105,8 +108,15 @@ export function CardGioco({
           </span>
         )}
         <span className="px-1 text-base font-extrabold leading-tight text-notte">{titolo}</span>
-        <span className="mt-auto px-1 pb-1 pt-1 text-xs font-bold text-notte-tenue">
-          {eta} anni · {minuti} min
+        <span className="mt-auto flex items-center justify-between gap-1 px-1 pb-1 pt-1 text-xs font-bold text-notte-tenue">
+          <span>
+            {eta} anni · {minuti} min
+          </span>
+          {stelle ? (
+            <span role="img" aria-label={`Già finito: ${stelle} ${stelle === 1 ? "stella" : "stelle"} su 3`} data-stelle-gioco={stelle}>
+              {"⭐".repeat(stelle)}
+            </span>
+          ) : null}
         </span>
       </Link>
     );

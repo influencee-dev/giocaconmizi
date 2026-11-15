@@ -66,6 +66,12 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
+      // La voce registrata di Mizi: il nome del file è la frase e la cartella è
+      // la versione della voce, quindi un file non cambia mai.
+      {
+        source: "/voce/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
       {
         source: "/:path*",
         headers: [

@@ -117,3 +117,9 @@ export function IconaGioco({ slug, skill, lato }: { slug?: string; skill: Skill;
   const nomi = (slug && ICONE_GIOCO[slug]) || ICONE_SKILL[skill] || ICONE_SKILL.forme;
   return <Icone nomi={nomi} lato={lato} />;
 }
+
+/** La figurina di un gioco per l'album di Mizi: una sola icona, la prima del gioco. */
+export function FigurinaGioco({ slug, skill, className = "h-full w-full" }: { slug: string; skill: Skill; className?: string }) {
+  const nomi = ICONE_GIOCO[slug] || ICONE_SKILL[skill] || ICONE_SKILL.forme;
+  return <Icona nome={nomi[0]} className={`object-contain ${className}`} />;
+}
