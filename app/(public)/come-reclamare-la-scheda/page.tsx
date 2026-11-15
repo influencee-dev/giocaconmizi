@@ -4,14 +4,16 @@ import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { Briciole, InBreve } from "@/components/directory/Briciole";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { url } from "@/lib/seo";
-import { PERCORSO_COME_RECLAMARE, VIDEO_RECLAMO } from "@/lib/reclamo";
+import { PERCORSO_COME_RECLAMARE, TUTORIAL_RECLAMO, VIDEO_RECLAMO } from "@/lib/reclamo";
+import { percorsoTutorial } from "@/lib/tutorial";
 import { PERCORSO_RISORSE } from "@/lib/risorse-educative";
 
 /**
  * Il tutorial per le attività e le realtà educative: come si reclama la
  * scheda che Giocamizi ha già creato (o come se ne propone una nuova).
  * Linkato dal richiamo «Come funziona» di feste, directory e risorse.
- * In testa il video tutorial (lib/reclamo.ts → VIDEO_RECLAMO), con sottotitoli e trascrizione.
+ * In testa il video di Mizi: i dati e il VideoObject stanno nella sua pagina
+ * /tutorial/come-reclamare-la-scheda (lib/tutorial.ts), qui si incorpora soltanto.
  */
 
 const TITOLO = "Come reclamare la scheda della tua attività su Giocamizi";
@@ -96,20 +98,6 @@ export default function ComeReclamare() {
       <JsonLd
         data={{
           "@context": "https://schema.org",
-          "@type": "VideoObject",
-          name: "Come reclamare la scheda della tua attività su Giocamizi",
-          description: DESCRIZIONE,
-          thumbnailUrl: [url(VIDEO_RECLAMO.poster)],
-          uploadDate: VIDEO_RECLAMO.caricato,
-          duration: VIDEO_RECLAMO.durata,
-          contentUrl: url(VIDEO_RECLAMO.src),
-          inLanguage: "it-IT",
-          transcript: VIDEO_RECLAMO.testo.join(" "),
-        }}
-      />
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
           "@type": "HowTo",
           name: TITOLO,
           description: DESCRIZIONE,
@@ -156,6 +144,11 @@ export default function ComeReclamare() {
             ))}
           </div>
         </details>
+        <p className="mt-3">
+          <Link href={percorsoTutorial(TUTORIAL_RECLAMO)} className="font-bold text-notte underline decoration-viola decoration-2 underline-offset-4 hover:text-viola">
+            Apri il video nella pagina dei tutorial, con i passi da saltare
+          </Link>
+        </p>
       </section>
 
       <section className="mt-10" aria-labelledby="titolo-passi">

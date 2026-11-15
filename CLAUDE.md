@@ -243,6 +243,13 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   (campione ufficiale). Cosa fare dopo: «01 Catalogo dei video» (crearne la
   versione nuova con la data quando cambia). Chiave OpenAI: segreto
   dell'ambiente cloud «Giocamizi», il proxy la mette da solo.
+- Pagine dei video: `lib/tutorial.ts` (registro, gruppi «partner» e «utenti»
+  come su Drive; IN_ARRIVO = solo testo nell'hub) → /tutorial e
+  /tutorial/<slug> (video nostro incorporato, passi cliccabili che saltano al
+  punto, ?t=secondi, trascrizione, VideoObject con i Clip, video in sitemap).
+  Un video nuovo = file in public/video/ + una voce in TUTORIAL. Le pagine
+  del sito di cui parla il video lo incorporano e linkano al tutorial (il
+  VideoObject sta SOLO nella pagina del tutorial).
 
 ## Giochi: upgrade uno alla volta, voce registrata, album di Mizi (15/11/2026)
 - Metodo e coda in `.claude/skills/game-designer-mizi/SKILL.md` (da leggere prima

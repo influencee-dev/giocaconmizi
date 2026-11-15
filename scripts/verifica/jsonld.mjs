@@ -9,7 +9,7 @@ const TIPI_NOTI = new Set([
   "CollectionPage", "AboutPage", "ContactPage", "LocalBusiness", "Restaurant", "ChildCare", "EventVenue", "AmusementPark", "Museum",
   "SportsActivityLocation", "NGO", "Place", "PostalAddress", "GeoCoordinates", "ImageObject", "SearchAction", "EntryPoint",
   "HowTo", "HowToStep", "Offer", "AggregateRating", "Thing", "Course", "DefinedTerm", "PropertyValue", "AudienceType",
-  "Audience", "PeopleAudience", "EducationalAudience", "QuantitativeValue", "VirtualLocation", "MediaObject", "VideoObject",
+  "Audience", "PeopleAudience", "EducationalAudience", "QuantitativeValue", "VirtualLocation", "MediaObject", "VideoObject", "Clip",
   "SoftwareApplication", "WebApplication", "ImageGallery", "Event", "ContactPoint", "Country", "City", "AdministrativeArea", "Service",
 ]);
 

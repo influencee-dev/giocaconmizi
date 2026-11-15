@@ -12,6 +12,7 @@ import { chiaveScheda, pubblicate } from "@/lib/directory-db";
 import { dataDi, dataGioco } from "@/lib/date-pagine";
 import { fotoDellaPagina, fotoGuida } from "@/lib/foto";
 import { percorsoRisorsa } from "@/lib/risorse-educative";
+import { PERCORSO_TUTORIAL, TUTORIAL, percorsoTutorial } from "@/lib/tutorial";
 import { categorieAttive, listingRisorse, percorsoCategoriaRisorse, percorsoListingRisorse } from "@/lib/risorse-categorie";
 import { risorseVisibili } from "@/lib/risorse-reclamo";
 
@@ -195,6 +196,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: url(percorsoRisorsa(r)),
       changeFrequency: "monthly" as const,
       priority: r.reclamata ? 0.6 : 0.5,
+    })),
+
+    // I video tutorial di Mizi: l'hub e una pagina per video, con il video in sitemap.
+    {
+      url: url(PERCORSO_TUTORIAL),
+      lastModified: dataDi("lib/tutorial.ts"),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    ...TUTORIAL.map((t) => ({
+      url: url(percorsoTutorial(t)),
+      lastModified: dataDi(t.video.caricato),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+      videos: [
+        {
+          title: t.titolo,
+          description: t.descrizione,
+          thumbnail_loc: url(t.video.poster),
+          content_loc: url(t.video.src),
+          duration: t.video.secondi,
+          publication_date: t.video.caricato,
+        },
+      ],
     })),
 
     // Le guide per i genitori: contenuto evergreen, priorità alta (AEO)

@@ -8,6 +8,7 @@ import { CATEGORIE_ATTIVE, LISTING, SCHEDE } from "@/lib/directory";
 import { temi } from "@/lib/biglietti";
 import { url } from "@/lib/seo";
 import { contaRisorse } from "@/lib/risorse-educative";
+import { TUTORIAL, percorsoTutorial } from "@/lib/tutorial";
 import { RISORSE } from "@/lib/risorse-educative-dati";
 import { categorieAttive, listingRisorse, percorsoCategoriaRisorse, percorsoListingRisorse, risorseDi } from "@/lib/risorse-categorie";
 
@@ -113,6 +114,8 @@ ${LISTING.map((l) => `- [${l.categoria.nome} a ${l.citta}](${url(`/${l.categoria
 - [Risorse educative consigliate](${url("/risorse-educative-bambini")}): ${contaRisorse()} siti, scuole, cooperative e progetti esterni utili a bambini, famiglie e insegnanti, divisi per categoria e provincia, ognuno con la sua scheda (cosa fa, per chi, costi, sito ufficiale). Le realtà possono reclamare la scheda gratis. La presenza non implica partnership, approvazione o sponsorizzazione.
 ${categorieAttive(RISORSE).map((c) => `  - [${c.titolo}](${url(percorsoCategoriaRisorse(c))}): ${risorseDi(c.slug, RISORSE).length} realtà. ${c.rispostaBreve}`).join("\n")}
 ${listingRisorse(RISORSE).map((l) => `  - [${l.categoria.nome} a ${l.provincia} e provincia](${url(percorsoListingRisorse(l.categoria, l.slug))}): ${l.n} realtà.`).join("\n")}
+- [Video tutorial di Mizi](${url("/tutorial")}): brevi video con sottotitoli e trascrizione in cui Mizi spiega come usare Giocamizi, per le attività e per le famiglie.
+${TUTORIAL.map((t) => `  - [${t.titolo}](${url(percorsoTutorial(t))}): ${t.rispostaBreve}`).join("\n")}
 - [Per le mamme](${url("/per-le-mamme")}): la rete delle mamme — associazioni, community locali, gruppi d'ascolto e locali family-friendly con nursery o area giochi. Inserimento gratuito su segnalazione.
 - [Chi siamo](${url("/chi-siamo")})
 - [Privacy](${url("/privacy")}) · [Cookie](${url("/cookie")})

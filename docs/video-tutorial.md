@@ -42,7 +42,10 @@ public/icone usate nelle scene).
    2 Aree → Giocamizi · Video (cartelle «16x9 · Tutorial per partner»,
    «16x9 · Tutorial per utenti», «9x16 · Reel e storie»), nome
    «AAAA-MM-GG · titolo · 16x9.mp4», e si aggiorna «01 Catalogo dei video».
-7. Sul sito va solo l'orizzontale: copiare mp4, vtt e poster in `public/video/`. Il verticale va su Drive (2 Aree → Giocamizi · Social) per Instagram, aggiornare durata e testo in
+7. Sul sito va solo l'orizzontale: file in `public/video/`, una voce in
+   `TUTORIAL` di lib/tutorial.ts (testo, capitoli = inizi delle scene, FAQ) →
+   pagina /tutorial/<slug> da sola. Togliere il titolo da IN_ARRIVO.
+   Poi, se serve,: copiare mp4, vtt e poster in `public/video/`. Il verticale va su Drive (2 Aree → Giocamizi · Social) per Instagram, aggiornare durata e testo in
    lib/reclamo.ts, verifiche di sempre.
 
 Regole: niente schermate di siti di altri, niente volti veri, niente musica
