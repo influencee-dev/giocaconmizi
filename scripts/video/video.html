@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: Nunito; src: url(asset/nunito-600.ttf); font-weight: 600; }
+@font-face { font-family: Nunito; src: url(asset/nunito-800.ttf); font-weight: 800; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1280px; height: 720px; overflow: hidden; background: #FFF3E6; font-family: Nunito, sans-serif; color: #1F2430; }
+#palco { position: absolute; inset: 0; overflow: hidden; }
+.bolla { position: absolute; border-radius: 50%; }
+.scena { position: absolute; inset: 0; will-change: transform; }
+.passo { position: absolute; left: 80px; top: 150px; width: 520px; }
+.numero { display: inline-flex; width: 64px; height: 64px; border-radius: 50%; background: #7E4FC4; color: #fff; font-weight: 800; font-size: 34px; align-items: center; justify-content: center; }
+.titolo { margin-top: 22px; font-weight: 800; font-size: 54px; line-height: 1.04; letter-spacing: -0.5px; }
+.testo { margin-top: 18px; font-weight: 600; font-size: 26px; line-height: 1.35; color: #4A4F5C; }
+.telefono { position: absolute; scale: .84; transform-origin: 0 0; width: 304px; height: 616px; border-radius: 46px; background: #1F2430; padding: 14px; box-shadow: 0 40px 80px -30px rgba(31,36,48,.55); }
+.schermo { position: relative; width: 276px; height: 588px; border-radius: 34px; overflow: hidden; background: #FFF3E6; }
+.schermo img.pagina { position: absolute; left: 0; top: 0; width: 276px; }
+.anello { position: absolute; border: 5px solid #F28AB2; border-radius: 18px; box-shadow: 0 0 0 9999px rgba(31,36,48,.0); }
+.dito { position: absolute; width: 46px; height: 46px; border-radius: 50%; background: rgba(126,79,196,.35); border: 4px solid #fff; }
+.carta { position: absolute; background: #fff; border-radius: 30px; box-shadow: 0 30px 60px -28px rgba(31,36,48,.45); }
+.etichetta { display: inline-flex; align-items: center; gap: 10px; background: #E3F4E8; color: #2E7D4A; font-weight: 800; font-size: 26px; padding: 10px 20px; border-radius: 16px; }
+#sottotitoli { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); max-width: 1040px; text-align: center; font-weight: 800; font-size: 27px; line-height: 1.3; color: #fff; background: rgba(31,36,48,.82); padding: 10px 22px; border-radius: 16px; }
+#barra { position: absolute; left: 0; top: 0; height: 8px; background: #7E4FC4; }
+#logo { position: absolute; right: 36px; top: 26px; height: 46px; }
+</style>
+</head>
+<body>
+<div id="palco">
+  <div class="bolla" style="width:520px;height:520px;left:-160px;top:-200px;background:#FCE1EC"></div>
+  <div class="bolla" style="width:420px;height:420px;right:-120px;bottom:-170px;background:#E1F3FB"></div>
+  <div class="bolla" style="width:120px;height:120px;right:380px;top:70px;background:#FEF3D1"></div>
+  <div id="scene"></div>
+  <img id="logo" src="asset/giocamizi-logo-orizzontale.webp" alt="">
+  <div id="sottotitoli"></div>
+  <div id="barra"></div>
+</div>
+<script>
+const BOX = __BOX__;
+const VOCI = __VOCI__;
+const TESTI = __TESTI__;
+const S = 276 / 390; // scala dello screenshot dentro il telefono
+
+// --- utilità ---
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const ease = (x) => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const out = (x) => 1 - Math.pow(1 - clamp(x), 3);
+const back = (x) => { x = clamp(x); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const tra = (t, a, b) => clamp((t - a) / (b - a));
+const el = (html) => { const d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstChild; };
+
+const ANTICIPO = 0.5, CODA = 0.6, PUSH = 0.7;
+
+function telefono(nome, x, y) {
+  return `<div class="telefono" style="left:${x}px;top:${y}px"><div class="schermo"><img class="pagina" src="schermi/${nome}.png"><div class="anelli"></div></div></div>`;
+}
+function scorri(sc, y) { sc.querySelector('img.pagina').style.transform = `translateY(${-y * S}px)`; }
+function anello(sc, b, scrollY, vis, pad = 8) {
+  const a = sc.querySelector('.anelli');
+  if (!a.firstChild) a.innerHTML = '<div class="anello"></div>';
+  const r = a.firstChild;
+  const sc2 = 1 + 0.06 * Math.sin(vis * Math.PI * 4);
+  r.style.left = (b.x * S - pad) + 'px'; r.style.top = ((b.y - scrollY) * S - pad) + 'px';
+  r.style.width = (b.w * S + pad * 2) + 'px'; r.style.height = (b.h * S + pad * 2) + 'px';
+  r.style.opacity = vis > 0 ? 1 : 0; r.style.transform = `scale(${vis > 0 ? sc2 : .6})`;
+  r.style.boxShadow = `0 0 0 9999px rgba(31,36,48,${.38 * clamp(vis * 3)})`;
+}
+function passoHTML(n, titolo, testo) {
+  return `<div class="passo"><div class="numero">${n}</div><div class="titolo">${titolo}</div><div class="testo">${testo}</div></div>`;
+}
+function entra(nodo, t, ritardo, dx = 0, dy = 40) {
+  const p = out(tra(t, ritardo, ritardo + .6));
+  nodo.style.opacity = p; nodo.style.transform = `translate(${dx * (1 - p)}px, ${dy * (1 - p)}px)`;
+}
+
+// --- le scene: durata = voce + anticipo + coda ---
+const SCENE = [
+  { // 0 introduzione
+    html: `<div>
+      <img class="mizi" src="asset/mizi-intera.webp" style="position:absolute;left:820px;top:120px;width:360px">
+      <div class="passo" style="top:170px;width:700px">
+        <div class="etichetta" style="background:#FCE1EC;color:#B03A6F">Per attività e realtà educative</div>
+        <div class="titolo" style="font-size:68px">Come reclamare la tua scheda su Giocamizi</div>
+        <div class="testo">Gratis, in pochi minuti.</div>
+      </div></div>`,
+    anima(sc, t) {
+      const m = sc.querySelector('.mizi');
+      const p = back(tra(t, .2, 1.1));
+      m.style.transform = `translateY(${(1 - p) * 300}px) rotate(${Math.sin(t * 2) * 3}deg)`;
+      const ps = sc.querySelector('.passo').children;
+      [...ps].forEach((c, i) => entra(c, t, .3 + i * .25, -60, 0));
+    },
+  },
+  { // 1 cerca
+    html: `<div>${passoHTML(1, 'Cerca la tua attività', 'Feste per città, risorse educative per categoria e provincia.')}
+      ${telefono('feste', 660, 92)}${telefono('risorse', 920, 92)}</div>`,
+    anima(sc, t) {
+      const [a, b] = sc.querySelectorAll('.telefono');
+      const pa = out(tra(t, .3, 1.1)), pb = out(tra(t, .7, 1.5));
+      a.style.transform = `translateX(${(1 - pa) * 700}px) rotate(-4deg)`;
+      b.style.transform = `translateX(${(1 - pb) * 700}px) rotate(4deg)`;
+      scorri(a, 380 * ease(tra(t, 1.5, 5)));
+      scorri(b, 420 * ease(tra(t, 2.5, 6.5)));
+      [...sc.querySelector('.passo').children].forEach((c, i) => entra(c, t, .2 + i * .2));
+    },
+  },
+  { // 2 bottone
+    html: `<div>${passoHTML(2, 'Apri la scheda e tocca «Reclama la scheda»', 'Il bottone è in fondo, in ogni scheda.')}${telefono('scheda', 840, 92)}</div>`,
+    anima(sc, t) {
+      const ph = sc.querySelector('.telefono');
+      const b = BOX.scheda.evidenza;
+      const fine = b.y - 380;
+      const y = fine * ease(tra(t, .6, 3.6));
+      scorri(ph, y);
+      const z = 1 + .05 * ease(tra(t, 3.8, 4.6));
+      ph.style.transform = `scale(${z})`; ph.style.transformOrigin = '50% 50%';
+      anello(ph, b, y, tra(t, 3.8, 6.5) * (t > 3.8 ? 1 : 0));
+      [...sc.querySelector('.passo').children].forEach((c, i) => entra(c, t, .2 + i * .2));
+    },
+  },
+  { // 3 modulo
+    html: `<div>${passoHTML(3, 'Compila il modulo', 'Nome, email e telefono: restano privati, non vanno sul sito.')}
+      <div class="carta privati" style="left:80px;top:470px;padding:16px 24px;display:flex;align-items:center;gap:14px"><img src="asset/chiave.png" style="width:44px"><b style="font-size:24px">Dati privati, mai pubblicati</b></div>
+      ${telefono('modulo', 840, 92)}</div>`,
+    anima(sc, t) {
+      const ph = sc.querySelector('.telefono');
+      const campi = BOX.modulo.campi.filter(Boolean);
+      const fine = campi[0].y - 300;
+      const y = fine * ease(tra(t, .5, 2.8));
+      scorri(ph, y);
+      // un campo alla volta, in tempo con la voce
+      const i = t < 4.2 ? 0 : t < 5.4 ? 1 : 2;
+      anello(ph, campi[i], y, t > 3 ? tra(t, 3, 3.4) : 0, 6);
+      [...sc.querySelector('.passo').children].forEach((c, k) => entra(c, t, .2 + k * .2));
+      entra(sc.querySelector('.privati'), t, 6.3, -80, 0);
+    },
+  },
+  { // 4 controllo
+    html: `<div>${passoHTML(4, 'Controlliamo noi, a mano', 'Niente va online da solo.')}
+      <div class="carta controllo" style="left:720px;top:150px;width:440px;height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">
+        <img class="lente" src="asset/lente.png" style="width:150px">
+        <div style="font-weight:800;font-size:30px">Verifica in corso…</div>
+        <img class="spunta" src="asset/spunta.png" style="width:90px;position:absolute;right:34px;top:30px">
+      </div></div>`,
+    anima(sc, t) {
+      const c = sc.querySelector('.controllo');
+      const p = back(tra(t, .3, 1.1));
+      c.style.transform = `scale(${.4 + .6 * p})`; c.style.opacity = clamp(p * 2);
+      const l = sc.querySelector('.lente');
+      l.style.transform = `translate(${Math.sin(t * 2.4) * 46}px, ${Math.cos(t * 3.1) * 20}px)`;
+      const s = sc.querySelector('.spunta');
+      const ps = back(tra(t, 4.6, 5.3));
+      s.style.transform = `scale(${ps})`; s.style.opacity = ps > 0 ? 1 : 0;
+      [...sc.querySelector('.passo').children].forEach((k, i) => entra(k, t, .2 + i * .2));
+    },
+  },
+  { // 5 email
+    html: `<div>${passoHTML(5, 'Ricevi il tuo link personale', 'Arriva via email. Nessuna password.')}
+      <div class="carta busta" style="left:700px;top:140px;width:480px;padding:30px">
+        <div style="display:flex;align-items:center;gap:14px"><img src="asset/cassetta-posta.png" style="width:60px"><div><div style="font-weight:800;font-size:24px">Giocamizi</div><div style="font-weight:600;font-size:18px;color:#4A4F5C">ciao@giocamizi.it</div></div></div>
+        <div style="margin-top:20px;font-weight:800;font-size:26px">Ecco il link della tua scheda</div>
+        <div style="margin-top:8px;font-weight:600;font-size:20px;color:#4A4F5C">Aprilo per approvarla o completarla.</div>
+        <div class="bottone" style="margin-top:22px;background:#7E4FC4;color:#fff;font-weight:800;font-size:24px;padding:16px;border-radius:18px;text-align:center">Apri la tua scheda</div>
+      </div></div>`,
+    anima(sc, t) {
+      const c = sc.querySelector('.busta');
+      const p = out(tra(t, .3, 1.2));
+      c.style.transform = `translateY(${(1 - p) * 500}px) rotate(${(1 - p) * 8}deg)`;
+      const bt = sc.querySelector('.bottone');
+      const pulse = t > 2.5 ? 1 + .05 * Math.sin((t - 2.5) * 6) : 1;
+      bt.style.transform = `scale(${pulse})`;
+      bt.style.boxShadow = t > 2.5 ? `0 0 0 ${6 + 4 * Math.sin((t - 2.5) * 6)}px rgba(242,138,178,.6)` : 'none';
+      [...sc.querySelector('.passo').children].forEach((k, i) => entra(k, t, .2 + i * .2));
+    },
+  },
+  { // 6 il link
+    html: `<div>${passoHTML(6, 'Approva, completa o togli', 'Descrizione, contatti, orari, logo: decidi tu cosa mostrare.')}${telefono('link', 840, 92)}</div>`,
+    anima(sc, t) {
+      const ph = sc.querySelector('.telefono');
+      const sc6 = BOX.link.scelte;
+      const y = (sc6[0].y - 200) * ease(tra(t, .6, 3));
+      scorri(ph, y);
+      const i = t < 5.2 ? 0 : t < 9.6 ? 1 : 2;
+      anello(ph, sc6[Math.min(i, sc6.length - 1)], y, t > 3.6 ? tra(t, 3.6, 4) : 0, 6);
+      [...sc.querySelector('.passo').children].forEach((k, j) => entra(k, t, .2 + j * .2));
+    },
+  },
+  { // 7 verificata
+    html: `<div>${passoHTML(7, 'La tua scheda è verificata', 'Gratis e per sempre: nessuna commissione, nessuna pubblicità.')}
+      ${telefono('scheda', 840, 92)}
+      <div class="etichetta bollino" style="position:absolute;left:760px;top:430px;font-size:30px;box-shadow:0 20px 40px -20px rgba(31,36,48,.5)">✓ Scheda verificata</div>
+      <img class="stella" src="asset/stella.png" style="position:absolute;left:1120px;top:380px;width:70px">
+      <img class="cuore" src="asset/cuore-viola.png" style="position:absolute;left:740px;top:140px;width:60px"></div>`,
+    anima(sc, t) {
+      const ph = sc.querySelector('.telefono');
+      scorri(ph, 0);
+      const pp = out(tra(t, .2, 1));
+      ph.style.transform = `translateX(${(1 - pp) * -300}px)`;
+      const b = sc.querySelector('.bollino');
+      const p = back(tra(t, 1.8, 2.6));
+      b.style.transform = `scale(${p}) rotate(${-4 * p}deg)`; b.style.opacity = p > 0 ? 1 : 0;
+      for (const [s, r] of [[sc.querySelector('.stella'), 2.4], [sc.querySelector('.cuore'), 2.8]]) {
+        const q = back(tra(t, r, r + .6));
+        s.style.transform = `scale(${q}) rotate(${Math.sin(t * 3) * 10}deg)`; s.style.opacity = q > 0 ? 1 : 0;
+      }
+      [...sc.querySelector('.passo').children].forEach((k, i) => entra(k, t, .2 + i * .2));
+    },
+  },
+  { // 8 chiusura
+    html: `<div>
+      <img class="mizi" src="asset/mizi-intera.webp" style="position:absolute;left:120px;top:150px;width:340px">
+      <div class="passo" style="left:540px;top:190px;width:660px">
+        <div class="titolo" style="font-size:56px">Tutti i passaggi su</div>
+        <div class="carta url" style="position:relative;margin-top:24px;padding:22px 28px;font-weight:800;font-size:34px;color:#7E4FC4">giocamizi.it/come-reclamare-la-scheda</div>
+        <div class="testo">Ti aspettiamo!</div>
+      </div></div>`,
+    anima(sc, t) {
+      const m = sc.querySelector('.mizi');
+      const p = back(tra(t, .2, 1));
+      m.style.transform = `scale(${p}) rotate(${Math.sin(t * 2.2) * 4}deg)`;
+      [...sc.querySelector('.passo').children].forEach((c, i) => entra(c, t, .4 + i * .3, 60, 0));
+    },
+  },
+];
+
+// tempi
+let inizio = 0;
+const TEMPI = SCENE.map((s, i) => { const d = VOCI[i] + ANTICIPO + CODA; const r = { inizio, dur: d, voce: inizio + ANTICIPO }; inizio += d; return r; });
+const DURATA = inizio;
+window.DURATA = DURATA; window.TEMPI = TEMPI;
+
+const contenitore = document.getElementById('scene');
+const nodi = SCENE.map((s) => { const n = document.createElement('div'); n.className = 'scena'; n.appendChild(el(s.html)); n.style.display = 'none'; contenitore.appendChild(n); return n; });
+
+// sottotitoli: la frase della scena divisa in pezzi, in proporzione al tempo della voce
+const PEZZI = TESTI.map((f) => {
+  const parole = f.split(' '); const pezzi = []; let cur = [];
+  for (const p of parole) { cur.push(p); if (cur.join(' ').length > 46 || /[.:!?]$/.test(p)) { pezzi.push(cur.join(' ')); cur = []; } }
+  if (cur.length) pezzi.push(cur.join(' '));
+  const tot = pezzi.reduce((a, p) => a + p.length, 0); let acc = 0;
+  return pezzi.map((p) => { const a = acc / tot; acc += p.length; return { testo: p, da: a, a: acc / tot }; });
+});
+window.PEZZI = PEZZI;
+
+window.render = (t) => {
+  SCENE.forEach((s, i) => {
+    const { inizio: a, dur } = TEMPI[i];
+    const lt = t - a;
+    const vis = lt > -PUSH && lt < dur + PUSH;
+    const n = nodi[i];
+    n.style.display = vis ? 'block' : 'none';
+    if (!vis) return;
+    // push alternato: le scene pari escono a sinistra, le dispari a destra
+    const dir = i % 2 === 0 ? -1 : 1;
+    let x = 0;
+    if (lt < 0) x = -dir * 1280 * ease(-lt / PUSH) * -1; // in arrivo dal lato opposto all'uscita della precedente
+    if (lt < 0) { const prevDir = (i - 1) % 2 === 0 ? -1 : 1; x = -prevDir * 1280 * (1 - ease(1 + lt / PUSH)); }
+    if (lt > dur - PUSH && i < SCENE.length - 1) x = dir * 1280 * ease((lt - (dur - PUSH)) / PUSH);
+    n.style.transform = `translateX(${x}px)`;
+    s.anima(n, Math.max(0, lt));
+  });
+  // sottotitoli
+  let testo = '';
+  TEMPI.forEach((tm, i) => {
+    const d = VOCI[i];
+    const f = (t - tm.voce) / d;
+    if (f >= 0 && f <= 1.02) testo = (PEZZI[i].find((p) => f >= p.da && f < p.a + .02) || PEZZI[i][PEZZI[i].length - 1]).testo;
+  });
+  const st = document.getElementById('sottotitoli');
+  st.textContent = testo; st.style.opacity = testo ? 1 : 0;
+  document.getElementById('barra').style.width = (t / DURATA * 1280) + 'px';
+};
+render(0);
+</script>
+</body>
+</html>

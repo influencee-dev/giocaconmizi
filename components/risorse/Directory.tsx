@@ -39,7 +39,7 @@ export function CtaRisorsa({ risorsa }: { risorsa?: Pick<Risorsa, "slug" | "nome
         <p className="text-xl font-extrabold text-notte">{risorsa ? `Gestisci ${risorsa.nome}?` : "Sei una scuola, una cooperativa o un progetto educativo?"}</p>
         <p className="mt-1 text-sm font-semibold text-notte-tenue">
           {risorsa
-            ? "La scheda è gratuita: reclamala per completarla, aggiungere il logo e i contatti e vedere quante famiglie la guardano."
+            ? "La scheda è gratuita: reclamala per completarla, aggiungere il logo e i contatti e prendere il bollino «Verificata»."
             : "La scheda è gratuita: reclama quella che c'è già o proponi la tua realtà. Nessuna commissione, nessuna pubblicità."}
         </p>
         <Link href={PERCORSO_COME_RECLAMARE} className="mt-2 inline-block text-sm font-extrabold text-viola underline decoration-2 underline-offset-4">

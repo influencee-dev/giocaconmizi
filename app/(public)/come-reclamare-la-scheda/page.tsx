@@ -4,14 +4,14 @@ import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { Briciole, InBreve } from "@/components/directory/Briciole";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { url } from "@/lib/seo";
-import { PERCORSO_COME_RECLAMARE } from "@/lib/reclamo";
+import { PERCORSO_COME_RECLAMARE, VIDEO_RECLAMO } from "@/lib/reclamo";
 import { PERCORSO_RISORSE } from "@/lib/risorse-educative";
 
 /**
  * Il tutorial per le attività e le realtà educative: come si reclama la
  * scheda che Giocamizi ha già creato (o come se ne propone una nuova).
  * Linkato dal richiamo «Come funziona» di feste, directory e risorse.
- * Il video con la voce arriverà qui (docs/piano-risorse-eventi.md, fase 4).
+ * In testa il video tutorial (lib/reclamo.ts → VIDEO_RECLAMO), con sottotitoli e trascrizione.
  */
 
 const TITOLO = "Come reclamare la scheda della tua attività su Giocamizi";
@@ -96,6 +96,20 @@ export default function ComeReclamare() {
       <JsonLd
         data={{
           "@context": "https://schema.org",
+          "@type": "VideoObject",
+          name: "Come reclamare la scheda della tua attività su Giocamizi",
+          description: DESCRIZIONE,
+          thumbnailUrl: [url(VIDEO_RECLAMO.poster)],
+          uploadDate: VIDEO_RECLAMO.caricato,
+          duration: VIDEO_RECLAMO.durata,
+          contentUrl: url(VIDEO_RECLAMO.src),
+          inLanguage: "it-IT",
+          transcript: VIDEO_RECLAMO.testo.join(" "),
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
           "@type": "HowTo",
           name: TITOLO,
           description: DESCRIZIONE,
@@ -117,6 +131,32 @@ export default function ComeReclamare() {
       <div className="mt-6">
         <InBreve testo={RISPOSTA} />
       </div>
+
+      <section className="mt-8" aria-labelledby="titolo-video">
+        <h2 id="titolo-video" className="text-2xl font-black text-notte sm:text-3xl">
+          Guarda come si fa (1 minuto e mezzo)
+        </h2>
+        <video
+          controls
+          playsInline
+          preload="metadata"
+          poster={VIDEO_RECLAMO.poster}
+          className="mt-4 aspect-video w-full rounded-[1.4rem] bg-notte shadow-[0_20px_40px_-24px_rgba(31,36,48,0.6)]"
+          data-video-reclamo
+        >
+          <source src={VIDEO_RECLAMO.src} type="video/mp4" />
+          <track kind="captions" src={VIDEO_RECLAMO.sottotitoli} srcLang="it" label="Italiano" default />
+          Il tuo browser non riproduce il video: qui sotto trovi tutti i passi scritti.
+        </video>
+        <details className="mt-3 rounded-2xl bg-white px-5 py-3">
+          <summary className="cursor-pointer font-extrabold text-notte">Leggi il testo del video</summary>
+          <div className="mt-2 flex flex-col gap-2 text-notte-tenue">
+            {VIDEO_RECLAMO.testo.map((t) => (
+              <p key={t}>{t}</p>
+            ))}
+          </div>
+        </details>
+      </section>
 
       <section className="mt-10" aria-labelledby="titolo-passi">
         <h2 id="titolo-passi" className="text-[1.75rem] font-black leading-tight tracking-tight text-notte sm:text-4xl">
