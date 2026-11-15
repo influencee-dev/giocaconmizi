@@ -75,6 +75,9 @@ export function Editor({ parte = "biglietto" }: { parte?: "biglietto" | "kit" })
   const [passo, setPasso] = useState(0);
   const [tutto, setTutto] = useState(false);
   const [tuttiITemi, setTuttiITemi] = useState(false);
+  // Chi arriva da una pagina a tema (es. «Biglietti di Natale») ha già tipo e
+  // sfondo: si parte dalle scritte, e Mizi lo dice.
+  const [sfondoGiaScelto, setSfondoGiaScelto] = useState(false);
   const inizio = useRef<HTMLDivElement>(null);
   const [dati, setDati] = useState<DatiBiglietto>(VUOTO);
   const [formato, setFormato] = useState<FormatoId>("a6");
@@ -123,6 +126,10 @@ export function Editor({ parte = "biglietto" }: { parte?: "biglietto" | "kit" })
       variante: varianteUrl && VARIANTI.some((v) => v.id === varianteUrl) ? varianteUrl : d.variante,
     }));
     if (formatoUrl && FORMATI.some((f) => f.id === formatoUrl)) setFormato(formatoUrl);
+    if (tema && temi.some((t) => t.theme === tema)) {
+      setSfondoGiaScelto(true);
+      setPasso(2);
+    }
   }, [parametri]);
 
   const [larghezza, altezza] = misure(formato);
@@ -478,7 +485,11 @@ export function Editor({ parte = "biglietto" }: { parte?: "biglietto" | "kit" })
                 <FacciaMizi emozione="felice" className="h-12 w-12" />
               </span>
               <p className="fumetto relative flex-1 rounded-morbido border-2 border-crema-scuro bg-white px-4 py-3 text-lg font-extrabold leading-snug text-notte">
-                {tutto ? "Ecco tutto il biglietto in una pagina: cambia quello che vuoi." : PASSI[passo].mizi}
+                {tutto
+                  ? "Ecco tutto il biglietto in una pagina: cambia quello che vuoi."
+                  : passo === 2 && sfondoGiaScelto
+                    ? "Lo sfondo è già pronto! Ora scrivi il nome: le frasi pronte compaiono già con il nome dentro."
+                    : PASSI[passo].mizi}
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-between gap-2">
