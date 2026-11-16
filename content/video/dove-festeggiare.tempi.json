@@ -1,0 +1,38 @@
+{
+ "secondi": 97,
+ "caricato": "2026-11-16",
+ "capitoli": [
+  {
+   "da": 0,
+   "titolo": "Ciao, sono Mizi"
+  },
+  {
+   "da": 16,
+   "titolo": "1 · Apri «Feste»"
+  },
+  {
+   "da": 24,
+   "titolo": "2 · La pagina della città"
+  },
+  {
+   "da": 35,
+   "titolo": "3 · Cosa cerchi · Dove"
+  },
+  {
+   "da": 48,
+   "titolo": "4 · Salva quelli che ti piacciono"
+  },
+  {
+   "da": 59,
+   "titolo": "5 · Apri la scheda"
+  },
+  {
+   "da": 66,
+   "titolo": "6 · Contatta il locale"
+  },
+  {
+   "da": 82,
+   "titolo": "7 · E poi l'invito"
+  }
+ ]
+}
