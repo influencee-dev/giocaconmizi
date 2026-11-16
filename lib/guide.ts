@@ -246,14 +246,21 @@ const GUIDE_BREVI: Guida[] = [
     titolo: "Come insegnare ai bambini a leggere l'orologio",
     titoloBreve: "L'orologio",
     descrizione:
-      "Ore, mezz'ore, quarti e i famosi \"meno dieci\": il percorso in 4 tappe per leggere l'orologio analogico a 6-8 anni, con i passaggi dove quasi tutti si bloccano.",
+      "Ore, mezz'ore, quarti e i famosi \"meno dieci\": il percorso in 4 tappe per leggere l'orologio analogico a 6-8 anni, con l'orologio di cartone da costruire, gli sbagli più comuni e cosa dire.",
     rispostaBreve:
       "L'orologio si insegna in quattro tappe: prima solo le ore esatte (lancetta corta), poi le mezz'ore, poi i quarti, e per ultimi i minuti a salti di 5. L'errore classico è introdurre subito \"le e venti\" e \"meno un quarto\" insieme: sono due sistemi diversi e vanno separati.",
     etaMin: 6,
     etaMax: 9,
-    minutiLettura: 5,
-    aggiornata: "2026-09-26",
+    minutiLettura: 8,
+    aggiornata: "2026-11-16",
     sezioni: [
+      {
+        titolo: "Prima di cominciare: cosa serve davvero",
+        paragrafi: [
+          "Per partire bastano due cose: riconoscere i numeri da 1 a 12 e avere un'idea della giornata, cioè che c'è un prima e un dopo (\"prima la colazione, poi la scuola\"). Non serve saper contare fino a 60: quello arriva alla quarta tappa.",
+          "Se il vostro bambino confonde ancora il 6 con il 9, o il 12 con il 21, non è indietro: è solo presto. Giocate ancora un po' con i numeri e riprovate tra qualche settimana.",
+        ],
+      },
       {
         titolo: "Prima tappa: solo la lancetta corta",
         paragrafi: [
@@ -273,6 +280,30 @@ const GUIDE_BREVI: Guida[] = [
         paragrafi: [
           "\"E un quarto\" (lunga sul 3) e \"e tre quarti\" (lunga sul 9) si imparano come posizioni fisse, tipo punti cardinali. Solo dopo arriva l'idea generale: ogni numero del quadrante vale 5 minuti, e si conta per 5 seguendo la lancetta lunga — che è anche un bel ripasso della tabellina del 5.",
           "Per ultimo, il sistema \"all'indietro\": \"le 8 meno dieci\" invece di \"le 7 e cinquanta\". È una convenzione italiana in più, non una tappa obbligata: introducetela solo quando la lettura in avanti è solidissima.",
+        ],
+      },
+      {
+        titolo: "Un orologio di cartone: dieci minuti, e si usa per mesi",
+        paragrafi: [
+          "Serve un piatto di carta, un fermacampione e due strisce di cartoncino di colore diverso: una corta e larga per le ore, una lunga e sottile per i minuti. I numeri li scrive il bambino, partendo da 12, 3, 6 e 9: così scopre da solo che il quadrante è diviso in quattro parti.",
+          "Il colore diverso non è un dettaglio. Per settimane potrete dire \"guarda la lancetta rossa\" invece di \"quella corta\", e l'errore più frequente, scambiare le due lancette, quasi sparisce.",
+          "Usatelo al contrario del solito: non \"che ore sono?\", ma \"metti le lancette sulle 4\". Costruire l'ora è più facile che leggerla, e prepara alla lettura.",
+        ],
+      },
+      {
+        titolo: "Gli sbagli che fanno quasi tutti, e cosa dire",
+        paragrafi: [
+          "Scambia le lancette e legge \"le 3 e 7\" invece delle 7 e un quarto. Non correggete il risultato: chiedete \"qual è la lancetta delle ore?\". Di solito si corregge da solo.",
+          "Legge il numero invece dei minuti: lancetta lunga sul 4, \"sono le 7 e 4\". È il passaggio più difficile di tutto il percorso, perché lo stesso numero vale due cose diverse. Contate insieme a salti di 5 toccando i numeri del quadrante: 5, 10, 15, 20.",
+          "Sbaglia l'ora quando manca poco a quella dopo: alle 7 e 50 la lancetta corta è quasi sull'8, e lui legge \"le 8 e 50\". Vale la regola della mezz'ora: la lancetta corta dice l'ora che è già passata.",
+        ],
+      },
+      {
+        titolo: "Cinque minuti al giorno, dentro la giornata",
+        paragrafi: [
+          "L'orologio non si impara al tavolo: si impara perché serve. Legate ogni giorno un'ora a qualcosa che gli interessa: \"quando la lancetta lunga arriva sul 6 si spegne la tv\", \"alle 4 e mezza andiamo al parco: me lo dici tu quando è ora?\".",
+          "Fategli fare il custode del tempo: è lui che avvisa quando sono le 8 e si esce. Sbaglierà, e va bene: l'importante è che guardi l'orologio molte volte al giorno, senza che sia una verifica.",
+          "Per ripassare senza accorgersene c'è anche il gioco «Che ore sono?» qui sul sito: parte dalle ore esatte, poi passa alle mezz'ore e ai quarti, e all'ultimo livello chiede l'ora a parole. Sono le stesse tappe di questa guida, nello stesso ordine.",
         ],
       },
       {
@@ -297,6 +328,21 @@ const GUIDE_BREVI: Guida[] = [
         domanda: "Meglio iniziare dall'orologio digitale?",
         risposta:
           "No: il digitale si legge senza capire. Il quadrante analogico fa vedere il tempo come spazio (quanto manca, quanto è passato) ed è la base su cui il digitale poi si aggancia da solo.",
+      },
+      {
+        domanda: "Mio figlio confonde la lancetta delle ore con quella dei minuti: cosa faccio?",
+        risposta:
+          "Datele due colori diversi, anche solo con un pennarello su un orologio di cartone, e per qualche settimana chiamatele col colore. Poi chiedete sempre per prima cosa \"qual è la lancetta delle ore?\": letta quella, il resto viene dopo.",
+      },
+      {
+        domanda: "Deve sapere la tabellina del 5 per leggere i minuti?",
+        risposta:
+          "No: basta saper contare a salti di 5 fino a 60, toccando i numeri del quadrante. Anzi, è l'orologio che aiuta la tabellina del 5, perché la fa vedere tutti i giorni.",
+      },
+      {
+        domanda: "Quando si passa alle 15, alle 18, alle 21?",
+        risposta:
+          "Quando la lettura fino alle 12 è sicura. Le ore del pomeriggio sono solo un secondo giro: \"dopo le 12 si ricomincia, ma si aggiunge 12\". Si agganciano bene agli orari che il bambino vede davvero, come quelli del treno o dei cartoni in tv.",
       },
     ],
     giochi: ["l-orologio", "conta-fino-a-10", "tabelline"],

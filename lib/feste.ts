@@ -15,7 +15,9 @@
 // non ritentarle prima di qualche mese. Pescara, Sassari, Barletta, Pistoia,
 // Terni, Matera, L'Aquila, Potenza, Marsala, Faenza, Legnano, Avellino
 // (entro il 13/11/2026); Cinisello Balsamo, Torre del Greco, Olbia (14/11/2026);
-// Giugliano in Campania (15/11/2026).
+// Giugliano in Campania (15/11/2026); Andria (un solo locale, scheda senza data)
+// e Pesaro (solido solo Fantasilandia a Montelabbate; Enjoy Park e Baboom senza
+// segnali recenti) il 16/11/2026.
 
 export interface LocaleFesta {
   nome: string;
@@ -980,7 +982,7 @@ export const CITTA_FESTE: CittaFeste[] = [
           "Affitta le sale per le feste nel weekend, quattro ore dalle 15 alle 19, fino a 15 bambini con i loro adulti; va prenotato con qualche settimana di anticipo.",
         sito: "https://www.ilgiardinodelleciliegie.it",
       },
-      { nome: "Caribe Bay", zona: "Jesolo, sul litorale veneziano", tipo: "parco acquatico", descrizione: "Parco acquatico a tema caraibico a Jesolo, aperto d'estate: nel 2026 tutti i giorni dal 30 maggio al 13 settembre. Per le famiglie con bimbi piccoli c'è Pirates' Bay, una baia con la spiaggia di sabbia bianca e le attrazioni per i bambini. I bambini fino a 100 cm entrano gratis e tra 100 e 140 cm pagano il ridotto. Dal 2026 dal parco si arriva anche al minigolf a tema, con 24 buche, su prenotazione.", sito: "https://www.caribebay.it/", festa: false },
+      { nome: "Caribe Bay", zona: "Jesolo, sul litorale veneziano", tipo: "parco acquatico", descrizione: "Parco acquatico a tema caraibico a Jesolo, aperto d'estate: nel 2026 tutti i giorni dal 30 maggio al 13 settembre. Per le famiglie con bambini piccoli c'è Pirates' Bay, una baia con la spiaggia di sabbia bianca e le attrazioni per i bambini. I bambini fino a 100 cm entrano gratis e tra 100 e 140 cm pagano il ridotto. Dal 2026 dal parco si arriva anche al minigolf a tema, con 24 buche, su prenotazione.", sito: "https://www.caribebay.it/", festa: false },
     ],
     faq: [
       {
@@ -1818,7 +1820,7 @@ export const CITTA_FESTE: CittaFeste[] = [
       { nome: "Chibia Parco Giochi", zona: "Rimini, Viserba", tipo: "parco giochi al coperto", descrizione: "Area coperta di circa 1000 mq con gonfiabili, uno scivolo alto 7 metri, percorsi a ostacoli e un'area baby recintata per i bimbi da 0 a 3 anni. Per le feste allestisce uno spazio dedicato, prepara il buffet e include l'accesso a tutti i giochi del parco.", sito: "https://www.chibiaparcogiochirimini.it/" },
       { nome: "Bowling Seventies", zona: "Cerasolo (Coriano)", tipo: "sala feste con playground", descrizione: "Bowling a pochi minuti da Rimini con pacchetti compleanno divisi per età (0–6, 7–10 e 11–17 anni), che comprendono decorazioni, animatori e torta della pasticceria interna. I più piccoli hanno il Play Park, e c'è uno short bowling con piste più corte e palle leggere pensato per i bambini dai 4 anni.", sito: "https://bowling-seventies.com/" },
       { nome: "Parcogiochi Paperopolis", zona: "Igea Marina (Bellaria Igea Marina)", tipo: "parco divertimenti", descrizione: "Storico parco giochi per famiglie all'aperto, in un'area verde, con gonfiabili, reti elastiche e piccole attrazioni. Organizza feste di tre ore al pomeriggio oppure la sera; conviene verificare il calendario di apertura prima di fissare la data.", sito: "https://paperopolis.it/" },
-      { nome: "Aquafan", zona: "Riccione, a pochi chilometri da Rimini", tipo: "parco acquatico", descrizione: "Il grande parco acquatico di Riccione, aperto d'estate: nel 2026 dal 1° giugno al 6 settembre, tutti i giorni dalle 10 alle 18:30. Ci sono zone pensate per chi arriva con bimbi piccoli, con spazi più tranquilli, giochi d'acqua e piscine basse. I bambini fino a un metro di altezza entrano gratis, e chi compie gli anni entra gratis nel giorno del compleanno mostrando un documento.", sito: "https://www.aquafan.it/", festa: false },
+      { nome: "Aquafan", zona: "Riccione, a pochi chilometri da Rimini", tipo: "parco acquatico", descrizione: "Il grande parco acquatico di Riccione, aperto d'estate: nel 2026 dal 1° giugno al 6 settembre, tutti i giorni dalle 10 alle 18:30. Ci sono zone pensate per chi arriva con bambini piccoli, con spazi più tranquilli, giochi d'acqua e piscine basse. I bambini fino a un metro di altezza entrano gratis, e chi compie gli anni entra gratis nel giorno del compleanno mostrando un documento.", sito: "https://www.aquafan.it/", festa: false },
     ],
     faq: [
       { domanda: "Qual è il posto giusto in base all'età?", risposta: "Per i più piccoli funzionano bene i parchi giochi al coperto con un'area baby dedicata, come quello di Viserba con lo spazio per i bimbi da 0 a 3 anni. Dai 4–5 anni in su piacciono gonfiabili e short bowling, mentre per i ragazzi più grandi alcuni locali propongono pacchetti teen con bowling o biliardo." },
@@ -2506,6 +2508,24 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Dove si fa una festa di compleanno per bambini ad Ancona?", risposta: "In una sala feste con gonfiabili come Magic Land alla Baraccola Nord, oppure in un parco giochi al coperto come Playland in via Achille Grandi. Sono tutti e due al chiuso." },
       { domanda: "Per che età vanno bene?", risposta: "Playland accoglie bambini da 0 a 13 anni. Magic Land è pensata per le feste dei bambini, con area morbida per i più piccoli: dite l'età quando prenotate." },
       { domanda: "Cosa comprende la festa?", risposta: "Magic Land propone pacchetti con allestimento, animazione e merenda a buffet. Per Playland le guide parlano di animazione e catering: fatevi dire per iscritto cosa è compreso, torta inclusa." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "la-spezia",
+    citta: "La Spezia",
+    aggiornata: "2026-11-16",
+    rispostaBreve: "Alla Spezia la festa di compleanno per bambini si fa al coperto: al Padre Dionisio Sporting Club, sui colli, con un'area giochi riscaldata con gonfiabili, playground e parete di arrampicata, oppure da Patapan, a Bragarina, un parco giochi al coperto con tre sale per le feste. Tutti e due vanno bene in ogni stagione: chiedete per tempo date libere e cosa comprende il prezzo.",
+    intro: "Alla Spezia gli spazi privati per le feste dei bambini sono pochi ma al coperto, quindi buoni anche d'inverno. Qui trovate un parco giochi dentro un centro sportivo sui colli, con ristorante e parcheggio, e un parco giochi al chiuso nel quartiere di Bragarina.",
+    locali: [
+      { nome: "Padre Dionisio Sporting Club", zona: "La Spezia, via dei Colli", tipo: "parco giochi al coperto con gonfiabili e feste di compleanno", sito: "https://www.padredionisiosportingclub.it/", descrizione: "Sui colli della Spezia, dentro un circolo con campi da padel e da calcio a 5, c'è un'area giochi al coperto e riscaldata con gonfiabili, playground, parete di arrampicata, area per i più piccoli, zona baby dance e biliardini; fuori c'è un'altra area giochi. Ci sono bar, ristorante pizzeria e parcheggio, e il centro è aperto tutto l'anno. Per i compleanni il sito indica feste a partire da 220 euro (prezzo letto a novembre 2026). Il personale controlla solo l'uso corretto dei giochi, riservati a chi non ha ancora compiuto 13 anni." },
+      { nome: "Patapan", zona: "La Spezia, Bragarina (via Sardegna)", tipo: "parco giochi al coperto con sale feste", sito: "https://www.patapanlaspezia.it/", descrizione: "Parco giochi al coperto nel quartiere di Bragarina, aperto nel 2016. Il sito parla di un playground di 200 mq su due livelli, con percorsi di gioco e sensoriali, e di tre sale per le feste di compleanno, riscaldate e climatizzate. Su richiesta ci sono giornate a tema con truccabimbi, baby dance e animazione. I bambini devono essere accompagnati da un adulto; orari e disponibilità si chiedono direttamente al parco." },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno per bambini alla Spezia?", risposta: "Al coperto, in uno dei due parchi giochi che organizzano compleanni: il Padre Dionisio Sporting Club in via dei Colli, con gonfiabili e parete di arrampicata, oppure Patapan a Bragarina, con tre sale per le feste." },
+      { domanda: "Vanno bene anche d'inverno?", risposta: "Sì: tutti e due sono al chiuso. L'area giochi del Padre Dionisio è riscaldata e le sale di Patapan sono riscaldate e climatizzate." },
+      { domanda: "Quanto costa la festa?", risposta: "Il sito del Padre Dionisio Sporting Club indica feste a partire da 220 euro (prezzo letto a novembre 2026). Per Patapan il prezzo si chiede al parco. In ogni caso fatevi scrivere cosa è compreso: numero di bambini, merenda, torta e durata." },
+      { domanda: "Fino a che età si può giocare?", risposta: "Al Padre Dionisio i giochi sono riservati a chi non ha ancora compiuto 13 anni. Da Patapan serve sempre un adulto che accompagna: dite l'età dei bambini quando prenotate." },
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
