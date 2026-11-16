@@ -3,6 +3,7 @@ import Link from "next/link";
 /** Il menu del pannello di Giorgia: cresce con le fasi di docs/piano-backoffice.md. */
 const VOCI = [
   { percorso: "/schede", nome: "Schede" },
+  { percorso: "/importa", nome: "Importa con l'AI" },
   { percorso: "", nome: "Risposte dei locali" },
   { percorso: "/candidature", nome: "Candidature" },
   { percorso: "/risorse", nome: "Risorse" },

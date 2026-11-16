@@ -39,30 +39,88 @@ export type DatiModifica = Partial<Record<Campo, string>> & { estesa?: SchedaEst
 export interface Pubblicata {
   tipo: "approva" | "modifica" | "rimuovi";
   dati: DatiModifica;
+  /** Chi ha scritto i dati: l'attività dal suo link (verificata) o Giorgia con l'importazione AI. */
+  fonte?: "attivita" | "giorgia";
+}
+
+/** Unisce le schede preparate da Giorgia a quelle confermate dalle attività: vince sempre l'attività. */
+function conSchedeGiorgia(m: Map<string, Pubblicata>, giorgia: { chiave: string; dati: SchedaEstesa }[]) {
+  for (const g of giorgia) {
+    const r = m.get(g.chiave);
+    if (!r) m.set(g.chiave, { tipo: "modifica", dati: { estesa: g.dati }, fonte: "giorgia" });
+    else if (r.tipo !== "rimuovi" && !r.dati.estesa) m.set(g.chiave, { ...r, dati: { ...r.dati, estesa: g.dati } });
+  }
+  return m;
 }
 
 /** Le risposte dei locali che Giorgia ha accettato, per chiave scheda. */
 export async function pubblicate(): Promise<Map<string, Pubblicata>> {
   // Nel server delle verifiche una risorsa risulta reclamata, per provarne la pagina propria.
   if (process.env.GIOCAMIZI_ADMIN_PROVA && !process.env.VERCEL) {
-    return new Map<string, Pubblicata>([
-      [INVITO_PROVA_RISORSA.chiave, { tipo: "modifica", dati: { descrizione: "Scheda di prova: testo scritto dalla realtà dal suo link personale.", sito: "https://www.coopaccento.it/" } }],
-      [SCHEDA_ESTESA_PROVA.chiave, { tipo: "modifica", dati: { estesa: SCHEDA_ESTESA_PROVA.estesa } }],
-    ]);
+    return conSchedeGiorgia(
+      new Map<string, Pubblicata>([
+        [INVITO_PROVA_RISORSA.chiave, { tipo: "modifica", dati: { descrizione: "Scheda di prova: testo scritto dalla realtà dal suo link personale.", sito: "https://www.coopaccento.it/" } }],
+        [SCHEDA_ESTESA_PROVA.chiave, { tipo: "modifica", dati: { estesa: SCHEDA_ESTESA_PROVA.estesa } }],
+      ]),
+      [...schedeGiorgiaProva.entries()].filter(([, g]) => g.pubblicata).map(([chiave, g]) => ({ chiave, dati: g.dati })),
+    );
   }
   const client = db();
   if (!client) return new Map();
   try {
-    const { data, error } = await client.rpc("dir_pubblicate");
-    if (error || !Array.isArray(data)) return new Map();
-    return new Map(data.map((r: { chiave: string; tipo: Pubblicata["tipo"]; dati: DatiModifica }) => [r.chiave, { tipo: r.tipo, dati: r.dati ?? {} }]));
+    const [r, g] = await Promise.all([client.rpc("dir_pubblicate"), client.rpc("dir_pubblicate_giorgia")]);
+    if (r.error || !Array.isArray(r.data)) return new Map();
+    const m = new Map<string, Pubblicata>(
+      r.data.map((x: { chiave: string; tipo: Pubblicata["tipo"]; dati: DatiModifica }) => [x.chiave, { tipo: x.tipo, dati: x.dati ?? {}, fonte: "attivita" as const }]),
+    );
+    // Se l'SQL delle schede preparate non è ancora incollato, g.error: si va avanti senza.
+    return conSchedeGiorgia(m, !g.error && Array.isArray(g.data) ? (g.data as { chiave: string; dati: SchedaEstesa }[]) : []);
   } catch {
     return new Map();
   }
 }
 
+// ---------- Schede preparate da Giorgia con l'importazione AI (supabase/scheda-dati.sql) ----------
+
+/** Solo nel server delle verifiche: le schede preparate restano in memoria. */
+const schedeGiorgiaProva: Map<string, { dati: SchedaEstesa; pubblicata: boolean; aggiornato_il: string }> =
+  ((globalThis as { __schedeGiorgiaProva?: Map<string, { dati: SchedaEstesa; pubblicata: boolean; aggiornato_il: string }> }).__schedeGiorgiaProva ??= new Map());
+
+export async function adminSalvaScheda(codice: string, chiave: string, dati: SchedaEstesa, pubblica: boolean) {
+  if (inProva() && codice === process.env.GIOCAMIZI_ADMIN_PROVA) {
+    schedeGiorgiaProva.set(chiave, { dati, pubblicata: pubblica, aggiornato_il: new Date().toISOString() });
+    return { ok: true as const };
+  }
+  const client = db();
+  if (!client) return { ok: false as const, errore: "Il database non risponde." };
+  try {
+    const { error } = await client.rpc("dir_admin_salva_scheda", { p_codice: codice, p_chiave: chiave, p_dati: dati, p_pubblica: pubblica });
+    if (error) {
+      const manca = /function .* does not exist|Could not find the function/i.test(error.message);
+      return { ok: false as const, errore: manca ? "Manca l'SQL delle schede: incolla supabase/scheda-dati.sql nel SQL Editor di Supabase." : error.message };
+    }
+    return { ok: true as const };
+  } catch {
+    return { ok: false as const, errore: "Il database non risponde." };
+  }
+}
+
+export async function adminSchedeGiorgia(codice: string): Promise<{ chiave: string; pubblicata: boolean; aggiornato_il: string }[]> {
+  if (inProva() && codice === process.env.GIOCAMIZI_ADMIN_PROVA) {
+    return [...schedeGiorgiaProva.entries()].map(([chiave, g]) => ({ chiave, pubblicata: g.pubblicata, aggiornato_il: g.aggiornato_il }));
+  }
+  const client = db();
+  if (!client) return [];
+  try {
+    const { data, error } = await client.rpc("dir_admin_schede_giorgia", { p_codice: codice });
+    return error || !Array.isArray(data) ? [] : data;
+  } catch {
+    return [];
+  }
+}
+
 /** La scheda con le modifiche approvate sopra, o null se il locale ha chiesto di toglierla. */
-export function conModifiche(s: Scheda, p: Map<string, Pubblicata>): (Scheda & { verificata: boolean; extra: DatiModifica }) | null {
+export function conModifiche(s: Scheda, p: Map<string, Pubblicata>): (Scheda & { verificata: boolean; preparataDaGiorgia: boolean; extra: DatiModifica }) | null {
   const r = p.get(chiaveScheda(s));
   if (r?.tipo === "rimuovi") return null;
   const d = r?.dati ?? {};
@@ -71,7 +129,8 @@ export function conModifiche(s: Scheda, p: Map<string, Pubblicata>): (Scheda & {
     descrizione: d.descrizione?.trim() || s.descrizione,
     sito: d.sito?.trim() || s.sito,
     instagram: d.instagram?.trim() || s.instagram,
-    verificata: Boolean(r),
+    verificata: Boolean(r) && r?.fonte !== "giorgia",
+    preparataDaGiorgia: r?.fonte === "giorgia",
     extra: d,
   };
 }

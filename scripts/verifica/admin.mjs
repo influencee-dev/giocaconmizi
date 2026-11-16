@@ -129,6 +129,8 @@ await page.waitForURL(/\/ludoteche\/milano/, { timeout: 8000 }).catch(() => null
 ok("ricerca Cosa · Dove: porta al listing della città", page.url().endsWith("/ludoteche/milano"), page.url());
 await page.goto(`${BASE}/ludoteche/milano/il-nano-gigante`, { waitUntil: "networkidle" });
 ok("scheda: «Cosa offre» e domande da fare", (await page.locator("[data-cosa-offre]").count()) === 1 && (await page.getByText("Da chiedere al locale").count()) === 1);
+ok("scheda: riga dei dati chiave, con «da chiedere» dove manca", (await page.locator("[data-dati-chiave]").count()) === 1 && (await page.locator("[data-dati-chiave]").getByText("da chiedere").count()) > 0);
+ok("scheda: icone a tratto, niente emoji 3D nella scheda", (await page.locator('main img[src^="/icone/"]').count()) === 0);
 
 // 7. Mappa: si carica solo al tocco (niente terze parti prima); ogni città
 // ha le coordinate; il pannello delle posizioni si apre.
@@ -155,6 +157,19 @@ await browser.close();
   ok("footer: invito ad aggiungere un'attività su ogni pagina", pagina[1].includes("data-piede-attivita"));
   const sbagliato = await fetch(`${BASE}/admin/codice-sbagliato-000000/candidature`).then((r) => r.text());
   ok("candidature: senza codice → pannello non disponibile", sbagliato.includes("Pannello non disponibile"));
+  const importaNo = await fetch(`${BASE}/admin/codice-sbagliato-000000/importa`).then((r) => r.text());
+  ok("importa con l'AI: senza codice → pannello non disponibile", importaNo.includes("Pannello non disponibile"));
+  const bi = await apriBrowser();
+  const pi = await bi.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await pi.goto(`${BASE}/admin/${CODICE_ADMIN_PROVA}/importa`, { waitUntil: "networkidle" });
+  await pi.locator("#cerca-scheda").fill("nano gig");
+  await pi.getByRole("button", { name: /Il Nano Gigante/ }).tap();
+  ok("importa con l'AI: scelta la scheda, compaiono i link da leggere", (await pi.getByText("2. Da dove leggere").count()) === 1);
+  await pi.getByPlaceholder("https://sito-ufficiale.it").fill("https://www.esempio-non-esistente-giocamizi.it/");
+  await pi.getByRole("button", { name: /Proponi la scheda/ }).tap();
+  await pi.locator("[data-proposta]").waitFor({ timeout: 30000 }).catch(() => null);
+  ok("importa con l'AI: risponde sempre (proposta, o errore leggibile se mancano rete o chiave)", (await pi.locator("[data-proposta]").count()) === 1);
+  await bi.close();
 
   const bc = await apriBrowser();
   const pc = await bc.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });

@@ -27,7 +27,7 @@ export const TITOLARE = {
 } as const;
 
 /** Data dell'ultima revisione delle informative (si aggiorna a ogni modifica). */
-export const AGGIORNATA = "8 novembre 2026";
+export const AGGIORNATA = "16 novembre 2026";
 
 export interface VoceRegistro {
   nome: string;
@@ -183,6 +183,12 @@ export const FORNITORI = [
     dove: "Unione Europea (Francia)",
   },
   {
+    nome: "Anthropic (Claude)",
+    scopo:
+      "Solo nel pannello di Giorgia: legge le pagine pubbliche del sito e dei social di un'attività (testi già pubblici, nessun dato di famiglie o bambini) e propone i campi della scheda, che Giorgia controlla prima di pubblicarli.",
+    dove: "Stati Uniti; trasferimento coperto dalle clausole contrattuali standard UE",
+  },
+  {
     nome: "Google Ireland Ltd. (Google Analytics)",
     scopo:
       "Statistiche di visita, SOLO se acconsenti dal banner: pagine viste e uso dei giochi, senza Google Signals né personalizzazione degli annunci.",
@@ -197,8 +203,18 @@ export const FORNITORI = [
 export const TITOLARI_AUTONOMI = [
   {
     nome: "Meta Platforms Ireland Ltd. (Instagram)",
-    quando: "se tocchi «Guarda il reel» in una pagina città",
+    quando: "se tocchi «Guarda il reel» o «Guarda su Instagram» in una pagina città o in una scheda",
     informativa: "https://privacycenter.instagram.com/policy",
+  },
+  {
+    nome: "Google Ireland Ltd. (YouTube, versione senza cookie)",
+    quando: "se tocchi «Guarda su YouTube» in una scheda",
+    informativa: "https://policies.google.com/privacy",
+  },
+  {
+    nome: "TikTok Technology Limited",
+    quando: "se tocchi «Guarda su TikTok» in una scheda",
+    informativa: "https://www.tiktok.com/legal/page/eea/privacy-policy/it",
   },
   {
     nome: "OpenStreetMap Foundation (mappe)",

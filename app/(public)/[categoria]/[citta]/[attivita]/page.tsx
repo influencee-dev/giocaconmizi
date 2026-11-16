@@ -192,6 +192,8 @@ export default async function SchedaPage({ params }: P) {
               <span className="inline-flex items-center gap-1 rounded-bolla bg-[#E3F4E8] px-3 py-1 text-xs font-extrabold text-[#2E7D4A]">
                 <BadgeCheck className="h-3.5 w-3.5" aria-hidden /> Verificata dal titolare
               </span>
+            ) : s.preparataDaGiorgia ? (
+              <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte-tenue">Dati presi dal sito ufficiale · da confermare</span>
             ) : (
               <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte-tenue">Scheda da reclamare</span>
             )}

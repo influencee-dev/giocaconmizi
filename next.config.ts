@@ -14,7 +14,7 @@ const CSP = [
   "img-src 'self' data: blob: https://*.google-analytics.com https://*.googletagmanager.com https://tile.openstreetmap.org",
   "font-src 'self' data:",
   "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://vercel.live",
-  "frame-src https://www.instagram.com https://vercel.live",
+  "frame-src https://www.instagram.com https://www.youtube-nocookie.com https://www.tiktok.com https://vercel.live",
   "media-src 'self' blob: data:",
   "worker-src 'self' blob:",
   "object-src 'none'",
