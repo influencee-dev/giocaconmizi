@@ -302,5 +302,80 @@
     "risposta": "Se metti il tuo numero WhatsApp, chi riceve l'invito tocca «Confermo, ci saremo!» e ti arriva il messaggio già scritto; sull'invito stampato c'è il QR."
    }
   ]
+ },
+ {
+  "slug": "il-kit-della-festa",
+  "gruppo": "utenti",
+  "titolo": "Il kit della festa: etichette, festone, topper, segnaposto e caccia al tesoro",
+  "ordine": 2,
+  "descrizione": "Mizi ti mostra il kit della festa di Giocamizi: etichette, festone col nome, topper, segnaposto e caccia al tesoro da stampare.",
+  "rispostaBreve": "Il kit della festa di Giocamizi si apre dall'ultimo passo dell'invito, con lo stesso nome e sfondo: etichette per i sacchettini, festone col nome, topper per la torta, segnaposto e una caccia al tesoro con sei indizi. Tutto su fogli A4 da stampare a casa, gratis.",
+  "video": {
+   "src": "/video/il-kit-della-festa.mp4",
+   "poster": "/video/il-kit-della-festa.webp",
+   "sottotitoli": "/video/il-kit-della-festa.vtt",
+   "durata": "PT1M42S",
+   "secondi": 102,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! L'invito è pronto? Allora prepariamo il kit della festa: etichette, festone, topper, segnaposto e caccia al tesoro. Si stampa tutto a casa, gratis!",
+    "Quando l'invito è pronto, all'ultimo passo tocca «Prepara il kit della festa». Il kit arriva con il nome e lo sfondo del biglietto.",
+    "Qui trovi già il nome, gli anni e lo sfondo. Se vuoi cambiarli, lo fai una volta sola, e valgono per tutti i fogli.",
+    "Scrivi i nomi degli invitati, uno per riga. Esce un foglio con un cartellino «Grazie» per ogni sacchettino. I nomi restano sul tuo telefono, non vanno nel link.",
+    "Il festone ha una bandierina per ogni lettera: «Buon compleanno» e il nome, oppure solo il nome. Ritagli, pieghi sullo spago e incolli: il numerino ti dice l'ordine.",
+    "Per la torta c'è il topper: un disco grande con gli anni e il nome, e otto dischetti per i cupcake. Dietro ci attacchi uno stecchino con lo scotch.",
+    "I segnaposto usano gli stessi nomi delle etichette. Li pieghi a tenda, e il nome si legge da tutti e due i lati.",
+    "E poi la caccia al tesoro! Ci sono sei indizi pronti per giocare in casa: ognuno dice dove trovare il prossimo, e l'ultimo porta al tesoro. Puoi cambiarli come vuoi.",
+    "Trovi il kit su giocamizi.it, nella pagina dei biglietti. Buona festa! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 16,
+    "titolo": "1 · Parti dall'invito"
+   },
+   {
+    "da": 27,
+    "titolo": "2 · Tutto con lo stesso sfondo"
+   },
+   {
+    "da": 37,
+    "titolo": "3 · Le etichette dei sacchettini"
+   },
+   {
+    "da": 49,
+    "titolo": "4 · Il festone col nome"
+   },
+   {
+    "da": 63,
+    "titolo": "5 · Il topper per la torta"
+   },
+   {
+    "da": 74,
+    "titolo": "6 · I segnaposto"
+   },
+   {
+    "da": 82,
+    "titolo": "7 · La caccia al tesoro"
+   }
+  ],
+  "pagina": {
+   "href": "/biglietti/kit-festa",
+   "testo": "Il kit della festa"
+  },
+  "faq": [
+   {
+    "domanda": "I nomi degli invitati vengono salvati?",
+    "risposta": "No: restano sul tuo telefono e non finiscono nel link."
+   },
+   {
+    "domanda": "Serve una stampante speciale?",
+    "risposta": "No, ogni foglio è un A4 normale da stampare a casa."
+   }
+  ]
  }
 ]
