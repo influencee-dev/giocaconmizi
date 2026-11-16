@@ -1,0 +1,34 @@
+{
+ "secondi": 93,
+ "caricato": "2026-11-16",
+ "capitoli": [
+  {
+   "da": 0,
+   "titolo": "Ciao, sono Mizi"
+  },
+  {
+   "da": 15,
+   "titolo": "1 · Scegli una categoria"
+  },
+  {
+   "da": 30,
+   "titolo": "2 · Da casa o sul territorio"
+  },
+  {
+   "da": 40,
+   "titolo": "3 · Cerca per provincia"
+  },
+  {
+   "da": 51,
+   "titolo": "4 · Tutte le realtà della provincia"
+  },
+  {
+   "da": 60,
+   "titolo": "5 · Leggi la scheda"
+  },
+  {
+   "da": 74,
+   "titolo": "6 · Controlla alla fonte"
+  }
+ ]
+}

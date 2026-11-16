@@ -597,5 +597,71 @@
     "risposta": "No: niente timer, niente punteggi da battere, niente pubblicità."
    }
   ]
+ },
+ {
+  "slug": "le-risorse-educative",
+  "gruppo": "utenti",
+  "titolo": "Come trovare le risorse educative su Giocamizi",
+  "ordine": 6,
+  "descrizione": "Mizi ti mostra come trovare scuole, cooperative, blog e progetti nelle risorse educative di Giocamizi.",
+  "rispostaBreve": "Le risorse educative di Giocamizi sono divise per categoria (blog per genitori, schede per insegnanti, coding, fiabe, scuole, cooperative, natura e musei) e, per quelle con una sede, per provincia. Ogni realtà ha una scheda con cosa fa, per chi, costi e il link al sito ufficiale.",
+  "video": {
+   "src": "/video/le-risorse-educative.mp4",
+   "poster": "/video/le-risorse-educative.webp",
+   "sottotitoli": "/video/le-risorse-educative.vtt",
+   "durata": "PT1M33S",
+   "secondi": 93,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Cerchi una scuola per il tuo bimbo, delle schede da stampare o un sito di coding? Nelle risorse educative di Giocamizi le trovi tutte in un posto. Ti faccio vedere!",
+    "Apri la pagina delle risorse educative. In alto scorrono le categorie: blog per genitori, schede per insegnanti, coding, fiabe e musica, scuole, cooperative e altre ancora.",
+    "Sono divise in due gruppi: quelle da usare da casa o in classe, online in tutta Italia, e quelle sul territorio, con una sede vera.",
+    "Apri una categoria sul territorio, per esempio le scuole paritarie. Sotto «Cerca per provincia» tocca la tua: per esempio Torino.",
+    "Ecco le realtà della provincia, ognuna con la sua card: dove si trova, cosa fa e per chi è. Tocca «Vedi la scheda».",
+    "Sotto il nome vedi chi ha scritto la scheda: Giocamizi, dal sito ufficiale, oppure la realtà stessa. Poi leggi cosa fa, per chi è, come si partecipa e quanto costa.",
+    "Le informazioni vengono dai siti ufficiali: il bottone viola ti porta proprio lì, per controllare. E più sotto trovi cosa guardare prima di scegliere.",
+    "Trovi tutte le risorse su giocamizi.it, nella pagina «Risorse educative». Buona ricerca! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 15,
+    "titolo": "1 · Scegli una categoria"
+   },
+   {
+    "da": 30,
+    "titolo": "2 · Da casa o sul territorio"
+   },
+   {
+    "da": 40,
+    "titolo": "3 · Cerca per provincia"
+   },
+   {
+    "da": 51,
+    "titolo": "4 · Tutte le realtà della provincia"
+   },
+   {
+    "da": 60,
+    "titolo": "5 · Leggi la scheda"
+   },
+   {
+    "da": 74,
+    "titolo": "6 · Controlla alla fonte"
+   }
+  ],
+  "pagina": {
+   "href": "/risorse-educative-bambini",
+   "testo": "Le risorse educative"
+  },
+  "faq": [
+   {
+    "domanda": "Da dove vengono le informazioni delle schede?",
+    "risposta": "Dai siti ufficiali delle realtà, oppure dalla realtà stessa quando reclama la scheda."
+   }
+  ]
  }
 ]
