@@ -527,5 +527,75 @@
     "risposta": "Sul tuo telefono."
    }
   ]
+ },
+ {
+  "slug": "trovare-il-gioco-giusto",
+  "gruppo": "utenti",
+  "titolo": "Come trovare il gioco giusto per il tuo bimbo",
+  "ordine": 5,
+  "descrizione": "Mizi ti mostra come trovare il gioco giusto su Giocamizi per età e per competenza, e come si gioca.",
+  "rispostaBreve": "Per trovare il gioco giusto su Giocamizi apri «Giochi» e scegli l'età e cosa allenare (lettere, numeri, colori e forme, logica, coding), oppure usa le pagine per età e per competenza. Nel gioco Mizi spiega a voce cosa fare; non ci sono timer né punteggi da battere.",
+  "video": {
+   "src": "/video/trovare-il-gioco-giusto.mp4",
+   "poster": "/video/trovare-il-gioco-giusto.webp",
+   "sottotitoli": "/video/trovare-il-gioco-giusto.vtt",
+   "durata": "PT1M28S",
+   "secondi": 88,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Su Giocamizi ci sono tanti giochi, dai tre ai dodici anni. Ti faccio vedere come trovare quello giusto per il tuo bimbo, in un attimo.",
+    "Apri la pagina Giochi. Senza filtri li trovi divisi in tre gruppi: dai tre ai cinque anni, dai sei agli otto, e dai nove in su.",
+    "In alto ci sono due file di bottoni. Nella prima scegli l'età, nella seconda cosa allenare: lettere, numeri, colori e forme, logica, coding. E restano solo i giochi giusti.",
+    "C'è anche una pagina per ogni età, dai tre ai dodici anni, e una per ogni competenza: per esempio le forme.",
+    "Tocca un gioco: vedi per che età è e quanti minuti dura. Poi premi «Gioca». Con i numeri qui sotto scegli quanti anni ha il tuo bimbo, e il gioco si adatta.",
+    "Dentro il gioco parlo io: ti dico a voce cosa fare, e lo scrivo anche nel fumetto. Non hai sentito? Tocca l'altoparlante e lo ripeto.",
+    "E non c'è nessun timer e nessun punteggio da battere: si gioca finché si ha voglia. Per uscire, tocca la X in alto a sinistra.",
+    "Tutti i giochi ti aspettano su giocamizi.it, nella pagina Giochi. Vieni a giocare con me! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 13,
+    "titolo": "1 · Apri «Giochi»"
+   },
+   {
+    "da": 24,
+    "titolo": "2 · Scegli età e competenza"
+   },
+   {
+    "da": 39,
+    "titolo": "3 · Una pagina per ogni età"
+   },
+   {
+    "da": 47,
+    "titolo": "4 · Apri il gioco e premi «Gioca»"
+   },
+   {
+    "da": 59,
+    "titolo": "5 · Ti dico io cosa fare"
+   },
+   {
+    "da": 70,
+    "titolo": "6 · Niente fretta"
+   }
+  ],
+  "pagina": {
+   "href": "/giochi",
+   "testo": "Tutti i giochi"
+  },
+  "faq": [
+   {
+    "domanda": "Per che età sono i giochi?",
+    "risposta": "Dai 3 ai 12 anni; ogni gioco dice l'età e quanti minuti dura."
+   },
+   {
+    "domanda": "I giochi hanno timer o classifiche?",
+    "risposta": "No: niente timer, niente punteggi da battere, niente pubblicità."
+   }
+  ]
  }
 ]
