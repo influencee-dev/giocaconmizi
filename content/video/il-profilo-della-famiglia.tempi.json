@@ -1,0 +1,38 @@
+{
+ "secondi": 94,
+ "caricato": "2026-11-16",
+ "capitoli": [
+  {
+   "da": 0,
+   "titolo": "Ciao, sono Mizi"
+  },
+  {
+   "da": 14,
+   "titolo": "1 · Apri «Profilo»"
+  },
+  {
+   "da": 23,
+   "titolo": "2 · Il tuo nome"
+  },
+  {
+   "da": 29,
+   "titolo": "3 · Il tuo bimbo"
+  },
+  {
+   "da": 42,
+   "titolo": "4 · L'email e la posta di Mizi"
+  },
+  {
+   "da": 54,
+   "titolo": "5 · Cambia quando vuoi"
+  },
+  {
+   "da": 66,
+   "titolo": "6 · Il saluto e l'album"
+  },
+  {
+   "da": 77,
+   "titolo": "7 · Tutto resta sul telefono"
+  }
+ ]
+}

@@ -729,5 +729,80 @@
     "risposta": "Sì, come tutto Giocamizi, senza pubblicità."
    }
   ]
+ },
+ {
+  "slug": "il-profilo-della-famiglia",
+  "gruppo": "utenti",
+  "titolo": "Il profilo della famiglia e l'album di Mizi",
+  "ordine": 8,
+  "descrizione": "Mizi ti mostra come creare il profilo della famiglia su Giocamizi e dove restano i dati: sul tuo telefono.",
+  "rispostaBreve": "Il profilo della famiglia di Giocamizi si crea dal telefono in pochi passi: il tuo nome, il nome e l'età del bimbo, l'email. Profilo e album di Mizi restano solo sul telefono, senza account; l'email arriva a Giocamizi solo se scegli la posta di Mizi. Si cancella con «Cancella i miei dati».",
+  "video": {
+   "src": "/video/il-profilo-della-famiglia.mp4",
+   "poster": "/video/il-profilo-della-famiglia.webp",
+   "sottotitoli": "/video/il-profilo-della-famiglia.vtt",
+   "durata": "PT1M34S",
+   "secondi": 94,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Con il profilo ti saluto per nome e ti propongo i giochi giusti per l'età del tuo bimbo. Ti faccio vedere come si crea, e dove restano i tuoi dati.",
+    "Dal telefono apri la pagina Profilo e tocca «Crea il profilo». Si fa dal telefono, non dal computer.",
+    "Prima ti chiedo come ti chiami. Così, quando apri Giocamizi, ti saluto per nome.",
+    "Poi scrivi il nome del tuo bimbo e tocca la sua età. Se hai più bimbi, puoi aggiungerli. I nomi restano solo sul tuo telefono: a noi non arrivano.",
+    "Ultima cosa, l'email. Anche lei resta sul telefono: arriva a noi solo se scegli la posta di Mizi, un gioco nuovo a settimana. È facoltativa.",
+    "Nella pagina Profilo puoi cambiare tutto: il nome, l'email, l'età, aggiungere un bimbo o scegliere per chi sono i giochi. E la posta di Mizi la accendi quando vuoi.",
+    "Ora la home ti saluta per nome e ti mostra i giochi per l'età del tuo bimbo. E nell'album di Mizi, ogni gioco finito regala una figurina!",
+    "Profilo e album restano solo su questo telefono, e non serve un account. Se vuoi, tocca «Cancella i miei dati» e il profilo sparisce dal telefono.",
+    "Crea il tuo profilo su giocamizi.it, dal telefono. Ti aspetto! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 14,
+    "titolo": "1 · Apri «Profilo»"
+   },
+   {
+    "da": 23,
+    "titolo": "2 · Il tuo nome"
+   },
+   {
+    "da": 29,
+    "titolo": "3 · Il tuo bimbo"
+   },
+   {
+    "da": 42,
+    "titolo": "4 · L'email e la posta di Mizi"
+   },
+   {
+    "da": 54,
+    "titolo": "5 · Cambia quando vuoi"
+   },
+   {
+    "da": 66,
+    "titolo": "6 · Il saluto e l'album"
+   },
+   {
+    "da": 77,
+    "titolo": "7 · Tutto resta sul telefono"
+   }
+  ],
+  "pagina": {
+   "href": "/profilo",
+   "testo": "Il tuo profilo"
+  },
+  "faq": [
+   {
+    "domanda": "I nomi dei bambini arrivano a Giocamizi?",
+    "risposta": "No: restano solo sul tuo telefono."
+   },
+   {
+    "domanda": "Serve un account?",
+    "risposta": "No, il profilo vive sul telefono."
+   }
+  ]
  }
 ]
