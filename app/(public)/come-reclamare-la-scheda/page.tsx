@@ -137,7 +137,7 @@ export default function ComeReclamare() {
           data-video-reclamo
         >
           <source src={TUTORIAL_RECLAMO.video.src} type="video/mp4" />
-          <track kind="captions" src={TUTORIAL_RECLAMO.video.sottotitoli} srcLang="it" label="Italiano" default />
+          <track kind="captions" src={TUTORIAL_RECLAMO.video.sottotitoli} srcLang="it" label="Italiano" />
           Il tuo browser non riproduce il video: qui sotto trovi tutti i passi scritti.
         </video>
         <details className="mt-3 rounded-2xl bg-white px-5 py-3">

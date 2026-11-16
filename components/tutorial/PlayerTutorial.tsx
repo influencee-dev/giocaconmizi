@@ -6,7 +6,8 @@ import { minuti, type Capitolo } from "@/lib/tutorial-base";
 /**
  * Il video di un tutorial con i passi sotto: toccare un passo porta il video
  * a quel punto e lo fa partire. Il video è un file nostro (niente player di
- * terzi, niente cookie), con i sottotitoli italiani accesi.
+ * terzi, niente cookie), con i sottotitoli già stampati nelle immagini: la traccia
+ * .vtt resta spenta (accesa faceva il doppio sottotitolo) e serve a chi la sceglie.
  */
 export function PlayerTutorial({ t }: { t: { titolo: string; capitoli: Capitolo[]; video: { src: string; poster: string; sottotitoli: string } } }) {
   const video = useRef<HTMLVideoElement>(null);
@@ -36,7 +37,7 @@ export function PlayerTutorial({ t }: { t: { titolo: string; capitoli: Capitolo[
         data-video-tutorial
       >
         <source src={t.video.src} type="video/mp4" />
-        <track kind="captions" src={t.video.sottotitoli} srcLang="it" label="Italiano" default />
+        <track kind="captions" src={t.video.sottotitoli} srcLang="it" label="Italiano" />
         Il tuo browser non riproduce il video: qui sotto trovi il testo completo.
       </video>
       <nav aria-label={`I passi del video «${t.titolo}»`} className="mt-4">

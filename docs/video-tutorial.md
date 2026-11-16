@@ -68,3 +68,11 @@ caricare su Drive (2 Aree → Giocamizi · Video) e su YouTube.
   conta (es. il profilo salvato vale per le schermate dopo).
 - Non compilare (`npm run build`) mentre gira un video: la build sovrascrive
   il sito di prova che si sta fotografando.
+- Voce muta dopo la prima frase (16/11/2026, i primi 12 tutorial): il taglio
+  con `-ss` dopo `-i` lasciava alla dissolvenza i tempi della registrazione
+  intera e azzerava tutte le frasi tranne la prima. Ora si taglia con
+  `atrim` + `asetpts` e voce.py si ferma se una frase esce muta. La misura del
+  volume del video finito NON basta a scoprirlo (loudnorm alza la musica):
+  si ascolta, o si trascrive un pezzo a metà con whisper.
+- I sottotitoli sono stampati nelle immagini: nel lettore del sito la traccia
+  .vtt resta spenta (senza `default`), se no si vedono doppi.

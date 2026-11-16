@@ -23,7 +23,7 @@ const RISPOSTA =
 
 const FAQ = [
   { domanda: "I video tutorial sono gratuiti?", risposta: "Sì, come tutto Giocamizi: si guardano dal sito, senza registrazione, senza pubblicità e senza cookie di terzi." },
-  { domanda: "Si possono guardare senza audio?", risposta: "Sì: i sottotitoli sono dentro il video e accesi nel lettore, e sotto ogni video c'è il testo completo di quello che dice Mizi." },
+  { domanda: "Si possono guardare senza audio?", risposta: "Sì: i sottotitoli sono già dentro il video, e sotto ogni video c'è il testo completo di quello che dice Mizi." },
   { domanda: "Chi è Mizi?", risposta: "Mizi è la pinguina di Giocamizi, la mascotte che guida i bambini nei giochi e che nei video spiega come funziona il sito." },
 ];
 

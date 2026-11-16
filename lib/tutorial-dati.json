@@ -164,9 +164,9 @@
    "src": "/video/come-aggiungere-un-attivita.mp4",
    "poster": "/video/come-aggiungere-un-attivita.webp",
    "sottotitoli": "/video/come-aggiungere-un-attivita.vtt",
-   "durata": "PT1M42S",
-   "secondi": 102,
-   "caricato": "2026-11-16",
+   "durata": "PT1M41S",
+   "secondi": 101,
+   "caricato": "2026-11-17",
    "testo": [
     "Ciao, sono Mizi! La tua ludoteca, la tua sala feste o il tuo laboratorio non sono ancora su Giocamizi? Ti faccio vedere come aggiungerli. È gratis, e dal telefono va benissimo!",
     "Vai sulla pagina «Aggiungi la tua attività». In alto vedi i tre passi: compili il modulo, il team controlla, e poi sei online.",
@@ -201,15 +201,15 @@
     "titolo": "4 · Dicci chi sei"
    },
    {
-    "da": 56,
+    "da": 68,
     "titolo": "5 · C'è già? Cercala"
    },
    {
-    "da": 78,
+    "da": 77,
     "titolo": "6 · Controlliamo noi, a mano"
    },
    {
-    "da": 88,
+    "da": 87,
     "titolo": "7 · Ti scriviamo quando sei online"
    }
   ],

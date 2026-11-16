@@ -59,7 +59,7 @@ export default async function PaginaTutorial({ params }: P) {
       </p>
       <h1 className="mt-4 max-w-3xl text-3xl font-black leading-tight text-notte sm:text-5xl">{t.titolo}</h1>
       <p className="mt-3 max-w-2xl text-lg text-notte-tenue">
-        {t.descrizione} Dura {minuti(t.video.secondi)} minuti; i sottotitoli sono accesi.
+        {t.descrizione} Dura {minuti(t.video.secondi)} minuti; i sottotitoli sono già dentro il video.
       </p>
 
       <div className="mt-6">
