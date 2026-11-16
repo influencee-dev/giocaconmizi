@@ -136,7 +136,7 @@ export const ESPERIENZE: Esperienza[] = [
     gruppo: "Dove",
     domanda: "Avete uno spazio all'aperto? E se piove?",
     trova: /all'aperto|all’aperto|giardino|\bprato|outdoor|spazio esterno|area esterna|nel verde/i,
-    categorie: ["parchi-all-aperto", "fattorie-didattiche"],
+    categorie: ["parchi-all-aperto", "fattorie-didattiche", "parchi-avventura", "parchi-acquatici"],
   },
   {
     id: "coperto",
@@ -152,9 +152,12 @@ export const ESPERIENZE: Esperienza[] = [
 export const GRUPPI = ["Per la festa", "Per giocare", "Comodità", "Dove"] as const;
 
 /** Le esperienze scritte nella scheda (tipo + descrizione + pacchetti), più quelle implicate dalla categoria. */
-export function esperienzeDi(s: { tipo: string; descrizione: string; categoria: string; pacchetti?: string }): IdEsperienza[] {
+export function esperienzeDi(s: { tipo: string; descrizione: string; categoria: string; pacchetti?: string; festa?: boolean }): IdEsperienza[] {
   const testo = `${s.tipo} ${s.descrizione} ${s.pacchetti ?? ""}`;
-  const scritte = ESPERIENZE.filter((e) => e.trova.test(testo)).map((e) => e.id);
+  // Un posto che non risulta fare feste (parco acquatico «a tema», miniclub con «animatori»)
+  // non prende le voci «Per la festa», a meno che il titolare non abbia scritto i suoi pacchetti.
+  const senzaFesta = s.festa === false && !s.pacchetti;
+  const scritte = ESPERIENZE.filter((e) => e.trova.test(testo) && !(senzaFesta && e.gruppo === "Per la festa")).map((e) => e.id);
   // La categoria implica «al coperto» o «all'aperto» solo se il testo non dice il contrario.
   const implicite = ESPERIENZE.filter(
     (e) => e.categorie?.includes(s.categoria) && !(e.id === "coperto" && scritte.includes("aperto")) && !(e.id === "aperto" && scritte.includes("coperto")),

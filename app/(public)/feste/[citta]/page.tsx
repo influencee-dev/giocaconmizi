@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaAttivita } from "@/components/directory/Briciole";
 import { notFound } from "next/navigation";
-import { CITTA_FESTE, cittaFeste } from "@/lib/feste";
+import { CITTA_FESTE, cittaFeste, localiDaFesta } from "@/lib/feste";
 import { categoriaDi, slugify } from "@/lib/directory";
 import { pubblicate } from "@/lib/directory-db";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
@@ -77,7 +77,8 @@ export default async function FestaCittaPage({
     .filter((v, i) => v.km <= 200 || i < 3);
   // I locali che hanno chiesto di non comparire spariscono anche da qui.
   const p = await pubblicate();
-  const locali = voce.locali.filter((l) => p.get(`${voce.slug}/${slugify(l.nome)}`)?.tipo !== "rimuovi");
+  // Solo i posti che fanno feste (lib/feste.ts, campo `festa`): i parchi da giornata fuori stanno nella directory.
+  const locali = localiDaFesta(voce).filter((l) => p.get(`${voce.slug}/${slugify(l.nome)}`)?.tipo !== "rimuovi");
 
   return (
     <Contenitore className="py-10">
@@ -102,7 +103,7 @@ export default async function FestaCittaPage({
         parlano le famiglie
       </h1>
       <p className="mt-2 text-sm font-bold text-notte-tenue">
-        {voce.locali.length} location per zona · aggiornata da {site.nome}
+        {locali.length} location per zona · aggiornata da {site.nome}
       </p>
 
       {/* La risposta in breve: il blocco pensato per essere citato dalle AI. */}

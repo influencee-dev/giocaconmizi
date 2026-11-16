@@ -63,6 +63,19 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   vecchi vanno aggiunti a `content/directory-spostamenti.json` (redirect
   permanenti in next.config.ts; la batteria SEO li controlla). Il modulo
   ha anche «Altro».
+- Parchi avventura e parchi acquatici (15/11/2026): due categorie «da giornata
+  fuori» (`giornata: true` in CATEGORIE, in testa all'elenco perché il loro
+  `tipo` contiene parole di altre regole). Un posto che dalle fonti NON risulta
+  fare feste si inserisce in lib/feste.ts con `festa: false`: ha la scheda
+  nella directory ma non compare in /feste/[città] (`localiDaFesta`), la scheda
+  non mostra «Fa feste di compleanno», non prende i filtri «Per la festa» e il
+  listing non scrive «tutte organizzano feste». Mai scrivere che un parco fa
+  feste senza una fonte. I parchi si agganciano a una città già presente, con
+  la distanza nella `zona` («Riccione, a pochi chilometri da Rimini»). Le date
+  di stagione si scrivono con l'anno («nel 2026 dal… al…»). Parchi chiusi o
+  senza segnali recenti non si inseriscono (Etnaland: stagione 2026 annullata).
+  La lista di nomi da verificare è su Drive, 1 Progetti («Parchi avventura e
+  acquatici · lotto 1 e nomi da verificare»).
 - Candidature: `/aggiungi-attivita` (pubblica) — un'attività nuova si propone
   (anche la categoria «Associazioni e laboratori», attiva solo quando c'è una
   scheda) o un titolare chiede l'accesso alla sua scheda. Finiscono in
@@ -268,6 +281,26 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 - La festa si riconosce da `[data-festa]` (non più dal testo «Bravissimo!»).
 - L'invito alle novità dopo il secondo gioco (components/form/DopoIlGioco.tsx)
   ora è sopra lo schermo di gioco: prima era nascosto sotto.
+
+## Filtri dei listing della directory (15/11/2026)
+- components/directory/ListingFiltrato.tsx: barra con «Filtri» (apre un foglio
+  dal basso con tutti i gruppi, pillole grandi e «Mostra N posti»), «Mappa» e
+  i filtri più usati come pillole rapide. Niente più tendine con caselline:
+  su telefono si aprivano sotto il bordo dello schermo.
+- RicercaCosaDove `compatta`: nei risultati, su telefono, è una riga sola.
+- Routine «Giocamizi · Due giochi al giorno» (11:23, sessione nuova, ambiente
+  «Giocamizi»): segue la coda della skill game-designer-mizi. Voce «sage».
+- Proposta dei tipi di attività nuovi: Drive, 1 Progetti, «Mappa dei tipi di
+  attività da inserire» (da decidere con Giorgia, niente è stato creato).
+
+## Foto servite dai nostri file, senza /_next/image (15/11/2026)
+- `<Image>` usa il caricatore lib/caricatore-immagini.ts (next.config.ts,
+  loader «custom»): per `/immagini/<nome>-<L>.webp` sceglie tra le larghezze
+  che esistono davvero (lib/immagini-varianti.json, rigenerato dal «prebuild»);
+  il resto (logo, ritratti) si serve com'è. Motivo: su iPhone le foto passate
+  dal servizio di Vercel non si vedevano, anche se dal server uscivano giuste.
+- Una foto nuova deve avere le sue varianti in public/immagini (le fa
+  `npm run foto-arrivate`): niente più ridimensionamento al volo.
 
 ## Canzoni di Mizi (14/11/2026)
 - Su Drive: 2 Aree → Giocamizi · Social → «Canzoni di Mizi» (id

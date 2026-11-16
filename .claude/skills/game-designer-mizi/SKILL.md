@@ -46,7 +46,9 @@ Build di produzione (`npm run build`, poi `npx next start -p 3200`): il server d
 ### 4. La voce registrata di Mizi (una bambina)
 - Le frasi che il gioco dice sono costanti nel codice (es. `FRASI_MEMORY`) e stanno, identiche, in `content/voce-mizi.json` sotto lo slug del gioco. Una virgola diversa = un'altra registrazione.
 - Frasi corte, da bambina a bambina, senza genere («Evviva!», non «Brava!»), senza «clicca». Niente nomi propri dei bambini (non si possono registrare).
-- `npm run voce -- --gioco <slug>` registra le mancanti (OpenAI `gpt-4o-mini-tts`, voce e istruzioni nel copione, resa più acuta con `intonazione`); `npm run voce -- --prova <cartella>` fa sentire più voci per scegliere. Serve il segreto di rete per `api.openai.com` nell'ambiente della sessione.
+- La voce è «sage» (decisione di Giorgia del 15/11/2026, la stessa dei video: scripts/video/voce.py), con le istruzioni scritte nel copione e `intonazione` 0. Non si cambia senza una sua richiesta.
+- `npm run voce -- --gioco <slug>` registra le mancanti (OpenAI `gpt-4o-mini-tts`). Serve il segreto di rete per `api.openai.com` nell'ambiente della sessione (c'è nell'ambiente «Giocamizi», non in «Default»).
+- Nessuno può ascoltare le registrazioni: ogni frase registrata va riascoltata dalla macchina (trascrizione `whisper-1`) e confrontata col testo. Una frase che non torna si rifà; alla terza volta resta alla sintesi del telefono e lo si scrive nella nota.
 - Il sito suona il file se esiste (`lib/voce-registrata.json`), altrimenti la sintesi del telefono: si può pubblicare il gioco prima della registrazione.
 - Verifica obbligatoria: tutto quello che il gioco dice in una partita completa è nel copione.
 
@@ -59,20 +61,27 @@ Vietato aggiungere: serie da non perdere, punti che scadono, classifiche, premi 
 - `npm run typecheck && npm run lint && npm run build`, poi `npm run verifica` (tutte le batterie), poi push e deploy READY.
 - Aggiornare la coda qui sotto e lasciare la nota in Bacheca.
 
-## La coda (ordine del registro)
+## La coda (i più cercati per primi)
 
-| # | Gioco | Stato |
-|---|---|---|
-| 1 | memory-animali | FATTO il 15/11/2026 (voce: 30 frasi in copione, da registrare) |
-| 2 | abbina-i-colori | da fare |
-| 3 | trova-la-forma | da fare |
-| 4 | conta-fino-a-10 | da fare |
-| 5 | puzzle-facile | da fare |
-| 6 | il-suono-dell-animale | da fare |
-| 7 | grande-piccolo | da fare |
-| 8 | le-emozioni-di-mizi | da fare |
+Due giochi al giorno, li fa la routine «Giocamizi · Due giochi al giorno». L'ordine segue le ricerche in Italia (Ubersuggest, novembre 2026, ricerche al mese sulla parola più vicina al gioco): prima i giochi che la gente cerca di più. Chi finisce un gioco aggiorna questa tabella nello stesso commit.
 
-Poi gli altri nell'ordine di `games/registry.ts`. Molti giochi usano lo stesso motore (`games/_engine/SceltaMultipla.tsx`): migliorare il motore migliora tutti i suoi giochi, ma ognuno va comunque giocato e ha le sue frasi.
+| # | Gioco | Parola e ricerche al mese | Stato |
+|---|---|---|---|
+| 1 | memory-animali | memory online · 1.600 | FATTO il 15/11/2026 (voce: 30 frasi in copione, da registrare) |
+| 2 | pixel-art | pixel art · 49.500 | da fare |
+| 3 | puzzle-facile | puzzle online · 27.100 | da fare |
+| 4 | tabelline | giochi tabelline · 8.100 (giochi matematica · 18.100) | da fare |
+| 5 | pizza-delle-frazioni | frazioni · 9.900 | da fare |
+| 6 | addizioni-entro-20 | giochi matematica · 18.100 | da fare |
+| 7 | trova-le-differenze | trova le differenze · 2.900 | da fare |
+| 8 | colora-con-mizi | giochi da colorare · 1.900 | da fare |
+| 9 | unisci-i-puntini | unisci i puntini · 1.600 | da fare |
+| 10 | salvadanaio | giochi matematica · 18.100 | da fare |
+| 11 | vesti-mizi | giochi di vestire · 720 | da fare |
+
+Finiti questi undici, gli altri nell'ordine di `games/registry.ts`, rimisurando prima le ricerche (connettore Ubersuggest, lingua «it», locId 2380) e aggiungendo le righe qui. Se un dato manca si scrive «non misurato», non si inventa.
+
+Molti giochi usano lo stesso motore (`games/_engine/SceltaMultipla.tsx`, `PixelArt.tsx`…): migliorare il motore migliora tutti i suoi giochi, ma ognuno va comunque giocato e ha le sue frasi. Un cambio al motore si verifica giocando ALMENO un altro gioco che lo usa.
 
 ## Trovato giocando (da ricordare)
 

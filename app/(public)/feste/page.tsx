@@ -2,7 +2,7 @@ import { TestataPagina } from "@/components/vetrina";
 import { ScenaBiglietti } from "@/components/illustrazioni";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CITTA_FESTE } from "@/lib/feste";
+import { CITTA_FESTE, localiDaFesta } from "@/lib/feste";
 import { CATEGORIE_ATTIVE, vociRicerca } from "@/lib/directory";
 import { RicercaCosaDove } from "@/components/directory/RicercaCosaDove";
 import { CENTRO_CITTA } from "@/lib/coordinate-citta";
@@ -78,8 +78,8 @@ export default function FestePage() {
               href: `/feste/${c.slug}`,
               icona: "festa",
               colore: "#F28AB2",
-              sotto: `${c.locali.length} posti per le feste`,
-              numero: c.locali.length,
+              sotto: `${localiDaFesta(c).length} posti per le feste`,
+              numero: localiDaFesta(c).length,
             }))}
           />
         </div>
@@ -93,7 +93,7 @@ export default function FestePage() {
             >
               <span className="text-xl font-extrabold text-notte">{c.citta}</span>
               <span className="text-sm text-notte-tenue">
-                {c.locali.length} location per zona
+                {localiDaFesta(c).length} location per zona
               </span>
             </Link>
           ))}

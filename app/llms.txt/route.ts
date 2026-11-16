@@ -100,7 +100,7 @@ ${CITTA_FESTE.map((c) => `- [Festa di compleanno per bambini a ${c.citta}](${url
 
 ## Posti per bambini: la directory (${SCHEDE.length} attività)
 
-Categoria → città → scheda. Ogni scheda è un'attività vera che organizza feste di compleanno per bambini:
+Categoria → città → scheda. Ogni scheda è un'attività vera; quasi tutte organizzano feste di compleanno per bambini, mentre parchi avventura e parchi acquatici sono soprattutto posti da giornata fuori (la scheda dice «fa feste» solo quando risulta):
 
 ${CATEGORIE_ATTIVE.map((c) => `- [${c.titolo}](${url(`/${c.slug}`)}): ${c.rispostaBreve}`).join("\n")}
 

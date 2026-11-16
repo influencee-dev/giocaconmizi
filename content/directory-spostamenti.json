@@ -114,6 +114,20 @@
           "a": "/feste/viterbo"
         }
       ]
+    },
+    {
+      "data": "2026-11-15",
+      "motivo": "nuove categorie: parchi avventura, parchi acquatici",
+      "indirizzi": [
+        {
+          "da": "/sale-feste/trapani/parco-avventura-erice",
+          "a": "/parchi-avventura/trapani/parco-avventura-erice"
+        },
+        {
+          "da": "/laser-game/fiumicino/parco-avventura-fregene",
+          "a": "/parchi-avventura/fiumicino/parco-avventura-fregene"
+        }
+      ]
     }
   ]
 }

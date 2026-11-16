@@ -72,6 +72,26 @@ for (const { da, a } of spostati) {
 }
 ok("directory: indirizzi vecchi reindirizzati a pagine vive", spostati.length > 0 && rotti.length === 0, rotti.slice(0, 3).join(" | ") || `${spostati.length} indirizzi`);
 
+// 2-quater-bis. Parchi avventura e parchi acquatici (dal 15/11/2026): sono
+// posti «da giornata fuori». Un parco che non risulta fare feste (festa: false
+// in lib/feste.ts) ha la sua scheda ma non dice «fa feste» e non compare nella
+// pagina delle feste della città; uno che le fa, sì.
+const htmlAvventura = await testo("/parchi-avventura");
+const htmlAcquatici = await testo("/parchi-acquatici");
+ok("parchi: le due categorie nuove hanno la loro pagina", htmlAvventura.includes("Parchi avventura per bambini") && htmlAcquatici.includes("Parchi acquatici per bambini"));
+ok("parchi: le pagine sono in sitemap, col listing di Roma e di Firenze",
+  ["/parchi-avventura", "/parchi-acquatici", "/parchi-acquatici/roma", "/parchi-avventura/firenze", "/parchi-acquatici/roma/hydromania"].every((x) => percorsiSitemap.has(x)));
+const htmlHydro = await testo("/parchi-acquatici/roma/hydromania");
+ok("parchi: un parco acquatico non dice «fa feste di compleanno»",
+  htmlHydro.includes("Hydromania") && !htmlHydro.includes("data-fa-feste") && !htmlHydro.includes("organizza feste di compleanno"));
+const htmlEur = await testo("/parchi-avventura/roma/eurpark-energy-adventure");
+ok("parchi: un parco avventura che fa feste lo dice", htmlEur.includes("data-fa-feste"));
+const htmlFesteRoma = await testo("/feste/roma");
+ok("parchi: nella pagina feste di Roma c'è EurPark ma non Hydromania", htmlFesteRoma.includes("EurPark") && !htmlFesteRoma.includes("Hydromania"));
+const htmlListingRoma = await testo("/parchi-acquatici/roma");
+ok("parchi: il listing dei parchi acquatici non promette feste",
+  htmlListingRoma.includes("Aquafelix") && htmlListingRoma.includes("MagicSplash") && !htmlListingRoma.includes("tutte organizzano anche feste"));
+
 // 2-quinquies. Città vicine (dal 12/11/2026): ogni pagina città linka le 6
 // più vicine; Carpi deve avere Modena e Reggio Emilia, e mai sé stessa.
 const htmlCarpi = await testo("/feste/carpi");
@@ -101,6 +121,35 @@ for (const v of conImmagini) {
   }
 }
 ok("sitemap immagini: ogni foto risponde e sta nella sua pagina", immaginiStorte.length === 0, immaginiStorte.slice(0, 3).join(" | "));
+
+// 2-quater. Le foto si servono dai nostri file già pronti nelle varie misure
+// (lib/caricatore-immagini.ts), mai da /_next/image: dal 15/11/2026, quando
+// su iPhone le foto passate da quel servizio non si vedevano. Ogni indirizzo
+// di immagine scritto nelle pagine deve rispondere con un'immagine.
+{
+  const pagineConFoto = ["/", "/giochi", "/feste", "/guide", "/guide/tabelline-senza-lacrime", "/chi-siamo", "/storie", "/biglietti", "/coding"];
+  const daServizio = [];
+  const indirizzi = new Set();
+  for (const percorso of pagineConFoto) {
+    const html = (await testo(percorso)).replace(/&amp;/g, "&");
+    if (html.includes("/_next/image")) daServizio.push(percorso);
+    for (const m of html.matchAll(/<img\b[^>]*>/g)) {
+      const src = m[0].match(/\ssrc="([^"]+)"/)?.[1];
+      const srcset = m[0].match(/\ssrcSet="([^"]+)"/i)?.[1] ?? "";
+      for (const u of [src, ...srcset.split(",").map((x) => x.trim().split(/\s+/)[0])]) if (u?.startsWith("/")) indirizzi.add(u);
+    }
+  }
+  ok("foto: nessuna pagina passa da /_next/image", daServizio.length === 0, daServizio.join(", "));
+  const rotte = [];
+  for (const u of indirizzi) {
+    const r = await fetch(`${BASE}${u}`);
+    if (!r.ok || !r.headers.get("content-type")?.startsWith("image/")) rotte.push(`${u}: ${r.status}`);
+  }
+  ok("foto: ogni immagine scritta nelle pagine risponde", indirizzi.size > 40 && rotte.length === 0, `${indirizzi.size} indirizzi; ${rotte.slice(0, 3).join(" | ")}`);
+  const hero = (await testo("/feste")).match(/<img[^>]*festa-di-compleanno-per-bambini-ludoteca[^>]*>/)?.[0] ?? "";
+  ok("foto: sul telefono arriva la misura giusta, non sempre la più grande",
+    /ludoteca-480\.webp 256w/.test(hero) && /ludoteca-640\.webp 640w/.test(hero) && /ludoteca-1440\.webp 1200w/.test(hero), hero.slice(0, 200));
+}
 
 // 3. Ogni pagina della sitemap: 200, un solo canonical, su sé stessa e sul
 // dominio; og:url coerente; i JSON-LD non citano altri domini del sito.
