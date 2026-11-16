@@ -663,5 +663,71 @@
     "risposta": "Dai siti ufficiali delle realtà, oppure dalla realtà stessa quando reclama la scheda."
    }
   ]
+ },
+ {
+  "slug": "le-storie",
+  "gruppo": "utenti",
+  "titolo": "Le storie di Giocamizi: tre caratteri e la lettura ad alta voce",
+  "ordine": 7,
+  "descrizione": "Mizi ti mostra le storie di Giocamizi: in stampatello, minuscolo o corsivo, con le lettere grandi e la lettura ad alta voce.",
+  "rispostaBreve": "Le storie di Giocamizi sono brevi e gratuite: si scelgono per età o per carattere e ognuna si legge in stampatello maiuscolo, minuscolo o corsivo, con tre grandezze del testo. Con «Ascolta» la storia si legge ad alta voce. Ogni storia indica età e minuti di lettura.",
+  "video": {
+   "src": "/video/le-storie.mp4",
+   "poster": "/video/le-storie.webp",
+   "sottotitoli": "/video/le-storie.vtt",
+   "durata": "PT1M29S",
+   "secondi": 89,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Ti piacciono le storie? Su Giocamizi ce ne sono tante, brevi, da leggere insieme. E c'è un trucco: ogni storia si legge in tre caratteri diversi!",
+    "Apri la pagina Storie. Puoi sceglierle per età, cinque, sei o sette anni, oppure per carattere. Più giù le trovi tutte, una dopo l'altra.",
+    "Apri una storia, per esempio la mia: «Mizi impara a nuotare». In alto ci sono i bottoni dei caratteri. Si parte in stampatello maiuscolo, il carattere di chi comincia a leggere.",
+    "Con un tocco la stessa storia diventa in minuscolo, per la prima elementare, o in corsivo, per la seconda. Il testo è sempre lo stesso: cambiano solo le lettere.",
+    "Le lettere sono troppo piccole? Tocca una delle tre A e il testo diventa più grande.",
+    "E se vuoi ascoltarla, tocca «Ascolta»: la storia si legge ad alta voce, e tu segui le parole con il dito. Per fermarla, tocca «Ferma».",
+    "In ogni storia c'è scritto per che età è e quanti minuti ci vogliono. Perfetta da leggere stasera, prima della nanna!",
+    "Le storie ti aspettano su giocamizi.it, nella pagina Storie. Buona lettura! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 15,
+    "titolo": "1 · Scegli per età o per carattere"
+   },
+   {
+    "da": 27,
+    "titolo": "2 · Parte in stampatello"
+   },
+   {
+    "da": 41,
+    "titolo": "3 · Minuscolo e corsivo"
+   },
+   {
+    "da": 53,
+    "titolo": "4 · Lettere più grandi"
+   },
+   {
+    "da": 61,
+    "titolo": "5 · Tocca «Ascolta»"
+   },
+   {
+    "da": 72,
+    "titolo": "6 · Una storia a sera"
+   }
+  ],
+  "pagina": {
+   "href": "/storie",
+   "testo": "Tutte le storie"
+  },
+  "faq": [
+   {
+    "domanda": "Le storie sono gratis?",
+    "risposta": "Sì, come tutto Giocamizi, senza pubblicità."
+   }
+  ]
  }
 ]
