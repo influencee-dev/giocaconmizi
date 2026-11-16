@@ -1,0 +1,38 @@
+{
+ "secondi": 105,
+ "caricato": "2026-11-16",
+ "capitoli": [
+  {
+   "da": 0,
+   "titolo": "Ciao, sono Mizi"
+  },
+  {
+   "da": 15,
+   "titolo": "1 · Apri «Biglietti»"
+  },
+  {
+   "da": 22,
+   "titolo": "2 · Invito e formato"
+  },
+  {
+   "da": 35,
+   "titolo": "3 · Scegli lo sfondo"
+  },
+  {
+   "da": 45,
+   "titolo": "4 · Nome, festa e conferma"
+  },
+  {
+   "da": 59,
+   "titolo": "5 · Adesivi e foto"
+  },
+  {
+   "da": 71,
+   "titolo": "6 · Scarica, stampa o manda"
+  },
+  {
+   "da": 83,
+   "titolo": "7 · Gli invitati confermano"
+  }
+ ]
+}

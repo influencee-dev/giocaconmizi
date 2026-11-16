@@ -227,5 +227,80 @@
     "risposta": "Sì: i giochi funzionano sulla LIM, sui tablet della classe e sui telefoni, dal browser."
    }
   ]
+ },
+ {
+  "slug": "come-creare-l-invito",
+  "gruppo": "utenti",
+  "titolo": "Come creare l'invito di compleanno con la conferma su WhatsApp",
+  "ordine": 1,
+  "descrizione": "Mizi ti mostra come creare l'invito di compleanno gratis, con la conferma su WhatsApp e il QR da stampare.",
+  "rispostaBreve": "Per creare un invito di compleanno su Giocamizi apri «Biglietti», tocca «Crea il tuo, gratis» e segui i sette passi: tipo e formato, sfondo, nome, anni e dettagli della festa, numero WhatsApp per le conferme, adesivi. Poi scarichi, stampi quattro copie su un A4 o lo mandi su WhatsApp. Gratis, senza registrazione.",
+  "video": {
+   "src": "/video/come-creare-l-invito.mp4",
+   "poster": "/video/come-creare-l-invito.webp",
+   "sottotitoli": "/video/come-creare-l-invito.vtt",
+   "durata": "PT1M45S",
+   "secondi": 105,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! C'è una festa di compleanno in arrivo? Ti faccio vedere come si prepara l'invito, con la conferma su WhatsApp. È gratis e non serve registrarsi!",
+    "Vai nella pagina Biglietti e tocca «Crea il tuo, gratis». Funziona anche dal telefono.",
+    "Ti guido io, in sette passi. Prima scegli che biglietto è: invito, auguri o grazie. Poi il formato: da stampare, oppure per WhatsApp e le storie.",
+    "Adesso lo sfondo. Ne vedi otto subito, e con «Vedi tutti» arrivi a ventisette. Io scelgo i dinosauri!",
+    "Scrivi il nome e gli anni: le frasi pronte compaiono già con il nome dentro. Poi data, ora e indirizzo. E se metti il tuo numero WhatsApp, gli invitati ti confermano con un tocco.",
+    "Poi gli adesivi: tocchi il dinosauro e lo sposti col dito. Se vuoi, metti anche la foto del festeggiato: resta sul tuo telefono, non va nei link.",
+    "Pronto! Puoi scaricarlo, stampare quattro copie su un foglio A4, o mandarlo su WhatsApp. Sull'invito di carta metti il QR: chi lo inquadra ti conferma.",
+    "Chi riceve l'invito trova il bottone «Confermo, ci saremo!»: lo tocca, e a te arriva il messaggio già scritto. Dentro ci sono indirizzo e telefono, quindi mandalo solo agli invitati.",
+    "Trovi tutto su giocamizi.it, nella pagina Biglietti. Buona festa! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 15,
+    "titolo": "1 · Apri «Biglietti»"
+   },
+   {
+    "da": 22,
+    "titolo": "2 · Invito e formato"
+   },
+   {
+    "da": 35,
+    "titolo": "3 · Scegli lo sfondo"
+   },
+   {
+    "da": 45,
+    "titolo": "4 · Nome, festa e conferma"
+   },
+   {
+    "da": 59,
+    "titolo": "5 · Adesivi e foto"
+   },
+   {
+    "da": 71,
+    "titolo": "6 · Scarica, stampa o manda"
+   },
+   {
+    "da": 83,
+    "titolo": "7 · Gli invitati confermano"
+   }
+  ],
+  "pagina": {
+   "href": "/biglietti",
+   "testo": "Crea il tuo invito"
+  },
+  "faq": [
+   {
+    "domanda": "L'invito è gratis?",
+    "risposta": "Sì, gratis e senza filigrana, senza registrazione."
+   },
+   {
+    "domanda": "Come confermano gli invitati?",
+    "risposta": "Se metti il tuo numero WhatsApp, chi riceve l'invito tocca «Confermo, ci saremo!» e ti arriva il messaggio già scritto; sull'invito stampato c'è il QR."
+   }
+  ]
  }
 ]
