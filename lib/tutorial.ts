@@ -26,11 +26,9 @@ export const GRUPPI: Record<GruppoTutorial, { titolo: string; descrizione: strin
   },
 };
 
-export interface Capitolo {
-  /** Secondi dall'inizio del video. */
-  da: number;
-  titolo: string;
-}
+export type { Capitolo } from "./tutorial-base";
+import type { Capitolo } from "./tutorial-base";
+export { minuti } from "./tutorial-base";
 
 export interface Tutorial {
   slug: string;
@@ -76,6 +74,3 @@ export const IN_ARRIVO: Record<GruppoTutorial, string[]> = {
 export const tutorialDaSlug = (slug: string) => TUTORIAL.find((t) => t.slug === slug);
 export const percorsoTutorial = (t: Pick<Tutorial, "slug">) => `${PERCORSO_TUTORIAL}/${t.slug}`;
 export const tutorialDi = (g: GruppoTutorial) => TUTORIAL.filter((t) => t.gruppo === g);
-
-/** «1:05» */
-export const minuti = (s: number) => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, "0")}`;

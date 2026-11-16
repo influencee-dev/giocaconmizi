@@ -1,0 +1,38 @@
+{
+ "secondi": 111,
+ "caricato": "2026-11-16",
+ "capitoli": [
+  {
+   "da": 0,
+   "titolo": "Ciao, sono Mizi"
+  },
+  {
+   "da": 20,
+   "titolo": "1 · Apri il tuo link"
+  },
+  {
+   "da": 33,
+   "titolo": "2 · Tocca «Voglio completarla»"
+  },
+  {
+   "da": 48,
+   "titolo": "3 · Correggi e aggiungi"
+  },
+  {
+   "da": 61,
+   "titolo": "4 · Per le feste: «Voglio modificarla»"
+  },
+  {
+   "da": 75,
+   "titolo": "5 · Nome, email e invio"
+  },
+  {
+   "da": 85,
+   "titolo": "6 · Controlliamo noi, a mano"
+  },
+  {
+   "da": 93,
+   "titolo": "7 · La tua scheda è verificata"
+  }
+ ]
+}

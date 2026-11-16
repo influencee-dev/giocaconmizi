@@ -42,5 +42,6 @@ mkdir -p "$RADICE/public/video"
 cp "$LAVORO/$SLUG · 16x9.mp4" "$RADICE/public/video/$SLUG.mp4"
 cp "$LAVORO/poster.webp" "$RADICE/public/video/$SLUG.webp"
 cp "$LAVORO/sottotitoli.vtt" "$RADICE/public/video/$SLUG.vtt"
+echo "· pagina del tutorial"; python3 "$QUI/registra.py" "$SLUG" "$LAVORO"
 ffprobe -v error -show_entries format=duration -of csv=p=0 "$LAVORO/$SLUG · 16x9.mp4" | xargs printf "· fatto: %.1f s\n"
 ls -la "$LAVORO"/*.mp4

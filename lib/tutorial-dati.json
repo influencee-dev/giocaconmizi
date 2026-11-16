@@ -79,6 +79,81 @@
   ]
  },
  {
+  "slug": "come-completare-la-scheda",
+  "gruppo": "partner",
+  "titolo": "Come completare la scheda dal link personale",
+  "ordine": 2,
+  "descrizione": "Mizi ti mostra come completare la scheda della tua attività dal link personale: testi, contatti, orari, pacchetti festa e logo.",
+  "rispostaBreve": "Per completare la scheda su Giocamizi apri il link personale ricevuto via email, tocca «Voglio completarla» (o «Voglio modificarla» per le attività delle feste), correggi testi, contatti e orari, aggiungi il logo se sei una realtà educativa e invia. Il team controlla a mano prima di pubblicare.",
+  "video": {
+   "src": "/video/come-completare-la-scheda.mp4",
+   "poster": "/video/come-completare-la-scheda.webp",
+   "sottotitoli": "/video/come-completare-la-scheda.vtt",
+   "durata": "PT1M51S",
+   "secondi": 111,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Ti è arrivato il link personale della tua scheda? Bene! Ti faccio vedere come completarla, con contatti, orari e, per le realtà educative, anche il logo. È gratis, e non serve nessuna password.",
+    "Apri il link dall'email. In alto c'è la tua scheda, proprio come la vedono le famiglie. Sotto ci sono tre scelte: approvarla così com'è, completarla, oppure toglierla.",
+    "Se sei una realtà educativa, tocca «Voglio completarla». Si apre il modulo, e la prima cosa è il vostro logo. È facoltativo, e va bene un PNG o un JPG.",
+    "Poi ci sono i testi, già scritti: correggili come vuoi. Cosa fate, per chi, quanto costa. E puoi aggiungere la sede, gli orari, il sito e i social.",
+    "Hai un'attività per feste e bambini? Lì il bottone si chiama «Voglio modificarla». Puoi mettere WhatsApp, orari e pacchetti festa con i prezzi. E le foto le mandi rispondendo all'email.",
+    "Alla fine scrivi il tuo nome e la tua email: servono solo per risponderti. Spunta i termini e tocca «Invia le modifiche».",
+    "Poi il team di Giocamizi controlla tutto a mano, anche il logo. Niente va online da solo!",
+    "Quando le modifiche sono approvate, la scheda prende il bollino verde «Scheda verificata». E ti arriva un'email quando è online.",
+    "Se hai dubbi, trovi tutti i miei video su giocamizi.it, nella pagina «Tutorial». Ti aspetto! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 20,
+    "titolo": "1 · Apri il tuo link"
+   },
+   {
+    "da": 33,
+    "titolo": "2 · Tocca «Voglio completarla»"
+   },
+   {
+    "da": 48,
+    "titolo": "3 · Correggi e aggiungi"
+   },
+   {
+    "da": 61,
+    "titolo": "4 · Per le feste: «Voglio modificarla»"
+   },
+   {
+    "da": 75,
+    "titolo": "5 · Nome, email e invio"
+   },
+   {
+    "da": 85,
+    "titolo": "6 · Controlliamo noi, a mano"
+   },
+   {
+    "da": 93,
+    "titolo": "7 · La tua scheda è verificata"
+   }
+  ],
+  "pagina": {
+   "href": "/come-reclamare-la-scheda",
+   "testo": "Come reclamare la scheda, passo per passo"
+  },
+  "faq": [
+   {
+    "domanda": "Serve una password per completare la scheda?",
+    "risposta": "No: si usa il link personale arrivato via email, che vale solo per la tua scheda. Non inoltrarlo a chi non deve modificarla."
+   },
+   {
+    "domanda": "Le modifiche vanno online subito?",
+    "risposta": "No: il team di Giocamizi le controlla a mano, anche il logo. Quando sono approvate la scheda si aggiorna e prende il bollino «Verificata»."
+   }
+  ]
+ },
+ {
   "slug": "come-aggiungere-un-attivita",
   "gruppo": "partner",
   "titolo": "Come aggiungere un'attività che non c'è ancora",

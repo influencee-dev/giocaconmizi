@@ -1,15 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { Capitolo, Tutorial } from "@/lib/tutorial";
-import { minuti } from "@/lib/tutorial";
+import { minuti, type Capitolo } from "@/lib/tutorial-base";
 
 /**
  * Il video di un tutorial con i passi sotto: toccare un passo porta il video
  * a quel punto e lo fa partire. Il video è un file nostro (niente player di
  * terzi, niente cookie), con i sottotitoli italiani accesi.
  */
-export function PlayerTutorial({ t }: { t: Pick<Tutorial, "video" | "capitoli" | "titolo"> }) {
+export function PlayerTutorial({ t }: { t: { titolo: string; capitoli: Capitolo[]; video: { src: string; poster: string; sottotitoli: string } } }) {
   const video = useRef<HTMLVideoElement>(null);
   const [ora, setOra] = useState(0);
   const attivo = [...t.capitoli].reverse().find((c) => ora >= c.da)?.da ?? 0;

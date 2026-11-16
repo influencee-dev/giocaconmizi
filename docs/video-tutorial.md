@@ -1,52 +1,70 @@
-# Video tutorial (15/11/2026)
+# Video di Mizi (15-16/11/2026)
 
-Il primo: «Come reclamare la scheda», in `/come-reclamare-la-scheda`
-(`VIDEO_RECLAMO` in lib/reclamo.ts, file in `public/video/`). Scene animate in
-HTML con le schermate vere del sito, voce italiana con l'API di OpenAI, musica
-originale scritta col codice, sottotitoli WebVTT bruciati nel video e in traccia.
+Tutti i video si fanno con UN comando, a partire da UNA scheda:
 
-## Come si rifà (o se ne fa uno nuovo, es. per gli eventi)
+```
+npm run build                       # build fresca: le schermate vengono dal sito di prova
+npm run video -- <slug> [cartella]  # es. npm run video -- come-creare-l-invito
+```
 
-Tutto in una cartella di lavoro fuori dal repo (lo scratchpad), con gli script
-di `scripts/video/` copiati dentro, più `asset/` (nunito-*.ttf da
-lib/social/caratteri, mizi-intera.webp e il logo da public/mizi, le icone da
-public/icone usate nelle scene).
+Il comando (scripts/video/fai.sh) fa da solo:
+1. **schermate** (schermi.mjs): accende il server di prova con il codice del
+   pannello di prova, apre ogni pagina della scheda dal telefono (390×844),
+   fa le azioni (riempi / scegli / clicca / attendi, dati finti), torna in
+   cima, nasconde le barre fisse in basso, fotografa la pagina intera e salva
+   dove stanno gli elementi da cerchiare (box.json);
+2. **voce di Mizi** (voce.py): TUTTO il testo in una sola registrazione OpenAI
+   (voce «sage», pinguina-bambina, decisione di Giorgia del 15/11), poi
+   whisper-1 dà i tempi delle parole e si taglia frase per frase. Se una frase
+   dura meno di 1,5 secondi il taglio è sbagliato e si ferma;
+3. **scene** (prepara.py + video.html): il motore delle animazioni legge la
+   scheda; **fotogrammi** (rendi.mjs) 25 al secondo, 16:9 (1920×1080) e
+   9:16 (1080×1920) insieme;
+4. **musica** originale (musica.py) e **audio** (audio.py: voce al suo posto,
+   musica che si abbassa quando parla Mizi, sottotitoli .vtt);
+5. **montaggio** H.264 + AAC; copia in public/video/<slug>.mp4/.webp/.vtt;
+6. **pagina del tutorial** (registra.py): salva content/video/<slug>.tempi.json
+   e ricompila lib/tutorial-dati.json → /tutorial/<slug> nasce da sola.
 
-1. **Testi**: `testi.json`, una frase per scena (per la pronuncia scrivere
-   «giocamizi punto it»: nei sottotitoli diventa giocamizi.it).
-2. **Voce di Mizi**: `python3 voce.py` → `voce/<n>.wav`. Parla SEMPRE Mizi,
-   pinguina-bambina di ~10 anni, in prima persona (decisione di Giorgia del
-   15/11/2026: voce «sage» di gpt-4o-mini-tts, istruzioni fisse in voce.py).
-   Tutto il testo in UNA chiamata (la voce resta uguale), poi whisper-1 dà i
-   tempi delle parole e lo script taglia frase per frase: controllare che le
-   durate stampate siano sensate (una frase di 1 secondo = taglio sbagliato). La chiave è un segreto
-   dell'ambiente cloud «Giocamizi» (la mette il proxy: header
-   `Authorization: Bearer proxy-injected`), mai nel repo né in chat.
-3. **Schermate**: build fresca, server di prova con `GIOCAMIZI_ADMIN_PROVA`
-   (vedi scripts/verifica/comune.mjs), poi `node schermi.mjs` → `schermi/*.png`
-   e `box.json` (dove stanno bottoni e campi, per i cerchi). Nasconde le barre
-   fisse e il banner dei cookie del NOSTRO sito; il modulo si riempie con dati finti.
-4. **Scene**: `python3 prepara.py` → `video-pronto.html` (aprirlo nel browser,
-   con `#verticale` per il 9:16, e chiamare `render(t)` per guardare un
-   istante), poi `node rendi.mjs` → `fotogrammi/` (1920×1080) e
-   `node rendi.mjs v` → `fotogrammi-v/` (1080×1920, per Reel e storie: testi e
-   sottotitoli stanno in alto, fuori dalla fascia dei bottoni di Instagram).
-   30 al secondo, ~25 minuti ciascuno (si possono lanciare insieme).
-5. **Audio**: `python3 musica.py <durata in secondi>` (marimba + basso + sonaglio, accordi
-   Do-La-Fa-Sol: tutto originale) e `python3 audio.py` → `audio.wav` (voce al
-   suo posto, musica che si abbassa quando si parla, volume normalizzato) e
-   `sottotitoli.vtt`.
-6. **Montaggio**: ffmpeg, H.264 + AAC, `-movflags +faststart`, CRF ~24
-   (il file deve restare sotto i 10 MB); poster = un fotogramma in WebP.
-8. **Second brain**: ogni video finito (16:9 e 9:16) si carica su Drive in
-   2 Aree → Giocamizi · Video (cartelle «16x9 · Tutorial per partner»,
-   «16x9 · Tutorial per utenti», «9x16 · Reel e storie»), nome
-   «AAAA-MM-GG · titolo · 16x9.mp4», e si aggiorna «01 Catalogo dei video».
-7. Sul sito va solo l'orizzontale: file in `public/video/`, una voce in
-   `TUTORIAL` di lib/tutorial.ts (testo, capitoli = inizi delle scene, FAQ) →
-   pagina /tutorial/<slug> da sola. Togliere il titolo da IN_ARRIVO.
-   Poi, se serve,: copiare mp4, vtt e poster in `public/video/`. Il verticale va su Drive (2 Aree → Giocamizi · Social) per Instagram, aggiornare durata e testo in
-   lib/reclamo.ts, verifiche di sempre.
+Restano nella cartella di lavoro «<slug> · 16x9.mp4» e «<slug> · 9x16.mp4» da
+caricare su Drive (2 Aree → Giocamizi · Video) e su YouTube.
 
-Regole: niente schermate di siti di altri, niente volti veri, niente musica
-o voci prese dal web. Mizi compare come illustrazione nostra.
+## La scheda: content/video/<slug>.json
+
+- `slug`, `titolo`, `gruppo` («partner» o «utenti»), `ordine` nell'hub;
+- per la pagina: `descrizione`, `rispostaBreve` (citabile dalle AI),
+  `pagina` {href, testo} (la pagina del sito di cui parla), `faq`;
+- `schermate`: nome → { url, azioni, selettori } (selettori Playwright:
+  meglio name, data-*, `button:has-text("…")` col testo esatto del codice);
+- `scene`, in ordine, ognuna con la `voce` (cosa dice Mizi):
+  - `intro` (etichetta, titolo, sottotitolo) — Mizi entra;
+  - `telefono` (passo, titolo, testo, schermata, scorri, evidenzia[],
+    nota/notaIcona, bollino, entraDaSinistra) — la pagina scorre e un cerchio
+    rosa evidenzia gli elementi uno alla volta durante la frase;
+  - `due` (schermate[2], scorri[2]) — due telefoni affiancati;
+  - `carta` (carta: icona, titolo, sotto, testo, bottone, spunta) — per ciò
+    che non si può fotografare (email, controlli, istruzioni del telefono);
+  - `finale` (url, sotto, sopra) — SEMPRE l'ultima: schermata viola con Mizi
+    e l'indirizzo del sito.
+- Nella voce si scrive «giocamizi punto it» (si pronuncia bene); nei
+  sottotitoli diventa giocamizi.it.
+
+## Regole
+
+- Parla sempre Mizi, in prima persona, frasi brevi e calde, mai da spot.
+- SOLO cose che il sito fa davvero: niente funzioni inventate, niente tempi
+  promessi, niente statistiche che i titolari non vedono ancora.
+- Solo schermate del NOSTRO sito, dal server di prova, con dati finti.
+  Niente siti di altri, volti veri, musica o voci prese dal web.
+- Ogni video in 16:9 e 9:16, con il finale viola.
+- Dopo il video: verifiche di sempre, pubblicazione, caricamento su Drive e
+  YouTube, «01 Catalogo dei video» aggiornato su Drive.
+
+## Trappole note
+
+- Le barre fisse più in basso di 120 px (filtri dei giochi, barretta «Scarica»)
+  nello scatto spariscono: raccontarle con una scena `carta`.
+- Tutte le schermate di una scheda condividono il localStorage: l'ordine
+  conta (es. il profilo salvato vale per le schermate dopo).
+- Non compilare (`npm run build`) mentre gira un video: la build sovrascrive
+  il sito di prova che si sta fotografando.
