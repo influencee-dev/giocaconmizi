@@ -45,7 +45,10 @@ export interface Pubblicata {
 export async function pubblicate(): Promise<Map<string, Pubblicata>> {
   // Nel server delle verifiche una risorsa risulta reclamata, per provarne la pagina propria.
   if (process.env.GIOCAMIZI_ADMIN_PROVA && !process.env.VERCEL) {
-    return new Map([[INVITO_PROVA_RISORSA.chiave, { tipo: "modifica", dati: { descrizione: "Scheda di prova: testo scritto dalla realtà dal suo link personale.", sito: "https://www.coopaccento.it/" } }]]);
+    return new Map<string, Pubblicata>([
+      [INVITO_PROVA_RISORSA.chiave, { tipo: "modifica", dati: { descrizione: "Scheda di prova: testo scritto dalla realtà dal suo link personale.", sito: "https://www.coopaccento.it/" } }],
+      [SCHEDA_ESTESA_PROVA.chiave, { tipo: "modifica", dati: { estesa: SCHEDA_ESTESA_PROVA.estesa } }],
+    ]);
   }
   const client = db();
   if (!client) return new Map();
@@ -72,6 +75,60 @@ export function conModifiche(s: Scheda, p: Map<string, Pubblicata>): (Scheda & {
     extra: d,
   };
 }
+
+/**
+ * Una scheda estesa di PROVA, solo nel server delle verifiche (mai su Vercel):
+ * serve a vedere e controllare la pagina pubblica piena. Dati inventati per il
+ * test, mai mostrati sul sito vero.
+ */
+export const SCHEDA_ESTESA_PROVA: { chiave: string; estesa: SchedaEstesa } = {
+  chiave: "milano/festavventura",
+  estesa: {
+    versione: 1,
+    valori: {
+      descrizione: "Scheda di prova: sala feste con animazione, compilata con tutti i campi per controllare la pagina.",
+      puntiForza: ["animazione", "torta", "allestimento"],
+      eta: { da: 3, a: 10 },
+      sotto3: true,
+      fannoFeste: true,
+      bambini: { da: 10, a: 30 },
+      durata: "180",
+      esclusiva: "esclusiva",
+      incluso: ["sala", "animazione", "merenda", "torta", "allestimento", "pulizia"],
+      tortaDaCasa: "supplemento",
+      allergie: "su-richiesta",
+      temi: "principesse, supereroi, dinosauri, pirati",
+      giorniFeste: ["ven", "sab", "dom"],
+      prezzo: { modello: "festa", importo: 250, bambiniInclusi: 15, supplemento: 12, comunicatoIl: "2026-11" },
+      pacchetti: [
+        { nome: "Festa base", prezzo: 250, bambini: { da: 10, a: 15 }, durata: 150, comprende: "Sala, animatore, merenda salata e dolce, pulizia" },
+        { nome: "Festa completa", prezzo: 390, bambini: { da: 15, a: 30 }, durata: 180, comprende: "Tutto il base, più torta, allestimento a tema e truccabimbi" },
+      ],
+      extra: [{ nome: "Truccabimbi", prezzo: 60 }, { nome: "Mezz'ora in più", prezzo: 40 }, { nome: "Gadget per gli invitati", prezzo: 3 }],
+      caparra: "50% alla prenotazione",
+      cancellazione: "Gratis fino a 7 giorni prima; il numero di bambini si cambia fino a 3 giorni prima",
+      anticipo: "4",
+      orari: [
+        { giorno: "ven", dalle: "16:00", alle: "20:00" },
+        { giorno: "sab", dalle: "10:00", alle: "20:00" },
+        { giorno: "dom", dalle: "10:00", alle: "19:00" },
+      ],
+      orarioLimite: "20:00",
+      ambiente: "coperto",
+      metriQuadri: 220,
+      parcheggio: "strada",
+      passeggino: true,
+      fasciatoio: true,
+      genitori: true,
+      educatori: 10,
+      regole: "Calze antiscivolo per tutti i bambini. I genitori possono restare nella zona caffè.",
+      fotoBambini: "solo-famiglia",
+      cosaPortare: "Calze antiscivolo e un cambio per i più piccoli",
+      comeArrivare: "Metro M2, fermata a 5 minuti a piedi",
+      video: ["https://www.youtube.com/watch?v=dQw4w9WgXcQ", "https://www.instagram.com/reel/C0prova123/"],
+    },
+  },
+};
 
 /** Il link di prova dell'area attività: vale solo nel server delle verifiche (come lib/admin.ts), mai su Vercel. */
 export const INVITO_PROVA = { codice: "prova-attivita-locale-0000000000", chiave: "milano/il-nano-gigante" };

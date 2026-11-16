@@ -1,7 +1,8 @@
 "use client";
 
 import { ChevronDown, Heart, X } from "lucide-react";
-import { Icona, type NomeIcona } from "@/components/icone";
+import type { NomeIcona } from "@/components/icone";
+import { IconaLucide } from "./IconaLucide";
 import { useEffect, useMemo, useState } from "react";
 import type { DatiCard } from "@/lib/directory";
 import { ESPERIENZE, GRUPPI, type IdEsperienza } from "@/lib/esperienze";
@@ -222,7 +223,7 @@ export function ListingFiltrato({
                     className="h-5 w-5 shrink-0 accent-[#9B6DD6]"
                   />
                   <span className="flex-1">
-                    {v.icona && <Icona nome={v.icona} className="mr-1 h-5 w-5 align-[-4px]" />}
+                    {v.icona && <IconaLucide nome={v.icona} className="mr-1 inline h-4 w-4 align-[-3px]" />}
                     {v.nome}
                   </span>
                   <span className="text-xs font-bold text-notte-tenue">{v.n}</span>

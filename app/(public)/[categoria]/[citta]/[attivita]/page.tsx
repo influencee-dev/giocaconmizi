@@ -1,4 +1,3 @@
-import { Icona } from "@/components/icone";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -15,6 +14,10 @@ import { Contatore } from "@/components/directory/Contatore";
 import { Globe, Instagram, MessageCircle, Phone } from "lucide-react";
 import { Etichetta } from "@/components/directory/Etichetta";
 import { ESPERIENZE } from "@/lib/esperienze";
+import { daChiedere as domandeDaChiedere, eSchedaEstesa, jsonLdEstesa, testoPrezzo, type Prezzo } from "@/lib/scheda-campi";
+import { IconaLucide } from "@/components/directory/IconaLucide";
+import { BlocchiDettaglio, DaChiedere, DatiChiave, PrezziPacchetti, PuntiForza, VideoAttivita } from "@/components/directory/SchedaDettagli";
+import { BadgeCheck, Camera } from "lucide-react";
 
 /** La scheda di un'attività (Figma 04–06). */
 
@@ -49,17 +52,22 @@ const wa = (t: string) => {
   return `https://wa.me/${/^3\d{8,9}$/.test(n) ? `39${n}` : n}`;
 };
 
-function Contatti({ sito, instagram, extra }: { sito?: string; instagram?: string; extra: DatiModifica }) {
+function Contatti({ sito, instagram, extra, prezzo }: { sito?: string; instagram?: string; extra: DatiModifica; prezzo: { prezzo: string; nota?: string } }) {
   return (
     <div className="flex flex-col gap-3 rounded-[1.4rem] border border-notte/10 bg-white p-5 shadow-[0_10px_30px_rgba(31,36,48,0.08)]">
-      <p className="text-xl font-extrabold text-notte">Contatta l&apos;attività</p>
+      <div>
+        <p className="text-2xl font-black text-notte">{prezzo.prezzo}</p>
+        {prezzo.nota && <p className="text-xs font-semibold text-notte-tenue">{prezzo.nota}</p>}
+      </div>
       <p className="text-sm font-semibold text-notte-tenue">
-        Prezzi, disponibilità e pacchetti festa si chiedono direttamente al locale: noi non prendiamo commissioni.
+        {prezzo.nota
+          ? "Disponibilità e preventivo si chiedono direttamente al locale: noi non prendiamo commissioni."
+          : "Richiedi prezzo e disponibilità direttamente al locale: noi non prendiamo commissioni."}
       </p>
       {extra.whatsapp && (
         <a data-traccia="whatsapp" href={wa(extra.whatsapp)} target="_blank" rel="nofollow noopener" className="rounded-bolla bg-verde px-5 py-3 text-center font-extrabold text-white">
           <MessageCircle className="mr-2 inline h-5 w-5 align-[-4px]" strokeWidth={2.4} aria-hidden />
-          Scrivi su WhatsApp
+          {prezzo.nota ? "Scrivi su WhatsApp" : "Richiedi su WhatsApp"}
         </a>
       )}
       {extra.telefono && (
@@ -116,9 +124,25 @@ export default async function SchedaPage({ params }: P) {
   const faq = cat.faq.map((f) => ({ ...f }));
   const card = datiCard(s);
   const offre = ESPERIENZE.filter((e) => card.esperienze.includes(e.id) && e.gruppo !== "Dove");
-  const daChiedere = ESPERIENZE.filter(
-    (e) => !card.esperienze.includes(e.id) && ["animazione", "buffet", "esclusiva", "piccoli", "genitori"].includes(e.id),
-  );
+  // La scheda estesa compilata dall'attività (lib/scheda-campi.ts), se Giorgia l'ha accettata.
+  const estesa = eSchedaEstesa(s.extra.estesa) ? s.extra.estesa : undefined;
+  const valori = estesa?.valori ?? {};
+  const domande = estesa
+    ? domandeDaChiedere(cat.slug, estesa)
+    : ESPERIENZE.filter(
+        (e) => !card.esperienze.includes(e.id) && ["animazione", "buffet", "esclusiva", "piccoli", "genitori"].includes(e.id),
+      ).map((e) => e.domanda);
+  const prezzo = valori.prezzo as Prezzo | undefined;
+  const sameAs = [...new Set([s.sito, s.instagram, valori.instagram, s.extra.facebook, valori.facebook, valori.tiktok, valori.schedaGoogle]
+    .filter((x): x is string => typeof x === "string" && x !== ""))];
+  // WhatsApp e telefono: quelli della scheda estesa, se ci sono, altrimenti i campi di prima.
+  const contatti: DatiModifica = {
+    ...s.extra,
+    ...(typeof valori.whatsapp === "string" && { whatsapp: valori.whatsapp }),
+    ...(typeof valori.telefono === "string" && { telefono: valori.telefono }),
+    ...(typeof valori.facebook === "string" && { facebook: valori.facebook }),
+    ...(typeof valori.tiktok === "string" && { tiktok: valori.tiktok }),
+  };
 
   return (
     <>
@@ -141,7 +165,8 @@ export default async function SchedaPage({ params }: P) {
             url: url(percorsoScheda(s)),
             address: { "@type": "PostalAddress", ...(s.extra.indirizzo ? { streetAddress: s.extra.indirizzo } : {}), addressLocality: s.citta, addressRegion: s.zona, addressCountry: "IT" },
             ...(s.extra.telefono ? { telephone: s.extra.telefono } : {}),
-            ...(s.sito || s.instagram || s.extra.facebook ? { sameAs: [s.sito, s.instagram, s.extra.facebook].filter(Boolean) } : {}),
+            ...(sameAs.length ? { sameAs } : {}),
+            ...jsonLdEstesa(cat.slug, estesa),
           }}
         />
 
@@ -150,8 +175,9 @@ export default async function SchedaPage({ params }: P) {
         <div className="mt-4 overflow-hidden rounded-morbido">
           <Illustrazione colore={card.etichetta.fondo} icona={cat.icona} alta="h-48 sm:h-72" grande />
         </div>
-        <p className="mt-2 text-xs font-semibold text-notte-tenue">
-          Le foto le aggiunge l&apos;attività quando completa la scheda.
+        <p className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-notte-tenue">
+          <Camera className="h-3.5 w-3.5" aria-hidden />
+          Le foto vere le aggiunge l&apos;attività quando completa la scheda.
         </p>
 
         <div className="mt-6 flex flex-col gap-3">
@@ -163,19 +189,28 @@ export default async function SchedaPage({ params }: P) {
             <Etichetta e={card.etichetta} grande />
             {card.eta && <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">{card.eta}</span>}
             {s.verificata ? (
-              <span className="rounded-bolla bg-[#E3F4E8] px-3 py-1 text-xs font-extrabold text-[#2E7D4A]">✓ Verificata dal titolare</span>
+              <span className="inline-flex items-center gap-1 rounded-bolla bg-[#E3F4E8] px-3 py-1 text-xs font-extrabold text-[#2E7D4A]">
+                <BadgeCheck className="h-3.5 w-3.5" aria-hidden /> Verificata dal titolare
+              </span>
             ) : (
               <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte-tenue">Scheda da reclamare</span>
             )}
-            <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">Fa feste di compleanno</span>
+            {valori.fannoFeste !== false && (
+              <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">Fa feste di compleanno</span>
+            )}
             <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">{cat.nome}</span>
           </div>
+        </div>
+
+        <div className="mt-6 flex flex-col gap-3">
+          <DatiChiave valori={valori} etaCard={card.eta ?? undefined} />
+          <PuntiForza categoria={cat.slug} valori={valori} />
         </div>
 
         <div className="mt-8 lg:grid lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start lg:gap-10">
           <div className="flex min-w-0 flex-col gap-8">
             <InBreve
-              testo={`${s.descrizione} ${s.nome} si trova a ${s.citta}, zona ${s.zona}, e organizza feste di compleanno per bambini: chiedete al locale un preventivo scritto con tutto quello che è incluso.`}
+              testo={`${(valori.descrizione as string | undefined) ?? s.descrizione} ${s.nome} si trova a ${s.citta}, zona ${s.zona}, e organizza feste di compleanno per bambini: chiedete al locale un preventivo scritto con tutto quello che è incluso.`}
             />
             <section data-cosa-offre>
               <TitoloSezione>Cosa offre</TitoloSezione>
@@ -183,7 +218,7 @@ export default async function SchedaPage({ params }: P) {
                 <ul className="grid gap-2.5 sm:grid-cols-2">
                   {offre.map((e) => (
                     <li key={e.id} className="flex items-center gap-3 rounded-xl bg-[#E3F4E7] px-4 py-3 font-extrabold text-[#2E7D4A]">
-                      <Icona nome={e.icona} className="h-7 w-7" />
+                      <IconaLucide nome={e.icona} className="h-6 w-6" />
                       {e.nome}
                     </li>
                   ))}
@@ -191,20 +226,7 @@ export default async function SchedaPage({ params }: P) {
               ) : (
                 <p className="text-notte-tenue">La scheda non elenca ancora i servizi: chiedili al locale con le domande qui sotto.</p>
               )}
-              {daChiedere.length > 0 && (
-                <div className="mt-5 rounded-[1.4rem] border-2 border-dashed border-crema-scuro bg-white p-5">
-                  <p className="font-black text-notte">Da chiedere al locale</p>
-                  <p className="mt-1 text-sm text-notte-tenue">Non è scritto nella scheda, il che non vuol dire che manchi:</p>
-                  <ul className="mt-3 flex flex-col gap-2">
-                    {daChiedere.map((e) => (
-                      <li key={e.id} className="flex gap-2 text-sm font-bold text-notte">
-                        <Icona nome={e.icona} className="h-5 w-5" />
-                        {e.domanda}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <DaChiedere domande={domande} />
             </section>
             <section>
               <TitoloSezione>Cosa chiedere prima di prenotare</TitoloSezione>
@@ -217,7 +239,9 @@ export default async function SchedaPage({ params }: P) {
                 ))}
               </ul>
             </section>
-            {(s.extra.orari || s.extra.pacchetti) && (
+            <PrezziPacchetti categoria={cat.slug} valori={valori} />
+            <BlocchiDettaglio categoria={cat.slug} valori={valori} />
+            {!estesa && (s.extra.orari || s.extra.pacchetti) && (
               <section className="grid gap-4 sm:grid-cols-2">
                 {[["Orari", s.extra.orari], ["Pacchetti festa", s.extra.pacchetti]].map(([t, v]) =>
                   v ? (
@@ -229,18 +253,14 @@ export default async function SchedaPage({ params }: P) {
                 )}
               </section>
             )}
-            {s.extra.video && (
-              <a href={s.extra.video} target="_blank" rel="nofollow noopener" className="self-start rounded-bolla border-2 border-crema-scuro bg-white px-5 py-3 font-extrabold text-notte">
-                ▶ Guarda il video della struttura
-              </a>
-            )}
+            <VideoAttivita valori={{ ...valori, video: (valori.video as string[] | undefined) ?? (s.extra.video ? [s.extra.video] : undefined) }} nome={s.nome} />
             {s.reel && <ReelInstagram url={s.reel} nome={s.nome} />}
             <div className="lg:hidden">
-              <Contatti sito={s.sito} instagram={s.instagram} extra={s.extra} />
+              <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} prezzo={testoPrezzo(prezzo)} />
             </div>
           </div>
           <aside className="hidden lg:sticky lg:top-24 lg:block">
-            <Contatti sito={s.sito} instagram={s.instagram} extra={s.extra} />
+            <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} prezzo={testoPrezzo(prezzo)} />
           </aside>
         </div>
 

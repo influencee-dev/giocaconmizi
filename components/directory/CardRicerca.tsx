@@ -1,5 +1,5 @@
 import { MapPin } from "lucide-react";
-import { Icona } from "@/components/icone";
+import { IconaLucide } from "./IconaLucide";
 import Link from "next/link";
 import type { DatiCard } from "@/lib/directory";
 import { esperienza, type IdEsperienza } from "@/lib/esperienze";
@@ -54,12 +54,12 @@ export function CardRicerca({ s, cercate = [] }: { s: DatiCard; cercate?: IdEspe
           <ul className="flex flex-wrap gap-x-3 gap-y-1 border-y border-notte/10 py-2 text-[13px] font-extrabold text-notte" aria-label="Cosa offre">
             {s.eta && (
               <li className="flex items-center gap-1">
-                <Icona nome="bebe" className="h-4 w-4" /> {s.eta}
+                <IconaLucide nome="bebe" className="h-4 w-4" /> {s.eta}
               </li>
             )}
             {ordinate.slice(0, 3).map((id: IdEsperienza) => (
               <li key={id} className={`flex items-center gap-1 ${cercate.includes(id) ? "text-verde" : ""}`}>
-                <Icona nome={esperienza(id).icona} className="h-4 w-4" /> {esperienza(id).nome}
+                <IconaLucide nome={esperienza(id).icona} className="h-4 w-4" /> {esperienza(id).nome}
               </li>
             ))}
             {ordinate.length > 3 && <li className="text-notte-tenue">+{ordinate.length - 3}</li>}

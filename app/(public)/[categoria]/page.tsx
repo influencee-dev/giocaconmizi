@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { IconaLucide } from "@/components/directory/IconaLucide";
 import { notFound } from "next/navigation";
 import { CATEGORIE_ATTIVE, REGIONE, categoria, cittaDi, datiCard, haListing, percorsoScheda, schedeDi, vociRicerca } from "@/lib/directory";
 import { RicercaCosaDove } from "@/components/directory/RicercaCosaDove";
@@ -81,8 +82,7 @@ export default async function CategoriaPage({ params }: { params: Promise<{ cate
                   qui ? "border-viola bg-viola text-white" : "border-white bg-white text-notte hover:border-viola"
                 }`}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element -- icone statiche locali */}
-                <img src={`/icone/${c.icona}.png`} alt="" className="h-10 w-10" />
+                <IconaLucide nome={c.icona} className="h-8 w-8" tratto={1.9} />
                 <span className="w-28 leading-tight">{c.nome}</span>
               </Link>
             );

@@ -137,6 +137,8 @@ export interface Opzione { id: string; nome: string }
 export interface DefCampo {
   id: string;
   etichetta: string;
+  /** L'etichetta nella pagina pubblica, se quella del modulo parla all'attività («Fate…», «Avete…»). */
+  pubblica?: string;
   gruppo: Gruppo;
   tipo: TipoCampo;
   livello: Livello;
@@ -242,11 +244,11 @@ export const CAMPI_SCHEDA = [
     aiuto: "C'è uno spazio al coperto? La festa si sposta o si rimanda?" },
 
   // ---- Sicurezza e regole
-  { id: "educatori", etichetta: "Un educatore ogni quanti bambini", gruppo: "Sicurezza e regole", tipo: "numero", livello: "consigliato", unita: "bambini", min: 1, max: 100, aeo: true },
+  { id: "educatori", etichetta: "Un educatore ogni quanti bambini", pubblica: "Un educatore ogni", gruppo: "Sicurezza e regole", tipo: "numero", livello: "consigliato", unita: "bambini", min: 1, max: 100, aeo: true },
   { id: "regole", etichetta: "Regole da sapere", gruppo: "Sicurezza e regole", tipo: "testo", livello: "consigliato", max: 400, aeo: true,
     aiuto: "Calze antiscivolo, i genitori restano o no, cosa non si può portare." },
-  { id: "assicurazione", etichetta: "Avete un'assicurazione per i partecipanti", gruppo: "Sicurezza e regole", tipo: "sino", livello: "facoltativo" },
-  { id: "fotoBambini", etichetta: "Foto e video ai bambini durante le feste", gruppo: "Sicurezza e regole", tipo: "scelta", livello: "facoltativo",
+  { id: "assicurazione", etichetta: "Avete un'assicurazione per i partecipanti", pubblica: "Assicurazione per i partecipanti", gruppo: "Sicurezza e regole", tipo: "sino", livello: "facoltativo" },
+  { id: "fotoBambini", etichetta: "Foto e video ai bambini durante le feste", pubblica: "Foto e video ai bambini", gruppo: "Sicurezza e regole", tipo: "scelta", livello: "facoltativo",
     opzioni: op(["no", "Non ne facciamo"], ["solo-famiglia", "Solo per la famiglia, non le pubblichiamo"], ["con-consenso", "Le pubblichiamo solo con il consenso dei genitori"]) },
 
   // ---- Prima di andare
@@ -275,7 +277,7 @@ export const CAMPI_SCHEDA = [
   { id: "tessera", etichetta: "Tessera associativa", gruppo: "Prenotare", tipo: "testoBreve", livello: "consigliato", max: 160,
     categorie: ["associazioni-per-bambini", "corsi-per-bambini"], aiuto: "Serve? Quanto costa? Basta per il festeggiato?",
     domanda: "Serve la tessera associativa?" },
-  { id: "zonaServita", etichetta: "Fin dove vi spostate", gruppo: "Dove e comodità", tipo: "numero", livello: "consigliato", unita: "km", min: 1, max: 500,
+  { id: "zonaServita", etichetta: "Fin dove vi spostate", pubblica: "Si spostano fino a", gruppo: "Dove e comodità", tipo: "numero", livello: "consigliato", unita: "km", min: 1, max: 500,
     categorie: ["animatori-per-feste", "allestimenti-feste"] },
   { id: "trasferta", etichetta: "Costo della trasferta", gruppo: "Prezzi", tipo: "testoBreve", livello: "consigliato", max: 160,
     categorie: ["animatori-per-feste", "allestimenti-feste"] },
@@ -630,3 +632,42 @@ export function riepilogoScheda(categoria: string, s: SchedaEstesa | undefined) 
 /** È davvero una scheda estesa (e non un vecchio dato a testo libero)? */
 export const eSchedaEstesa = (v: unknown): v is SchedaEstesa =>
   Boolean(v && typeof v === "object" && typeof (v as SchedaEstesa).versione === "number" && typeof (v as SchedaEstesa).valori === "object");
+
+// ---------- Dati strutturati (schema.org) dalla scheda estesa ----------
+
+const GIORNO_SCHEMA: Record<Giorno, string> = {
+  lun: "Monday", mar: "Tuesday", mer: "Wednesday", gio: "Thursday", ven: "Friday", sab: "Saturday", dom: "Sunday",
+};
+
+/** Le proprietà in più per il JSON-LD LocalBusiness della scheda: solo dati dichiarati dall'attività. */
+export function jsonLdEstesa(categoria: string, s: SchedaEstesa | undefined): Record<string, unknown> {
+  if (!s) return {};
+  const v = s.valori;
+  const out: Record<string, unknown> = {};
+  const servizi = campiPerCategoria(categoria).filter((c) => c.tipo === "sino" && v[c.id as IdCampo] !== undefined);
+  const inclusi = (v.incluso as string[] | undefined) ?? [];
+  const amenity = [
+    ...servizi.map((c) => ({ "@type": "LocationFeatureSpecification", name: c.etichetta, value: v[c.id as IdCampo] === true })),
+    ...inclusi.map((i) => ({ "@type": "LocationFeatureSpecification", name: `${campo("incluso").opzioni?.find((o) => o.id === i)?.nome ?? i} incluso`, value: true })),
+  ];
+  if (amenity.length) out.amenityFeature = amenity;
+  const orari = v.orari as FasciaOraria[] | undefined;
+  if (orari) {
+    out.openingHoursSpecification = orari.map((f) => ({ "@type": "OpeningHoursSpecification", dayOfWeek: GIORNO_SCHEMA[f.giorno], opens: f.dalle, closes: f.alle }));
+  }
+  const p = v.prezzo as Prezzo | undefined;
+  const pacchetti = (v.pacchetti as Pacchetto[] | undefined)?.filter((k) => k.prezzo !== undefined) ?? [];
+  // Un prezzo senza data non esce mai (decisione del 16/11/2026): i pacchetti usano la data del prezzo.
+  if (p) {
+    const offerte = [
+      { "@type": "Offer", name: "Festa di compleanno", priceCurrency: "EUR", price: p.importo, validFrom: `${p.comunicatoIl}-01` },
+      ...pacchetti.map((k) => ({ "@type": "Offer", name: k.nome, priceCurrency: "EUR", price: k.prezzo, validFrom: `${p.comunicatoIl}-01`, ...(k.comprende && { description: k.comprende }) })),
+    ];
+    out.makesOffer = offerte;
+  }
+  const eta = v.eta as Intervallo | undefined;
+  if (eta) out.audience = { "@type": "PeopleAudience", ...(eta.da !== undefined && { suggestedMinAge: eta.da }), ...(eta.a !== undefined && { suggestedMaxAge: eta.a }) };
+  const video = ((v.video as string[] | undefined) ?? []).map(videoRiconosciuto).filter((x) => x !== null);
+  if (video.length) out.subjectOf = video.map((x) => ({ "@type": "VideoObject", name: `Video su ${x.piattaforma}`, embedUrl: x.incorpora, url: x.url }));
+  return out;
+}
