@@ -24,7 +24,9 @@ export async function generateMetadata({ params }: { params: Promise<{ categoria
   if (!cat) return {};
   return {
     title: `${cat.titolo}: città per città`,
-    description: `${cat.sottotitolo} Zone, tipo di spazio e consigli per la festa di compleanno.`,
+    description: cat.giornata
+      ? `${cat.sottotitolo} Cosa c'è per i bambini, quando aprono e cosa controllare prima di partire.`
+      : `${cat.sottotitolo} Zone, tipo di spazio e consigli per la festa di compleanno.`,
     alternates: { canonical: `/${cat.slug}` },
   };
 }

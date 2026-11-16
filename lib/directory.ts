@@ -33,9 +33,66 @@ export interface Categoria {
   /** Icona in public/icone, per la fascia colorata delle card. */
   icona: string;
   regola: RegExp;
+  /**
+   * Categoria «da giornata fuori» (parchi avventura, parchi acquatici): le sue
+   * schede non sono per forza posti da festa, e i testi delle pagine lo dicono.
+   */
+  giornata?: true;
 }
 
 export const CATEGORIE: Categoria[] = [
+  // Le due categorie «da giornata fuori» stanno in testa: il loro tipo contiene
+  // parole («centro sportivo», «all'aperto») che altrimenti le manderebbero altrove.
+  {
+    slug: "parchi-avventura",
+    nome: "Parchi avventura",
+    singolare: "parco avventura",
+    titolo: "Parchi avventura per bambini",
+    sottotitolo: "Percorsi sugli alberi, ponti sospesi e carrucole: i parchi avventura dove portare i bambini, città per città.",
+    rispostaBreve:
+      "Un parco avventura è un bosco attrezzato con percorsi sospesi tra gli alberi: ponti, reti e carrucole da affrontare con imbrago e casco, divisi per altezza e non per età. Quasi tutti hanno un percorso basso per i piccoli, spesso dai 3 anni. Sono all'aperto e lavorano a stagione, in genere da primavera all'autunno e soprattutto nel fine settimana: controllate sempre giorni e orari prima di partire.",
+    comeScegliere: [
+      "L'altezza minima di ogni percorso: si entra per centimetri, non per età.",
+      "Se c'è un percorso basso per i più piccoli e da che età.",
+      "Giorni e orari di apertura: molti parchi aprono solo nel weekend e chiudono d'inverno.",
+      "Se serve prenotare e quanto dura il biglietto (spesso due o tre ore).",
+    ],
+    faq: [
+      { domanda: "Da che età si può andare al parco avventura?", risposta: "Dipende dall'altezza più che dall'età. Molti parchi hanno un percorso basso per i bambini dai 3 anni, con un adulto vicino; i percorsi veri e propri partono di solito da 100-110 cm, e quelli più alti da 130-140 cm." },
+      { domanda: "È sicuro per i bambini?", risposta: "I bambini salgono con imbrago e casco dopo una spiegazione degli istruttori, e nei parchi più recenti il moschettone resta sempre agganciato alla linea. Sui percorsi dei piccoli chiedete se serve un adulto che li accompagna da terra." },
+      { domanda: "Come ci si veste?", risposta: "Scarpe chiuse con la suola che tiene, pantaloni comodi e capelli legati. Niente sandali o ciabatte: in molti parchi senza scarpe chiuse non si sale." },
+      { domanda: "Si può fare la festa di compleanno al parco avventura?", risposta: "Alcuni parchi hanno un'area riservata o un pacchetto per i gruppi, altri no: nelle schede lo scriviamo solo quando risulta. In ogni caso conviene chiamare, dire quanti bambini sono e quanto sono alti." },
+    ],
+    schema: "AmusementPark",
+    icona: "albero",
+    regola: /parco avventura|percorsi sugli alberi|percorsi acrobatici/i,
+    giornata: true,
+  },
+  {
+    slug: "parchi-acquatici",
+    nome: "Parchi acquatici",
+    singolare: "parco acquatico",
+    titolo: "Parchi acquatici per bambini",
+    sottotitolo: "Scivoli, piscine a onde e aree con l'acqua bassa per i piccoli: i parchi acquatici dove passare una giornata, città per città.",
+    rispostaBreve:
+      "Un parco acquatico è una giornata intera tra scivoli, piscine a onde e fiumi lenti; per chi ha bambini piccoli conta soprattutto l'area baby, con acqua bassa e scivoli in miniatura. Quasi tutti aprono solo d'estate, in genere da fine maggio o giugno a inizio settembre, e fanno entrare gratis i bambini sotto una certa altezza. Date, orari e prezzi cambiano ogni anno: controllate il sito del parco prima di partire.",
+    comeScegliere: [
+      "Se c'è un'area per i più piccoli con acqua bassa, e quanto è grande.",
+      "Fino a che altezza i bambini entrano gratis e da che altezza pagano il ridotto.",
+      "Le altezze minime degli scivoli, per non fare la fila inutilmente.",
+      "Ombra, lettini e cibo: cosa è compreso nel biglietto e cosa si può portare da casa.",
+    ],
+    faq: [
+      { domanda: "Quando aprono i parchi acquatici?", risposta: "Quasi tutti da fine maggio o giugno ai primi di settembre, con orario continuato dal mattino al tardo pomeriggio. Qualcuno ha una parte al coperto aperta anche d'inverno. Le date cambiano ogni anno e dipendono dal meteo: guardate sempre il calendario sul sito del parco." },
+      { domanda: "Da che età ha senso portare un bambino?", risposta: "Anche da piccolissimi, se il parco ha un'area baby con acqua bassa, giochi e ombra. Gli scivoli veri hanno un'altezza minima, spesso da 100 a 140 cm: i più piccoli restano nelle loro piscine." },
+      { domanda: "I bambini pagano?", risposta: "Di solito i bambini sotto una certa altezza, spesso un metro, entrano gratis, e fino a 140 cm c'è il biglietto ridotto. La regola è per altezza, non per età, e cambia da parco a parco." },
+      { domanda: "Cosa mettere nello zaino?", risposta: "Costume di ricambio, crema solare, cappellino, ciabatte e i braccioli per chi non sa nuotare. Chiedete prima se si può portare il pranzo da casa: in alcuni parchi non è permesso." },
+    ],
+    schema: "WaterPark",
+    icona: "pesce",
+    regola: /parco acquatico|acquapark|aquapark/i,
+    giornata: true,
+  },
   {
     slug: "laser-game",
     nome: "Laser game, bowling e sport",
@@ -360,6 +417,8 @@ export interface Scheda {
   sito?: string;
   instagram?: string;
   reel?: string;
+  /** `false` se dalle fonti non risulta che organizzi feste (vedi LocaleFesta.festa). */
+  festa: boolean;
   categoria: Categoria;
   citta: string;
   cittaSlug: string;
@@ -392,6 +451,7 @@ export const SCHEDE: Scheda[] = CITTA_FESTE.flatMap((c) =>
     sito: l.sito,
     instagram: l.instagram,
     reel: l.reel,
+    festa: l.festa !== false,
     categoria: categoriaDi(l),
     citta: c.citta,
     cittaSlug: c.slug,
@@ -441,7 +501,7 @@ export const datiCard = (
   colore: s.colore,
   icona: s.categoria.icona,
   etichetta: etichettaDi(s.tipo, s.categoria.slug),
-  esperienze: esperienzeDi({ tipo: s.tipo, descrizione: s.descrizione, categoria: s.categoria.slug, pacchetti: s.extra?.pacchetti }),
+  esperienze: esperienzeDi({ tipo: s.tipo, descrizione: s.descrizione, categoria: s.categoria.slug, pacchetti: s.extra?.pacchetti, festa: s.festa }),
   eta: etaDi(s.descrizione),
   contatti: {
     whatsapp: Boolean(s.extra?.whatsapp),
@@ -480,6 +540,14 @@ export const CATEGORIE_ATTIVE = CATEGORIE.filter((c) => schedeDi(c.slug).length 
 export function rispostaListing(cat: Categoria, citta: string, schede: Scheda[]) {
   const zone = [...new Set(schede.map((s) => s.zona))].slice(0, 4);
   const elenco = zone.length > 1 ? `${zone.slice(0, -1).join(", ")} e ${zone.at(-1)}` : zone[0];
+  // «Tutte fanno feste» si scrive solo se è vero per ogni scheda della pagina.
+  if (schede.some((s) => !s.festa)) {
+    return (
+      `Intorno a ${citta} abbiamo raccolto ${schede.length} ${cat.nome.toLowerCase()} dove portare i bambini, ` +
+      `tra ${elenco}. Sono posti da giornata fuori e quasi tutti lavorano a stagione: ` +
+      `prima di partire controllate giorni, orari e prezzi sul sito del parco.`
+    );
+  }
   return (
     `A ${citta} abbiamo raccolto ${schede.length} ${cat.nome.toLowerCase()} di cui parlano le famiglie, ` +
     `tra ${elenco}: tutte organizzano anche feste di compleanno per bambini. ` +

@@ -7,6 +7,9 @@
 // - descrizioni fedeli a ciò che le fonti dicono, senza promesse nostre;
 // - niente personaggi protetti da copyright nelle NOSTRE descrizioni;
 // - il reel Instagram si aggiunge solo con l'URL vero del post (campo reel).
+// - un posto che NON risulta fare feste (parco acquatico, parco avventura senza
+//   pacchetti compleanno) si inserisce con `festa: false`: entra nella directory,
+//   non nella pagina delle feste. Mai scrivere «organizza feste» senza una fonte.
 //
 // Città già provate e SCARTATE (meno di 2 locali solidi con segnali recenti):
 // non ritentarle prima di qualche mese. Pescara, Sassari, Barletta, Pistoia,
@@ -27,6 +30,12 @@ export interface LocaleFesta {
   instagram?: string;
   /** URL di un reel Instagram da incorporare (caricato solo al tocco). */
   reel?: string;
+  /**
+   * `false` = dalle fonti NON risulta che organizzi feste di compleanno
+   * (parchi acquatici, molti parchi avventura): la scheda sta nella directory
+   * ma non nella pagina «Feste a [città]», e la scheda non dice «fa feste».
+   */
+  festa?: false;
 }
 
 export interface CittaFeste {
@@ -44,7 +53,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "milano",
     citta: "Milano",
-    aggiornata: "2026-10-19",
+    aggiornata: "2026-11-15",
     rispostaBreve:
       "A Milano una festa di compleanno per bambini si organizza in ludoteca o in una sala feste di zona: ce ne sono in quasi ogni quartiere, da Lambrate al Sempione alla zona Ripamonti, con formule da circa due ore e mezza che spesso comprendono spazio giochi, buffet e animazione. Conviene prenotare con qualche settimana di anticipo, chiedere un preventivo scritto e verificare cosa è incluso: torta, allestimento e pulizie fanno la differenza sul prezzo finale.",
     intro:
@@ -109,6 +118,8 @@ export const CITTA_FESTE: CittaFeste[] = [
         descrizione:
           "Feste di compleanno con o senza animazione: la via di mezzo tra la sala nuda e il pacchetto completo.",
       },
+      { nome: "Tree Experience Milano Corvetto", zona: "Milano, parco Cassinis (M3 Porto di Mare)", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Il primo parco avventura dentro Milano, aperto nel 2016 nel parco Cassinis, vicino alla fermata Porto di Mare della metro gialla. Le guide parlano di otto percorsi per tutte le età, tra ponti tibetani, liane, reti e carrucole, e della Net Experience, un percorso tutto in rete adatto anche ai bambini dai 2 anni. Per gruppi e compleanni si chiede direttamente al parco.", festa: false },
+      { nome: "Acquatica Park", zona: "Milano, Quinto Romano (via Airaghi)", tipo: "parco acquatico", descrizione: "Parco acquatico dentro Milano, a Quinto Romano, vicino all'uscita San Siro della Tangenziale Ovest. È aperto d'estate, da fine maggio a inizio settembre, e ha riaperto anche per la stagione 2026. Per i più piccoli c'è la Baby Lagoon, con acqua bassa e mini scivoli; per i grandi ci sono scivoli, gommoni e il fiume lento. Sulla soglia di altezza per l'ingresso gratuito le fonti non concordano: controllatela dal parco prima di partire.", festa: false },
     ],
     faq: [
       {
@@ -136,7 +147,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "roma",
     citta: "Roma",
-    aggiornata: "2026-10-19",
+    aggiornata: "2026-11-15",
     rispostaBreve:
       "A Roma le feste di compleanno per bambini si fanno in ludoteca, nei parchi giochi al chiuso o — nella bella stagione — negli spazi con giardino: l'offerta è distribuita per quadranti, da Roma Nord alla Portuense a Roma Sud, quindi conviene cercare prima per zona e poi per formula. Le strutture propongono in genere sala, merenda e animazione su prenotazione, spesso con un acconto: chiedete cosa è incluso e fissate una scadenza per le conferme degli invitati.",
     intro:
@@ -202,6 +213,10 @@ export const CITTA_FESTE: CittaFeste[] = [
           "Sala buffet e sala giochi spaziose, con feste pensate per bambini fino ai 9 anni.",
         sito: "https://www.candypark.net/",
       },
+      { nome: "EurPark Energy & Adventure", zona: "Roma, EUR (piazza Pakistan)", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Parco avventura dentro Roma, all'EUR. Nell'area Adventure ci sono i percorsi acrobatici sugli alberi, una parete di arrampicata a quattro facce e il tiro con l'arco; nell'area Energy i giochi di squadra, come il laser tag e il calcio balilla umano. Le guide parlano di sei percorsi di difficoltà diversa, con gli istruttori che seguono i bambini. Organizza feste di compleanno per bambini e centri estivi: orari e prenotazioni sono sul sito del parco.", sito: "https://www.eurpark.it/" },
+      { nome: "Hydromania", zona: "Roma ovest, vicolo del Casale Lumbroso", tipo: "parco acquatico", descrizione: "Parco acquatico dentro Roma, aperto d'estate: nel 2026 la stagione è andata dal 30 maggio al 6 settembre. Per i più piccoli c'è una zona con tre piscine con giochi, scivoli e rocce con cascate, e un miniclub dove i bambini giocano seguiti dagli animatori. Date, orari e prezzi cambiano ogni anno: si controllano sul sito del parco.", sito: "https://www.hydromania.it/", festa: false },
+      { nome: "Aquafelix", zona: "Civitavecchia, sul litorale a nord di Roma", tipo: "parco acquatico", descrizione: "Parco acquatico a Civitavecchia, aperto d'estate: per il 2026 le guide indicano l'apertura tutti i giorni da metà giugno a metà settembre, dalle 10 alle 18:30. Per i bambini c'è un'area dedicata, in parte recintata, con scivoli piccoli, giochi d'acqua, cascate e una piscina bassa, e durante la giornata c'è l'animazione. Orari e regole d'ingresso si controllano sul sito ufficiale.", sito: "https://www.aquafelix.it/", festa: false },
+      { nome: "MagicSplash", zona: "Valmontone, a sud-est di Roma, accanto a MagicLand", tipo: "parco acquatico", descrizione: "Il parco acquatico a tema caraibico di MagicLand, a Valmontone: circa 40.000 m² aperti d'estate, con la stagione 2026 inaugurata il 30 maggio. Per i più piccoli ci sono Laguna Tiburon, un'area di giochi d'acqua e spruzzi con il fondo gommato, e Cala Tortuga, con quattro scivoli in miniatura. Nel 2026 sono arrivati anche quattro scivoli nuovi per i più grandi. Calendario e orari si controllano sul sito del parco.", sito: "https://magicland.it/", festa: false },
     ],
     faq: [
       {
@@ -229,7 +244,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "napoli",
     citta: "Napoli",
-    aggiornata: "2026-10-19",
+    aggiornata: "2026-11-15",
     rispostaBreve:
       "A Napoli e nell'hinterland le feste di compleanno per bambini si organizzano nelle ludoteche e nelle sale feste con playground: dall'area del Vomero a Salvator Rosa fino a Mugnano, Casoria e Quarto, le strutture propongono pacchetti con sala, giochi, animazione e spesso mascotte. Il passaparola tra mamme conta molto: prima di prenotare chiedete un preventivo scritto e verificate cosa comprende davvero il pacchetto.",
     intro:
@@ -284,6 +299,7 @@ export const CITTA_FESTE: CittaFeste[] = [
         tipo: "ludoteca e sala eventi",
         descrizione: "Ludoteca e sala eventi dell'area nord, per feste e ricorrenze.",
       },
+      { nome: "AcquaFlash", zona: "Licola (Giugliano in Campania), sul litorale a nord di Napoli", tipo: "parco acquatico", descrizione: "L'ex Pareo Park di Licola, presentato come il parco acquatico più grande della Campania. Apre d'estate: nel 2026 ha riaperto il 23 giugno, con orario continuato fino ai primi di settembre. È consigliato dai 3 anni e i bambini più piccoli entrano gratis: sulla soglia esatta di altezza le fonti non concordano, quindi controllatela dal parco insieme a orari e prezzi.", festa: false },
     ],
     faq: [
       {
@@ -311,7 +327,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "torino",
     citta: "Torino",
-    aggiornata: "2026-10-20",
+    aggiornata: "2026-11-15",
     rispostaBreve:
       "A Torino le feste di compleanno per bambini si fanno nelle ludoteche e sale giochi della citt\u00e0 e della prima cintura \u2014 da via Bardonecchia a Nichelino, Collegno e Beinasco \u2014 con pacchetti che spesso comprendono sala riservata, gonfiabili, cibo e allestimento. Le formule con animazione durano in genere due ore e mezza; i prezzi partono da circa 150 euro nei giorni feriali e l'affitto di una sala attrezzata si aggira tra i 200 e i 300 euro.",
     intro:
@@ -372,6 +388,7 @@ export const CITTA_FESTE: CittaFeste[] = [
         descrizione:
           "Un salone al chiuso di oltre 200 mq: la scelta per le feste d'inverno coi gruppi numerosi.",
       },
+      { nome: "Parco Avventura Tre Querce", zona: "Pino Torinese, sulla collina di Superga", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Parco avventura in un bosco di frassini e querce sulla collina di Torino, con sei percorsi: il Baby è per i bambini dai 3 ai 6 anni, i Junior dai 7 anni in su. Ci sono tariffe per gruppi e famiglie, e nel fine settimana serve prenotare. Il sito del turismo di Torino lo indica anche per gruppi, scuole e feste: per un compleanno chiedete direttamente al parco.", festa: false },
     ],
     faq: [
       {
@@ -487,7 +504,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "genova",
     citta: "Genova",
-    aggiornata: "2026-10-20",
+    aggiornata: "2026-11-15",
     rispostaBreve:
       "A Genova il compleanno dei bambini si festeggia in ludoteca \u2014 dal centro a Sampierdarena \u2014 o nelle sale di quartiere e parrocchiali, molto usate e pi\u00f9 economiche: la sala di via Donghi a San Fruttuoso \u00e8 tra le pi\u00f9 richieste. I pacchetti delle strutture attrezzate partono da circa 220 euro nei giorni feriali (260 nel weekend) per la fascia 15:30\u201318:30, spesso con addobbi e pulizie inclusi.",
     intro:
@@ -523,6 +540,7 @@ export const CITTA_FESTE: CittaFeste[] = [
           "Servizio di feste e animazione attivo in diversi quartieri della citt\u00e0, con sale appoggiate per ogni zona.",
         sito: "https://www.compleannogenova.it/",
       },
+      { nome: "Parco Avventura Righi", zona: "Genova, Righi (sulle alture della città)", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Parco avventura in oltre 15.000 m² di bosco al Righi, sulle alture di Genova: otto percorsi con 70 piattaforme sospese e un campo gioco per i più piccoli. Secondo le guide per famiglie si può cominciare dai 3 anni, con percorsi diversi in base all'età e all'altezza. Apre soprattutto nel fine settimana: giorni e orari vanno controllati prima di salire.", festa: false },
     ],
     faq: [
       {
@@ -550,7 +568,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "bologna",
     citta: "Bologna",
-    aggiornata: "2026-10-21",
+    aggiornata: "2026-11-15",
     rispostaBreve:
       "A Bologna le feste di compleanno per bambini si fanno nei parchi gioco al coperto e nelle ludoteche \u2014 da Casteldebole al centro \u2014 oppure, per chi preferisce l'aria aperta, negli agriturismi con animazione alle porte della citt\u00e0. Dalle fonti pubbliche, una festa in ludoteca costa in genere tra i 100 e i 200 euro, mentre gli spazi pi\u00f9 grandi con pacchetto completo arrivano a 200\u2013500 euro per due\u2013tre ore: per i weekend conviene prenotare almeno quattro settimane prima.",
     intro:
@@ -587,6 +605,7 @@ export const CITTA_FESTE: CittaFeste[] = [
         descrizione:
           "Il parco divertimenti al coperto con pacchetti festa all inclusive, per i gruppi numerosi.",
       },
+      { nome: "Parco Avventura Cavaioni", zona: "Bologna, parco Cavaioni (sui colli)", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Parco avventura dentro il parco Cavaioni, sui colli di Bologna: sette percorsi per i bambini a partire da 100 cm di altezza e nove per ragazzi e adulti da 140 cm. Nel parco ci sono aree attrezzate per il picnic. Giorni di apertura e orari cambiano con la stagione: controllateli prima di salire.", festa: false },
     ],
     faq: [
       {
@@ -614,7 +633,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "firenze",
     citta: "Firenze",
-    aggiornata: "2026-10-21",
+    aggiornata: "2026-11-15",
     rispostaBreve:
       "A Firenze le feste di compleanno per bambini si organizzano nelle ludoteche \u2014 dall'Oltrarno a via Pisana \u2014 nei saloni attrezzati in citt\u00e0 o nei grandi spazi con gonfiabili della piana, come Calenzano e Campi Bisenzio. Dalle fonti pubbliche i pacchetti partono da circa 150 euro nei feriali per 10 bambini; le sale pi\u00f9 richieste lavorano il sabato e la domenica pomeriggio e vanno prenotate con almeno una settimana d'anticipo.",
     intro:
@@ -658,6 +677,8 @@ export const CITTA_FESTE: CittaFeste[] = [
           "La festa per i pi\u00f9 grandi: sala giochi e lasergame fino a 24 giocatori per partita.",
         sito: "https://www.lasergamefirenze.com/compleanni-cxrn",
       },
+      { nome: "Tree Experience Vincigliata", zona: "Vincigliata (Fiesole), a una decina di minuti da Firenze", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Parco avventura nel bosco di Vincigliata, sulle colline di Fiesole. Le schede del parco parlano di nove percorsi sugli alberi, tra i più lunghi della Toscana, e lo presentano come un posto adatto alle feste di compleanno di bambini e ragazzi. Chi c'è stato racconta di uno staff attento ai più piccoli. Per la festa chiedete al parco età minima, numero di bambini e prezzo." },
+      { nome: "Parco Avventura Il Gigante", zona: "Pratolino (Vaglia), a nord di Firenze", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Uno dei parchi avventura più grandi del centro Italia: 18 percorsi sospesi nel bosco delle Querce della Garena, a Pratolino, con percorsi a partire dai 3 anni. Nella scheda del parco è indicata la possibilità di organizzare feste di compleanno. Giorni di apertura e orari cambiano con la stagione: conviene controllarli prima di salire." },
     ],
     faq: [
       {
@@ -761,7 +782,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "catania",
     citta: "Catania",
-    aggiornata: "2026-10-22",
+    aggiornata: "2026-11-15",
     rispostaBreve:
       "A Catania la festa di compleanno per bambini si fa quasi sempre in una sala feste o ludoteca con playground: in citt\u00e0 ci sono spazi grandi con area baby e sala per i genitori, e appena fuori \u2014 San Gregorio, Misterbianco, Acireale \u2014 parchi giochi al chiuso e ville con spazi all'aperto. I pacchetti comprendono spesso allestimento e catering: fatevi dare un preventivo scritto con l'elenco di cosa \u00e8 incluso.",
     intro:
@@ -813,6 +834,7 @@ export const CITTA_FESTE: CittaFeste[] = [
           "Parco divertimenti e ludoteca con spazi all'aperto e una pista ciclabile privata; feste per bambini da 1 a 12 anni.",
         sito: "https://villaanzalone.it",
       },
+      { nome: "Monti Rossi Etna Adventure Park", zona: "Nicolosi, sull'Etna, a pochi chilometri da Catania", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Parco avventura ai Monti Rossi di Nicolosi, in via Goethe, a circa un chilometro dal centro del paese. I percorsi Junior, giallo e azzurro, sono per i bambini da 110 cm di altezza; quelli più alti chiedono 130 cm. Una scheda del parco indica che si possono organizzare feste di compleanno: condizioni e prezzi si chiedono al parco. Nel 2026 le sessioni si prenotano online." },
     ],
     faq: [
       {
@@ -840,7 +862,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "verona",
     citta: "Verona",
-    aggiornata: "2026-10-22",
+    aggiornata: "2026-11-15",
     rispostaBreve:
       "A Verona si pu\u00f2 scegliere tra la sala feste privata per i pi\u00f9 piccoli, il bowling in zona Fiera con pacchetti da circa 25 \u20ac a bambino e perfino il compleanno al museo: il Children's Museum e il Museo Archeologico Nazionale organizzano feste su prenotazione (al museo archeologico 190 \u20ac fino a 20 bambini). Verso il lago di Garda ci sono trattorie con ludoteca dove i grandi mangiano e i bimbi giocano.",
     intro:
@@ -886,6 +908,7 @@ export const CITTA_FESTE: CittaFeste[] = [
           "Trattoria con ludoteca e spazi dedicati ai pi\u00f9 piccoli: la formula dove i grandi stanno a tavola e i bimbi giocano accanto.",
         sito: "https://www.trattoriadamaick.it",
       },
+      { nome: "Caneva Aquapark", zona: "Lazise, sul lago di Garda (a circa 25 km da Verona)", tipo: "parco acquatico", descrizione: "Parco acquatico a Lazise, sul lago di Garda, aperto d'estate: nel 2026 dal 23 maggio al 13 settembre, in genere dalle 10 alle 18 e fino alle 19 nei fine settimana e in piena estate. I bambini sotto i 100 cm entrano gratis e non hanno bisogno del biglietto; da 100 a 140 cm c'è il ridotto. Prezzi e orari cambiano secondo il periodo: controllateli prima di partire.", festa: false },
     ],
     faq: [
       {
@@ -913,7 +936,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "venezia",
     citta: "Venezia",
-    aggiornata: "2026-10-22",
+    aggiornata: "2026-11-15",
     rispostaBreve:
       "A Venezia la maggior parte delle feste di compleanno per bambini si fa in terraferma, tra Mestre e dintorni: trampoline park con sala privata (pacchetto base 120 \u20ac nei feriali, 150 \u20ac nel weekend), ristoranti per eventi con area giochi e perfino il compleanno in fattoria. In centro storico gli spazi sono pochissimi (la ludoteca comunale di Castello \u00e8 chiusa dal 2022), quindi chi abita in laguna di solito festeggia oltre il ponte.",
     intro:
@@ -957,6 +980,7 @@ export const CITTA_FESTE: CittaFeste[] = [
           "Affitta le sale per le feste nel weekend, quattro ore dalle 15 alle 19, fino a 15 bambini con i loro adulti; va prenotato con qualche settimana di anticipo.",
         sito: "https://www.ilgiardinodelleciliegie.it",
       },
+      { nome: "Caribe Bay", zona: "Jesolo, sul litorale veneziano", tipo: "parco acquatico", descrizione: "Parco acquatico a tema caraibico a Jesolo, aperto d'estate: nel 2026 tutti i giorni dal 30 maggio al 13 settembre. Per le famiglie con bimbi piccoli c'è Pirates' Bay, una baia con la spiaggia di sabbia bianca e le attrazioni per i bambini. I bambini fino a 100 cm entrano gratis e tra 100 e 140 cm pagano il ridotto. Dal 2026 dal parco si arriva anche al minigolf a tema, con 24 buche, su prenotazione.", sito: "https://www.caribebay.it/", festa: false },
     ],
     faq: [
       {
@@ -1730,7 +1754,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "ravenna",
     citta: "Ravenna",
-    aggiornata: "2026-10-27",
+    aggiornata: "2026-11-15",
     rispostaBreve: "A Ravenna la festa di compleanno per bambini si fa nei parchi giochi al coperto con gonfiabili, come Neverland Park alle Bassette (700 mq, con un'area per i bimbi da 0 a 3 anni), nelle sale feste con playground in città e a Marina Romea, oppure per i più grandi con il pacchetto compleanno di Mirabilandia. Molti pacchetti arrivano a circa 20 bambini fratelli compresi: fate la lista degli invitati prima di prenotare.",
     intro: "Ravenna unisce una città raccolta e i lidi a pochi minuti, e questo si vede anche nelle feste: si sceglie tra i parchi gioco coperti della periferia, le sale feste vicino al mare e il grande parco divertimenti a Savio.",
     locali: [
@@ -1738,6 +1762,7 @@ export const CITTA_FESTE: CittaFeste[] = [
       { nome: "Cucina Retrò", zona: "Marina Romea (Ravenna)", tipo: "sala feste con playground", descrizione: "Locale dedicato esclusivamente ai compleanni dei bambini, con sale per le feste e circa 200 mq di aree gioco, tra cui una ludoteca coperta con playground, piscina di palline e scivolo; i genitori possono seguire i bimbi dal tavolo grazie ai monitor. Il buffet è preparato in giornata dalla cucina e in stagione si gioca anche all'aperto.", sito: "https://cucinaretro.it/" },
       { nome: "L'isola di Sophie", zona: "Ravenna, via Agro Pontino", tipo: "sala feste con playground", descrizione: "Spazio per le feste di compleanno aperto nel 2026, pensato per riunire in un unico ambiente l'area gioco dei bambini e uno spazio riservato ai genitori. Le due aree principali accolgono una ventina di bambini, con gonfiabili, un playground di sei metri, scivoli e un'area baby per i più piccoli." },
       { nome: "Mirabilandia", zona: "Savio di Ravenna", tipo: "parco divertimenti", descrizione: "Il parco propone un pacchetto compleanno per gruppi di almeno 10 persone, con ingresso omaggio per il festeggiato, ingresso scontato per gli invitati e un pasto con torta di compleanno; d'estate c'è una formula simile anche al parco acquatico Mirabeach. Il pacchetto va prenotato almeno 3 giorni prima.", sito: "https://www.mirabilandia.it/" },
+      { nome: "CerviAvventura", zona: "Cervia, via Forlanini (a circa 25 km da Ravenna)", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Parco avventura a Cervia, con percorsi di difficoltà diversa adatti alle famiglie. Si entra in base all'età e all'altezza: nel 2026 il biglietto era di 10 euro dai 4 anni, 15 dagli 8 anni e 20 sopra 1,40 m. Apre a stagione, in primavera nei fine settimana e nei festivi: il calendario aggiornato è sul sito del turismo di Cervia.", festa: false },
     ],
     faq: [
       { domanda: "Quanti bambini posso invitare in un parco giochi al coperto?", risposta: "Dipende dal locale, ma a Ravenna è frequente un pacchetto fino a circa 20 bambini: a Neverland Park, per esempio, il conteggio comprende anche i fratelli. Fai la lista completa prima di prenotare e chiedi come vengono contati i più piccoli." },
@@ -1785,7 +1810,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "rimini",
     citta: "Rimini",
-    aggiornata: "2026-10-28",
+    aggiornata: "2026-11-15",
     rispostaBreve: "A Rimini la festa di compleanno per bambini si fa soprattutto nelle ludoteche con sala feste e nei parchi giochi al coperto tra Marina Centro e Viserba, mentre nei dintorni ci sono un bowling con play park a Cerasolo di Coriano e un parco giochi all'aperto a Igea Marina. Molte formule durano circa tre ore: Tiny Rimini propone pacchetti fino a 20 bambini, Chibia ha uno spazio coperto di circa 1000 mq con un'area baby per i bimbi da 0 a 3 anni. Prenota con qualche settimana di anticipo, soprattutto per il weekend, e chiedi subito cosa è compreso tra buffet, torta e animazione.",
     intro: "Rimini non è solo spiaggia d'estate: tutto l'anno ci sono spazi pensati per far festa con i bambini, dalle ludoteche vicino al mare ai grandi parchi gonfiabili al coperto. E se cerchi qualcosa di diverso, a pochi chilometri trovi anche bowling e parchi giochi all'aperto nei comuni vicini.",
     locali: [
@@ -1793,6 +1818,7 @@ export const CITTA_FESTE: CittaFeste[] = [
       { nome: "Chibia Parco Giochi", zona: "Rimini, Viserba", tipo: "parco giochi al coperto", descrizione: "Area coperta di circa 1000 mq con gonfiabili, uno scivolo alto 7 metri, percorsi a ostacoli e un'area baby recintata per i bimbi da 0 a 3 anni. Per le feste allestisce uno spazio dedicato, prepara il buffet e include l'accesso a tutti i giochi del parco.", sito: "https://www.chibiaparcogiochirimini.it/" },
       { nome: "Bowling Seventies", zona: "Cerasolo (Coriano)", tipo: "sala feste con playground", descrizione: "Bowling a pochi minuti da Rimini con pacchetti compleanno divisi per età (0–6, 7–10 e 11–17 anni), che comprendono decorazioni, animatori e torta della pasticceria interna. I più piccoli hanno il Play Park, e c'è uno short bowling con piste più corte e palle leggere pensato per i bambini dai 4 anni.", sito: "https://bowling-seventies.com/" },
       { nome: "Parcogiochi Paperopolis", zona: "Igea Marina (Bellaria Igea Marina)", tipo: "parco divertimenti", descrizione: "Storico parco giochi per famiglie all'aperto, in un'area verde, con gonfiabili, reti elastiche e piccole attrazioni. Organizza feste di tre ore al pomeriggio oppure la sera; conviene verificare il calendario di apertura prima di fissare la data.", sito: "https://paperopolis.it/" },
+      { nome: "Aquafan", zona: "Riccione, a pochi chilometri da Rimini", tipo: "parco acquatico", descrizione: "Il grande parco acquatico di Riccione, aperto d'estate: nel 2026 dal 1° giugno al 6 settembre, tutti i giorni dalle 10 alle 18:30. Ci sono zone pensate per chi arriva con bimbi piccoli, con spazi più tranquilli, giochi d'acqua e piscine basse. I bambini fino a un metro di altezza entrano gratis, e chi compie gli anni entra gratis nel giorno del compleanno mostrando un documento.", sito: "https://www.aquafan.it/", festa: false },
     ],
     faq: [
       { domanda: "Qual è il posto giusto in base all'età?", risposta: "Per i più piccoli funzionano bene i parchi giochi al coperto con un'area baby dedicata, come quello di Viserba con lo spazio per i bimbi da 0 a 3 anni. Dai 4–5 anni in su piacciono gonfiabili e short bowling, mentre per i ragazzi più grandi alcuni locali propongono pacchetti teen con bowling o biliardo." },
@@ -1839,7 +1865,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "latina",
     citta: "Latina",
-    aggiornata: "2026-10-29",
+    aggiornata: "2026-11-15",
     rispostaBreve: "A Latina la festa di compleanno per bambini si fa soprattutto nei parchi giochi al coperto con gonfiabili e trampolini, nelle ludoteche con sala feste del centro e, con la bella stagione, negli spazi verdi dei borghi come Borgo Bainsizza. Ci sono anche formule di nicchia, come le feste a tema moda e spa dai 5 ai 12 anni, o pacchetti con area riservata in esclusiva e torta inclusa. Per le feste nel fine settimana conviene prenotare con qualche settimana di anticipo e chiedere subito cosa comprende il pacchetto (buffet, animazione, aree incluse nel gioco libero).",
     intro: "Latina è una città giovane e a misura di famiglia, dove tra centro, borghi e litorale non mancano gli spazi pensati per far festa con i più piccoli. Si va dai grandi parchi giochi al coperto, perfetti nei mesi freddi, ai giardini e alle piscine della campagna pontina per le feste all'aperto.",
     locali: [
@@ -1847,6 +1873,7 @@ export const CITTA_FESTE: CittaFeste[] = [
       { nome: "Tutti Giù per Terra", zona: "Latina, via dei Marruccini", tipo: "ludoteca e sala feste", descrizione: "Associazione con ludoteca che affitta una sala per i compleanni dei bambini, personalizzabile con tema, decorazioni e animazione. Organizza anche feste a tema con giochi gonfiabili e teatrini.", sito: "https://www.ludotecatuttigiuperterra.com/" },
       { nome: "Angolo Verde Mini Park", zona: "Borgo Bainsizza (Latina)", tipo: "sala feste con playground", descrizione: "Azienda agrituristica con ampi spazi verdi, parco giochi per bambini, campi da calcetto e pallavolo, postazioni barbecue e una piscina all'aperto, più una sala interna per le feste nei mesi più freddi. Su richiesta si possono noleggiare gonfiabili e avere il buffet.", sito: "https://www.miniparklangoloverde.it/" },
       { nome: "La Petite", zona: "Latina, via Garigliano", tipo: "sala feste", descrizione: "Sala in stile parigino dedicata alle feste delle bambine dai 5 ai 12 anni, con formule come lo Spa & Fashion Party con piccola sfilata e l'Afternoon Tea Party con merenda elegante e giochi tra amiche. Propone anche una festa pensata per mamma e figlia.", sito: "https://www.lapetite.it/" },
+      { nome: "Indiana Park Latina", zona: "Latina, strada Cerasella", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Parco avventura alle porte di Latina, aperto nei fine settimana. Ha sette percorsi sugli alberi, divisi per colore in base all'età: IndianaKid è pensato per i bambini da 2 a 6 anni circa. Oltre ai percorsi ci sono il tiro con l'arco e una pista per la mountain bike. Per gruppi e compleanni si chiede direttamente al parco.", festa: false },
     ],
     faq: [
       { domanda: "Dove si può fare una festa di compleanno al chiuso a Latina?", risposta: "Le scelte più comuni sono i parchi giochi al coperto con gonfiabili, trampolini e aree riservate per la festa, oppure le ludoteche con sala in affitto, che spesso includono anche animazione e decorazioni a tema. Sono le soluzioni più comode tra l'autunno e la primavera, quando il meteo è incerto." },
@@ -1858,7 +1885,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "monza",
     citta: "Monza",
-    aggiornata: "2026-10-29",
+    aggiornata: "2026-11-15",
     rispostaBreve: "A Monza la festa di compleanno per bambini si fa nelle sale dei centri sportivi in città; appena fuori città ci sono il trampoline park di Lissone, i parchi giochi al coperto di Bellusco e la fattoria di Concorezzo. Qualche esempio: il trampoline park di Lissone ha 1.200 m² con un'area feste riservata, mentre il parco al coperto di Bellusco offre 650 m² di gioco per bambini da 0 a 12 anni e un'area party di 150 m² divisa in salette. Prenota con anticipo i weekend d'autunno e d'inverno, quando le feste si spostano al chiuso, e metti i calzini antiscivolo nello zaino.",
     intro: "Monza unisce il verde del Parco e della Villa Reale a una Brianza ricca di spazi pensati per i bambini, tutti a pochi minuti d'auto. Per la festa si può restare in città oppure spostarsi nei comuni vicini, scegliendo tra gioco libero, salti, natura e animali.",
     locali: [
@@ -1866,6 +1893,7 @@ export const CITTA_FESTE: CittaFeste[] = [
       { nome: "Space Jump", zona: "Lissone", tipo: "trampoline park", descrizione: "Trampoline park di 1.200 m² con un'area riservata ai compleanni e la sala Space Party per eventi privati. C'è anche il Baby Space dedicato ai più piccoli; per saltare servono i calzini antiscivolo.", sito: "https://www.spacejump.it/" },
       { nome: "La Foresta Incantata", zona: "Bellusco", tipo: "parco giochi al coperto", descrizione: "Parco giochi al coperto a tema foresta: 650 m² di gioco per bambini da 0 a 12 anni, con un grande playground-labirinto e un angolo per i bimbi sotto i 3 anni. L'area party di 150 m² si divide in sei salette singole o tre doppie.", sito: "https://www.laforestaincantataparcogiochi.com/" },
       { nome: "La Camilla", zona: "Concorezzo", tipo: "fattoria didattica, spazi all'aperto", descrizione: "Agriturismo con 8 ettari di terreno e una fattoria con animali da cortile e cavalli, dove si organizza il compleanno in fattoria con merenda e giochi di gruppo all'aperto. Il pomeriggio è disponibile dal martedì al venerdì, il weekend su prenotazione.", sito: "https://www.lacamilla.it/" },
+      { nome: "Acquaworld", zona: "Concorezzo, a pochi minuti da Monza", tipo: "parco acquatico al coperto e all'aperto", descrizione: "Parco acquatico con una parte al coperto e una all'aperto, in funzione anche d'inverno: le guide lo presentano come il più grande parco acquatico al coperto d'Italia. L'area dei bambini si chiama Tiki Bay e, secondo le cronache del 2026, ogni giorno alle 15, tranne il lunedì, diventa una festa con musica, giochi e schiuma. I bambini fino a 80 cm entrano gratis; i biglietti comprati online di solito costano meno.", sito: "https://acquaworld.it/", festa: false },
     ],
     faq: [
       { domanda: "Che posto scegliere in base all'età?", risposta: "Fino ai 5-6 anni funzionano bene ludoteche e parchi al coperto con un angolo baby e giochi morbidi, dove anche i piccolissimi sono al sicuro. Dai 6-7 anni in su piacciono gli spazi dove ci si muove tanto, come i trampolini, o le feste all'aperto con giochi di gruppo." },
@@ -1877,7 +1905,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "bergamo",
     citta: "Bergamo",
-    aggiornata: "2026-10-30",
+    aggiornata: "2026-11-15",
     rispostaBreve: "A Bergamo la festa di compleanno per bambini si fa soprattutto nei parchi giochi al coperto in città e nei locali per famiglie con playground della provincia, mentre per chi vuole muoversi di più ci sono il parco trampolini di via Guzzanica e, a Capriate San Gervasio, Leolandia. Fantabosco accoglie bambini da 1 a 10 anni, e le feste a Leolandia sono pensate dai 3 anni in su con formule fino a 20 partecipanti. Prenotate con almeno due o tre settimane di anticipo, soprattutto se puntate al sabato o alla domenica.",
     intro: "Bergamo è una città a misura di famiglia, con spazi gioco al coperto a due passi dal centro e tante alternative nei comuni della provincia, dalla Bassa alla zona dei laghi. Che si cerchi un pomeriggio di scivoli e palline per i più piccoli o qualcosa di più movimentato per i grandi, le distanze sono brevi e le opzioni non mancano.",
     locali: [
@@ -1885,6 +1913,7 @@ export const CITTA_FESTE: CittaFeste[] = [
       { nome: "Mi gioco la pizza", zona: "Chiuduno (BG)", tipo: "sala feste con playground", descrizione: "Ristorante per famiglie con parco giochi coperto, tra percorso a ostacoli, piscina di palline e un'area dedicata ai bambini da 0 a 6 anni; il parco si può usare durante le feste di compleanno, proposte in diversi pacchetti con animazione dello staff.", sito: "https://www.migiocolapizza.com/" },
       { nome: "Zero-Gravity Bergamo", zona: "Bergamo, via Guzzanica", tipo: "trampoline park", descrizione: "Parco trampolini con formula festa privata pensata per bambini e ragazzi: comprende assistente dedicato, sala privata, allestimento e accesso alle aree trampolini, con calze antiscivolo per ogni partecipante.", sito: "https://www.zero-gravity.it/" },
       { nome: "Leolandia", zona: "Capriate San Gervasio (BG)", tipo: "parco divertimenti", descrizione: "Parco divertimenti con pacchetti compleanno per bambini dai 3 anni, che includono torta e tavolo riservato per il taglio; le formule sono pensate per gruppi di diverse dimensioni, fino a 20 partecipanti.", sito: "https://www.leolandia.it/" },
+      { nome: "Parco Avventura Bergamo Torre Boldone", zona: "Torre Boldone, alle porte di Bergamo", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Il parco avventura più vicino a Bergamo, aperto nel 2018 a Torre Boldone. Ha dieci percorsi sospesi, sette sugli alberi e tre su pali di legno, più una torre per il bungee, un parco giochi con fontana a spruzzi e un ristorante. Le guide segnalano due percorsi baby dai 3 anni; i biglietti in vendita per il 2026 valgono due ore e partono da 110 cm di altezza.", festa: false },
     ],
     faq: [
       { domanda: "Con quanto anticipo conviene prenotare?", risposta: "Almeno due o tre settimane prima, come suggerisce anche Leolandia per i suoi pacchetti; per i weekend e i periodi di festa è meglio muoversi ancora prima, perché sale e fasce orarie sono limitate." },
@@ -1965,12 +1994,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "novara",
     citta: "Novara",
-    aggiornata: "2026-11-01",
+    aggiornata: "2026-11-15",
     rispostaBreve: "A Novara la festa di compleanno per bambini si fa nelle sale di un parco come il Parco della Mora, che affitta due sale con tavoli, frigorifero e bagno con fasciatoio affacciate su un parco giochi recintato, oppure al centro per famiglie Agorà, in via Cameri, che ha un'area feste accanto alla ludoteca e si prenota online. Per il weekend muovetevi con anticipo e chiedete sempre cosa è incluso nel prezzo: alla Mora le sale sono attrezzate con tavoli e frigorifero per merenda e torta, e il bar è proprio di fronte.",
     intro: "Novara è una città pianeggiante e comoda da girare, con spazi verdi e centri per le famiglie a pochi minuti da casa. Per il compleanno si può scegliere tra una sala affacciata su un parco giochi all'aperto e una ludoteca al coperto con area feste.",
     locali: [
       { nome: "Parco della Mora", zona: "Novara", tipo: "sala feste", descrizione: "Centro sportivo nel verde con un parco giochi interamente recintato, dove a gennaio 2026 sono arrivati giochi nuovi. Per i compleanni affitta due sale colorate con frigorifero, tavoli e sedie per merenda e torta e un bagno con fasciatoio, a uso privato per il pomeriggio: una ha una pergola coperta, l'altra un dehor con ombrelloni, e da entrambe si vedono i bambini giocare.", sito: "https://www.parcodellamora.it/" },
       { nome: "Agorà", zona: "Novara (via Cameri)", tipo: "ludoteca", descrizione: "Centro per le famiglie con ludoteca, scuola di musica e di lingue e campus estivi. Le feste di compleanno si fanno nell'area feste accanto alla ludoteca e si possono prenotare online.", sito: "https://www.agoranovara.com/" },
+      { nome: "Ondaland", zona: "Vicolungo, vicino a Novara", tipo: "parco acquatico", descrizione: "Grande parco acquatico a Vicolungo, aperto dal 2005 e diviso in tre aree a tema, con tante piscine per adulti e bambini, scivoli e punti ristoro. Apre d'estate, da giugno ai primi di settembre, tutti i giorni salvo maltempo. Sulle date esatte del 2026 le fonti non concordano di qualche giorno: prima di partire guardate il calendario del parco.", festa: false },
     ],
     faq: [
       { domanda: "Dove si festeggia un compleanno per bambini a Novara?", risposta: "Due formule diverse: le sale del Parco della Mora, affacciate su un parco giochi recintato, oppure l'area feste accanto alla ludoteca del centro Agorà, in via Cameri, che si prenota online." },
@@ -2016,12 +2046,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "cesena",
     citta: "Cesena",
-    aggiornata: "2026-11-02",
+    aggiornata: "2026-11-15",
     rispostaBreve: "A Cesena la festa di compleanno per bambini si fa nel verde del Parco Rio Marano, che ha pacchetti compleanno dai 4 anni in su con gonfiabili e reti elastiche senza limiti di tempo e una merenda con la pizza, oppure al coperto in una ludoteca come Libera-mente, a Capannaguzzo, che riserva lo spazio per le feste con area gioco, angolo per torta e buffet e una caffetteria per i genitori. Prenotate per tempo e, se scegliete il parco, chiedete sempre cosa succede in caso di pioggia.",
     intro: "Cesena ha la campagna a pochi minuti dal centro, e per un compleanno è un vantaggio: si può festeggiare all'aperto in un grande parco giochi nel verde oppure in una ludoteca al coperto, comoda in ogni stagione. Due posti diversi, uno per chi vuole correre e saltare, l'altro per chi cerca uno spazio raccolto anche d'inverno.",
     locali: [
       { nome: "Parco Rio Marano", zona: "Cesena (via Vicinale Papa)", tipo: "parco giochi, spazi all'aperto", descrizione: "Parco giochi nel verde con oltre 20 giochi e attrazioni, tra cui gonfiabili, reti elastiche, scivoli, castelli in legno, minigolf, il Rio Tree Village e un'area protetta per i bimbi da 0 a 3 anni, con ristorante e pizzeria. I pacchetti compleanno, per bambini dai 4 anni, comprendono gonfiabili e reti senza limiti di tempo e una merenda con pizza, crocchette, panini dolci, frutta e bibite; la torta si può prendere al parco o portare da pasticceria o gelateria con lo scontrino.", sito: "https://www.riomaranocesena.it/" },
       { nome: "Libera-mente APS", zona: "Cesena (Capannaguzzo, via Capannaguzzo)", tipo: "ludoteca", descrizione: "Ludoteca e spazio ricreativo e sensoriale per bambini, con un'area gioco attrezzata con giochi adatti a tutte le età, una zona costruzioni, laboratori sensoriali e creativi e una caffetteria dove i genitori si siedono mentre i bambini giocano. Lo spazio si può riservare per le feste di compleanno e gli eventi in esclusiva, con l'area gioco, uno spazio per il taglio della torta e il buffet e un aiuto nell'organizzazione. È un'associazione di promozione sociale: al primo ingresso si fa l'iscrizione, che serve anche per l'assicurazione.", sito: "https://www.libera-mente-aps.it/" },
+      { nome: "Atlantica", zona: "Cesenatico, sulla riviera (a circa 15 km da Cesena)", tipo: "parco acquatico", descrizione: "Parco acquatico a Cesenatico, aperto d'estate: per il 2026 le guide indicano l'apertura dal 6 giugno al 6 settembre, tutti i giorni dalle 9:30 alle 19. La zona bambini ha due piscine con scivoli e funghi d'acqua, e durante la giornata c'è l'animazione, con spazi per il miniclub.", festa: false },
     ],
     faq: [
       { domanda: "Dove si festeggia un compleanno per bambini a Cesena?", risposta: "Due formule diverse: i pacchetti compleanno del Parco Rio Marano, nel verde, con gonfiabili, reti elastiche e merenda, oppure una festa al coperto nella ludoteca Libera-mente, a Capannaguzzo, che riserva lo spazio con area gioco e angolo per torta e buffet." },
@@ -2479,6 +2510,9 @@ export const CITTA_FESTE: CittaFeste[] = [
     ],
   },
 ];
+
+/** I soli locali che organizzano feste: quelli della pagina «Feste a [città]». */
+export const localiDaFesta = (c: CittaFeste) => c.locali.filter((l) => l.festa !== false);
 
 export function cittaFeste(slug: string): CittaFeste | undefined {
   return CITTA_FESTE.find((c) => c.slug === slug);

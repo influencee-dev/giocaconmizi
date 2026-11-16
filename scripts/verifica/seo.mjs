@@ -72,6 +72,26 @@ for (const { da, a } of spostati) {
 }
 ok("directory: indirizzi vecchi reindirizzati a pagine vive", spostati.length > 0 && rotti.length === 0, rotti.slice(0, 3).join(" | ") || `${spostati.length} indirizzi`);
 
+// 2-quater-bis. Parchi avventura e parchi acquatici (dal 15/11/2026): sono
+// posti «da giornata fuori». Un parco che non risulta fare feste (festa: false
+// in lib/feste.ts) ha la sua scheda ma non dice «fa feste» e non compare nella
+// pagina delle feste della città; uno che le fa, sì.
+const htmlAvventura = await testo("/parchi-avventura");
+const htmlAcquatici = await testo("/parchi-acquatici");
+ok("parchi: le due categorie nuove hanno la loro pagina", htmlAvventura.includes("Parchi avventura per bambini") && htmlAcquatici.includes("Parchi acquatici per bambini"));
+ok("parchi: le pagine sono in sitemap, col listing di Roma e di Firenze",
+  ["/parchi-avventura", "/parchi-acquatici", "/parchi-acquatici/roma", "/parchi-avventura/firenze", "/parchi-acquatici/roma/hydromania"].every((x) => percorsiSitemap.has(x)));
+const htmlHydro = await testo("/parchi-acquatici/roma/hydromania");
+ok("parchi: un parco acquatico non dice «fa feste di compleanno»",
+  htmlHydro.includes("Hydromania") && !htmlHydro.includes("data-fa-feste") && !htmlHydro.includes("organizza feste di compleanno"));
+const htmlEur = await testo("/parchi-avventura/roma/eurpark-energy-adventure");
+ok("parchi: un parco avventura che fa feste lo dice", htmlEur.includes("data-fa-feste"));
+const htmlFesteRoma = await testo("/feste/roma");
+ok("parchi: nella pagina feste di Roma c'è EurPark ma non Hydromania", htmlFesteRoma.includes("EurPark") && !htmlFesteRoma.includes("Hydromania"));
+const htmlListingRoma = await testo("/parchi-acquatici/roma");
+ok("parchi: il listing dei parchi acquatici non promette feste",
+  htmlListingRoma.includes("Aquafelix") && htmlListingRoma.includes("MagicSplash") && !htmlListingRoma.includes("tutte organizzano anche feste"));
+
 // 2-quinquies. Città vicine (dal 12/11/2026): ogni pagina città linka le 6
 // più vicine; Carpi deve avere Modena e Reggio Emilia, e mai sé stessa.
 const htmlCarpi = await testo("/feste/carpi");

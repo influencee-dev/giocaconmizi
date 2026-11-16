@@ -63,6 +63,19 @@ Partidea SRL (dati in lib/legal.ts → SOCIETA). Mascotte: Mizi, una pinguina.
   vecchi vanno aggiunti a `content/directory-spostamenti.json` (redirect
   permanenti in next.config.ts; la batteria SEO li controlla). Il modulo
   ha anche «Altro».
+- Parchi avventura e parchi acquatici (15/11/2026): due categorie «da giornata
+  fuori» (`giornata: true` in CATEGORIE, in testa all'elenco perché il loro
+  `tipo` contiene parole di altre regole). Un posto che dalle fonti NON risulta
+  fare feste si inserisce in lib/feste.ts con `festa: false`: ha la scheda
+  nella directory ma non compare in /feste/[città] (`localiDaFesta`), la scheda
+  non mostra «Fa feste di compleanno», non prende i filtri «Per la festa» e il
+  listing non scrive «tutte organizzano feste». Mai scrivere che un parco fa
+  feste senza una fonte. I parchi si agganciano a una città già presente, con
+  la distanza nella `zona` («Riccione, a pochi chilometri da Rimini»). Le date
+  di stagione si scrivono con l'anno («nel 2026 dal… al…»). Parchi chiusi o
+  senza segnali recenti non si inseriscono (Etnaland: stagione 2026 annullata).
+  La lista di nomi da verificare è su Drive, 1 Progetti («Parchi avventura e
+  acquatici · lotto 1 e nomi da verificare»).
 - Candidature: `/aggiungi-attivita` (pubblica) — un'attività nuova si propone
   (anche la categoria «Associazioni e laboratori», attiva solo quando c'è una
   scheda) o un titolare chiede l'accesso alla sua scheda. Finiscono in

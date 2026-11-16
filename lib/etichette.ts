@@ -18,6 +18,8 @@ export type IdEtichetta =
   | "ludoteca"
   | "coperto"
   | "aperto"
+  | "avventura"
+  | "acqua"
   | "sala";
 
 export interface Etichetta {
@@ -40,11 +42,15 @@ const E: Record<IdEtichetta, Etichetta> = {
   ludoteca: { id: "ludoteca", nome: "Ludoteca", icona: "puzzle", fondo: "#F0E8FA", testo: "#5B3A9A", pieno: "#9B6DD6" },
   coperto: { id: "coperto", nome: "Parco giochi al coperto", icona: "castello", fondo: "#E2F2FB", testo: "#185E7E", pieno: "#3DB5E6" },
   aperto: { id: "aperto", nome: "All'aperto", icona: "albero", fondo: "#E3F4E7", testo: "#2E7D4A", pieno: "#4CAF6D" },
+  avventura: { id: "avventura", nome: "Parco avventura", icona: "albero", fondo: "#E8F1D8", testo: "#4A6417", pieno: "#7C9F2E" },
+  acqua: { id: "acqua", nome: "Parco acquatico", icona: "pesce", fondo: "#DDF4F1", testo: "#0F6B62", pieno: "#1FA899" },
   sala: { id: "sala", nome: "Sala feste", icona: "festa", fondo: "#FCE6EE", testo: "#A23462", pieno: "#F28AB2" },
 };
 
 /** Regole sul «tipo», in ordine: la prima che combacia vince. */
 const REGOLE: [RegExp, IdEtichetta][] = [
+  [/parco avventura|percorsi sugli alberi|percorsi acrobatici/i, "avventura"],
+  [/parco acquatico|acquapark|aquapark/i, "acqua"],
   [/\bbar\b|caff[eè]|gelateri|trattori|ristorant|pizzeri/i, "bar"],
   [/asilo|\bnido\b|^spazio per l'infanzia|^baby parking/i, "asilo"],
   [/fattoria|agriturism/i, "fattoria"],
@@ -58,6 +64,8 @@ const REGOLE: [RegExp, IdEtichetta][] = [
 ];
 
 const PER_CATEGORIA: Record<string, IdEtichetta> = {
+  "parchi-avventura": "avventura",
+  "parchi-acquatici": "acqua",
   ludoteche: "ludoteca",
   "sale-feste": "sala",
   "parchi-giochi-al-coperto": "coperto",

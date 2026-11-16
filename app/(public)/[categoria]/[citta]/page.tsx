@@ -37,8 +37,12 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   const d = await dati(params);
   if (!d) return {};
   return {
-    title: `${d.cat.nome} a ${d.nomeCitta}: dove portare i bambini e fare la festa`,
-    description: `${d.schede.length} ${d.cat.nome.toLowerCase()} a ${d.nomeCitta}, zona per zona: tipo di spazio, feste di compleanno e consigli prima di prenotare.`,
+    title: d.cat.giornata
+      ? `${d.cat.nome} a ${d.nomeCitta} e dintorni: dove portare i bambini`
+      : `${d.cat.nome} a ${d.nomeCitta}: dove portare i bambini e fare la festa`,
+    description: d.cat.giornata
+      ? `${d.schede.length} ${d.cat.nome.toLowerCase()} a ${d.nomeCitta} e dintorni: cosa c'è per i bambini, quando aprono e cosa controllare prima di partire.`
+      : `${d.schede.length} ${d.cat.nome.toLowerCase()} a ${d.nomeCitta}, zona per zona: tipo di spazio, feste di compleanno e consigli prima di prenotare.`,
     alternates: { canonical: `/${d.cat.slug}/${d.citta}` },
   };
 }
@@ -55,7 +59,9 @@ export default async function ListingPage({ params }: P) {
     ...cat.faq.slice(1, 3),
     {
       domanda: `Dove si festeggia un compleanno per bambini a ${nomeCitta}?`,
-      risposta: `Oltre alle ${cat.nome.toLowerCase()} di questa pagina, a ${nomeCitta} ci sono altre location per le feste: le trovi tutte, zona per zona, nella pagina dedicata alle feste di compleanno in città.`,
+      risposta: cat.giornata
+        ? `Per la festa di compleanno a ${nomeCitta} abbiamo una pagina a parte, con le location zona per zona: ludoteche, sale feste e parchi giochi al coperto. I ${cat.nome.toLowerCase()} di questa pagina sono soprattutto posti da giornata fuori.`
+        : `Oltre alle ${cat.nome.toLowerCase()} di questa pagina, a ${nomeCitta} ci sono altre location per le feste: le trovi tutte, zona per zona, nella pagina dedicata alle feste di compleanno in città.`,
     },
   ];
 

@@ -315,7 +315,7 @@ export function ListingFiltrato({
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-lg font-black text-notte" aria-live="polite" data-risultati={visibili.length}>
-          {visibili.length} {visibili.length === 1 ? "posto trovato" : `${nome.toLowerCase()} trovate`}
+          {visibili.length} {visibili.length === 1 ? "posto trovato" : `${nome.toLowerCase()} ${/^(ludoteche|sale|fattorie|associazioni)\b/i.test(nome) ? "trovate" : "trovati"}`}
         </p>
         <label className="flex items-center gap-2 text-sm font-bold text-notte">
           Ordina
