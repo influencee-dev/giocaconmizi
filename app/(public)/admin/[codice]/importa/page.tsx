@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SCHEDE, percorsoScheda } from "@/lib/directory";
 import { adminSchedeGiorgia } from "@/lib/directory-db";
 import { adminValido } from "@/lib/admin";
+import { chiaveAiPresente, fornitoreAi, nomeChiaveAi } from "@/lib/import-ai";
 import { Contenitore } from "@/components/ui";
 import { MenuAdmin } from "../MenuAdmin";
 import { NonDisponibile } from "../NonDisponibile";
@@ -32,7 +33,7 @@ export default async function AdminImporta({ params }: { params: Promise<{ codic
     ...(s.instagram && { instagram: s.instagram }),
   }));
   const perChiave = new Map(SCHEDE.map((s) => [`${s.cittaSlug}/${s.slug}`, s]));
-  const chiaveAttiva = Boolean(process.env.ANTHROPIC_API_KEY);
+  const chiaveAttiva = chiaveAiPresente();
 
   return (
     <Contenitore largo className="py-10">
@@ -40,11 +41,11 @@ export default async function AdminImporta({ params }: { params: Promise<{ codic
       <h1 className="text-3xl font-extrabold text-notte">Importa con l&apos;AI</h1>
       <p className="mt-2 max-w-2xl text-notte-tenue">
         L&apos;AI legge il sito ufficiale e i post pubblici di un locale e propone i campi della scheda, con la frase della fonte accanto.
-        Prende solo fatti scritti: quello che non trova resta «da chiedere». Nessuna foto viene presa.
+        Prende solo fatti scritti: quello che non trova resta «da chiedere». Nessuna foto viene presa. AI in uso: {fornitoreAi() === "gemini" ? "Gemini di Google (piano gratuito)" : "Claude di Anthropic"}.
       </p>
       {!chiaveAttiva && (
         <p className="mt-4 rounded-xl bg-[#FFF3CF] px-4 py-3 text-sm font-bold text-[#7A5A00]" data-manca-chiave>
-          Per attivarla manca la chiave ANTHROPIC_API_KEY su Vercel (Settings → Environment Variables). Finché non c&apos;è, la pagina si apre ma l&apos;AI non risponde.
+          Per attivarla manca la chiave {nomeChiaveAi()} su Vercel (Settings → Environment Variables). Finché non c&apos;è, la pagina si apre ma l&apos;AI non risponde.
         </p>
       )}
       <div className="mt-6">

@@ -183,10 +183,10 @@ export const FORNITORI = [
     dove: "Unione Europea (Francia)",
   },
   {
-    nome: "Anthropic (Claude)",
+    nome: "Google Ireland Ltd. (Gemini API)",
     scopo:
-      "Solo nel pannello di Giorgia: legge le pagine pubbliche del sito e dei social di un'attività (testi già pubblici, nessun dato di famiglie o bambini) e propone i campi della scheda, che Giorgia controlla prima di pubblicarli.",
-    dove: "Stati Uniti; trasferimento coperto dalle clausole contrattuali standard UE",
+      "Solo nel pannello di Giorgia: legge le pagine pubbliche del sito e dei social di un'attività (testi già pubblici, nessun dato di famiglie o bambini) e propone i campi della scheda, che Giorgia controlla prima di pubblicarli. Con il piano gratuito Google può usare questi testi pubblici per migliorare i suoi servizi.",
+    dove: "Irlanda; possibili trasferimenti verso Google LLC (USA) coperti dal Data Privacy Framework UE-USA",
   },
   {
     nome: "Google Ireland Ltd. (Google Analytics)",

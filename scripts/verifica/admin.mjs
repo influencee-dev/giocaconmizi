@@ -169,6 +169,13 @@ await browser.close();
   await pi.getByRole("button", { name: /Proponi la scheda/ }).tap();
   await pi.locator("[data-proposta]").waitFor({ timeout: 30000 }).catch(() => null);
   ok("importa con l'AI: risponde sempre (proposta, o errore leggibile se mancano rete o chiave)", (await pi.locator("[data-proposta]").count()) === 1);
+  await pi.getByPlaceholder("https://sito-ufficiale.it").fill("https://prova.giocamizi.it/");
+  await pi.getByRole("button", { name: /Proponi la scheda/ }).tap();
+  await pi.getByText("3. Controlla").waitFor({ timeout: 15000 }).catch(() => null);
+  ok("importa con l'AI: la proposta mostra i campi con la frase della fonte", (await pi.locator("[data-proposta] input[type=checkbox]").count()) >= 5);
+  await pi.getByRole("button", { name: /Salva solo per l'attività/ }).tap();
+  await pi.locator("[data-salvato]").waitFor({ timeout: 15000 }).catch(() => null);
+  ok("importa con l'AI: salvata per l'attività", (await pi.locator("[data-salvato]").textContent().catch(() => ""))?.includes("già compilata"));
   await bi.close();
 
   const bc = await apriBrowser();
