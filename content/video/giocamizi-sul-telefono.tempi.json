@@ -1,0 +1,38 @@
+{
+ "secondi": 98,
+ "caricato": "2026-11-16",
+ "capitoli": [
+  {
+   "da": 0,
+   "titolo": "Ciao, sono Mizi"
+  },
+  {
+   "da": 14,
+   "titolo": "1 · Apri Giocamizi dal telefono"
+  },
+  {
+   "da": 28,
+   "titolo": "2 · Su Android: «Installa»"
+  },
+  {
+   "da": 38,
+   "titolo": "3 · Su iPhone: due tocchi"
+  },
+  {
+   "da": 49,
+   "titolo": "4 · Con un altro browser"
+  },
+  {
+   "da": 58,
+   "titolo": "5 · Si apre a tutto schermo"
+  },
+  {
+   "da": 69,
+   "titolo": "6 · La prima volta: 30 secondi"
+  },
+  {
+   "da": 82,
+   "titolo": "7 · Non è il momento?"
+  }
+ ]
+}

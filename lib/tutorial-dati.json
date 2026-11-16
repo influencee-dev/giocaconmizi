@@ -452,5 +452,80 @@
     "risposta": "Restano solo sul tuo telefono."
    }
   ]
+ },
+ {
+  "slug": "giocamizi-sul-telefono",
+  "gruppo": "utenti",
+  "titolo": "Come mettere Giocamizi sul telefono, come un'app",
+  "ordine": 4,
+  "descrizione": "Mizi ti mostra come mettere Giocamizi sul telefono come un'app, su Android e su iPhone, senza store.",
+  "rispostaBreve": "Per mettere Giocamizi sul telefono apri giocamizi.it dal browser e tocca «Scarica» nella barretta in basso. Su Android con Chrome conferma «Installa»; su iPhone tocca Condividi in Safari e poi «Aggiungi alla schermata Home». L'icona apre Giocamizi a tutto schermo, come un'app. Gratis, senza store.",
+  "video": {
+   "src": "/video/giocamizi-sul-telefono.mp4",
+   "poster": "/video/giocamizi-sul-telefono.webp",
+   "sottotitoli": "/video/giocamizi-sul-telefono.vtt",
+   "durata": "PT1M38S",
+   "secondi": 98,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Lo sapevi che puoi mettere Giocamizi sul telefono, proprio come un'app? Non serve nessuno store ed è gratis. Ti faccio vedere come si fa!",
+    "Apri giocamizi.it dal browser del telefono. In fondo alla pagina compare una barretta scura: «Scarica Giocamizi sul tuo telefono». Tocca il bottone giallo.",
+    "Su Android, con Chrome, di solito il bottone dice «Installa». Toccalo e conferma nella finestra che si apre. Fatto!",
+    "Su iPhone, invece, tocca «Scarica» e ti spiego i due tocchi: prima «Condividi», nella barra di Safari, poi «Aggiungi alla schermata Home».",
+    "Con un altro browser, apri il menu con i tre puntini e tocca «Installa app» oppure «Aggiungi a schermata Home».",
+    "Ora sulla schermata Home c'è l'icona di Giocamizi. Toccala: si apre a tutto schermo, senza la barra del browser, proprio come un'app.",
+    "La prima volta che apri l'app ti chiedo come ti chiami, il nome e l'età del tuo bimbo, e l'email. Ci vogliono trenta secondi, una volta sola, e restano sul tuo telefono.",
+    "Non è il momento? Tocca la X sulla barretta e per trenta giorni non te la ripropongo.",
+    "Prova adesso: apri giocamizi.it dal telefono e mettimi nella schermata Home. Ci vediamo lì! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 14,
+    "titolo": "1 · Apri Giocamizi dal telefono"
+   },
+   {
+    "da": 28,
+    "titolo": "2 · Su Android: «Installa»"
+   },
+   {
+    "da": 38,
+    "titolo": "3 · Su iPhone: due tocchi"
+   },
+   {
+    "da": 49,
+    "titolo": "4 · Con un altro browser"
+   },
+   {
+    "da": 58,
+    "titolo": "5 · Si apre a tutto schermo"
+   },
+   {
+    "da": 69,
+    "titolo": "6 · La prima volta: 30 secondi"
+   },
+   {
+    "da": 82,
+    "titolo": "7 · Non è il momento?"
+   }
+  ],
+  "pagina": {
+   "href": "/",
+   "testo": "Apri Giocamizi"
+  },
+  "faq": [
+   {
+    "domanda": "Serve scaricare qualcosa dallo store?",
+    "risposta": "No: Giocamizi si aggiunge alla schermata Home direttamente dal browser."
+   },
+   {
+    "domanda": "I dati del profilo dove restano?",
+    "risposta": "Sul tuo telefono."
+   }
+  ]
  }
 ]
