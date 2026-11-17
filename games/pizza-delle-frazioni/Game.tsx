@@ -163,7 +163,7 @@ function Scritta({ f, grande = false }: { f: Frazione; grande?: boolean }) {
   );
 }
 
-const LODI = ["Giusto!", "Esatto!", "Bravo!", "Perfetto!"];
+const LODI = ["Giusto!", "Esatto!", "Evviva!", "Perfetto!"];
 
 export default function Game({ onProgress, onComplete, demo = false }: GameProps) {
   const round: Round[] = useMemo(

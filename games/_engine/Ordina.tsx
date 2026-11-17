@@ -79,7 +79,7 @@ export function Ordina({ titolo, round, age, onProgress, onComplete, demo = fals
       }
 
       setRisolto(true);
-      parla(corrente.vocePremio ?? "Bravo! Ordine giusto.");
+      parla(corrente.vocePremio ?? "Evviva! Ordine giusto.");
 
       const nuoviPunti = primoTentativo ? punti + 1 : punti;
       setPunti(nuoviPunti);

@@ -29,7 +29,7 @@ interface RoundVassoio {
   opzioni: NomeFigura[];
 }
 
-const LODI = ["Bravo!", "Benissimo!", "Esatto!", "Che memoria!"];
+const LODI = ["Evviva!", "Benissimo!", "Esatto!", "Che memoria!"];
 const INCORAGGIAMENTI = ["Quasi! Riprova.", "Non è questo. Riprova.", "Riprova, ci sei quasi."];
 
 export default function Game({ onProgress, onComplete, demo = false }: GameProps) {

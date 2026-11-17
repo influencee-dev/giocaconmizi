@@ -580,6 +580,105 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   await ctxForm.close();
 }
 
+// ── Nucleo comune dei giochi (16/11/2026) ──
+// 1) OGNI gioco del registro arriva da solo alla festa (?demo=1): è la prova
+//    che nessuno resta bloccato a metà. Il 16/11 erano 31 su 38: «La tartaruga»
+//    non si poteva finire nemmeno giocando davvero.
+// 2) Una partita da sbadati a un gioco «tocca la risposta giusta»: dopo due
+//    errori la risposta giusta dondola, la festa dà una stella sola, la
+//    figurina entra nell'album, e ogni lode detta è nel copione.
+// 3) «Crea il tuo gioco»: «Ho finito» porta alla festa e alla figurina.
+{
+  const { readFileSync } = await import("node:fs");
+  const registro = readFileSync("games/registry.ts", "utf8");
+  const vivi = [...registro.matchAll(/slug: "([^"]+)"[^}]*?ageMin: (\d+)[^}]*?status: "live"/g)].map((x) => ({ slug: x[1], eta: Number(x[2]) }));
+  const fermi = [];
+  const coda = [...vivi];
+  await Promise.all(Array.from({ length: 6 }, async () => {
+    while (coda.length) {
+      const g = coda.shift();
+      const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+      await ctx.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+      const pg = await ctx.newPage();
+      let rotto = 0;
+      pg.on("pageerror", () => rotto++);
+      await pg.goto(`${BASE}/giochi/${g.slug}/gioca?eta=${g.eta}&demo=1`, { waitUntil: "domcontentloaded" });
+      const festa = await pg.locator("[data-festa]").waitFor({ timeout: 120000 }).then(() => true, () => false);
+      if (!festa || rotto) fermi.push(`${g.slug}${rotto ? " (errore JS)" : ""}`);
+      await ctx.close();
+    }
+  }));
+  ok(`tutti i ${vivi.length} giochi del registro arrivano da soli alla festa`, vivi.length >= 38 && fermi.length === 0, fermi.join(", "));
+
+  const copione = JSON.parse(readFileSync("content/voce-mizi.json", "utf8"));
+  const nucleo = new Set(copione.frasi.nucleo ?? []);
+  const sorgente = readFileSync("games/_engine/nucleo.ts", "utf8");
+  const nelCodice = [...sorgente.matchAll(/"([^"\n]+[.!])"/g)].map((x) => x[1]).filter((f) => /^(Evviva|Esatto|Sì|Che occhio|Giusto|Quasi|Non è|Riprova|Ti aiuto)/.test(f));
+  ok("nucleo: le frasi comuni del codice sono identiche a quelle del copione", nelCodice.length === nucleo.size && nelCodice.every((f) => nucleo.has(f)), nelCodice.filter((f) => !nucleo.has(f)).join(" | "));
+  ok("nucleo: nessuna lode al maschile nei giochi", !/Brav[oa][!.]|Bravissim/.test(["games/_engine/SceltaMultipla.tsx", "games/_engine/Ordina.tsx", "games/_engine/PixelArt.tsx", "games/_engine/Tartaruga.tsx", "games/cosa-manca/Game.tsx", "games/salvadanaio/Game.tsx", "games/pizza-delle-frazioni/Game.tsx", "games/puzzle-facile/Game.tsx", "games/unisci-le-sillabe/Game.tsx"].map((f) => readFileSync(f, "utf8")).join("\n")));
+
+  // La partita da sbadati: «Abbina i colori» a 3 anni.
+  const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctx.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const s = await ctx.newPage();
+  let erroriS = 0;
+  s.on("pageerror", () => erroriS++);
+  await s.goto(`${BASE}/giochi/abbina-i-colori/gioca?eta=3`, { waitUntil: "networkidle" });
+  const campo = s.locator("[data-scelta-multipla]");
+  await campo.waitFor({ timeout: 10000 });
+  const totali = Number(await campo.getAttribute("data-round-totali"));
+  // Il colore giusto è quello dell'oggetto al centro («Oggetto viola»): a ogni round
+  // si toccano apposta due secchielli sbagliati, poi deve dondolare proprio quello giusto.
+  let aiutiGiusti = 0, doppioTocco = true, rounds = 0;
+  for (let r = 1; r <= totali; r++) {
+    await s.waitForFunction((n) => document.querySelector("[data-scelta-multipla]")?.getAttribute("data-round") === String(n) && document.querySelector("[data-scelta-multipla]")?.getAttribute("data-partita") === "gioca", r, { timeout: 8000 }).catch(() => {});
+    const colore = (await campo.locator('[aria-label^="Oggetto "]').first().getAttribute("aria-label", { timeout: 5000 }).catch(() => ""))?.replace("Oggetto ", "");
+    const sbagliati = s.locator(`[data-opzione][data-stato=libera]:not([aria-label="Secchiello ${colore}"])`);
+    for (let colpo = 0; colpo < 2; colpo++) {
+      await sbagliati.first().tap();
+      await s.waitForTimeout(250);
+    }
+    const aiuto = s.locator("[data-aiuto-opzione]");
+    if ((await aiuto.count()) === 1 && (await aiuto.getAttribute("aria-label")) === `Secchiello ${colore}`) aiutiGiusti++;
+    // Due tocchi nello stesso istante sulla giusta: il round avanza una volta sola.
+    await s.locator(`[data-opzione][aria-label="Secchiello ${colore}"]`).evaluate((el) => { el.click(); el.click(); });
+    rounds++;
+    await s.waitForTimeout(1300);
+    const adesso = await campo.getAttribute("data-round").catch(() => null);
+    if (r < totali && Number(adesso) !== r + 1) doppioTocco = false;
+  }
+  const stelleAttese = 1;
+  const festaS = await s.locator("[data-festa]").waitFor({ timeout: 8000 }).then(() => true, () => false);
+  const stelleS = festaS ? await s.locator("[data-festa] [data-stelle]").first().getAttribute("data-stelle") : null;
+  const album = await s.evaluate(() => JSON.parse(localStorage.getItem("giocamizi-album") || "{}"));
+  const detto = await s.evaluate(() => (window.__voceMizi || []).map((v) => v.testo));
+  ok("nucleo: la partita da sbadati finisce senza errori JS", festaS && erroriS === 0 && rounds === totali, `round ${rounds}/${totali}`);
+  ok("nucleo: dopo due errori dondola proprio la risposta giusta, a ogni round", aiutiGiusti === totali, `${aiutiGiusti} su ${totali}`);
+  ok("nucleo: due tocchi nello stesso istante non saltano un round", doppioTocco);
+  ok("nucleo: chi sbaglia a ogni round prende una stella, mai zero", stelleS === String(stelleAttese), `stelle ${stelleS}`);
+  ok("nucleo: la partita finita mette la figurina nell'album", album.giochi?.["abbina-i-colori"]?.stelle === stelleAttese && album.giochi["abbina-i-colori"].volte === 1, JSON.stringify(album.giochi ?? {}));
+  ok("nucleo: lodi e incoraggiamenti detti sono quelli del copione", detto.some((t) => nucleo.has(t)) && !detto.some((t) => /Brav[oa]/.test(t)), detto.slice(0, 6).join(" | "));
+  // La pagina del gioco mostra la sua figurina: presa (con le stelle) dopo la partita, da prendere prima.
+  await s.goto(`${BASE}/giochi/abbina-i-colori`, { waitUntil: "networkidle" });
+  const presa = s.locator("[data-figurina-gioco=presa]");
+  const vistaPresa = await presa.waitFor({ timeout: 5000 }).then(() => true, () => false);
+  await s.goto(`${BASE}/giochi/tabelline`, { waitUntil: "networkidle" });
+  const daPrendere = await s.locator("[data-figurina-gioco=da-prendere]").waitFor({ timeout: 5000 }).then(() => true, () => false);
+  ok("album: la pagina di ogni gioco dice se la figurina è presa o da prendere", vistaPresa && daPrendere);
+  await ctx.close();
+
+  // «Crea il tuo gioco»: prima «Ho finito» non mostrava né festa né figurina.
+  const ctxC = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxC.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const c = await ctxC.newPage();
+  await c.goto(`${BASE}/giochi/crea-il-tuo-gioco/gioca?eta=10`, { waitUntil: "networkidle" });
+  await c.locator("[data-ho-finito]").tap();
+  const festaC = await c.locator("[data-festa]").waitFor({ timeout: 6000 }).then(() => true, () => false);
+  const albumC = await c.evaluate(() => JSON.parse(localStorage.getItem("giocamizi-album") || "{}"));
+  ok("crea il tuo gioco: «Ho finito» porta alla festa e alla figurina", festaC && albumC.giochi?.["crea-il-tuo-gioco"]?.stelle === 3);
+  await ctxC.close();
+}
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("giochi") ? 0 : 1);

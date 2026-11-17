@@ -321,3 +321,17 @@ a[role="button"],
     transition: none;
   }
 }
+
+/* Giochi «tocca la risposta giusta»: dopo due errori la risposta giusta dondola
+   tre volte e poi resta ferma col bordo giallo (games/_engine/nucleo.ts). Con
+   «riduci movimento» resta solo il bordo. */
+.opzione-aiuto {
+  /* Tre dondolii e poi ferma, col bordo giallo: un bersaglio che non smette di
+     muoversi è più difficile da toccare (e le prove automatiche aspettano che stia fermo). */
+  animation: dondola 0.6s ease-in-out 3;
+}
+@media (prefers-reduced-motion: reduce) {
+  .opzione-aiuto {
+    animation: none;
+  }
+}

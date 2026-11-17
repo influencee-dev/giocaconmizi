@@ -5,6 +5,8 @@ import { GameShell } from "@/components/game-shell/GameShell";
 import { Disegno } from "./arte";
 import { parla } from "@/lib/audio";
 import { stelle, type GameProps } from "./tipi";
+import { comandiDi, massimoDi, passiDi, passo, risolvi, statoIniziale, type Comando, type Livello } from "./griglia-logica";
+import { suona } from "@/lib/suoni";
 
 /**
  * Coding su griglia: si compone un programma, si preme Via, Mizi lo esegue.
@@ -18,21 +20,7 @@ import { stelle, type GameProps } from "./tipi";
  * si guarda cosa è successo e si corregge (checklist).
  */
 
-export type Comando = "su" | "giu" | "sinistra" | "destra" | "avanti" | "giraDx" | "giraSx";
-
-export interface Livello {
-  /** Lato della griglia. */
-  lato: number;
-  partenza: [number, number];
-  arrivo: [number, number];
-  /** Celle non attraversabili, come "x,y". */
-  muri?: string[];
-  /** Direzione iniziale in modalità blocchi: 0 su, 1 destra, 2 giù, 3 sinistra. */
-  direzione?: number;
-  /** Numero massimo di comandi: è il vincolo che rende il livello un problema. */
-  massimo?: number;
-  ripeti?: boolean;
-}
+export type { Comando, Livello } from "./griglia-logica";
 
 export interface GrigliaCodingProps extends GameProps {
   titolo: string;
@@ -60,13 +48,6 @@ const NOMI: Record<Comando, string> = {
   giraSx: "gira a sinistra",
 };
 
-const SPOSTAMENTI: [number, number][] = [
-  [0, -1], // su
-  [1, 0], // destra
-  [0, 1], // giù
-  [-1, 0], // sinistra
-];
-
 export function GrigliaCoding({
   titolo,
   modalita,
@@ -90,7 +71,7 @@ export function GrigliaCoding({
   // Memoizzato: altrimenti l'insieme cambia identità a ogni render e `esegui`
   // verrebbe ricreato di continuo.
   const muri = useMemo(() => new Set(livello.muri ?? []), [livello]);
-  const massimo = livello.massimo ?? livello.lato * 3;
+  const massimo = massimoDi(livello);
 
   const pulisciTimer = useCallback(() => {
     timers.current.forEach((t) => window.clearTimeout(t));
@@ -127,46 +108,26 @@ export function GrigliaCoding({
     const tentativoCorrente = tentativi + 1;
     setTentativi(tentativoCorrente);
 
-    let x = livello.partenza[0];
-    let y = livello.partenza[1];
-    let dir = livello.direzione ?? 1;
+    // La stessa funzione che risolve i livelli (griglia-logica.ts): lo schermo
+    // e la soluzione non possono andare in disaccordo.
+    let stato = statoIniziale(livello);
 
     // Il "ripeti" raddoppia la sequenza: è la prima idea di ciclo (piano §13).
-    const passi = livello.ripeti ? [...programma, ...programma] : programma;
+    const passi = passiDi(livello, programma);
 
     passi.forEach((comando, i) => {
       const t = window.setTimeout(
         () => {
-          if (comando === "giraDx") dir = (dir + 1) % 4;
-          else if (comando === "giraSx") dir = (dir + 3) % 4;
-          else {
-            const [dx, dy] =
-              comando === "avanti"
-                ? SPOSTAMENTI[dir]
-                : comando === "su"
-                  ? SPOSTAMENTI[0]
-                  : comando === "destra"
-                    ? SPOSTAMENTI[1]
-                    : comando === "giu"
-                      ? SPOSTAMENTI[2]
-                      : SPOSTAMENTI[3];
-
-            const nx = x + dx;
-            const ny = y + dy;
-            // Muri e bordi fermano Mizi senza drammi: resta dov'è.
-            if (nx >= 0 && ny >= 0 && nx < livello.lato && ny < livello.lato && !muri.has(`${nx},${ny}`)) {
-              x = nx;
-              y = ny;
-            }
-          }
-
+          stato = passo(livello, muri, stato, comando);
+          const { x, y } = stato;
           setPosizione([x, y]);
-          setDirezione(dir);
+          setDirezione(stato.dir);
 
           if (i === passi.length - 1) {
             const arrivato = x === livello.arrivo[0] && y === livello.arrivo[1];
             const t2 = window.setTimeout(() => {
               if (arrivato) {
+                suona("coppia");
                 parla("Ce l'hai fatta! Mizi ha preso il pesce.");
                 const nuoviPunti = punti + 1;
                 setPunti(nuoviPunti);
@@ -196,23 +157,11 @@ export function GrigliaCoding({
     });
   }, [inEsecuzione, programma, livello, muri, punti, indice, totale, tentativi, onComplete, onProgress, reimposta]);
 
-  // Demo: costruisce un percorso banale in linea e lo esegue.
+  // Demo: risolve il livello davvero (muri, giri e «ripeti» compresi) e lo esegue.
+  // Prima tirava una riga dritta verso il pesce e si incastrava al primo muro.
   useEffect(() => {
     if (!demo || finito || inEsecuzione || programma.length > 0) return;
-    const t = window.setTimeout(() => {
-      const [px, py] = livello.partenza;
-      const [ax, ay] = livello.arrivo;
-      const passi: Comando[] = [];
-      if (modalita === "frecce") {
-        for (let i = 0; i < ax - px; i++) passi.push("destra");
-        for (let i = 0; i < px - ax; i++) passi.push("sinistra");
-        for (let i = 0; i < ay - py; i++) passi.push("giu");
-        for (let i = 0; i < py - ay; i++) passi.push("su");
-      } else {
-        for (let i = 0; i < Math.abs(ax - px); i++) passi.push("avanti");
-      }
-      setProgramma(passi);
-    }, 700);
+    const t = window.setTimeout(() => setProgramma(risolvi(livello, modalita) ?? []), 700);
     return () => window.clearTimeout(t);
   }, [demo, finito, inEsecuzione, programma.length, livello, modalita]);
 
@@ -230,8 +179,7 @@ export function GrigliaCoding({
     reimposta();
   }, [reimposta]);
 
-  const disponibili: Comando[] =
-    modalita === "frecce" ? ["su", "giu", "sinistra", "destra"] : ["avanti", "giraSx", "giraDx"];
+  const disponibili = comandiDi(modalita);
 
   const celle = Array.from({ length: livello.lato * livello.lato }, (_, i) => [
     i % livello.lato,

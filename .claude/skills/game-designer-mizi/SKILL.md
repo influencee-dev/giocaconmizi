@@ -43,6 +43,14 @@ Build di produzione (`npm run build`, poi `npx next start -p 3200`): il server d
 - **La voce insegna**: il nome della cosa toccata, non solo «giusto».
 - Stato del gioco leggibile da fuori con attributi `data-…` (fase, livello, stato di ogni pezzo): servono alle verifiche.
 
+### 3-bis. Il nucleo comune (dal 16/11/2026): prima di scrivere logica nuova
+`games/_engine/nucleo.ts` fa una volta per tutti quello che ogni motore rifaceva a modo suo: `useRound()` conta i round, chiude il round al primo tocco giusto (due tocchi nello stesso istante non lo fanno avanzare due volte), dà il punto solo ai round senza errori, fa scattare l'aiuto dopo N errori, suona, dice lodi e incoraggiamenti senza genere, espone lo stato con `data-partita`, `data-round`, `data-errori-round`, `data-aiuto-attivo` e a fine partita passa anche errori, aiuti e secondi.
+- Lo usa già `SceltaMultipla.tsx` (20 giochi): dopo due errori la risposta giusta dondola.
+- Un motore che si migliora va portato sul nucleo, non riscritto accanto. I giochi fatti a mano (colora, cosa manca, pizza, salvadanaio, vesti Mizi) lo adottano quando tocca a loro.
+- Le frasi del nucleo stanno identiche in `content/voce-mizi.json` sotto «nucleo»: la batteria lo controlla.
+- La logica pura di un motore sta in un file senza React (`griglia-logica.ts` per il coding su griglia): la usano lo schermo, la demo e le prove, così non possono andare in disaccordo.
+- La demo (`?demo=1`) deve arrivare alla festa in OGNI gioco: la batteria gioca da sola tutto il registro. Una demo che legge lo stato dentro un timer vecchio si blocca: ogni passo deve ripartire dallo stato vero (un effetto per passo, con lo stato tra le dipendenze).
+
 ### 4. La voce registrata di Mizi (una bambina)
 - Le frasi che il gioco dice sono costanti nel codice (es. `FRASI_MEMORY`) e stanno, identiche, in `content/voce-mizi.json` sotto lo slug del gioco. Una virgola diversa = un'altra registrazione.
 - Frasi corte, da bambina a bambina, senza genere («Evviva!», non «Brava!»), senza «clicca». Niente nomi propri dei bambini (non si possono registrare).
@@ -89,3 +97,7 @@ Molti giochi usano lo stesso motore (`games/_engine/SceltaMultipla.tsx`, `PixelA
 - 15/11/2026 — L'istruzione ripetuta a ogni round tagliava la lode a metà, in tutti i giochi: ora il guscio la accoda.
 - 15/11/2026 — L'invito «Vi mandiamo i giochi nuovi?» dopo il secondo gioco stava SOTTO lo schermo di gioco (z-10 contro z-50): nessuno l'ha mai visto. Ora è sopra, 3,5 secondi dopo la festa.
 - 15/11/2026 — Il guscio aveva un secondo `<main>` dentro quello della pagina.
+- 16/11/2026 — «La tartaruga» non si poteva finire: risolta la prima sfida, la pulizia dell'effetto cancellava il timer che portava alla seconda. Nessuna prova se ne accorgeva, perché si controllava solo che la pagina si aprisse. Ora la batteria porta ogni gioco alla festa.
+- 16/11/2026 — «Crea il tuo gioco»: «Ho finito» avvisava il sito ma la festa non compariva mai (`finito={false}` fisso): niente figurina a vista.
+- 16/11/2026 — Demo ferme in 6 giochi: nei tre di coding la demo tirava una riga dritta e sbatteva nei muri (ora c'è un risolutore vero); in «Vesti Mizi» premeva «Fatto» con i vestiti vecchi; «Tabelline» restava sulla schermata di scelta.
+- 16/11/2026 — Lodi al maschile («Bravo!», «Bravissimo!») in 7 file: tutte diventate «Evviva!».

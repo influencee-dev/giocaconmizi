@@ -66,7 +66,7 @@ export function PixelArt({ titolo, quadri, age, onProgress, onComplete, demo = f
 
   useEffect(() => {
     if (!completo || finito) return;
-    parla(`Bravissimo! È ${quadro.nome}.`);
+    parla(`Evviva! È ${quadro.nome}.`);
     const nuoviPunti = punti + 1;
     setPunti(nuoviPunti);
 

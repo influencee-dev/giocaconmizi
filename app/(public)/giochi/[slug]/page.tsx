@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { games } from "@/games/registry";
 import { testoGioco } from "@/lib/content";
 import { Contenitore, Prosa } from "@/components/ui";
+import { FigurinaDelGioco } from "@/components/giochi/FigurinaDelGioco";
 import {
   JsonLd,
   jsonLdBreadcrumb,
@@ -102,6 +103,9 @@ export default async function GiocoPage({ params }: Params) {
                 >
                   Gioca
                 </Link>
+
+                {/* La figurina di questo gioco nell'album di Mizi: presa o da prendere. */}
+                <FigurinaDelGioco slug={gioco.slug} skill={gioco.skill} />
 
                 {/* Lo stesso gioco si adatta all'età: qui la si sceglie prima di entrare. */}
                 <div className="flex flex-wrap items-center gap-2">

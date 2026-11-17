@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { parla } from "@/lib/audio";
+import { suona } from "@/lib/suoni";
 import { stelle, type GameProps } from "./tipi";
 
 /**
@@ -117,20 +118,27 @@ export function Tartaruga({ titolo, sfide, onProgress, onComplete, demo = false 
     setDentroRipeti(true);
   }, [finito, risolta, volte]);
 
+  // Disegno uguale all'obiettivo: sfida risolta. Solo questo, qui: il passaggio
+  // alla sfida dopo sta in un effetto a parte. Prima stavano insieme e la pulizia
+  // dell'effetto, scattando appena `risolta` diventava vera, cancellava il timer:
+  // il gioco restava fermo sulla prima sfida per sempre (trovato il 16/11/2026).
   useEffect(() => {
     if (risolta || finito || programma.length === 0) return;
     if (!uguali(mio, obiettivo)) return;
-
     setRisolta(true);
-    parla(`Perfetto! Hai disegnato ${sfida.nome}.`);
-    const nuoviPunti = punti + 1;
-    setPunti(nuoviPunti);
+    setPunti((p) => p + 1);
+    suona("coppia");
+    parla(`Evviva! Hai disegnato ${sfida.nome}.`);
+  }, [mio, obiettivo, risolta, finito, programma.length, sfida.nome]);
 
+  // Sfida risolta: due secondi per guardare il disegno, poi la prossima (o la festa).
+  useEffect(() => {
+    if (!risolta || finito) return;
     const t = window.setTimeout(() => {
       const prossimo = indice + 1;
       if (prossimo >= totale) {
         setFinito(true);
-        onComplete?.({ score: nuoviPunti, stars: stelle(nuoviPunti, totale) });
+        onComplete?.({ score: punti, stars: stelle(punti, totale) });
         return;
       }
       setIndice(prossimo);
@@ -140,8 +148,7 @@ export function Tartaruga({ titolo, sfide, onProgress, onComplete, demo = false 
       onProgress?.(prossimo, totale);
     }, 2000);
     return () => window.clearTimeout(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mio, obiettivo, risolta, finito, programma.length, indice, totale, sfida.nome, onComplete, onProgress]);
+  }, [risolta, finito, indice, totale, punti, onComplete, onProgress]);
 
   useEffect(() => {
     if (!demo || finito || risolta || programma.length > 0) return;

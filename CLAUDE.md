@@ -279,6 +279,13 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   /giochi/album (noindex), fascia e stelle nel catalogo. Mai serie, punti che
   scadono, classifiche.
 - La festa si riconosce da `[data-festa]` (non più dal testo «Bravissimo!»).
+- Nucleo comune dei giochi (16/11/2026): `games/_engine/nucleo.ts` (`useRound`:
+  round, blocco del doppio tocco, punto ai round puliti, aiuto dopo N errori,
+  suoni, lodi senza genere, attributi `data-partita`/`data-round`, esito con
+  errori, aiuti e secondi). Lo usa SceltaMultipla (20 giochi); gli altri motori
+  ci passano quando si migliorano. Logica pura dei motori in file senza React
+  (`griglia-logica.ts`). La batteria gioca da sola TUTTI i giochi del registro
+  fino alla festa: un gioco che non finisce fa fallire la verifica.
 - L'invito alle novità dopo il secondo gioco (components/form/DopoIlGioco.tsx)
   ora è sopra lo schermo di gioco: prima era nascosto sotto.
 
