@@ -3,7 +3,7 @@ import { Contenitore } from "@/components/ui";
 import { giochiBrevi } from "@/games/elenco";
 import { AlbumMizi } from "@/components/giochi/AlbumMizi";
 
-/** L'album di Mizi: le figurine dei giochi finiti. Vive sul telefono (lib/album.ts). */
+/** L'album di Mizi: le figurine dei giochi finiti. Vive sul telefono (lib/giochi/album.ts). */
 export const metadata: Metadata = {
   title: "L'album di Mizi",
   description: "Le figurine dei giochi finiti: una per ogni gioco, più la coccarda del giorno.",

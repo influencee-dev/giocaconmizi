@@ -3,8 +3,8 @@ import Link from "next/link";
 import { Contenitore } from "@/components/ui";
 import { InBreve } from "@/components/vetrina";
 import { JsonLd, jsonLdBreadcrumb } from "@/components/seo/JsonLd";
-import { CITTA_EVENTI, EVENTI_VERIFICATI_IL, eventiAttivi } from "@/lib/eventi-natale";
-import { PERCORSO_EVENTI, PERCORSO_NATALE } from "@/lib/natale";
+import { CITTA_EVENTI, EVENTI_VERIFICATI_IL, eventiAttivi } from "@/lib/natale/eventi-natale";
+import { PERCORSO_EVENTI, PERCORSO_NATALE } from "@/lib/natale/natale";
 
 export const metadata: Metadata = {
   title: "Eventi di Natale per bambini nelle città italiane",

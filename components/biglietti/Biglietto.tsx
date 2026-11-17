@@ -1,6 +1,6 @@
 import qrcode from "qrcode-generator";
 import { Disegno } from "@/games/_engine/arte";
-import { linkConferma, numeroWhatsApp } from "@/lib/biglietti";
+import { linkConferma, numeroWhatsApp } from "@/lib/biglietti/biglietti";
 import { CSS_DA_COLORARE, Sfondo, inchiostro, type Variante } from "./Sfondo";
 import { StickerDisegno, type StickerSulBiglietto } from "./stickers";
 

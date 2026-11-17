@@ -2,9 +2,9 @@
  * Risorse educative consigliate — l'hub /risorse-educative-bambini.
  *
  * Dal 14/11/2026 è una directory come quella delle feste: categorie,
- * province e una scheda per ogni realtà (lib/risorse-categorie.ts). Le
+ * province e una scheda per ogni realtà (lib/risorse/risorse-categorie.ts). Le
  * cinque SEZIONI restano come temi della card e per i dati del foglio. I dati pubblici
- * stanno in lib/risorse-educative-dati.ts; l'archivio completo (con email e
+ * stanno in lib/risorse/risorse-educative-dati.ts; l'archivio completo (con email e
  * note di outreach) resta nel foglio privato di Giorgia e NON entra nel repo.
  *
  * COME SI AGGIORNA: dal foglio «Listing GiocaMizi» si copiano solo le righe

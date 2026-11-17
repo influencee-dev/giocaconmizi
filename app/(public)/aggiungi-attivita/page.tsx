@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { CATEGORIE, SCHEDE } from "@/lib/directory";
-import { CITTA_FESTE } from "@/lib/feste";
-import { chiaveScheda } from "@/lib/directory-db";
-import { chiaveRisorsa } from "@/lib/risorse-educative";
-import { RISORSE } from "@/lib/risorse-educative-dati";
+import { CATEGORIE, SCHEDE } from "@/lib/directory/directory";
+import { CITTA_FESTE } from "@/lib/directory/feste";
+import { chiaveScheda } from "@/lib/directory/directory-db";
+import { chiaveRisorsa } from "@/lib/risorse/risorse-educative";
+import { RISORSE } from "@/lib/risorse/risorse-educative-dati";
 import { Contenitore } from "@/components/ui";
 import { ModuloCandidatura } from "./ModuloCandidatura";
 

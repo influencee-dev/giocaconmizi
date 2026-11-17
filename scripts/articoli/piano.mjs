@@ -33,9 +33,9 @@ const somiglianza = (a, b) => {
   return comuni / Math.max(1, Math.min(A.size, B.size));
 };
 
-/** Le pagine già online: guide brevi (lib/guide.ts) e articoli pubblicati. */
+/** Le pagine già online: guide brevi (lib/contenuti/guide.ts) e articoli pubblicati. */
 function pagineEsistenti() {
-  const brevi = [...fs.readFileSync(path.join(RADICE, "lib/guide.ts"), "utf8").matchAll(/^    slug: "([a-z0-9-]+)",\n(?:.*\n){0,2}?    titolo: "([^"]+)"/gm)].map((m) => ({ slug: m[1], titolo: m[2] }));
+  const brevi = [...fs.readFileSync(path.join(RADICE, "lib/contenuti/guide.ts"), "utf8").matchAll(/^    slug: "([a-z0-9-]+)",\n(?:.*\n){0,2}?    titolo: "([^"]+)"/gm)].map((m) => ({ slug: m[1], titolo: m[2] }));
   const cartella = path.join(RADICE, "content/guide");
   const lunghi = fs.existsSync(cartella)
     ? fs.readdirSync(cartella).filter((f) => f.endsWith(".md")).map((f) => {

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import type { Skill } from "@/games/registry";
 import { FigurinaGioco } from "@/components/icone";
-import { useAlbum } from "@/lib/album";
+import { useAlbum } from "@/lib/giochi/album";
 
 /**
  * La figurina del gioco, nella sua pagina: dice se è già nell'album di Mizi

@@ -169,6 +169,6 @@
   "games/unisci-i-puntini": "2026-10-11",
   "games/unisci-le-sillabe": "2026-11-17",
   "games/vesti-mizi": "2026-11-17",
-  "lib/biglietti.ts": "2026-11-14",
-  "lib/esempi.ts": "2026-08-23"
+  "lib/biglietti/biglietti.ts": "2026-11-14",
+  "lib/biglietti/esempi.ts": "2026-08-23"
 }

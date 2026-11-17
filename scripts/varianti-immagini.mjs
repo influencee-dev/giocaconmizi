@@ -1,6 +1,6 @@
 // Elenco delle foto del sito e delle larghezze in cui esistono davvero
-// (public/immagini/<nome>-<larghezza>.webp) → lib/immagini-varianti.json.
-// Lo legge lib/caricatore-immagini.ts per scegliere il file giusto senza
+// (public/immagini/<nome>-<larghezza>.webp) → lib/foto/immagini-varianti.json.
+// Lo legge lib/foto/caricatore-immagini.ts per scegliere il file giusto senza
 // passare dal ridimensionamento di Vercel. Gira da solo prima di ogni build
 // («prebuild»): una foto nuova entra nell'elenco senza doverci pensare.
 import { readdirSync, statSync, writeFileSync } from "node:fs";
@@ -21,5 +21,5 @@ function leggi(cartella, prefisso) {
 }
 leggi(RADICE, "");
 for (const k of Object.keys(varianti)) varianti[k].sort((a, b) => a - b);
-writeFileSync("lib/immagini-varianti.json", `${JSON.stringify(varianti)}\n`);
-console.log(`varianti-immagini: ${Object.keys(varianti).length} foto in lib/immagini-varianti.json`);
+writeFileSync("lib/foto/immagini-varianti.json", `${JSON.stringify(varianti)}\n`);
+console.log(`varianti-immagini: ${Object.keys(varianti).length} foto in lib/foto/immagini-varianti.json`);

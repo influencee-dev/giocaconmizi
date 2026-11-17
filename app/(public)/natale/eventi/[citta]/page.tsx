@@ -4,13 +4,13 @@ import { notFound } from "next/navigation";
 import { Contenitore } from "@/components/ui";
 import { FaqVetrina, InBreve } from "@/components/vetrina";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
-import { CITTA_EVENTI, EVENTI_VERIFICATI_IL, NOMI_TIPO_EVENTO, cittaEventi, eventiAttivi, quando } from "@/lib/eventi-natale";
-import { CITTA_FESTE } from "@/lib/feste";
-import { PERCORSO_BIGLIETTI_NATALE, PERCORSO_EVENTI, PERCORSO_LETTERINA, PERCORSO_NATALE } from "@/lib/natale";
+import { CITTA_EVENTI, EVENTI_VERIFICATI_IL, NOMI_TIPO_EVENTO, cittaEventi, eventiAttivi, quando } from "@/lib/natale/eventi-natale";
+import { CITTA_FESTE } from "@/lib/directory/feste";
+import { PERCORSO_BIGLIETTI_NATALE, PERCORSO_EVENTI, PERCORSO_LETTERINA, PERCORSO_NATALE } from "@/lib/natale/natale";
 
 /**
  * «Eventi di Natale per bambini a <città>»: solo eventi verificati
- * (lib/eventi-natale.ts), che spariscono quando finiscono. Dati
+ * (lib/natale/eventi-natale.ts), che spariscono quando finiscono. Dati
  * strutturati Event per ognuno.
  */
 

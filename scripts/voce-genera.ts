@@ -9,8 +9,8 @@
  *
  * Le frasi stanno in content/voce-mizi.json, divise per gioco. Ogni frase
  * diventa public/voce/v{versione}/{id}.mp3, dove l'id si calcola dal testo
- * (lib/voce-id.ts): il sito suona il file se c'è, altrimenti usa la sintesi
- * del telefono. Alla fine si riscrive lib/voce-registrata.json con le frasi
+ * (lib/giochi/voce-id.ts): il sito suona il file se c'è, altrimenti usa la sintesi
+ * del telefono. Alla fine si riscrive lib/giochi/voce-registrata.json con le frasi
  * che esistono davvero.
  *
  * La chiave: OPENAI_API_KEY se c'è; nelle sessioni cloud la mette il proxy
@@ -22,7 +22,7 @@ import { spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { idFrase } from "../lib/voce-id";
+import { idFrase } from "../lib/giochi/voce-id";
 
 type Voce = string | { testo: string; lingua: string };
 interface Copione {
@@ -136,7 +136,7 @@ const registrate = readdirSync(CARTELLA)
   .filter((n) => n.endsWith(".mp3") && previste.has(n.replace(/\.mp3$/, "")) && statSync(join(CARTELLA, n)).size > 500)
   .map((n) => n.replace(/\.mp3$/, ""))
   .sort();
-writeFileSync("lib/voce-registrata.json", `${JSON.stringify({ versione: copione.versione, frasi: registrate }, null, 2)}\n`);
+writeFileSync("lib/giochi/voce-registrata.json", `${JSON.stringify({ versione: copione.versione, frasi: registrate }, null, 2)}\n`);
 rmSync(lavoro, { recursive: true, force: true });
 
 console.log(JSON.stringify({ registrate_ora: fatte, registrate_in_tutto: registrate.length, previste: previste.size, mancano: previste.size - registrate.length }));

@@ -5,7 +5,7 @@
  *
  *   npm run foto:genera -- --data 2026-11-12 [--quante 2] [--prova]
  *
- * Stesse foto e stessi prompt del documento su Drive (lib/foto-del-giorno.ts),
+ * Stesse foto e stessi prompt del documento su Drive (lib/foto/foto-del-giorno.ts),
  * con l'immagine di Mizi (public/mizi/mizi-intera.webp) come riferimento.
  * Variabili d'ambiente (nell'ambiente cloud «Giocamizi», MAI nel repo):
  *   OPENAI_API_KEY          obbligatoria
@@ -18,7 +18,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import sharp from "sharp";
-import { fotoDelGiorno, misuraApi, promptFoto, type FotoDaFare } from "../lib/foto-del-giorno";
+import { fotoDelGiorno, misuraApi, promptFoto, type FotoDaFare } from "../lib/foto/foto-del-giorno";
 
 const arg = (nome: string) => {
   const i = process.argv.indexOf(`--${nome}`);

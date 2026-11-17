@@ -1,5 +1,5 @@
-import { GUIDE, type Guida } from "@/lib/guide";
-import { fotoGuida } from "@/lib/foto";
+import { GUIDE, type Guida } from "@/lib/contenuti/guide";
+import { fotoGuida } from "@/lib/foto/foto";
 import { games, type GameMeta } from "@/games/registry";
 
 /**

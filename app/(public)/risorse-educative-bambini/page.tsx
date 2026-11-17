@@ -7,10 +7,10 @@ import { Illustrazione } from "@/components/directory/Illustrazione";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { CardRisorsaDirectory } from "@/components/risorse/CardRisorsaDirectory";
 import { CtaRisorsa, NavCategorieRisorse } from "@/components/risorse/Directory";
-import { site, url } from "@/lib/seo";
+import { site, url } from "@/lib/seo/seo";
 import { PERCORSO_TRAPPOLA } from "@/lib/protezione/limiti";
-import { risorseVisibili } from "@/lib/risorse-reclamo";
-import { DISCLAIMER, FAQ_RISORSE, LINK_CONTROLLATI, PERCORSO_RISORSE, RISPOSTA_BREVE } from "@/lib/risorse-educative";
+import { risorseVisibili } from "@/lib/risorse/risorse-reclamo";
+import { DISCLAIMER, FAQ_RISORSE, LINK_CONTROLLATI, PERCORSO_RISORSE, RISPOSTA_BREVE } from "@/lib/risorse/risorse-educative";
 import {
   categorieAttive,
   listingRisorse,
@@ -18,12 +18,12 @@ import {
   percorsoListingRisorse,
   risorseDi,
   type Ambito,
-} from "@/lib/risorse-categorie";
+} from "@/lib/risorse/risorse-categorie";
 
 /**
  * Hub della directory delle risorse educative (14/11/2026): come /feste,
  * categorie → province → schede. Ogni realtà ha la sua scheda; le categorie
- * nascono da sole alla prima scheda (lib/risorse-categorie.ts).
+ * nascono da sole alla prima scheda (lib/risorse/risorse-categorie.ts).
  */
 
 export const revalidate = 600;

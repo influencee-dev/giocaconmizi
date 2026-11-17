@@ -3,8 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Contenitore, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb } from "@/components/seo/JsonLd";
-import { esempi, immagineDisponibile } from "@/lib/esempi";
-import { linkAlTool, temaPerSlug } from "@/lib/biglietti";
+import { esempi, immagineDisponibile } from "@/lib/biglietti/esempi";
+import { linkAlTool, temaPerSlug } from "@/lib/biglietti/biglietti";
 
 export const metadata: Metadata = {
   title: "Esempi di biglietti di compleanno",

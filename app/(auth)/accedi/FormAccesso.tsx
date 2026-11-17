@@ -2,7 +2,7 @@
 
 import { Mail, RotateCw } from "lucide-react";
 import { useEffect, useState } from "react";
-import { leggiProfilo } from "@/lib/profilo";
+import { leggiProfilo } from "@/lib/famiglia/profilo";
 import { creaClientBrowser } from "@/lib/supabase/client";
 
 type Stato =

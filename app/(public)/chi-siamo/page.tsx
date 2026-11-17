@@ -5,8 +5,8 @@ import { Contenitore } from "@/components/ui";
 import { MiziIntero } from "@/components/illustrazioni";
 import { JsonLd, jsonLdFaq } from "@/components/seo/JsonLd";
 import { Bollino, FasciaFinale, FaqVetrina, InBreve, TitoloVetrina, TONI, type Tono } from "@/components/vetrina";
-import { url } from "@/lib/seo";
-import { SOCIETA, TITOLARE } from "@/lib/legal";
+import { url } from "@/lib/seo/seo";
+import { SOCIETA, TITOLARE } from "@/lib/contenuti/legal";
 
 export const metadata: Metadata = {
   title: "Chi siamo: Giorgia, Domiziana e Mizi",

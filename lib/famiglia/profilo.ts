@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 /**
  * Il profilo della mamma nell'app: nome, bimbi (nome ed età), email e la
  * scelta sulla posta di Mizi. Resta SOLO sul telefono (localStorage, voce
- * «giocamizi-profilo» nel registro di lib/legal.ts): al server non arriva
+ * «giocamizi-profilo» nel registro di lib/contenuti/legal.ts): al server non arriva
  * niente. L'email va a Brevo solo se la mamma accende la posta di Mizi, e
  * allora parte il doppio opt-in come per la fascia newsletter (senza i nomi).
  */

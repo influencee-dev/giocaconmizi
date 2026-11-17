@@ -1,16 +1,16 @@
 import { games } from "@/games/registry";
-import { tutteLeStorie } from "@/lib/content";
-import { GUIDE } from "@/lib/guide";
-import { CITTA_FESTE } from "@/lib/feste";
-import { CITTA_EVENTI, eventiAttivi } from "@/lib/eventi-natale";
-import { RISPOSTA_BREVE_LETTERINA, RISPOSTA_BREVE_NATALE } from "@/lib/natale";
-import { CATEGORIE_ATTIVE, LISTING, SCHEDE } from "@/lib/directory";
-import { temi } from "@/lib/biglietti";
-import { url } from "@/lib/seo";
-import { contaRisorse } from "@/lib/risorse-educative";
-import { TUTORIAL, percorsoTutorial } from "@/lib/tutorial";
-import { RISORSE } from "@/lib/risorse-educative-dati";
-import { categorieAttive, listingRisorse, percorsoCategoriaRisorse, percorsoListingRisorse, risorseDi } from "@/lib/risorse-categorie";
+import { tutteLeStorie } from "@/lib/contenuti/content";
+import { GUIDE } from "@/lib/contenuti/guide";
+import { CITTA_FESTE } from "@/lib/directory/feste";
+import { CITTA_EVENTI, eventiAttivi } from "@/lib/natale/eventi-natale";
+import { RISPOSTA_BREVE_LETTERINA, RISPOSTA_BREVE_NATALE } from "@/lib/natale/natale";
+import { CATEGORIE_ATTIVE, LISTING, SCHEDE } from "@/lib/directory/directory";
+import { temi } from "@/lib/biglietti/biglietti";
+import { url } from "@/lib/seo/seo";
+import { contaRisorse } from "@/lib/risorse/risorse-educative";
+import { TUTORIAL, percorsoTutorial } from "@/lib/contenuti/tutorial";
+import { RISORSE } from "@/lib/risorse/risorse-educative-dati";
+import { categorieAttive, listingRisorse, percorsoCategoriaRisorse, percorsoListingRisorse, risorseDi } from "@/lib/risorse/risorse-categorie";
 
 /**
  * llms.txt generato dal registry (llmstxt.org): la mappa del sito per gli

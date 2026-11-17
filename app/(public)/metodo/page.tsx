@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { hub } from "@/lib/content";
+import { hub } from "@/lib/contenuti/content";
 import { PaginaHub } from "@/components/vetrina/PaginaHub";
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Contenitore, TitoloSezione } from "@/components/ui";
 import { FacciaMizi } from "@/games/_engine/arte";
-import { TITOLARE } from "@/lib/legal";
-import { CATEGORIE, perCategoria, type Categoria } from "@/lib/rete";
+import { TITOLARE } from "@/lib/contenuti/legal";
+import { CATEGORIE, perCategoria, type Categoria } from "@/lib/directory/rete";
 
 export const metadata: Metadata = {
   title: "Per le mamme: associazioni, community e locali family-friendly",

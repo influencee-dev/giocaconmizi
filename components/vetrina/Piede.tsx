@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { SENZA_PRECARICO } from "@/lib/precarico";
+import { SENZA_PRECARICO } from "@/lib/seo/precarico";
 import type { ReactNode } from "react";
-import { SOCIETA, TITOLARE } from "@/lib/legal";
-import type { CodiceFoto } from "@/lib/foto";
+import { SOCIETA, TITOLARE } from "@/lib/contenuti/legal";
+import type { CodiceFoto } from "@/lib/foto/foto";
 import { Foto, Freccia } from "./index";
 
 /**

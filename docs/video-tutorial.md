@@ -24,7 +24,7 @@ Il comando (scripts/video/fai.sh) fa da solo:
    musica che si abbassa quando parla Mizi, sottotitoli .vtt);
 5. **montaggio** H.264 + AAC; copia in public/video/<slug>.mp4/.webp/.vtt;
 6. **pagina del tutorial** (registra.py): salva content/video/<slug>.tempi.json
-   e ricompila lib/tutorial-dati.json → /tutorial/<slug> nasce da sola.
+   e ricompila lib/contenuti/tutorial-dati.json → /tutorial/<slug> nasce da sola.
 
 Restano nella cartella di lavoro «<slug> · 16x9.mp4» e «<slug> · 9x16.mp4» da
 caricare su Drive (2 Aree → Giocamizi · Video) e su YouTube.

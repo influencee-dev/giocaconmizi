@@ -7,7 +7,7 @@ import { MOTIVI } from "@/components/biglietti/motivi";
 import { annuncia, MessaggioEsito } from "@/components/ui/Esito";
 import { FacciaMizi } from "@/games/_engine/arte";
 import { Icona } from "@/components/icone";
-import { parla, zittisci } from "@/lib/audio";
+import { parla, zittisci } from "@/lib/giochi/audio";
 import {
   APERTURE,
   CARTE,
@@ -25,8 +25,8 @@ import {
   TESTO_CONDIVISIONE,
   riempi,
   type Fascia,
-} from "@/lib/natale";
-import { condividiImmagine, foglioInPng, nomeFileLetterina, pngInPdf, scaricaUrl, stampaImmagine } from "@/lib/natale-esporta";
+} from "@/lib/natale/natale";
+import { condividiImmagine, foglioInPng, nomeFileLetterina, pngInPdf, scaricaUrl, stampaImmagine } from "@/lib/natale/natale-esporta";
 import { FoglioBusta } from "./FoglioBusta";
 import { FoglioLetterina, FoglioRisposta, type DatiLetterina } from "./FoglioLetterina";
 

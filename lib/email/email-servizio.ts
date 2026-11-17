@@ -1,5 +1,5 @@
 import { inviaEmailServizio, provaEmailServizio } from "./brevo";
-import { TITOLARE } from "./legal";
+import { TITOLARE } from "../contenuti/legal";
 
 /**
  * Le email di servizio delle schede (attività della directory e risorse educative):
@@ -8,7 +8,7 @@ import { TITOLARE } from "./legal";
  *   3. il link personale, mandato dal pannello con un tocco;
  *   4. «la tua scheda è online» (o «l'abbiamo tolta») dopo la decisione di Giorgia.
  *
- * Partono da Brevo (lib/brevo.ts → inviaEmailServizio) e non bloccano mai
+ * Partono da Brevo (lib/email/brevo.ts → inviaEmailServizio) e non bloccano mai
  * l'azione: senza chiave o con Brevo giù, semplicemente non partono.
  * Nessun codice del pannello nelle email: chi le inoltra non apre niente.
  */

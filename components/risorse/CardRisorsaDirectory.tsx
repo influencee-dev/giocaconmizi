@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Globe, MapPin } from "lucide-react";
 import { Illustrazione } from "@/components/directory/Illustrazione";
 import { LogoRisorsa } from "./CardRisorsa";
-import { percorsoRisorsa } from "@/lib/risorse-educative";
-import { categoriaDiRisorsa } from "@/lib/risorse-categorie";
-import type { RisorsaVista } from "@/lib/risorse-reclamo";
-import { anteprimaSito } from "@/lib/risorse-anteprime";
+import { percorsoRisorsa } from "@/lib/risorse/risorse-educative";
+import { categoriaDiRisorsa } from "@/lib/risorse/risorse-categorie";
+import type { RisorsaVista } from "@/lib/risorse/risorse-reclamo";
+import { anteprimaSito } from "@/lib/risorse/risorse-anteprime";
 
 /**
  * La card di una risorsa nella directory, gemella di CardRicerca delle feste:

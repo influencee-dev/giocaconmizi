@@ -14,7 +14,7 @@ Come la directory delle feste, ma sotto `/risorse-educative-bambini`:
 | `/risorse-educative-bambini/<categoria>/<provincia>` | provincia: solo categorie sul territorio e solo con ≥ 2 schede |
 | `/risorse-educative-bambini/<slug>` | la scheda di OGNI realtà: è il link da mettere nelle email |
 
-- Registro in `lib/risorse-categorie.ts`: `CATEGORIE_RISORSE` (estendibile: una
+- Registro in `lib/risorse/risorse-categorie.ts`: `CATEGORIE_RISORSE` (estendibile: una
   categoria vuota non si vede, appare da sola alla prima scheda), `ASSEGNAZIONI`
   (risorsa → categoria; senza riga decide la prima sezione), `PROVINCE` (sigla → nome).
 - La scheda non ha la categoria nell'indirizzo apposta: se una realtà cambia

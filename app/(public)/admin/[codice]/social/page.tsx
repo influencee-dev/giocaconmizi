@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Contenitore } from "@/components/ui";
-import { adminValido } from "@/lib/admin";
+import { adminValido } from "@/lib/directory/admin";
 import { giornoDiRoma, postDelGiorno, type TipoPost } from "@/lib/social/post";
 import { instagramCollegato } from "@/lib/social/instagram";
 import { MenuAdmin } from "../MenuAdmin";

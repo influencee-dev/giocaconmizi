@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { minuti, type Capitolo } from "@/lib/tutorial-base";
+import { minuti, type Capitolo } from "@/lib/contenuti/tutorial-base";
 
 /**
  * Il video di un tutorial con i passi sotto: toccare un passo porta il video

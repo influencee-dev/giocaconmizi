@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Contenitore } from "@/components/ui";
 import { FacciaMizi } from "@/games/_engine/arte";
-import { AGGIORNATA, FORNITORI, TITOLARE, TITOLARI_AUTONOMI } from "@/lib/legal";
+import { AGGIORNATA, FORNITORI, TITOLARE, TITOLARI_AUTONOMI } from "@/lib/contenuti/legal";
 
 export const metadata: Metadata = {
   title: "Privacy policy",

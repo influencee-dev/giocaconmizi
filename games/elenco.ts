@@ -1,5 +1,5 @@
 import { games } from "./registry";
-import type { GiocoBreve } from "@/lib/album";
+import type { GiocoBreve } from "@/lib/giochi/album";
 
 /**
  * Slug dei giochi che hanno un componente giocabile.

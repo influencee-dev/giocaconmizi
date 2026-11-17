@@ -115,7 +115,7 @@ export function linkInvito(dati: DatiBiglietto): string {
   return `/biglietti/vedi?b=${datiPerLink(dati)}`;
 }
 
-// numeroWhatsApp vive in lib/biglietti.ts (serve anche al Biglietto, che
+// numeroWhatsApp vive in lib/biglietti/biglietti.ts (serve anche al Biglietto, che
 // disegna il QR ed è usato da pagine server); da qui si riesporta per i
 // componenti che già la importavano.
-export { numeroWhatsApp } from "@/lib/biglietti";
+export { numeroWhatsApp } from "@/lib/biglietti/biglietti";

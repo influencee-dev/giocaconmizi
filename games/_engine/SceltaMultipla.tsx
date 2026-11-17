@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { Disegno, FacciaMizi, Secchiello, type Emozione, type NomeFigura } from "./arte";
-import type { Lingua } from "@/lib/audio";
+import type { Lingua } from "@/lib/giochi/audio";
 import type { GameProps } from "./tipi";
 import { useRound } from "./nucleo";
 

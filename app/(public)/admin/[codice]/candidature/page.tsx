@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CATEGORIE, SCHEDE, percorsoScheda } from "@/lib/directory";
-import { adminCandidature, chiaveScheda } from "@/lib/directory-db";
-import { adminValido } from "@/lib/admin";
+import { CATEGORIE, SCHEDE, percorsoScheda } from "@/lib/directory/directory";
+import { adminCandidature, chiaveScheda } from "@/lib/directory/directory-db";
+import { adminValido } from "@/lib/directory/admin";
 import { Contenitore } from "@/components/ui";
 import { MenuAdmin } from "../MenuAdmin";
 import { NonDisponibile } from "../NonDisponibile";
@@ -12,7 +12,7 @@ import { MandaLink } from "./MandaLink";
 /**
  * Le attività che si sono proposte da /aggiungi-attivita. Niente va online da
  * solo: «Accetta» vuol dire «la verifico e la aggiungo» (attività nuova: va
- * controllata col sito ufficiale e inserita in lib/feste.ts; accesso: si manda
+ * controllata col sito ufficiale e inserita in lib/directory/feste.ts; accesso: si manda
  * il link personale della scheda dalla sezione Schede).
  */
 export const dynamic = "force-dynamic";

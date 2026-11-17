@@ -4,8 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { Disegno, FacciaMizi, type NomeFigura } from "./arte";
 import { mescola } from "./casuale";
-import { parla, preparaVoci } from "@/lib/audio";
-import { suona } from "@/lib/suoni";
+import { parla, preparaVoci } from "@/lib/giochi/audio";
+import { suona } from "@/lib/giochi/suoni";
 import type { GameProps } from "./tipi";
 
 /**

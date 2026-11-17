@@ -22,7 +22,7 @@ Build di produzione (`npm run build`, poi `npx next start -p 3200`): il server d
 - una partita da **smemorato/sbadato** (sbaglia sempre): si deve arrivare in fondo lo stesso, con un aiuto;
 - la **demo** (`?demo=1`) fino alla festa: se si blocca è un bug;
 - **tocchi nello stesso istante** su più bersagli (`el.click()` tre volte in un `evaluate`);
-- cosa **dice** la voce e in che ordine: `window.__voceMizi` (riempito da `lib/audio.ts` se esiste) — una frase tagliata a metà dalla successiva è un bug;
+- cosa **dice** la voce e in che ordine: `window.__voceMizi` (riempito da `lib/giochi/audio.ts` se esiste) — una frase tagliata a metà dalla successiva è un bug;
 - foto di ogni schermata, guardate davvero.
 
 ### 2. Cercare i bug con questa lista
@@ -39,7 +39,7 @@ Build di produzione (`npm run build`, poi `npx next start -p 3200`): il server d
 - **Durata e crescita**: 3 livelli (o 5-8 round) che salgono per quantità o complessità, mai per fretta. Età più piccola = partenza più facile.
 - **Aiuto prima della frustrazione**: dopo 3 errori di fila il gioco mostra la strada (nel Memory due carte ballano).
 - **Errore vero ≠ esplorazione**: le stelle contano solo gli errori evitabili.
-- **Ogni tocco risponde**: un suono (`suona()` in `lib/suoni.ts`, mai negativo), un movimento (CSS, rispettando `prefers-reduced-motion`), una parola.
+- **Ogni tocco risponde**: un suono (`suona()` in `lib/giochi/suoni.ts`, mai negativo), un movimento (CSS, rispettando `prefers-reduced-motion`), una parola.
 - **La voce insegna**: il nome della cosa toccata, non solo «giusto».
 - Stato del gioco leggibile da fuori con attributi `data-…` (fase, livello, stato di ogni pezzo): servono alle verifiche.
 
@@ -57,11 +57,11 @@ Build di produzione (`npm run build`, poi `npx next start -p 3200`): il server d
 - La voce è «sage» (decisione di Giorgia del 15/11/2026, la stessa dei video: scripts/video/voce.py), con le istruzioni scritte nel copione e `intonazione` 0. Non si cambia senza una sua richiesta.
 - `npm run voce -- --gioco <slug>` registra le mancanti (OpenAI `gpt-4o-mini-tts`). Serve il segreto di rete per `api.openai.com` nell'ambiente della sessione (c'è nell'ambiente «Giocamizi», non in «Default»).
 - Nessuno può ascoltare le registrazioni: ogni frase registrata va riascoltata dalla macchina (trascrizione `whisper-1`) e confrontata col testo. Una frase che non torna si rifà; alla terza volta resta alla sintesi del telefono e lo si scrive nella nota.
-- Il sito suona il file se esiste (`lib/voce-registrata.json`), altrimenti la sintesi del telefono: si può pubblicare il gioco prima della registrazione.
+- Il sito suona il file se esiste (`lib/giochi/voce-registrata.json`), altrimenti la sintesi del telefono: si può pubblicare il gioco prima della registrazione.
 - Verifica obbligatoria: tutto quello che il gioco dice in una partita completa è nel copione.
 
 ### 5. L'album di Mizi (la spinta a provare altri giochi)
-Non serve fare niente nel gioco: basta chiamare `onComplete({ score, stars })` una volta sola a fine partita e usare `GameShell`. La festa finale mostra da sola figurina, coccarda del giorno (3 giochi DIVERSI) e «Prossimo gioco» (`lib/album.ts`, `components/game-shell/GameShell.tsx`).
+Non serve fare niente nel gioco: basta chiamare `onComplete({ score, stars })` una volta sola a fine partita e usare `GameShell`. La festa finale mostra da sola figurina, coccarda del giorno (3 giochi DIVERSI) e «Prossimo gioco» (`lib/giochi/album.ts`, `components/game-shell/GameShell.tsx`).
 Vietato aggiungere: serie da non perdere, punti che scadono, classifiche, premi a tempo, notifiche che fanno sentire in colpa.
 
 ### 6. Verifiche e pubblicazione

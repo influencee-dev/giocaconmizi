@@ -2,9 +2,9 @@ import { Icona } from "@/components/icone";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SCHEDE, datiCard, haListing, percorsoScheda, scheda, schedeDi } from "@/lib/directory";
-import { chiaveScheda, conModifiche, pubblicate, type DatiModifica } from "@/lib/directory-db";
-import { url } from "@/lib/seo";
+import { SCHEDE, datiCard, haListing, percorsoScheda, scheda, schedeDi } from "@/lib/directory/directory";
+import { chiaveScheda, conModifiche, pubblicate, type DatiModifica } from "@/lib/directory/directory-db";
+import { url } from "@/lib/seo/seo";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { Briciole, CtaAttivita, InBreve } from "@/components/directory/Briciole";
@@ -14,7 +14,7 @@ import { ReelInstagram } from "@/components/feste/ReelInstagram";
 import { Contatore } from "@/components/directory/Contatore";
 import { Globe, Instagram, MessageCircle, Phone } from "lucide-react";
 import { Etichetta } from "@/components/directory/Etichetta";
-import { ESPERIENZE } from "@/lib/esperienze";
+import { ESPERIENZE } from "@/lib/directory/esperienze";
 
 /** La scheda di un'attività (Figma 04–06). */
 

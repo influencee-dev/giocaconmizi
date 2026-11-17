@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useMemo } from "react";
 import { FigurinaGioco } from "@/components/icone";
 import { FacciaMizi } from "@/games/_engine/arte";
-import { CHIAVE_ALBUM, GIOCHI_PER_COCCARDA, fattiOggi, prossimiGiochi, useAlbum, type GiocoBreve } from "@/lib/album";
-import { bimboAttivo, useProfilo } from "@/lib/profilo";
+import { CHIAVE_ALBUM, GIOCHI_PER_COCCARDA, fattiOggi, prossimiGiochi, useAlbum, type GiocoBreve } from "@/lib/giochi/album";
+import { bimboAttivo, useProfilo } from "@/lib/famiglia/profilo";
 import { AREE } from "./CatalogoGiochi";
 
 /**

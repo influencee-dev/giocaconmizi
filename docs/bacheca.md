@@ -44,7 +44,7 @@ Mai dati personali nelle note (iscritti, email, contatti): restano fuori da Driv
 
 Una foto in ritardo non blocca niente: il contenuto esce con Mizi su fondo
 pastello e la foto compare quando arriva. Le prenotazioni non arrivate restano
-nei prompt dei giorni dopo (lib/foto-del-giorno.ts prende `perIl <= data`).
+nei prompt dei giorni dopo (lib/foto/foto-del-giorno.ts prende `perIl <= data`).
 
 ## Se ChatGPT non riesce a salvare su Drive
 L'attività di ChatGPT scrive nella sua nota (o nella chat) quali foto non ha

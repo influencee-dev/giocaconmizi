@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Contenitore } from "@/components/ui";
 import { FaqVetrina, InBreve } from "@/components/vetrina";
 import { JsonLd, jsonLdFaq } from "@/components/seo/JsonLd";
-import { CITTA_EVENTI, eventiAttivi } from "@/lib/eventi-natale";
+import { CITTA_EVENTI, eventiAttivi } from "@/lib/natale/eventi-natale";
 import { MOTIVI } from "@/components/biglietti/motivi";
-import { PERCORSO_BIGLIETTI_NATALE, PERCORSO_COME_SCRIVERE, PERCORSO_EVENTI, PERCORSO_LETTERINA, PERCORSO_NATALE, RISPOSTA_BREVE_NATALE } from "@/lib/natale";
+import { PERCORSO_BIGLIETTI_NATALE, PERCORSO_COME_SCRIVERE, PERCORSO_EVENTI, PERCORSO_LETTERINA, PERCORSO_NATALE, RISPOSTA_BREVE_NATALE } from "@/lib/natale/natale";
 
 export const metadata: Metadata = {
   title: "Natale per bambini: letterina, biglietti, eventi e giochi gratis",

@@ -1,7 +1,7 @@
 # Dopo la produzione di un video: python3 registra.py <slug> <cartella-lavoro>
 #  1. salva content/video/<slug>.tempi.json (durata, inizio di ogni scena, data);
-#  2. ricompila lib/tutorial-dati.json con tutti i video che hanno tempi E file
-#     in public/video/: è quello che il sito legge (lib/tutorial.ts).
+#  2. ricompila lib/contenuti/tutorial-dati.json con tutti i video che hanno tempi E file
+#     in public/video/: è quello che il sito legge (lib/contenuti/tutorial.ts).
 import json, subprocess, sys, os, glob, datetime
 qui = os.path.dirname(os.path.abspath(__file__))
 radice = os.path.abspath(os.path.join(qui, "..", ".."))
@@ -38,5 +38,5 @@ for p in sorted(glob.glob(os.path.join(cartella_video, "*.json"))):
         "capitoli": tm["capitoli"], "pagina": s["pagina"], "faq": s.get("faq", []),
     })
 elenco.sort(key=lambda x: (x["gruppo"], x["ordine"], x["titolo"]))
-json.dump(elenco, open(os.path.join(radice, "lib", "tutorial-dati.json"), "w"), ensure_ascii=False, indent=1)
+json.dump(elenco, open(os.path.join(radice, "lib", "contenuti", "tutorial-dati.json"), "w"), ensure_ascii=False, indent=1)
 print("tutorial nel sito:", ", ".join(x["slug"] for x in elenco))

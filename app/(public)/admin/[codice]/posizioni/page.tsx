@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Contenitore } from "@/components/ui";
-import { adminValido } from "@/lib/admin";
-import { SCHEDE } from "@/lib/directory";
-import { chiaveScheda } from "@/lib/directory-db";
-import { posizioni } from "@/lib/posizioni";
+import { adminValido } from "@/lib/directory/admin";
+import { SCHEDE } from "@/lib/directory/directory";
+import { chiaveScheda } from "@/lib/directory/directory-db";
+import { posizioni } from "@/lib/directory/posizioni";
 import { MenuAdmin } from "../MenuAdmin";
 import { DaAttivare, NonDisponibile, Numero } from "../NonDisponibile";
 import { calcolaPosizioni, correggiPosizione } from "./azioni";

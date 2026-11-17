@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CATEGORIE_ATTIVE, LISTING, categoria, datiCard, haListing, percorsoScheda, rispostaListing, schedeDi, vociRicerca } from "@/lib/directory";
+import { CATEGORIE_ATTIVE, LISTING, categoria, datiCard, haListing, percorsoScheda, rispostaListing, schedeDi, vociRicerca } from "@/lib/directory/directory";
 import { RicercaCosaDove } from "@/components/directory/RicercaCosaDove";
-import { cittaFeste } from "@/lib/feste";
-import { conModifiche, pubblicate } from "@/lib/directory-db";
-import { url } from "@/lib/seo";
+import { cittaFeste } from "@/lib/directory/feste";
+import { conModifiche, pubblicate } from "@/lib/directory/directory-db";
+import { url } from "@/lib/seo/seo";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { Briciole, CtaAttivita, InBreve } from "@/components/directory/Briciole";
 import { ListingFiltrato } from "@/components/directory/ListingFiltrato";
-import { chiaveScheda } from "@/lib/directory-db";
-import { posizioni as leggiPosizioni } from "@/lib/posizioni";
-import { CENTRO_CITTA } from "@/lib/coordinate-citta";
+import { chiaveScheda } from "@/lib/directory/directory-db";
+import { posizioni as leggiPosizioni } from "@/lib/directory/posizioni";
+import { CENTRO_CITTA } from "@/lib/directory/coordinate-citta";
 
 /** Listing categoria + città, la pagina che conta per la SEO locale (Figma 01–03). */
 

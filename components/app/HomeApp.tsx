@@ -4,7 +4,7 @@ import { BookOpen, Gift, PartyPopper, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { IconaGioco } from "@/components/icone";
 import type { Skill } from "@/games/registry";
-import { bimboAttivo, ETA, EVENTO_APRI_BENVENUTO, salvaProfilo, useProfilo } from "@/lib/profilo";
+import { bimboAttivo, ETA, EVENTO_APRI_BENVENUTO, salvaProfilo, useProfilo } from "@/lib/famiglia/profilo";
 
 /**
  * La testa della home sul telefono, come un'app (Figma «App mobile», 6):

@@ -27,11 +27,11 @@ import {
 import { PilaGuide } from "@/components/vetrina/PilaGuide";
 import { HomeApp } from "@/components/app/HomeApp";
 import { JsonLd, jsonLdElenco, jsonLdFaq } from "@/components/seo/JsonLd";
-import { fotoSito } from "@/lib/foto";
-import { GUIDE } from "@/lib/guide";
-import { CITTA_FESTE } from "@/lib/feste";
-import { tutteLeStorie } from "@/lib/content";
-import { eta, url } from "@/lib/seo";
+import { fotoSito } from "@/lib/foto/foto";
+import { GUIDE } from "@/lib/contenuti/guide";
+import { CITTA_FESTE } from "@/lib/directory/feste";
+import { tutteLeStorie } from "@/lib/contenuti/content";
+import { eta, url } from "@/lib/seo/seo";
 
 export const metadata: Metadata = {
   title: "Giochi educativi, storie e feste per bambini",

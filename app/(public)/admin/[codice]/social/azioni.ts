@@ -1,6 +1,6 @@
 "use server";
 
-import { adminValido } from "@/lib/admin";
+import { adminValido } from "@/lib/directory/admin";
 import { postDaId } from "@/lib/social/post";
 import { ErroreInstagram, giaPubblicato, pubblicaSuInstagram } from "@/lib/social/instagram";
 

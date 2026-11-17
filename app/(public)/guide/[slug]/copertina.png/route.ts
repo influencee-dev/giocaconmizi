@@ -1,4 +1,4 @@
-import { GUIDE } from "@/lib/guide";
+import { GUIDE } from "@/lib/contenuti/guide";
 import Immagine from "../opengraph-image";
 
 /**

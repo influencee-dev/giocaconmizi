@@ -6,7 +6,7 @@ import { cardTypes } from "@/cards/registry";
 import { Biglietto } from "@/components/biglietti/Biglietto";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdFaq } from "@/components/seo/JsonLd";
-import { ETA_BIGLIETTI, linkAlTool, temi } from "@/lib/biglietti";
+import { ETA_BIGLIETTI, linkAlTool, temi } from "@/lib/biglietti/biglietti";
 
 /* Le domande che le mamme fanno davvero: testo visibile + FAQPage JSON-LD,
    così motori e assistenti AI possono citare la risposta (AEO). */

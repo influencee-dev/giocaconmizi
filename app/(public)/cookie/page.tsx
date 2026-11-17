@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Contenitore } from "@/components/ui";
 import { FacciaMizi } from "@/games/_engine/arte";
 import { ScegliDiNuovo } from "@/components/legal/ScegliDiNuovo";
-import { AGGIORNATA, REGISTRO, TITOLARE } from "@/lib/legal";
+import { AGGIORNATA, REGISTRO, TITOLARE } from "@/lib/contenuti/legal";
 
 export const metadata: Metadata = {
   title: "Cookie policy",

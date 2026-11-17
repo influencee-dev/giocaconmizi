@@ -4,8 +4,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Contenitore } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb } from "@/components/seo/JsonLd";
-import { esempioPerSlug, esempiPubblicati, immagineDisponibile } from "@/lib/esempi";
-import { linkAlTool, temaPerSlug } from "@/lib/biglietti";
+import { esempioPerSlug, esempiPubblicati, immagineDisponibile } from "@/lib/biglietti/esempi";
+import { linkAlTool, temaPerSlug } from "@/lib/biglietti/biglietti";
 
 type Params = { params: Promise<{ slug: string }> };
 

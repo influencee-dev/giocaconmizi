@@ -42,7 +42,7 @@ export interface Guida {
   foto: { scena: string; alt: string };
   /**
    * Solo per gli articoli approfonditi (content/guide/<slug>.md, compilati
-   * in lib/approfondimenti.json da `npm run articoli:compila`): corpo HTML
+   * in lib/contenuti/approfondimenti.json da `npm run articoli:compila`): corpo HTML
    * con tabelle e grafici, indice, scheda rapida e fonti.
    */
   approfondimento?: Approfondimento;

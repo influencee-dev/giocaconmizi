@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { parla, preparaVoci } from "@/lib/audio";
-import { suona } from "@/lib/suoni";
+import { parla, preparaVoci } from "@/lib/giochi/audio";
+import { suona } from "@/lib/giochi/suoni";
 import { stelle, type EsitoPartita } from "./tipi";
 
 /**

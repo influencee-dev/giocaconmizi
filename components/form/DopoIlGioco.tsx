@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { FormGenitore } from "./FormGenitore";
-import { partiteFinite } from "@/lib/partite";
+import { partiteFinite } from "@/lib/giochi/partite";
 
 /**
  * Il form si propone dopo il secondo gioco completato (piano §2, decisione 1):

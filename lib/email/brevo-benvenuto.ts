@@ -1,13 +1,13 @@
 /**
  * L'email di benvenuto: parte una volta sola, quando la mamma ha toccato
- * «Confermo l'iscrizione» (lib/brevo.ts → inviaBenvenuto). Foto vera di
+ * «Confermo l'iscrizione» (lib/email/brevo.ts → inviaBenvenuto). Foto vera di
  * Giorgia e Domiziana (public/email/, JPG perché alcuni programmi di posta
  * non aprono il WebP), tre bottoni verso il sito e, molto in piccolo in
  * fondo, i progetti di Giorgia e la nota che tutto è gestito gratuitamente
  * da Partidea SRL. {{ params.NOME }} è il nome della mamma, se l'ha dato.
  */
 
-import { SOCIETA } from "./legal";
+import { SOCIETA } from "../contenuti/legal";
 
 const SITO = "https://giocamizi.it";
 const UTM = "utm_source=brevo&utm_medium=email&utm_campaign=benvenuto";

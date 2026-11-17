@@ -5,10 +5,10 @@ import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { Briciole, InBreve } from "@/components/directory/Briciole";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { PlayerTutorial } from "@/components/tutorial/PlayerTutorial";
-import { url } from "@/lib/seo";
-import { GRUPPI, PERCORSO_TUTORIAL, TUTORIAL, minuti, percorsoTutorial, tutorialDaSlug, tutorialDi } from "@/lib/tutorial";
+import { url } from "@/lib/seo/seo";
+import { GRUPPI, PERCORSO_TUTORIAL, TUTORIAL, minuti, percorsoTutorial, tutorialDaSlug, tutorialDi } from "@/lib/contenuti/tutorial";
 
-/** La pagina di un video tutorial di Mizi (lib/tutorial.ts). */
+/** La pagina di un video tutorial di Mizi (lib/contenuti/tutorial.ts). */
 
 export const dynamicParams = false;
 

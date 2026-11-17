@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { creaContatto } from "@/lib/brevo";
+import { creaContatto } from "@/lib/email/brevo";
 
 /**
  * Sync verso Brevo (piano §4.4).

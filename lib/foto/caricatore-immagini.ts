@@ -1,4 +1,4 @@
-import VARIANTI from "@/lib/immagini-varianti.json";
+import VARIANTI from "@/lib/foto/immagini-varianti.json";
 
 /**
  * Da dove arrivano le immagini di <Image> (next.config.ts, loader «custom»).

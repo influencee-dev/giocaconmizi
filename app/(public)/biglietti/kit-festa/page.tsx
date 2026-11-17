@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { Contenitore } from "@/components/ui";
 import { Editor } from "@/components/biglietti/Editor";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { url } from "@/lib/seo";
+import { url } from "@/lib/seo/seo";
 
 export const metadata: Metadata = {
   title: "Kit per la festa di compleanno da stampare gratis",

@@ -1,6 +1,6 @@
 // Il pannello di Giorgia: l'ingresso è chiuso senza codice, e il «plugin»
 // immagini trasforma una foto in WebP molto più leggeri, con i nomi giusti.
-// Il codice di prova vale solo nel server delle verifiche (lib/admin.ts).
+// Il codice di prova vale solo nel server delle verifiche (lib/directory/admin.ts).
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { apriBrowser, conServer, contatore, BASE, CODICE_ADMIN_PROVA } from "./comune.mjs";
@@ -153,8 +153,8 @@ ok("mappa: nessuna mappa prima del tocco", (await page.locator(".leaflet-contain
 await page.locator("[data-apri-mappa]").first().tap();
 await page.locator(".leaflet-container").waitFor({ timeout: 10000 }).catch(() => null);
 ok("mappa: al tocco compare con le città", (await page.locator(".leaflet-marker-icon").count()) >= 40, `${await page.locator(".leaflet-marker-icon").count()} segnaposto`);
-const feste = readFileSync("lib/feste.ts", "utf8");
-const coord = readFileSync("lib/coordinate-citta.ts", "utf8");
+const feste = readFileSync("lib/directory/feste.ts", "utf8");
+const coord = readFileSync("lib/directory/coordinate-citta.ts", "utf8");
 const cittaSenza = [...feste.matchAll(/slug: ["']([a-z-]+)["']/g)].map((m) => m[1]).filter((c) => !coord.includes(`${c}:`) && !coord.includes(`"${c}":`));
 ok("mappa: ogni città ha le coordinate", cittaSenza.length === 0, cittaSenza.join(" "));
 await page.goto(`${BASE}/admin/${CODICE_ADMIN_PROVA}/posizioni`, { waitUntil: "networkidle" });

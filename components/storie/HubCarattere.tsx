@@ -1,4 +1,4 @@
-import { tutteLeStorie } from "@/lib/content";
+import { tutteLeStorie } from "@/lib/contenuti/content";
 import { CardStoria } from "@/components/storie/CardStoria";
 import { Contenitore, Griglia } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";

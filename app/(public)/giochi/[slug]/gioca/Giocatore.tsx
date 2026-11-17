@@ -2,8 +2,8 @@
 
 import { useCallback, useMemo, useState } from "react";
 import { componenti } from "@/games/componenti";
-import { registraPartita } from "@/lib/partite";
-import { registraNellAlbum, type EsitoAlbum, type GiocoBreve } from "@/lib/album";
+import { registraPartita } from "@/lib/giochi/partite";
+import { registraNellAlbum, type EsitoAlbum, type GiocoBreve } from "@/lib/giochi/album";
 import { ContestoPartita, type Partita } from "@/components/game-shell/partita";
 import { DopoIlGioco } from "@/components/form/DopoIlGioco";
 

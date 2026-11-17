@@ -125,7 +125,7 @@ Un giorno senza fonti sufficienti produce un report, non un articolo inventato.
 ## Non pestarsi i piedi con la routine delle 7:00
 Questo job gira dopo (alle 9:00) e tocca solo: content/guide/, content/piano-editoriale.json,
 content/foto-in-arrivo.json, public/immagini/ (foto arrivate),
-lib/approfondimenti.json, lib/date-pagine.json, scripts/verifica/sbordi.mjs.
+lib/contenuti/approfondimenti.json, lib/seo/date-pagine.json, scripts/verifica/sbordi.mjs.
 Prima del push: `git pull --rebase`. La routine delle 7:00 non scrive più
 guide nuove (lo slot «guida» migliora quelle esistenti): vedi CLAUDE.md.
 

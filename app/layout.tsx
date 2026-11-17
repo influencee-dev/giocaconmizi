@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito, Lexend } from "next/font/google";
-import { site, url } from "@/lib/seo";
+import { site, url } from "@/lib/seo/seo";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { adminDati, adminLoghi } from "@/lib/directory-db";
-import { adminValido } from "@/lib/admin";
-import { chiaveRisorsa, percorsoRisorsa, risorsaDaChiave } from "@/lib/risorse-educative";
-import { RISORSE } from "@/lib/risorse-educative-dati";
+import { adminDati, adminLoghi } from "@/lib/directory/directory-db";
+import { adminValido } from "@/lib/directory/admin";
+import { chiaveRisorsa, percorsoRisorsa, risorsaDaChiave } from "@/lib/risorse/risorse-educative";
+import { RISORSE } from "@/lib/risorse/risorse-educative-dati";
 import { Contenitore } from "@/components/ui";
 import { MenuAdmin } from "../MenuAdmin";
 import { NonDisponibile } from "../NonDisponibile";

@@ -1,8 +1,8 @@
-// Gli articoli approfonditi: da content/guide/<slug>.md a lib/approfondimenti.json.
+// Gli articoli approfonditi: da content/guide/<slug>.md a lib/contenuti/approfondimenti.json.
 //
 // Ogni articolo è un file Markdown con i dati in testa (frontmatter: vedi
 // docs/routine-articoli.md). Questo script lo trasforma nel formato delle
-// guide (lib/guide.ts → Guida), con in più l'HTML del corpo, l'indice, la
+// guide (lib/contenuti/guide.ts → Guida), con in più l'HTML del corpo, l'indice, la
 // scheda rapida, le fonti e le immagini. Solo gli articoli con
 // `stato: pubblicata` finiscono nel JSON: le bozze restano nel Markdown.
 //
@@ -22,7 +22,7 @@ import { Marked } from "marked";
 const QUESTO = fileURLToPath(import.meta.url);
 const RADICE = path.resolve(path.dirname(QUESTO), "../..");
 export const CARTELLA = path.join(RADICE, "content/guide");
-const USCITA = path.join(RADICE, "lib/approfondimenti.json");
+const USCITA = path.join(RADICE, "lib/contenuti/approfondimenti.json");
 
 const esc = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -195,12 +195,12 @@ if (eseguito) {
   if (process.argv.includes("--controlla")) {
     const attuale = fs.existsSync(USCITA) ? fs.readFileSync(USCITA, "utf8") : "";
     if (attuale !== testo) {
-      console.error("articoli: lib/approfondimenti.json non è aggiornato. Esegui: npm run articoli:compila");
+      console.error("articoli: lib/contenuti/approfondimenti.json non è aggiornato. Esegui: npm run articoli:compila");
       process.exit(1);
     }
     console.log(`articoli: aggiornato (${pubblicati.length} pubblicati)`);
   } else {
     fs.writeFileSync(USCITA, testo);
-    console.log(`articoli: ${pubblicati.length} pubblicati in lib/approfondimenti.json`);
+    console.log(`articoli: ${pubblicati.length} pubblicati in lib/contenuti/approfondimenti.json`);
   }
 }

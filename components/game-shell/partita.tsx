@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import type { EsitoAlbum, GiocoBreve } from "@/lib/album";
+import type { EsitoAlbum, GiocoBreve } from "@/lib/giochi/album";
 
 /**
  * Quello che il guscio dei giochi deve sapere della partita in corso per fare

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { TITOLARE } from "@/lib/legal";
+import { TITOLARE } from "@/lib/contenuti/legal";
 import { Contenitore } from "@/components/ui";
 
 export const metadata: Metadata = {

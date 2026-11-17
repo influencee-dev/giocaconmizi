@@ -3,10 +3,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { Disegno } from "./arte";
-import { parla } from "@/lib/audio";
+import { parla } from "@/lib/giochi/audio";
 import { stelle, type GameProps } from "./tipi";
 import { comandiDi, massimoDi, passiDi, passo, risolvi, statoIniziale, type Comando, type Livello } from "./griglia-logica";
-import { suona } from "@/lib/suoni";
+import { suona } from "@/lib/giochi/suoni";
 
 /**
  * Coding su griglia: si compone un programma, si preme Via, Mizi lo esegue.

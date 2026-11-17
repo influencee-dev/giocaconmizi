@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PERCORSO_COME_RECLAMARE } from "@/lib/reclamo";
+import { PERCORSO_COME_RECLAMARE } from "@/lib/directory/reclamo";
 
 /** Il percorso visibile (Home › Ludoteche › Milano), gemello del JSON-LD. */
 export function Briciole({ voci }: { voci: { nome: string; href?: string }[] }) {

@@ -3,13 +3,13 @@
 import { Check, Heart, Map as IconaMappa, SlidersHorizontal, X } from "lucide-react";
 import { Icona, type NomeIcona } from "@/components/icone";
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { DatiCard } from "@/lib/directory";
-import { ESPERIENZE, GRUPPI, type IdEsperienza } from "@/lib/esperienze";
-import type { IdEtichetta } from "@/lib/etichette";
+import type { DatiCard } from "@/lib/directory/directory";
+import { ESPERIENZE, GRUPPI, type IdEsperienza } from "@/lib/directory/esperienze";
+import type { IdEtichetta } from "@/lib/directory/etichette";
 import { CardRicerca } from "./CardRicerca";
 import { EVENTO_PREFERITI, leggiPreferiti } from "./BottoneSalva";
 import { MappaLocali, type Punto } from "@/components/mappa/MappaLocali";
-import type { Posizione } from "@/lib/posizioni";
+import type { Posizione } from "@/lib/directory/posizioni";
 
 /**
  * I risultati di ricerca di una categoria in una città.
@@ -21,7 +21,7 @@ import type { Posizione } from "@/lib/posizioni";
  * - «Filtri» apre un foglio dal basso con tutti i gruppi (per la festa, per
  *   giocare, comodità, dove, tipo di posto, zona): pillole grandi, col numero
  *   di posti che resterebbero, e in fondo «Mostra N posti».
- * I filtri usano SOLO ciò che è scritto nelle schede (lib/esperienze.ts) e
+ * I filtri usano SOLO ciò che è scritto nelle schede (lib/directory/esperienze.ts) e
  * finiscono nell'indirizzo (?servizi=…&tipo=…&zona=…) per condividere la
  * ricerca; la pagina indicizzata resta una.
  */
@@ -39,7 +39,7 @@ export function ListingFiltrato({
 }: {
   schede: DatiCard[];
   nome: string;
-  /** Posizioni per DatiCard.chiave (lib/posizioni.ts). */
+  /** Posizioni per DatiCard.chiave (lib/directory/posizioni.ts). */
   posizioni?: Record<string, Posizione>;
   centro?: [number, number];
 }) {

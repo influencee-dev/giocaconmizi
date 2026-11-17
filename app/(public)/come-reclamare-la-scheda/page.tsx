@@ -3,20 +3,20 @@ import Link from "next/link";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { Briciole, InBreve } from "@/components/directory/Briciole";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
-import { url } from "@/lib/seo";
-import { PERCORSO_COME_RECLAMARE } from "@/lib/reclamo";
-import { percorsoTutorial, tutorialDaSlug } from "@/lib/tutorial";
+import { url } from "@/lib/seo/seo";
+import { PERCORSO_COME_RECLAMARE } from "@/lib/directory/reclamo";
+import { percorsoTutorial, tutorialDaSlug } from "@/lib/contenuti/tutorial";
 
-// Il video del reclamo: vive nel registro dei tutorial (lib/tutorial.ts), qui si incorpora.
+// Il video del reclamo: vive nel registro dei tutorial (lib/contenuti/tutorial.ts), qui si incorpora.
 const TUTORIAL_RECLAMO = tutorialDaSlug("come-reclamare-la-scheda");
-import { PERCORSO_RISORSE } from "@/lib/risorse-educative";
+import { PERCORSO_RISORSE } from "@/lib/risorse/risorse-educative";
 
 /**
  * Il tutorial per le attività e le realtà educative: come si reclama la
  * scheda che Giocamizi ha già creato (o come se ne propone una nuova).
  * Linkato dal richiamo «Come funziona» di feste, directory e risorse.
  * In testa il video di Mizi: i dati e il VideoObject stanno nella sua pagina
- * /tutorial/come-reclamare-la-scheda (lib/tutorial.ts), qui si incorpora soltanto.
+ * /tutorial/come-reclamare-la-scheda (lib/contenuti/tutorial.ts), qui si incorpora soltanto.
  */
 
 const TITOLO = "Come reclamare la scheda della tua attività su Giocamizi";

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { games } from "@/games/registry";
 import { Contenitore, TitoloSezione } from "@/components/ui";
-import { classi, etichettaClasse } from "@/lib/seo";
+import { classi, etichettaClasse } from "@/lib/seo/seo";
 
 export const metadata: Metadata = {
   title: "Per insegnanti",

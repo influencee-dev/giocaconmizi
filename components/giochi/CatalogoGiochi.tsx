@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { CardGioco } from "@/components/ui";
 import { IconaGioco } from "@/components/icone";
 import type { Skill } from "@/games/registry";
-import { useAlbum, type Album } from "@/lib/album";
+import { useAlbum, type Album } from "@/lib/giochi/album";
 import { FasciaAlbum } from "./FasciaAlbum";
 
 /**

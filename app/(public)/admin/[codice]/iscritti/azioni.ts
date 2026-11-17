@@ -1,7 +1,7 @@
 "use server";
 
-import { adminValido } from "@/lib/admin";
-import { provaVersoAvvisi } from "@/lib/email-servizio";
+import { adminValido } from "@/lib/directory/admin";
+import { provaVersoAvvisi } from "@/lib/email/email-servizio";
 
 export type EsitoProva = { stato: "fermo" } | { stato: "partita"; a: string } | { stato: "non-partita"; motivo: string };
 

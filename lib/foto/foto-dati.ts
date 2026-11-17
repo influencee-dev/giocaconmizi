@@ -1,7 +1,7 @@
 /**
  * Il registro delle foto del sito, senza filesystem: lo leggono anche i
  * componenti client (l'ottimizzatore immagini del pannello). La funzione
- * che controlla se il file c'è sta in lib/foto.ts.
+ * che controlla se il file c'è sta in lib/foto/foto.ts.
  */
 
 export type CodiceFoto =

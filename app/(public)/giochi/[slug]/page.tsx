@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { games } from "@/games/registry";
-import { testoGioco } from "@/lib/content";
+import { testoGioco } from "@/lib/contenuti/content";
 import { Contenitore, Prosa } from "@/components/ui";
 import { FigurinaDelGioco } from "@/components/giochi/FigurinaDelGioco";
 import {

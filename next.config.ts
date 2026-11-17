@@ -28,8 +28,8 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   // Le foto esistono già in più larghezze (public/immagini): <Image> prende
-  // direttamente il file giusto, senza /_next/image (lib/caricatore-immagini.ts).
-  images: { loader: "custom", loaderFile: "./lib/caricatore-immagini.ts" },
+  // direttamente il file giusto, senza /_next/image (lib/foto/caricatore-immagini.ts).
+  images: { loader: "custom", loaderFile: "./lib/foto/caricatore-immagini.ts" },
   // Le pagine pubbliche sono statiche/ISR: velocità = SEO + bambini impazienti (piano §4.1).
   experimental: {
     optimizePackageImports: ["@supabase/supabase-js"],

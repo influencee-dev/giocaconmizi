@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
-import { parla } from "@/lib/audio";
-import { suona } from "@/lib/suoni";
+import { parla } from "@/lib/giochi/audio";
+import { suona } from "@/lib/giochi/suoni";
 import { stelle, type GameProps } from "./tipi";
 
 /**

@@ -1,5 +1,5 @@
-import { logoDi } from "@/lib/directory-db";
-import { chiaveRisorsa, risorsaDaSlug } from "@/lib/risorse-educative";
+import { logoDi } from "@/lib/directory/directory-db";
+import { chiaveRisorsa, risorsaDaSlug } from "@/lib/risorse/risorse-educative";
 
 /**
  * Il logo di una risorsa: solo quello caricato dalla realtà e approvato da

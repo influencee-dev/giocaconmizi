@@ -1,9 +1,9 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { GUIDE } from "./guide";
+import { GUIDE } from "../contenuti/guide";
 import { FOTO, LARGHEZZE, LARGHEZZE_GUIDA, fotoSito, type CodiceFoto } from "./foto";
 import { fotoArrivata, leggiCoda } from "./foto-in-arrivo";
-import { BLOCCO_FOTO, BLOCCO_MIZI, REGOLE_PERSONE } from "../scripts/blocchi-prompt";
+import { BLOCCO_FOTO, BLOCCO_MIZI, REGOLE_PERSONE } from "../../scripts/blocchi-prompt";
 
 /**
  * Le foto da fare per un giorno e il loro prompt, uguali per i due usi:

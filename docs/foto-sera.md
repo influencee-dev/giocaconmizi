@@ -20,7 +20,7 @@ Ogni giro lascia una nota in Drive «Giocamizi / 0 Bacheca» e legge quelle
 degli ultimi 2 giorni prima di iniziare.
 
 ## Generazione con l'API (scripts/foto-genera.ts)
-- Stesse foto e stessi prompt del documento su Drive (`lib/foto-del-giorno.ts`):
+- Stesse foto e stessi prompt del documento su Drive (`lib/foto/foto-del-giorno.ts`):
   tutte le prenotazioni del giorno, poi fino a 2 foto che mancano al sito.
 - Riferimento di Mizi: `public/mizi/mizi-intera.webp`.
 - Chiave `OPENAI_API_KEY` SOLO nelle variabili d'ambiente dell'ambiente cloud
@@ -41,7 +41,7 @@ foto compare da sola quando arriva (le pagine la cercano in public/immagini).
   per giorno, titolo «Prompt del giorno · GG/MM/AAAA» (il giorno in cui servono le foto).
 - «99 Immagini pronte» — id `1lUlL1Uj2AspXO2SgFeSU_itN0nu2RQbP`: i PNG di ChatGPT,
   col nome esatto del prompt: un nome NEUTRO tipo `foto-3fa91c2e.png` (niente marchi
-  o nomi di giochi, che il generatore rifiuta: lib/foto-in-arrivo.ts → nomeConsegna).
+  o nomi di giochi, che il generatore rifiuta: lib/foto/foto-in-arrivo.ts → nomeConsegna).
   `foto-arrivate` lo riconduce da solo al nome vero (es. guida-minecraft-vs-roblox).
 - «01 Mizi pupazzo (riferimento)»: la foto di riferimento di Mizi da allegare.
 

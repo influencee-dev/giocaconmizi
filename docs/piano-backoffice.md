@@ -46,7 +46,7 @@ e con un deploy READY.
   cookie, senza IP, senza identificativi: legittimo interesse, nessun
   consenso. Le persone compaiono per nome solo quando scrivono loro (modulo
   di contatto) o si iscrivono (Brevo). Ogni trattamento nuovo = una voce in
-  `lib/legal.ts` + `docs/privacy/registro-trattamenti.md` + informativa.
+  `lib/contenuti/legal.ts` + `docs/privacy/registro-trattamenti.md` + informativa.
 - **Stile**: mattoni di `components/vetrina/`, mobile prima di tutto, tap
   target da 44 px, testi in italiano semplice.
 
@@ -72,7 +72,7 @@ giro).
 4. Varianti responsive opzionali (1440, 960, 800, 640, 480 px) con i nomi
    che vuole il sito: `<nome>-<larghezza>.webp`.
 5. Assegnazione facoltativa a un codice foto del sito (H-01…I-05, registro
-   `lib/foto.ts`): il nome file e il ritaglio al rapporto giusto vengono da
+   `lib/foto/foto.ts`): il nome file e il ritaglio al rapporto giusto vengono da
    lì.
 6. Risultato: anteprima prima/dopo, peso prima/dopo e risparmio in %, e
    download dei file uno per uno o in un unico ZIP (generato nel browser,

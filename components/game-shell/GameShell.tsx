@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { parla, zittisci, type Lingua } from "@/lib/audio";
-import { suona } from "@/lib/suoni";
-import { GIOCHI_PER_COCCARDA, leggiAlbum, prossimiGiochi } from "@/lib/album";
+import { parla, zittisci, type Lingua } from "@/lib/giochi/audio";
+import { suona } from "@/lib/giochi/suoni";
+import { GIOCHI_PER_COCCARDA, leggiAlbum, prossimiGiochi } from "@/lib/giochi/album";
 import { FigurinaGioco } from "@/components/icone";
 import { FacciaMizi } from "@/games/_engine/arte";
 import { usePartita, type Partita } from "./partita";
@@ -15,7 +15,7 @@ import { usePartita, type Partita } from "./partita";
  * istruzione vocale con icona ripeti, "Esci" piccolo in alto a sinistra,
  * "Ancora" sempre visibile alla fine, festa con coriandoli CSS.
  * Dal 15/11/2026 la festa mostra anche la figurina per l'album di Mizi, la
- * coccarda del giorno e il prossimo gioco da provare (lib/album.ts).
+ * coccarda del giorno e il prossimo gioco da provare (lib/giochi/album.ts).
  *
  * L'istruzione è SEMPRE anche scritta, nel fumetto di Mizi: la voce può non
  * partire (telefono muto, browser senza sintesi) e senza testo lo schermo

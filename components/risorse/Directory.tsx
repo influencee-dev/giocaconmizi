@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { chiaveRisorsa, type Risorsa } from "@/lib/risorse-educative";
-import { percorsoCategoriaRisorse, type CategoriaRisorsa } from "@/lib/risorse-categorie";
-import { PERCORSO_COME_RECLAMARE } from "@/lib/reclamo";
+import { chiaveRisorsa, type Risorsa } from "@/lib/risorse/risorse-educative";
+import { percorsoCategoriaRisorse, type CategoriaRisorsa } from "@/lib/risorse/risorse-categorie";
+import { PERCORSO_COME_RECLAMARE } from "@/lib/directory/reclamo";
 
 /** I mattoni condivisi delle pagine della directory delle risorse educative. */
 

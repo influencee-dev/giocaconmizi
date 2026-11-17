@@ -1,12 +1,12 @@
 import { etichettaDi, type Etichetta } from "./etichette";
 import { esperienzeDi, etaDi, type IdEsperienza } from "./esperienze";
-import { CITTA_FESTE, type LocaleFesta } from "@/lib/feste";
+import { CITTA_FESTE, type LocaleFesta } from "@/lib/directory/feste";
 
 /**
  * La directory delle attività per bambini (docs/piano-directory.md, fase 1).
  *
  * Categoria → città → scheda, sul modello di matrimonio.com. Le schede nascono
- * dai locali veri già raccolti in lib/feste.ts: ogni locale finisce in UNA
+ * dai locali veri già raccolti in lib/directory/feste.ts: ogni locale finisce in UNA
  * categoria secondo il suo `tipo` (regole qui sotto, la prima che combacia).
  * Una città diventa pagina di listing solo con almeno MIN_LISTING schede di
  * quella categoria: sotto, Google la tratterebbe come contenuto sottile.

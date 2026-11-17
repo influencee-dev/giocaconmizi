@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MOTIVI } from "@/components/biglietti/motivi";
-import { PERCORSO_LETTERINA, PERCORSO_NATALE, inStagioneNatale } from "@/lib/natale";
+import { PERCORSO_LETTERINA, PERCORSO_NATALE, inStagioneNatale } from "@/lib/natale/natale";
 
 /**
  * Il riquadro del Natale in home (studio UX del 14/11/2026: il Natale non si

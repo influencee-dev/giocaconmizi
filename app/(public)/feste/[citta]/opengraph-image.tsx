@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
-import { cittaFeste, localiDaFesta } from "@/lib/feste";
-import { dimensioniOg, ImmagineOg } from "@/lib/og";
+import { cittaFeste, localiDaFesta } from "@/lib/directory/feste";
+import { dimensioniOg, ImmagineOg } from "@/lib/seo/og";
 
 export const alt = "Festa di compleanno per bambini — Gioca con Mizi";
 export const size = dimensioniOg;

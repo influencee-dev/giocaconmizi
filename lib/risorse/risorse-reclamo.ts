@@ -1,5 +1,5 @@
 import { unstable_cache } from "next/cache";
-import { chiaviConLogo, pubblicate } from "./directory-db";
+import { chiaviConLogo, pubblicate } from "../directory/directory-db";
 import { chiaveRisorsa, type Costi, type Risorsa } from "./risorse-educative";
 import { RISORSE } from "./risorse-educative-dati";
 
@@ -10,7 +10,7 @@ import { RISORSE } from "./risorse-educative-dati";
  * delle attività, chiave "risorse/<slug>") e viene approvata diventa
  * «reclamata»: ottiene la pagina propria e può mostrare il logo che ha caricato.
  * Se chiede la rimozione e Giorgia accetta, sparisce dall'hub.
- * Se il database non risponde, l'hub resta quello di lib/risorse-educative-dati.ts.
+ * Se il database non risponde, l'hub resta quello di lib/risorse/risorse-educative-dati.ts.
  */
 
 /** I campi che la realtà può scrivere dal suo link: tutti testo, tutti pubblici. */

@@ -17,7 +17,7 @@ import { consensoStatistiche } from "@/components/legal/analytics";
  * - Altri browser: le istruzioni dal menu.
  *
  * Non compare: se l'app è già aperta come app, se l'hai chiusa (per 30 giorni,
- * ricordato in localStorage, vedi lib/legal.ts), finché c'è il banner dei
+ * ricordato in localStorage, vedi lib/contenuti/legal.ts), finché c'è il banner dei
  * cookie, dentro i giochi e il pannello, e dove la pagina ha già una sua barra
  * fissa in basso ([data-barra-fissa], es. la scheda di un locale).
  */

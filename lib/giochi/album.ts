@@ -10,7 +10,7 @@ import type { Skill } from "@/games/registry";
  * serie da non perdere, niente punti che scadono, niente classifiche.
  *
  * Resta SOLO sul telefono (localStorage «giocamizi-album», registrato in
- * lib/legal.ts): al server non arriva niente e non identifica nessuno.
+ * lib/contenuti/legal.ts): al server non arriva niente e non identifica nessuno.
  */
 
 export const CHIAVE_ALBUM = "giocamizi-album";

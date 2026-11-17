@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { dimensioniOg, ImmagineOg } from "@/lib/og";
+import { dimensioniOg, ImmagineOg } from "@/lib/seo/og";
 
 export const alt = "Gioca con Mizi — giochi educativi gratis per bambini dai 3 ai 12 anni";
 export const size = dimensioniOg;

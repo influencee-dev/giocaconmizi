@@ -3,7 +3,7 @@
 import { Camera, Check } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
-import { parla } from "@/lib/audio";
+import { parla } from "@/lib/giochi/audio";
 import { stelle, type GameProps } from "@/games/_engine/tipi";
 import { CAPI, ORDINE, ZONE, capo, type Zona } from "./capi";
 

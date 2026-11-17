@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaAttivita } from "@/components/directory/Briciole";
 import { notFound } from "next/navigation";
-import { CITTA_FESTE, cittaFeste, localiDaFesta } from "@/lib/feste";
-import { categoriaDi, slugify } from "@/lib/directory";
-import { pubblicate } from "@/lib/directory-db";
+import { CITTA_FESTE, cittaFeste, localiDaFesta } from "@/lib/directory/feste";
+import { categoriaDi, slugify } from "@/lib/directory/directory";
+import { pubblicate } from "@/lib/directory/directory-db";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { ReelInstagram } from "@/components/feste/ReelInstagram";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
-import { site } from "@/lib/seo";
-import { cittaVicine } from "@/lib/coordinate-citta";
+import { site } from "@/lib/seo/seo";
+import { cittaVicine } from "@/lib/directory/coordinate-citta";
 
 /**
  * Pagina locale "Festa di compleanno per bambini a [città]" (piano SEO/GEO/AEO):
@@ -77,7 +77,7 @@ export default async function FestaCittaPage({
     .filter((v, i) => v.km <= 200 || i < 3);
   // I locali che hanno chiesto di non comparire spariscono anche da qui.
   const p = await pubblicate();
-  // Solo i posti che fanno feste (lib/feste.ts, campo `festa`): i parchi da giornata fuori stanno nella directory.
+  // Solo i posti che fanno feste (lib/directory/feste.ts, campo `festa`): i parchi da giornata fuori stanno nella directory.
   const locali = localiDaFesta(voce).filter((l) => p.get(`${voce.slug}/${slugify(l.nome)}`)?.tipo !== "rimuovi");
 
   return (

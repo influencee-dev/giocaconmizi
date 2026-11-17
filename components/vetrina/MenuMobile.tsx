@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Freccia } from "./freccia";
-import { SENZA_PRECARICO } from "@/lib/precarico";
+import { SENZA_PRECARICO } from "@/lib/seo/precarico";
 
 /**
  * Il menu del telefono e del tablet. Si chiude da solo quando cambi pagina

@@ -1,14 +1,14 @@
 "use client";
 
-import { idFrase } from "@/lib/voce-id";
-import REGISTRATE from "@/lib/voce-registrata.json";
+import { idFrase } from "@/lib/giochi/voce-id";
+import REGISTRATE from "@/lib/giochi/voce-registrata.json";
 
 /**
  * La voce di Mizi.
  *
  * Piano A: la voce REGISTRATA (una bambina, fatta con OpenAI una volta sola da
  * `npm run voce`, file in public/voce/v{versione}/). Le frasi stanno in
- * content/voce-mizi.json; qui si sa solo quali esistono (lib/voce-registrata.json).
+ * content/voce-mizi.json; qui si sa solo quali esistono (lib/giochi/voce-registrata.json).
  * Piano B: la sintesi del telefono (Web Speech), per le frasi non ancora
  * registrate e per i dispositivi dove il file non parte.
  *

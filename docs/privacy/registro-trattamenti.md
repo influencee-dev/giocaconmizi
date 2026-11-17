@@ -2,7 +2,7 @@
 
 Titolare: Partidea SRL (P.IVA 04405500408, Via Antonio Beltramelli 13, 47923 Rimini), che gestisce Giocamizi (giocamizi.it), idea di Giorgia Palazzo. Contatto: ciao@giocamizi.it.
 DPO: non nominato, perché non obbligatorio (art. 37: nessun ente pubblico, nessun monitoraggio regolare e sistematico su larga scala, nessuna categoria particolare di dati).
-Ultimo aggiornamento: 2 novembre 2026. Va aggiornato a ogni nuovo trattamento, insieme a `lib/legal.ts`.
+Ultimo aggiornamento: 2 novembre 2026. Va aggiornato a ogni nuovo trattamento, insieme a `lib/contenuti/legal.ts`.
 
 | # | Trattamento | Interessati | Dati | Finalità | Base giuridica | Destinatari / responsabili | Extra UE | Conservazione |
 |---|---|---|---|---|---|---|---|---|

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Contenitore } from "@/components/ui";
-import { adminValido } from "@/lib/admin";
-import { CATEGORIE_ATTIVE, SCHEDE } from "@/lib/directory";
-import { adminDati, chiaveScheda } from "@/lib/directory-db";
-import { EVENTI, contatti, perScheda, statisticheAdmin, type Evento } from "@/lib/statistiche";
+import { adminValido } from "@/lib/directory/admin";
+import { CATEGORIE_ATTIVE, SCHEDE } from "@/lib/directory/directory";
+import { adminDati, chiaveScheda } from "@/lib/directory/directory-db";
+import { EVENTI, contatti, perScheda, statisticheAdmin, type Evento } from "@/lib/directory/statistiche";
 import { MenuAdmin } from "../MenuAdmin";
 import { DaAttivare, NonDisponibile, Numero } from "../NonDisponibile";
 

@@ -6,9 +6,9 @@ import { Briciole, InBreve } from "@/components/directory/Briciole";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco, jsonLdFaq } from "@/components/seo/JsonLd";
 import { CardRisorsaDirectory } from "@/components/risorse/CardRisorsaDirectory";
 import { CtaRisorsa } from "@/components/risorse/Directory";
-import { RISORSE } from "@/lib/risorse-educative-dati";
-import { PERCORSO_RISORSE, percorsoRisorsa } from "@/lib/risorse-educative";
-import { risorseVisibili } from "@/lib/risorse-reclamo";
+import { RISORSE } from "@/lib/risorse/risorse-educative-dati";
+import { PERCORSO_RISORSE, percorsoRisorsa } from "@/lib/risorse/risorse-educative";
+import { risorseVisibili } from "@/lib/risorse/risorse-reclamo";
 import {
   MIN_LISTING_RISORSE,
   categoriaRisorsaDaSlug,
@@ -18,7 +18,7 @@ import {
   provinciaDi,
   risorseDi,
   rispostaListingRisorse,
-} from "@/lib/risorse-categorie";
+} from "@/lib/risorse/risorse-categorie";
 
 /**
  * Una categoria in una provincia (/risorse-educative-bambini/scuole-paritarie-infanzia-primaria/torino):

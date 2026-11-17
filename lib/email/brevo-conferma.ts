@@ -1,7 +1,7 @@
 /**
  * L'email di conferma dell'iscrizione (doppio opt-in) per l'account Brevo di
  * Giocamizi. Il sito la crea da solo nell'account la prima volta che serve
- * (lib/brevo.ts), con il mittente ciao@giocamizi.it: niente ID da copiare.
+ * (lib/email/brevo.ts), con il mittente ciao@giocamizi.it: niente ID da copiare.
  * {{ doubleoptin }} è il link di conferma che Brevo mette al suo posto.
  */
 

@@ -1,13 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
 import { SUPABASE_ANON_KEY, SUPABASE_URL, supabaseConfigurato } from "@/lib/supabase/config";
-import type { Scheda } from "@/lib/directory";
+import type { Scheda } from "@/lib/directory/directory";
 
 /**
  * L'area delle attività sul database (supabase/directory.sql).
  * Solo chiave pubblica: ogni lettura e scrittura passa dalle funzioni SQL,
  * che controllano il codice del link personale o del pannello admin.
  * Se il database non risponde (in pausa, non ancora creato, in locale) il
- * sito pubblico non si rompe: le schede restano quelle di lib/feste.ts.
+ * sito pubblico non si rompe: le schede restano quelle di lib/directory/feste.ts.
  */
 
 const ATTESA_MS = 4000;
@@ -68,7 +68,7 @@ export function conModifiche(s: Scheda, p: Map<string, Pubblicata>): (Scheda & {
   };
 }
 
-/** Il link di prova dell'area attività: vale solo nel server delle verifiche (come lib/admin.ts), mai su Vercel. */
+/** Il link di prova dell'area attività: vale solo nel server delle verifiche (come lib/directory/admin.ts), mai su Vercel. */
 export const INVITO_PROVA = { codice: "prova-attivita-locale-0000000000", chiave: "milano/il-nano-gigante" };
 
 export async function apriInvito(codice: string) {

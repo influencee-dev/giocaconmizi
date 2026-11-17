@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { SUPABASE_ANON_KEY, SUPABASE_URL, supabaseConfigurato } from "@/lib/supabase/config";
-import { CENTRO_CITTA } from "@/lib/coordinate-citta";
+import { CENTRO_CITTA } from "@/lib/directory/coordinate-citta";
 
 /**
  * Le posizioni dei locali sulla mappa (supabase/backoffice.sql, tabella

@@ -1,8 +1,8 @@
-import { SCHEDE } from "@/lib/directory";
-import { chiaveScheda } from "@/lib/directory-db";
-import { EVENTI, conta, type Evento } from "@/lib/statistiche";
-import { RISORSE } from "@/lib/risorse-educative-dati";
-import { chiaveRisorsa } from "@/lib/risorse-educative";
+import { SCHEDE } from "@/lib/directory/directory";
+import { chiaveScheda } from "@/lib/directory/directory-db";
+import { EVENTI, conta, type Evento } from "@/lib/directory/statistiche";
+import { RISORSE } from "@/lib/risorse/risorse-educative-dati";
+import { chiaveRisorsa } from "@/lib/risorse/risorse-educative";
 
 /**
  * Contatori delle schede: la pagina manda { scheda, evento } con sendBeacon.

@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { COLORI, type NomeColore } from "./arte";
-import { parla } from "@/lib/audio";
+import { parla } from "@/lib/giochi/audio";
 import { stelle, type GameProps } from "./tipi";
 
 /**

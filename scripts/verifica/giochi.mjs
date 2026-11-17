@@ -420,7 +420,7 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   const { readFileSync, existsSync } = await import("node:fs");
   const copione = JSON.parse(readFileSync("content/voce-mizi.json", "utf8"));
   const nelCopione = new Set(Object.values(copione.frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
-  const registrate = JSON.parse(readFileSync("lib/voce-registrata.json", "utf8"));
+  const registrate = JSON.parse(readFileSync("lib/giochi/voce-registrata.json", "utf8"));
   ok("voce: ogni frase segnata come registrata ha il suo file",
     registrate.frasi.every((id) => existsSync(`public/voce/v${registrate.versione}/${id}.mp3`)), `${registrate.frasi.length} frasi`);
 

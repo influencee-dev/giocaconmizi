@@ -54,10 +54,10 @@ for f in sorted((RADICE / "content/guide").glob("*.md")):
     )
 slug_articoli = {a["slug"] for a in articoli}
 
-# ── Guide brevi (lib/guide.ts) e giochi (games/registry.ts) ──────────────────
+# ── Guide brevi (lib/contenuti/guide.ts) e giochi (games/registry.ts) ──────────────────
 guide = [
     {"slug": m.group(1), "titolo": re.sub(r"\\u([0-9a-fA-F]{4})", lambda u: chr(int(u.group(1), 16)), m.group(2))}
-    for m in re.finditer(r'^    slug: "([a-z0-9-]+)",\n(?:.*\n){0,2}?    titolo: "([^"]+)"', leggi("lib/guide.ts"), re.M)
+    for m in re.finditer(r'^    slug: "([a-z0-9-]+)",\n(?:.*\n){0,2}?    titolo: "([^"]+)"', leggi("lib/contenuti/guide.ts"), re.M)
     if m.group(1) not in slug_articoli
 ]
 giochi = [
@@ -85,7 +85,7 @@ for f in sorted((RADICE / "content/stories").glob("*.md")):
 
 citta_feste = [
     {"slug": m.group(1), "citta": m.group(2), "data": m.group(3)}
-    for m in re.finditer(r"""^    slug: ["']([a-z0-9-]+)["'],\n    citta: ["']([^"'\n]+)["'],\n    aggiornata: ["']([0-9-]+)["']""", leggi("lib/feste.ts"), re.M)
+    for m in re.finditer(r"""^    slug: ["']([a-z0-9-]+)["'],\n    citta: ["']([^"'\n]+)["'],\n    aggiornata: ["']([0-9-]+)["']""", leggi("lib/directory/feste.ts"), re.M)
 ]
 
 # Pagine fisse che i post usano come punto di partenza: [tipo, titolo, indirizzo, età, tema, file della pagina]

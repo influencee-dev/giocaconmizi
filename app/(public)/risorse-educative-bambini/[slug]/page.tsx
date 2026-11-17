@@ -10,11 +10,11 @@ import { JsonLd, jsonLdBreadcrumb, jsonLdElenco, jsonLdFaq } from "@/components/
 import { LogoRisorsa } from "@/components/risorse/CardRisorsa";
 import { CardRisorsaDirectory } from "@/components/risorse/CardRisorsaDirectory";
 import { CtaRisorsa, NavCategorieRisorse } from "@/components/risorse/Directory";
-import { url } from "@/lib/seo";
-import { RISORSE } from "@/lib/risorse-educative-dati";
-import { DATA_ANTEPRIME, anteprimaSito } from "@/lib/risorse-anteprime";
-import { AVVISO_LINK, DISCLAIMER, PERCORSO_RISORSE, chiaveRisorsa, dominio, percorsoRisorsa } from "@/lib/risorse-educative";
-import { linkSocial, risorseVisibili, type RisorsaVista } from "@/lib/risorse-reclamo";
+import { url } from "@/lib/seo/seo";
+import { RISORSE } from "@/lib/risorse/risorse-educative-dati";
+import { DATA_ANTEPRIME, anteprimaSito } from "@/lib/risorse/risorse-anteprime";
+import { AVVISO_LINK, DISCLAIMER, PERCORSO_RISORSE, chiaveRisorsa, dominio, percorsoRisorsa } from "@/lib/risorse/risorse-educative";
+import { linkSocial, risorseVisibili, type RisorsaVista } from "@/lib/risorse/risorse-reclamo";
 import {
   CATEGORIE_RISORSE,
   MIN_LISTING_RISORSE,
@@ -27,10 +27,10 @@ import {
   provinciaDi,
   risorseDi,
   type CategoriaRisorsa,
-} from "@/lib/risorse-categorie";
+} from "@/lib/risorse/risorse-categorie";
 
 /**
- * Un livello solo per due tipi di pagina (lib/risorse-categorie.ts):
+ * Un livello solo per due tipi di pagina (lib/risorse/risorse-categorie.ts):
  *   - la pagina di una CATEGORIA (/risorse-educative-bambini/cooperative-educative)
  *   - la SCHEDA di una realtà (/risorse-educative-bambini/cooperativa-indaco),
  *     l'indirizzo stabile che parte nelle email di Giorgia.

@@ -23,7 +23,7 @@ const dominio = new URL(host).origin;
 ok("robots: sitemap sullo stesso dominio dell'Host", new URL(sitemapUrl).origin === dominio, dominio);
 // Il dominio dev'essere quello COLLEGATO su Vercel: un dominio coerente ma
 // non collegato è esattamente il guasto del 24/10. Se cambia il dominio,
-// si aggiorna qui insieme a lib/seo.ts.
+// si aggiorna qui insieme a lib/seo/seo.ts.
 const COLLEGATO = "https://giocamizi.it";
 ok("robots: il dominio è quello collegato su Vercel", dominio === COLLEGATO, `${dominio} (atteso ${COLLEGATO})`);
 
@@ -38,7 +38,7 @@ ok("sitemap: almeno 250 pagine", locs.length >= 250, `${locs.length}`);
 
 // 2-bis. lastmod veri (dal 02/11/2026): Google li ignora se dicono "adesso"
 // su ogni pagina. Ogni lastmod è un giorno intero dalla storia git
-// (lib/date-pagine.json), mai nel futuro; i giochi ce l'hanno tutti; il
+// (lib/seo/date-pagine.json), mai nel futuro; i giochi ce l'hanno tutti; il
 // file delle date è allineato ai sorgenti (npm run date-pagine).
 const voci = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => ({
   loc: m[1].match(/<loc>([^<]+)<\/loc>/)?.[1] ?? "",
@@ -74,7 +74,7 @@ ok("directory: indirizzi vecchi reindirizzati a pagine vive", spostati.length > 
 
 // 2-quater-bis. Parchi avventura e parchi acquatici (dal 15/11/2026): sono
 // posti «da giornata fuori». Un parco che non risulta fare feste (festa: false
-// in lib/feste.ts) ha la sua scheda ma non dice «fa feste» e non compare nella
+// in lib/directory/feste.ts) ha la sua scheda ma non dice «fa feste» e non compare nella
 // pagina delle feste della città; uno che le fa, sì.
 const htmlAvventura = await testo("/parchi-avventura");
 const htmlAcquatici = await testo("/parchi-acquatici");
@@ -123,7 +123,7 @@ for (const v of conImmagini) {
 ok("sitemap immagini: ogni foto risponde e sta nella sua pagina", immaginiStorte.length === 0, immaginiStorte.slice(0, 3).join(" | "));
 
 // 2-quater. Le foto si servono dai nostri file già pronti nelle varie misure
-// (lib/caricatore-immagini.ts), mai da /_next/image: dal 15/11/2026, quando
+// (lib/foto/caricatore-immagini.ts), mai da /_next/image: dal 15/11/2026, quando
 // su iPhone le foto passate da quel servizio non si vedevano. Ogni indirizzo
 // di immagine scritto nelle pagine deve rispondere con un'immagine.
 {

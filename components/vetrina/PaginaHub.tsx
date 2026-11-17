@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { CodiceFoto } from "@/lib/foto";
+import type { CodiceFoto } from "@/lib/foto/foto";
 import { Contenitore, Prosa } from "@/components/ui";
 import { JsonLd, jsonLdFaq } from "@/components/seo/JsonLd";
 import { FaqVetrina, InBreve, TestataPagina, TitoloVetrina, type Tono } from "./index";

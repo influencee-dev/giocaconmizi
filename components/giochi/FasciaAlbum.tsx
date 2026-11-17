@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { GIOCHI_PER_COCCARDA, fattiOggi, useAlbum } from "@/lib/album";
+import { GIOCHI_PER_COCCARDA, fattiOggi, useAlbum } from "@/lib/giochi/album";
 
 /** La fascia in testa al catalogo dei giochi: l'album di Mizi a colpo d'occhio. */
 export function FasciaAlbum({ totale }: { totale: number }) {

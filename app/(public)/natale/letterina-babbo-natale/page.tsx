@@ -4,8 +4,8 @@ import { Contenitore } from "@/components/ui";
 import { FaqVetrina, InBreve } from "@/components/vetrina";
 import { EditorLetterina } from "@/components/natale/EditorLetterina";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
-import { url } from "@/lib/seo";
-import { FAQ_LETTERINA, PERCORSO_LETTERINA, PERCORSO_NATALE, RISPOSTA_BREVE_LETTERINA } from "@/lib/natale";
+import { url } from "@/lib/seo/seo";
+import { FAQ_LETTERINA, PERCORSO_LETTERINA, PERCORSO_NATALE, RISPOSTA_BREVE_LETTERINA } from "@/lib/natale/natale";
 
 export const metadata: Metadata = {
   title: "Letterina a Babbo Natale da stampare e compilare online, gratis",

@@ -1,7 +1,7 @@
 /**
  * Eventi di Natale per bambini, città per città (/natale/eventi/<città>).
  *
- * REGOLE (come per le feste in lib/feste.ts):
+ * REGOLE (come per le feste in lib/directory/feste.ts):
  * - solo eventi dell'edizione in corso con date confermate da una fonte
  *   ufficiale (organizzatore, comune, ente turistico) o da un giornale locale
  *   che riporta il programma: mai date, orari o prezzi inventati;

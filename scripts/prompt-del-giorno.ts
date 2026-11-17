@@ -3,12 +3,12 @@
  * del giorno»): le foto che servono in un giorno. Dal 12/11/2026 lo carica la
  * routine articoli delle 9:00 per il giorno DOPO e l'attività programmata di
  * ChatGPT delle 9:30 genera le foto in «99 Immagini pronte» (docs/bacheca.md);
- * la sera Claude le importa. Stesse foto e stessi prompt: lib/foto-del-giorno.ts.
+ * la sera Claude le importa. Stesse foto e stessi prompt: lib/foto/foto-del-giorno.ts.
  *
  *   npm run prompt-del-giorno -- [--quante 2] [--data 2026-11-12]
  */
-import { fotoDelGiorno, promptFoto, titoloNeutro } from "../lib/foto-del-giorno";
-import { nomeConsegna } from "../lib/foto-in-arrivo";
+import { fotoDelGiorno, promptFoto, titoloNeutro } from "../lib/foto/foto-del-giorno";
+import { nomeConsegna } from "../lib/foto/foto-in-arrivo";
 
 const arg = (nome: string) => {
   const i = process.argv.indexOf(`--${nome}`);

@@ -1,9 +1,9 @@
-import { slugify } from "./directory";
+import { slugify } from "../directory/directory";
 import { PERCORSO_RISORSE, type Risorsa, type Sezione } from "./risorse-educative";
 
 /**
  * La directory delle risorse educative (14/11/2026), gemella di quella delle
- * feste (lib/directory.ts): categoria → provincia → scheda.
+ * feste (lib/directory/directory.ts): categoria → provincia → scheda.
  *
  * Indirizzi:
  *   /risorse-educative-bambini                       l'hub con tutte le categorie

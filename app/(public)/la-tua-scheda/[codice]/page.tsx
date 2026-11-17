@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SCHEDE, datiCard, percorsoScheda } from "@/lib/directory";
-import { apriInvito } from "@/lib/directory-db";
+import { SCHEDE, datiCard, percorsoScheda } from "@/lib/directory/directory";
+import { apriInvito } from "@/lib/directory/directory-db";
 import { Contenitore } from "@/components/ui";
 import { CardAttivita } from "@/components/directory/CardAttivita";
 import { ModuloRisposta } from "./ModuloRisposta";
 import { ModuloRisorsa } from "./ModuloRisorsa";
 import { CardRisorsa } from "@/components/risorse/CardRisorsa";
-import { risorsaDaChiave, type Risorsa } from "@/lib/risorse-educative";
+import { risorsaDaChiave, type Risorsa } from "@/lib/risorse/risorse-educative";
 
 /**
  * Il link personale che riceve ogni attività: anteprima della sua scheda e

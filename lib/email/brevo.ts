@@ -95,7 +95,7 @@ export async function diagnosiBrevo(): Promise<string> {
  * Un'email di servizio (avvisi a Giorgia, conferme e link alle attività):
  * stessa chiave e stesso mittente delle novità. Senza BREVO_API_KEY non parte
  * e restituisce false, senza errori: le azioni del sito non si bloccano mai
- * per un'email. Testi e grafica in lib/email-servizio.ts.
+ * per un'email. Testi e grafica in lib/email/email-servizio.ts.
  */
 export async function inviaEmailServizio(e: { a: string; oggetto: string; html: string; etichetta: string; rispondiA?: string }): Promise<boolean> {
   return (await inviaConEsito(e)).ok;

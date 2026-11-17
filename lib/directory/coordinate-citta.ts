@@ -1,7 +1,7 @@
 /**
  * Il centro delle città della directory (gradi decimali, WGS84), per la
  * mappa nazionale e come punto di partenza della ricerca delle posizioni.
- * Una città nuova in lib/feste.ts = una riga qui (la batteria admin controlla).
+ * Una città nuova in lib/directory/feste.ts = una riga qui (la batteria admin controlla).
  */
 export const CENTRO_CITTA: Record<string, [number, number]> = {
   milano: [45.4642, 9.19], roma: [41.9028, 12.4964], napoli: [40.8518, 14.2681], torino: [45.0703, 7.6869],

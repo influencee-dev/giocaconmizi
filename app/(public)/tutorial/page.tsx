@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Contenitore, Faq } from "@/components/ui";
 import { Briciole, InBreve } from "@/components/directory/Briciole";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco, jsonLdFaq } from "@/components/seo/JsonLd";
-import { GRUPPI, IN_ARRIVO, PERCORSO_TUTORIAL, TUTORIAL, minuti, percorsoTutorial, tutorialDi, type GruppoTutorial } from "@/lib/tutorial";
+import { GRUPPI, IN_ARRIVO, PERCORSO_TUTORIAL, TUTORIAL, minuti, percorsoTutorial, tutorialDi, type GruppoTutorial } from "@/lib/contenuti/tutorial";
 
-/** L'hub dei video tutorial di Mizi, in due gruppi: partner e utenti (lib/tutorial.ts). */
+/** L'hub dei video tutorial di Mizi, in due gruppi: partner e utenti (lib/contenuti/tutorial.ts). */
 
 const TITOLO = "Video tutorial di Giocamizi, spiegati da Mizi";
 const DESCRIZIONE =

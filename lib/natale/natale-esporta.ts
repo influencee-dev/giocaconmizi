@@ -1,6 +1,6 @@
 "use client";
 
-import { biglietoInPng } from "@/lib/condivisione";
+import { biglietoInPng } from "@/lib/biglietti/condivisione";
 
 /**
  * Le uscite della letterina, tutte nel browser: PNG, PDF A4, stampa e
