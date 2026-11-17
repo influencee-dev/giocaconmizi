@@ -51,6 +51,13 @@ Build di produzione (`npm run build`, poi `npx next start -p 3200`): il server d
 - La logica pura di un motore sta in un file senza React (`griglia-logica.ts` per il coding su griglia): la usano lo schermo, la demo e le prove, così non possono andare in disaccordo.
 - La demo (`?demo=1`) deve arrivare alla festa in OGNI gioco: la batteria gioca da sola tutto il registro. Una demo che legge lo stato dentro un timer vecchio si blocca: ogni passo deve ripartire dallo stato vero (un effetto per passo, con lo stato tra le dipendenze).
 
+### 3-ter. I giochi di esplorazione (dal 17/11/2026)
+`games/_engine/Esplora.tsx` + `games/_engine/esplora-logica.ts`: una mappa vista dall'alto con muretti e nuvole, si tocca una casella e Mizi ci va per la strada più corta; ogni sala ha UNA missione che apre la porta. Primo gioco: `games/labirinto-dei-tesori` («giochi labirinto», 590 ricerche al mese).
+- Un gioco nuovo di questo tipo è solo un elenco di sale (`SpecSala`): cosa prendere, cosa lasciare, se in ordine, le frasi. Il labirinto e i posti delle cose cambiano a ogni partita, le missioni no: così ogni frase sta nel copione.
+- Regole di casa: nessun nemico, nessun tempo, nessuna vita. Una cosa si prende solo toccandola apposta; nelle nuvole il primo tocco la scopre soltanto. La porta chiusa non è un errore: fa vedere cosa cercare. Dopo una cosa sbagliata Mizi torna un passo indietro e la cosa resta.
+- Lo stile dei disegni della mappa sta in fondo a `Esplora.tsx` (`STILE`, `Pavimento`, `Porta`, `Figura`): si cambia lì, non nella logica.
+- Per le prove: `data-prossimo` sulla casella della prossima cosa giusta, `data-porta`, `data-mizi`, `data-nebbia`, `data-borsa`.
+
 ### 4. La voce registrata di Mizi (una bambina)
 - Le frasi che il gioco dice sono costanti nel codice (es. `FRASI_MEMORY`) e stanno, identiche, in `content/voce-mizi.json` sotto lo slug del gioco. Una virgola diversa = un'altra registrazione.
 - Frasi corte, da bambina a bambina, senza genere («Evviva!», non «Brava!»), senza «clicca». Niente nomi propri dei bambini (non si possono registrare).

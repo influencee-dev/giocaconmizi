@@ -77,6 +77,7 @@ export const ICONE_GIOCO: Record<string, NomeIcona[]> = {
   "pixel-art": ["alieno-pixel", "tavolozza"],
   "robot-ballerino": ["robot", "note"],
   "labirinto-a-blocchi": ["bussola", "pinguino"],
+  "labirinto-dei-tesori": ["mappa", "chiave"],
   "trova-l-errore": ["bug", "lente"],
   "dove-arriva-mizi": ["pinguino", "domanda"],
   "salto-di-mizi": ["pinguino", "tondo-blu"],

@@ -21,6 +21,7 @@ export const slugGiocabili = [
   "tocca-la-lettera",
   "unisci-le-sillabe",
   "trova-le-differenze",
+  "labirinto-dei-tesori",
   "unisci-i-puntini",
   "cosa-viene-dopo",
   "cosa-manca",

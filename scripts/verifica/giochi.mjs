@@ -536,8 +536,8 @@ ok("og:image di una città", await ogServita("/feste/milano"));
     proposte: [...document.querySelectorAll("[data-proposta]")].map((x) => x.getAttribute("data-proposta")),
     sbordo: document.documentElement.scrollWidth - window.innerWidth,
   }));
-  ok("album: 3 figurine prese su 38, coccarda contata, tre giochi nuovi da provare",
-    album.prese === 3 && album.tutte === 38 && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
+  ok("album: 3 figurine prese su 39, coccarda contata, tre giochi nuovi da provare",
+    album.prese === 3 && album.tutte === 39 && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
     !album.proposte.some((s) => ["memory-animali", "conta-fino-a-10", "abbina-i-colori"].includes(s)) && album.sbordo <= 0, JSON.stringify(album));
   await m.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
   await m.waitForTimeout(400);
@@ -753,6 +753,149 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   const stelleE = festaE ? await e.locator("[data-festa] [data-stelle]").first().getAttribute("data-stelle") : null;
   ok("differenze: a 5 anni tre differenze per scena, e senza tocchi a vuoto tre stelle", treAScena && stelleE === "3", `stelle ${stelleE}`);
   await ctxE.close();
+
+  // «Il labirinto dei tesori» (17/11/2026): esplorazione a sale. Mizi va dove si
+  // tocca; ogni sala ha una missione che apre la porta; nell'ultima c'è il tesoro.
+  const frasiL = new Set(copione.frasi["labirinto-dei-tesori"] ?? []);
+  const tuttoIlCopione = new Set(Object.values(copione.frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
+  const sorgenteL = readFileSync("games/labirinto-dei-tesori/Game.tsx", "utf8") + readFileSync("games/_engine/Esplora.tsx", "utf8").split("const ERRORI_PER_AIUTO")[0];
+  const nelCodiceL = [...sorgenteL.matchAll(/"([^"\n]{2,}[.!])"/g)].map((x) => x[1]).filter((f) => !f.startsWith("@/"));
+  ok("labirinto: le frasi del gioco sono identiche a quelle del copione", nelCodiceL.length >= 40 && nelCodiceL.every((f) => frasiL.has(f)), nelCodiceL.filter((f) => !frasiL.has(f)).join(" | "));
+
+  const fermoL = (pg) => pg.waitForFunction(() => !document.querySelector("[data-esplora]")?.hasAttribute("data-in-cammino"), null, { timeout: 8000 }).catch(() => {});
+  const salaL = (pg, n) => pg.waitForFunction((k) => { const c = document.querySelector("[data-esplora]"); return c?.getAttribute("data-round") === String(k) && c?.getAttribute("data-partita") === "gioca"; }, n, { timeout: 8000 }).catch(() => {});
+  // Prende la prossima cosa giusta: se era nella nebbia il primo tocco la scopre soltanto.
+  const prendiL = async (pg) => {
+    const campo = pg.locator("[data-esplora]");
+    const prima = await campo.getAttribute("data-prese");
+    for (let v = 0; v < 3 && (await campo.getAttribute("data-prese")) === prima; v++) {
+      await pg.locator("[data-prossimo]").tap();
+      await fermoL(pg);
+      await pg.waitForTimeout(150);
+    }
+  };
+
+  // Partita onesta a 5 anni: quattro sale, la prima senza nuvole.
+  const ctxL = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxL.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const l = await ctxL.newPage();
+  let erroriL = 0;
+  l.on("pageerror", () => erroriL++);
+  await l.goto(`${BASE}/giochi/labirinto-dei-tesori/gioca?eta=5`, { waitUntil: "networkidle" });
+  const campoL = l.locator("[data-esplora]");
+  await campoL.waitFor({ timeout: 10000 });
+  const saleL = Number(await campoL.getAttribute("data-round-totali"));
+  const nuvole = [];
+  let latoMinimo = 999, portaPresto = 0;
+  for (let r = 1; r <= saleL; r++) {
+    await salaL(l, r);
+    nuvole.push(await l.locator("[data-nebbia]").count());
+    latoMinimo = Math.min(latoMinimo, await l.locator("[data-cella]").first().evaluate((el) => Math.round(el.getBoundingClientRect().width)));
+    while ((await campoL.getAttribute("data-porta")) === "chiusa") {
+      if ((await l.locator("[data-disegno-porta=aperta]").count()) > 0) portaPresto++;
+      await prendiL(l);
+    }
+    await l.locator("[data-porta-qui]").tap();
+    await fermoL(l);
+    await l.waitForTimeout(1500);
+  }
+  const festaL = await l.locator("[data-festa]").waitFor({ timeout: 8000 }).then(() => true, () => false);
+  const stelleL = festaL ? await l.locator("[data-festa] [data-stelle]").first().getAttribute("data-stelle") : null;
+  const dettoL = await l.evaluate(() => (window.__voceMizi || []).map((v) => v.testo));
+  ok("labirinto: a 5 anni quattro sale fino al tesoro, senza errori JS e con tre stelle", festaL && erroriL === 0 && saleL === 4 && stelleL === "3", `sale ${saleL}, stelle ${stelleL}`);
+  ok("labirinto: la prima sala è tutta scoperta, le altre hanno le nuvole", nuvole[0] === 0 && nuvole.slice(1).every((n) => n > 0), nuvole.join(","));
+  ok("labirinto: le caselle da toccare sono larghe almeno 64 px sul telefono", latoMinimo >= 64, `${latoMinimo}px`);
+  ok("labirinto: la porta si apre solo a missione compiuta", portaPresto === 0);
+  ok("labirinto: tutto quello che Mizi dice è nel copione, e conta ad alta voce", dettoL.every((t) => tuttoIlCopione.has(t)) && ["Uno!", "Due!", "Tre!", "Hai trovato il tesoro!"].every((f) => dettoL.includes(f)), dettoL.filter((t) => !tuttoIlCopione.has(t)).join(" | "));
+  await ctxL.close();
+
+  // Partita da curiosi e sbadati a 8 anni: nebbia, porta chiusa, cose sbagliate, la spesa.
+  const ctxM = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxM.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const m = await ctxM.newPage();
+  let erroriM = 0;
+  m.on("pageerror", () => erroriM++);
+  await m.goto(`${BASE}/giochi/labirinto-dei-tesori/gioca?eta=8`, { waitUntil: "networkidle" });
+  const campoM = m.locator("[data-esplora]");
+  await campoM.waitFor({ timeout: 10000 });
+  const saleM = Number(await campoM.getAttribute("data-round-totali"));
+  let nebbiaOk = null, portaChiusaOk = 0, aiutiGiustiM = 0, restano = 0, saltateM = 0, borsa = [];
+  for (let r = 1; r <= saleM; r++) {
+    await salaL(m, r);
+    if (r === 1) {
+      // Una cosa nascosta dalle nuvole: toccarla la scopre, non la prende, e Mizi non ci sale sopra.
+      const nascosta = await m.locator("[data-oggetto][data-nebbia]").first().getAttribute("data-cella").catch(() => null);
+      if (nascosta) {
+        const nuvolePrima = await m.locator("[data-nebbia]").count();
+        await m.locator(`[data-cella="${nascosta}"]`).tap();
+        await fermoL(m);
+        await m.waitForTimeout(200);
+        nebbiaOk = (await campoM.getAttribute("data-prese")) === "0" && (await campoM.getAttribute("data-errori-round")) === "0" && (await campoM.getAttribute("data-mizi")) !== nascosta &&
+          (await m.locator(`[data-cella="${nascosta}"][data-nebbia]`).count()) === 0 && (await m.locator("[data-nebbia]").count()) < nuvolePrima;
+      }
+    }
+    // La porta chiusa: nessun errore, si resta nella sala, Mizi fa vedere una cosa da cercare.
+    await m.locator("[data-porta-qui]").tap();
+    await fermoL(m);
+    await m.waitForTimeout(250);
+    if ((await campoM.getAttribute("data-round")) === String(r) && (await campoM.getAttribute("data-errori-round")) === "0" && (await m.locator("[data-aiuto-oggetto]").count()) === 1 &&
+      (await campoM.getAttribute("data-mizi")) !== (await m.locator("[data-porta-qui]").getAttribute("data-cella"))) portaChiusaOk++;
+    // Due cose prese per sbaglio (da lasciare, o fuori ordine): restano dove sono e poi si muove quella giusta.
+    const daLasciare = await m.locator('[data-giusto="no"]').evaluateAll((els) => els.map((el) => el.getAttribute("data-cella")));
+    const fuoriOrdine = await m.locator('[data-giusto="si"]:not([data-prossimo])').evaluateAll((els) => els.map((el) => el.getAttribute("data-cella")));
+    const cosePrima = await m.locator("[data-oggetto]").count();
+    for (const k of [...daLasciare, ...fuoriOrdine].slice(0, 2)) {
+      const sbagli = Number(await campoM.getAttribute("data-errori-round"));
+      for (let v = 0; v < 3 && Number(await campoM.getAttribute("data-errori-round")) === sbagli; v++) {
+        await m.locator(`[data-cella="${k}"]`).tap();
+        await fermoL(m);
+        await m.waitForTimeout(200);
+      }
+    }
+    if ((await m.locator("[data-oggetto]").count()) === cosePrima) restano++;
+    const mossa = m.locator("[data-aiuto-oggetto]");
+    if ((await campoM.getAttribute("data-aiuto-attivo")) === "si" && (await mossa.count()) === 1 &&
+      (await mossa.getAttribute("data-aiuto-oggetto")) === (await m.locator("[data-prossimo]").getAttribute("data-oggetto"))) aiutiGiustiM++;
+    if ((await m.locator("[data-cruscotto]").getAttribute("data-cruscotto")) === "lista") borsa.push(await m.locator("[data-borsa]").getAttribute("data-borsa"));
+    while ((await campoM.getAttribute("data-porta")) === "chiusa") await prendiL(m);
+    if ((await m.locator("[data-cruscotto]").getAttribute("data-cruscotto")) === "lista") borsa.push(await m.locator("[data-borsa]").getAttribute("data-borsa"));
+    // Due tocchi nello stesso istante sulla porta aperta: una sala sola.
+    await m.locator("[data-porta-qui]").evaluate((el) => { for (let k = 0; k < 2; k++) el.dispatchEvent(new MouseEvent("click", { bubbles: true })); });
+    await fermoL(m);
+    await m.waitForTimeout(1600);
+    if (r < saleM && Number(await campoM.getAttribute("data-round").catch(() => 0)) !== r + 1) saltateM++;
+  }
+  const festaM = await m.locator("[data-festa]").waitFor({ timeout: 8000 }).then(() => true, () => false);
+  const stelleM = festaM ? await m.locator("[data-festa] [data-stelle]").first().getAttribute("data-stelle") : null;
+  const albumM = await m.evaluate(() => JSON.parse(localStorage.getItem("giocamizi-album") || "{}"));
+  const dettoM = await m.evaluate(() => (window.__voceMizi || []).map((v) => v.testo));
+  ok("labirinto: a 8 anni cinque sale, anche sbagliando sempre si arriva al tesoro", festaM && erroriM === 0 && saleM === 5);
+  ok("labirinto: una cosa nelle nuvole si scopre, non si prende per caso", nebbiaOk !== false, String(nebbiaOk));
+  ok("labirinto: la porta chiusa non è un errore e Mizi mostra cosa cercare, in ogni sala", portaChiusaOk === saleM, `${portaChiusaOk} su ${saleM}`);
+  ok("labirinto: le cose prese per sbaglio restano al loro posto", restano === saleM, `${restano} su ${saleM}`);
+  ok("labirinto: dopo due sbagli si muove proprio la cosa giusta, in ogni sala", aiutiGiustiM === saleM, `${aiutiGiustiM} su ${saleM}`);
+  ok("labirinto: la spesa parte da 10 monete e ne resta una", borsa.join(",") === "10,1", borsa.join(","));
+  ok("labirinto: due tocchi sulla porta non saltano una sala", saltateM === 0);
+  ok("labirinto: chi sbaglia in ogni sala prende una stella, mai zero, e la figurina", stelleM === "1" && albumM.giochi?.["labirinto-dei-tesori"]?.stelle === 1, `stelle ${stelleM}`);
+  ok("labirinto: anche da sbadati Mizi dice solo frasi del copione, senza «sbagliato»", dettoM.every((t) => tuttoIlCopione.has(t)) && !dettoM.some((t) => /sbagliat|Brav[oa]/i.test(t)), dettoM.filter((t) => !tuttoIlCopione.has(t)).join(" | "));
+  await ctxM.close();
+
+  // Da computer si gioca anche con le frecce della tastiera.
+  const ctxT = await b.newContext({ viewport: { width: 1280, height: 800 } });
+  await ctxT.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const t = await ctxT.newPage();
+  await t.goto(`${BASE}/giochi/labirinto-dei-tesori/gioca?eta=5`, { waitUntil: "networkidle" });
+  const campoT = t.locator("[data-esplora]");
+  await campoT.waitFor({ timeout: 10000 });
+  const partenzaT = await campoT.getAttribute("data-mizi");
+  let mossaT = false;
+  for (const freccia of ["ArrowUp", "ArrowRight", "ArrowLeft", "ArrowDown"]) {
+    await t.keyboard.press(freccia);
+    await t.waitForTimeout(350);
+    if ((await campoT.getAttribute("data-mizi")) !== partenzaT || Number(await campoT.getAttribute("data-prese")) > 0) { mossaT = true; break; }
+  }
+  ok("labirinto: da computer Mizi si muove con le frecce", mossaT);
+  await ctxT.close();
 }
 
 await b.close();

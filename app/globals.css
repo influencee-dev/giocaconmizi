@@ -336,8 +336,10 @@ a[role="button"],
   }
 }
 
-/* Trova le differenze: il cerchio viola dell'aiuto pulsa tre volte e poi resta. */
-.differenza-aiuto {
+/* Trova le differenze: il cerchio viola dell'aiuto pulsa tre volte e poi resta.
+   Il labirinto dei tesori: pulsa allo stesso modo la cosa da prendere. */
+.differenza-aiuto,
+.esplora-aiuto {
   transform-box: fill-box;
   transform-origin: center;
   animation: pulsa-aiuto 0.7s ease-in-out 3;
@@ -348,7 +350,8 @@ a[role="button"],
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .differenza-aiuto {
+  .differenza-aiuto,
+  .esplora-aiuto {
     animation: none;
   }
 }

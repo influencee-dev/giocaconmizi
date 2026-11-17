@@ -292,6 +292,12 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   /giochi/album (noindex), fascia e stelle nel catalogo. Mai serie, punti che
   scadono, classifiche.
 - La festa si riconosce da `[data-festa]` (non più dal testo «Bravissimo!»).
+- Giochi di esplorazione (17/11/2026): motore `games/_engine/Esplora.tsx` con
+  logica pura in `esplora-logica.ts`. Primo gioco «Il labirinto dei tesori»
+  (games/labirinto-dei-tesori, 5-9 anni, 39º gioco): mappa dall'alto, si tocca
+  una casella e Mizi ci va, una missione per sala apre la porta. Un gioco nuovo
+  di questo tipo è un elenco di sale. Niente nemici, tempo o vite. Lo stile dei
+  disegni sta in fondo a Esplora.tsx (`STILE`).
 - Nucleo comune dei giochi (16/11/2026): `games/_engine/nucleo.ts` (`useRound`:
   round, blocco del doppio tocco, punto ai round puliti, aiuto dopo N errori,
   suoni, lodi senza genere, attributi `data-partita`/`data-round`, esito con
