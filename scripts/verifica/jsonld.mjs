@@ -11,6 +11,7 @@ const TIPI_NOTI = new Set([
   "HowTo", "HowToStep", "Offer", "AggregateRating", "Thing", "Course", "DefinedTerm", "PropertyValue", "AudienceType",
   "Audience", "PeopleAudience", "EducationalAudience", "QuantitativeValue", "VirtualLocation", "MediaObject", "VideoObject",
   "SoftwareApplication", "WebApplication", "ImageGallery", "Event", "ContactPoint", "Country", "City", "AdministrativeArea", "Service",
+  "LocationFeatureSpecification", "OpeningHoursSpecification", "PriceSpecification",
 ]);
 
 /** Testo leggibile della pagina, per controllare che le FAQ siano davvero visibili. */
