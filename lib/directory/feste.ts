@@ -18,6 +18,10 @@
 // Giugliano in Campania (15/11/2026); Andria (un solo locale, scheda senza data)
 // e Pesaro (solido solo Fantasilandia a Montelabbate; Enjoy Park e Baboom senza
 // segnali recenti) il 16/11/2026.
+// Alessandria (17/11/2026): Giocherellando Park e Giocolandia non hanno un sito
+// ufficiale, solo recensioni e una pagina Facebook. Da verificare prima di
+// usarlo: Il Bosco Sospeso, parco avventura a Cenadi (CZ), con pagina feste ma
+// eventi fermi al 2018.
 
 export interface LocaleFesta {
   nome: string;
@@ -2526,6 +2530,42 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Vanno bene anche d'inverno?", risposta: "Sì: tutti e due sono al chiuso. L'area giochi del Padre Dionisio è riscaldata e le sale di Patapan sono riscaldate e climatizzate." },
       { domanda: "Quanto costa la festa?", risposta: "Il sito del Padre Dionisio Sporting Club indica feste a partire da 220 euro (prezzo letto a novembre 2026). Per Patapan il prezzo si chiede al parco. In ogni caso fatevi scrivere cosa è compreso: numero di bambini, merenda, torta e durata." },
       { domanda: "Fino a che età si può giocare?", risposta: "Al Padre Dionisio i giochi sono riservati a chi non ha ancora compiuto 13 anni. Da Patapan serve sempre un adulto che accompagna: dite l'età dei bambini quando prenotate." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "catanzaro",
+    citta: "Catanzaro",
+    aggiornata: "2026-11-17",
+    rispostaBreve: "A Catanzaro la festa di compleanno per bambini si fa al coperto: da A Casa di Topolino, in viale Lucrezia della Valle, un'area giochi con playground e una sala feste di circa 450 mq, oppure alla Bacchetta Magica, in via dei Conti Ruffo, mille metri quadrati tra parco giochi, ludoteca e baby parking. Chiedete per tempo le date libere e fatevi scrivere cosa comprende il prezzo.",
+    intro: "A Catanzaro gli spazi dove festeggiare un compleanno con molti bambini sono al chiuso, quindi vanno bene tutto l'anno. Qui trovate due parchi giochi al coperto con il loro sito ufficiale: uno ha anche il laser game per chi ha già otto anni, l'altro una ludoteca per i più piccoli.",
+    locali: [
+      { nome: "A Casa di Topolino", zona: "Catanzaro, viale Lucrezia della Valle", tipo: "area giochi al coperto con ludoteca e sala feste", sito: "https://www.acasaditopolino.com/", descrizione: "Ludoteca e area giochi al coperto in viale Lucrezia della Valle. Il sito descrive un playground con tre scivoli, ponte tibetano, campetto da calcetto, salterelli, parete per arrampicare e piscine di palline. Per i compleanni c'è una sala feste di circa 450 mq con una zona ristoro per buffet e torta; su richiesta ci sono animazione, allestimenti e catering. Nello stesso posto c'è un laser game, che il sito indica dagli 8 anni in su. Prezzi e orari non sono pubblicati: si chiedono al locale." },
+      { nome: "La Bacchetta Magica Catanzaro", zona: "Catanzaro, via dei Conti Ruffo", tipo: "parco giochi al coperto con ludoteca e baby parking", sito: "https://www.labacchettamagica.com/catanzaro", descrizione: "Parco giochi al coperto in via dei Conti Ruffo: il sito parla di 1000 mq con parco giochi, ludoteca e baby parking, e invita a festeggiarci il compleanno. La ludoteca, dice il sito, lavora il pomeriggio con i bambini fino a 5 o 6 anni. Gli orari pubblicati (tutti i giorni, mattina e pomeriggio fino a sera) non coincidono con quelli di altri elenchi: prima di andare conviene telefonare. Il prezzo della festa si chiede al locale." },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno per bambini a Catanzaro?", risposta: "Al coperto, in uno dei due parchi giochi che organizzano compleanni: A Casa di Topolino in viale Lucrezia della Valle, con una sala feste di circa 450 mq, oppure La Bacchetta Magica in via dei Conti Ruffo, con 1000 mq tra parco giochi e ludoteca." },
+      { domanda: "Quanto costa la festa?", risposta: "Nessuno dei due pubblica i prezzi sul sito: si chiedono al locale. Fatevi scrivere cosa è compreso: quanti bambini, quanto dura, se ci sono merenda, torta e animazione." },
+      { domanda: "E se gli invitati hanno età diverse?", risposta: "Ditelo quando prenotate. Da A Casa di Topolino il laser game è indicato dagli 8 anni in su, mentre il playground è per i più piccoli. Alla Bacchetta Magica la ludoteca è pensata per i bambini fino a 5 o 6 anni." },
+      { domanda: "Vanno bene anche d'inverno o se piove?", risposta: "Sì: tutti e due sono al chiuso." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "pisa",
+    citta: "Pisa",
+    aggiornata: "2026-11-17",
+    rispostaBreve: "A Pisa la festa di compleanno per bambini si fa al Piccolo Mondo, a Madonna dell'Acqua, un parco divertimenti per bambini con un salone e salette a tema per i compleanni, oppure all'Isola delle Meraviglie, a Navacchio, un parco giochi al chiuso di 800 mq con sale per le feste. Il Piccolo Mondo cambia orari con la stagione: chiedete sempre le date libere e cosa comprende il prezzo.",
+    intro: "Intorno a Pisa i posti privati per festeggiare con tanti bambini sono due, molto diversi: un parco divertimenti alle porte della città, che d'estate ha anche le piscine, e un parco giochi al chiuso a Navacchio, nel comune di Cascina, a pochi chilometri.",
+    locali: [
+      { nome: "Piccolo Mondo", zona: "Pisa, Madonna dell'Acqua", tipo: "parco divertimenti per bambini con piscine d'estate e sale per i compleanni", sito: "https://www.piccolomondo.it/", descrizione: "Parco divertimenti per bambini a Madonna dell'Acqua, alle porte di Pisa. Il sito elenca tra le attrazioni un galeone dei pirati, un trenino, una pista di piccoli kart, il cinema 7D e gli spettacoli; d'estate ci sono piscine con acqua bassa e scivoli, e nel parco ci sono bar, pizzeria e aree picnic, con un grande parcheggio gratuito. Per i compleanni ci sono un salone con animazione e salette a tema: il sito indica pacchetti a partire da 300 euro per 20 bambini con saletta e ingresso al parco (letto a novembre 2026), più cari con merenda e torta. Gli orari cambiano con la stagione: da ottobre a marzo il parco apre nei pomeriggi di sabato, domenica e festivi." },
+      { nome: "L'Isola delle Meraviglie", zona: "Navacchio (Cascina)", tipo: "parco giochi al coperto con sale feste", sito: "https://www.isoladellemeraviglie.it/", descrizione: "Parco giochi al chiuso di 800 mq a Navacchio, nel comune di Cascina, per bambini fino a 12 anni. Il sito descrive un'area per i più piccoli con altalene, scivoli e casetta, un playground a forma di galeone e, per i più grandi, biliardino e air hockey. Organizza feste di compleanno e feste di classe e affitta le sale. Gli orari che si trovano in rete non coincidono tra loro: prima di andare conviene telefonare, e il prezzo della festa si chiede al parco." },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno per bambini a Pisa?", risposta: "Al Piccolo Mondo, a Madonna dell'Acqua, che ha un salone e salette a tema dentro un parco divertimenti per bambini, oppure all'Isola delle Meraviglie di Navacchio, un parco giochi al chiuso di 800 mq con sale per le feste." },
+      { domanda: "Quanto costa la festa?", risposta: "Il sito del Piccolo Mondo indica pacchetti a partire da 300 euro per 20 bambini, con saletta a tema e ingresso al parco (prezzo letto a novembre 2026). Per l'Isola delle Meraviglie il prezzo si chiede al parco. Fatevi sempre scrivere cosa è compreso." },
+      { domanda: "Quale va bene d'inverno?", risposta: "L'Isola delle Meraviglie è tutta al chiuso. Il Piccolo Mondo d'inverno apre nei pomeriggi di sabato, domenica e festivi e fa le feste nelle sale: chiedete quali attrazioni sono aperte nel giorno che vi interessa." },
+      { domanda: "Fino a che età si può giocare?", risposta: "L'Isola delle Meraviglie è pensata per bambini fino a 12 anni, con un'area a parte per i più piccoli. Al Piccolo Mondo le piscine estive hanno l'acqua bassa, adatta ai bambini piccoli." },
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },

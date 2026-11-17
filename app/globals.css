@@ -335,3 +335,20 @@ a[role="button"],
     animation: none;
   }
 }
+
+/* Trova le differenze: il cerchio viola dell'aiuto pulsa tre volte e poi resta. */
+.differenza-aiuto {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulsa-aiuto 0.7s ease-in-out 3;
+}
+@keyframes pulsa-aiuto {
+  50% {
+    transform: scale(1.25);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .differenza-aiuto {
+    animation: none;
+  }
+}

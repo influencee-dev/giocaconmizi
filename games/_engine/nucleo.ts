@@ -49,16 +49,33 @@ export interface OpzioniRound {
   erroriPerAiuto?: number;
   /** Millisecondi tra la risposta giusta e il round dopo. */
   pausa?: number;
+  /**
+   * Le stelle, per i giochi dove un tocco a vuoto è esplorazione e non errore
+   * (trova le differenze): di norma contano i round puliti.
+   */
+  stelleDi?: (conto: { punti: number; totale: number; errori: number; aiuti: number }) => number;
 }
 
 export type FaseRound = "gioca" | "giusta" | "finito";
 
-export function useRound({ totale, onProgress, onComplete, erroriPerAiuto = 3, pausa = 1000 }: OpzioniRound) {
+export function useRound({ totale, onProgress, onComplete, erroriPerAiuto = 3, pausa = 1000, stelleDi }: OpzioniRound) {
   const [indice, setIndice] = useState(0);
   const [punti, setPunti] = useState(0);
   const [fase, setFase] = useState<FaseRound>("gioca");
   const [erroriRound, setErroriRound] = useState(0);
   const [aiuto, setAiuto] = useState(false);
+  const [errori, setErrori] = useState(0);
+
+  // La regola delle stelle può cambiare identità a ogni disegno: si legge da un ref.
+  const regolaStelle = useRef(stelleDi);
+  useEffect(() => {
+    regolaStelle.current = stelleDi;
+  }, [stelleDi]);
+  const stelleOra = useCallback(
+    (c: { punti: number; errori: number; aiuti: number }) =>
+      Math.max(1, Math.min(3, regolaStelle.current?.({ punti: c.punti, totale, errori: c.errori, aiuti: c.aiuti }) ?? stelle(c.punti, totale))),
+    [totale],
+  );
 
   // Quello che serve subito, senza aspettare il render: i tocchi veloci dei bambini.
   const chiuso = useRef(false);
@@ -85,7 +102,7 @@ export function useRound({ totale, onProgress, onComplete, erroriPerAiuto = 3, p
       setFase("finito");
       onComplete?.({
         score: c.punti,
-        stars: stelle(c.punti, totale),
+        stars: stelleOra(c),
         errori: c.errori,
         aiuti: c.aiuti,
         secondi: Math.round((Date.now() - inizio.current) / 1000),
@@ -101,7 +118,7 @@ export function useRound({ totale, onProgress, onComplete, erroriPerAiuto = 3, p
     setAiuto(false);
     setFase("gioca");
     onProgress?.(prossimo, totale);
-  }, [totale, onComplete, onProgress]);
+  }, [totale, onComplete, onProgress, stelleOra]);
 
   /** Risposta giusta: chiude il round, festeggia e dopo la pausa passa oltre. `false` se il round era già chiuso. */
   const giusto = useCallback(
@@ -117,15 +134,20 @@ export function useRound({ totale, onProgress, onComplete, erroriPerAiuto = 3, p
     [avanza, pausa],
   );
 
-  /** Risposta sbagliata: si resta nel round, senza punizioni. `frase` è il trucco del gioco, se ce l'ha. */
+  /**
+   * Risposta sbagliata: si resta nel round, senza punizioni. `frase` è il trucco
+   * del gioco, se ce l'ha. Con `aiuto: true` è il motore a decidere che l'aiuto
+   * scatta adesso (per esempio dopo tre tocchi a vuoto dall'ultima cosa trovata).
+   */
   const sbagliato = useCallback(
-    (frase?: string): void => {
+    (frase?: string, opzioni?: { aiuto?: boolean }): void => {
       if (chiuso.current) return;
       const c = conto.current;
       c.erroriRound += 1;
       c.errori += 1;
       setErroriRound(c.erroriRound);
-      const scatta = erroriPerAiuto > 0 && c.erroriRound === erroriPerAiuto;
+      setErrori(c.errori);
+      const scatta = opzioni?.aiuto ?? (erroriPerAiuto > 0 && c.erroriRound === erroriPerAiuto);
       if (scatta) {
         c.aiuti += 1;
         setAiuto(true);
@@ -146,6 +168,7 @@ export function useRound({ totale, onProgress, onComplete, erroriPerAiuto = 3, p
     setIndice(0);
     setPunti(0);
     setErroriRound(0);
+    setErrori(0);
     setAiuto(false);
     setFase("gioca");
   }, []);
@@ -171,7 +194,7 @@ export function useRound({ totale, onProgress, onComplete, erroriPerAiuto = 3, p
     inPausa: fase === "giusta",
     erroriRound,
     aiuto,
-    stelle: stelle(punti, totale),
+    stelle: stelleOra({ punti, errori, aiuti: conto.current.aiuti }),
     giusto,
     sbagliato,
     ricomincia,

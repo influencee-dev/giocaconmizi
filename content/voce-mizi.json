@@ -49,6 +49,14 @@
       "Non è questo. Riprova.",
       "Riprova, ci sei quasi.",
       "Ti aiuto io: guarda quella che si muove."
+    ],
+    "trova-le-differenze": [
+      "Trovata!",
+      "Trovate tutte!",
+      "Ti aiuto io: guarda il cerchio viola.",
+      "Lì è uguale. Guarda meglio.",
+      "Guarda le due immagini. Trova 3 differenze toccandole nell'immagine di sotto.",
+      "Guarda le due immagini. Trova 5 differenze toccandole nell'immagine di sotto."
     ]
   }
 }

@@ -81,7 +81,7 @@ Due giochi al giorno, li fa la routine «Giocamizi · Due giochi al giorno». L'
 | 4 | tabelline | giochi tabelline · 8.100 (giochi matematica · 18.100) | da fare |
 | 5 | pizza-delle-frazioni | frazioni · 9.900 | da fare |
 | 6 | addizioni-entro-20 | giochi matematica · 18.100 | da fare |
-| 7 | trova-le-differenze | trova le differenze · 2.900 | da fare |
+| 7 | trova-le-differenze | trova le differenze · 2.900 | PRIMO PASSO il 17/11/2026: sul nucleo, aiuto dopo tre tocchi a vuoto, doppio tocco sistemato, 7 prove. Restano: scene nuove (sono 4, sempre le stesse) e differenze «sostituzione» |
 | 8 | colora-con-mizi | giochi da colorare · 1.900 | da fare |
 | 9 | unisci-i-puntini | unisci i puntini · 1.600 | da fare |
 | 10 | salvadanaio | giochi matematica · 18.100 | da fare |
@@ -101,3 +101,4 @@ Molti giochi usano lo stesso motore (`games/_engine/SceltaMultipla.tsx`, `PixelA
 - 16/11/2026 — «Crea il tuo gioco»: «Ho finito» avvisava il sito ma la festa non compariva mai (`finito={false}` fisso): niente figurina a vista.
 - 16/11/2026 — Demo ferme in 6 giochi: nei tre di coding la demo tirava una riga dritta e sbatteva nei muri (ora c'è un risolutore vero); in «Vesti Mizi» premeva «Fatto» con i vestiti vecchi; «Tabelline» restava sulla schermata di scelta.
 - 16/11/2026 — Lodi al maschile («Bravo!», «Bravissimo!») in 7 file: tutte diventate «Evviva!».
+- **Trova le differenze (17/11/2026).** Due tocchi nello stesso istante sull'ultima differenza saltavano la scena dopo: lo stato non era ancora aggiornato. Serve un ref, come nel nucleo. Qui un tocco a vuoto è esplorazione: le stelle contano i tocchi a vuoto di tutta la partita (`stelleDi` del nucleo), non il round. Il cerchio dell'aiuto giallo, intorno al sole giallo, sembrava i raggi del sole: un aiuto deve avere un colore che non c'è nella scena (viola tratteggiato con bordo bianco).

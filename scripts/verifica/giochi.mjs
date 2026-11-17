@@ -677,6 +677,82 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   const albumC = await c.evaluate(() => JSON.parse(localStorage.getItem("giocamizi-album") || "{}"));
   ok("crea il tuo gioco: «Ho finito» porta alla festa e alla figurina", festaC && albumC.giochi?.["crea-il-tuo-gioco"]?.stelle === 3);
   await ctxC.close();
+
+  // «Trova le differenze» sul nucleo (17/11/2026). Una partita da curiosi a 7 anni:
+  // a ogni scena tre tocchi a vuoto, poi la differenza indicata, poi le altre,
+  // l'ultima con due tocchi nello stesso istante (prima saltava una scena).
+  const frasiD = copione.frasi["trova-le-differenze"] ?? [];
+  const sorgenteD = readFileSync("games/_engine/Differenze.tsx", "utf8");
+  const nelCodiceD = [...sorgenteD.matchAll(/(?:trovata|tutte|aiuto|vuoto): "([^"]+)"/g)].map((x) => x[1]);
+  ok("differenze: le frasi del motore sono identiche a quelle del copione", nelCodiceD.length === 4 && nelCodiceD.every((f) => frasiD.includes(f)), nelCodiceD.filter((f) => !frasiD.includes(f)).join(" | "));
+  const ctxD = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxD.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const d = await ctxD.newPage();
+  let erroriD = 0;
+  d.on("pageerror", () => erroriD++);
+  await d.goto(`${BASE}/giochi/trova-le-differenze/gioca?eta=7`, { waitUntil: "networkidle" });
+  const campoD = d.locator("[data-differenze]");
+  await campoD.waitFor({ timeout: 10000 });
+  const sceneD = Number(await campoD.getAttribute("data-round-totali"));
+  let aiutiD = 0, aiutoPresto = 0, aiutoResta = 0, scenePulite = 0, saltate = 0;
+  for (let r = 1; r <= sceneD; r++) {
+    await d.waitForFunction((n) => { const c = document.querySelector("[data-differenze]"); return c?.getAttribute("data-round") === String(n) && c?.getAttribute("data-partita") === "gioca"; }, r, { timeout: 8000 }).catch(() => {});
+    const box = await d.locator("[data-scena-da-toccare]").boundingBox();
+    const centri = await d.locator("[data-differenza]").evaluateAll((els) => els.map((e) => ({ x: Number(e.getAttribute("cx")), y: Number(e.getAttribute("cy")) })));
+    // Un punto della scena lontano da ogni differenza.
+    let libero = { x: 50, y: 55 };
+    cerca: for (let x = 5; x < 100; x += 5) for (let y = 5; y < 60; y += 5) if (centri.every((c) => Math.hypot(c.x - x, c.y - y) > 12)) { libero = { x, y }; break cerca; }
+    for (let colpo = 1; colpo <= 3; colpo++) {
+      if (colpo === 3 && (await d.locator("[data-aiuto-differenza]").count())) aiutoPresto++;
+      await d.touchscreen.tap(box.x + (libero.x / 100) * box.width, box.y + (libero.y / 60) * box.height);
+      await d.waitForTimeout(200);
+    }
+    const aiutoD = d.locator("[data-aiuto-differenza]");
+    const indicata = (await aiutoD.count()) === 1 ? await aiutoD.getAttribute("data-aiuto-differenza") : null;
+    if (indicata && (await d.locator(`[data-differenza="${indicata}"]:not([data-trovata])`).count()) === 1) aiutiD++;
+    if (indicata) await d.locator(`[data-differenza="${indicata}"]`).tap({ force: true });
+    await d.waitForTimeout(200);
+    if (await d.locator("[data-aiuto-differenza]").count()) aiutoResta++;
+    const resto = await d.locator("[data-differenza]:not([data-trovata])").evaluateAll((els) => els.map((e) => e.getAttribute("data-differenza")));
+    for (let i = 0; i < resto.length; i++) {
+      const el = d.locator(`[data-differenza="${resto[i]}"]`);
+      if (i === resto.length - 1) await el.evaluate((e) => { for (let k = 0; k < 2; k++) e.dispatchEvent(new MouseEvent("click", { bubbles: true })); });
+      else { await el.tap({ force: true }); await d.waitForTimeout(150); }
+    }
+    await d.waitForTimeout(300);
+    if ((await campoD.getAttribute("data-trovate")) === (await campoD.getAttribute("data-da-trovare"))) scenePulite++;
+    await d.waitForTimeout(1500);
+    if (r < sceneD && Number(await campoD.getAttribute("data-round").catch(() => 0)) !== r + 1) saltate++;
+  }
+  const festaD = await d.locator("[data-festa]").waitFor({ timeout: 8000 }).then(() => true, () => false);
+  const stelleD = festaD ? await d.locator("[data-festa] [data-stelle]").first().getAttribute("data-stelle") : null;
+  const albumD = await d.evaluate(() => JSON.parse(localStorage.getItem("giocamizi-album") || "{}"));
+  const dettoD = await d.evaluate(() => (window.__voceMizi || []).map((v) => v.testo));
+  ok("differenze: la partita da curiosi finisce senza errori JS", festaD && erroriD === 0 && scenePulite === sceneD, `scene ${scenePulite}/${sceneD}`);
+  ok("differenze: dopo tre tocchi a vuoto (non prima) un cerchio indica una differenza che manca", aiutiD === sceneD && aiutoPresto === 0, `${aiutiD} su ${sceneD}, in anticipo ${aiutoPresto}`);
+  ok("differenze: trovata la differenza indicata, il cerchio dell'aiuto sparisce", aiutoResta === 0);
+  ok("differenze: due tocchi nello stesso istante sull'ultima non saltano una scena", saltate === 0);
+  ok("differenze: tanti tocchi a vuoto danno una stella, mai zero, e la figurina", stelleD === "1" && albumD.giochi?.["trova-le-differenze"]?.stelle === 1, `stelle ${stelleD}`);
+  ok("differenze: Mizi dice solo frasi del copione, senza «sbagliato»", ["Trovata!", "Trovate tutte!", "Ti aiuto io: guarda il cerchio viola.", "Lì è uguale. Guarda meglio."].every((f) => dettoD.includes(f)) && !dettoD.some((t) => /sbagliat|Brav[oa]/i.test(t)), [...new Set(dettoD)].join(" | "));
+  await ctxD.close();
+
+  // Chi non tocca mai a vuoto prende tre stelle (a 5 anni: tre differenze per scena).
+  const ctxE = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxE.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const e = await ctxE.newPage();
+  await e.goto(`${BASE}/giochi/trova-le-differenze/gioca?eta=5`, { waitUntil: "networkidle" });
+  const campoE = e.locator("[data-differenze]");
+  await campoE.waitFor({ timeout: 10000 });
+  const treAScena = (await campoE.getAttribute("data-da-trovare")) === "3";
+  for (let r = 1; r <= sceneD; r++) {
+    await e.waitForFunction((n) => { const c = document.querySelector("[data-differenze]"); return c?.getAttribute("data-round") === String(n) && c?.getAttribute("data-partita") === "gioca"; }, r, { timeout: 8000 }).catch(() => {});
+    const ids = await e.locator("[data-differenza]").evaluateAll((els) => els.map((x) => x.getAttribute("data-differenza")));
+    for (const id of ids) { await e.locator(`[data-differenza="${id}"]`).tap({ force: true }); await e.waitForTimeout(120); }
+  }
+  const festaE = await e.locator("[data-festa]").waitFor({ timeout: 8000 }).then(() => true, () => false);
+  const stelleE = festaE ? await e.locator("[data-festa] [data-stelle]").first().getAttribute("data-stelle") : null;
+  ok("differenze: a 5 anni tre differenze per scena, e senza tocchi a vuoto tre stelle", treAScena && stelleE === "3", `stelle ${stelleE}`);
+  await ctxE.close();
 }
 
 await b.close();
