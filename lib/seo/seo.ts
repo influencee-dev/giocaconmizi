@@ -49,3 +49,18 @@ export type Classe = (typeof classi)[number];
 export function etichettaClasse(classe: string): string {
   return classe.replace(/-/g, " ");
 }
+
+/**
+ * Un testo accorciato per la descrizione della pagina nei motori di ricerca:
+ * oltre i 155 caratteri circa Google la taglia a metà parola. Qui si taglia
+ * alla fine di una frase se ce n'è una dopo i primi 90 caratteri, altrimenti
+ * all'ultima parola intera, con i puntini.
+ */
+export function riassunto(testo: string, massimo = 155): string {
+  const pulito = testo.replace(/\s+/g, " ").trim();
+  if (pulito.length <= massimo) return pulito;
+  const pezzo = pulito.slice(0, massimo + 1);
+  const fineFrase = Math.max(pezzo.lastIndexOf(". "), pezzo.lastIndexOf("! "), pezzo.lastIndexOf("? "));
+  if (fineFrase >= 90) return pezzo.slice(0, fineFrase + 1);
+  return `${pezzo.slice(0, pezzo.lastIndexOf(" ", massimo - 1)).replace(/[,;:(]+$/, "")}…`;
+}

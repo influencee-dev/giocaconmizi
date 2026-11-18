@@ -135,7 +135,8 @@ export default async function GiocoPage({ params }: Params) {
 
         {testo && (
           <div className="mt-10 lg:col-start-1">
-            <Prosa html={testo.html} />
+            {/* Il titolo del testo è già l'h1 della pagina: qui si toglie, una pagina ha un solo h1. */}
+            <Prosa html={testo.html.replace(/<h1[^>]*>[\s\S]*?<\/h1>/, "")} />
           </div>
         )}
       </div>

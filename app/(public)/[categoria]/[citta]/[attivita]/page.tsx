@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SCHEDE, datiCard, haListing, percorsoScheda, scheda, schedeDi } from "@/lib/directory/directory";
 import { chiaveScheda, conModifiche, pubblicate, type DatiModifica } from "@/lib/directory/directory-db";
-import { url } from "@/lib/seo/seo";
+import { url, riassunto } from "@/lib/seo/seo";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { Briciole, CtaAttivita, InBreve } from "@/components/directory/Briciole";
@@ -38,9 +38,10 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   if (!s) return {};
   return {
     title: `${s.nome}, ${s.tipo} a ${s.citta} (${s.zona})`,
-    description: s.festa
-      ? `${s.descrizione} ${s.nome} a ${s.citta}, zona ${s.zona}: feste di compleanno per bambini e cosa chiedere prima di prenotare.`
-      : `${s.descrizione} ${s.nome}, ${s.zona}: cosa c'è per i bambini e cosa controllare prima di partire.`,
+    // Nome, tipo e città sono già nel titolo: qui va il racconto del posto,
+    // tagliato perché stia intero nei risultati di ricerca (prima arrivava a 500 caratteri).
+    // Un racconto molto corto si completa con che cos'è il posto e dove sta.
+    description: riassunto(s.descrizione.length < 110 ? `${s.descrizione} ${s.nome}: ${s.tipo} a ${s.citta}, zona ${s.zona}.` : s.descrizione),
     alternates: { canonical: percorsoScheda(s) },
   };
 }

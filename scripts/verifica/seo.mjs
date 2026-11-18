@@ -155,6 +155,7 @@ ok("sitemap immagini: ogni foto risponde e sta nella sua pagina", immaginiStorte
 // dominio; og:url coerente; i JSON-LD non citano altri domini del sito.
 const problemi = [];
 const strutturati = [];
+const teste = [];
 const coda = [...locs];
 async function controlla(loc) {
   const percorso = locale(loc);
@@ -176,6 +177,14 @@ async function controlla(loc) {
     if (altri.length) problemi.push(`${percorso}: JSON-LD cita ${altri[0]}`);
   }
   strutturati.push(...validaJsonLd(html, percorso).problemi);
+  // Per il punto 3-ter: titolo, descrizione e intestazioni di ogni pagina.
+  const pulito = (t) => t.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#x27;/g, "'").replace(/&quot;/g, '"').replace(/\s+/g, " ").trim();
+  teste.push({
+    percorso,
+    titolo: pulito(html.match(/<title[^>]*>([\s\S]*?)<\/title>/)?.[1] ?? ""),
+    descrizione: pulito(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? ""),
+    h1: [...html.matchAll(/<h1[\s>]/g)].length,
+  });
 }
 // Cinque richieste alla volta: abbastanza veloce, senza affogare il server.
 await Promise.all(Array.from({ length: 5 }, async () => {
@@ -186,6 +195,30 @@ ok(
   problemi.length === 0,
   problemi.length ? `${problemi.length} problemi, es. ${problemi.slice(0, 3).join(" | ")}` : `${locs.length} pagine`,
 );
+
+// 3-ter. Titolo, descrizione e intestazione di ogni pagina (dal 18/11/2026).
+// Un giro su tutta la sitemap aveva trovato 38 pagine dei giochi con due h1 e descrizioni delle schede lunghe fino a 550 caratteri,
+// che Google taglia a metà parola.
+{
+  const doppi = (campo) => {
+    const gruppi = new Map();
+    for (const t of teste) gruppi.set(t[campo], [...(gruppi.get(t[campo]) ?? []), t.percorso]);
+    return [...gruppi].filter(([valore, dove]) => valore && dove.length > 1).map(([, dove]) => dove.slice(0, 2).join(" = "));
+  };
+  // La home ne ha due uguali, uno per il telefono (la home «come un'app») e uno per
+  // il computer: se ne vede sempre uno solo, e lo controlla la batteria dell'app.
+  const h1Storti = teste.filter((t) => t.h1 !== (t.percorso === "/" ? 2 : 1)).map((t) => `${t.percorso} (${t.h1})`);
+  ok("ogni pagina della sitemap ha un solo h1", teste.length === locs.length && h1Storti.length === 0, `${h1Storti.length} pagine, es. ${h1Storti.slice(0, 3).join(" ")}`);
+  const titoliDoppi = doppi("titolo");
+  const descrizioniDoppie = doppi("descrizione");
+  ok("nessun titolo e nessuna descrizione uguali su due pagine", titoliDoppi.length === 0 && descrizioniDoppie.length === 0, [...titoliDoppi, ...descrizioniDoppie].slice(0, 3).join(" | "));
+  const povere = teste.filter((t) => !t.titolo || t.descrizione.length < 70).map((t) => `${t.percorso} (${t.descrizione.length})`);
+  ok("ogni pagina ha un titolo e una descrizione di almeno 70 caratteri", povere.length === 0, povere.slice(0, 4).join(" "));
+  // Le schede delle attività: /categoria/città/scheda. La descrizione deve stare intera nei risultati.
+  const schede = teste.filter((t) => /^\/[a-z-]+\/[a-z-]+\/[a-z0-9-]+$/.test(t.percorso) && !/^\/(giochi|guide|natale|biglietti|storie|tutorial|risorse-educative-bambini|admin|feste)\//.test(t.percorso));
+  const lunghe = schede.filter((t) => t.descrizione.length > 160).map((t) => `${t.percorso} (${t.descrizione.length})`);
+  ok("schede delle attività: la descrizione sta nei 160 caratteri", schede.length > 200 && lunghe.length === 0, `${schede.length} schede; ${lunghe.slice(0, 3).join(" ")}`);
+}
 
 // 3-bis. I dati strutturati di ogni pagina (dal 04/11/2026, scripts/verifica/jsonld.mjs):
 // JSON leggibile, tipi schema.org veri, FAQ complete e VISIBILI nella pagina,

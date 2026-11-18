@@ -22,6 +22,8 @@
 // ufficiale, solo recensioni e una pagina Facebook. Da verificare prima di
 // usarlo: Il Bosco Sospeso, parco avventura a Cenadi (CZ), con pagina feste ma
 // eventi fermi al 2018.
+// Brindisi (18/11/2026): solo Gommalandia Park (pagina Facebook, niente sito);
+// gli altri nomi vengono da un elenco con numeri di telefono finti.
 
 export interface LocaleFesta {
   nome: string;
@@ -2566,6 +2568,42 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Quanto costa la festa?", risposta: "Il sito del Piccolo Mondo indica pacchetti a partire da 300 euro per 20 bambini, con saletta a tema e ingresso al parco (prezzo letto a novembre 2026). Per l'Isola delle Meraviglie il prezzo si chiede al parco. Fatevi sempre scrivere cosa è compreso." },
       { domanda: "Quale va bene d'inverno?", risposta: "L'Isola delle Meraviglie è tutta al chiuso. Il Piccolo Mondo d'inverno apre nei pomeriggi di sabato, domenica e festivi e fa le feste nelle sale: chiedete quali attrazioni sono aperte nel giorno che vi interessa." },
       { domanda: "Fino a che età si può giocare?", risposta: "L'Isola delle Meraviglie è pensata per bambini fino a 12 anni, con un'area a parte per i più piccoli. Al Piccolo Mondo le piscine estive hanno l'acqua bassa, adatta ai bambini piccoli." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "asti",
+    citta: "Asti",
+    aggiornata: "2026-11-18",
+    rispostaBreve: "Ad Asti la festa di compleanno per bambini si fa al coperto, in centro: da Kids' Republic, in vicolo Monticone, una ludoteca con una sala con playground e gonfiabili, oppure da Happy Games, in via Assauto, un circolo con laser game dove si festeggia dai 4 anni in su. Chiedete per tempo le date libere e fatevi scrivere cosa comprende il prezzo.",
+    intro: "Ad Asti i posti privati per i compleanni dei bambini sono due, tutti e due in centro e al chiuso. Sono molto diversi: uno è una ludoteca per i più piccoli, l'altro un laser game per chi ha già voglia di correre e fare squadra.",
+    locali: [
+      { nome: "Kids' Republic", zona: "Asti, centro (vicolo Monticone)", tipo: "ludoteca con sala feste e baby parking", sito: "https://kidsrepublic.it/", descrizione: "Ludoteca in centro ad Asti, in vicolo Monticone, che fa anche baby parking a ore. Per i compleanni il sito descrive una sala di 300 mq con playground e gonfiabili, uno spazio riservato per la festa e pacchetti a tema, con un'animatrice per tre ore nella formula di base; la festa nella sala allestita si fa con almeno 12 bambini e comprende il rinfresco. I prezzi non sono pubblicati: si chiedono alla ludoteca, insieme alle date libere." },
+      { nome: "Happy Games Asti", zona: "Asti, centro (via Assauto)", tipo: "laser game con sala giochi e feste di compleanno", sito: "https://www.happygamesasti.it/", descrizione: "Circolo con laser game, ludoteca e sala giochi in via Assauto, nel cortile interno. I compleanni sono pensati per chi ha almeno 4 anni; se giocano bambini sotto i 6 anni in arena entra anche un adulto. Il sito indica 24 euro a invitato, con almeno 10 persone (prezzo letto a novembre 2026): tre partite da 25 minuti a testa, bibite, patatine, pop corn e caramelle, area riservata e pulizia. Con la pizza si aggiungono 13 euro a invitato. Essendo un circolo serve la tessera, 10 euro l'anno, e le date si controllano passando di persona." },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno per bambini ad Asti?", risposta: "In centro e al coperto: da Kids' Republic in vicolo Monticone, una ludoteca con sala feste, playground e gonfiabili, oppure da Happy Games in via Assauto, dove la festa è una sfida a laser game." },
+      { domanda: "Quanto costa la festa?", risposta: "Happy Games indica sul sito 24 euro a invitato con almeno 10 persone, più 13 euro a testa se si aggiunge la pizza (prezzi letti a novembre 2026); serve anche la tessera del circolo, 10 euro l'anno. Kids' Republic non pubblica i prezzi: si chiedono alla ludoteca." },
+      { domanda: "Quale va bene per i più piccoli?", risposta: "Kids' Republic è una ludoteca, con playground e gonfiabili. Da Happy Games le feste sono dai 4 anni in su, e sotto i 6 anni in arena entra anche un adulto." },
+      { domanda: "Vanno bene anche d'inverno o se piove?", risposta: "Sì: tutti e due sono al chiuso." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "pavia",
+    citta: "Pavia",
+    aggiornata: "2026-11-18",
+    rispostaBreve: "A Pavia la festa di compleanno per bambini si fa da SpazioGioco, una ludoteca in via Allende che la domenica si affitta per le feste dei bambini fino a 6 anni, oppure, da marzo a ottobre, al Parco Giochi Minerva di viale Cesare Battisti, un parco di gonfiabili all'aperto che riserva un'area per la festa. Chiedete per tempo le date libere.",
+    intro: "A Pavia città trovate due soluzioni molto diverse: una ludoteca gestita da un'associazione, piccola e pensata per i più piccoli, da affittare e allestire da soli, e un parco di gonfiabili all'aperto per la bella stagione.",
+    locali: [
+      { nome: "SpazioGioco Pavia", zona: "Pavia, via Allende", tipo: "ludoteca da affittare per le feste", sito: "https://www.spaziogiocopavia.it/", descrizione: "Ludoteca senza scopo di lucro, circolo ARCI, in via Allende. La domenica la sala si affitta per i compleanni: è pensata per bambini fino a 6 anni e tiene al massimo 25 persone, adulti compresi. Il sito indica 100 euro, 80 per i soci, con una caparra di 30 euro che torna indietro se la sala viene lasciata pulita (prezzi letti a novembre 2026). Si affitta solo lo spazio: allestimento, merenda e pulizia sono a carico della famiglia. Per la festa non serve la tessera." },
+      { nome: "Parco Giochi Minerva", zona: "Pavia, viale Cesare Battisti", tipo: "parco divertimenti all'aperto con gonfiabili e feste di compleanno", sito: "https://www.parcogiochiminerva.it/", descrizione: "Parco di gonfiabili all'aperto in viale Cesare Battisti, accanto al centro commerciale Minerva. Il sito lo dà aperto da marzo a ottobre, tutti i giorni, mattina e pomeriggio, chiuso solo con il maltempo. Per i compleanni riserva un'area privata con addobbi a tema e giochi senza limiti di tempo. I prezzi non sono pubblicati: si chiedono al parco. D'inverno è chiuso." },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno per bambini a Pavia?", risposta: "Da SpazioGioco, la ludoteca di via Allende che la domenica si affitta per le feste dei bambini fino a 6 anni, oppure, da marzo a ottobre, al Parco Giochi Minerva di viale Cesare Battisti, con i gonfiabili all'aperto." },
+      { domanda: "Quanto costa la festa?", risposta: "SpazioGioco indica sul sito 100 euro per l'affitto della sala, 80 per i soci, più una caparra di 30 euro che viene restituita (prezzi letti a novembre 2026). Il Parco Giochi Minerva non pubblica i prezzi: si chiedono al parco." },
+      { domanda: "E d'inverno?", risposta: "D'inverno resta SpazioGioco, che è al chiuso. Il Parco Giochi Minerva è all'aperto e apre da marzo a ottobre." },
+      { domanda: "Quanti invitati posso portare da SpazioGioco?", risposta: "Al massimo 25 persone in tutto, contando anche gli adulti. La sala è pensata per bambini fino a 6 anni e si affitta solo la domenica." },
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
