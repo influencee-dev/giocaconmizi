@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { url } from "@/lib/seo";
+import { url } from "@/lib/seo/seo";
 import { PERCORSO_TRAPPOLA } from "@/lib/protezione/limiti";
 
 /**

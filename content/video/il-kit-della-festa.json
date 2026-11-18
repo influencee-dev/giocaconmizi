@@ -1,0 +1,173 @@
+{
+  "slug": "il-kit-della-festa",
+  "titolo": "Il kit della festa: etichette, festone, topper, segnaposto e caccia al tesoro",
+  "gruppo": "utenti",
+  "ordine": 2,
+  "descrizione": "Mizi ti mostra il kit della festa di Giocamizi: etichette, festone col nome, topper, segnaposto e caccia al tesoro da stampare.",
+  "rispostaBreve": "Il kit della festa di Giocamizi si apre dall'ultimo passo dell'invito, con lo stesso nome e sfondo: etichette per i sacchettini, festone col nome, topper per la torta, segnaposto e una caccia al tesoro con sei indizi. Tutto su fogli A4 da stampare a casa, gratis.",
+  "pagina": {
+    "href": "/biglietti/kit-festa",
+    "testo": "Il kit della festa"
+  },
+  "faq": [
+    {
+      "domanda": "I nomi degli invitati vengono salvati?",
+      "risposta": "No: restano sul tuo telefono e non finiscono nel link."
+    },
+    {
+      "domanda": "Serve una stampante speciale?",
+      "risposta": "No, ogni foglio è un A4 normale da stampare a casa."
+    }
+  ],
+  "schermate": {
+    "fine": {
+      "url": "/biglietti/crea",
+      "azioni": [
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "clicca": "button[aria-label=\"Dinosauri\"]"
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "riempi": "input[placeholder=\"es. Sofia\"]",
+          "valore": "Sofia"
+        },
+        {
+          "riempi": "input[placeholder=\"es. 5\"]",
+          "valore": "6"
+        },
+        {
+          "clicca": "[aria-label^=\"Vai al passo 7\"]"
+        }
+      ],
+      "selettori": [
+        "[data-link-kit]"
+      ]
+    },
+    "kit": {
+      "url": "/biglietti/kit-festa?b=eyJ0aXBvIjoiaW52aXRvIiwidGVtYSI6ImRpbm9zYXVyaSIsInZhcmlhbnRlIjoiY2hpYXJvIiwibm9tZSI6IlNvZmlhIiwiZXRhIjoiNiIsImZyYXNlIjoiIiwiZGF0YSI6InNhYmF0byAxMiBhcHJpbGUiLCJvcmEiOiJkYWxsZSAxNiBhbGxlIDE5IiwibHVvZ28iOiJWaWEgZGVpIFRpZ2xpIDQiLCJjb25mZXJtYSI6IjMzMyAwMDAwMDAwIiwiZmlybWEiOiIiLCJjb25NaXppIjpmYWxzZSwiY2FyYXR0ZXJlIjoidG9uZG8iLCJzdGlja2VycyI6W3siaWQiOiJkaW5vc2F1cm8iLCJ4IjoxOCwieSI6MTYsInMiOjF9XSwiY29uUXIiOnRydWV9",
+      "azioni": [
+        {
+          "riempi": "textarea",
+          "valore": "Martina\nLeo\nAurora"
+        }
+      ],
+      "selettori": [
+        "input[placeholder=\"es. Sofia\"]",
+        "[data-temi]",
+        "textarea",
+        "button:has-text(\"Scarica le etichette (A4)\")",
+        "fieldset",
+        "button:has-text(\"Scarica il foglio 1 di\")",
+        "[data-topper-riepilogo]",
+        "[data-scarica-topper]",
+        "[data-scarica-segnaposto=\"1\"]",
+        "[data-campo-indizio=\"1\"]",
+        "[data-scarica-caccia]"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per le famiglie",
+      "titolo": "Il kit della festa",
+      "sottotitolo": "Cinque cose da stampare a casa, gratis.",
+      "voce": "Ciao, sono Mizi! L'invito è pronto? Allora prepariamo il kit della festa: etichette, festone, topper, segnaposto e caccia al tesoro. Si stampa tutto a casa, gratis!"
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Parti dall'invito",
+      "testo": "All'ultimo passo: «Prepara il kit della festa».",
+      "schermata": "fine",
+      "evidenzia": [
+        "[data-link-kit]"
+      ],
+      "voce": "Quando l'invito è pronto, all'ultimo passo tocca «Prepara il kit della festa». Il kit arriva con il nome e lo sfondo del biglietto."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Tutto con lo stesso sfondo",
+      "testo": "Nome, anni e sfondo valgono per tutti i fogli.",
+      "schermata": "kit",
+      "evidenzia": [
+        "input[placeholder=\"es. Sofia\"]",
+        "[data-temi]"
+      ],
+      "voce": "Qui trovi già il nome, gli anni e lo sfondo. Se vuoi cambiarli, lo fai una volta sola, e valgono per tutti i fogli."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 3,
+      "titolo": "Le etichette dei sacchettini",
+      "testo": "Un cartellino «Grazie» per ogni invitato.",
+      "schermata": "kit",
+      "evidenzia": [
+        "textarea",
+        "button:has-text(\"Scarica le etichette (A4)\")"
+      ],
+      "nota": "I nomi restano sul tuo telefono",
+      "notaIcona": "chiave",
+      "voce": "Scrivi i nomi degli invitati, uno per riga. Esce un foglio con un cartellino «Grazie» per ogni sacchettino. I nomi restano sul tuo telefono, non vanno nel link."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 4,
+      "titolo": "Il festone col nome",
+      "testo": "Una bandierina per lettera, sei per foglio.",
+      "schermata": "kit",
+      "evidenzia": [
+        "fieldset",
+        "button:has-text(\"Scarica il foglio 1 di\")"
+      ],
+      "voce": "Il festone ha una bandierina per ogni lettera: «Buon compleanno» e il nome, oppure solo il nome. Ritagli, pieghi sullo spago e incolli: il numerino ti dice l'ordine."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 5,
+      "titolo": "Il topper per la torta",
+      "testo": "Un disco grande e otto dischetti per i cupcake.",
+      "schermata": "kit",
+      "evidenzia": [
+        "[data-topper-riepilogo]",
+        "[data-scarica-topper]"
+      ],
+      "voce": "Per la torta c'è il topper: un disco grande con gli anni e il nome, e otto dischetti per i cupcake. Dietro ci attacchi uno stecchino con lo scotch."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 6,
+      "titolo": "I segnaposto",
+      "testo": "Piegati a tenda, il nome si legge dai due lati.",
+      "schermata": "kit",
+      "evidenzia": [
+        "[data-scarica-segnaposto=\"1\"]"
+      ],
+      "voce": "I segnaposto usano gli stessi nomi delle etichette. Li pieghi a tenda, e il nome si legge da tutti e due i lati."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 7,
+      "titolo": "La caccia al tesoro",
+      "testo": "Sei indizi pronti, da cambiare come vuoi.",
+      "schermata": "kit",
+      "evidenzia": [
+        "[data-campo-indizio=\"1\"]",
+        "[data-scarica-caccia]"
+      ],
+      "voce": "E poi la caccia al tesoro! Ci sono sei indizi pronti per giocare in casa: ognuno dice dove trovare il prossimo, e l'ultimo porta al tesoro. Puoi cambiarli come vuoi."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/biglietti/kit-festa",
+      "sotto": "Ogni foglio è un A4 da stampare a casa.",
+      "voce": "Trovi il kit su giocamizi punto it, nella pagina dei biglietti. Buona festa! Ciao ciao!"
+    }
+  ]
+}

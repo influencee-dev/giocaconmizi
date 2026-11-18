@@ -2,13 +2,14 @@ import { TestataPagina } from "@/components/vetrina";
 import { ScenaBiglietti } from "@/components/illustrazioni";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CITTA_FESTE } from "@/lib/feste";
-import { CATEGORIE_ATTIVE, vociRicerca } from "@/lib/directory";
+import { CITTA_FESTE, localiDaFesta } from "@/lib/directory/feste";
+import { CATEGORIE_ATTIVE, vociRicerca } from "@/lib/directory/directory";
 import { RicercaCosaDove } from "@/components/directory/RicercaCosaDove";
-import { CENTRO_CITTA } from "@/lib/coordinate-citta";
+import { CENTRO_CITTA } from "@/lib/directory/coordinate-citta";
 import { MappaLocali } from "@/components/mappa/MappaLocali";
 import { Contenitore, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
+import { CtaAttivita } from "@/components/directory/Briciole";
 
 export const metadata: Metadata = {
   title: "Feste di compleanno per bambini: le location città per città",
@@ -77,8 +78,8 @@ export default function FestePage() {
               href: `/feste/${c.slug}`,
               icona: "festa",
               colore: "#F28AB2",
-              sotto: `${c.locali.length} posti per le feste`,
-              numero: c.locali.length,
+              sotto: `${localiDaFesta(c).length} posti per le feste`,
+              numero: localiDaFesta(c).length,
             }))}
           />
         </div>
@@ -92,7 +93,7 @@ export default function FestePage() {
             >
               <span className="text-xl font-extrabold text-notte">{c.citta}</span>
               <span className="text-sm text-notte-tenue">
-                {c.locali.length} location per zona
+                {localiDaFesta(c).length} location per zona
               </span>
             </Link>
           ))}
@@ -120,6 +121,8 @@ export default function FestePage() {
           Crea l&apos;invito
         </Link>
       </section>
+
+      <CtaAttivita />
     </Contenitore>
   );
 }

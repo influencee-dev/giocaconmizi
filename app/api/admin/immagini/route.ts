@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { adminValido } from "@/lib/admin";
-import { FEDELTA, ottimizza, type Fedelta } from "@/lib/immagini/ottimizza";
+import { adminValido } from "@/lib/directory/admin";
+import { FEDELTA, ottimizza, type Fedelta } from "@/lib/foto/immagini/ottimizza";
 
 /**
  * Ottimizzatore immagini del pannello: riceve UNA foto (già girata e ridotta

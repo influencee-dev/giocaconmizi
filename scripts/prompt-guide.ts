@@ -1,6 +1,6 @@
 /**
  * Il documento per ChatGPT con le foto delle guide («00 PROMPT GUIDE» nella
- * cartella Drive «Giocamizi · Prompt immagini»). Si rigenera da lib/guide.ts:
+ * cartella Drive «Giocamizi · Prompt immagini»). Si rigenera da lib/contenuti/guide.ts:
  * `npm run prompt-guide` scrive il testo su stdout, da incollare (o caricare)
  * nel documento Drive ogni volta che arriva una guida nuova.
  * Blocchi MIZI e FOTO identici a «00 PROMPT UNICO»: le foto devono sembrare
@@ -8,8 +8,8 @@
  */
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { GUIDE } from "../lib/guide";
-import { LARGHEZZE_GUIDA } from "../lib/foto";
+import { GUIDE } from "../lib/contenuti/guide";
+import { LARGHEZZE_GUIDA } from "../lib/foto/foto";
 import { BLOCCO_FOTO, BLOCCO_MIZI } from "./blocchi-prompt";
 
 const consegnata = (slug: string) =>

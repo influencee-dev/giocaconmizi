@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { Disegno, type NomeFigura } from "@/games/_engine/arte";
 import { alcuni, mescola, uno } from "@/games/_engine/casuale";
-import { parla } from "@/lib/audio";
+import { parla } from "@/lib/giochi/audio";
 import { stelle, type GameProps } from "@/games/_engine/tipi";
 
 /**
@@ -29,7 +29,7 @@ interface RoundVassoio {
   opzioni: NomeFigura[];
 }
 
-const LODI = ["Bravo!", "Benissimo!", "Esatto!", "Che memoria!"];
+const LODI = ["Evviva!", "Benissimo!", "Esatto!", "Che memoria!"];
 const INCORAGGIAMENTI = ["Quasi! Riprova.", "Non è questo. Riprova.", "Riprova, ci sei quasi."];
 
 export default function Game({ onProgress, onComplete, demo = false }: GameProps) {

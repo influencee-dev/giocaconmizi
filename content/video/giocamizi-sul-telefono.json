@@ -1,0 +1,146 @@
+{
+  "slug": "giocamizi-sul-telefono",
+  "titolo": "Come mettere Giocamizi sul telefono, come un'app",
+  "gruppo": "utenti",
+  "ordine": 4,
+  "descrizione": "Mizi ti mostra come mettere Giocamizi sul telefono come un'app, su Android e su iPhone, senza store.",
+  "rispostaBreve": "Per mettere Giocamizi sul telefono apri giocamizi.it dal browser e tocca «Scarica» nella barretta in basso. Su Android con Chrome conferma «Installa»; su iPhone tocca Condividi in Safari e poi «Aggiungi alla schermata Home». L'icona apre Giocamizi a tutto schermo, come un'app. Gratis, senza store.",
+  "pagina": {
+    "href": "/",
+    "testo": "Apri Giocamizi"
+  },
+  "faq": [
+    {
+      "domanda": "Serve scaricare qualcosa dallo store?",
+      "risposta": "No: Giocamizi si aggiunge alla schermata Home direttamente dal browser."
+    },
+    {
+      "domanda": "I dati del profilo dove restano?",
+      "risposta": "Sul tuo telefono."
+    }
+  ],
+  "schermate": {
+    "home": {
+      "url": "/",
+      "selettori": [
+        "[data-saluto]"
+      ]
+    },
+    "benvenuto": {
+      "url": "/",
+      "azioni": [
+        {
+          "clicca": "[data-crea-profilo]"
+        },
+        {
+          "attendi": 400
+        }
+      ],
+      "selettori": [
+        "input[data-campo=\"mamma\"]"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per mamme e papà",
+      "titolo": "Giocamizi sul telefono, come un'app",
+      "sottotitolo": "Gratis, niente store.",
+      "voce": "Ciao, sono Mizi! Lo sapevi che puoi mettere Giocamizi sul telefono, proprio come un'app? Non serve nessuno store ed è gratis. Ti faccio vedere come si fa!"
+    },
+    {
+      "tipo": "carta",
+      "passo": 1,
+      "titolo": "Apri Giocamizi dal telefono",
+      "testo": "In fondo alla pagina compare una barretta.",
+      "carta": {
+        "icona": "casa",
+        "titolo": "Scarica Giocamizi sul tuo telefono",
+        "sotto": "Gratis · come un'app",
+        "bottone": "Scarica"
+      },
+      "voce": "Apri giocamizi punto it dal browser del telefono. In fondo alla pagina compare una barretta scura: «Scarica Giocamizi sul tuo telefono». Tocca il bottone giallo."
+    },
+    {
+      "tipo": "carta",
+      "passo": 2,
+      "titolo": "Su Android: «Installa»",
+      "testo": "Con Chrome si apre la finestra del browser.",
+      "carta": {
+        "icona": "spunta",
+        "titolo": "Android e Chrome",
+        "testo": "Il bottone diventa «Installa»: toccalo e conferma nella finestra che si apre.",
+        "bottone": "Installa"
+      },
+      "voce": "Su Android, con Chrome, di solito il bottone dice «Installa». Toccalo e conferma nella finestra che si apre. Fatto!"
+    },
+    {
+      "tipo": "carta",
+      "passo": 3,
+      "titolo": "Su iPhone: due tocchi",
+      "testo": "Te li spiega la barretta stessa.",
+      "carta": {
+        "icona": "lampadina",
+        "titolo": "Due tocchi e Mizi è sul tuo telefono",
+        "testo": "1. Tocca Condividi nella barra di Safari. 2. Scegli Aggiungi alla schermata Home.",
+        "bottone": "Ok"
+      },
+      "voce": "Su iPhone, invece, tocca «Scarica» e ti spiego i due tocchi: prima «Condividi», nella barra di Safari, poi «Aggiungi alla schermata Home»."
+    },
+    {
+      "tipo": "carta",
+      "passo": 4,
+      "titolo": "Con un altro browser",
+      "testo": "Si passa dal menu.",
+      "carta": {
+        "icona": "ingranaggio",
+        "titolo": "Dal menu del browser",
+        "testo": "Apri i tre puntini ⋮ e tocca «Installa app» o «Aggiungi a schermata Home»."
+      },
+      "voce": "Con un altro browser, apri il menu con i tre puntini e tocca «Installa app» oppure «Aggiungi a schermata Home»."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 5,
+      "titolo": "Si apre a tutto schermo",
+      "testo": "Senza la barra del browser, come un'app.",
+      "schermata": "home",
+      "evidenzia": [
+        "[data-saluto]"
+      ],
+      "voce": "Ora sulla schermata Home c'è l'icona di Giocamizi. Toccala: si apre a tutto schermo, senza la barra del browser, proprio come un'app."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 6,
+      "titolo": "La prima volta: 30 secondi",
+      "testo": "Il tuo nome, il bimbo, l'email. Una volta sola.",
+      "schermata": "benvenuto",
+      "evidenzia": [
+        "input[data-campo=\"mamma\"]"
+      ],
+      "nota": "Restano sul telefono",
+      "notaIcona": "chiave",
+      "voce": "La prima volta che apri l'app ti chiedo come ti chiami, il nome e l'età del tuo bimbo, e l'email. Ci vogliono trenta secondi, una volta sola, e restano sul tuo telefono."
+    },
+    {
+      "tipo": "carta",
+      "passo": 7,
+      "titolo": "Non è il momento?",
+      "testo": "Tocca la X sulla barretta.",
+      "carta": {
+        "icona": "orologio",
+        "titolo": "Non ora",
+        "testo": "Chiudi la barretta con la X: torna fra 30 giorni."
+      },
+      "voce": "Non è il momento? Tocca la X sulla barretta e per trenta giorni non te la ripropongo."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it",
+      "sotto": "Aprilo dal telefono: gratis, niente store.",
+      "voce": "Prova adesso: apri giocamizi punto it dal telefono e mettimi nella schermata Home. Ci vediamo lì! Ciao ciao!"
+    }
+  ]
+}

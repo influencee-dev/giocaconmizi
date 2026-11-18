@@ -30,7 +30,7 @@ import {
   type Pacchetto,
   type Prezzo,
   type SchedaEstesa,
-} from "@/lib/scheda-campi";
+} from "@/lib/directory/scheda-campi";
 import { TitoloSezione } from "@/components/ui";
 import { VideoAlTocco } from "./VideoAlTocco";
 

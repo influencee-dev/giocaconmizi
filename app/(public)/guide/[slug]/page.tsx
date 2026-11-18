@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { fotoGuida } from "@/lib/foto";
+import { fotoGuida } from "@/lib/foto/foto";
 import { SegnoAI } from "@/components/vetrina";
 import { notFound } from "next/navigation";
-import { GUIDE, guida, guideCorrelate } from "@/lib/guide";
+import { GUIDE, guida, guideCorrelate } from "@/lib/contenuti/guide";
 import { games } from "@/games/registry";
 import { CardGioco, Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { IllustrazioneSkill } from "@/components/illustrazioni";
@@ -26,7 +26,7 @@ import {
  * La pagina di una guida (piano AEO): la risposta breve in testa è il
  * paragrafo pensato per essere citato da motori e assistenti AI; le sezioni
  * sono la risposta completa; in fondo i giochi per passare dalla teoria
- * alla pratica. Tutto statico, generato da lib/guide.ts.
+ * alla pratica. Tutto statico, generato da lib/contenuti/guide.ts.
  */
 
 export function generateStaticParams() {

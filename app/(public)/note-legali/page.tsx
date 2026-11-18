@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Contenitore } from "@/components/ui";
-import { AGGIORNATA, SOCIETA, TITOLARE } from "@/lib/legal";
+import { AGGIORNATA, SOCIETA, TITOLARE } from "@/lib/contenuti/legal";
 
 export const metadata: Metadata = {
   title: "Note legali",

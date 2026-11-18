@@ -10,7 +10,7 @@ import { MiziIntero } from "@/components/illustrazioni";
  * sito. Deve far venire voglia di iscriversi senza trucchi: vantaggi concreti,
  * numeri veri del sito, un campo solo obbligatorio (l'email), consenso NON
  * spuntato in partenza, nessuna frase che colpevolizza chi non si iscrive.
- * Doppio opt-in: Brevo manda l'email di conferma (lib/brevo.ts).
+ * Doppio opt-in: Brevo manda l'email di conferma (lib/email/brevo.ts).
  *
  * Non compare dove disturba: dentro un gioco, nel pannello, nelle pagine di
  * servizio e subito dopo l'iscrizione.

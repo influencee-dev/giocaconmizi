@@ -1,0 +1,280 @@
+{
+  "slug": "come-creare-l-invito",
+  "titolo": "Come creare l'invito di compleanno con la conferma su WhatsApp",
+  "gruppo": "utenti",
+  "ordine": 1,
+  "descrizione": "Mizi ti mostra come creare l'invito di compleanno gratis, con la conferma su WhatsApp e il QR da stampare.",
+  "rispostaBreve": "Per creare un invito di compleanno su Giocamizi apri «Biglietti», tocca «Crea il tuo, gratis» e segui i sette passi: tipo e formato, sfondo, nome, anni e dettagli della festa, numero WhatsApp per le conferme, adesivi. Poi scarichi, stampi quattro copie su un A4 o lo mandi su WhatsApp. Gratis, senza registrazione.",
+  "pagina": {
+    "href": "/biglietti",
+    "testo": "Crea il tuo invito"
+  },
+  "faq": [
+    {
+      "domanda": "L'invito è gratis?",
+      "risposta": "Sì, gratis e senza filigrana, senza registrazione."
+    },
+    {
+      "domanda": "Come confermano gli invitati?",
+      "risposta": "Se metti il tuo numero WhatsApp, chi riceve l'invito tocca «Confermo, ci saremo!» e ti arriva il messaggio già scritto; sull'invito stampato c'è il QR."
+    }
+  ],
+  "schermate": {
+    "biglietti": {
+      "url": "/biglietti",
+      "selettori": [
+        "a:has-text(\"Crea il tuo, gratis\")"
+      ]
+    },
+    "passo1": {
+      "url": "/biglietti/crea",
+      "selettori": [
+        "[data-mizi-guida]",
+        "button[aria-pressed]:has-text(\"Invito\")",
+        "button:has-text(\"WhatsApp e storie\")"
+      ]
+    },
+    "sfondo": {
+      "url": "/biglietti/crea",
+      "azioni": [
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "clicca": "button[aria-label=\"Dinosauri\"]"
+        }
+      ],
+      "selettori": [
+        "[data-temi]",
+        "[data-tutti-i-temi]",
+        "button[aria-label=\"Dinosauri\"]"
+      ]
+    },
+    "scritte": {
+      "url": "/biglietti/crea",
+      "azioni": [
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "clicca": "button[aria-label=\"Dinosauri\"]"
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "riempi": "input[placeholder=\"es. Sofia\"]",
+          "valore": "Sofia"
+        },
+        {
+          "riempi": "input[placeholder=\"es. 5\"]",
+          "valore": "6"
+        },
+        {
+          "clicca": "button.text-left.text-sm"
+        },
+        {
+          "riempi": "input[placeholder=\"es. sabato 12 aprile\"]",
+          "valore": "sabato 12 aprile"
+        },
+        {
+          "riempi": "input[placeholder=\"es. dalle 16 alle 19\"]",
+          "valore": "dalle 16 alle 19"
+        },
+        {
+          "riempi": "input[placeholder=\"es. Via dei Tigli 4\"]",
+          "valore": "Via dei Tigli 4"
+        },
+        {
+          "riempi": "input[placeholder=\"es. 333 1234567\"]",
+          "valore": "333 0000000"
+        }
+      ],
+      "selettori": [
+        "input[placeholder=\"es. Sofia\"]",
+        "button.text-left.text-sm",
+        "input[placeholder=\"es. 333 1234567\"]"
+      ]
+    },
+    "adesivi": {
+      "url": "/biglietti/crea",
+      "azioni": [
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "clicca": "button[aria-label=\"Dinosauri\"]"
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "riempi": "input[placeholder=\"es. Sofia\"]",
+          "valore": "Sofia"
+        },
+        {
+          "riempi": "input[placeholder=\"es. 5\"]",
+          "valore": "6"
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "clicca": "button[aria-label=\"Aggiungi Dinosauro\"]"
+        }
+      ],
+      "selettori": [
+        "button[aria-label=\"Aggiungi Dinosauro\"]",
+        "p:has-text(\"Trascina gli adesivi col dito\")"
+      ]
+    },
+    "pronto": {
+      "url": "/biglietti/crea",
+      "azioni": [
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "clicca": "button[aria-label=\"Dinosauri\"]"
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "riempi": "input[placeholder=\"es. Sofia\"]",
+          "valore": "Sofia"
+        },
+        {
+          "riempi": "input[placeholder=\"es. 5\"]",
+          "valore": "6"
+        },
+        {
+          "riempi": "input[placeholder=\"es. 333 1234567\"]",
+          "valore": "333 0000000"
+        },
+        {
+          "clicca": "[aria-label^=\"Vai al passo 7\"]"
+        },
+        {
+          "clicca": "label:has-text(\"Metti il QR\")"
+        }
+      ],
+      "selettori": [
+        "button:has-text(\"Foglio A4 (4 copie)\")",
+        "button:has-text(\"Invia su WhatsApp\")",
+        "label:has-text(\"Metti il QR\")"
+      ]
+    },
+    "vedi": {
+      "url": "/biglietti/vedi?b=eyJ0aXBvIjoiaW52aXRvIiwidGVtYSI6ImRpbm9zYXVyaSIsInZhcmlhbnRlIjoiY2hpYXJvIiwibm9tZSI6IlNvZmlhIiwiZXRhIjoiNiIsImZyYXNlIjoiIiwiZGF0YSI6InNhYmF0byAxMiBhcHJpbGUiLCJvcmEiOiJkYWxsZSAxNiBhbGxlIDE5IiwibHVvZ28iOiJWaWEgZGVpIFRpZ2xpIDQiLCJjb25mZXJtYSI6IjMzMyAwMDAwMDAwIiwiZmlybWEiOiIiLCJjb25NaXppIjpmYWxzZSwiY2FyYXR0ZXJlIjoidG9uZG8iLCJzdGlja2VycyI6W3siaWQiOiJkaW5vc2F1cm8iLCJ4IjoxOCwieSI6MTYsInMiOjF9XSwiY29uUXIiOnRydWV9",
+      "selettori": [
+        "button:has-text(\"Confermo, ci saremo!\")"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per le famiglie",
+      "titolo": "Come creare l'invito di compleanno",
+      "sottotitolo": "Con la conferma su WhatsApp. Gratis, senza registrarsi.",
+      "voce": "Ciao, sono Mizi! C'è una festa di compleanno in arrivo? Ti faccio vedere come si prepara l'invito, con la conferma su WhatsApp. È gratis e non serve registrarsi!"
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Apri «Biglietti»",
+      "testo": "Poi tocca «Crea il tuo, gratis».",
+      "schermata": "biglietti",
+      "evidenzia": [
+        "a:has-text(\"Crea il tuo, gratis\")"
+      ],
+      "voce": "Vai nella pagina Biglietti e tocca «Crea il tuo, gratis». Funziona anche dal telefono."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Invito e formato",
+      "testo": "Da stampare, oppure per WhatsApp.",
+      "schermata": "passo1",
+      "evidenzia": [
+        "[data-mizi-guida]",
+        "button[aria-pressed]:has-text(\"Invito\")",
+        "button:has-text(\"WhatsApp e storie\")"
+      ],
+      "voce": "Ti guido io, in sette passi. Prima scegli che biglietto è: invito, auguri o grazie. Poi il formato: da stampare, oppure per WhatsApp e le storie."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 3,
+      "titolo": "Scegli lo sfondo",
+      "testo": "Otto subito, ventisette in tutto.",
+      "schermata": "sfondo",
+      "evidenzia": [
+        "[data-temi]",
+        "[data-tutti-i-temi]",
+        "button[aria-label=\"Dinosauri\"]"
+      ],
+      "voce": "Adesso lo sfondo. Ne vedi otto subito, e con «Vedi tutti» arrivi a ventisette. Io scelgo i dinosauri!"
+    },
+    {
+      "tipo": "telefono",
+      "passo": 4,
+      "titolo": "Nome, festa e conferma",
+      "testo": "Le frasi pronte hanno già il nome dentro.",
+      "schermata": "scritte",
+      "evidenzia": [
+        "input[placeholder=\"es. Sofia\"]",
+        "button.text-left.text-sm",
+        "input[placeholder=\"es. 333 1234567\"]"
+      ],
+      "voce": "Scrivi il nome e gli anni: le frasi pronte compaiono già con il nome dentro. Poi data, ora e indirizzo. E se metti il tuo numero WhatsApp, gli invitati ti confermano con un tocco."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 5,
+      "titolo": "Adesivi e foto",
+      "testo": "Disegni nostri, da spostare col dito.",
+      "schermata": "adesivi",
+      "evidenzia": [
+        "button[aria-label=\"Aggiungi Dinosauro\"]",
+        "p:has-text(\"Trascina gli adesivi col dito\")"
+      ],
+      "nota": "La foto resta sul tuo telefono",
+      "notaIcona": "chiave",
+      "voce": "Poi gli adesivi: tocchi il dinosauro e lo sposti col dito. Se vuoi, metti anche la foto del festeggiato: resta sul tuo telefono, non va nei link."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 6,
+      "titolo": "Scarica, stampa o manda",
+      "testo": "Sull'invito di carta, il QR per confermare.",
+      "schermata": "pronto",
+      "evidenzia": [
+        "button:has-text(\"Foglio A4 (4 copie)\")",
+        "button:has-text(\"Invia su WhatsApp\")",
+        "label:has-text(\"Metti il QR\")"
+      ],
+      "voce": "Pronto! Puoi scaricarlo, stampare quattro copie su un foglio A4, o mandarlo su WhatsApp. Sull'invito di carta metti il QR: chi lo inquadra ti conferma."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 7,
+      "titolo": "Gli invitati confermano",
+      "testo": "Il messaggio arriva già scritto.",
+      "schermata": "vedi",
+      "evidenzia": [
+        "button:has-text(\"Confermo, ci saremo!\")"
+      ],
+      "nota": "Mandalo solo agli invitati",
+      "notaIcona": "cassetta-posta",
+      "voce": "Chi riceve l'invito trova il bottone «Confermo, ci saremo!»: lo tocca, e a te arriva il messaggio già scritto. Dentro ci sono indirizzo e telefono, quindi mandalo solo agli invitati."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/biglietti",
+      "sotto": "Gratis, senza registrazione e senza filigrana.",
+      "voce": "Trovi tutto su giocamizi punto it, nella pagina Biglietti. Buona festa! Ciao ciao!"
+    }
+  ]
+}

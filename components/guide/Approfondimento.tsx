@@ -1,4 +1,4 @@
-import type { Approfondimento as DatiApprofondimento } from "@/lib/guide";
+import type { Approfondimento as DatiApprofondimento } from "@/lib/contenuti/guide";
 
 /**
  * Il corpo di un articolo approfondito (content/guide/<slug>.md): scheda

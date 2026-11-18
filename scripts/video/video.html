@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<!--
+  Il motore delle scene dei video di Mizi (docs/video-tutorial.md). Legge la
+  scheda del video (content/video/<slug>.json → __SPEC__), le posizioni degli
+  elementi nelle schermate (__BOX__) e la durata di ogni frase (__VOCI__).
+  Due formati dallo stesso file: orizzontale 1280×720, verticale 540×960 (#verticale).
+  Tipi di scena: intro · telefono · due · carta · finale (sempre l'ultima).
+-->
+<style>
+@font-face { font-family: Nunito; src: url(asset/nunito-600.ttf); font-weight: 600; }
+@font-face { font-family: Nunito; src: url(asset/nunito-800.ttf); font-weight: 800; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1280px; height: 720px; overflow: hidden; background: #FFF3E6; font-family: Nunito, sans-serif; color: #1F2430; }
+body.v { width: 540px; height: 960px; }
+#palco { position: absolute; inset: 0; overflow: hidden; }
+.bolla { position: absolute; border-radius: 50%; }
+.scena { position: absolute; inset: 0; will-change: transform; }
+.passo { position: absolute; left: 80px; top: 150px; width: 520px; }
+.v .passo { left: 34px; top: 92px; width: 472px; }
+.numero { display: inline-flex; width: 64px; height: 64px; border-radius: 50%; background: #7E4FC4; color: #fff; font-weight: 800; font-size: 34px; align-items: center; justify-content: center; }
+.v .numero { width: 46px; height: 46px; font-size: 25px; }
+.titolo { margin-top: 22px; font-weight: 800; font-size: 54px; line-height: 1.04; letter-spacing: -0.5px; }
+.v .titolo { margin-top: 12px; font-size: 34px; }
+.testo { margin-top: 18px; font-weight: 600; font-size: 26px; line-height: 1.35; color: #4A4F5C; }
+.v .passo .testo { display: none; }
+.telefono { position: absolute; scale: .84; transform-origin: 0 0; width: 304px; height: 616px; border-radius: 46px; background: #1F2430; padding: 14px; box-shadow: 0 40px 80px -30px rgba(31,36,48,.55); }
+.v .telefono { scale: .8; }
+.schermo { position: relative; width: 276px; height: 588px; border-radius: 34px; overflow: hidden; background: #FFF3E6; }
+.schermo img.pagina { position: absolute; left: 0; top: 0; width: 276px; }
+.anello { position: absolute; border: 5px solid #F28AB2; border-radius: 18px; }
+.carta { position: absolute; background: #fff; border-radius: 30px; box-shadow: 0 30px 60px -28px rgba(31,36,48,.45); }
+.etichetta { display: inline-flex; align-items: center; gap: 10px; background: #E3F4E8; color: #2E7D4A; font-weight: 800; font-size: 26px; padding: 10px 20px; border-radius: 16px; }
+.v .etichetta { font-size: 20px; padding: 8px 14px; }
+.viola { position: absolute; inset: 0; background: #7E4FC4; overflow: hidden; }
+.viola .bolla { background: rgba(255,255,255,.12); }
+#sottotitoli { position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); width: max-content; max-width: 1040px; text-align: center; font-weight: 800; font-size: 27px; line-height: 1.3; color: #fff; background: rgba(31,36,48,.82); padding: 10px 22px; border-radius: 16px; z-index: 5; }
+.v #sottotitoli { bottom: auto; top: 246px; max-width: 480px; font-size: 21px; padding: 8px 16px; }
+#barra { position: absolute; left: 0; top: 0; height: 8px; background: #7E4FC4; z-index: 6; }
+#logo { position: absolute; right: 36px; top: 26px; height: 46px; z-index: 4; }
+.v #logo { right: auto; left: 50%; transform: translateX(-50%); top: 26px; height: 40px; }
+</style>
+</head>
+<body>
+<div id="palco">
+  <div class="bolla" style="width:520px;height:520px;left:-160px;top:-200px;background:#FCE1EC"></div>
+  <div class="bolla" style="width:420px;height:420px;right:-120px;bottom:-170px;background:#E1F3FB"></div>
+  <div class="bolla b3" style="width:120px;height:120px;right:380px;top:70px;background:#FEF3D1"></div>
+  <div id="scene"></div>
+  <img id="logo" src="asset/giocamizi-logo-orizzontale.webp" alt="">
+  <div id="sottotitoli"></div>
+  <div id="barra"></div>
+</div>
+<script>
+const V = location.hash === '#verticale';
+if (V) { document.body.classList.add('v'); const b3 = document.querySelector('.b3'); b3.style.right = '60px'; b3.style.top = '170px'; }
+const W = V ? 540 : 1280, H = V ? 960 : 720;
+const SPEC = __SPEC__;
+const BOX = __BOX__;
+const VOCI = __VOCI__;
+const S = 276 / 390;          // scala della schermata dentro il telefono
+const VISIBILE = 588 / S;     // quanta pagina si vede nel telefono (px della pagina)
+const P = (o, v) => (V ? v : o);
+
+// --- utilità ---
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const ease = (x) => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const out = (x) => 1 - Math.pow(1 - clamp(x), 3);
+const back = (x) => { x = clamp(x); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const tra = (t, a, b) => clamp((t - a) / (b - a));
+const el = (html) => { const d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstChild; };
+const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const ANTICIPO = 0.5, CODA = 0.6, PUSH = 0.7;
+
+const TEL = P([840, 92], [148, 330]);
+function telefono(nome, x, y) {
+  return `<div class="telefono" style="left:${x}px;top:${y}px"><div class="schermo"><img class="pagina" src="schermi/${nome}.png"><div class="anelli"></div></div></div>`;
+}
+const box = (schermata, sel) => BOX[schermata]?.sel?.[sel] ?? null;
+// lo scorrimento che porta l'elemento al 40% del telefono, senza uscire dalla pagina
+function scorrimentoPer(schermata, sel) {
+  const b = sel && box(schermata, sel);
+  if (!b) return 0;
+  const max = Math.max(0, (BOX[schermata]?.altezza ?? 0) - VISIBILE);
+  return clamp(b.y - VISIBILE * .4, 0, max);
+}
+function scorri(sc, y) { sc.querySelector('img.pagina').style.transform = `translateY(${-y * S}px)`; }
+function anello(sc, b, scrollY, vis, pad = 7) {
+  const a = sc.querySelector('.anelli');
+  if (!a.firstChild) a.innerHTML = '<div class="anello"></div>';
+  const r = a.firstChild;
+  if (!b) { r.style.opacity = 0; return; }
+  const sc2 = 1 + 0.06 * Math.sin(vis * Math.PI * 4);
+  r.style.left = (b.x * S - pad) + 'px'; r.style.top = ((b.y - scrollY) * S - pad) + 'px';
+  r.style.width = (b.w * S + pad * 2) + 'px'; r.style.height = (b.h * S + pad * 2) + 'px';
+  r.style.opacity = vis > 0 ? 1 : 0; r.style.transform = `scale(${vis > 0 ? sc2 : .6})`;
+  r.style.boxShadow = `0 0 0 9999px rgba(31,36,48,${.38 * clamp(vis * 3)})`;
+}
+function passoHTML(sc) {
+  return `<div class="passo">${sc.passo ? `<div class="numero">${sc.passo}</div>` : ''}<div class="titolo">${esc(sc.titolo)}</div><div class="testo">${esc(sc.testo)}</div></div>`;
+}
+function entra(nodo, t, ritardo, dx = 0, dy = 40) {
+  const p = out(tra(t, ritardo, ritardo + .6));
+  nodo.style.opacity = p; nodo.style.transform = `translate(${dx * (1 - p)}px, ${dy * (1 - p)}px)`;
+}
+const entraPasso = (n, t) => { const p = n.querySelector('.passo'); if (p) [...p.children].forEach((c, i) => entra(c, t, .2 + i * .2)); };
+
+// --- i tipi di scena ---
+const TIPI = {
+  intro: {
+    html: (sc) => `<div>
+      <img class="mizi" src="asset/mizi-intera.webp" style="position:absolute;left:${P(820, 120)}px;top:${P(120, 420)}px;width:${P(360, 300)}px">
+      <div class="passo" style="top:${P(170, 110)}px;width:${P(700, 472)}px">
+        ${sc.etichetta ? `<div class="etichetta" style="background:#FCE1EC;color:#B03A6F">${esc(sc.etichetta)}</div>` : ''}
+        <div class="titolo" style="font-size:${P(68, 44)}px">${esc(sc.titolo)}</div>
+        ${sc.sottotitolo ? `<div class="testo" style="display:block;font-size:${P(26, 22)}px">${esc(sc.sottotitolo)}</div>` : ''}
+      </div></div>`,
+    anima(n, t) {
+      const m = n.querySelector('.mizi');
+      const p = back(tra(t, .2, 1.1));
+      m.style.transform = `translateY(${(1 - p) * 300}px) rotate(${Math.sin(t * 2) * 3}deg)`;
+      [...n.querySelector('.passo').children].forEach((c, i) => entra(c, t, .3 + i * .25, -60, 0));
+    },
+  },
+  telefono: {
+    html: (sc) => `<div>${passoHTML(sc)}${telefono(sc.schermata, ...TEL)}
+      ${sc.bollino ? `<div class="etichetta bollino" style="position:absolute;left:${P(760, 80)}px;top:${P(430, 640)}px;font-size:${P(30, 26)}px;box-shadow:0 20px 40px -20px rgba(31,36,48,.5);z-index:2">${esc(sc.bollino)}</div>` : ''}
+      ${sc.nota ? `<div class="carta nota" style="left:${P(80, 70)}px;top:${P(470, 760)}px;padding:${P('16px 24px', '12px 18px')};display:flex;align-items:center;gap:14px;z-index:2">${sc.notaIcona ? `<img src="asset/${sc.notaIcona}.png" style="width:${P(44, 36)}px">` : ''}<b style="font-size:${P(24, 20)}px">${esc(sc.nota)}</b></div>` : ''}</div>`,
+    anima(n, t, sc, d) {
+      const ph = n.querySelector('.telefono');
+      const ev = (sc.evidenzia ?? []).map((s) => box(sc.schermata, s));
+      const fine = scorrimentoPer(sc.schermata, sc.scorri ?? sc.evidenzia?.[0]);
+      const y = fine * ease(tra(t, .5, Math.min(3.2, d * .35)));
+      scorri(ph, y);
+      if (sc.entraDaSinistra) { const pp = out(tra(t, .2, 1)); ph.style.transform = `translateX(${(1 - pp) * -300}px)`; }
+      // un elemento evidenziato alla volta, distribuiti sul resto della frase
+      if (ev.length) {
+        const da = d * .3, quota = (d * .95 - da) / ev.length;
+        const i = Math.min(ev.length - 1, Math.max(0, Math.floor((t - da) / quota)));
+        anello(ph, ev[i], y, t > da ? tra(t, da, da + .4) : 0);
+      }
+      const b = n.querySelector('.bollino');
+      if (b) { const p = back(tra(t, d * .3, d * .3 + .8)); b.style.transform = `scale(${p}) rotate(${-4 * p}deg)`; b.style.opacity = p > 0 ? 1 : 0; }
+      const no = n.querySelector('.nota'); if (no) entra(no, t, d * .6, -80, 0);
+      entraPasso(n, t);
+    },
+  },
+  due: {
+    html: (sc) => `<div>${passoHTML(sc)}${telefono(sc.schermate[0], P(660, 22), P(92, 350))}${telefono(sc.schermate[1], P(920, 278), P(92, 350))}</div>`,
+    anima(n, t, sc, d) {
+      const [a, b] = n.querySelectorAll('.telefono');
+      if (V) { a.style.scale = '.7'; b.style.scale = '.7'; }
+      const pa = out(tra(t, .3, 1.1)), pb = out(tra(t, .7, 1.5));
+      a.style.transform = `translateX(${(1 - pa) * 700}px) rotate(-4deg)`;
+      b.style.transform = `translateX(${(1 - pb) * 700}px) rotate(4deg)`;
+      const ya = sc.scorri?.[0] ? scorrimentoPer(sc.schermate[0], sc.scorri[0]) : 380;
+      const yb = sc.scorri?.[1] ? scorrimentoPer(sc.schermate[1], sc.scorri[1]) : 420;
+      scorri(a, ya * ease(tra(t, 1.5, d * .55)));
+      scorri(b, yb * ease(tra(t, 2.5, d * .75)));
+      entraPasso(n, t);
+    },
+  },
+  carta: {
+    html: (sc) => {
+      const c = sc.carta ?? {};
+      return `<div>${passoHTML(sc)}
+        <div class="carta grande" style="left:${P(700, 30)}px;top:${P(140, 390)}px;width:${P(480, 480)}px;padding:30px">
+          <div style="display:flex;align-items:center;gap:14px">${c.icona ? `<img class="ic" src="asset/${c.icona}.png" style="width:72px">` : ''}<div><div style="font-weight:800;font-size:26px">${esc(c.titolo)}</div>${c.sotto ? `<div style="font-weight:600;font-size:18px;color:#4A4F5C">${esc(c.sotto)}</div>` : ''}</div></div>
+          ${c.testo ? `<div style="margin-top:18px;font-weight:600;font-size:21px;line-height:1.35;color:#4A4F5C">${esc(c.testo)}</div>` : ''}
+          ${c.bottone ? `<div class="bottone" style="margin-top:22px;background:#7E4FC4;color:#fff;font-weight:800;font-size:24px;padding:16px;border-radius:18px;text-align:center">${esc(c.bottone)}</div>` : ''}
+          ${c.spunta ? `<img class="spunta" src="asset/spunta.png" style="width:80px;position:absolute;right:26px;top:-28px">` : ''}
+        </div></div>`;
+    },
+    anima(n, t, sc, d) {
+      const c = n.querySelector('.grande');
+      const p = out(tra(t, .3, 1.2));
+      c.style.transform = `translateY(${(1 - p) * 500}px) rotate(${(1 - p) * 8}deg)`;
+      const ic = n.querySelector('.ic'); if (ic) ic.style.transform = `rotate(${Math.sin(t * 2.4) * 8}deg)`;
+      const bt = n.querySelector('.bottone');
+      if (bt) { const on = t > d * .4; bt.style.transform = `scale(${on ? 1 + .05 * Math.sin((t - d * .4) * 6) : 1})`; bt.style.boxShadow = on ? `0 0 0 ${6 + 4 * Math.sin((t - d * .4) * 6)}px rgba(242,138,178,.6)` : 'none'; }
+      const s = n.querySelector('.spunta'); if (s) { const ps = back(tra(t, d * .6, d * .6 + .7)); s.style.transform = `scale(${ps})`; s.style.opacity = ps > 0 ? 1 : 0; }
+      entraPasso(n, t);
+    },
+  },
+  // Il finale uguale per tutti i video: schermata viola, Mizi, l'indirizzo del sito.
+  finale: {
+    html: (sc) => `<div><div class="viola">
+        <div class="bolla" style="width:${P(520, 420)}px;height:${P(520, 420)}px;left:-140px;bottom:-200px"></div>
+        <div class="bolla" style="width:${P(300, 240)}px;height:${P(300, 240)}px;right:-60px;top:-80px"></div>
+        <div class="bolla" style="width:90px;height:90px;right:${P(420, 60)}px;top:${P(560, 560)}px"></div>
+        <img class="mizi" src="asset/mizi-intera.webp" style="position:absolute;left:${P(150, 130)}px;top:${P(170, 470)}px;width:${P(340, 280)}px">
+        <div class="blocco" style="position:absolute;left:${P(560, 34)}px;top:${P(200, 110)}px;width:${P(640, 472)}px;color:#fff">
+          <div style="font-weight:800;font-size:${P(34, 26)}px;opacity:.9">${esc(sc.sopra ?? 'Ti aspetto su')}</div>
+          <div style="margin-top:12px;font-weight:800;font-size:${P(72, 52)}px;line-height:1">giocamizi.it</div>
+          <div class="pill" style="margin-top:26px;display:inline-block;background:#fff;color:#7E4FC4;font-weight:800;font-size:${P(28, 20)}px;padding:${P('16px 26px', '12px 18px')};border-radius:999px;white-space:nowrap">${esc(sc.url ?? 'giocamizi.it')}</div>
+          <div style="margin-top:22px;font-weight:600;font-size:${P(24, 19)}px;opacity:.9">${esc(sc.sotto ?? 'Gratis, senza pubblicità.')}</div>
+        </div>
+      </div></div>`,
+    anima(n, t) {
+      const m = n.querySelector('.mizi');
+      const p = back(tra(t, .2, 1));
+      m.style.transform = `scale(${p}) rotate(${Math.sin(t * 2.2) * 5}deg) translateY(${Math.sin(t * 3) * 6}px)`;
+      [...n.querySelector('.blocco').children].forEach((c, i) => entra(c, t, .3 + i * .25, 60, 0));
+      const pill = n.querySelector('.pill');
+      if (t > 1.6) pill.style.boxShadow = `0 0 0 ${6 + 5 * Math.sin((t - 1.6) * 5)}px rgba(255,255,255,.35)`;
+    },
+  },
+};
+
+const SCENE = SPEC.scene;
+let inizio = 0;
+const TEMPI = SCENE.map((s, i) => { const d = VOCI[i] + ANTICIPO + CODA; const r = { inizio, dur: d, voce: inizio + ANTICIPO }; inizio += d; return r; });
+const DURATA = inizio;
+window.DURATA = DURATA; window.TEMPI = TEMPI;
+
+const contenitore = document.getElementById('scene');
+const nodi = SCENE.map((s) => { const n = document.createElement('div'); n.className = 'scena'; n.appendChild(el(TIPI[s.tipo].html(s))); n.style.display = 'none'; contenitore.appendChild(n); return n; });
+
+// sottotitoli: la frase della scena divisa in pezzi, in proporzione al tempo della voce
+const LUNGO = V ? 34 : 46;
+const PEZZI = SCENE.map((s) => {
+  const parole = String(s.voce).replace(/giocamizi punto it/gi, 'giocamizi.it').split(' '); const pezzi = []; let cur = [];
+  for (const p of parole) { cur.push(p); if (cur.join(' ').length > LUNGO || /[.:!?]$/.test(p)) { pezzi.push(cur.join(' ')); cur = []; } }
+  if (cur.length) pezzi.push(cur.join(' '));
+  const tot = pezzi.reduce((a, p) => a + p.length, 0); let acc = 0;
+  return pezzi.map((p) => { const a = acc / tot; acc += p.length; return { testo: p, da: a, a: acc / tot }; });
+});
+
+window.render = (t) => {
+  SCENE.forEach((s, i) => {
+    const { inizio: a, dur } = TEMPI[i];
+    const lt = t - a;
+    const vis = lt > -PUSH && lt < dur + PUSH;
+    const n = nodi[i];
+    n.style.display = vis ? 'block' : 'none';
+    if (!vis) return;
+    // push alternato: le scene pari escono a sinistra, le dispari a destra; la successiva entra dal lato opposto
+    const dir = i % 2 === 0 ? -1 : 1;
+    let x = 0;
+    if (lt < 0) { const prevDir = (i - 1) % 2 === 0 ? -1 : 1; x = -prevDir * W * (1 - ease(1 + lt / PUSH)); }
+    if (lt > dur - PUSH && i < SCENE.length - 1) x = dir * W * ease((lt - (dur - PUSH)) / PUSH);
+    n.style.transform = `translateX(${x}px)`;
+    TIPI[s.tipo].anima(n, Math.max(0, lt), s, VOCI[i]);
+  });
+  let testo = '', ora = -1;
+  TEMPI.forEach((tm, i) => {
+    if (t >= tm.inizio && t < tm.inizio + tm.dur) ora = i;
+    const f = (t - tm.voce) / VOCI[i];
+    if (f >= 0 && f <= 1.02) testo = (PEZZI[i].find((p) => f >= p.da && f < p.a + .02) || PEZZI[i][PEZZI[i].length - 1]).testo;
+  });
+  const st = document.getElementById('sottotitoli');
+  st.textContent = testo; st.style.opacity = testo ? 1 : 0;
+  // nel verticale, dove non c'è il telefono (intro e finale), i sottotitoli scendono sotto i titoli
+  const tipo = SCENE[ora]?.tipo;
+  if (V) st.style.top = tipo === 'intro' || tipo === 'finale' ? '780px' : '246px';
+  // nel finale il logo colorato lascia il posto alla scritta bianca
+  document.getElementById('logo').style.opacity = tipo === 'finale' ? 0 : 1;
+  document.getElementById('barra').style.width = (t / DURATA * W) + 'px';
+};
+render(0);
+</script>
+</body>
+</html>

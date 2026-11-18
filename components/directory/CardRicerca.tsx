@@ -1,8 +1,8 @@
 import { MapPin } from "lucide-react";
 import { IconaLucide } from "./IconaLucide";
 import Link from "next/link";
-import type { DatiCard } from "@/lib/directory";
-import { esperienza, type IdEsperienza } from "@/lib/esperienze";
+import type { DatiCard } from "@/lib/directory/directory";
+import { esperienza, type IdEsperienza } from "@/lib/directory/esperienze";
 import { Illustrazione } from "./Illustrazione";
 import { Etichetta } from "./Etichetta";
 import { BottoneSalva } from "./BottoneSalva";

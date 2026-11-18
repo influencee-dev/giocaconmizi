@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Biglietto, type DatiBiglietto } from "./Biglietto";
-import { biglietoInPng, leggiDatiDaLink, numeroWhatsApp } from "@/lib/condivisione";
-import { linkConferma, misure } from "@/lib/biglietti";
+import { biglietoInPng, leggiDatiDaLink, numeroWhatsApp } from "@/lib/biglietti/condivisione";
+import { linkConferma, misure } from "@/lib/biglietti/biglietti";
 
 /**
  * L'invito digitale: la pagina che riceve chi apre il link dell'invito.

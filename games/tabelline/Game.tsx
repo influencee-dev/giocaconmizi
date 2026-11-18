@@ -15,7 +15,8 @@ import type { GameProps } from "@/games/_engine/tipi";
 const TABELLINE = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export default function Game(props: GameProps) {
-  const [scelta, setScelta] = useState<number | "mix" | null>(null);
+  // ?demo=1 (video e prove automatiche): niente schermata di scelta, tutte insieme.
+  const [scelta, setScelta] = useState<number | "mix" | null>(props.demo ? "mix" : null);
 
   const round = useMemo<Round[]>(() => {
     if (scelta === null) return [];

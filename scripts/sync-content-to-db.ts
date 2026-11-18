@@ -11,7 +11,7 @@
 
 import { createClient } from "@supabase/supabase-js";
 import { games } from "../games/registry";
-import { testoGioco, tutteLeStorie } from "../lib/content";
+import { testoGioco, tutteLeStorie } from "../lib/contenuti/content";
 
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY;

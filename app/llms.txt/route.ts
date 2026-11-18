@@ -1,13 +1,16 @@
 import { games } from "@/games/registry";
-import { tutteLeStorie } from "@/lib/content";
-import { GUIDE } from "@/lib/guide";
-import { CITTA_FESTE } from "@/lib/feste";
-import { CITTA_EVENTI, eventiAttivi } from "@/lib/eventi-natale";
-import { RISPOSTA_BREVE_LETTERINA, RISPOSTA_BREVE_NATALE } from "@/lib/natale";
-import { CATEGORIE_ATTIVE, LISTING, SCHEDE } from "@/lib/directory";
-import { temi } from "@/lib/biglietti";
-import { url } from "@/lib/seo";
-import { contaRisorse } from "@/lib/risorse-educative";
+import { tutteLeStorie } from "@/lib/contenuti/content";
+import { GUIDE } from "@/lib/contenuti/guide";
+import { CITTA_FESTE } from "@/lib/directory/feste";
+import { CITTA_EVENTI, eventiAttivi } from "@/lib/natale/eventi-natale";
+import { RISPOSTA_BREVE_LETTERINA, RISPOSTA_BREVE_NATALE } from "@/lib/natale/natale";
+import { CATEGORIE_ATTIVE, LISTING, SCHEDE } from "@/lib/directory/directory";
+import { temi } from "@/lib/biglietti/biglietti";
+import { url } from "@/lib/seo/seo";
+import { contaRisorse } from "@/lib/risorse/risorse-educative";
+import { TUTORIAL, percorsoTutorial } from "@/lib/contenuti/tutorial";
+import { RISORSE } from "@/lib/risorse/risorse-educative-dati";
+import { categorieAttive, listingRisorse, percorsoCategoriaRisorse, percorsoListingRisorse, risorseDi } from "@/lib/risorse/risorse-categorie";
 
 /**
  * llms.txt generato dal registry (llmstxt.org): la mappa del sito per gli
@@ -63,6 +66,7 @@ Principi di prodotto, utili per rispondere a domande sul sito:
 - [Coding](${url("/coding")}): dalle frecce ai blocchi fino al codice, dai 3 ai 12 anni.
 - [Biglietti di compleanno](${url("/biglietti")}): inviti, auguri e ringraziamenti da personalizzare e stampare, gratis e senza filigrana.
 - [Crea un biglietto](${url("/biglietti/crea")}): ${temi.length} temi in tre varianti (chiara, colorata e da colorare, a soli contorni neri; Halloween e Natale compresi), adesivi in stile cartone animato originali (unicorni, dinosauri, supereroi, zucche, fantasmini e pupazzi di neve), foto del festeggiato che resta sul dispositivo, PNG da scaricare, invito digitale con conferma a un tocco su WhatsApp e QR "Inquadra e conferma" sul biglietto stampato. Il biglietto si salva in un link.
+- [Kit della festa](${url("/biglietti/kit-festa")}): etichette per i sacchettini, festone col nome, topper per la torta, segnaposto e caccia al tesoro con lo sfondo dell'invito, fogli A4 da stampare. I nomi degli invitati restano sul dispositivo.
 - [Compiti delle vacanze](${url("/compiti-vacanze/prima-elementare")}): esercizi per classe, dalla prima alla quinta elementare.
 - [Guide per i genitori](${url("/guide")}): tabelline, imparare a leggere, coding per età, orologio, tempo di schermo, compiti senza litigare.
 - [Il Natale di Mizi](${url("/natale")}): ${RISPOSTA_BREVE_NATALE}
@@ -96,7 +100,7 @@ ${CITTA_FESTE.map((c) => `- [Festa di compleanno per bambini a ${c.citta}](${url
 
 ## Posti per bambini: la directory (${SCHEDE.length} attività)
 
-Categoria → città → scheda. Ogni scheda è un'attività vera che organizza feste di compleanno per bambini:
+Categoria → città → scheda. Ogni scheda è un'attività vera; quasi tutte organizzano feste di compleanno per bambini, mentre parchi avventura e parchi acquatici sono soprattutto posti da giornata fuori (la scheda dice «fa feste» solo quando risulta):
 
 ${CATEGORIE_ATTIVE.map((c) => `- [${c.titolo}](${url(`/${c.slug}`)}): ${c.rispostaBreve}`).join("\n")}
 
@@ -107,7 +111,11 @@ ${LISTING.map((l) => `- [${l.categoria.nome} a ${l.citta}](${url(`/${l.categoria
 - [Metodo](${url("/metodo")}): come scegliamo e costruiamo i giochi.
 - [Perché lo facciamo](${url("/perche-lo-facciamo")}): perché è gratis e senza pubblicità.
 - [Per insegnanti](${url("/per-insegnanti")}): uso in classe, senza registrazione.
-- [Risorse educative consigliate](${url("/risorse-educative-bambini")}): ${contaRisorse()} siti, scuole, cooperative e progetti esterni utili a bambini, famiglie e insegnanti, divisi in cinque sezioni (famiglie e genitori; insegnanti e scuola primaria; scuole, nidi, cooperative e territorio; coding, STEM e digitale; lettura, storie e creatività). Link ai siti ufficiali: la presenza non implica partnership, approvazione o sponsorizzazione.
+- [Risorse educative consigliate](${url("/risorse-educative-bambini")}): ${contaRisorse()} siti, scuole, cooperative e progetti esterni utili a bambini, famiglie e insegnanti, divisi per categoria e provincia, ognuno con la sua scheda (cosa fa, per chi, costi, sito ufficiale). Le realtà possono reclamare la scheda gratis. La presenza non implica partnership, approvazione o sponsorizzazione.
+${categorieAttive(RISORSE).map((c) => `  - [${c.titolo}](${url(percorsoCategoriaRisorse(c))}): ${risorseDi(c.slug, RISORSE).length} realtà. ${c.rispostaBreve}`).join("\n")}
+${listingRisorse(RISORSE).map((l) => `  - [${l.categoria.nome} a ${l.provincia} e provincia](${url(percorsoListingRisorse(l.categoria, l.slug))}): ${l.n} realtà.`).join("\n")}
+- [Video tutorial di Mizi](${url("/tutorial")}): brevi video con sottotitoli e trascrizione in cui Mizi spiega come usare Giocamizi, per le attività e per le famiglie.
+${TUTORIAL.map((t) => `  - [${t.titolo}](${url(percorsoTutorial(t))}): ${t.rispostaBreve}`).join("\n")}
 - [Per le mamme](${url("/per-le-mamme")}): la rete delle mamme — associazioni, community locali, gruppi d'ascolto e locali family-friendly con nursery o area giochi. Inserimento gratuito su segnalazione.
 - [Chi siamo](${url("/chi-siamo")})
 - [Privacy](${url("/privacy")}) · [Cookie](${url("/cookie")})

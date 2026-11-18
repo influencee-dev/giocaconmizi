@@ -1,6 +1,6 @@
 import Link from "next/link";
-import type { DatiCard } from "@/lib/directory";
-import { esperienza } from "@/lib/esperienze";
+import type { DatiCard } from "@/lib/directory/directory";
+import { esperienza } from "@/lib/directory/esperienze";
 import { Illustrazione } from "./Illustrazione";
 import { Etichetta } from "./Etichetta";
 

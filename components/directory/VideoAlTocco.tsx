@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Play } from "lucide-react";
-import type { VideoIncorporato } from "@/lib/scheda-campi";
+import type { VideoIncorporato } from "@/lib/directory/scheda-campi";
 
 const NOME = { instagram: "Instagram", youtube: "YouTube", tiktok: "TikTok" } as const;
 

@@ -1,0 +1,222 @@
+{
+  "slug": "come-aggiungere-un-attivita",
+  "titolo": "Come aggiungere un'attività che non c'è ancora",
+  "gruppo": "partner",
+  "ordine": 3,
+  "descrizione": "Mizi ti mostra come proporre su Giocamizi un'attività per bambini che non c'è ancora, o chiedere l'accesso a una scheda esistente.",
+  "rispostaBreve": "Per aggiungere un'attività su Giocamizi apri la pagina «Aggiungi la tua attività», scegli «Aggiungere la mia attività», scrivi nome, categoria, città e una breve descrizione, poi i tuoi contatti. Il team la controlla a mano e ti scrive quando la scheda è online. È gratis.",
+  "pagina": {
+    "href": "/aggiungi-attivita",
+    "testo": "Aggiungi la tua attività"
+  },
+  "faq": [
+    {
+      "domanda": "Aggiungere un'attività costa qualcosa?",
+      "risposta": "No, la scheda è gratuita: nessuna commissione e nessuna pubblicità."
+    },
+    {
+      "domanda": "I miei contatti finiscono sul sito?",
+      "risposta": "Email e telefono del modulo servono per risponderti e restano nel nostro archivio privato; sulla scheda compaiono solo i contatti che decidi di mostrare."
+    }
+  ],
+  "schermate": {
+    "pagina": {
+      "url": "/aggiungi-attivita",
+      "selettori": [
+        "li:has-text(\"Compili il modulo\")",
+        "li:has-text(\"Controlliamo\")",
+        "li:has-text(\"Sei online\")"
+      ]
+    },
+    "modulo": {
+      "url": "/aggiungi-attivita",
+      "azioni": [
+        {
+          "clicca": "label:has([data-tipo=nuova])"
+        },
+        {
+          "riempi": "[data-campo=nome]",
+          "valore": "Ludoteca Il Girotondo"
+        },
+        {
+          "scegli": "[data-campo=categoria]",
+          "valore": "ludoteche"
+        },
+        {
+          "riempi": "[data-campo=citta]",
+          "valore": "Bologna"
+        },
+        {
+          "riempi": "[data-campo=descrizione]",
+          "valore": "Laboratori creativi dai 4 ai 10 anni, feste di compleanno a tema con un educatore e un centro estivo."
+        },
+        {
+          "clicca": "summary:has-text(\"Aggiungi indirizzo, età, sito e social\")"
+        },
+        {
+          "riempi": "input[name=eta]",
+          "valore": "4–10 anni"
+        },
+        {
+          "riempi": "[data-campo=referente]",
+          "valore": "Anna Rossi"
+        },
+        {
+          "riempi": "[data-campo=email]",
+          "valore": "anna@esempio.it"
+        },
+        {
+          "riempi": "input[name=telefono]",
+          "valore": "333 000 0000"
+        },
+        {
+          "clicca": "[data-spunta=conferma]"
+        }
+      ],
+      "selettori": [
+        "label:has([data-tipo=nuova])",
+        "[data-campo=nome]",
+        "[data-campo=categoria]",
+        "[data-campo=citta]",
+        "[data-campo=descrizione]",
+        "summary:has-text(\"Aggiungi indirizzo, età, sito e social\")",
+        "[data-campo=referente]",
+        "[data-campo=email]",
+        "input[name=telefono]",
+        "[data-spunta=conferma]",
+        "[data-invia]"
+      ]
+    },
+    "esiste": {
+      "url": "/aggiungi-attivita",
+      "azioni": [
+        {
+          "clicca": "label:has([data-tipo=accesso])"
+        },
+        {
+          "riempi": "[data-campo=cerca-scheda]",
+          "valore": "Nano Gigante"
+        },
+        {
+          "attendi": 400
+        }
+      ],
+      "selettori": [
+        "label:has([data-tipo=accesso])",
+        "[data-campo=cerca-scheda]",
+        "button[data-trovata]"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per attività, scuole e associazioni",
+      "titolo": "Come aggiungere la tua attività su Giocamizi",
+      "sottotitolo": "Gratis, anche dal telefono.",
+      "voce": "Ciao, sono Mizi! La tua ludoteca, la tua sala feste o il tuo laboratorio non sono ancora su Giocamizi? Ti faccio vedere come aggiungerli. È gratis, e dal telefono va benissimo!"
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Apri «Aggiungi la tua attività»",
+      "testo": "Tre passi: modulo, controllo, online.",
+      "schermata": "pagina",
+      "evidenzia": [
+        "li:has-text(\"Compili il modulo\")",
+        "li:has-text(\"Controlliamo\")",
+        "li:has-text(\"Sei online\")"
+      ],
+      "voce": "Vai sulla pagina «Aggiungi la tua attività». In alto vedi i tre passi: compili il modulo, il team controlla, e poi sei online."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Scegli «Aggiungere la mia attività»",
+      "testo": "Se su Giocamizi non c'è ancora.",
+      "schermata": "modulo",
+      "evidenzia": [
+        "label:has([data-tipo=nuova])"
+      ],
+      "voce": "Prima scegli cosa vuoi fare. Tocca «Aggiungere la mia attività», se su Giocamizi non c'è ancora."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 3,
+      "titolo": "Racconta la tua attività",
+      "testo": "Nome, categoria, città e due o tre frasi.",
+      "schermata": "modulo",
+      "evidenzia": [
+        "[data-campo=nome]",
+        "[data-campo=categoria]",
+        "[data-campo=citta]",
+        "[data-campo=descrizione]",
+        "summary:has-text(\"Aggiungi indirizzo, età, sito e social\")"
+      ],
+      "voce": "Scrivi il nome, scegli la categoria e la città. Poi racconta in due o tre frasi cosa fate per i bambini. Se vuoi, apri la riga sotto e aggiungi indirizzo, età, sito e social."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 4,
+      "titolo": "Dicci chi sei",
+      "testo": "Email e telefono restano a noi.",
+      "schermata": "modulo",
+      "evidenzia": [
+        "[data-campo=referente]",
+        "[data-campo=email]",
+        "input[name=telefono]",
+        "[data-spunta=conferma]",
+        "[data-invia]"
+      ],
+      "nota": "Non compaiono sulla scheda",
+      "notaIcona": "chiave",
+      "voce": "Poi dicci chi sei: nome, email e, se vuoi, il telefono. Servono solo per risponderti, e non vanno sulla scheda se non ce lo chiedi. Spunta la conferma e tocca «Proponi la mia attività»."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 5,
+      "titolo": "C'è già? Cercala",
+      "testo": "Scegli «La mia attività c'è già».",
+      "schermata": "esiste",
+      "evidenzia": [
+        "label:has([data-tipo=accesso])",
+        "[data-campo=cerca-scheda]",
+        "button[data-trovata]"
+      ],
+      "voce": "E se la tua attività c'è già? Scegli «La mia attività c'è già», cercala per nome o città, e toccala nell'elenco."
+    },
+    {
+      "tipo": "carta",
+      "passo": 6,
+      "titolo": "Controlliamo noi, a mano",
+      "testo": "Niente va online da solo.",
+      "carta": {
+        "icona": "lente",
+        "titolo": "Grazie, richiesta ricevuta!",
+        "testo": "Verifichiamo che l'attività sia vera e adatta ai bambini.",
+        "spunta": true
+      },
+      "voce": "Poi il team di Giocamizi la controlla a mano: guarda che l'attività sia vera e adatta ai bambini. Niente va online da solo!"
+    },
+    {
+      "tipo": "carta",
+      "passo": 7,
+      "titolo": "Ti scriviamo quando sei online",
+      "testo": "Con il link della tua scheda.",
+      "carta": {
+        "icona": "cassetta-posta",
+        "titolo": "Mizi di Giocamizi",
+        "sotto": "ciao@giocamizi.it",
+        "testo": "La tua scheda è online su Giocamizi.",
+        "bottone": "Guarda la tua scheda"
+      },
+      "voce": "Intanto ti arriva un'email di conferma. E quando la scheda è online, ti scriviamo di nuovo, con il link per vederla."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/aggiungi-attivita",
+      "sotto": "Gratis, controllata a mano.",
+      "voce": "Ti aspetto su giocamizi punto it, nella pagina «Aggiungi attività». Ciao ciao!"
+    }
+  ]
+}

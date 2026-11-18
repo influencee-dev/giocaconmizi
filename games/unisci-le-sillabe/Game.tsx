@@ -43,7 +43,7 @@ export default function Game(props: GameProps) {
           etichetta: sillaba,
           descrizione: `Sillaba ${sillaba}`,
         })),
-        vocePremio: `${parola}! Bravo.`,
+        vocePremio: `${parola}! Evviva.`,
         centro: (
           <div className="h-28 w-28">
             <Disegno id={voce.figura} titolo={parola.toLowerCase()} />

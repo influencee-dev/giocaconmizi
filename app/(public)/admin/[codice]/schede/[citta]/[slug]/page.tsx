@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Contenitore } from "@/components/ui";
-import { adminValido } from "@/lib/admin";
-import { SCHEDE, percorsoScheda } from "@/lib/directory";
-import { adminDati, chiaveScheda } from "@/lib/directory-db";
-import { gscConfigurato, ricerchePerPagina } from "@/lib/gsc";
-import { url } from "@/lib/seo";
-import { EVENTI, NOME_EVENTO, contatti, perScheda, statisticheAdmin, type Evento } from "@/lib/statistiche";
+import { adminValido } from "@/lib/directory/admin";
+import { SCHEDE, percorsoScheda } from "@/lib/directory/directory";
+import { adminDati, chiaveScheda } from "@/lib/directory/directory-db";
+import { gscConfigurato, ricerchePerPagina } from "@/lib/seo/gsc";
+import { url } from "@/lib/seo/seo";
+import { EVENTI, NOME_EVENTO, contatti, perScheda, statisticheAdmin, type Evento } from "@/lib/directory/statistiche";
 import { MenuAdmin } from "../../../MenuAdmin";
 import { DaAttivare, NonDisponibile, Numero } from "../../../NonDisponibile";
 

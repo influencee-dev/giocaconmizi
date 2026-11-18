@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { IconaLucide } from "@/components/directory/IconaLucide";
 import { notFound } from "next/navigation";
-import { CATEGORIE_ATTIVE, REGIONE, categoria, cittaDi, datiCard, haListing, percorsoScheda, schedeDi, vociRicerca } from "@/lib/directory";
+import { CATEGORIE_ATTIVE, REGIONE, categoria, cittaDi, datiCard, haListing, percorsoScheda, schedeDi, vociRicerca } from "@/lib/directory/directory";
 import { RicercaCosaDove } from "@/components/directory/RicercaCosaDove";
 import { CardRicerca } from "@/components/directory/CardRicerca";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco, jsonLdFaq } from "@/components/seo/JsonLd";
 import { Briciole, CtaAttivita, InBreve } from "@/components/directory/Briciole";
-import { conModifiche, pubblicate } from "@/lib/directory-db";
+import { conModifiche, pubblicate } from "@/lib/directory/directory-db";
 import { Illustrazione } from "@/components/directory/Illustrazione";
 
 /** Pagina categoria nazionale della directory (Figma 07–09). */
@@ -25,7 +25,9 @@ export async function generateMetadata({ params }: { params: Promise<{ categoria
   if (!cat) return {};
   return {
     title: `${cat.titolo}: città per città`,
-    description: `${cat.sottotitolo} Zone, tipo di spazio e consigli per la festa di compleanno.`,
+    description: cat.giornata
+      ? `${cat.sottotitolo} Cosa c'è per i bambini, quando aprono e cosa controllare prima di partire.`
+      : `${cat.sottotitolo} Zone, tipo di spazio e consigli per la festa di compleanno.`,
     alternates: { canonical: `/${cat.slug}` },
   };
 }

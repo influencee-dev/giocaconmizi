@@ -1,0 +1,38 @@
+{
+ "secondi": 102,
+ "caricato": "2026-11-16",
+ "capitoli": [
+  {
+   "da": 0,
+   "titolo": "Ciao, sono Mizi"
+  },
+  {
+   "da": 16,
+   "titolo": "1 · Parti dall'invito"
+  },
+  {
+   "da": 27,
+   "titolo": "2 · Tutto con lo stesso sfondo"
+  },
+  {
+   "da": 37,
+   "titolo": "3 · Le etichette dei sacchettini"
+  },
+  {
+   "da": 49,
+   "titolo": "4 · Il festone col nome"
+  },
+  {
+   "da": 63,
+   "titolo": "5 · Il topper per la torta"
+  },
+  {
+   "da": 74,
+   "titolo": "6 · I segnaposto"
+  },
+  {
+   "da": 82,
+   "titolo": "7 · La caccia al tesoro"
+  }
+ ]
+}

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SCHEDE, percorsoScheda } from "@/lib/directory";
-import { adminDati } from "@/lib/directory-db";
-import { risorsaDaChiave } from "@/lib/risorse-educative";
-import { adminValido } from "@/lib/admin";
-import { eSchedaEstesa, riepilogoScheda } from "@/lib/scheda-campi";
+import { SCHEDE, percorsoScheda } from "@/lib/directory/directory";
+import { adminDati } from "@/lib/directory/directory-db";
+import { risorsaDaChiave } from "@/lib/risorse/risorse-educative";
+import { adminValido } from "@/lib/directory/admin";
+import { eSchedaEstesa, riepilogoScheda } from "@/lib/directory/scheda-campi";
 import { Contenitore } from "@/components/ui";
 import { decidi } from "./azioni";
 import { MenuAdmin } from "./MenuAdmin";

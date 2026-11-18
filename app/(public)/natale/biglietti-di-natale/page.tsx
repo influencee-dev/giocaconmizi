@@ -4,8 +4,8 @@ import { Contenitore } from "@/components/ui";
 import { FaqVetrina, InBreve } from "@/components/vetrina";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { auguriPerTema } from "@/cards/registry";
-import { linkAlTool } from "@/lib/biglietti";
-import { PERCORSO_BIGLIETTI_NATALE, PERCORSO_LETTERINA, PERCORSO_NATALE } from "@/lib/natale";
+import { linkAlTool } from "@/lib/biglietti/biglietti";
+import { PERCORSO_BIGLIETTI_NATALE, PERCORSO_LETTERINA, PERCORSO_NATALE } from "@/lib/natale/natale";
 
 export const metadata: Metadata = {
   title: "Biglietti di Natale da stampare e personalizzare gratis",

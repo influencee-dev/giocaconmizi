@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { games } from "@/games/registry";
-import { testoGioco } from "@/lib/content";
+import { testoGioco } from "@/lib/contenuti/content";
 import { Contenitore, Prosa } from "@/components/ui";
+import { FigurinaDelGioco } from "@/components/giochi/FigurinaDelGioco";
 import {
   JsonLd,
   jsonLdBreadcrumb,
@@ -103,6 +104,9 @@ export default async function GiocoPage({ params }: Params) {
                   Gioca
                 </Link>
 
+                {/* La figurina di questo gioco nell'album di Mizi: presa o da prendere. */}
+                <FigurinaDelGioco slug={gioco.slug} skill={gioco.skill} />
+
                 {/* Lo stesso gioco si adatta all'età: qui la si sceglie prima di entrare. */}
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="font-bold text-notte-tenue">Gioca come se avesse</span>
@@ -131,7 +135,8 @@ export default async function GiocoPage({ params }: Params) {
 
         {testo && (
           <div className="mt-10 lg:col-start-1">
-            <Prosa html={testo.html} />
+            {/* Il titolo del testo è già l'h1 della pagina: qui si toglie, una pagina ha un solo h1. */}
+            <Prosa html={testo.html.replace(/<h1[^>]*>[\s\S]*?<\/h1>/, "")} />
           </div>
         )}
       </div>

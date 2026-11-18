@@ -1,0 +1,883 @@
+[
+ {
+  "slug": "come-reclamare-la-scheda",
+  "gruppo": "partner",
+  "titolo": "Come reclamare la scheda della tua attività",
+  "ordine": 1,
+  "descrizione": "Mizi ti mostra, passo per passo, come trovare la tua scheda su Giocamizi, reclamarla e completarla. Gratis.",
+  "rispostaBreve": "Per reclamare la scheda della tua attività su Giocamizi: apri la scheda, tocca «Reclama la scheda», compila il modulo con nome ed email. Dopo un controllo a mano ricevi un link personale per approvarla, completarla con contatti, orari e logo, o toglierla. È gratis, senza commissioni.",
+  "video": {
+   "src": "/video/come-reclamare-la-scheda.mp4",
+   "poster": "/video/come-reclamare-la-scheda.webp",
+   "sottotitoli": "/video/come-reclamare-la-scheda.vtt",
+   "durata": "PT1M35S",
+   "secondi": 95,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Hai un'attività per bambini, una scuola o un progetto educativo? Forse su Giocamizi la tua scheda c'è già. Ti faccio vedere come reclamarla: è gratis, e ci vogliono pochi minuti!",
+    "Per prima cosa, cerca la tua attività. Le feste sono divise per città, e le risorse educative per categoria e provincia.",
+    "Apri la tua scheda e scorri fino in fondo: lì c'è il bottone «Reclama la scheda».",
+    "Si apre un modulo, con la tua scheda già scelta. Scrivi il tuo nome, l'email e, se vuoi, un telefono. Non preoccuparti: restano privati e non finiscono sul sito.",
+    "Poi il team di Giocamizi controlla a mano che sia proprio la tua realtà. Niente va online da solo!",
+    "A quel punto ti arriva un'email con il tuo link personale. Niente password da ricordare!",
+    "Dal link vedi la scheda proprio come la vedono le famiglie. Puoi approvarla, completarla con descrizione, contatti, orari e logo, oppure chiedere di toglierla.",
+    "Quando le modifiche sono approvate, la tua scheda prende il bollino «Verificata». Ed è gratis, davvero: nessuna commissione e nessuna pubblicità.",
+    "Trovi tutti i passaggi su giocamizi.it, nella pagina «Come reclamare la scheda». Ti aspetto! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 18,
+    "titolo": "1 · Cerca la tua attività"
+   },
+   {
+    "da": 27,
+    "titolo": "2 · Tocca «Reclama la scheda»"
+   },
+   {
+    "da": 35,
+    "titolo": "3 · Compila il modulo"
+   },
+   {
+    "da": 48,
+    "titolo": "4 · Controlliamo noi, a mano"
+   },
+   {
+    "da": 56,
+    "titolo": "5 · Ricevi il tuo link personale"
+   },
+   {
+    "da": 63,
+    "titolo": "6 · Approva, completa o togli"
+   },
+   {
+    "da": 76,
+    "titolo": "7 · La tua scheda è verificata"
+   }
+  ],
+  "pagina": {
+   "href": "/come-reclamare-la-scheda",
+   "testo": "Tutti i passi scritti e le domande frequenti"
+  },
+  "faq": [
+   {
+    "domanda": "Reclamare la scheda costa qualcosa?",
+    "risposta": "No. La scheda è gratuita e lo resta: nessuna commissione sulle prenotazioni e nessuna pubblicità."
+   },
+   {
+    "domanda": "Quanto tempo ci vuole?",
+    "risposta": "Il modulo si compila in due minuti. Il controllo lo facciamo a mano e ti scriviamo appena è fatto; dopo, le modifiche accettate vanno online in pochi minuti."
+   },
+   {
+    "domanda": "Email e telefono finiscono sul sito?",
+    "risposta": "No: quelli che scrivi nel modulo restano nel nostro archivio privato. Sul sito compaiono solo i contatti che decidi tu di mostrare dal link personale."
+   }
+  ]
+ },
+ {
+  "slug": "come-completare-la-scheda",
+  "gruppo": "partner",
+  "titolo": "Come completare la scheda dal link personale",
+  "ordine": 2,
+  "descrizione": "Mizi ti mostra come completare la scheda della tua attività dal link personale: testi, contatti, orari, pacchetti festa e logo.",
+  "rispostaBreve": "Per completare la scheda su Giocamizi apri il link personale ricevuto via email, tocca «Voglio completarla» (o «Voglio modificarla» per le attività delle feste), correggi testi, contatti e orari, aggiungi il logo se sei una realtà educativa e invia. Il team controlla a mano prima di pubblicare.",
+  "video": {
+   "src": "/video/come-completare-la-scheda.mp4",
+   "poster": "/video/come-completare-la-scheda.webp",
+   "sottotitoli": "/video/come-completare-la-scheda.vtt",
+   "durata": "PT1M51S",
+   "secondi": 111,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Ti è arrivato il link personale della tua scheda? Bene! Ti faccio vedere come completarla, con contatti, orari e, per le realtà educative, anche il logo. È gratis, e non serve nessuna password.",
+    "Apri il link dall'email. In alto c'è la tua scheda, proprio come la vedono le famiglie. Sotto ci sono tre scelte: approvarla così com'è, completarla, oppure toglierla.",
+    "Se sei una realtà educativa, tocca «Voglio completarla». Si apre il modulo, e la prima cosa è il vostro logo. È facoltativo, e va bene un PNG o un JPG.",
+    "Poi ci sono i testi, già scritti: correggili come vuoi. Cosa fate, per chi, quanto costa. E puoi aggiungere la sede, gli orari, il sito e i social.",
+    "Hai un'attività per feste e bambini? Lì il bottone si chiama «Voglio modificarla». Puoi mettere WhatsApp, orari e pacchetti festa con i prezzi. E le foto le mandi rispondendo all'email.",
+    "Alla fine scrivi il tuo nome e la tua email: servono solo per risponderti. Spunta i termini e tocca «Invia le modifiche».",
+    "Poi il team di Giocamizi controlla tutto a mano, anche il logo. Niente va online da solo!",
+    "Quando le modifiche sono approvate, la scheda prende il bollino verde «Scheda verificata». E ti arriva un'email quando è online.",
+    "Se hai dubbi, trovi tutti i miei video su giocamizi.it, nella pagina «Tutorial». Ti aspetto! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 20,
+    "titolo": "1 · Apri il tuo link"
+   },
+   {
+    "da": 33,
+    "titolo": "2 · Tocca «Voglio completarla»"
+   },
+   {
+    "da": 48,
+    "titolo": "3 · Correggi e aggiungi"
+   },
+   {
+    "da": 61,
+    "titolo": "4 · Per le feste: «Voglio modificarla»"
+   },
+   {
+    "da": 75,
+    "titolo": "5 · Nome, email e invio"
+   },
+   {
+    "da": 85,
+    "titolo": "6 · Controlliamo noi, a mano"
+   },
+   {
+    "da": 93,
+    "titolo": "7 · La tua scheda è verificata"
+   }
+  ],
+  "pagina": {
+   "href": "/come-reclamare-la-scheda",
+   "testo": "Come reclamare la scheda, passo per passo"
+  },
+  "faq": [
+   {
+    "domanda": "Serve una password per completare la scheda?",
+    "risposta": "No: si usa il link personale arrivato via email, che vale solo per la tua scheda. Non inoltrarlo a chi non deve modificarla."
+   },
+   {
+    "domanda": "Le modifiche vanno online subito?",
+    "risposta": "No: il team di Giocamizi le controlla a mano, anche il logo. Quando sono approvate la scheda si aggiorna e prende il bollino «Verificata»."
+   }
+  ]
+ },
+ {
+  "slug": "come-aggiungere-un-attivita",
+  "gruppo": "partner",
+  "titolo": "Come aggiungere un'attività che non c'è ancora",
+  "ordine": 3,
+  "descrizione": "Mizi ti mostra come proporre su Giocamizi un'attività per bambini che non c'è ancora, o chiedere l'accesso a una scheda esistente.",
+  "rispostaBreve": "Per aggiungere un'attività su Giocamizi apri la pagina «Aggiungi la tua attività», scegli «Aggiungere la mia attività», scrivi nome, categoria, città e una breve descrizione, poi i tuoi contatti. Il team la controlla a mano e ti scrive quando la scheda è online. È gratis.",
+  "video": {
+   "src": "/video/come-aggiungere-un-attivita.mp4",
+   "poster": "/video/come-aggiungere-un-attivita.webp",
+   "sottotitoli": "/video/come-aggiungere-un-attivita.vtt",
+   "durata": "PT1M41S",
+   "secondi": 101,
+   "caricato": "2026-11-17",
+   "testo": [
+    "Ciao, sono Mizi! La tua ludoteca, la tua sala feste o il tuo laboratorio non sono ancora su Giocamizi? Ti faccio vedere come aggiungerli. È gratis, e dal telefono va benissimo!",
+    "Vai sulla pagina «Aggiungi la tua attività». In alto vedi i tre passi: compili il modulo, il team controlla, e poi sei online.",
+    "Prima scegli cosa vuoi fare. Tocca «Aggiungere la mia attività», se su Giocamizi non c'è ancora.",
+    "Scrivi il nome, scegli la categoria e la città. Poi racconta in due o tre frasi cosa fate per i bambini. Se vuoi, apri la riga sotto e aggiungi indirizzo, età, sito e social.",
+    "Poi dicci chi sei: nome, email e, se vuoi, il telefono. Servono solo per risponderti, e non vanno sulla scheda se non ce lo chiedi. Spunta la conferma e tocca «Proponi la mia attività».",
+    "E se la tua attività c'è già? Scegli «La mia attività c'è già», cercala per nome o città, e toccala nell'elenco.",
+    "Poi il team di Giocamizi la controlla a mano: guarda che l'attività sia vera e adatta ai bambini. Niente va online da solo!",
+    "Intanto ti arriva un'email di conferma. E quando la scheda è online, ti scriviamo di nuovo, con il link per vederla.",
+    "Ti aspetto su giocamizi.it, nella pagina «Aggiungi attività». Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 17,
+    "titolo": "1 · Apri «Aggiungi la tua attività»"
+   },
+   {
+    "da": 28,
+    "titolo": "2 · Scegli «Aggiungere la mia attività»"
+   },
+   {
+    "da": 36,
+    "titolo": "3 · Racconta la tua attività"
+   },
+   {
+    "da": 51,
+    "titolo": "4 · Dicci chi sei"
+   },
+   {
+    "da": 68,
+    "titolo": "5 · C'è già? Cercala"
+   },
+   {
+    "da": 77,
+    "titolo": "6 · Controlliamo noi, a mano"
+   },
+   {
+    "da": 87,
+    "titolo": "7 · Ti scriviamo quando sei online"
+   }
+  ],
+  "pagina": {
+   "href": "/aggiungi-attivita",
+   "testo": "Aggiungi la tua attività"
+  },
+  "faq": [
+   {
+    "domanda": "Aggiungere un'attività costa qualcosa?",
+    "risposta": "No, la scheda è gratuita: nessuna commissione e nessuna pubblicità."
+   },
+   {
+    "domanda": "I miei contatti finiscono sul sito?",
+    "risposta": "Email e telefono del modulo servono per risponderti e restano nel nostro archivio privato; sulla scheda compaiono solo i contatti che decidi di mostrare."
+   }
+  ]
+ },
+ {
+  "slug": "giocamizi-in-classe",
+  "gruppo": "partner",
+  "titolo": "Giocamizi in classe con la LIM, senza account",
+  "ordine": 4,
+  "descrizione": "Mizi mostra a maestre e maestri come usare i giochi di Giocamizi in classe, alla LIM o sui tablet, senza account.",
+  "rispostaBreve": "Per usare Giocamizi in classe apri la pagina «Per insegnanti», scegli la competenza o un gioco e tocca «Gioca»: si apre subito alla LIM o sui tablet, senza account e senza pubblicità. Puoi scegliere l'età dei bambini e il gioco si adatta. Nessun timer, nessun punteggio da battere.",
+  "video": {
+   "src": "/video/giocamizi-in-classe.mp4",
+   "poster": "/video/giocamizi-in-classe.webp",
+   "sottotitoli": "/video/giocamizi-in-classe.vtt",
+   "durata": "PT1M42S",
+   "secondi": 102,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Sei una maestra o un maestro? Ti faccio vedere come usare i giochi di Giocamizi in classe, alla LIM o sui tablet. Senza account e senza pubblicità!",
+    "C'è una pagina apposta: «Per insegnanti». I giochi si aprono con un link, senza registrazione. Funzionano sulla LIM, sui tablet della classe e sui telefoni.",
+    "Sotto trovi i giochi divisi per competenza: matematica, ortografia, logica, coding e tante altre. Tocca quella che state facendo in classe.",
+    "Oppure apri la pagina con tutti i giochi. Ognuno allena una cosa sola, e su ogni card vedi l'età e quanti minuti dura.",
+    "Scegli un gioco, per esempio le tabelline, e tocca «Gioca». Puoi anche scegliere l'età dei bambini: il gioco diventa più facile o più difficile.",
+    "E si gioca subito! Nessun timer e nessun punteggio da battere: così nessun bambino resta indietro davanti a tutti.",
+    "Non serve nessun account, né per te né per i bambini. Basta il link: lo apri alla LIM, oppure sui tablet della classe.",
+    "E nella stessa pagina trovi i compiti delle vacanze divisi per classe, e altri siti utili per la scuola, con schede e materiali.",
+    "Ti aspetto su giocamizi.it, nella pagina «Per insegnanti». Buon lavoro in classe! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 17,
+    "titolo": "1 · La pagina «Per insegnanti»"
+   },
+   {
+    "da": 31,
+    "titolo": "2 · Scegli la competenza"
+   },
+   {
+    "da": 43,
+    "titolo": "3 · Un gioco, una competenza"
+   },
+   {
+    "da": 53,
+    "titolo": "4 · Tocca «Gioca»"
+   },
+   {
+    "da": 64,
+    "titolo": "5 · Si gioca subito"
+   },
+   {
+    "da": 74,
+    "titolo": "6 · Basta un link"
+   },
+   {
+    "da": 84,
+    "titolo": "7 · Compiti e siti utili"
+   }
+  ],
+  "pagina": {
+   "href": "/per-insegnanti",
+   "testo": "La pagina per insegnanti"
+  },
+  "faq": [
+   {
+    "domanda": "Serve un account per usare i giochi in classe?",
+    "risposta": "No: i giochi si aprono con un link, senza registrazione, né per l'insegnante né per i bambini."
+   },
+   {
+    "domanda": "Funziona sulla LIM?",
+    "risposta": "Sì: i giochi funzionano sulla LIM, sui tablet della classe e sui telefoni, dal browser."
+   }
+  ]
+ },
+ {
+  "slug": "come-creare-l-invito",
+  "gruppo": "utenti",
+  "titolo": "Come creare l'invito di compleanno con la conferma su WhatsApp",
+  "ordine": 1,
+  "descrizione": "Mizi ti mostra come creare l'invito di compleanno gratis, con la conferma su WhatsApp e il QR da stampare.",
+  "rispostaBreve": "Per creare un invito di compleanno su Giocamizi apri «Biglietti», tocca «Crea il tuo, gratis» e segui i sette passi: tipo e formato, sfondo, nome, anni e dettagli della festa, numero WhatsApp per le conferme, adesivi. Poi scarichi, stampi quattro copie su un A4 o lo mandi su WhatsApp. Gratis, senza registrazione.",
+  "video": {
+   "src": "/video/come-creare-l-invito.mp4",
+   "poster": "/video/come-creare-l-invito.webp",
+   "sottotitoli": "/video/come-creare-l-invito.vtt",
+   "durata": "PT1M45S",
+   "secondi": 105,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! C'è una festa di compleanno in arrivo? Ti faccio vedere come si prepara l'invito, con la conferma su WhatsApp. È gratis e non serve registrarsi!",
+    "Vai nella pagina Biglietti e tocca «Crea il tuo, gratis». Funziona anche dal telefono.",
+    "Ti guido io, in sette passi. Prima scegli che biglietto è: invito, auguri o grazie. Poi il formato: da stampare, oppure per WhatsApp e le storie.",
+    "Adesso lo sfondo. Ne vedi otto subito, e con «Vedi tutti» arrivi a ventisette. Io scelgo i dinosauri!",
+    "Scrivi il nome e gli anni: le frasi pronte compaiono già con il nome dentro. Poi data, ora e indirizzo. E se metti il tuo numero WhatsApp, gli invitati ti confermano con un tocco.",
+    "Poi gli adesivi: tocchi il dinosauro e lo sposti col dito. Se vuoi, metti anche la foto del festeggiato: resta sul tuo telefono, non va nei link.",
+    "Pronto! Puoi scaricarlo, stampare quattro copie su un foglio A4, o mandarlo su WhatsApp. Sull'invito di carta metti il QR: chi lo inquadra ti conferma.",
+    "Chi riceve l'invito trova il bottone «Confermo, ci saremo!»: lo tocca, e a te arriva il messaggio già scritto. Dentro ci sono indirizzo e telefono, quindi mandalo solo agli invitati.",
+    "Trovi tutto su giocamizi.it, nella pagina Biglietti. Buona festa! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 15,
+    "titolo": "1 · Apri «Biglietti»"
+   },
+   {
+    "da": 22,
+    "titolo": "2 · Invito e formato"
+   },
+   {
+    "da": 35,
+    "titolo": "3 · Scegli lo sfondo"
+   },
+   {
+    "da": 45,
+    "titolo": "4 · Nome, festa e conferma"
+   },
+   {
+    "da": 59,
+    "titolo": "5 · Adesivi e foto"
+   },
+   {
+    "da": 71,
+    "titolo": "6 · Scarica, stampa o manda"
+   },
+   {
+    "da": 83,
+    "titolo": "7 · Gli invitati confermano"
+   }
+  ],
+  "pagina": {
+   "href": "/biglietti",
+   "testo": "Crea il tuo invito"
+  },
+  "faq": [
+   {
+    "domanda": "L'invito è gratis?",
+    "risposta": "Sì, gratis e senza filigrana, senza registrazione."
+   },
+   {
+    "domanda": "Come confermano gli invitati?",
+    "risposta": "Se metti il tuo numero WhatsApp, chi riceve l'invito tocca «Confermo, ci saremo!» e ti arriva il messaggio già scritto; sull'invito stampato c'è il QR."
+   }
+  ]
+ },
+ {
+  "slug": "il-kit-della-festa",
+  "gruppo": "utenti",
+  "titolo": "Il kit della festa: etichette, festone, topper, segnaposto e caccia al tesoro",
+  "ordine": 2,
+  "descrizione": "Mizi ti mostra il kit della festa di Giocamizi: etichette, festone col nome, topper, segnaposto e caccia al tesoro da stampare.",
+  "rispostaBreve": "Il kit della festa di Giocamizi si apre dall'ultimo passo dell'invito, con lo stesso nome e sfondo: etichette per i sacchettini, festone col nome, topper per la torta, segnaposto e una caccia al tesoro con sei indizi. Tutto su fogli A4 da stampare a casa, gratis.",
+  "video": {
+   "src": "/video/il-kit-della-festa.mp4",
+   "poster": "/video/il-kit-della-festa.webp",
+   "sottotitoli": "/video/il-kit-della-festa.vtt",
+   "durata": "PT1M42S",
+   "secondi": 102,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! L'invito è pronto? Allora prepariamo il kit della festa: etichette, festone, topper, segnaposto e caccia al tesoro. Si stampa tutto a casa, gratis!",
+    "Quando l'invito è pronto, all'ultimo passo tocca «Prepara il kit della festa». Il kit arriva con il nome e lo sfondo del biglietto.",
+    "Qui trovi già il nome, gli anni e lo sfondo. Se vuoi cambiarli, lo fai una volta sola, e valgono per tutti i fogli.",
+    "Scrivi i nomi degli invitati, uno per riga. Esce un foglio con un cartellino «Grazie» per ogni sacchettino. I nomi restano sul tuo telefono, non vanno nel link.",
+    "Il festone ha una bandierina per ogni lettera: «Buon compleanno» e il nome, oppure solo il nome. Ritagli, pieghi sullo spago e incolli: il numerino ti dice l'ordine.",
+    "Per la torta c'è il topper: un disco grande con gli anni e il nome, e otto dischetti per i cupcake. Dietro ci attacchi uno stecchino con lo scotch.",
+    "I segnaposto usano gli stessi nomi delle etichette. Li pieghi a tenda, e il nome si legge da tutti e due i lati.",
+    "E poi la caccia al tesoro! Ci sono sei indizi pronti per giocare in casa: ognuno dice dove trovare il prossimo, e l'ultimo porta al tesoro. Puoi cambiarli come vuoi.",
+    "Trovi il kit su giocamizi.it, nella pagina dei biglietti. Buona festa! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 16,
+    "titolo": "1 · Parti dall'invito"
+   },
+   {
+    "da": 27,
+    "titolo": "2 · Tutto con lo stesso sfondo"
+   },
+   {
+    "da": 37,
+    "titolo": "3 · Le etichette dei sacchettini"
+   },
+   {
+    "da": 49,
+    "titolo": "4 · Il festone col nome"
+   },
+   {
+    "da": 63,
+    "titolo": "5 · Il topper per la torta"
+   },
+   {
+    "da": 74,
+    "titolo": "6 · I segnaposto"
+   },
+   {
+    "da": 82,
+    "titolo": "7 · La caccia al tesoro"
+   }
+  ],
+  "pagina": {
+   "href": "/biglietti/kit-festa",
+   "testo": "Il kit della festa"
+  },
+  "faq": [
+   {
+    "domanda": "I nomi degli invitati vengono salvati?",
+    "risposta": "No: restano sul tuo telefono e non finiscono nel link."
+   },
+   {
+    "domanda": "Serve una stampante speciale?",
+    "risposta": "No, ogni foglio è un A4 normale da stampare a casa."
+   }
+  ]
+ },
+ {
+  "slug": "dove-festeggiare",
+  "gruppo": "utenti",
+  "titolo": "Dove festeggiare il compleanno nella tua città",
+  "ordine": 3,
+  "descrizione": "Mizi ti mostra come trovare su Giocamizi ludoteche, sale feste e spazi gioco per il compleanno, città per città.",
+  "rispostaBreve": "Per trovare dove festeggiare un compleanno su Giocamizi apri «Feste», scegli la tua città o usa la ricerca «Cosa cerchi · Dove». Apri la scheda del posto per vedere cosa offre e cosa chiedere prima di prenotare; prezzi e disponibilità si chiedono direttamente al locale. Nessuna commissione.",
+  "video": {
+   "src": "/video/dove-festeggiare.mp4",
+   "poster": "/video/dove-festeggiare.webp",
+   "sottotitoli": "/video/dove-festeggiare.vtt",
+   "durata": "PT1M37S",
+   "secondi": 97,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Cerchi un posto per la festa di compleanno? Su Giocamizi trovi ludoteche, sale feste e spazi gioco, città per città. Ti faccio vedere come si cerca!",
+    "Apri la pagina Feste e scegli la tua città dall'elenco. Io scelgo Milano!",
+    "Nella pagina della città c'è un riassunto in breve, e poi le location zona per zona, con il tipo di spazio. Così parti dal tuo quartiere.",
+    "Cerchi un tipo di posto preciso? Usa la ricerca: in «Cosa cerchi» c'è il tipo, per esempio le ludoteche. In «Dove» scrivi la città, e tocca Cerca.",
+    "Ecco i posti della città, con la zona e quello che offrono. Col cuoricino salvi quelli che ti piacciono: restano sul tuo telefono.",
+    "Apri una scheda: vedi cosa offre il posto, e le domande utili da fare prima di prenotare.",
+    "Prezzi e posti liberi li chiedi direttamente al locale, dal riquadro «Contatta l'attività». Lì trovi il sito, e quando il locale completa la scheda anche WhatsApp o telefono. Noi non prendiamo commissioni.",
+    "Hai scelto il posto? Dalla scheda prepari subito l'invito, gratis, con la conferma su WhatsApp.",
+    "Trovi tutte le città su giocamizi.it, nella pagina Feste. Buona festa! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 16,
+    "titolo": "1 · Apri «Feste»"
+   },
+   {
+    "da": 24,
+    "titolo": "2 · La pagina della città"
+   },
+   {
+    "da": 35,
+    "titolo": "3 · Cosa cerchi · Dove"
+   },
+   {
+    "da": 48,
+    "titolo": "4 · Salva quelli che ti piacciono"
+   },
+   {
+    "da": 59,
+    "titolo": "5 · Apri la scheda"
+   },
+   {
+    "da": 66,
+    "titolo": "6 · Contatta il locale"
+   },
+   {
+    "da": 82,
+    "titolo": "7 · E poi l'invito"
+   }
+  ],
+  "pagina": {
+   "href": "/feste",
+   "testo": "Le feste città per città"
+  },
+  "faq": [
+   {
+    "domanda": "Giocamizi prende commissioni dai locali?",
+    "risposta": "No: prezzi e prenotazioni si fanno direttamente con il locale."
+   },
+   {
+    "domanda": "Dove finiscono i posti salvati col cuoricino?",
+    "risposta": "Restano solo sul tuo telefono."
+   }
+  ]
+ },
+ {
+  "slug": "giocamizi-sul-telefono",
+  "gruppo": "utenti",
+  "titolo": "Come mettere Giocamizi sul telefono, come un'app",
+  "ordine": 4,
+  "descrizione": "Mizi ti mostra come mettere Giocamizi sul telefono come un'app, su Android e su iPhone, senza store.",
+  "rispostaBreve": "Per mettere Giocamizi sul telefono apri giocamizi.it dal browser e tocca «Scarica» nella barretta in basso. Su Android con Chrome conferma «Installa»; su iPhone tocca Condividi in Safari e poi «Aggiungi alla schermata Home». L'icona apre Giocamizi a tutto schermo, come un'app. Gratis, senza store.",
+  "video": {
+   "src": "/video/giocamizi-sul-telefono.mp4",
+   "poster": "/video/giocamizi-sul-telefono.webp",
+   "sottotitoli": "/video/giocamizi-sul-telefono.vtt",
+   "durata": "PT1M38S",
+   "secondi": 98,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Lo sapevi che puoi mettere Giocamizi sul telefono, proprio come un'app? Non serve nessuno store ed è gratis. Ti faccio vedere come si fa!",
+    "Apri giocamizi.it dal browser del telefono. In fondo alla pagina compare una barretta scura: «Scarica Giocamizi sul tuo telefono». Tocca il bottone giallo.",
+    "Su Android, con Chrome, di solito il bottone dice «Installa». Toccalo e conferma nella finestra che si apre. Fatto!",
+    "Su iPhone, invece, tocca «Scarica» e ti spiego i due tocchi: prima «Condividi», nella barra di Safari, poi «Aggiungi alla schermata Home».",
+    "Con un altro browser, apri il menu con i tre puntini e tocca «Installa app» oppure «Aggiungi a schermata Home».",
+    "Ora sulla schermata Home c'è l'icona di Giocamizi. Toccala: si apre a tutto schermo, senza la barra del browser, proprio come un'app.",
+    "La prima volta che apri l'app ti chiedo come ti chiami, il nome e l'età del tuo bimbo, e l'email. Ci vogliono trenta secondi, una volta sola, e restano sul tuo telefono.",
+    "Non è il momento? Tocca la X sulla barretta e per trenta giorni non te la ripropongo.",
+    "Prova adesso: apri giocamizi.it dal telefono e mettimi nella schermata Home. Ci vediamo lì! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 14,
+    "titolo": "1 · Apri Giocamizi dal telefono"
+   },
+   {
+    "da": 28,
+    "titolo": "2 · Su Android: «Installa»"
+   },
+   {
+    "da": 38,
+    "titolo": "3 · Su iPhone: due tocchi"
+   },
+   {
+    "da": 49,
+    "titolo": "4 · Con un altro browser"
+   },
+   {
+    "da": 58,
+    "titolo": "5 · Si apre a tutto schermo"
+   },
+   {
+    "da": 69,
+    "titolo": "6 · La prima volta: 30 secondi"
+   },
+   {
+    "da": 82,
+    "titolo": "7 · Non è il momento?"
+   }
+  ],
+  "pagina": {
+   "href": "/",
+   "testo": "Apri Giocamizi"
+  },
+  "faq": [
+   {
+    "domanda": "Serve scaricare qualcosa dallo store?",
+    "risposta": "No: Giocamizi si aggiunge alla schermata Home direttamente dal browser."
+   },
+   {
+    "domanda": "I dati del profilo dove restano?",
+    "risposta": "Sul tuo telefono."
+   }
+  ]
+ },
+ {
+  "slug": "trovare-il-gioco-giusto",
+  "gruppo": "utenti",
+  "titolo": "Come trovare il gioco giusto per il tuo bimbo",
+  "ordine": 5,
+  "descrizione": "Mizi ti mostra come trovare il gioco giusto su Giocamizi per età e per competenza, e come si gioca.",
+  "rispostaBreve": "Per trovare il gioco giusto su Giocamizi apri «Giochi» e scegli l'età e cosa allenare (lettere, numeri, colori e forme, logica, coding), oppure usa le pagine per età e per competenza. Nel gioco Mizi spiega a voce cosa fare; non ci sono timer né punteggi da battere.",
+  "video": {
+   "src": "/video/trovare-il-gioco-giusto.mp4",
+   "poster": "/video/trovare-il-gioco-giusto.webp",
+   "sottotitoli": "/video/trovare-il-gioco-giusto.vtt",
+   "durata": "PT1M28S",
+   "secondi": 88,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Su Giocamizi ci sono tanti giochi, dai tre ai dodici anni. Ti faccio vedere come trovare quello giusto per il tuo bimbo, in un attimo.",
+    "Apri la pagina Giochi. Senza filtri li trovi divisi in tre gruppi: dai tre ai cinque anni, dai sei agli otto, e dai nove in su.",
+    "In alto ci sono due file di bottoni. Nella prima scegli l'età, nella seconda cosa allenare: lettere, numeri, colori e forme, logica, coding. E restano solo i giochi giusti.",
+    "C'è anche una pagina per ogni età, dai tre ai dodici anni, e una per ogni competenza: per esempio le forme.",
+    "Tocca un gioco: vedi per che età è e quanti minuti dura. Poi premi «Gioca». Con i numeri qui sotto scegli quanti anni ha il tuo bimbo, e il gioco si adatta.",
+    "Dentro il gioco parlo io: ti dico a voce cosa fare, e lo scrivo anche nel fumetto. Non hai sentito? Tocca l'altoparlante e lo ripeto.",
+    "E non c'è nessun timer e nessun punteggio da battere: si gioca finché si ha voglia. Per uscire, tocca la X in alto a sinistra.",
+    "Tutti i giochi ti aspettano su giocamizi.it, nella pagina Giochi. Vieni a giocare con me! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 13,
+    "titolo": "1 · Apri «Giochi»"
+   },
+   {
+    "da": 24,
+    "titolo": "2 · Scegli età e competenza"
+   },
+   {
+    "da": 39,
+    "titolo": "3 · Una pagina per ogni età"
+   },
+   {
+    "da": 47,
+    "titolo": "4 · Apri il gioco e premi «Gioca»"
+   },
+   {
+    "da": 59,
+    "titolo": "5 · Ti dico io cosa fare"
+   },
+   {
+    "da": 70,
+    "titolo": "6 · Niente fretta"
+   }
+  ],
+  "pagina": {
+   "href": "/giochi",
+   "testo": "Tutti i giochi"
+  },
+  "faq": [
+   {
+    "domanda": "Per che età sono i giochi?",
+    "risposta": "Dai 3 ai 12 anni; ogni gioco dice l'età e quanti minuti dura."
+   },
+   {
+    "domanda": "I giochi hanno timer o classifiche?",
+    "risposta": "No: niente timer, niente punteggi da battere, niente pubblicità."
+   }
+  ]
+ },
+ {
+  "slug": "le-risorse-educative",
+  "gruppo": "utenti",
+  "titolo": "Come trovare le risorse educative su Giocamizi",
+  "ordine": 6,
+  "descrizione": "Mizi ti mostra come trovare scuole, cooperative, blog e progetti nelle risorse educative di Giocamizi.",
+  "rispostaBreve": "Le risorse educative di Giocamizi sono divise per categoria (blog per genitori, schede per insegnanti, coding, fiabe, scuole, cooperative, natura e musei) e, per quelle con una sede, per provincia. Ogni realtà ha una scheda con cosa fa, per chi, costi e il link al sito ufficiale.",
+  "video": {
+   "src": "/video/le-risorse-educative.mp4",
+   "poster": "/video/le-risorse-educative.webp",
+   "sottotitoli": "/video/le-risorse-educative.vtt",
+   "durata": "PT1M33S",
+   "secondi": 93,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Cerchi una scuola per il tuo bimbo, delle schede da stampare o un sito di coding? Nelle risorse educative di Giocamizi le trovi tutte in un posto. Ti faccio vedere!",
+    "Apri la pagina delle risorse educative. In alto scorrono le categorie: blog per genitori, schede per insegnanti, coding, fiabe e musica, scuole, cooperative e altre ancora.",
+    "Sono divise in due gruppi: quelle da usare da casa o in classe, online in tutta Italia, e quelle sul territorio, con una sede vera.",
+    "Apri una categoria sul territorio, per esempio le scuole paritarie. Sotto «Cerca per provincia» tocca la tua: per esempio Torino.",
+    "Ecco le realtà della provincia, ognuna con la sua card: dove si trova, cosa fa e per chi è. Tocca «Vedi la scheda».",
+    "Sotto il nome vedi chi ha scritto la scheda: Giocamizi, dal sito ufficiale, oppure la realtà stessa. Poi leggi cosa fa, per chi è, come si partecipa e quanto costa.",
+    "Le informazioni vengono dai siti ufficiali: il bottone viola ti porta proprio lì, per controllare. E più sotto trovi cosa guardare prima di scegliere.",
+    "Trovi tutte le risorse su giocamizi.it, nella pagina «Risorse educative». Buona ricerca! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 15,
+    "titolo": "1 · Scegli una categoria"
+   },
+   {
+    "da": 30,
+    "titolo": "2 · Da casa o sul territorio"
+   },
+   {
+    "da": 40,
+    "titolo": "3 · Cerca per provincia"
+   },
+   {
+    "da": 51,
+    "titolo": "4 · Tutte le realtà della provincia"
+   },
+   {
+    "da": 60,
+    "titolo": "5 · Leggi la scheda"
+   },
+   {
+    "da": 74,
+    "titolo": "6 · Controlla alla fonte"
+   }
+  ],
+  "pagina": {
+   "href": "/risorse-educative-bambini",
+   "testo": "Le risorse educative"
+  },
+  "faq": [
+   {
+    "domanda": "Da dove vengono le informazioni delle schede?",
+    "risposta": "Dai siti ufficiali delle realtà, oppure dalla realtà stessa quando reclama la scheda."
+   }
+  ]
+ },
+ {
+  "slug": "le-storie",
+  "gruppo": "utenti",
+  "titolo": "Le storie di Giocamizi: tre caratteri e la lettura ad alta voce",
+  "ordine": 7,
+  "descrizione": "Mizi ti mostra le storie di Giocamizi: in stampatello, minuscolo o corsivo, con le lettere grandi e la lettura ad alta voce.",
+  "rispostaBreve": "Le storie di Giocamizi sono brevi e gratuite: si scelgono per età o per carattere e ognuna si legge in stampatello maiuscolo, minuscolo o corsivo, con tre grandezze del testo. Con «Ascolta» la storia si legge ad alta voce. Ogni storia indica età e minuti di lettura.",
+  "video": {
+   "src": "/video/le-storie.mp4",
+   "poster": "/video/le-storie.webp",
+   "sottotitoli": "/video/le-storie.vtt",
+   "durata": "PT1M29S",
+   "secondi": 89,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Ti piacciono le storie? Su Giocamizi ce ne sono tante, brevi, da leggere insieme. E c'è un trucco: ogni storia si legge in tre caratteri diversi!",
+    "Apri la pagina Storie. Puoi sceglierle per età, cinque, sei o sette anni, oppure per carattere. Più giù le trovi tutte, una dopo l'altra.",
+    "Apri una storia, per esempio la mia: «Mizi impara a nuotare». In alto ci sono i bottoni dei caratteri. Si parte in stampatello maiuscolo, il carattere di chi comincia a leggere.",
+    "Con un tocco la stessa storia diventa in minuscolo, per la prima elementare, o in corsivo, per la seconda. Il testo è sempre lo stesso: cambiano solo le lettere.",
+    "Le lettere sono troppo piccole? Tocca una delle tre A e il testo diventa più grande.",
+    "E se vuoi ascoltarla, tocca «Ascolta»: la storia si legge ad alta voce, e tu segui le parole con il dito. Per fermarla, tocca «Ferma».",
+    "In ogni storia c'è scritto per che età è e quanti minuti ci vogliono. Perfetta da leggere stasera, prima della nanna!",
+    "Le storie ti aspettano su giocamizi.it, nella pagina Storie. Buona lettura! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 15,
+    "titolo": "1 · Scegli per età o per carattere"
+   },
+   {
+    "da": 27,
+    "titolo": "2 · Parte in stampatello"
+   },
+   {
+    "da": 41,
+    "titolo": "3 · Minuscolo e corsivo"
+   },
+   {
+    "da": 53,
+    "titolo": "4 · Lettere più grandi"
+   },
+   {
+    "da": 61,
+    "titolo": "5 · Tocca «Ascolta»"
+   },
+   {
+    "da": 72,
+    "titolo": "6 · Una storia a sera"
+   }
+  ],
+  "pagina": {
+   "href": "/storie",
+   "testo": "Tutte le storie"
+  },
+  "faq": [
+   {
+    "domanda": "Le storie sono gratis?",
+    "risposta": "Sì, come tutto Giocamizi, senza pubblicità."
+   }
+  ]
+ },
+ {
+  "slug": "il-profilo-della-famiglia",
+  "gruppo": "utenti",
+  "titolo": "Il profilo della famiglia e l'album di Mizi",
+  "ordine": 8,
+  "descrizione": "Mizi ti mostra come creare il profilo della famiglia su Giocamizi e dove restano i dati: sul tuo telefono.",
+  "rispostaBreve": "Il profilo della famiglia di Giocamizi si crea dal telefono in pochi passi: il tuo nome, il nome e l'età del bimbo, l'email. Profilo e album di Mizi restano solo sul telefono, senza account; l'email arriva a Giocamizi solo se scegli la posta di Mizi. Si cancella con «Cancella i miei dati».",
+  "video": {
+   "src": "/video/il-profilo-della-famiglia.mp4",
+   "poster": "/video/il-profilo-della-famiglia.webp",
+   "sottotitoli": "/video/il-profilo-della-famiglia.vtt",
+   "durata": "PT1M34S",
+   "secondi": 94,
+   "caricato": "2026-11-16",
+   "testo": [
+    "Ciao, sono Mizi! Con il profilo ti saluto per nome e ti propongo i giochi giusti per l'età del tuo bimbo. Ti faccio vedere come si crea, e dove restano i tuoi dati.",
+    "Dal telefono apri la pagina Profilo e tocca «Crea il profilo». Si fa dal telefono, non dal computer.",
+    "Prima ti chiedo come ti chiami. Così, quando apri Giocamizi, ti saluto per nome.",
+    "Poi scrivi il nome del tuo bimbo e tocca la sua età. Se hai più bimbi, puoi aggiungerli. I nomi restano solo sul tuo telefono: a noi non arrivano.",
+    "Ultima cosa, l'email. Anche lei resta sul telefono: arriva a noi solo se scegli la posta di Mizi, un gioco nuovo a settimana. È facoltativa.",
+    "Nella pagina Profilo puoi cambiare tutto: il nome, l'email, l'età, aggiungere un bimbo o scegliere per chi sono i giochi. E la posta di Mizi la accendi quando vuoi.",
+    "Ora la home ti saluta per nome e ti mostra i giochi per l'età del tuo bimbo. E nell'album di Mizi, ogni gioco finito regala una figurina!",
+    "Profilo e album restano solo su questo telefono, e non serve un account. Se vuoi, tocca «Cancella i miei dati» e il profilo sparisce dal telefono.",
+    "Crea il tuo profilo su giocamizi.it, dal telefono. Ti aspetto! Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 14,
+    "titolo": "1 · Apri «Profilo»"
+   },
+   {
+    "da": 23,
+    "titolo": "2 · Il tuo nome"
+   },
+   {
+    "da": 29,
+    "titolo": "3 · Il tuo bimbo"
+   },
+   {
+    "da": 42,
+    "titolo": "4 · L'email e la posta di Mizi"
+   },
+   {
+    "da": 54,
+    "titolo": "5 · Cambia quando vuoi"
+   },
+   {
+    "da": 66,
+    "titolo": "6 · Il saluto e l'album"
+   },
+   {
+    "da": 77,
+    "titolo": "7 · Tutto resta sul telefono"
+   }
+  ],
+  "pagina": {
+   "href": "/profilo",
+   "testo": "Il tuo profilo"
+  },
+  "faq": [
+   {
+    "domanda": "I nomi dei bambini arrivano a Giocamizi?",
+    "risposta": "No: restano solo sul tuo telefono."
+   },
+   {
+    "domanda": "Serve un account?",
+    "risposta": "No, il profilo vive sul telefono."
+   }
+  ]
+ }
+]

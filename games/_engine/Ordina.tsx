@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { mescola } from "./casuale";
-import { parla } from "@/lib/audio";
+import { parla } from "@/lib/giochi/audio";
 import { stelle, type GameProps } from "./tipi";
 
 /**
@@ -79,7 +79,7 @@ export function Ordina({ titolo, round, age, onProgress, onComplete, demo = fals
       }
 
       setRisolto(true);
-      parla(corrente.vocePremio ?? "Bravo! Ordine giusto.");
+      parla(corrente.vocePremio ?? "Evviva! Ordine giusto.");
 
       const nuoviPunti = primoTentativo ? punti + 1 : punti;
       setPunti(nuoviPunti);

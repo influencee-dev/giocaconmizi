@@ -4,12 +4,12 @@
 
 const DOMINIO = "https://giocamizi.it";
 const TIPI_NOTI = new Set([
-  "WebSite", "Organization", "Person", "FAQPage", "Question", "Answer", "BreadcrumbList", "ListItem", "ItemList",
+  "WebSite", "Organization", "EducationalOrganization", "School", "Person", "FAQPage", "Question", "Answer", "BreadcrumbList", "ListItem", "ItemList",
   "Article", "BlogPosting", "VideoGame", "Game", "LearningResource", "CreativeWork", "Book", "ShortStory", "WebPage",
-  "CollectionPage", "AboutPage", "ContactPage", "LocalBusiness", "Restaurant", "ChildCare", "EventVenue", "AmusementPark", "Museum",
+  "CollectionPage", "AboutPage", "ContactPage", "LocalBusiness", "Restaurant", "ChildCare", "EventVenue", "AmusementPark", "WaterPark", "Museum",
   "SportsActivityLocation", "NGO", "Place", "PostalAddress", "GeoCoordinates", "ImageObject", "SearchAction", "EntryPoint",
   "HowTo", "HowToStep", "Offer", "AggregateRating", "Thing", "Course", "DefinedTerm", "PropertyValue", "AudienceType",
-  "Audience", "PeopleAudience", "EducationalAudience", "QuantitativeValue", "VirtualLocation", "MediaObject", "VideoObject",
+  "Audience", "PeopleAudience", "EducationalAudience", "QuantitativeValue", "VirtualLocation", "MediaObject", "VideoObject", "Clip",
   "SoftwareApplication", "WebApplication", "ImageGallery", "Event", "ContactPoint", "Country", "City", "AdministrativeArea", "Service",
   "LocationFeatureSpecification", "OpeningHoursSpecification", "PriceSpecification",
 ]);

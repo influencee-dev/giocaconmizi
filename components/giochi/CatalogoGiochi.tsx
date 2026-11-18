@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { CardGioco } from "@/components/ui";
 import { IconaGioco } from "@/components/icone";
 import type { Skill } from "@/games/registry";
+import { useAlbum, type Album } from "@/lib/giochi/album";
+import { FasciaAlbum } from "./FasciaAlbum";
 
 /**
  * Il catalogo dei giochi con i filtri: 31 giochi in colonna unica erano un
@@ -30,7 +32,7 @@ const FASCE_ETA = [
   { nome: "9–12 anni", da: 9, a: 12 },
 ];
 
-const AREE: { slug: string; nome: string; skills: Skill[] }[] = [
+export const AREE: { slug: string; nome: string; skills: Skill[] }[] = [
   { slug: "lettere", nome: "lettere e parole", skills: ["alfabeto", "fonetica", "lettura", "ortografia", "comprensione", "ascolto"] },
   { slug: "numeri", nome: "numeri e matematica", skills: ["numeri", "matematica"] },
   { slug: "colori-forme", nome: "colori e forme", skills: ["colori", "forme"] },
@@ -68,7 +70,7 @@ function Chip({
   );
 }
 
-function GrigliaCompatta({ giochi }: { giochi: GiocoInCatalogo[] }) {
+function GrigliaCompatta({ giochi, album }: { giochi: GiocoInCatalogo[]; album: Album }) {
   return (
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
       {giochi.map((g) => (
@@ -80,6 +82,7 @@ function GrigliaCompatta({ giochi }: { giochi: GiocoInCatalogo[] }) {
           descrizione={g.subskill}
           eta={`${g.ageMin}–${g.ageMax}`}
           minuti={g.minutes}
+          stelle={album.giochi[g.slug]?.stelle}
           illustrazione={<IconaGioco slug={g.slug} skill={g.skill} lato="h-8 w-8" />}
         />
       ))}
@@ -90,6 +93,8 @@ function GrigliaCompatta({ giochi }: { giochi: GiocoInCatalogo[] }) {
 export function CatalogoGiochi({ giochi }: { giochi: GiocoInCatalogo[] }) {
   const [fascia, setFascia] = useState<number | null>(null);
   const [area, setArea] = useState<string | null>(null);
+  // Le stelle dei giochi già finiti (album di Mizi, solo su questo dispositivo).
+  const { album } = useAlbum();
 
   // Solo le aree che hanno davvero almeno un gioco.
   const aree = useMemo(
@@ -115,6 +120,7 @@ export function CatalogoGiochi({ giochi }: { giochi: GiocoInCatalogo[] }) {
 
   return (
     <div className="mt-6">
+      <FasciaAlbum totale={giochi.length} />
       {/* top-[84px]: 2px sotto gli 86px dell'header sticky, z sotto il suo z-30. */}
       <div className="sticky top-[84px] z-20 bg-crema/95 py-3 backdrop-blur">
         <div role="group" aria-label="Filtra per età" className="flex gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-x-visible">
@@ -147,7 +153,7 @@ export function CatalogoGiochi({ giochi }: { giochi: GiocoInCatalogo[] }) {
             {fasciaScelta && ` per ${fasciaScelta.nome}`}
           </p>
           {filtrati.length > 0 ? (
-            <GrigliaCompatta giochi={filtrati} />
+            <GrigliaCompatta giochi={filtrati} album={album} />
           ) : (
             <p className="rounded-[1.4rem] border border-notte/10 bg-white p-5 text-notte-tenue">
               Con questi filtri non c&apos;è ancora nessun gioco: prova a
@@ -161,7 +167,7 @@ export function CatalogoGiochi({ giochi }: { giochi: GiocoInCatalogo[] }) {
             <h2 className="mb-4 text-2xl font-extrabold text-notte sm:text-3xl">
               {gruppo.titolo}
             </h2>
-            <GrigliaCompatta giochi={gruppo.giochi} />
+            <GrigliaCompatta giochi={gruppo.giochi} album={album} />
           </section>
         ))
       )}

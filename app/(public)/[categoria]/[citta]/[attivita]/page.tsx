@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SCHEDE, datiCard, haListing, percorsoScheda, scheda, schedeDi } from "@/lib/directory";
-import { chiaveScheda, conModifiche, pubblicate, type DatiModifica } from "@/lib/directory-db";
-import { url } from "@/lib/seo";
+import { SCHEDE, datiCard, haListing, percorsoScheda, scheda, schedeDi } from "@/lib/directory/directory";
+import { chiaveScheda, conModifiche, pubblicate, type DatiModifica } from "@/lib/directory/directory-db";
+import { url, riassunto } from "@/lib/seo/seo";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { Briciole, CtaAttivita, InBreve } from "@/components/directory/Briciole";
@@ -13,8 +13,8 @@ import { ReelInstagram } from "@/components/feste/ReelInstagram";
 import { Contatore } from "@/components/directory/Contatore";
 import { Globe, Instagram, MessageCircle, Phone } from "lucide-react";
 import { Etichetta } from "@/components/directory/Etichetta";
-import { ESPERIENZE } from "@/lib/esperienze";
-import { daChiedere as domandeDaChiedere, eSchedaEstesa, jsonLdEstesa, testoPrezzo, type Prezzo } from "@/lib/scheda-campi";
+import { ESPERIENZE } from "@/lib/directory/esperienze";
+import { daChiedere as domandeDaChiedere, eSchedaEstesa, jsonLdEstesa, testoPrezzo, type Prezzo } from "@/lib/directory/scheda-campi";
 import { IconaLucide } from "@/components/directory/IconaLucide";
 import { BlocchiDettaglio, DaChiedere, DatiChiave, PrezziPacchetti, PuntiForza, VideoAttivita } from "@/components/directory/SchedaDettagli";
 import { BadgeCheck, Camera } from "lucide-react";
@@ -41,7 +41,10 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   if (!s) return {};
   return {
     title: `${s.nome}, ${s.tipo} a ${s.citta} (${s.zona})`,
-    description: `${s.descrizione} ${s.nome} a ${s.citta}, zona ${s.zona}: feste di compleanno per bambini e cosa chiedere prima di prenotare.`,
+    // Nome, tipo e città sono già nel titolo: qui va il racconto del posto,
+    // tagliato perché stia intero nei risultati di ricerca (prima arrivava a 500 caratteri).
+    // Un racconto molto corto si completa con che cos'è il posto e dove sta.
+    description: riassunto(s.descrizione.length < 110 ? `${s.descrizione} ${s.nome}: ${s.tipo} a ${s.citta}, zona ${s.zona}.` : s.descrizione),
     alternates: { canonical: percorsoScheda(s) },
   };
 }
@@ -52,7 +55,7 @@ const wa = (t: string) => {
   return `https://wa.me/${/^3\d{8,9}$/.test(n) ? `39${n}` : n}`;
 };
 
-function Contatti({ sito, instagram, extra, prezzo }: { sito?: string; instagram?: string; extra: DatiModifica; prezzo: { prezzo: string; nota?: string } }) {
+function Contatti({ sito, instagram, extra, festa, prezzo }: { sito?: string; instagram?: string; extra: DatiModifica; festa: boolean; prezzo: { prezzo: string; nota?: string } }) {
   return (
     <div className="flex flex-col gap-3 rounded-[1.4rem] border border-notte/10 bg-white p-5 shadow-[0_10px_30px_rgba(31,36,48,0.08)]">
       <div>
@@ -62,7 +65,9 @@ function Contatti({ sito, instagram, extra, prezzo }: { sito?: string; instagram
       <p className="text-sm font-semibold text-notte-tenue">
         {prezzo.nota
           ? "Disponibilità e preventivo si chiedono direttamente al locale: noi non prendiamo commissioni."
-          : "Richiedi prezzo e disponibilità direttamente al locale: noi non prendiamo commissioni."}
+          : festa
+            ? "Richiedi prezzo e disponibilità direttamente al locale: noi non prendiamo commissioni."
+            : "Giorni di apertura, orari e prezzi si controllano direttamente dal parco: noi non prendiamo commissioni."}
       </p>
       {extra.whatsapp && (
         <a data-traccia="whatsapp" href={wa(extra.whatsapp)} target="_blank" rel="nofollow noopener" className="rounded-bolla bg-verde px-5 py-3 text-center font-extrabold text-white">
@@ -115,7 +120,10 @@ export default async function SchedaPage({ params }: P) {
   if (!s) notFound();
   const cat = s.categoria;
   const listing = haListing(cat.slug, s.cittaSlug);
-  const hrefCitta = listing ? `/${cat.slug}/${s.cittaSlug}` : `/feste/${s.cittaSlug}`;
+  // Fa feste se lo dicono le fonti o se il titolare ha scritto i suoi pacchetti festa.
+  const faFeste = s.festa || Boolean(s.extra.pacchetti) || s.extra.estesa?.valori?.fannoFeste === true;
+  // Senza listing di città si torna alle feste della città; un posto che non fa feste torna alla sua categoria.
+  const hrefCitta = listing ? `/${cat.slug}/${s.cittaSlug}` : faFeste ? `/feste/${s.cittaSlug}` : `/${cat.slug}`;
   const simili = schedeDi(cat.slug, s.cittaSlug)
     .filter((x) => x.slug !== s.slug)
     .map((x) => conModifiche(x, p))
@@ -130,7 +138,9 @@ export default async function SchedaPage({ params }: P) {
   const domande = estesa
     ? domandeDaChiedere(cat.slug, estesa)
     : ESPERIENZE.filter(
-        (e) => !card.esperienze.includes(e.id) && ["animazione", "buffet", "esclusiva", "piccoli", "genitori"].includes(e.id),
+        (e) =>
+          !card.esperienze.includes(e.id) &&
+          (faFeste ? ["animazione", "buffet", "esclusiva", "piccoli", "genitori"] : ["piccoli", "genitori"]).includes(e.id),
       ).map((e) => e.domanda);
   const prezzo = valori.prezzo as Prezzo | undefined;
   const sameAs = [...new Set([s.sito, s.instagram, valori.instagram, s.extra.facebook, valori.facebook, valori.tiktok, valori.schedaGoogle]
@@ -197,9 +207,7 @@ export default async function SchedaPage({ params }: P) {
             ) : (
               <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte-tenue">Scheda da reclamare</span>
             )}
-            {valori.fannoFeste !== false && (
-              <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">Fa feste di compleanno</span>
-            )}
+            {faFeste && valori.fannoFeste !== false && <span data-fa-feste className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">Fa feste di compleanno</span>}
             <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">{cat.nome}</span>
           </div>
         </div>
@@ -212,7 +220,11 @@ export default async function SchedaPage({ params }: P) {
         <div className="mt-8 lg:grid lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start lg:gap-10">
           <div className="flex min-w-0 flex-col gap-8">
             <InBreve
-              testo={`${(valori.descrizione as string | undefined) ?? s.descrizione} ${s.nome} si trova a ${s.citta}, zona ${s.zona}, e organizza feste di compleanno per bambini: chiedete al locale un preventivo scritto con tutto quello che è incluso.`}
+              testo={
+                faFeste
+                  ? `${(valori.descrizione as string | undefined) ?? s.descrizione} ${s.nome} si trova a ${s.citta}, zona ${s.zona}, e organizza feste di compleanno per bambini: chiedete al locale un preventivo scritto con tutto quello che è incluso.`
+                  : `${(valori.descrizione as string | undefined) ?? s.descrizione} ${s.nome} si trova a ${s.zona}.`
+              }
             />
             <section data-cosa-offre>
               <TitoloSezione>Cosa offre</TitoloSezione>
@@ -231,7 +243,7 @@ export default async function SchedaPage({ params }: P) {
               <DaChiedere domande={domande} />
             </section>
             <section>
-              <TitoloSezione>Cosa chiedere prima di prenotare</TitoloSezione>
+              <TitoloSezione>{cat.giornata ? "Cosa guardare prima di andare" : "Cosa chiedere prima di prenotare"}</TitoloSezione>
               <ul className="grid gap-2.5 sm:grid-cols-2">
                 {cat.comeScegliere.map((c) => (
                   <li key={c} className="flex gap-2 rounded-xl border-2 border-crema-scuro bg-white px-4 py-3 text-sm font-bold text-notte">
@@ -258,11 +270,11 @@ export default async function SchedaPage({ params }: P) {
             <VideoAttivita valori={{ ...valori, video: (valori.video as string[] | undefined) ?? (s.extra.video ? [s.extra.video] : undefined) }} nome={s.nome} />
             {s.reel && <ReelInstagram url={s.reel} nome={s.nome} />}
             <div className="lg:hidden">
-              <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} prezzo={testoPrezzo(prezzo)} />
+              <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} festa={faFeste} prezzo={testoPrezzo(prezzo)} />
             </div>
           </div>
           <aside className="hidden lg:sticky lg:top-24 lg:block">
-            <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} prezzo={testoPrezzo(prezzo)} />
+            <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} festa={faFeste} prezzo={testoPrezzo(prezzo)} />
           </aside>
         </div>
 
@@ -291,8 +303,8 @@ export default async function SchedaPage({ params }: P) {
             Vai al sito ufficiale
           </a>
         ) : (
-          <Link data-traccia="invito" href="/biglietti/crea" className="block rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
-            Prepara l&apos;invito, gratis
+          <Link data-traccia={faFeste ? "invito" : "categoria"} href={faFeste ? "/biglietti/crea" : `/${cat.slug}`} className="block rounded-2xl bg-viola px-5 py-3 text-center font-extrabold text-white">
+            {faFeste ? "Prepara l'invito, gratis" : `Vedi tutti: ${cat.nome.toLowerCase()}`}
           </Link>
         )}
       </div>

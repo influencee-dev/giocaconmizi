@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { games } from "@/games/registry";
 import { Contenitore, TitoloSezione } from "@/components/ui";
-import { classi, etichettaClasse } from "@/lib/seo";
+import { classi, etichettaClasse } from "@/lib/seo/seo";
 
 export const metadata: Metadata = {
   title: "Per insegnanti",
@@ -66,10 +66,10 @@ export default function PerInsegnantiPage() {
         <p className="max-w-2xl text-lg text-notte-tenue">
           Portali di schede, blog di maestre e progetti di coding e STEM, divisi per tema:{" "}
           <Link
-            href="/risorse-educative-bambini?sezione=insegnanti"
+            href="/risorse-educative-bambini/schede-didattiche-per-insegnanti"
             className="font-bold text-notte underline decoration-viola decoration-2 underline-offset-4"
           >
-            risorse educative per insegnanti e scuola primaria
+            schede didattiche e materiali per insegnanti
           </Link>
           .
         </p>

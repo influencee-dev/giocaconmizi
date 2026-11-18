@@ -1,4 +1,4 @@
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { aggiornaSessione } from "@/lib/supabase/middleware";
 import {
   protetto,
@@ -10,6 +10,17 @@ import {
 
 export async function middleware(request: NextRequest) {
   const percorso = request.nextUrl.pathname;
+
+  // Dal 15/11/2026 le foto non passano più da /_next/image. Una pagina rimasta
+  // aperta da prima (l'app installata la tiene in memoria anche per giorni)
+  // le chiede ancora lì: la si manda al file vero invece di lasciarle rotte.
+  if (percorso === "/_next/image") {
+    const file = request.nextUrl.searchParams.get("url") ?? "";
+    if (/^\/(immagini|mizi|esempi|cards|mascot)\/[A-Za-z0-9._/-]+$/.test(file) && !file.includes("..")) {
+      return NextResponse.redirect(new URL(file, request.url), 307);
+    }
+    return new NextResponse(null, { status: 404 });
+  }
 
   // Difesa dalle letture a raffica, solo sulle pagine protette (lib/protezione).
   if (protetto(percorso)) {
@@ -43,5 +54,7 @@ export const config = {
      * /account e /accedi per non perdere la sessione.
      */
     "/((?!_next/static|_next/image|favicon.ico|cards/|mascot/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|txt|xml)$).*)",
+    // Solo per rimandare i vecchi indirizzi delle foto al file vero (vedi sopra).
+    "/_next/image",
   ],
 };

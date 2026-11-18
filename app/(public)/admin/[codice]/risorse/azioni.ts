@@ -1,9 +1,9 @@
 "use server";
 
 import { revalidatePath, revalidateTag } from "next/cache";
-import { adminCreaInvito, adminEsitoLogo } from "@/lib/directory-db";
-import { TAG_RECLAMO } from "@/lib/risorse-reclamo";
-import { chiaveRisorsa, risorsaDaSlug } from "@/lib/risorse-educative";
+import { adminCreaInvito, adminEsitoLogo } from "@/lib/directory/directory-db";
+import { TAG_RECLAMO } from "@/lib/risorse/risorse-reclamo";
+import { chiaveRisorsa, risorsaDaSlug } from "@/lib/risorse/risorse-educative";
 
 export type EsitoLink = { stato: "fermo" } | { stato: "ok"; link: string; nome: string } | { stato: "errore"; messaggio: string };
 

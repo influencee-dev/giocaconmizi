@@ -2,7 +2,7 @@ import { TestataPagina } from "@/components/vetrina";
 import { ScenaStorie } from "@/components/illustrazioni";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { tutteLeStorie } from "@/lib/content";
+import { tutteLeStorie } from "@/lib/contenuti/content";
 import { Contenitore, Griglia, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 import { CardStoria } from "@/components/storie/CardStoria";

@@ -23,7 +23,7 @@ const dominio = new URL(host).origin;
 ok("robots: sitemap sullo stesso dominio dell'Host", new URL(sitemapUrl).origin === dominio, dominio);
 // Il dominio dev'essere quello COLLEGATO su Vercel: un dominio coerente ma
 // non collegato è esattamente il guasto del 24/10. Se cambia il dominio,
-// si aggiorna qui insieme a lib/seo.ts.
+// si aggiorna qui insieme a lib/seo/seo.ts.
 const COLLEGATO = "https://giocamizi.it";
 ok("robots: il dominio è quello collegato su Vercel", dominio === COLLEGATO, `${dominio} (atteso ${COLLEGATO})`);
 
@@ -38,7 +38,7 @@ ok("sitemap: almeno 250 pagine", locs.length >= 250, `${locs.length}`);
 
 // 2-bis. lastmod veri (dal 02/11/2026): Google li ignora se dicono "adesso"
 // su ogni pagina. Ogni lastmod è un giorno intero dalla storia git
-// (lib/date-pagine.json), mai nel futuro; i giochi ce l'hanno tutti; il
+// (lib/seo/date-pagine.json), mai nel futuro; i giochi ce l'hanno tutti; il
 // file delle date è allineato ai sorgenti (npm run date-pagine).
 const voci = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => ({
   loc: m[1].match(/<loc>([^<]+)<\/loc>/)?.[1] ?? "",
@@ -72,6 +72,26 @@ for (const { da, a } of spostati) {
 }
 ok("directory: indirizzi vecchi reindirizzati a pagine vive", spostati.length > 0 && rotti.length === 0, rotti.slice(0, 3).join(" | ") || `${spostati.length} indirizzi`);
 
+// 2-quater-bis. Parchi avventura e parchi acquatici (dal 15/11/2026): sono
+// posti «da giornata fuori». Un parco che non risulta fare feste (festa: false
+// in lib/directory/feste.ts) ha la sua scheda ma non dice «fa feste» e non compare nella
+// pagina delle feste della città; uno che le fa, sì.
+const htmlAvventura = await testo("/parchi-avventura");
+const htmlAcquatici = await testo("/parchi-acquatici");
+ok("parchi: le due categorie nuove hanno la loro pagina", htmlAvventura.includes("Parchi avventura per bambini") && htmlAcquatici.includes("Parchi acquatici per bambini"));
+ok("parchi: le pagine sono in sitemap, col listing di Roma e di Firenze",
+  ["/parchi-avventura", "/parchi-acquatici", "/parchi-acquatici/roma", "/parchi-avventura/firenze", "/parchi-acquatici/roma/hydromania"].every((x) => percorsiSitemap.has(x)));
+const htmlHydro = await testo("/parchi-acquatici/roma/hydromania");
+ok("parchi: un parco acquatico non dice «fa feste di compleanno»",
+  htmlHydro.includes("Hydromania") && !htmlHydro.includes("data-fa-feste") && !htmlHydro.includes("organizza feste di compleanno"));
+const htmlEur = await testo("/parchi-avventura/roma/eurpark-energy-adventure");
+ok("parchi: un parco avventura che fa feste lo dice", htmlEur.includes("data-fa-feste"));
+const htmlFesteRoma = await testo("/feste/roma");
+ok("parchi: nella pagina feste di Roma c'è EurPark ma non Hydromania", htmlFesteRoma.includes("EurPark") && !htmlFesteRoma.includes("Hydromania"));
+const htmlListingRoma = await testo("/parchi-acquatici/roma");
+ok("parchi: il listing dei parchi acquatici non promette feste",
+  htmlListingRoma.includes("Aquafelix") && htmlListingRoma.includes("MagicSplash") && !htmlListingRoma.includes("tutte organizzano anche feste"));
+
 // 2-quinquies. Città vicine (dal 12/11/2026): ogni pagina città linka le 6
 // più vicine; Carpi deve avere Modena e Reggio Emilia, e mai sé stessa.
 const htmlCarpi = await testo("/feste/carpi");
@@ -102,10 +122,40 @@ for (const v of conImmagini) {
 }
 ok("sitemap immagini: ogni foto risponde e sta nella sua pagina", immaginiStorte.length === 0, immaginiStorte.slice(0, 3).join(" | "));
 
+// 2-quater. Le foto si servono dai nostri file già pronti nelle varie misure
+// (lib/foto/caricatore-immagini.ts), mai da /_next/image: dal 15/11/2026, quando
+// su iPhone le foto passate da quel servizio non si vedevano. Ogni indirizzo
+// di immagine scritto nelle pagine deve rispondere con un'immagine.
+{
+  const pagineConFoto = ["/", "/giochi", "/feste", "/guide", "/guide/tabelline-senza-lacrime", "/chi-siamo", "/storie", "/biglietti", "/coding"];
+  const daServizio = [];
+  const indirizzi = new Set();
+  for (const percorso of pagineConFoto) {
+    const html = (await testo(percorso)).replace(/&amp;/g, "&");
+    if (html.includes("/_next/image")) daServizio.push(percorso);
+    for (const m of html.matchAll(/<img\b[^>]*>/g)) {
+      const src = m[0].match(/\ssrc="([^"]+)"/)?.[1];
+      const srcset = m[0].match(/\ssrcSet="([^"]+)"/i)?.[1] ?? "";
+      for (const u of [src, ...srcset.split(",").map((x) => x.trim().split(/\s+/)[0])]) if (u?.startsWith("/")) indirizzi.add(u);
+    }
+  }
+  ok("foto: nessuna pagina passa da /_next/image", daServizio.length === 0, daServizio.join(", "));
+  const rotte = [];
+  for (const u of indirizzi) {
+    const r = await fetch(`${BASE}${u}`);
+    if (!r.ok || !r.headers.get("content-type")?.startsWith("image/")) rotte.push(`${u}: ${r.status}`);
+  }
+  ok("foto: ogni immagine scritta nelle pagine risponde", indirizzi.size > 40 && rotte.length === 0, `${indirizzi.size} indirizzi; ${rotte.slice(0, 3).join(" | ")}`);
+  const hero = (await testo("/feste")).match(/<img[^>]*festa-di-compleanno-per-bambini-ludoteca[^>]*>/)?.[0] ?? "";
+  ok("foto: sul telefono arriva la misura giusta, non sempre la più grande",
+    /ludoteca-480\.webp 256w/.test(hero) && /ludoteca-640\.webp 640w/.test(hero) && /ludoteca-1440\.webp 1200w/.test(hero), hero.slice(0, 200));
+}
+
 // 3. Ogni pagina della sitemap: 200, un solo canonical, su sé stessa e sul
 // dominio; og:url coerente; i JSON-LD non citano altri domini del sito.
 const problemi = [];
 const strutturati = [];
+const teste = [];
 const coda = [...locs];
 async function controlla(loc) {
   const percorso = locale(loc);
@@ -127,6 +177,14 @@ async function controlla(loc) {
     if (altri.length) problemi.push(`${percorso}: JSON-LD cita ${altri[0]}`);
   }
   strutturati.push(...validaJsonLd(html, percorso).problemi);
+  // Per il punto 3-ter: titolo, descrizione e intestazioni di ogni pagina.
+  const pulito = (t) => t.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#x27;/g, "'").replace(/&quot;/g, '"').replace(/\s+/g, " ").trim();
+  teste.push({
+    percorso,
+    titolo: pulito(html.match(/<title[^>]*>([\s\S]*?)<\/title>/)?.[1] ?? ""),
+    descrizione: pulito(html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? ""),
+    h1: [...html.matchAll(/<h1[\s>]/g)].length,
+  });
 }
 // Cinque richieste alla volta: abbastanza veloce, senza affogare il server.
 await Promise.all(Array.from({ length: 5 }, async () => {
@@ -137,6 +195,30 @@ ok(
   problemi.length === 0,
   problemi.length ? `${problemi.length} problemi, es. ${problemi.slice(0, 3).join(" | ")}` : `${locs.length} pagine`,
 );
+
+// 3-ter. Titolo, descrizione e intestazione di ogni pagina (dal 18/11/2026).
+// Un giro su tutta la sitemap aveva trovato 38 pagine dei giochi con due h1 e descrizioni delle schede lunghe fino a 550 caratteri,
+// che Google taglia a metà parola.
+{
+  const doppi = (campo) => {
+    const gruppi = new Map();
+    for (const t of teste) gruppi.set(t[campo], [...(gruppi.get(t[campo]) ?? []), t.percorso]);
+    return [...gruppi].filter(([valore, dove]) => valore && dove.length > 1).map(([, dove]) => dove.slice(0, 2).join(" = "));
+  };
+  // La home ne ha due uguali, uno per il telefono (la home «come un'app») e uno per
+  // il computer: se ne vede sempre uno solo, e lo controlla la batteria dell'app.
+  const h1Storti = teste.filter((t) => t.h1 !== (t.percorso === "/" ? 2 : 1)).map((t) => `${t.percorso} (${t.h1})`);
+  ok("ogni pagina della sitemap ha un solo h1", teste.length === locs.length && h1Storti.length === 0, `${h1Storti.length} pagine, es. ${h1Storti.slice(0, 3).join(" ")}`);
+  const titoliDoppi = doppi("titolo");
+  const descrizioniDoppie = doppi("descrizione");
+  ok("nessun titolo e nessuna descrizione uguali su due pagine", titoliDoppi.length === 0 && descrizioniDoppie.length === 0, [...titoliDoppi, ...descrizioniDoppie].slice(0, 3).join(" | "));
+  const povere = teste.filter((t) => !t.titolo || t.descrizione.length < 70).map((t) => `${t.percorso} (${t.descrizione.length})`);
+  ok("ogni pagina ha un titolo e una descrizione di almeno 70 caratteri", povere.length === 0, povere.slice(0, 4).join(" "));
+  // Le schede delle attività: /categoria/città/scheda. La descrizione deve stare intera nei risultati.
+  const schede = teste.filter((t) => /^\/[a-z-]+\/[a-z-]+\/[a-z0-9-]+$/.test(t.percorso) && !/^\/(giochi|guide|natale|biglietti|storie|tutorial|risorse-educative-bambini|admin|feste)\//.test(t.percorso));
+  const lunghe = schede.filter((t) => t.descrizione.length > 160).map((t) => `${t.percorso} (${t.descrizione.length})`);
+  ok("schede delle attività: la descrizione sta nei 160 caratteri", schede.length > 200 && lunghe.length === 0, `${schede.length} schede; ${lunghe.slice(0, 3).join(" ")}`);
+}
 
 // 3-bis. I dati strutturati di ogni pagina (dal 04/11/2026, scripts/verifica/jsonld.mjs):
 // JSON leggibile, tipi schema.org veri, FAQ complete e VISIBILI nella pagina,

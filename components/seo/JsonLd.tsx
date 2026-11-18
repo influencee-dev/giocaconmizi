@@ -1,4 +1,4 @@
-import { site, url } from "@/lib/seo";
+import { site, url } from "@/lib/seo/seo";
 
 /**
  * Inietta un blocco JSON-LD. Il contenuto è generato da noi, mai da input utente,

@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
-import { cittaFeste } from "@/lib/feste";
-import { dimensioniOg, ImmagineOg } from "@/lib/og";
+import { cittaFeste, localiDaFesta } from "@/lib/directory/feste";
+import { dimensioniOg, ImmagineOg } from "@/lib/seo/og";
 
 export const alt = "Festa di compleanno per bambini — Gioca con Mizi";
 export const size = dimensioniOg;
@@ -19,7 +19,7 @@ export default async function Image({ params }: { params: Promise<{ citta: strin
             ? `Festa di compleanno per bambini a ${voce.citta}`
             : "Feste di compleanno per bambini"
         }
-        sottotitolo={voce ? `${voce.locali.length} location, zona per zona` : "città per città"}
+        sottotitolo={voce ? `${localiDaFesta(voce).length} location, zona per zona` : "città per città"}
       />
     ),
     size,

@@ -1,0 +1,136 @@
+{
+  "slug": "le-risorse-educative",
+  "titolo": "Come trovare le risorse educative su Giocamizi",
+  "gruppo": "utenti",
+  "ordine": 6,
+  "descrizione": "Mizi ti mostra come trovare scuole, cooperative, blog e progetti nelle risorse educative di Giocamizi.",
+  "rispostaBreve": "Le risorse educative di Giocamizi sono divise per categoria (blog per genitori, schede per insegnanti, coding, fiabe, scuole, cooperative, natura e musei) e, per quelle con una sede, per provincia. Ogni realtà ha una scheda con cosa fa, per chi, costi e il link al sito ufficiale.",
+  "pagina": {
+    "href": "/risorse-educative-bambini",
+    "testo": "Le risorse educative"
+  },
+  "faq": [
+    {
+      "domanda": "Da dove vengono le informazioni delle schede?",
+      "risposta": "Dai siti ufficiali delle realtà, oppure dalla realtà stessa quando reclama la scheda."
+    }
+  ],
+  "schermate": {
+    "hub": {
+      "url": "/risorse-educative-bambini",
+      "selettori": [
+        "nav[aria-label=\"Categorie delle risorse educative\"]",
+        "#ambito-online",
+        "#ambito-territorio"
+      ]
+    },
+    "categoria": {
+      "url": "/risorse-educative-bambini/scuole-paritarie-infanzia-primaria",
+      "selettori": [
+        "a[href=\"/risorse-educative-bambini/scuole-paritarie-infanzia-primaria/torino\"]"
+      ]
+    },
+    "provincia": {
+      "url": "/risorse-educative-bambini/scuole-paritarie-infanzia-primaria/torino",
+      "selettori": [
+        "[data-risultato]"
+      ]
+    },
+    "scheda": {
+      "url": "/risorse-educative-bambini/maestra-giulia",
+      "selettori": [
+        "p:has-text(\"Scheda scritta da Giocamizi dal sito ufficiale\")",
+        "#titolo-dettagli",
+        "a[data-traccia=\"sito\"]",
+        "h2:has-text(\"Cosa guardare prima di scegliere\")"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per famiglie e insegnanti",
+      "titolo": "Le risorse educative di Giocamizi",
+      "sottotitolo": "Scuole, cooperative, siti e progetti.",
+      "voce": "Ciao, sono Mizi! Cerchi una scuola per il tuo bimbo, delle schede da stampare o un sito di coding? Nelle risorse educative di Giocamizi le trovi tutte in un posto. Ti faccio vedere!"
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Scegli una categoria",
+      "testo": "Blog, schede, coding, fiabe, scuole, cooperative…",
+      "schermata": "hub",
+      "evidenzia": [
+        "nav[aria-label=\"Categorie delle risorse educative\"]"
+      ],
+      "voce": "Apri la pagina delle risorse educative. In alto scorrono le categorie: blog per genitori, schede per insegnanti, coding, fiabe e musica, scuole, cooperative e altre ancora."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Da casa o sul territorio",
+      "testo": "Online in tutta Italia, oppure con una sede.",
+      "schermata": "hub",
+      "scorri": "#ambito-online",
+      "evidenzia": [
+        "#ambito-online",
+        "#ambito-territorio"
+      ],
+      "voce": "Sono divise in due gruppi: quelle da usare da casa o in classe, online in tutta Italia, e quelle sul territorio, con una sede vera."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 3,
+      "titolo": "Cerca per provincia",
+      "testo": "Le realtà con una sede sono divise per provincia.",
+      "schermata": "categoria",
+      "evidenzia": [
+        "a[href=\"/risorse-educative-bambini/scuole-paritarie-infanzia-primaria/torino\"]"
+      ],
+      "voce": "Apri una categoria sul territorio, per esempio le scuole paritarie. Sotto «Cerca per provincia» tocca la tua: per esempio Torino."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 4,
+      "titolo": "Tutte le realtà della provincia",
+      "testo": "Dove si trova, cosa fa, per chi.",
+      "schermata": "provincia",
+      "evidenzia": [
+        "[data-risultato]"
+      ],
+      "voce": "Ecco le realtà della provincia, ognuna con la sua card: dove si trova, cosa fa e per chi è. Tocca «Vedi la scheda»."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 5,
+      "titolo": "Leggi la scheda",
+      "testo": "Cosa fa, per chi, come si partecipa, costi.",
+      "schermata": "scheda",
+      "evidenzia": [
+        "p:has-text(\"Scheda scritta da Giocamizi dal sito ufficiale\")",
+        "#titolo-dettagli"
+      ],
+      "voce": "Sotto il nome vedi chi ha scritto la scheda: Giocamizi, dal sito ufficiale, oppure la realtà stessa. Poi leggi cosa fa, per chi è, come si partecipa e quanto costa."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 6,
+      "titolo": "Controlla alla fonte",
+      "testo": "Il bottone viola porta al sito ufficiale.",
+      "schermata": "scheda",
+      "evidenzia": [
+        "a[data-traccia=\"sito\"]",
+        "h2:has-text(\"Cosa guardare prima di scegliere\")"
+      ],
+      "nota": "Informazioni dai siti ufficiali",
+      "notaIcona": "lente",
+      "voce": "Le informazioni vengono dai siti ufficiali: il bottone viola ti porta proprio lì, per controllare. E più sotto trovi cosa guardare prima di scegliere."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/risorse-educative-bambini",
+      "sotto": "Gratis, senza pubblicità.",
+      "voce": "Trovi tutte le risorse su giocamizi punto it, nella pagina «Risorse educative». Buona ricerca! Ciao ciao!"
+    }
+  ]
+}

@@ -1,18 +1,20 @@
 import type { MetadataRoute } from "next";
 import { games } from "@/games/registry";
-import { tutteLeStorie } from "@/lib/content";
-import { tutteLePagine } from "@/lib/biglietti";
-import { esempiPubblicati } from "@/lib/esempi";
-import { GUIDE } from "@/lib/guide";
-import { CITTA_FESTE } from "@/lib/feste";
-import { CITTA_EVENTI, eventiAttivi } from "@/lib/eventi-natale";
-import { CATEGORIE_ATTIVE, LISTING, SCHEDE, percorsoScheda } from "@/lib/directory";
-import { classi, eta, url } from "@/lib/seo";
-import { chiaveScheda, pubblicate } from "@/lib/directory-db";
-import { dataDi, dataGioco } from "@/lib/date-pagine";
-import { fotoDellaPagina, fotoGuida } from "@/lib/foto";
-import { percorsoRisorsa } from "@/lib/risorse-educative";
-import { risorseVisibili } from "@/lib/risorse-reclamo";
+import { tutteLeStorie } from "@/lib/contenuti/content";
+import { tutteLePagine } from "@/lib/biglietti/biglietti";
+import { esempiPubblicati } from "@/lib/biglietti/esempi";
+import { GUIDE } from "@/lib/contenuti/guide";
+import { CITTA_FESTE } from "@/lib/directory/feste";
+import { CITTA_EVENTI, eventiAttivi } from "@/lib/natale/eventi-natale";
+import { CATEGORIE_ATTIVE, LISTING, SCHEDE, percorsoScheda } from "@/lib/directory/directory";
+import { classi, eta, url } from "@/lib/seo/seo";
+import { chiaveScheda, pubblicate } from "@/lib/directory/directory-db";
+import { dataDi, dataGioco } from "@/lib/seo/date-pagine";
+import { fotoDellaPagina, fotoGuida } from "@/lib/foto/foto";
+import { percorsoRisorsa } from "@/lib/risorse/risorse-educative";
+import { PERCORSO_TUTORIAL, TUTORIAL, percorsoTutorial } from "@/lib/contenuti/tutorial";
+import { categorieAttive, listingRisorse, percorsoCategoriaRisorse, percorsoListingRisorse } from "@/lib/risorse/risorse-categorie";
+import { risorseVisibili } from "@/lib/risorse/risorse-reclamo";
 
 /**
  * Sitemap generata dal registry e dai contenuti: un nuovo gioco o una nuova
@@ -24,8 +26,8 @@ export const revalidate = 600;
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const risposte = await pubblicate();
   const tolta = (s: (typeof SCHEDE)[number]) => risposte.get(chiaveScheda(s))?.tipo === "rimuovi";
-  const reclamate = (await risorseVisibili()).filter((r) => r.reclamata);
-  // Date vere (lib/date-pagine.json, dalla storia git): Google ignora i
+  const risorse = await risorseVisibili();
+  // Date vere (lib/seo/date-pagine.json, dalla storia git): Google ignora i
   // lastmod di una sitemap che dice "modificato adesso" su ogni pagina.
   // Dove una data non c'è, niente lastmod: meglio di uno falso.
   const pagina = (percorso: string) =>
@@ -46,18 +48,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/storie/minuscolo": [giorno(ultimaStoria)],
     "/storie/corsivo": [giorno(ultimaStoria)],
     "/coding": [giorno(dataDi(...giochiLive.filter((g) => g.skill === "coding").map((g) => giorno(dataGioco(g.slug)))))],
-    "/biglietti": ["lib/biglietti.ts", "cards/registry.ts"],
+    "/biglietti": ["lib/biglietti/biglietti.ts", "cards/registry.ts"],
     "/biglietti/crea": ["cards/registry.ts"],
-    "/biglietti/esempi": ["lib/esempi.ts"],
-    "/natale": ["lib/natale.ts", "lib/eventi-natale.ts"],
-    "/natale/letterina-babbo-natale": ["lib/natale.ts", "components/natale/EditorLetterina.tsx"],
+    "/biglietti/kit-festa": ["cards/registry.ts", "components/biglietti/Editor.tsx"],
+    "/biglietti/esempi": ["lib/biglietti/esempi.ts"],
+    "/natale": ["lib/natale/natale.ts", "lib/natale/eventi-natale.ts"],
+    "/natale/letterina-babbo-natale": ["lib/natale/natale.ts", "components/natale/EditorLetterina.tsx"],
     "/natale/biglietti-di-natale": ["cards/registry.ts"],
-    "/natale/eventi": ["lib/eventi-natale.ts"],
+    "/natale/eventi": ["lib/natale/eventi-natale.ts"],
     "/guide": [ultimaGuida],
     "/feste": [ultimaCitta],
     "/metodo": ["content/hubs/metodo.md"],
     "/perche-lo-facciamo": ["content/hubs/perche-lo-facciamo.md"],
-    "/risorse-educative-bambini": ["lib/risorse-educative-dati.ts", "lib/risorse-educative.ts"],
+    "/risorse-educative-bambini": ["lib/risorse/risorse-educative-dati.ts", "lib/risorse/risorse-educative.ts", "lib/risorse/risorse-categorie.ts"],
   };
   const ALIAS_COMPETENZA: Record<string, string[]> = {
     lettere: ["alfabeto", "fonetica", "lettura"],
@@ -74,6 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/coding",
     "/biglietti",
     "/biglietti/crea",
+    "/biglietti/kit-festa",
     "/biglietti/esempi",
     "/guide",
     "/feste",
@@ -144,7 +148,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Gli eventi di Natale per città: solo le città con eventi non ancora finiti.
     ...CITTA_EVENTI.filter((c) => eventiAttivi(c).length > 0).map((c) => ({
       url: url(`/natale/eventi/${c.slug}`),
-      lastModified: dataDi("lib/eventi-natale.ts"),
+      lastModified: dataDi("lib/natale/eventi-natale.ts"),
     })),
     // Le pagine locali delle feste: una per città, keyword locale (GEO)
     ...CITTA_FESTE.map((c) => ({
@@ -173,12 +177,49 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
-    // Le risorse educative che hanno reclamato la scheda hanno la pagina propria.
-    // Niente lastmod: la data vera è quella della decisione nel database.
-    ...reclamate.map((r) => ({
+    // La directory delle risorse educative: categorie, province e la scheda di
+    // ogni realtà (lib/risorse/risorse-categorie.ts). Le rimosse sono già fuori.
+    ...categorieAttive(risorse).map((c) => ({
+      url: url(percorsoCategoriaRisorse(c)),
+      lastModified: dataDi("lib/risorse/risorse-categorie.ts", "lib/risorse/risorse-educative-dati.ts"),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    ...listingRisorse(risorse).map((l) => ({
+      url: url(percorsoListingRisorse(l.categoria, l.slug)),
+      lastModified: dataDi("lib/risorse/risorse-categorie.ts", "lib/risorse/risorse-educative-dati.ts"),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+    // Niente lastmod sulle schede: per le reclamate la data vera è quella della decisione nel database.
+    ...risorse.map((r) => ({
       url: url(percorsoRisorsa(r)),
       changeFrequency: "monthly" as const,
-      priority: 0.5,
+      priority: r.reclamata ? 0.6 : 0.5,
+    })),
+
+    // I video tutorial di Mizi: l'hub e una pagina per video, con il video in sitemap.
+    {
+      url: url(PERCORSO_TUTORIAL),
+      lastModified: dataDi("lib/contenuti/tutorial.ts"),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    },
+    ...TUTORIAL.map((t) => ({
+      url: url(percorsoTutorial(t)),
+      lastModified: dataDi(t.video.caricato),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+      videos: [
+        {
+          title: t.titolo,
+          description: t.descrizione,
+          thumbnail_loc: url(t.video.poster),
+          content_loc: url(t.video.src),
+          duration: t.video.secondi,
+          publication_date: t.video.caricato,
+        },
+      ],
     })),
 
     // Le guide per i genitori: contenuto evergreen, priorità alta (AEO)
@@ -214,7 +255,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Le pagine dei biglietti sono generate da template (piano §14.2)
     ...tutteLePagine().map(({ slug }) => ({
       url: url(`/biglietti/${slug}`),
-      lastModified: dataDi("lib/biglietti.ts", "cards/registry.ts"),
+      lastModified: dataDi("lib/biglietti/biglietti.ts", "cards/registry.ts"),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
@@ -222,7 +263,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Gli esempi entrano in sitemap solo quando la loro immagine esiste
     ...esempiPubblicati().map((e) => ({
       url: url(`/biglietti/esempi/${e.slug}`),
-      lastModified: dataDi("lib/esempi.ts"),
+      lastModified: dataDi("lib/biglietti/esempi.ts"),
       changeFrequency: "monthly" as const,
       priority: 0.6,
       ...immagini([`/esempi/${e.slug}.png`]),

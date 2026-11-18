@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { byAge, games } from "@/games/registry";
-import { hub } from "@/lib/content";
+import { hub } from "@/lib/contenuti/content";
 import { CardGioco, Contenitore, Griglia, Prosa, TitoloSezione } from "@/components/ui";
 import { IconaGioco } from "@/components/icone";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
-import { eta as etaCoperte } from "@/lib/seo";
+import { eta as etaCoperte } from "@/lib/seo/seo";
 
 type Params = { params: Promise<{ eta: string }> };
 

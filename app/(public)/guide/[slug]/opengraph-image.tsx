@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
-import { guida } from "@/lib/guide";
-import { dimensioniOg, ImmagineOg } from "@/lib/og";
+import { guida } from "@/lib/contenuti/guide";
+import { dimensioniOg, ImmagineOg } from "@/lib/seo/og";
 
 export const alt = "Guida per i genitori — Gioca con Mizi";
 export const size = dimensioniOg;

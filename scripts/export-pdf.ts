@@ -13,7 +13,7 @@
  * quindi è il candidato principale.
  */
 
-import { tutteLeStorie } from "../lib/content";
+import { tutteLeStorie } from "../lib/contenuti/content";
 
 async function main() {
   const storie = tutteLeStorie();

@@ -4,7 +4,7 @@ import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
 
 export const BASE = "http://localhost:3100";
-// Il codice del pannello valido SOLO nel server delle verifiche (lib/admin.ts).
+// Il codice del pannello valido SOLO nel server delle verifiche (lib/directory/admin.ts).
 export const CODICE_ADMIN_PROVA = "prova-pannello-locale-0000";
 // Il Chromium cambia versione fra un ambiente e l'altro: si prende il primo
 // che esiste (/opt/pw-browsers/chromium è il collegamento alla versione attuale).

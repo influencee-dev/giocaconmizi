@@ -1,0 +1,34 @@
+{
+ "secondi": 88,
+ "caricato": "2026-11-16",
+ "capitoli": [
+  {
+   "da": 0,
+   "titolo": "Ciao, sono Mizi"
+  },
+  {
+   "da": 13,
+   "titolo": "1 · Apri «Giochi»"
+  },
+  {
+   "da": 24,
+   "titolo": "2 · Scegli età e competenza"
+  },
+  {
+   "da": 39,
+   "titolo": "3 · Una pagina per ogni età"
+  },
+  {
+   "da": 47,
+   "titolo": "4 · Apri il gioco e premi «Gioca»"
+  },
+  {
+   "da": 59,
+   "titolo": "5 · Ti dico io cosa fare"
+  },
+  {
+   "da": 70,
+   "titolo": "6 · Niente fretta"
+  }
+ ]
+}

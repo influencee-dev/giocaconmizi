@@ -1,5 +1,5 @@
 import { IconaLucide } from "./IconaLucide";
-import type { Etichetta as TipoEtichetta } from "@/lib/etichette";
+import type { Etichetta as TipoEtichetta } from "@/lib/directory/etichette";
 
 /** L'etichetta colorata del tipo di attività (ludoteca, sala feste, bar…). */
 export function Etichetta({ e, grande = false }: { e: TipoEtichetta; grande?: boolean }) {

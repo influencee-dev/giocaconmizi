@@ -3,7 +3,7 @@
 import { Camera, Check } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
-import { parla } from "@/lib/audio";
+import { parla } from "@/lib/giochi/audio";
 import { stelle, type GameProps } from "@/games/_engine/tipi";
 import { CAPI, ORDINE, ZONE, capo, type Zona } from "./capi";
 
@@ -202,16 +202,17 @@ export default function Game({ onComplete, onProgress, demo }: GameProps) {
     }, 1500);
   }, [uscita, vestiti, trucchi, punti, primoTentativo, round, totale, onComplete]);
 
-  // ?demo=1: Mizi si veste da sola (per i video).
+  // ?demo=1: Mizi si veste da sola (per i video), un capo alla volta. Ogni passo
+  // riparte dallo stato vero: prima vestiva tutto e premeva «Fatto» nello stesso
+  // istante, con i vestiti ancora vecchi, e restava ferma sul primo aiuto.
   useEffect(() => {
-    if (!demo || finito) return;
-    const t = window.setTimeout(() => {
-      for (const id of uscita.servono.length ? uscita.servono : ["corona", "cuori", "tutu", "guance", "brillantini"]) if (!addosso(id)) indossa(id);
-      window.setTimeout(fatto, 900);
-    }, 1200);
+    if (!demo || finito || messaggio?.tipo === "brava") return;
+    const servono = uscita.servono.length ? uscita.servono : ["corona", "cuori", "tutu", "guance", "brillantini"];
+    const manca = servono.find((id) => !addosso(id));
+    const t = window.setTimeout(() => (manca ? indossa(manca) : fatto()), manca ? 600 : 900);
     return () => window.clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [demo, round, finito]);
+  }, [demo, finito, round, vestiti, trucchi, messaggio]);
 
   const ancora = () => {
     setRound(0);

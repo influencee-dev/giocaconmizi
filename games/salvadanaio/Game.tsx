@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { Disegno, type NomeFigura } from "@/games/_engine/arte";
 import { mescola } from "@/games/_engine/casuale";
-import { parla } from "@/lib/audio";
+import { parla } from "@/lib/giochi/audio";
 import { stelle, type GameProps } from "@/games/_engine/tipi";
 
 /**
@@ -92,7 +92,7 @@ function DisegnoMoneta({ valore, lato = 64 }: { valore: Moneta; lato?: number })
   );
 }
 
-const LODI = ["Giusto! Mizi ha comprato", "Perfetto! Ecco", "Bravo! Pagato", "Esatto! Tutto tuo"];
+const LODI = ["Giusto! Mizi ha comprato", "Perfetto! Ecco", "Evviva! Pagato", "Esatto! Tutto tuo"];
 
 export default function Game({ onProgress, onComplete, demo = false }: GameProps) {
   const round = useMemo(() => {

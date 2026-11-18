@@ -9,7 +9,7 @@ verificati. Nessuna risposta contiene dati falsi, alterati o codice ostile.
 
 | Difesa | Dove | Cosa fa |
 | --- | --- | --- |
-| Solo dati pubblici nel repo | `lib/risorse-educative-dati.ts` | 44 schede: nome, descrizione, sezioni, temi, destinatari, località, sito, e la scheda «Scopri di più» (cosa fa, per chi, come si usa, costi) riscritta dai siti ufficiali l’8/11/2026. Mai email, fonti email, bozze, stati Gmail, note. Le 25 righe «Solo outreach» non ci sono. |
+| Solo dati pubblici nel repo | `lib/risorse/risorse-educative-dati.ts` | 44 schede: nome, descrizione, sezioni, temi, destinatari, località, sito, e la scheda «Scopri di più» (cosa fa, per chi, come si usa, costi) riscritta dai siti ufficiali l’8/11/2026. Mai email, fonti email, bozze, stati Gmail, note. Le 25 righe «Solo outreach» non ci sono. |
 | HTML lato server | `app/(public)/risorse-educative-bambini/page.tsx` | Le schede arrivano già nell'HTML; filtri = link, funzionano senza JavaScript. Nessun endpoint JSON con l'elenco. |
 | Paginazione lato server | `?sezione=…&pagina=…` | 12 schede per pagina nelle viste filtrate (noindex,follow, canonical all'hub). |
 | Limite di frequenza | `lib/protezione/limiti.ts` + `middleware.ts` | Per IP 120/min (scuole con IP condiviso), per «sessione tecnica» IP+browser 40/min e 15 in 10 s. Oltre: 429 + Retry-After + pagina gentile in italiano. I prefetch del browser non contano. |
@@ -41,8 +41,9 @@ Progetto `giocaconmizi` → **Firewall**:
    giorno, poi *Challenge*. Lascia passare i bot verificati (Google, Bing).
 2. **AI Bots** (managed ruleset): lasciare *Off* o *Log*: il sito vuole essere
    letto dagli assistenti AI (GEO). Decisione di Giorgia.
-3. **Regola personalizzata — limite**: se il percorso inizia con
-   `/risorse-educative-bambini` → *Rate limit*, finestra fissa 60 s,
+3. **Regola personalizzata — limite**: se il percorso è esattamente
+   `/risorse-educative-bambini` (dal 14/11/2026 categorie e schede sono pagine
+   pubbliche come le feste, docs/piano-risorse-eventi.md) → *Rate limit*, finestra fissa 60 s,
    100 richieste per IP, azione *Deny (429)*. Escludere i bot verificati.
 4. **Regola personalizzata — trappola**: se il percorso è
    `/risorse-educative-bambini/elenco-completo-archivio` → *Deny* (o *Log*

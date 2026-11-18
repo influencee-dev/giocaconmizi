@@ -12,12 +12,12 @@ import {
   leggiProfilo,
   salvaProfilo,
   type Bimbo,
-} from "@/lib/profilo";
+} from "@/lib/famiglia/profilo";
 
 /**
  * Il benvenuto a tutto schermo del telefono (le schermate di Figma, pagina
  * «App mobile»): Mizi saluta, poi tre passi, uno alla volta, nome della mamma,
- * nome ed età del bimbo, email. I dati restano sul telefono (lib/profilo.ts).
+ * nome ed età del bimbo, email. I dati restano sul telefono (lib/famiglia/profilo.ts).
  *
  * Quando compare:
  * - solo sotto i 768 px e solo se non c'è ancora un profilo;

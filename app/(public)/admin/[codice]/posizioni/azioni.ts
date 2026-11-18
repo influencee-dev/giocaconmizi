@@ -1,10 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { adminValido } from "@/lib/admin";
-import { SCHEDE } from "@/lib/directory";
-import { chiaveScheda, conModifiche, pubblicate } from "@/lib/directory-db";
-import { posizioni, salvaPosizione, trovaPosizione } from "@/lib/posizioni";
+import { adminValido } from "@/lib/directory/admin";
+import { SCHEDE } from "@/lib/directory/directory";
+import { chiaveScheda, conModifiche, pubblicate } from "@/lib/directory/directory-db";
+import { posizioni, salvaPosizione, trovaPosizione } from "@/lib/directory/posizioni";
 
 /** Quante schede per giro: 3 richieste al massimo per scheda, una al secondo, dentro i 60 secondi di Vercel. */
 const PER_GIRO = 12;

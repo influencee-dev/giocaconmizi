@@ -1,10 +1,10 @@
 "use server";
 
-import { CATEGORIE, SCHEDE } from "@/lib/directory";
-import { chiaveScheda, inviaCandidatura } from "@/lib/directory-db";
-import { chiaveRisorsa, risorsaDaChiave } from "@/lib/risorse-educative";
+import { CATEGORIE, SCHEDE } from "@/lib/directory/directory";
+import { chiaveScheda, inviaCandidatura } from "@/lib/directory/directory-db";
+import { chiaveRisorsa, risorsaDaChiave } from "@/lib/risorse/risorse-educative";
 import { after } from "next/server";
-import { avvisaGiorgia, confermaRicevuta } from "@/lib/email-servizio";
+import { avvisaGiorgia, confermaRicevuta } from "@/lib/email/email-servizio";
 
 export type EsitoCandidatura = { stato: "fermo" } | { stato: "ok"; tipo: "nuova" | "accesso" } | { stato: "errore"; messaggio: string };
 

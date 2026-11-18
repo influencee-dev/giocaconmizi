@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { COLORI, type NomeColore } from "./arte";
-import { parla } from "@/lib/audio";
+import { parla } from "@/lib/giochi/audio";
 import { stelle, type GameProps } from "./tipi";
 
 /**
@@ -66,7 +66,7 @@ export function PixelArt({ titolo, quadri, age, onProgress, onComplete, demo = f
 
   useEffect(() => {
     if (!completo || finito) return;
-    parla(`Bravissimo! È ${quadro.nome}.`);
+    parla(`Evviva! È ${quadro.nome}.`);
     const nuoviPunti = punti + 1;
     setPunti(nuoviPunti);
 

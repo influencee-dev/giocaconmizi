@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { SENZA_PRECARICO } from "@/lib/seo/precarico";
 import type { ReactNode } from "react";
-import { SOCIETA, TITOLARE } from "@/lib/legal";
-import type { CodiceFoto } from "@/lib/foto";
+import { SOCIETA, TITOLARE } from "@/lib/contenuti/legal";
+import type { CodiceFoto } from "@/lib/foto/foto";
 import { Foto, Freccia } from "./index";
 
 /**
@@ -52,6 +53,7 @@ export const COLONNE: { titolo: string; voci: [string, string][] }[] = [
       ["/per-insegnanti", "Per insegnanti"],
       ["/per-le-mamme", "Per le mamme"],
       ["/risorse-educative-bambini", "Risorse educative consigliate"],
+      ["/tutorial", "Video tutorial di Mizi"],
       ["/perche-lo-facciamo", "Perché lo facciamo"],
     ],
   },
@@ -141,7 +143,7 @@ export function Piede({ logo }: { logo: ReactNode }) {
             <div key={col.titolo} className="flex flex-col gap-2.5">
               <p className="font-black text-notte">{col.titolo}</p>
               {col.voci.map(([href, nome]) => (
-                <Link key={href} href={href} className="text-[15px] text-notte-tenue hover:text-viola">
+                <Link key={href} href={href} prefetch={SENZA_PRECARICO.has(href) ? false : undefined} className="text-[15px] text-notte-tenue hover:text-viola">
                   {nome}
                 </Link>
               ))}

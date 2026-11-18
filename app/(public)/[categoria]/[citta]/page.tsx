@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CATEGORIE_ATTIVE, LISTING, categoria, datiCard, haListing, percorsoScheda, rispostaListing, schedeDi, vociRicerca } from "@/lib/directory";
+import { CATEGORIE_ATTIVE, LISTING, categoria, datiCard, haListing, percorsoScheda, rispostaListing, schedeDi, vociRicerca } from "@/lib/directory/directory";
 import { RicercaCosaDove } from "@/components/directory/RicercaCosaDove";
-import { cittaFeste } from "@/lib/feste";
-import { conModifiche, pubblicate } from "@/lib/directory-db";
-import { url } from "@/lib/seo";
+import { cittaFeste } from "@/lib/directory/feste";
+import { conModifiche, pubblicate } from "@/lib/directory/directory-db";
+import { url } from "@/lib/seo/seo";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { Briciole, CtaAttivita, InBreve } from "@/components/directory/Briciole";
 import { ListingFiltrato } from "@/components/directory/ListingFiltrato";
-import { chiaveScheda } from "@/lib/directory-db";
-import { posizioni as leggiPosizioni } from "@/lib/posizioni";
-import { CENTRO_CITTA } from "@/lib/coordinate-citta";
+import { chiaveScheda } from "@/lib/directory/directory-db";
+import { posizioni as leggiPosizioni } from "@/lib/directory/posizioni";
+import { CENTRO_CITTA } from "@/lib/directory/coordinate-citta";
 
 /** Listing categoria + città, la pagina che conta per la SEO locale (Figma 01–03). */
 
@@ -37,8 +37,12 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   const d = await dati(params);
   if (!d) return {};
   return {
-    title: `${d.cat.nome} a ${d.nomeCitta}: dove portare i bambini e fare la festa`,
-    description: `${d.schede.length} ${d.cat.nome.toLowerCase()} a ${d.nomeCitta}, zona per zona: tipo di spazio, feste di compleanno e consigli prima di prenotare.`,
+    title: d.cat.giornata
+      ? `${d.cat.nome} a ${d.nomeCitta} e dintorni: dove portare i bambini`
+      : `${d.cat.nome} a ${d.nomeCitta}: dove portare i bambini e fare la festa`,
+    description: d.cat.giornata
+      ? `${d.schede.length} ${d.cat.nome.toLowerCase()} a ${d.nomeCitta} e dintorni: cosa c'è per i bambini, quando aprono e cosa controllare prima di partire.`
+      : `${d.schede.length} ${d.cat.nome.toLowerCase()} a ${d.nomeCitta}, zona per zona: tipo di spazio, feste di compleanno e consigli prima di prenotare.`,
     alternates: { canonical: `/${d.cat.slug}/${d.citta}` },
   };
 }
@@ -55,7 +59,9 @@ export default async function ListingPage({ params }: P) {
     ...cat.faq.slice(1, 3),
     {
       domanda: `Dove si festeggia un compleanno per bambini a ${nomeCitta}?`,
-      risposta: `Oltre alle ${cat.nome.toLowerCase()} di questa pagina, a ${nomeCitta} ci sono altre location per le feste: le trovi tutte, zona per zona, nella pagina dedicata alle feste di compleanno in città.`,
+      risposta: cat.giornata
+        ? `Per la festa di compleanno a ${nomeCitta} abbiamo una pagina a parte, con le location zona per zona: ludoteche, sale feste e parchi giochi al coperto. I ${cat.nome.toLowerCase()} di questa pagina sono soprattutto posti da giornata fuori.`
+        : `Oltre alle ${cat.nome.toLowerCase()} di questa pagina, a ${nomeCitta} ci sono altre location per le feste: le trovi tutte, zona per zona, nella pagina dedicata alle feste di compleanno in città.`,
     },
   ];
 
@@ -82,8 +88,8 @@ export default async function ListingPage({ params }: P) {
         }}
       />
 
-      <div className={`-mx-4 -mt-8 mb-6 px-4 pb-6 pt-6 sm:mx-0 sm:rounded-b-[2rem] sm:px-8`} style={{ background: "#F0E8FA" }}>
-        <RicercaCosaDove {...vociRicerca()} categoria={cat.slug} citta={citta} />
+      <div className={`-mx-4 -mt-8 mb-6 px-4 pb-4 pt-4 sm:mx-0 sm:rounded-b-[2rem] sm:px-8 sm:pb-6 sm:pt-6`} style={{ background: "#F0E8FA" }}>
+        <RicercaCosaDove {...vociRicerca()} categoria={cat.slug} citta={citta} compatta />
       </div>
       <Briciole voci={[{ nome: cat.nome, href: `/${cat.slug}` }, { nome: nomeCitta }]} />
       <h1 className="mt-3 text-3xl font-black tracking-tight text-notte sm:text-5xl">

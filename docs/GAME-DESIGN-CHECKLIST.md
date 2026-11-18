@@ -11,7 +11,7 @@ Basata su LEGO Foundation (apprendimento giocoso: gioioso, significativo, attivo
 ## Regole non negoziabili
 - [ ] NIENTE timer, NIENTE countdown, NIENTE "game over"
 - [ ] Errore = feedback gentile + riprova, mai punizione, mai suono negativo
-- [ ] Istruzione vocale all'inizio (Web Speech it-IT) + icona ripeti
+- [ ] Istruzione vocale all'inizio + icona ripeti: voce registrata di Mizi se la frase è in content/voce-mizi.json, altrimenti sintesi del telefono (lib/giochi/audio.ts)
 - [ ] Tap target ≥ 64px, spaziatura ≥ 16px tra elementi toccabili
 - [ ] Una sola azione per schermo; niente menu durante il gioco
 - [ ] 5–8 round, difficoltà crescente, poi festa finale con mizi-festa.png + coriandoli
@@ -20,6 +20,10 @@ Basata su LEGO Foundation (apprendimento giocoso: gioioso, significativo, attivo
 - [ ] Nessun testo da leggere per i giochi 3–5 anni (solo icone + voce)
 - [ ] Modalità `?demo=1`: gioca da sola per 12s (per i reel)
 - [ ] onProgress(round, total) e onComplete({score, stars}) chiamati correttamente
+- [ ] Frasi senza genere («Evviva!», non «Bravissimo!») e tutte nel copione della voce (content/voce-mizi.json)
+- [ ] Aiuto dopo 3 errori di fila; le stelle contano solo gli errori evitabili
+- [ ] Niente serie da non perdere, punti che scadono o classifiche: l'album di Mizi (lib/giochi/album.ts) è l'unica gamification
+- [ ] Metodo completo dell'upgrade: .claude/skills/game-designer-mizi/SKILL.md
 
 ## Contenuto SEO (content/games/{slug}.md)
 - [ ] Frontmatter: title, slug, ageMin, ageMax, skill, subskill, description (≤155 caratteri)

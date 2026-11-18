@@ -1,4 +1,4 @@
-import { url } from "@/lib/seo";
+import { url } from "@/lib/seo/seo";
 import { firmaSlide } from "./disegna";
 import type { PostSocial } from "./post";
 

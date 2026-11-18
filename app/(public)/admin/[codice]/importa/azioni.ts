@@ -1,11 +1,11 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { adminValido } from "@/lib/admin";
-import { SCHEDE, percorsoScheda } from "@/lib/directory";
-import { SCHEDA_ESTESA_PROVA, adminSalvaScheda } from "@/lib/directory-db";
-import { fornitoreAi, leggiFonti, proponiScheda, type EsitoFonte, type Proposta } from "@/lib/import-ai";
-import { validaScheda, type SchedaEstesa } from "@/lib/scheda-campi";
+import { adminValido } from "@/lib/directory/admin";
+import { SCHEDE, percorsoScheda } from "@/lib/directory/directory";
+import { SCHEDA_ESTESA_PROVA, adminSalvaScheda } from "@/lib/directory/directory-db";
+import { fornitoreAi, leggiFonti, proponiScheda, type EsitoFonte, type Proposta } from "@/lib/directory/import-ai";
+import { validaScheda, type SchedaEstesa } from "@/lib/directory/scheda-campi";
 
 const schedaDa = (chiave: string) => SCHEDE.find((s) => `${s.cittaSlug}/${s.slug}` === chiave);
 

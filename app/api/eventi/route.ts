@@ -1,6 +1,8 @@
-import { SCHEDE } from "@/lib/directory";
-import { chiaveScheda } from "@/lib/directory-db";
-import { EVENTI, conta, type Evento } from "@/lib/statistiche";
+import { SCHEDE } from "@/lib/directory/directory";
+import { chiaveScheda } from "@/lib/directory/directory-db";
+import { EVENTI, conta, type Evento } from "@/lib/directory/statistiche";
+import { RISORSE } from "@/lib/risorse/risorse-educative-dati";
+import { chiaveRisorsa } from "@/lib/risorse/risorse-educative";
 
 /**
  * Contatori delle schede: la pagina manda { scheda, evento } con sendBeacon.
@@ -11,7 +13,8 @@ import { EVENTI, conta, type Evento } from "@/lib/statistiche";
 
 export const runtime = "nodejs";
 
-const CHIAVI = new Set(SCHEDE.map((s) => chiaveScheda(s)));
+// Le schede delle feste e quelle delle risorse educative (chiave "risorse/<slug>").
+const CHIAVI = new Set([...SCHEDE.map((s) => chiaveScheda(s)), ...RISORSE.map((r) => chiaveRisorsa(r))]);
 const BOT = /bot|crawl|spider|slurp|preview|lighthouse|headless|facebookexternalhit|whatsapp/i;
 
 export async function POST(richiesta: Request) {

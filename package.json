@@ -5,6 +5,7 @@
   "description": "Gioca con Mizi — giochi educativi, storie, coding e biglietti per bambini 3–12 anni. Gratis, senza pubblicità.",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/varianti-immagini.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -15,13 +16,16 @@
     "date-pagine": "node scripts/date-pagine.mjs",
     "immagini": "tsx scripts/immagini.ts",
     "prompt-guide": "tsx scripts/prompt-guide.ts",
+    "registro": "python scripts/registro-prodotto.py",
     "prompt-del-giorno": "tsx scripts/prompt-del-giorno.ts",
     "foto-arrivate": "tsx scripts/foto-arrivate.ts",
     "articoli:compila": "node scripts/articoli/compila.mjs",
     "articoli:controlla": "node scripts/articoli/controlla.mjs",
     "articoli:piano": "node scripts/articoli/piano.mjs",
     "foto:prenota": "tsx scripts/foto-prenota.ts",
-    "foto:genera": "tsx scripts/foto-genera.ts"
+    "foto:genera": "tsx scripts/foto-genera.ts",
+    "voce": "tsx scripts/voce-genera.ts",
+    "video": "bash scripts/video/fai.sh"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.9.0",

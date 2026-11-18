@@ -3,7 +3,7 @@
 import { Lock, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Contenitore } from "@/components/ui";
-import { ETA, EVENTO_APRI_BENVENUTO, iscriviPosta, salvaProfilo, useProfilo, type Profilo } from "@/lib/profilo";
+import { ETA, EVENTO_APRI_BENVENUTO, iscriviPosta, salvaProfilo, useProfilo, type Profilo } from "@/lib/famiglia/profilo";
 
 /**
  * La pagina Profilo (Figma «App mobile», 7): nomi, bimbi, posta di Mizi e

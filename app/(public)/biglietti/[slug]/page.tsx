@@ -15,8 +15,8 @@ import {
   temiPer,
   tutteLePagine,
   type Pagina,
-} from "@/lib/biglietti";
-import { url } from "@/lib/seo";
+} from "@/lib/biglietti/biglietti";
+import { url } from "@/lib/seo/seo";
 
 type Params = { params: Promise<{ slug: string }> };
 

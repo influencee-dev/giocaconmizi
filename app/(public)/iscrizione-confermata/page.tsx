@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Contenitore } from "@/components/ui";
 import { BottoneFreccia, TestataPagina } from "@/components/vetrina";
-import { inviaBenvenuto } from "@/lib/brevo";
+import { inviaBenvenuto } from "@/lib/email/brevo";
 
 export const metadata: Metadata = {
   title: "Iscrizione confermata",

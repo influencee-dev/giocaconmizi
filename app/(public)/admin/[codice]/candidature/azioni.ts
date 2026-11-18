@@ -1,10 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { SCHEDE } from "@/lib/directory";
-import { adminCandidature, adminCreaInvito, adminEsitoCandidatura } from "@/lib/directory-db";
-import { risorsaDaChiave } from "@/lib/risorse-educative";
-import { mandaLinkPersonale } from "@/lib/email-servizio";
+import { SCHEDE } from "@/lib/directory/directory";
+import { adminCandidature, adminCreaInvito, adminEsitoCandidatura } from "@/lib/directory/directory-db";
+import { risorsaDaChiave } from "@/lib/risorse/risorse-educative";
+import { mandaLinkPersonale } from "@/lib/email/email-servizio";
 
 /** Giorgia segna una candidatura come accettata o rifiutata. */
 export async function decidiCandidatura(scelta: "accettata" | "rifiutata", form: FormData) {

@@ -1,10 +1,10 @@
 "use server";
 
 import { after } from "next/server";
-import { CAMPI, apriInvito, inviaRichiesta, type DatiModifica } from "@/lib/directory-db";
-import { SCHEDE } from "@/lib/directory";
-import { risorsaDaChiave } from "@/lib/risorse-educative";
-import { avvisaGiorgia, confermaRicevuta } from "@/lib/email-servizio";
+import { CAMPI, apriInvito, inviaRichiesta, type DatiModifica } from "@/lib/directory/directory-db";
+import { SCHEDE } from "@/lib/directory/directory";
+import { risorsaDaChiave } from "@/lib/risorse/risorse-educative";
+import { avvisaGiorgia, confermaRicevuta } from "@/lib/email/email-servizio";
 
 export type Esito = { stato: "fermo" } | { stato: "ok"; tipo: string } | { stato: "errore"; messaggio: string };
 
@@ -85,8 +85,8 @@ async function logoPulito(file: File): Promise<string | null> {
 }
 
 export async function rispondiRisorsa(_prima: Esito, form: FormData): Promise<Esito> {
-  const { CAMPI_RISORSA, COSTI } = await import("@/lib/risorse-reclamo");
-  const { inviaLogo } = await import("@/lib/directory-db");
+  const { CAMPI_RISORSA, COSTI } = await import("@/lib/risorse/risorse-reclamo");
+  const { inviaLogo } = await import("@/lib/directory/directory-db");
   const tipo = pulito(form.get("tipo"), 20) as "approva" | "modifica" | "rimuovi";
   if (!["approva", "modifica", "rimuovi"].includes(tipo)) return { stato: "errore", messaggio: "Scelta non valida." };
   const email = pulito(form.get("contatto"), 200);

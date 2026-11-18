@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SCHEDE, percorsoScheda } from "@/lib/directory";
-import { adminSchedeGiorgia } from "@/lib/directory-db";
-import { adminValido } from "@/lib/admin";
-import { chiaveAiPresente, fornitoreAi, nomeChiaveAi } from "@/lib/import-ai";
+import { SCHEDE, percorsoScheda } from "@/lib/directory/directory";
+import { adminSchedeGiorgia } from "@/lib/directory/directory-db";
+import { adminValido } from "@/lib/directory/admin";
+import { chiaveAiPresente, fornitoreAi, nomeChiaveAi } from "@/lib/directory/import-ai";
 import { Contenitore } from "@/components/ui";
 import { MenuAdmin } from "../MenuAdmin";
 import { NonDisponibile } from "../NonDisponibile";

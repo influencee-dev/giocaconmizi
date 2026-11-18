@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { Disegno, FacciaMizi, Secchiello, type Emozione, type NomeFigura } from "./arte";
-import { parla, type Lingua } from "@/lib/audio";
-import { stelle, type GameProps } from "./tipi";
+import type { Lingua } from "@/lib/giochi/audio";
+import type { GameProps } from "./tipi";
+import { useRound } from "./nucleo";
 
 /**
  * Motore "tocca la risposta giusta".
@@ -17,6 +18,10 @@ import { stelle, type GameProps } from "./tipi";
  * Regole rispettate qui una volta per tutte (docs/GAME-DESIGN-CHECKLIST.md):
  * niente timer, l'errore non punisce e non blocca, feedback positivo,
  * una sola azione per schermo, tap target ampi.
+ *
+ * Round, punti, stelle, suoni, lodi e aiuto vengono dal nucleo comune
+ * (nucleo.ts). Qui restano solo le opzioni da toccare: dopo due errori nello
+ * stesso round la risposta giusta dondola, così nessuno resta bloccato.
  */
 
 export interface Opzione {
@@ -61,9 +66,6 @@ export interface SceltaMultiplaProps extends GameProps {
   colonne?: number;
 }
 
-const LODI = ["Bravo!", "Benissimo!", "Esatto!", "Perfetto!", "Sì!"];
-const INCORAGGIAMENTI = ["Quasi! Riprova.", "Non è questo. Riprova.", "Riprova, ci sei quasi."];
-
 export function SceltaMultipla({
   titolo,
   round,
@@ -72,83 +74,44 @@ export function SceltaMultipla({
   onComplete,
   demo = false,
 }: SceltaMultiplaProps) {
-  const [indice, setIndice] = useState(0);
-  const [punti, setPunti] = useState(0);
-  const [finito, setFinito] = useState(false);
-  const [sbagliate, setSbagliate] = useState<string[]>([]);
-  const [azzeccata, setAzzeccata] = useState<string | null>(null);
-  const [primoTentativo, setPrimoTentativo] = useState(true);
-
-  /**
-   * Lock di round. I bambini toccano più volte lo stesso bottone, e due tap
-   * nello stesso tick userebbero entrambi lo stato del render precedente:
-   * il round avanzerebbe due volte. Un ref si aggiorna subito, uno stato no.
-   */
-  const chiuso = useRef(false);
+  const totale = round.length;
+  const [sbagliateDi, setSbagliateDi] = useState<{ round: number; ids: string[] }>({ round: 0, ids: [] });
+  // Con due sole opzioni l'aiuto arriva al primo errore: ne resta una.
+  const partita = useRound({ totale, onProgress, onComplete, erroriPerAiuto: 2 });
+  const { indice, finito, inPausa, giusto, sbagliato } = partita;
 
   const corrente = round[Math.min(indice, round.length - 1)];
-  const totale = round.length;
-
-
-  const prossimoRound = useCallback(
-    (giusto: boolean) => {
-      const nuoviPunti = giusto ? punti + 1 : punti;
-      setPunti(nuoviPunti);
-
-      const prossimo = indice + 1;
-      if (prossimo >= totale) {
-        setFinito(true);
-        onComplete?.({ score: nuoviPunti, stars: stelle(nuoviPunti, totale) });
-        return;
-      }
-
-      setIndice(prossimo);
-      setSbagliate([]);
-      setAzzeccata(null);
-      setPrimoTentativo(true);
-      chiuso.current = false;
-      onProgress?.(prossimo, totale);
-    },
-    [indice, punti, totale, onComplete, onProgress],
-  );
+  const sbagliate = sbagliateDi.round === indice ? sbagliateDi.ids : NESSUNA;
+  const azzeccata = inPausa || finito ? corrente.correttaId : null;
+  const aiutoAttivo = !azzeccata && (partita.aiuto || (sbagliate.length > 0 && corrente.opzioni.length - sbagliate.length === 1));
 
   const scegli = useCallback(
     (id: string) => {
-      if (chiuso.current || azzeccata || finito) return;
-
+      if (inPausa || finito) return;
       if (id === corrente.correttaId) {
-        chiuso.current = true;
-        setAzzeccata(id);
-        parla(LODI[indice % LODI.length]);
         // Il punto vale solo se azzeccata al primo colpo; l'errore non toglie nulla.
-        window.setTimeout(() => prossimoRound(primoTentativo), 1000);
+        giusto();
         return;
       }
-
       // Errore: feedback gentile, l'opzione si spegne, si resta nel round.
-      setSbagliate((precedenti) => [...precedenti, id]);
-      setPrimoTentativo(false);
-      parla(corrente.aiuto ?? INCORAGGIAMENTI[sbagliate.length % INCORAGGIAMENTI.length]);
+      if (sbagliate.includes(id)) return;
+      setSbagliateDi({ round: indice, ids: [...sbagliate, id] });
+      sbagliato(corrente.aiuto);
     },
-    [azzeccata, finito, corrente.correttaId, corrente.aiuto, indice, primoTentativo, prossimoRound, sbagliate.length],
+    [inPausa, finito, corrente.correttaId, corrente.aiuto, giusto, sbagliato, sbagliate, indice],
   );
 
   // Modalità demo per i reel: risponde giusto da sola, una volta al secondo.
   useEffect(() => {
-    if (!demo || finito) return;
+    if (!demo || finito || inPausa) return;
     const t = window.setTimeout(() => scegli(corrente.correttaId), 1200);
     return () => window.clearTimeout(t);
-  }, [demo, finito, corrente.correttaId, scegli]);
+  }, [demo, finito, inPausa, corrente.correttaId, scegli]);
 
   const ricomincia = useCallback(() => {
-    setIndice(0);
-    setPunti(0);
-    setFinito(false);
-    setSbagliate([]);
-    setAzzeccata(null);
-    setPrimoTentativo(true);
-    chiuso.current = false;
-  }, []);
+    setSbagliateDi({ round: 0, ids: [] });
+    partita.ricomincia();
+  }, [partita]);
 
   const colonneEffettive =
     corrente.colonne ??
@@ -163,10 +126,10 @@ export function SceltaMultipla({
       round={indice}
       totaleRound={totale}
       finito={finito}
-      stelle={stelle(punti, totale)}
+      stelle={partita.stelle}
       onAncora={ricomincia}
     >
-      <div className="flex h-full w-full max-w-3xl flex-col items-center justify-center gap-6">
+      <div data-scelta-multipla {...partita.attributi} className="flex h-full w-full max-w-3xl flex-col items-center justify-center gap-6">
         {corrente.centro && (
           <div className="flex items-center justify-center">{corrente.centro}</div>
         )}
@@ -186,6 +149,7 @@ export function SceltaMultipla({
                     ? "sbagliata"
                     : "libera"
               }
+              aiuto={aiutoAttivo && opzione.id === corrente.correttaId}
               onScegli={() => scegli(opzione.id)}
             />
           ))}
@@ -201,6 +165,8 @@ export function SceltaMultipla({
   );
 }
 
+const NESSUNA: string[] = [];
+
 /** Vero se l'opzione mostra una figura, non solo testo. */
 function contenutoVisivo(opzione: Opzione): boolean {
   return Boolean(opzione.disegno || opzione.tipo === "faccia" || opzione.tipo === "secchiello");
@@ -209,10 +175,13 @@ function contenutoVisivo(opzione: Opzione): boolean {
 function BottoneOpzione({
   opzione,
   stato,
+  aiuto,
   onScegli,
 }: {
   opzione: Opzione;
   stato: "libera" | "giusta" | "sbagliata";
+  /** Dopo due errori la risposta giusta dondola. */
+  aiuto: boolean;
   onScegli: () => void;
 }) {
   const bordo =
@@ -220,7 +189,9 @@ function BottoneOpzione({
       ? "border-verde bg-verde/10 scale-105"
       : stato === "sbagliata"
         ? "border-crema-scuro bg-white opacity-40"
-        : "border-crema-scuro bg-white active:scale-95";
+        : aiuto
+          ? "border-giallo bg-giallo/20 opzione-aiuto"
+          : "border-crema-scuro bg-white active:scale-95";
 
   const contenuto = useMemo(() => {
     const scala = opzione.scala ?? 1;
@@ -264,6 +235,9 @@ function BottoneOpzione({
       type="button"
       onClick={onScegli}
       disabled={stato === "sbagliata"}
+      data-opzione={opzione.id}
+      data-stato={stato}
+      data-aiuto-opzione={aiuto ? "si" : undefined}
       aria-label={opzione.descrizione ?? opzione.etichetta ?? opzione.id}
       className={`flex min-h-24 flex-col items-center justify-center gap-1 rounded-morbido border-4 p-3 transition-all ${bordo}`}
     >

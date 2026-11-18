@@ -2,11 +2,11 @@
 
 import { revalidatePath, revalidateTag } from "next/cache";
 import { after } from "next/server";
-import { SCHEDE, percorsoScheda } from "@/lib/directory";
-import { adminDati, adminEsito } from "@/lib/directory-db";
-import { TAG_RECLAMO } from "@/lib/risorse-reclamo";
-import { percorsoRisorsa, risorsaDaChiave } from "@/lib/risorse-educative";
-import { schedaOnline, schedaTolta } from "@/lib/email-servizio";
+import { SCHEDE, percorsoScheda } from "@/lib/directory/directory";
+import { adminDati, adminEsito } from "@/lib/directory/directory-db";
+import { TAG_RECLAMO } from "@/lib/risorse/risorse-reclamo";
+import { percorsoRisorsa, risorsaDaChiave } from "@/lib/risorse/risorse-educative";
+import { schedaOnline, schedaTolta } from "@/lib/email/email-servizio";
 
 /** Giorgia accetta o rifiuta una risposta; le pagine pubbliche si rigenerano. */
 export async function decidi(scelta: "accettata" | "rifiutata", form: FormData) {

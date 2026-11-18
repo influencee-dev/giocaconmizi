@@ -55,7 +55,7 @@ export default function Game(props: GameProps) {
           contenuto: <Striscia figura={immagine.figura} indice={k} totale={pezzi} />,
           descrizione: `Pezzo ${k + 1}`,
         })),
-        vocePremio: `Bravo! È ${immagine.nome}.`,
+        vocePremio: `Evviva! È ${immagine.nome}.`,
         centro: (
           <figure className="flex flex-col items-center">
             <div className="h-24 w-24 opacity-30">

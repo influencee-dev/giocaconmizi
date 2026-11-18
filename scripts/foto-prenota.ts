@@ -1,6 +1,6 @@
 /**
  * Prenota una foto per un giorno: finisce nel «Prompt del giorno» della sera
- * prima e ChatGPT la genera la mattina (lib/foto-in-arrivo.ts, docs/foto-sera.md).
+ * prima e ChatGPT la genera la mattina (lib/foto/foto-in-arrivo.ts, docs/foto-sera.md).
  *
  *   npm run foto:prenota -- --file guida-minecraft-vs-roblox --per 2026-11-09 \
  *     --titolo "Foto dell'articolo «Minecraft vs Roblox»" --scena "…" --alt "…" \
@@ -9,8 +9,8 @@
  * Rieseguirla con lo stesso --file aggiorna la prenotazione (niente doppioni).
  * Senza argomenti mostra le prenotazioni ancora da arrivare.
  */
-import { LARGHEZZE, LARGHEZZE_GUIDA } from "../lib/foto";
-import { fotoArrivata, leggiCoda, scriviCoda, type Prenotazione } from "../lib/foto-in-arrivo";
+import { LARGHEZZE, LARGHEZZE_GUIDA } from "../lib/foto/foto";
+import { fotoArrivata, leggiCoda, scriviCoda, type Prenotazione } from "../lib/foto/foto-in-arrivo";
 
 const arg = (nome: string) => {
   const i = process.argv.indexOf(`--${nome}`);

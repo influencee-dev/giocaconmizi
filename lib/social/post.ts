@@ -1,5 +1,5 @@
-import { GUIDE, type Guida } from "@/lib/guide";
-import { fotoGuida } from "@/lib/foto";
+import { GUIDE, type Guida } from "@/lib/contenuti/guide";
+import { fotoGuida } from "@/lib/foto/foto";
 import { games, type GameMeta } from "@/games/registry";
 
 /**
@@ -62,6 +62,9 @@ const HASHTAG_CATEGORIA: Record<string, string[]> = {
   "tavolo-offline": ["#giochidatavolo", "#giochiinfamiglia"],
   "famiglia-abitudini": ["#giochiinfamiglia", "#genitorialita"],
   "mamme-imprenditrici": ["#mammeimprenditrici", "#lavoroefamiglia"],
+  "feste-compleanni": ["#festadicompleanno", "#compleannobambini"],
+  "fuori-casa": ["#bambiniincitta", "#attivitaperbambini"],
+  stagionali: ["#ideeperbambini", "#famiglia"],
 };
 const HASHTAG_SKILL: Partial<Record<string, string[]>> = {
   matematica: ["#matematica", "#tabelline"],

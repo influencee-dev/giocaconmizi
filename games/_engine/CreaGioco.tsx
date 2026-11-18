@@ -52,13 +52,14 @@ export interface CreaGiocoProps extends GameProps {
   titolo: string;
 }
 
-export function CreaGioco({ titolo, onComplete }: CreaGiocoProps) {
+export function CreaGioco({ titolo, onComplete, demo = false }: CreaGiocoProps) {
   const [regole, setRegole] = useState<Regola[]>([{ evento: "tocchiMizi", azione: "puntoPiu" }]);
   const [inProva, setInProva] = useState(false);
   const [punti, setPunti] = useState(0);
   const [mizi, setMizi] = useState({ x: 50, y: 50, taglia: 70 });
   const [sfondo, setSfondo] = useState(SFONDI[0]);
   const [salvato, setSalvato] = useState(false);
+  const [finito, setFinito] = useState(false);
   const battito = useRef<number | null>(null);
 
   // Ricarica un progetto condiviso via link.
@@ -108,6 +109,35 @@ export function CreaGioco({ titolo, onComplete }: CreaGiocoProps) {
     setInProva(true);
   }, []);
 
+  // «Ho finito»: qui non c'è una risposta giusta, quindi la festa è sempre piena.
+  // Prima il bottone avvisava il sito ma la festa non compariva mai: niente figurina.
+  const termina = useCallback(() => {
+    setInProva(false);
+    setFinito(true);
+    onComplete?.({ score: Math.max(punti, 1), stars: 3 });
+  }, [onComplete, punti]);
+
+  const ricomincia = useCallback(() => {
+    setFinito(false);
+    setPunti(0);
+    setMizi({ x: 50, y: 50, taglia: 70 });
+  }, []);
+
+  // ?demo=1: prova il gioco, tocca Mizi qualche volta e chiude.
+  useEffect(() => {
+    if (!demo || finito) return;
+    if (!inProva) {
+      const t = window.setTimeout(avviaProva, 1200);
+      return () => window.clearTimeout(t);
+    }
+    if (punti < 4) {
+      const t = window.setTimeout(() => scatta("tocchiMizi"), 800);
+      return () => window.clearTimeout(t);
+    }
+    const t = window.setTimeout(termina, 1200);
+    return () => window.clearTimeout(t);
+  }, [demo, finito, inProva, punti, avviaProva, scatta, termina]);
+
   const salva = useCallback(() => {
     const codificato = encodeURIComponent(btoa(JSON.stringify(regole)));
     window.location.hash = `progetto=${codificato}`;
@@ -130,8 +160,9 @@ export function CreaGioco({ titolo, onComplete }: CreaGiocoProps) {
       istruzione="Costruisci il tuo gioco: scegli quando succede una cosa e cosa deve fare."
       round={inProva ? 1 : 0}
       totaleRound={1}
-      finito={false}
-      onAncora={() => undefined}
+      finito={finito}
+      stelle={3}
+      onAncora={ricomincia}
     >
       <div className="flex h-full w-full max-w-2xl flex-col gap-3 overflow-y-auto pb-4">
         {/* Il palcoscenico */}
@@ -185,7 +216,8 @@ export function CreaGioco({ titolo, onComplete }: CreaGiocoProps) {
           </button>
           <button
             type="button"
-            onClick={() => onComplete?.({ score: Math.max(punti, 1), stars: 3 })}
+            data-ho-finito
+            onClick={termina}
             className="rounded-bolla border-2 border-crema-scuro bg-white px-6 py-3 font-bold text-notte"
           >
             Ho finito

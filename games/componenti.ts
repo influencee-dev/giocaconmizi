@@ -30,6 +30,7 @@ export const componenti: Record<string, ComponentType<GameProps>> = {
   "tocca-la-lettera": dynamic(() => import("@/games/tocca-la-lettera/Game"), { ssr: false }),
   "unisci-le-sillabe": dynamic(() => import("@/games/unisci-le-sillabe/Game"), { ssr: false }),
   "trova-le-differenze": dynamic(() => import("@/games/trova-le-differenze/Game"), { ssr: false }),
+  "labirinto-dei-tesori": dynamic(() => import("@/games/labirinto-dei-tesori/Game"), { ssr: false }),
   "unisci-i-puntini": dynamic(() => import("@/games/unisci-i-puntini/Game"), { ssr: false }),
   "cosa-viene-dopo": dynamic(() => import("@/games/cosa-viene-dopo/Game"), { ssr: false }),
   "cosa-manca": dynamic(() => import("@/games/cosa-manca/Game"), { ssr: false }),

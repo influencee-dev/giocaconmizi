@@ -1,10 +1,10 @@
 import { games } from "@/games/registry";
-import { testoGioco } from "@/lib/content";
-import { GUIDE } from "@/lib/guide";
-import { CITTA_FESTE } from "@/lib/feste";
-import { SCHEDE, percorsoScheda } from "@/lib/directory";
-import { conModifiche, pubblicate } from "@/lib/directory-db";
-import { url } from "@/lib/seo";
+import { testoGioco } from "@/lib/contenuti/content";
+import { GUIDE } from "@/lib/contenuti/guide";
+import { CITTA_FESTE } from "@/lib/directory/feste";
+import { SCHEDE, percorsoScheda } from "@/lib/directory/directory";
+import { conModifiche, pubblicate } from "@/lib/directory/directory-db";
+import { url } from "@/lib/seo/seo";
 
 /**
  * llms-full.txt (convenzione llmstxt.org): il TESTO completo delle pagine

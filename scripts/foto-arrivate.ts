@@ -10,10 +10,10 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { GUIDE } from "../lib/guide";
-import { FOTO, LARGHEZZE, LARGHEZZE_GUIDA, type CodiceFoto } from "../lib/foto";
-import { ottimizza } from "../lib/immagini/ottimizza";
-import { leggiCoda, nomeConsegna } from "../lib/foto-in-arrivo";
+import { GUIDE } from "../lib/contenuti/guide";
+import { FOTO, LARGHEZZE, LARGHEZZE_GUIDA, type CodiceFoto } from "../lib/foto/foto";
+import { ottimizza } from "../lib/foto/immagini/ottimizza";
+import { leggiCoda, nomeConsegna } from "../lib/foto/foto-in-arrivo";
 
 const cartella = process.argv.slice(2).find((a) => !a.startsWith("--"));
 const sovrascrivi = process.argv.includes("--sovrascrivi");

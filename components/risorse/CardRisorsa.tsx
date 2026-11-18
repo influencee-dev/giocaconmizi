@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AVVISO_LINK, SEZIONI, chiaveRisorsa, dominio, iniziali, percorsoRisorsa, type Risorsa, type Sezione } from "@/lib/risorse-educative";
+import { AVVISO_LINK, SEZIONI, chiaveRisorsa, dominio, iniziali, percorsoRisorsa, type Risorsa, type Sezione } from "@/lib/risorse/risorse-educative";
 
 /** La card di una risorsa nell'hub (e nell'anteprima del link personale). */
 

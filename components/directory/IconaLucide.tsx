@@ -25,6 +25,7 @@ import {
   Target,
   Tractor,
   Trees,
+  Waves,
   Wand,
   Zap,
 } from "lucide-react";
@@ -52,6 +53,7 @@ const MAPPA: Record<string, LucideIcon> = {
   orsetto: Baby,
   pacco: Package,
   palloncino: PartyPopper,
+  pesce: Waves,
   pallone: Dumbbell,
   puzzle: Puzzle,
   razzo: Rocket,

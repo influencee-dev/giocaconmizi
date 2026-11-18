@@ -1,20 +1,20 @@
 // Ottimizzatore immagini da riga di comando, stessa logica del pannello
-// (lib/immagini/ottimizza.ts): WebP alla qualità più bassa che resta
+// (lib/foto/immagini/ottimizza.ts): WebP alla qualità più bassa che resta
 // identica a occhio, più le varianti responsive.
 //
 //   npm run immagini -- <cartella-o-file> [--codice H-01] [--fuori public/immagini] [--lato 1920] [--fedelta equilibrata]
 //
-// Con --codice il ritaglio e i nomi sono quelli di lib/foto-dati.ts e i file
+// Con --codice il ritaglio e i nomi sono quelli di lib/foto/foto-dati.ts e i file
 // finiscono in public/immagini/ pronti per il sito.
 import fs from "node:fs";
 import path from "node:path";
-import { FOTO, LARGHEZZE, type CodiceFoto } from "../lib/foto-dati";
+import { FOTO, LARGHEZZE, type CodiceFoto } from "../lib/foto/foto-dati";
 import {
   ottimizza,
   nomePulito,
   FEDELTA,
   type Fedelta,
-} from "../lib/immagini/ottimizza";
+} from "../lib/foto/immagini/ottimizza";
 
 const arg = (nome: string) => {
   const i = process.argv.indexOf(`--${nome}`);

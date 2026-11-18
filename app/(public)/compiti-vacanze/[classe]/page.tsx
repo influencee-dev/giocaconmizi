@@ -5,7 +5,7 @@ import { games } from "@/games/registry";
 import { CardGioco, Contenitore, Faq, Griglia, TitoloSezione } from "@/components/ui";
 import { IconaGioco } from "@/components/icone";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
-import { classi, etichettaClasse, type Classe } from "@/lib/seo";
+import { classi, etichettaClasse, type Classe } from "@/lib/seo/seo";
 
 type Params = { params: Promise<{ classe: string }> };
 

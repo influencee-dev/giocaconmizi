@@ -1,4 +1,4 @@
-import { adminValido } from "@/lib/admin";
+import { adminValido } from "@/lib/directory/admin";
 import { numeroSlide, rispostaSlide, slideJpeg } from "@/lib/social/disegna";
 
 /** Le anteprime delle slide nel pannello: solo con il codice admin. */

@@ -17,14 +17,14 @@ import { consensoStatistiche } from "@/components/legal/analytics";
  * - Altri browser: le istruzioni dal menu.
  *
  * Non compare: se l'app è già aperta come app, se l'hai chiusa (per 30 giorni,
- * ricordato in localStorage, vedi lib/legal.ts), finché c'è il banner dei
+ * ricordato in localStorage, vedi lib/contenuti/legal.ts), finché c'è il banner dei
  * cookie, dentro i giochi e il pannello, e dove la pagina ha già una sua barra
  * fissa in basso ([data-barra-fissa], es. la scheda di un locale).
  */
 
 export const CHIAVE_APP_CHIUSA = "giocamizi-app-chiusa";
 const TRENTA_GIORNI = 30 * 24 * 60 * 60 * 1000;
-const NASCOSTA = [/^\/giochi\/[^/]+\/gioca/, /^\/admin\//, /^\/la-tua-scheda\//, /^\/biglietti\/crea/, /^\/biglietti\/vedi/, /^\/accedi/, /^\/aggiungi-attivita/];
+const NASCOSTA = [/^\/giochi\/[^/]+\/gioca/, /^\/admin\//, /^\/la-tua-scheda\//, /^\/biglietti\/crea/, /^\/biglietti\/vedi/, /^\/natale\/letterina-babbo-natale/, /^\/accedi/, /^\/aggiungi-attivita/];
 
 interface EventoInstallazione extends Event {
   prompt: () => Promise<void>;

@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useMemo, useState } from "react";
-import { FOTO, LARGHEZZE, type CodiceFoto } from "@/lib/foto-dati";
-import { creaZip } from "@/lib/immagini/zip";
+import { FOTO, LARGHEZZE, type CodiceFoto } from "@/lib/foto/foto-dati";
+import { creaZip } from "@/lib/foto/immagini/zip";
 
 /**
  * L'ottimizzatore immagini del pannello. Il browser legge la foto (anche la

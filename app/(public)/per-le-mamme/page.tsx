@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Contenitore, TitoloSezione } from "@/components/ui";
 import { FacciaMizi } from "@/games/_engine/arte";
-import { TITOLARE } from "@/lib/legal";
-import { CATEGORIE, perCategoria, type Categoria } from "@/lib/rete";
+import { TITOLARE } from "@/lib/contenuti/legal";
+import { CATEGORIE, perCategoria, type Categoria } from "@/lib/directory/rete";
 
 export const metadata: Metadata = {
   title: "Per le mamme: associazioni, community e locali family-friendly",
@@ -133,6 +133,13 @@ export default function PerLeMammePage() {
         <p className="max-w-2xl text-lg text-notte-tenue">
           Cerchi idee da leggere o attività per i tuoi bambini? Abbiamo raccolto siti per famiglie,
           scuole e laboratori in{" "}
+          <Link
+            href="/risorse-educative-bambini/blog-per-genitori"
+            className="font-bold text-notte underline decoration-viola decoration-2 underline-offset-4"
+          >
+            blog e magazine per genitori
+          </Link>{" "}
+          e in tutte le{" "}
           <Link
             href="/risorse-educative-bambini"
             className="font-bold text-notte underline decoration-viola decoration-2 underline-offset-4"

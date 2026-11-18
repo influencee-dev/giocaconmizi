@@ -1,0 +1,208 @@
+{
+  "slug": "come-completare-la-scheda",
+  "titolo": "Come completare la scheda dal link personale",
+  "gruppo": "partner",
+  "ordine": 2,
+  "descrizione": "Mizi ti mostra come completare la scheda della tua attività dal link personale: testi, contatti, orari, pacchetti festa e logo.",
+  "rispostaBreve": "Per completare la scheda su Giocamizi apri il link personale ricevuto via email, tocca «Voglio completarla» (o «Voglio modificarla» per le attività delle feste), correggi testi, contatti e orari, aggiungi il logo se sei una realtà educativa e invia. Il team controlla a mano prima di pubblicare.",
+  "pagina": {
+    "href": "/come-reclamare-la-scheda",
+    "testo": "Come reclamare la scheda, passo per passo"
+  },
+  "faq": [
+    {
+      "domanda": "Serve una password per completare la scheda?",
+      "risposta": "No: si usa il link personale arrivato via email, che vale solo per la tua scheda. Non inoltrarlo a chi non deve modificarla."
+    },
+    {
+      "domanda": "Le modifiche vanno online subito?",
+      "risposta": "No: il team di Giocamizi le controlla a mano, anche il logo. Quando sono approvate la scheda si aggiorna e prende il bollino «Verificata»."
+    }
+  ],
+  "schermate": {
+    "link": {
+      "url": "/la-tua-scheda/prova-attivita-locale-0000000000",
+      "selettori": [
+        "button:has-text(\"Approvo\")",
+        "button:has-text(\"Voglio modificarla\")",
+        "button:has-text(\"Non voglio comparire\")"
+      ]
+    },
+    "risorsa": {
+      "url": "/la-tua-scheda/prova-risorsa-locale-000000000000",
+      "azioni": [
+        {
+          "clicca": "button:has-text(\"Voglio completarla\")"
+        },
+        {
+          "riempi": "textarea[name=orari]",
+          "valore": "Da lunedì a venerdì, 9–18"
+        },
+        {
+          "riempi": "input[name=referente]",
+          "valore": "Anna Rossi"
+        },
+        {
+          "riempi": "input[name=contatto]",
+          "valore": "anna@esempio.it"
+        },
+        {
+          "clicca": "input[name=termini]"
+        }
+      ],
+      "selettori": [
+        "button:has-text(\"Voglio completarla\")",
+        "input[name=logo-file]",
+        "textarea[name=cosaFa]",
+        "select[name=costi]",
+        "input[name=sede]",
+        "textarea[name=orari]",
+        "input[name=referente]",
+        "input[name=contatto]",
+        "input[name=termini]",
+        "button:has-text(\"Invia le modifiche\")"
+      ]
+    },
+    "attivita": {
+      "url": "/la-tua-scheda/prova-attivita-locale-0000000000",
+      "azioni": [
+        {
+          "clicca": "button:has-text(\"Voglio modificarla\")"
+        },
+        {
+          "riempi": "input[name=whatsapp]",
+          "valore": "333 000 0000"
+        },
+        {
+          "riempi": "textarea[name=orari]",
+          "valore": "Lun–ven 16–19, sabato e domenica 10–20"
+        },
+        {
+          "riempi": "textarea[name=pacchetti]",
+          "valore": "Festa di 2 ore con animatore e merenda"
+        }
+      ],
+      "selettori": [
+        "button:has-text(\"Voglio modificarla\")",
+        "input[name=whatsapp]",
+        "textarea[name=orari]",
+        "textarea[name=pacchetti]"
+      ]
+    },
+    "scheda": {
+      "url": "/risorse-educative-bambini/maestra-giulia"
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per attività e realtà educative",
+      "titolo": "Come completare la tua scheda",
+      "sottotitolo": "Dal tuo link personale, senza password.",
+      "voce": "Ciao, sono Mizi! Ti è arrivato il link personale della tua scheda? Bene! Ti faccio vedere come completarla, con contatti, orari e, per le realtà educative, anche il logo. È gratis, e non serve nessuna password."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Apri il tuo link",
+      "testo": "Vedi la scheda come la vedono le famiglie.",
+      "schermata": "link",
+      "evidenzia": [
+        "button:has-text(\"Approvo\")",
+        "button:has-text(\"Voglio modificarla\")",
+        "button:has-text(\"Non voglio comparire\")"
+      ],
+      "voce": "Apri il link dall'email. In alto c'è la tua scheda, proprio come la vedono le famiglie. Sotto ci sono tre scelte: approvarla così com'è, completarla, oppure toglierla."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Tocca «Voglio completarla»",
+      "testo": "Il logo è facoltativo: PNG, JPG o WebP.",
+      "schermata": "risorsa",
+      "evidenzia": [
+        "button:has-text(\"Voglio completarla\")",
+        "input[name=logo-file]"
+      ],
+      "nota": "Lo controlliamo prima di mostrarlo",
+      "notaIcona": "lente",
+      "voce": "Se sei una realtà educativa, tocca «Voglio completarla». Si apre il modulo, e la prima cosa è il vostro logo. È facoltativo, e va bene un PNG o un JPG."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 3,
+      "titolo": "Correggi e aggiungi",
+      "testo": "Cosa fate, per chi, costi, sede, orari, social.",
+      "schermata": "risorsa",
+      "evidenzia": [
+        "textarea[name=cosaFa]",
+        "select[name=costi]",
+        "input[name=sede]",
+        "textarea[name=orari]"
+      ],
+      "voce": "Poi ci sono i testi, già scritti: correggili come vuoi. Cosa fate, per chi, quanto costa. E puoi aggiungere la sede, gli orari, il sito e i social."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 4,
+      "titolo": "Per le feste: «Voglio modificarla»",
+      "testo": "WhatsApp, telefono, orari, pacchetti festa.",
+      "schermata": "attivita",
+      "evidenzia": [
+        "button:has-text(\"Voglio modificarla\")",
+        "input[name=whatsapp]",
+        "textarea[name=orari]",
+        "textarea[name=pacchetti]"
+      ],
+      "nota": "Le foto? Rispondi all'email",
+      "notaIcona": "cassetta-posta",
+      "voce": "Hai un'attività per feste e bambini? Lì il bottone si chiama «Voglio modificarla». Puoi mettere WhatsApp, orari e pacchetti festa con i prezzi. E le foto le mandi rispondendo all'email."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 5,
+      "titolo": "Nome, email e invio",
+      "testo": "La tua email serve solo per risponderti.",
+      "schermata": "risorsa",
+      "evidenzia": [
+        "input[name=referente]",
+        "input[name=contatto]",
+        "input[name=termini]",
+        "button:has-text(\"Invia le modifiche\")"
+      ],
+      "nota": "Non compare sulla scheda",
+      "notaIcona": "chiave",
+      "voce": "Alla fine scrivi il tuo nome e la tua email: servono solo per risponderti. Spunta i termini e tocca «Invia le modifiche»."
+    },
+    {
+      "tipo": "carta",
+      "passo": 6,
+      "titolo": "Controlliamo noi, a mano",
+      "testo": "Niente va online da solo.",
+      "carta": {
+        "icona": "lente",
+        "titolo": "Grazie, risposta ricevuta!",
+        "testo": "Il team di Giocamizi controlla le modifiche e il logo prima di pubblicarli.",
+        "spunta": true
+      },
+      "voce": "Poi il team di Giocamizi controlla tutto a mano, anche il logo. Niente va online da solo!"
+    },
+    {
+      "tipo": "telefono",
+      "passo": 7,
+      "titolo": "La tua scheda è verificata",
+      "testo": "E ti scriviamo quando è online.",
+      "schermata": "scheda",
+      "scorri": null,
+      "bollino": "✓ Scheda verificata",
+      "entraDaSinistra": true,
+      "voce": "Quando le modifiche sono approvate, la scheda prende il bollino verde «Scheda verificata». E ti arriva un'email quando è online."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/tutorial",
+      "sotto": "Tutti i video di Mizi, passo passo.",
+      "voce": "Se hai dubbi, trovi tutti i miei video su giocamizi punto it, nella pagina «Tutorial». Ti aspetto! Ciao ciao!"
+    }
+  ]
+}

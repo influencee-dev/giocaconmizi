@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { parla, zittisci } from "@/lib/audio";
+import { parla, zittisci } from "@/lib/giochi/audio";
 
 /**
  * Lettore delle storie: un testo, tre caratteri (piano §2, decisione 5).

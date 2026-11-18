@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { mescola, uno } from "@/games/_engine/casuale";
-import { parla } from "@/lib/audio";
+import { parla } from "@/lib/giochi/audio";
 import { stelle, type GameProps } from "@/games/_engine/tipi";
 
 /**
@@ -163,7 +163,7 @@ function Scritta({ f, grande = false }: { f: Frazione; grande?: boolean }) {
   );
 }
 
-const LODI = ["Giusto!", "Esatto!", "Bravo!", "Perfetto!"];
+const LODI = ["Giusto!", "Esatto!", "Evviva!", "Perfetto!"];
 
 export default function Game({ onProgress, onComplete, demo = false }: GameProps) {
   const round: Round[] = useMemo(

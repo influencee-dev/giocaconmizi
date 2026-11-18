@@ -1,0 +1,161 @@
+{
+  "slug": "giocamizi-in-classe",
+  "titolo": "Giocamizi in classe con la LIM, senza account",
+  "gruppo": "partner",
+  "ordine": 4,
+  "descrizione": "Mizi mostra a maestre e maestri come usare i giochi di Giocamizi in classe, alla LIM o sui tablet, senza account.",
+  "rispostaBreve": "Per usare Giocamizi in classe apri la pagina «Per insegnanti», scegli la competenza o un gioco e tocca «Gioca»: si apre subito alla LIM o sui tablet, senza account e senza pubblicità. Puoi scegliere l'età dei bambini e il gioco si adatta. Nessun timer, nessun punteggio da battere.",
+  "pagina": {
+    "href": "/per-insegnanti",
+    "testo": "La pagina per insegnanti"
+  },
+  "faq": [
+    {
+      "domanda": "Serve un account per usare i giochi in classe?",
+      "risposta": "No: i giochi si aprono con un link, senza registrazione, né per l'insegnante né per i bambini."
+    },
+    {
+      "domanda": "Funziona sulla LIM?",
+      "risposta": "Sì: i giochi funzionano sulla LIM, sui tablet della classe e sui telefoni, dal browser."
+    }
+  ],
+  "schermate": {
+    "insegnanti": {
+      "url": "/per-insegnanti",
+      "selettori": [
+        "p:has-text(\"senza registrazione\")",
+        "a[href=\"/giochi/competenza/matematica\"]",
+        "a[href=\"/compiti-vacanze/prima-elementare\"]",
+        "a[href=\"/risorse-educative-bambini/schede-didattiche-per-insegnanti\"]"
+      ]
+    },
+    "competenza": {
+      "url": "/giochi/competenza/matematica",
+      "selettori": [
+        "a[href=\"/giochi/tabelline\"]"
+      ]
+    },
+    "catalogo": {
+      "url": "/giochi",
+      "selettori": [
+        "a[href=\"/giochi/tabelline\"]"
+      ]
+    },
+    "gioco": {
+      "url": "/giochi/tabelline",
+      "selettori": [
+        "a[href=\"/giochi/tabelline/gioca\"]",
+        "a[href=\"/giochi/tabelline/gioca?eta=8\"]"
+      ]
+    },
+    "gioca": {
+      "url": "/giochi/tabelline/gioca?eta=8",
+      "azioni": [
+        {
+          "attendi": 1500
+        }
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per insegnanti",
+      "titolo": "Giocamizi in classe, alla LIM o sui tablet",
+      "sottotitolo": "Senza account, senza pubblicità.",
+      "voce": "Ciao, sono Mizi! Sei una maestra o un maestro? Ti faccio vedere come usare i giochi di Giocamizi in classe, alla LIM o sui tablet. Senza account e senza pubblicità!"
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "La pagina «Per insegnanti»",
+      "testo": "LIM, tablet della classe e telefoni.",
+      "schermata": "insegnanti",
+      "scorri": null,
+      "evidenzia": [
+        "p:has-text(\"senza registrazione\")"
+      ],
+      "voce": "C'è una pagina apposta: «Per insegnanti». I giochi si aprono con un link, senza registrazione. Funzionano sulla LIM, sui tablet della classe e sui telefoni."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Scegli la competenza",
+      "testo": "Matematica, ortografia, logica, coding…",
+      "schermata": "insegnanti",
+      "evidenzia": [
+        "a[href=\"/giochi/competenza/matematica\"]"
+      ],
+      "voce": "Sotto trovi i giochi divisi per competenza: matematica, ortografia, logica, coding e tante altre. Tocca quella che state facendo in classe."
+    },
+    {
+      "tipo": "due",
+      "passo": 3,
+      "titolo": "Un gioco, una competenza",
+      "testo": "Su ogni card: età e minuti.",
+      "schermate": [
+        "competenza",
+        "catalogo"
+      ],
+      "scorri": [
+        "a[href=\"/giochi/tabelline\"]",
+        "a[href=\"/giochi/tabelline\"]"
+      ],
+      "voce": "Oppure apri la pagina con tutti i giochi. Ognuno allena una cosa sola, e su ogni card vedi l'età e quanti minuti dura."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 4,
+      "titolo": "Tocca «Gioca»",
+      "testo": "Puoi scegliere l'età: il gioco si adatta.",
+      "schermata": "gioco",
+      "evidenzia": [
+        "a[href=\"/giochi/tabelline/gioca\"]",
+        "a[href=\"/giochi/tabelline/gioca?eta=8\"]"
+      ],
+      "voce": "Scegli un gioco, per esempio le tabelline, e tocca «Gioca». Puoi anche scegliere l'età dei bambini: il gioco diventa più facile o più difficile."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 5,
+      "titolo": "Si gioca subito",
+      "testo": "Nessun timer, nessun punteggio da battere.",
+      "schermata": "gioca",
+      "scorri": null,
+      "voce": "E si gioca subito! Nessun timer e nessun punteggio da battere: così nessun bambino resta indietro davanti a tutti."
+    },
+    {
+      "tipo": "carta",
+      "passo": 6,
+      "titolo": "Basta un link",
+      "testo": "Niente account, né per te né per i bambini.",
+      "carta": {
+        "icona": "link",
+        "titolo": "Tabelline con Mizi",
+        "sotto": "giocamizi.it/giochi/tabelline",
+        "testo": "Aprilo alla LIM o sui tablet della classe.",
+        "bottone": "Gioca",
+        "spunta": true
+      },
+      "voce": "Non serve nessun account, né per te né per i bambini. Basta il link: lo apri alla LIM, oppure sui tablet della classe."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 7,
+      "titolo": "Compiti e siti utili",
+      "testo": "Compiti delle vacanze per classe, schede didattiche.",
+      "schermata": "insegnanti",
+      "evidenzia": [
+        "a[href=\"/compiti-vacanze/prima-elementare\"]",
+        "a[href=\"/risorse-educative-bambini/schede-didattiche-per-insegnanti\"]"
+      ],
+      "voce": "E nella stessa pagina trovi i compiti delle vacanze divisi per classe, e altri siti utili per la scuola, con schede e materiali."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/per-insegnanti",
+      "sotto": "Gratis, senza registrazione.",
+      "voce": "Ti aspetto su giocamizi punto it, nella pagina «Per insegnanti». Buon lavoro in classe! Ciao ciao!"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { tutteLeStorie } from "@/lib/content";
+import { tutteLeStorie } from "@/lib/contenuti/content";
 import { Contenitore, Griglia } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 import { CardStoria } from "@/components/storie/CardStoria";

@@ -1,6 +1,6 @@
 // Il pannello di Giorgia: l'ingresso è chiuso senza codice, e il «plugin»
 // immagini trasforma una foto in WebP molto più leggeri, con i nomi giusti.
-// Il codice di prova vale solo nel server delle verifiche (lib/admin.ts).
+// Il codice di prova vale solo nel server delle verifiche (lib/directory/admin.ts).
 import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { apriBrowser, conServer, contatore, BASE, CODICE_ADMIN_PROVA } from "./comune.mjs";
@@ -110,10 +110,26 @@ ok("piè di pagina: dati della società e quattro porte", piede.includes("044055
 await page.goto(`${BASE}/sale-feste/milano`, { waitUntil: "networkidle" });
 const risultati = async () => Number(await page.locator("[data-risultati]").getAttribute("data-risultati"));
 const prima = await risultati();
-await page.getByRole("button", { name: /^Per la festa/ }).tap();
-await page.locator("[data-tendina]").getByLabel(/Animazione inclusa/).check();
+// Filtri per il telefono (15/11/2026): «Filtri» apre un foglio dal basso che
+// sta tutto nello schermo; le pillole si accendono e «Mostra N posti» chiude.
+ok("listing: su telefono la ricerca è una riga sola, i filtri sono subito sotto",
+  (await page.locator("[data-ricerca-compatta]").isVisible()) && (await page.locator("[data-apri-filtri]").boundingBox()).y < 760);
+await page.locator("[data-apri-filtri]").tap();
+const foglio = page.locator("[data-foglio-filtri] [role='dialog']");
+const riquadro = await foglio.boundingBox();
+ok("listing: il foglio dei filtri sta nello schermo, con «Mostra» in vista",
+  riquadro && riquadro.y >= 0 && riquadro.y + riquadro.height <= 845 && (await page.locator("[data-mostra-risultati]").isVisible()) &&
+  (await page.locator("[data-gruppo-filtri]").count()) >= 3);
+await foglio.getByLabel(/Animazione inclusa/).check({ force: true });
 await page.waitForTimeout(300);
 const dopo = await risultati();
+ok("listing: «Mostra N posti» dice quanti restano e chiude il foglio",
+  (await page.locator("[data-mostra-risultati]").textContent()).includes(String(dopo)));
+await page.locator("[data-mostra-risultati]").tap();
+await page.waitForTimeout(200);
+ok("listing: chiuso il foglio, «Filtri» mostra quanti sono accesi e la pillola rapida è accesa",
+  (await page.locator("[data-foglio-filtri]").count()) === 0 && (await page.locator("[data-apri-filtri]").textContent()).includes("1") &&
+  (await page.locator("[data-filtro-rapido='animazione']").getAttribute("aria-pressed")) === "true");
 ok("listing: il filtro esperienze restringe i risultati", prima > dopo && dopo >= 1, `${dopo}/${prima}`);
 ok("listing: il filtro finisce nell'indirizzo", page.url().includes("servizi=animazione"));
 await page.goto(`${BASE}/sale-feste/milano?servizi=animazione`, { waitUntil: "networkidle" });
@@ -139,8 +155,8 @@ ok("mappa: nessuna mappa prima del tocco", (await page.locator(".leaflet-contain
 await page.locator("[data-apri-mappa]").first().tap();
 await page.locator(".leaflet-container").waitFor({ timeout: 10000 }).catch(() => null);
 ok("mappa: al tocco compare con le città", (await page.locator(".leaflet-marker-icon").count()) >= 40, `${await page.locator(".leaflet-marker-icon").count()} segnaposto`);
-const feste = readFileSync("lib/feste.ts", "utf8");
-const coord = readFileSync("lib/coordinate-citta.ts", "utf8");
+const feste = readFileSync("lib/directory/feste.ts", "utf8");
+const coord = readFileSync("lib/directory/coordinate-citta.ts", "utf8");
 const cittaSenza = [...feste.matchAll(/slug: ["']([a-z-]+)["']/g)].map((m) => m[1]).filter((c) => !coord.includes(`${c}:`) && !coord.includes(`"${c}":`));
 ok("mappa: ogni città ha le coordinate", cittaSenza.length === 0, cittaSenza.join(" "));
 await page.goto(`${BASE}/admin/${CODICE_ADMIN_PROVA}/posizioni`, { waitUntil: "networkidle" });

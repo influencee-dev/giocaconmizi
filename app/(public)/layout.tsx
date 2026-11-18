@@ -1,20 +1,24 @@
+import { inStagioneNatale } from "@/lib/natale/natale";
 import Image from "next/image";
 import Link from "next/link";
 import { JsonLd, jsonLdSito } from "@/components/seo/JsonLd";
 import { FasciaNewsletter } from "@/components/form/FasciaNewsletter";
 import { Piede } from "@/components/vetrina/Piede";
 import { games } from "@/games/registry";
-import { GUIDE } from "@/lib/guide";
-import { CITTA_FESTE } from "@/lib/feste";
+import { GUIDE } from "@/lib/contenuti/guide";
+import { CITTA_FESTE } from "@/lib/directory/feste";
 import { BannerCookie } from "@/components/legal/BannerCookie";
 import { BarraApp } from "@/components/app/BarraApp";
 import { BarraSchede } from "@/components/app/BarraSchede";
 import { Benvenuto } from "@/components/app/Benvenuto";
 import { Freccia } from "@/components/vetrina";
 import { MenuMobile } from "@/components/vetrina/MenuMobile";
+import { SENZA_PRECARICO } from "@/lib/seo/precarico";
 
+// Il Natale entra nel menu solo in stagione (lib/natale/natale.ts).
 const MENU = [
   { href: "/giochi", nome: "Giochi" },
+  ...(inStagioneNatale() ? [{ href: "/natale", nome: "Natale" }] : []),
   { href: "/feste", nome: "Feste" },
   { href: "/guide", nome: "Guide" },
   { href: "/storie", nome: "Storie" },
@@ -57,7 +61,9 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
           <Logo />
           <nav aria-label="Principale" className="hidden items-center gap-1 lg:flex">
             {MENU.map((m) => (
-              <Link key={m.href} href={m.href} className="rounded-xl px-3.5 py-2 text-[15px] font-bold text-notte hover:text-viola">
+              // /natale e le risorse si rigenerano da sole (ISR): niente precaricamento
+              // automatico, che sul server di prova resta appeso (lib/seo/precarico.ts).
+              <Link key={m.href} href={m.href} prefetch={SENZA_PRECARICO.has(m.href) ? false : undefined} className="rounded-xl px-3.5 py-2 text-[15px] font-bold text-notte hover:text-viola">
                 {m.nome}
               </Link>
             ))}

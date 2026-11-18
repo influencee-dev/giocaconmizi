@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Contenitore } from "@/components/ui";
-import { adminValido } from "@/lib/admin";
+import { adminValido } from "@/lib/directory/admin";
 import { MenuAdmin } from "../MenuAdmin";
 import { Ottimizzatore } from "./Ottimizzatore";
 

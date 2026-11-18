@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { fotoSito, type CodiceFoto } from "@/lib/foto";
+import { fotoSito, type CodiceFoto } from "@/lib/foto/foto";
 import { MiziIntero } from "@/components/illustrazioni";
 import { Freccia } from "./freccia";
 
 /**
  * I mattoni del template vetrina: card pastello con la foto incassata,
  * bottoni con la freccia, blocco "In breve", testata delle pagine,
- * fascia finale. Le foto arrivano da lib/foto.ts; finché mancano, ogni
+ * fascia finale. Le foto arrivano da lib/foto/foto.ts; finché mancano, ogni
  * riquadro mostra un'illustrazione su fondo pastello.
  */
 

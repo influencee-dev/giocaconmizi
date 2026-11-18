@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Contenitore } from "@/components/ui";
-import { adminValido } from "@/lib/admin";
-import { diagnosiBrevo, iscrittiAdmin, statoInvio } from "@/lib/brevo";
+import { adminValido } from "@/lib/directory/admin";
+import { diagnosiBrevo, iscrittiAdmin, statoInvio } from "@/lib/email/brevo";
 import { MenuAdmin } from "../MenuAdmin";
 import { DaAttivare, NonDisponibile, Numero } from "../NonDisponibile";
 import { EsportaCsv } from "./EsportaCsv";

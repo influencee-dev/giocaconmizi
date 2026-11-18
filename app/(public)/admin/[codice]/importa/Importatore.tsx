@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useTransition } from "react";
 import { CircleAlert, CircleCheck, ExternalLink, LoaderCircle, Sparkles } from "lucide-react";
-import { campiPerCategoria, testoValore, type IdCampo } from "@/lib/scheda-campi";
+import { campiPerCategoria, testoValore, type IdCampo } from "@/lib/directory/scheda-campi";
 import { proponi, salva, type EsitoProposta, type EsitoSalva } from "./azioni";
 
 export interface SchedaScelta {

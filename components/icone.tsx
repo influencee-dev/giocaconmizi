@@ -77,6 +77,7 @@ export const ICONE_GIOCO: Record<string, NomeIcona[]> = {
   "pixel-art": ["alieno-pixel", "tavolozza"],
   "robot-ballerino": ["robot", "note"],
   "labirinto-a-blocchi": ["bussola", "pinguino"],
+  "labirinto-dei-tesori": ["mappa", "chiave"],
   "trova-l-errore": ["bug", "lente"],
   "dove-arriva-mizi": ["pinguino", "domanda"],
   "salto-di-mizi": ["pinguino", "tondo-blu"],
@@ -116,4 +117,10 @@ export function Icona({ nome, className = "h-5 w-5" }: { nome: NomeIcona; classN
 export function IconaGioco({ slug, skill, lato }: { slug?: string; skill: Skill; lato?: string }) {
   const nomi = (slug && ICONE_GIOCO[slug]) || ICONE_SKILL[skill] || ICONE_SKILL.forme;
   return <Icone nomi={nomi} lato={lato} />;
+}
+
+/** La figurina di un gioco per l'album di Mizi: una sola icona, la prima del gioco. */
+export function FigurinaGioco({ slug, skill, className = "h-full w-full" }: { slug: string; skill: Skill; className?: string }) {
+  const nomi = ICONE_GIOCO[slug] || ICONE_SKILL[skill] || ICONE_SKILL.forme;
+  return <Icona nome={nomi[0]} className={`object-contain ${className}`} />;
 }

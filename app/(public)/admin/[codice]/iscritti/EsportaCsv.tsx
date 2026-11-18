@@ -1,6 +1,6 @@
 "use client";
 
-import type { Iscritto } from "@/lib/brevo";
+import type { Iscritto } from "@/lib/email/brevo";
 
 /** Esporta gli iscritti in CSV (si apre con Excel e Fogli Google), generato nel browser. */
 export function EsportaCsv({ righe }: { righe: Iscritto[] }) {
