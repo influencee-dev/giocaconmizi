@@ -248,6 +248,29 @@ await page.waitForTimeout(200);
 // Frasi a tema: col tema halloween la prima frase proposta è a tema
 ok("frasi a tema (halloween)", await page.locator("button:has-text('Dolcetto o scherzetto')").count());
 
+// Dal 19/11/2026 OGNI tema ha due frasi d'invito sue: corte, col nome, senza «invitato/a».
+{
+  const { readFileSync } = await import("node:fs");
+  const registro = readFileSync("cards/registry.ts", "utf8");
+  const temiTutti = [...registro.split("export const cardBackgrounds")[0].matchAll(/^  \["([a-z-]+)", "/gm)].map((m) => m[1]);
+  const blocco = registro.split("export const phrasesPerTema")[1].split("export const auguriPerTema")[0];
+  const perTema = Object.fromEntries([...blocco.matchAll(/^  "?([a-z-]+)"?: \[\n([\s\S]*?)\n  \],/gm)].map((m) => [m[1], [...m[2].matchAll(/"([^"\n]+)",/g)].map((f) => f[1])]));
+  const senza = temiTutti.filter((t) => (perTema[t] ?? []).length < 2);
+  const tutte = Object.values(perTema).flat();
+  const storte = tutte.filter((f) => !f.includes("{nome}") || f.length > 80 || /invitat[oa]\b|\bbimb/i.test(f) && !/Sei invitato a corte/.test(f));
+  ok("frasi a tema: ogni sfondo ne ha almeno due, corte e col nome", temiTutti.length >= 27 && senza.length === 0 && storte.length === 0, `${temiTutti.length} temi; senza: ${senza.join(", ")}; storte: ${storte.join(" | ")}`);
+}
+await page.goto(`${BASE}/biglietti/crea?tema=fattoria`, { waitUntil: "networkidle" });
+await page.locator("[data-vedi-tutto]").tap();
+await page.waitForTimeout(400);
+await page.getByLabel("Nome", { exact: true }).fill("Margherita");
+await page.waitForTimeout(200);
+ok("frasi a tema (fattoria, tema nuovo)", await page.locator("button:has-text('Chicchirichì')").count());
+{
+  const html = await (await fetch(`${BASE}/biglietti/inviti-compleanno-safari`)).text();
+  ok("frasi a tema anche nella pagina del tema (safari)", html.includes("Zaino in spalla") && html.includes("Leoni, giraffe e torta"));
+}
+
 // Tema natale: frase dedicata e i tre adesivi nuovi a catalogo
 await page.goto(`${BASE}/biglietti/crea?tema=natale`, { waitUntil: "networkidle" });
 await page.locator("[data-vedi-tutto]").tap();

@@ -44,8 +44,7 @@ export const cardFormats = { a6: [1240, 1748], a5: [1748, 2480], story: [1080, 1
 
 /**
  * Frasi d'invito su misura del tema: compaiono PRIMA di quelle generiche
- * quando nel creatore è scelto il tema. Due per tema, solo per i temi
- * dove la frase a tema suona davvero meglio di quella generica.
+ * quando nel creatore è scelto il tema, e nella pagina del tema. Due per tema.
  */
 export const phrasesPerTema: Record<string, string[]> = {
   halloween: [
@@ -91,6 +90,74 @@ export const phrasesPerTema: Record<string, string[]> = {
   "mondo-a-cubetti": [
     "Nuova missione sbloccata: la festa dei {eta} anni di {nome}!",
     "{nome} compie {eta} anni: vieni a costruire la festa blocco su blocco?",
+  ],
+  // Dal 19/11/2026 ogni tema ha le sue due frasi. Regole: corte (stanno sul
+  // biglietto senza toccare la data), senza «invitato/invitata», senza
+  // personaggi dei cartoni.
+  "animali-foresta": [
+    "Nel bosco si fa festa: {nome} compie {eta} anni!",
+    "Volpi e orsetti ti aspettano: vieni ai {eta} anni di {nome}?",
+  ],
+  fattoria: [
+    "Chicchirichì! {nome} compie {eta} anni: festa in fattoria!",
+    "Tutti sul trattore: si va alla festa dei {eta} anni di {nome}!",
+  ],
+  macchinine: [
+    "Pronti, partenza, via! {nome} compie {eta} anni: ti aspettiamo.",
+    "Motori accesi per i {eta} anni di {nome}: vieni a fare un giro?",
+  ],
+  cuccioli: [
+    "Bau, miao e tanta torta: {nome} compie {eta} anni!",
+    "Zampette in festa per i {eta} anni di {nome}: vieni anche tu?",
+  ],
+  "farfalle-fiori": [
+    "È sbocciata una festa: {nome} compie {eta} anni!",
+    "Tra farfalle e fiori festeggiamo i {eta} anni di {nome}: vieni?",
+  ],
+  arcobaleno: [
+    "Una festa di tutti i colori: {nome} compie {eta} anni!",
+    "In fondo all'arcobaleno c'è la torta di {nome}: {eta} anni!",
+  ],
+  circo: [
+    "Venghino, venghino! {nome} compie {eta} anni: comincia lo spettacolo.",
+    "Sotto il tendone si festeggia: {eta} anni per {nome}!",
+  ],
+  safari: [
+    "Zaino in spalla: si parte per il safari dei {eta} anni di {nome}!",
+    "Leoni, giraffe e torta: {nome} compie {eta} anni, vieni?",
+  ],
+  "mare-estate": [
+    "Costume e asciugamano: {nome} compie {eta} anni, festa al mare!",
+    "Sole, tuffi e torta per i {eta} anni di {nome}: ti aspettiamo!",
+  ],
+  "dolci-torta": [
+    "Chi vuole una fetta di torta? {nome} compie {eta} anni!",
+    "Festa dolcissima per i {eta} anni di {nome}: vieni ad assaggiarla?",
+  ],
+  palloncini: [
+    "Palloncini pronti a volare: {nome} compie {eta} anni!",
+    "Coriandoli, palloncini e amici: alla festa di {nome} manchi solo tu!",
+  ],
+  robot: [
+    "Bip bip! Messaggio per te: {nome} compie {eta} anni.",
+    "Modalità festa attivata: vieni ai {eta} anni di {nome}?",
+  ],
+  fate: [
+    "Un pizzico di polvere di stelle: {nome} compie {eta} anni!",
+    "Nel giardino delle fate si festeggia: {eta} anni per {nome}!",
+  ],
+  ballerina: [
+    "Sulle punte verso la festa: {nome} compie {eta} anni!",
+    "Musica, piroette e torta per i {eta} anni di {nome}: vieni?",
+  ],
+  mattoncini: [
+    "Un mattoncino alla volta costruiamo la festa: {nome} compie {eta} anni!",
+    "Alla festa di {nome} manca un pezzo: sei tu! Vieni ai suoi {eta} anni?",
+  ],
+  // Tema dei primi compleanni: niente «{eta} anni», che a un anno suonerebbe storto.
+  "stelle-luna": [
+    "Brilla una stellina in più: è la festa di {nome}!",
+    "Sotto la luna e le stelle festeggiamo {nome}: vieni anche tu?",
   ],
 };
 

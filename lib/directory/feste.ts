@@ -24,6 +24,10 @@
 // eventi fermi al 2018.
 // Brindisi (18/11/2026): solo Gommalandia Park (pagina Facebook, niente sito);
 // gli altri nomi vengono da un elenco con numeri di telefono finti.
+// Guidonia Montecelio (19/11/2026): solido solo Jungle Park (Collefiorito);
+// Atlantic Park ha solo la pagina Facebook e il sito indicato è di un'altra
+// struttura. Attenzione: «Il Borgo dei Piccoli» esce nelle ricerche di molte
+// città ma è a Bologna.
 
 export interface LocaleFesta {
   nome: string;
@@ -2604,6 +2608,42 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Quanto costa la festa?", risposta: "SpazioGioco indica sul sito 100 euro per l'affitto della sala, 80 per i soci, più una caparra di 30 euro che viene restituita (prezzi letti a novembre 2026). Il Parco Giochi Minerva non pubblica i prezzi: si chiedono al parco." },
       { domanda: "E d'inverno?", risposta: "D'inverno resta SpazioGioco, che è al chiuso. Il Parco Giochi Minerva è all'aperto e apre da marzo a ottobre." },
       { domanda: "Quanti invitati posso portare da SpazioGioco?", risposta: "Al massimo 25 persone in tutto, contando anche gli adulti. La sala è pensata per bambini fino a 6 anni e si affitta solo la domenica." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "ragusa",
+    citta: "Ragusa",
+    aggiornata: "2026-11-19",
+    rispostaBreve: "A Ragusa la festa di compleanno per bambini si fa in ludoteca: da Batti Cinque, in viale Europa, con una sala feste al chiuso e un'area all'aperto, oppure alla Bacchetta Magica, nella zona industriale, con sala feste, ludoteca e baby parking. Chiedete per tempo le date libere e fatevi scrivere cosa comprende il prezzo.",
+    intro: "A Ragusa i compleanni dei bambini si festeggiano soprattutto nelle ludoteche, che mettono la sala e, se volete, anche allestimento e animazione. Qui trovate le due che hanno una pagina ufficiale con l'indirizzo e i servizi.",
+    locali: [
+      { nome: "Batti Cinque Ludoteca", zona: "Ragusa, viale Europa", tipo: "ludoteca con sala feste e area all'aperto", sito: "https://batticinqueludoteca.it/", descrizione: "Ludoteca in viale Europa con una sala feste al chiuso e un'area esterna usata per gli eventi. Per i compleanni lo staff può curare allestimento, giochi e animazione; in alternativa si affittano solo gli spazi e la famiglia organizza da sé. Gli orari cambiano tra estate e inverno e sul sito non coincidono in tutte le pagine: per le date e i prezzi conviene telefonare." },
+      { nome: "La Bacchetta Magica Ragusa", zona: "Ragusa, zona industriale", tipo: "ludoteca con sala feste e baby parking", sito: "https://www.labacchettamagica.com/ragusa", descrizione: "Nella zona industriale di Ragusa, prima fase: il sito del marchio la presenta come sala feste, ludoteca e baby parking. Orari e prezzi non sono pubblicati e i numeri di telefono cambiano da una pagina all'altra: per la festa chiedete tutto direttamente alla ludoteca. Lo stesso marchio ha un'altra sede a Marina di Ragusa." },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno per bambini a Ragusa?", risposta: "In ludoteca: da Batti Cinque in viale Europa, che ha una sala feste al chiuso e un'area all'aperto, oppure alla Bacchetta Magica nella zona industriale, con sala feste e ludoteca." },
+      { domanda: "Quanto costa la festa?", risposta: "Nessuna delle due pubblica i prezzi: si chiedono alla ludoteca. Fatevi scrivere cosa è compreso: quanti bambini, quanto dura, se ci sono animazione, merenda e torta." },
+      { domanda: "Posso organizzare tutto da me?", risposta: "Da Batti Cinque sì: oltre alla festa organizzata dallo staff si può affittare solo lo spazio e portare allestimento e giochi." },
+      { domanda: "C'è uno spazio all'aperto?", risposta: "Batti Cinque ha un'area esterna che usa per gli eventi: chiedete se è disponibile nel giorno della vostra festa." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "casoria",
+    citta: "Casoria",
+    aggiornata: "2026-11-19",
+    rispostaBreve: "A Casoria la festa di compleanno per bambini si fa da Funjungle, il parco giochi al coperto del centro Funteam in via Calvanese, con un pacchetto a prezzo unico che comprende menù, due animatori e ingresso ai giochi, oppure al Castello Sale Eventi, in via De Nicola, una ludoteca con una sala grande per le feste a tema. Chiedete per tempo le date libere.",
+    intro: "A Casoria trovate due posti al chiuso con il loro sito ufficiale: un parco giochi a tema giungla dentro un centro sportivo, dove alla festa si può aggiungere una partita di calcetto, e una sala eventi con ludoteca che organizza anche battesimi e comunioni.",
+    locali: [
+      { nome: "Funjungle", zona: "Casoria, via Mauro Calvanese", tipo: "parco giochi al coperto con sale feste", sito: "https://www.funteam.it/funjungle", descrizione: "Il parco giochi al coperto del centro sportivo Funteam, in via Mauro Calvanese: un playground a tema giungla con decine di giochi, scivoli, ostacoli, arrampicate e tunnel. Per i compleanni il sito propone un pacchetto a prezzo unico con inviti, menù per i bambini e per gli adulti, due animatori, allestimento e ingresso al playground; in più si può aggiungere una partita di calcio con telecronaca e video. Il prezzo non è pubblicato e gli orari cambiano da una pagina all'altra del sito: conviene telefonare." },
+      { nome: "Il Castello Sale Eventi", zona: "Casoria, via De Nicola", tipo: "sala feste con ludoteca per bambini", sito: "https://www.ilcastelloeventi.net/", descrizione: "Sala eventi con ludoteca in via De Nicola. Il sito descrive aree gioco per bambini di età diverse, seguite dagli animatori, e una sala grande per le feste a tema: primi compleanni, feste di fine anno, battesimi e comunioni. C'è un parcheggio riservato ai clienti. I prezzi non sono pubblicati: si chiedono alla struttura." },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno per bambini a Casoria?", risposta: "Al chiuso: da Funjungle, il parco giochi a tema giungla del centro Funteam in via Calvanese, oppure al Castello Sale Eventi in via De Nicola, una ludoteca con una sala grande per le feste a tema." },
+      { domanda: "Quanto costa la festa?", risposta: "Nessuno dei due pubblica i prezzi. Funjungle propone un pacchetto a prezzo unico con menù, due animatori, allestimento e ingresso ai giochi: chiedete la cifra per il vostro numero di invitati." },
+      { domanda: "Si può fare una festa con il calcio?", risposta: "Sì: da Funjungle, che sta dentro un centro con i campi di calcetto, al pacchetto festa si può aggiungere una partita con telecronaca e video." },
+      { domanda: "Vanno bene anche d'inverno o se piove?", risposta: "Sì: tutti e due sono al chiuso." },
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },
