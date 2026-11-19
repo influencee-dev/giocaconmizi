@@ -5,7 +5,7 @@ titolo: "Calendario dell'Avvento fai da te con i bambini: come farlo e cosa mett
 titoloSeo: "Calendario dell'Avvento fai da te con i bambini: idee per età"
 titoloBreve: "Calendario dell'Avvento fai da te"
 descrizione: "Calendario dell'Avvento fai da te con i bambini dai 3 ai 10 anni: sei modi di costruirlo, cosa metterci dentro, il piano di dicembre 2026 e la sicurezza."
-rispostaBreve: "Per un calendario dell'Avvento fai da te servono 24 contenitori (sacchetti di carta, bustine, rotoli di cartone, un barattolo) e 24 cose da trovarci dentro. Funziona meglio se la maggior parte sono bigliettini con una cosa da fare insieme, brevi nei giorni di scuola e più lunghe nei fine settimana, alternati a poche sorprese piccole. I bambini lo costruiscono con te: a 3 anni decorano, a 6 scrivono i numeri, a 9 lo progettano. Sotto i 3 anni niente pezzi piccoli, pile a bottone, caramelle dure."
+rispostaBreve: "Per un calendario dell'Avvento fai da te servono 24 contenitori (sacchetti di carta, bustine, rotoli di cartone, un barattolo) e 24 cose da trovarci dentro. Funziona meglio se la maggior parte sono bigliettini con una cosa da fare insieme, brevi nei giorni di scuola e più lunghe nei fine settimana, alternati a poche sorprese piccole. I bambini lo costruiscono con te: a 3 anni decorano, a 6 scrivono i numeri, a 9 lo progettano. Sotto i 3 anni niente pezzi piccoli né pile a bottone; sotto i 4 niente caramelle, pop corn e frutta secca intera."
 keyword: "calendario dell'avvento fai da te bambini"
 keywordSecondarie:
   - "calendario dell'avvento fai da te"
@@ -20,7 +20,8 @@ voce: pratica
 etaMin: 3
 etaMax: 10
 skill: tempo
-stato: bozza
+stato: pubblicata
+pubblicata: 2026-11-19
 aggiornata: 2026-11-19
 giochi:
   - colora-con-mizi
@@ -35,12 +36,25 @@ schedaRapida:
   - { voce: "Tempo", valore: "Da venti minuti (barattolo dei bigliettini) a due pomeriggi (scatoline impilate): stima della redazione" }
   - { voce: "Cosa metterci", valore: "Soprattutto bigliettini con una cosa da fare insieme, più poche sorprese piccole" }
   - { voce: "Dolci", valore: "Pochi: quattro o cinque su ventiquattro bastano" }
-  - { voce: "Sicurezza", valore: "Sotto i 3 anni niente pezzi piccoli, pile a bottone, magneti, caramelle dure e frutta secca intera" }
-fonti: []
+  - { voce: "Sicurezza", valore: "Sotto i 3 anni niente pezzi più piccoli di 3,17 cm né pile a bottone; sotto i 4 niente caramelle, pop corn, frutta secca intera" }
+fontiVerificateIl: 2026-11-19
+fonti:
+  - { titolo: "Avvento", editore: "Enciclopedia Treccani", url: "https://www.treccani.it/enciclopedia/avvento/", consultata: 2026-11-19 }
+  - { titolo: "Adventskalender (storia del calendario dell'Avvento)", editore: "Wikipedia in tedesco", url: "https://de.wikipedia.org/wiki/Adventskalender", consultata: 2026-11-19 }
+  - { titolo: "Calendario dell'avvento", editore: "Wikipedia in italiano", url: "https://it.wikipedia.org/wiki/Calendario_dell%27avvento", consultata: 2026-11-19 }
+  - { titolo: "Quale gioco scelgo per mio figlio", editore: "Ospedale Pediatrico Bambino Gesù", url: "https://www.ospedalebambinogesu.it/quale-gioco-scelgo-per-mio-figlio-80444/", consultata: 2026-11-19 }
+  - { titolo: "Inalazione di corpo estraneo", editore: "Ospedale Pediatrico Bambino Gesù", url: "https://www.ospedalebambinogesu.it/inalazione-di-corpo-estraneo-89899/", consultata: 2026-11-19 }
+  - { titolo: "Batterie a bottone: in tre mesi 6 ricoveri al Bambino Gesù per gravi lesioni all'esofago (11 agosto 2026)", editore: "Ospedale Pediatrico Bambino Gesù", url: "https://www.ospedalebambinogesu.it/batterie-a-bottone-in-tre-mesi-6-ricoveri-al-bambino-gesu-per-gravi-lesioni-all-esofago-il-triplo-del-2025-182024/", consultata: 2026-11-19 }
+  - { titolo: "Giochi che avvicinano: il miglior regalo di Natale è il tempo insieme (8 dicembre 2025)", editore: "Ospedale Pediatrico Bambino Gesù", url: "https://www.ospedalebambinogesu.it/giochi-avvicinano-miglior-regalo-natale-tempo-insieme-177383/", consultata: 2026-11-19 }
+  - { titolo: "Cibo e soffocamento: le misure per minimizzare i rischi", editore: "Uppa", url: "https://www.uppa.it/cibo-e-soffocamento-misure-per-minimizzare-i-rischi/", consultata: 2026-11-19 }
+  - { titolo: "Tagli sicuri per lo svezzamento, ecco come effettuarli", editore: "Uppa", url: "https://www.uppa.it/tagli-sicuri-svezzamento/", consultata: 2026-11-19 }
+  - { titolo: "Healthy diet (scheda informativa)", editore: "Organizzazione Mondiale della Sanità", url: "https://www.who.int/news-room/fact-sheets/detail/healthy-diet", consultata: 2026-11-19 }
+  - { titolo: "Guideline: sugars intake for adults and children (4 marzo 2015)", editore: "Organizzazione Mondiale della Sanità", url: "https://www.who.int/publications/i/item/9789241549028", consultata: 2026-11-19 }
+  - { titolo: "Toy safety", editore: "Commissione europea", url: "https://single-market-economy.ec.europa.eu/sectors/toys/toy-safety_en", consultata: 2026-11-19 }
 immagini: []
 esperienzeAutentiche: []
 relazioniCommerciali: null
-trasparenza: "Bozza del 19/11/2026: le fonti non sono ancora state aperte e lette. Non pubblicare prima di averle verificate una per una."
+trasparenza: "Ricerca e prima stesura con l'aiuto dell'intelligenza artificiale. Storia, sicurezza e indicazioni sugli zuccheri vengono solo dalle fonti elencate, tutte aperte e lette il 19/11/2026 (Treccani, Wikipedia, Ospedale Pediatrico Bambino Gesù, Uppa, Organizzazione Mondiale della Sanità, Commissione europea). Le idee pratiche, i tempi e il piano di dicembre sono una proposta della redazione: non è il racconto di una prova fatta in casa."
 faq:
   - domanda: "Cosa mettere nel calendario dell'Avvento al posto dei dolci?"
     risposta: "Bigliettini con una cosa da fare insieme (una cioccolata calda, due storie invece di una, fare l'albero), piccoli buoni («vale una colazione al bar»), pezzi di un tutto come le statuine del presepe o un puzzle da completare la vigilia, adesivi, pennarelli, frasi scritte a mano."
@@ -49,7 +63,7 @@ faq:
   - domanda: "Quanto tempo ci vuole per fare un calendario dell'Avvento in casa?"
     risposta: "Dipende dal tipo. Il barattolo dei bigliettini si prepara in una ventina di minuti, i sacchetti appesi a un filo in circa un'ora, le scatoline impilate chiedono un paio di pomeriggi. Sono stime della redazione, senza contare la scelta delle sorprese."
   - domanda: "Il calendario dell'Avvento va bene per un bambino di 2 anni?"
-    risposta: "Sì, se è pensato per la sua età: niente pezzi piccoli, niente pile a bottone o magneti, niente caramelle dure o frutta secca intera. Vanno bene un libro al giorno o una casella da colorare ogni sera, e i sacchetti vanno appesi dove un adulto li apre con lui."
+    risposta: "Sì, se è pensato per la sua età: niente pezzi piccoli, niente pile a bottone, niente caramelle, pop corn o frutta secca intera. Vanno bene un libro al giorno o una casella da colorare ogni sera, e i sacchetti vanno appesi dove un adulto li apre con lui."
   - domanda: "Si può cominciare il calendario dell'Avvento in ritardo?"
     risposta: "Sì. Si parte dal giorno in cui si è: un calendario dal 10 al 24 dicembre è un calendario a tutti gli effetti. Per i bambini conta il gesto di ogni giorno e vedere i giorni che mancano, non il numero delle caselle."
   - domanda: "Che cos'è il calendario dell'Avvento al contrario?"
@@ -68,7 +82,7 @@ Se hai poco tempo, ecco la sostanza.
 - **Dentro non devono esserci 24 regali.** Funzionano meglio i bigliettini con una cosa da fare insieme, alternati a qualche sorpresa piccola. Un dolcetto ogni tanto va bene; ventiquattro di fila, sommati a tutto il resto di dicembre, sono tanti.
 - **Il bambino lo costruisce con te.** A 3 anni attacca gli adesivi e infila i bigliettini. A 6 scrive i numeri. A 9 può preparare lui il calendario per un fratello o per i nonni.
 - **Le attività vanno pensate sul calendario vero.** Nei giorni di scuola bastano cinque minuti. Le cose lunghe (biscotti, mercatino, albero) si mettono nei fine settimana e nel ponte dell'8 dicembre.
-- **Sotto i 3 anni niente pezzi piccoli.** Vale per le sorprese e vale per i materiali: mollette piccole, campanellini, perline, pile a bottone, caramelle dure.
+- **Sotto i 3 anni niente pezzi piccoli.** Vale per le sorprese e vale per i materiali: mollette piccole, campanellini, perline, pile a bottone. E sotto i 4 anni niente caramelle, pop corn e frutta secca intera.
 
 La mia indicazione, in una riga: sacchetti di carta appesi a un filo, numerati dai bambini, con dentro sedici bigliettini di cose da fare e otto piccole sorprese. Il resto dell'articolo spiega come adattarlo a casa tua.
 
@@ -76,11 +90,19 @@ La mia indicazione, in una riga: sacchetti di carta appesi a un filo, numerati d
 
 Vale la pena saperlo, anche solo per raccontarlo ai bambini mentre si ritaglia.
 
-L'Avvento è il periodo che prepara al Natale. La parola viene dal latino *adventus*, «arrivo». Nel calendario della Chiesa cattolica di rito romano comincia quattro domeniche prima di Natale: per questo ogni anno parte in un giorno diverso. Nel 2026 la prima domenica di Avvento è il 29 novembre. Nel rito ambrosiano, quello di Milano e di buona parte della Lombardia, l'Avvento dura sei settimane e nel 2026 comincia il 15 novembre.
+L'Avvento è il periodo che prepara al Natale: la Treccani lo definisce, nella liturgia cristiana, «la preparazione alla venuta del Signore». Nel rito romano dura quattro settimane e comincia dalla domenica più vicina alla festa di sant'Andrea, il 30 novembre: quindi in un giorno compreso tra il 27 novembre e il 3 dicembre, diverso ogni anno. Nel rito ambrosiano, quello di Milano, le settimane sono sei. Facendo il conto sul calendario, nel 2026 la prima domenica di Avvento è il 29 novembre per il rito romano e il 15 novembre per quello ambrosiano.
 
-Il calendario che apriamo noi, invece, è una semplificazione nata in famiglia: parte sempre il 1° dicembre e finisce il 24, qualunque giorno della settimana sia. L'abitudine di contare i giorni che mancano al Natale è nata nell'Ottocento nelle case tedesche di tradizione luterana: si tracciavano dei segni col gesso sulla porta e se ne cancellava uno al giorno, oppure si accendeva ogni sera una candela, o si appendeva al muro un'immagine. I primi calendari stampati sono arrivati in Germania all'inizio del Novecento; le finestrelle da aprire sono di qualche anno dopo, e il cioccolato dietro la finestrella è un'aggiunta del dopoguerra.
+Il calendario che apriamo noi è una semplificazione: parte sempre il 1° dicembre e finisce il 24, qualunque giorno della settimana sia. E ha una storia più lunga di quanto sembri, quasi tutta tedesca.
 
-Detto questo: il calendario dell'Avvento oggi lo fanno anche tantissime famiglie che non lo vivono come un gesto religioso. È un modo per rendere visibile il tempo a chi ha quattro anni e chiede dieci volte al giorno «quanto manca?». Ventiquattro sacchetti appesi rispondono meglio di qualunque spiegazione.
+- **1839.** Il primo calendario dell'Avvento di cui si ha notizia lo costruisce un teologo evangelico, Johann Hinrich Wichern, per i bambini di un istituto di Amburgo: una ruota di carro con una candela per ogni giorno, più grossa per le domeniche. Serviva a rendere l'attesa più facile da vedere. Da lì vengono sia la corona dell'Avvento sia il calendario.
+- **Metà dell'Ottocento.** Nelle case protestanti si appendono al muro ventiquattro immagini, una al giorno, oppure si tracciano ventiquattro segni di gesso sulla porta e i bambini ne cancellano uno ogni mattina. Nelle case cattoliche si mette invece una pagliuzza al giorno nella mangiatoia del presepe, fino alla vigilia.
+- **1902 e 1903.** Arrivano i primi calendari stampati: ad Amburgo un «orologio di Natale» per bambini, e a Monaco quello dell'editore Gerhard Lang, con ventiquattro figurine da ritagliare e incollare, una al giorno. L'idea gli veniva dall'infanzia: sua madre cuciva su un cartone ventiquattro biscottini, e lui poteva mangiarne uno al giorno dal 1° dicembre.
+- **Dopo il 1920.** Si diffondono i calendari con le finestrelle che si aprono.
+- **Dopo il 1945.** Si afferma definitivamente il formato che conosciamo: ventiquattro porticine, dal 1° dicembre. Il primo calendario pieno di cioccolato è stato messo in vendita nel 1958.
+
+Mi piace molto il dettaglio della mamma di Lang, perché dice una cosa utile: il calendario dell'Avvento è nato fatto in casa, con ago, filo e biscotti. Quello comprato è arrivato dopo.
+
+Detto questo: oggi lo fanno anche tantissime famiglie che non lo vivono come un gesto religioso. È un modo per rendere visibile il tempo a chi ha quattro anni e chiede dieci volte al giorno «quanto manca?». Ventiquattro sacchetti appesi rispondono meglio di qualunque spiegazione.
 
 ## Prima di cominciare: tre decisioni
 
@@ -218,16 +240,18 @@ L'errore più comune è scrivere ventiquattro attività belle e scoprire il 3 di
 - Pomeriggio di film con le coperte sul divano.
 - Si fa un regalo fatto a mano per qualcuno di casa.
 
+Non lo dico solo io. Gli psicologi dell'Ospedale Pediatrico Bambino Gesù, parlando dei regali di Natale, lo mettono così: «Il vero regalo di Natale è il tempo passato insieme». Aggiungono che i regali non devono essere costosi o molto strutturati, e che sono meglio pochi giochi di qualità di tanti oggetti poco significativi. Un calendario fatto di bigliettini va esattamente in quella direzione.
+
 Un consiglio che vale più di tutte le idee: scrivi attività che faresti comunque. L'albero lo fate in ogni caso, i biscotti forse pure. Metterli nel calendario non aggiunge lavoro: trasforma una cosa già prevista in una sorpresa.
 
 ### Le sorprese: piccole davvero
 
 Qualche idea che non riempie la casa di oggetti inutili.
 
-- **Cose che si consumano:** un pennarello che mancava, un foglio di adesivi, un timbro, una gomma buffa, un palloncino (dai 3 anni in su, e gonfiato da un adulto fino agli 8), una bustina di semi da piantare a primavera.
+- **Cose che si consumano:** un pennarello che mancava, un foglio di adesivi, un timbro, una gomma da cancellare buffa, una bustina di semi da piantare a primavera con un adulto.
 - **Pezzi di un tutto:** una statuina del presepe al giorno, un pezzo di un puzzle da 24 pezzi che si completa la vigilia, una decorazione per l'albero, una pagina di una storia a puntate.
 - **Buoni:** «vale un giro in bici con papà», «vale una colazione al bar», «vale restare svegli mezz'ora in più». Costano zero e sono tra le caselle più attese.
-- **Dolci, con misura:** un cioccolatino, un biscotto fatto in casa, una caramella morbida per chi è abbastanza grande. Ne parlo più sotto.
+- **Dolci, con misura:** un cioccolatino, un biscotto fatto in casa. Ne parlo più sotto.
 
 L'idea del «pezzo di un tutto» è quella che consiglio di più a chi ha bambini tra i 4 e i 7 anni: ogni giorno arriva poco, ma si vede crescere qualcosa. È il contrario dell'oggettino che il giorno dopo è già sotto il divano.
 
@@ -236,7 +260,7 @@ L'idea del «pezzo di un tutto» è quella che consiglio di più a chi ha bambin
 Un bigliettino con una frase vera vale una casella. «Mi piace come ridi quando ti fai il solletico da solo.» «Grazie per aver aiutato tuo fratello ieri.» Per i bambini che sanno leggere, una al giorno, scritta a mano. È la parte del calendario che di solito viene conservata.
 
 ```matrice
-{"titolo": "Cosa mettere nel calendario, per età", "intestazione": "Contenuto", "colonne": ["3–4 anni", "5–6 anni", "7–8 anni", "9–10 anni"], "righe": [{"voce": "Bigliettini con un'attività da fare insieme", "valori": ["si", "si", "si", "si"]}, {"voce": "Statuine, decorazioni, pezzi di un puzzle grande", "valori": ["si", "si", "si", "parziale"]}, {"voce": "Adesivi, timbri, pennarelli", "valori": ["si", "si", "si", "parziale"]}, {"voce": "Buoni («vale una colazione al bar»)", "valori": ["parziale", "si", "si", "si"]}, {"voce": "Frasi e messaggi scritti a mano", "valori": ["parziale", "parziale", "si", "si"]}, {"voce": "Indovinelli e piccole sfide", "valori": ["no", "parziale", "si", "si"]}, {"voce": "Caramelle dure, gomme, frutta secca intera", "valori": ["no", "no", "si", "si"]}, {"voce": "Giochi con pezzi molto piccoli, magneti, pile a bottone", "valori": ["no", "no", "parziale", "parziale"]}], "nota": "Valutazione della redazione. Le ultime due righe seguono le indicazioni di sicurezza per i bambini piccoli riportate nelle fonti: con fratelli sotto i 3 anni in casa, quei contenuti si evitano per tutti."}
+{"titolo": "Cosa mettere nel calendario, per età", "intestazione": "Contenuto", "colonne": ["3–4 anni", "5–6 anni", "7–8 anni", "9–10 anni"], "righe": [{"voce": "Bigliettini con un'attività da fare insieme", "valori": ["si", "si", "si", "si"]}, {"voce": "Statuine, decorazioni, pezzi di un puzzle grande", "valori": ["si", "si", "si", "parziale"]}, {"voce": "Adesivi, timbri, pennarelli", "valori": ["si", "si", "si", "parziale"]}, {"voce": "Buoni («vale una colazione al bar»)", "valori": ["parziale", "si", "si", "si"]}, {"voce": "Frasi e messaggi scritti a mano", "valori": ["parziale", "parziale", "si", "si"]}, {"voce": "Indovinelli e piccole sfide", "valori": ["no", "parziale", "si", "si"]}, {"voce": "Caramelle, pop corn, frutta secca intera", "valori": ["no", "parziale", "si", "si"]}, {"voce": "Giochi con pezzi molto piccoli o con pile a bottone", "valori": ["no", "parziale", "parziale", "si"]}], "nota": "Valutazione della redazione. Le ultime due righe tengono conto delle indicazioni di Uppa e dell'Ospedale Bambino Gesù: il periodo più critico per il soffocamento va da 0 a 4 anni, e sotto i 36 mesi vanno evitati i giocattoli più piccoli di 3,17 cm. Con fratelli piccoli in casa, quei contenuti si evitano per tutti."}
 ```
 
 ## Dicembre 2026, giorno per giorno
@@ -270,29 +294,45 @@ Qui sotto c'è un piano già distribuito sul calendario vero: nel 2026 il 1° di
 | Mer 23 | Si incarta insieme un regalo per qualcuno di casa | Attività breve |
 | Gio 24 | L'ultimo pezzo: la stella, la statuina, la fine della storia | Sorpresa |
 
-Qualche nota sul piano. Il 7 dicembre a Milano è Sant'Ambrogio e molte scuole sono chiuse: lì può diventare un giorno da attività lunga, insieme all'8. Le vacanze di Natale cominciano in giorni diversi da regione a regione, quindi controlla il calendario della tua scuola prima di decidere cosa mettere dal 21 al 23. E se un giorno salta, non si recupera: si apre il sacchetto il giorno dopo insieme a quello nuovo, senza drammi.
+Qualche nota sul piano. Il 7 dicembre a Milano è Sant'Ambrogio, la festa del patrono: lì può diventare un giorno da attività lunga, insieme all'8. Le vacanze di Natale cominciano in giorni diversi da regione a regione, quindi controlla il calendario della tua scuola prima di decidere cosa mettere dal 21 al 23. E se un giorno salta, non si recupera: si apre il sacchetto il giorno dopo insieme a quello nuovo, senza drammi.
 
 Su 24 giorni, in questo piano le sorprese materiali sono sei, i buoni due, le parole una; tutto il resto sono cose da fare. I dolci compaiono una volta sola, più i biscotti fatti insieme.
 
 ## Sicurezza: le cose da sapere davvero
 
-Poche regole, ma queste sì.
+Poche regole, ma queste sì. Vengono dalle pagine dell'Ospedale Pediatrico Bambino Gesù e della rivista dei pediatri Uppa, che trovi tra le fonti.
 
 ### Sotto i 3 anni, niente pezzi piccoli
 
-I giocattoli destinati ai bambini sotto i 36 mesi non devono avere parti piccole che si possano staccare e ingoiare, e quelli che le hanno portano l'avvertenza «non adatto a bambini di età inferiore a 36 mesi». In un calendario fatto in casa quella garanzia non c'è: la responsabilità di guardare che cosa finisce nel sacchetto è tua. Vale per le sorprese (perline, campanellini, monete, gommine, piccoli personaggi) e vale per i materiali del calendario stesso: mollette in miniatura, bottoni, pompon incollati male, elastici.
+Il Bambino Gesù chiede un'attenzione particolare per i bambini sotto i 36 mesi, che portano più facilmente alla bocca i giocattoli piccoli o le loro parti, col rischio di ingoiarli o inalarli. L'indicazione è precisa: per quell'età non vanno acquistati giocattoli con un diametro inferiore a 3,17 centimetri. Più in generale, circa l'80% degli episodi di inalazione di un corpo estraneo riguarda bambini sotto i quattro anni, con un picco tra uno e due anni; tra gli oggetti citati ci sono semi, parti di giocattoli, monete, noccioline.
 
-Se in casa c'è un fratello più piccolo, il calendario del grande va appeso dove il piccolo non arriva, e le sorprese con pezzi piccoli si evitano o si aprono sul tavolo, non per terra.
+In un calendario fatto in casa nessuna etichetta ti avvisa: guardare che cosa finisce nel sacchetto tocca a te. Vale per le sorprese (perline, campanellini, monete, gommine, piccoli personaggi) e vale per i materiali del calendario stesso: mollette in miniatura, bottoni, pompon incollati male, elastici.
 
-### Pile a bottone e magneti
+Lo stesso ospedale ricorda di fare attenzione quando in casa c'è un fratello più grande, perché il piccolo si appropria facilmente dei giochi non adatti alla sua età. Tradotto per il calendario: quello del grande va appeso dove il piccolo non arriva, e le sorprese con pezzi piccoli si evitano o si aprono sul tavolo, non per terra.
 
-Le pile a bottone e i piccoli magneti potenti sono gli oggetti di cui i pediatri si preoccupano di più: se ingoiati possono fare danni gravi in poco tempo. Lucine a batteria, biglietti musicali, candeline finte, giochini luminosi: se nel calendario metti qualcosa che funziona a pile, controlla che il vano sia chiuso con una vite. In caso di dubbio che un bambino abbia ingoiato una pila o un magnete non si aspetta: si va subito al pronto soccorso.
+### Il marchio CE sui giocattoli comprati
 
-### I dolci a rischio soffocamento
+Tutti i giocattoli venduti nell'Unione europea devono avere la marcatura CE: è la dichiarazione del fabbricante che il giocattolo rispetta i requisiti essenziali di sicurezza. Il Bambino Gesù sconsiglia con decisione di comprare giocattoli che ne sono privi, pur ricordando che il marchio non protegge da tutti i rischi e a volte è contraffatto. Per le sorprese del calendario significa una cosa semplice: i giochini da pochi centesimi presi senza confezione e senza marchio sono quelli da lasciare dove sono.
 
-Per i bambini piccoli alcuni alimenti sono pericolosi per forma e consistenza prima ancora che per lo zucchero: caramelle dure e gommose, confetti, frutta secca intera, gomme da masticare, cioccolatini con la nocciola intera. Le indicazioni del Ministero della Salute sulla prevenzione del soffocamento da cibo riguardano soprattutto i bambini fino ai 4 o 5 anni. Nel calendario di un bambino di quell'età i dolci giusti sono quelli che si sciolgono o si sbriciolano: un cioccolatino senza frutta secca, un biscotto.
+### Pile a bottone
+
+Sono l'oggetto di cui i medici si preoccupano di più. Il Bambino Gesù ha lanciato un allarme nell'agosto 2026: nei primi sette mesi dell'anno ha ricoverato sette bambini per lesioni gravi all'esofago causate da una batteria a bottone ingoiata, contro i due di tutto il 2025. Quando la batteria resta bloccata nell'esofago le lesioni possono diventare gravissime in circa due ore, e all'inizio il bambino può non avere sintomi.
+
+Le pile a bottone stanno anche in cose tipiche di dicembre: l'ospedale elenca, tra gli altri, giocattoli, luci decorative e biglietti musicali. Quindi:
+
+- se nel calendario metti qualcosa che funziona a pile, controlla che il vano sia fissato con una vite o che serva un attrezzo per aprirlo;
+- le pile nuove e quelle scariche si tengono fuori dalla vista e dalla portata dei bambini, anche a casa dei nonni;
+- se sospetti che un bambino ne abbia ingoiata una non si aspetta: si va subito al pronto soccorso, anche se sta bene. L'ospedale dice di non provocare il vomito e di non dare cibo o bevande per «farla scendere».
+
+### I dolci e i cibi a rischio soffocamento
+
+Per i bambini piccoli alcuni alimenti sono pericolosi per forma e consistenza, prima ancora che per lo zucchero. Uppa indica come periodo più critico quello da 0 a 4 anni e spiega perché: vie respiratorie strette, masticazione ancora poco coordinata, e l'abitudine di mangiare mentre si fa altro. Sono a rischio i cibi piccoli come noccioline e semi, quelli tondi, quelli duri, quelli appiccicosi e quelli che si comprimono, come i marshmallow. Caramelle e pop corn sono definiti «molto pericolosi» per forma e consistenza, soprattutto perché di solito si danno quando il bambino è distratto. La frutta secca intera, dura, può essere inghiottita senza essere masticata.
+
+Nel calendario di un bambino sotto i 4 anni, quindi, i dolci adatti sono quelli che si sciolgono o si sbriciolano: un cioccolatino senza nocciola intera, un biscotto. E si mangiano seduti a tavola, non correndo verso la scuola con il sacchetto in mano.
 
 ### Candele, fili, altezze
+
+Queste tre sono buon senso mio, non vengono dalle fonti.
 
 - Le candele vere le accende e le spegne un adulto, e non restano mai accese in una stanza dove non c'è nessun grande. Lontano dal calendario, che è fatto di carta.
 - Lo spago teso va messo in alto o lungo una parete, non di traverso in un passaggio all'altezza del collo dei bambini.
@@ -302,7 +342,7 @@ Per i bambini piccoli alcuni alimenti sono pericolosi per forma e consistenza pr
 
 Un cioccolatino al giorno, da solo, non è un problema. Il problema è la somma: il calendario con il cioccolato, più la calza di San Nicola o di Santa Lucia dove si usa, più i panettoni in ufficio che tornano a casa, più le feste di classe, più i pacchetti dei nonni. A dicembre lo zucchero arriva da tutte le parti.
 
-L'Organizzazione Mondiale della Sanità raccomanda, per adulti e bambini, di tenere gli zuccheri liberi sotto il 10% dell'energia della giornata, e indica come obiettivo ulteriore di scendere sotto il 5%. Gli zuccheri liberi sono quelli aggiunti agli alimenti e quelli di miele, sciroppi e succhi; non quelli della frutta fresca intera e del latte. Non serve fare i conti col bilancino: serve sapere che il margine è piccolo, e che un calendario non deve consumarlo tutto da solo.
+L'Organizzazione Mondiale della Sanità, nella linea guida sugli zuccheri per adulti e bambini, raccomanda di tenere gli zuccheri liberi sotto il 10% dell'energia della giornata, e aggiunge che scendere al 5% o meno può dare benefici ulteriori. Per dare un'idea: per un adulto che consuma circa 2000 calorie il 10% sono 50 grammi, più o meno dodici cucchiaini rasi; un bambino mangia meno, quindi il suo margine è più stretto. Gli zuccheri liberi sono quelli aggiunti a cibi e bevande da chi li produce, li cucina o li mangia, più quelli naturalmente presenti in miele, sciroppi e succhi di frutta. Non serve fare i conti col bilancino: serve sapere che il margine è piccolo, e che un calendario non deve consumarlo tutto da solo.
 
 In pratica:
 
@@ -362,6 +402,6 @@ Le risposte brevi alle domande più comuni sono qui sotto, nelle FAQ della pagin
 
 ## Fonti e metodo
 
-Le informazioni sull'Avvento e sulla storia del calendario, le indicazioni di sicurezza per i bambini piccoli (parti piccole, pile a bottone, magneti, alimenti a rischio soffocamento) e la raccomandazione sugli zuccheri vengono dalle pagine elencate qui sotto, aperte e lette nella data indicata. Le date di dicembre 2026 sono calcolate sul calendario.
+Le informazioni di questo articolo che non sono idee pratiche vengono dalle pagine elencate qui sotto, aperte e lette il 19 novembre 2026: la voce «Avvento» dell'Enciclopedia Treccani; le voci di Wikipedia sul calendario dell'Avvento, in italiano e in tedesco (la seconda è quella con la storia più documentata, ed è da lì che vengono le date); le pagine dell'Ospedale Pediatrico Bambino Gesù sulla scelta dei giocattoli, sull'inalazione di corpi estranei, sulle batterie a bottone e sui regali di Natale; le pagine di Uppa su cibo e soffocamento e sui tagli sicuri; la scheda dell'Organizzazione Mondiale della Sanità sull'alimentazione sana e la sua linea guida sugli zuccheri; la pagina della Commissione europea sulla sicurezza dei giocattoli. Le date dell'Avvento e i giorni della settimana di dicembre 2026 sono calcolati sul calendario.
 
-Le idee per costruire il calendario, i tempi di preparazione, il piano giorno per giorno e le indicazioni per età sono una proposta della redazione: non vengono da una prova fatta in casa, e non sostituiscono quello che sai dei tuoi figli. Per allergie, intolleranze o dubbi sull'alimentazione vale sempre il parere del pediatra.
+Le idee per costruire il calendario, i tempi di preparazione, il piano giorno per giorno e le indicazioni per età sono una proposta della redazione: non vengono da una prova fatta in casa, e non sostituiscono quello che sai dei tuoi figli. Per allergie, intolleranze o dubbi sull'alimentazione vale sempre il parere del pediatra; per un sospetto di ingestione o di soffocamento, il pronto soccorso.
