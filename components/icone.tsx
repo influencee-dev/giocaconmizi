@@ -78,6 +78,7 @@ export const ICONE_GIOCO: Record<string, NomeIcona[]> = {
   "robot-ballerino": ["robot", "note"],
   "labirinto-a-blocchi": ["bussola", "pinguino"],
   "labirinto-dei-tesori": ["mappa", "chiave"],
+  "corsa-nella-piramide": ["pinguino", "stella"],
   "trova-l-errore": ["bug", "lente"],
   "dove-arriva-mizi": ["pinguino", "domanda"],
   "salto-di-mizi": ["pinguino", "tondo-blu"],

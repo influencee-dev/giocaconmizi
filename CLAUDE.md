@@ -316,6 +316,13 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   una casella e Mizi ci va, una missione per sala apre la porta. Un gioco nuovo
   di questo tipo è un elenco di sale. Niente nemici, tempo o vite. Lo stile dei
   disegni sta in fondo a Esplora.tsx (`STILE`).
+- Giochi che si muovono (20/11/2026): motore `games/_engine/Corsa.tsx` con logica
+  pura in `corsa-logica.ts`. Primo gioco «La corsa nella piramide»
+  (games/corsa-nella-piramide, 6-10 anni, 40º gioco): corridoio a tre strade,
+  si scorre per cambiare strada e si tocca per saltare, cinque piani. Niente
+  vite, tempo o velocità che cresce: un urto fa ripartire piano, al terzo la
+  strada libera si illumina. Un gioco nuovo di questo tipo è un elenco di
+  tratti. Metodo in `.claude/skills/accademia-giochi/SKILL.md`.
 - Nucleo comune dei giochi (16/11/2026): `games/_engine/nucleo.ts` (`useRound`:
   round, blocco del doppio tocco, punto ai round puliti, aiuto dopo N errori,
   suoni, lodi senza genere, attributi `data-partita`/`data-round`, esito con

@@ -59,6 +59,14 @@ Le fonti, e quanto sono state verificate, stanno in `riferimenti/fonti.md`.
 - Suoni con `suona()` di `lib/giochi/suoni.ts`; ogni frase detta sta in `content/voce-mizi.json`.
 - Codice, nomi e commenti in italiano.
 
-## Stato del prototipo «Corsa nella Piramide»
+## Il primo gioco fatto così: «La corsa nella piramide» (20/11/2026)
 
-Nato fuori dal sito come pagina sola. Prima di entrare in `games/` va riscritto secondo il canone: via le tre vite e la schermata di fine, via il suono dell'urto, velocità non più crescente per fretta, niente record, commenti in italiano, voce di Mizi e demo. Restano buoni: visuale dall'alto, Mizi in pixel art, memoria del salto, inclinazione, schiaccia e allunga, telecamera che segue, risoluzione adattiva.
+`games/corsa-nella-piramide` (6–10 anni), motore `games/_engine/Corsa.tsx`, logica pura in `games/_engine/corsa-logica.ts`. È il modello per ogni gioco che si muove.
+
+- Un gioco nuovo di questo tipo è un elenco di tratti (`SpecTratto`): la missione, la frase al portale, gli schemi di file (`gemme`, `casse`, `blocco`, `due-blocchi`, `fosso`). Il primo schema dell'elenco è la novità e compare da solo all'inizio; ogni terza fila è di respiro.
+- Nessuna vita: un urto fa ripartire piano e conta come errore del round nel nucleo. Al terzo urto dello stesso tratto scatta l'aiuto: si va più calmi e la strada libera si illumina di viola (`prossimaMossa`, la stessa funzione che guida la demo).
+- La velocità dipende solo dall'età (`velocitaPerEta`) e non cambia durante la partita.
+- Simulazione a passi fissi di 1/120 s; lo stato vivo sta nei `ref`; verso fuori `data-strada`, `data-urti`, `data-gemme`, `data-in-aria` oltre agli attributi del nucleo.
+- Lo stile (tavolozze dei piani, Mizi in pixel art vista di spalle) sta in fondo a `Corsa.tsx`.
+- Provato prima di scrivere lo schermo: 900 tratti simulati col pilota a due passi di tempo diversi, zero urti e sempre arrivo al portale. Una prova così costa poco e va rifatta se si tocca la logica.
+- Trovato simulando: il pilota smetteva di guardare un blocco quando gli era accanto e cambiava strada sbattendoci contro. Un ostacolo conta finché non è alle spalle.

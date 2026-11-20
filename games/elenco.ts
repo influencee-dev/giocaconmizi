@@ -22,6 +22,7 @@ export const slugGiocabili = [
   "unisci-le-sillabe",
   "trova-le-differenze",
   "labirinto-dei-tesori",
+  "corsa-nella-piramide",
   "unisci-i-puntini",
   "cosa-viene-dopo",
   "cosa-manca",

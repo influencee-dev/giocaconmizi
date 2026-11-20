@@ -898,6 +898,54 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   await ctxT.close();
 }
 
+// «La corsa nella piramide» (20/11/2026): corsa a tre strade, motore Corsa.tsx.
+// Niente vite e niente tempo: chi sbatte dappertutto arriva in cima lo stesso.
+{
+  const copioneC = JSON.parse(readFileSync("content/voce-mizi.json", "utf8"));
+  const frasiC = new Set(copioneC.frasi["corsa-nella-piramide"] ?? []);
+  const tuttoC = new Set(Object.values(copioneC.frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
+  const sorgenteC = readFileSync("games/corsa-nella-piramide/Game.tsx", "utf8") + readFileSync("games/_engine/Corsa.tsx", "utf8").split("const ERRORI_PER_AIUTO")[0];
+  const nelCodiceC = [...sorgenteC.matchAll(/"([^"\n]{2,}[.!])"/g)].map((x) => x[1]).filter((f) => !f.startsWith("@/"));
+  ok("corsa: le frasi del gioco sono identiche a quelle del copione", nelCodiceC.length >= 13 && nelCodiceC.every((f) => frasiC.has(f)), nelCodiceC.filter((f) => !frasiC.has(f)).join(" | "));
+
+  // I comandi: bottoni grandi, frecce della tastiera, il salto.
+  const ctxC = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxC.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const c = await ctxC.newPage();
+  let erroriC = 0;
+  c.on("pageerror", () => erroriC++);
+  await c.goto(`${BASE}/giochi/corsa-nella-piramide/gioca?eta=6`, { waitUntil: "networkidle" });
+  const campoC = c.locator("[data-corsa]");
+  await campoC.waitFor({ timeout: 10000 });
+  const stradaC = (n) => c.waitForFunction((k) => document.querySelector("[data-corsa]")?.getAttribute("data-strada") === k, String(n), { timeout: 3000 }).then(() => true, () => false);
+  await stradaC(0);
+  const latiC = await c.locator("[data-comando]").evaluateAll((els) => els.map((el) => Math.round(Math.min(el.getBoundingClientRect().width, el.getBoundingClientRect().height))));
+  ok("corsa: tre bottoni di almeno 64 px, tutti dentro lo schermo senza scorrere", latiC.length === 3 && Math.min(...latiC) >= 64 &&
+    (await c.locator("[data-comando]").evaluateAll((els) => els.every((el) => el.getBoundingClientRect().bottom <= window.innerHeight))), latiC.join(" "));
+  await c.locator("[data-comando=destra]").tap();
+  const aDestra = await stradaC(1);
+  await c.keyboard.press("ArrowLeft");
+  await c.keyboard.press("ArrowLeft");
+  const aSinistra = await stradaC(-1);
+  await c.locator("[data-comando=salta]").tap();
+  const inAria = await c.waitForFunction(() => document.querySelector("[data-corsa]")?.getAttribute("data-in-aria") === "si", null, { timeout: 2000 }).then(() => true, () => false);
+  ok("corsa: bottoni e frecce cambiano strada, «Salta» fa saltare", aDestra && aSinistra && inAria, `destra ${aDestra} sinistra ${aSinistra} salto ${inAria}`);
+
+  // Da qui non si tocca più niente: Mizi sbatte, riparte, e al terzo urto di un piano scatta l'aiuto.
+  let aiutoVisto = false;
+  const inizioC = Date.now();
+  while (Date.now() - inizioC < 240000 && (await c.locator("[data-festa]").count()) === 0) {
+    if ((await campoC.getAttribute("data-aiuto-attivo")) === "si") aiutoVisto = true;
+    await c.waitForTimeout(500);
+  }
+  const festaC = (await c.locator("[data-festa]").count()) > 0;
+  const stelleC = festaC ? await c.locator("[data-festa] [data-stelle]").first().getAttribute("data-stelle") : null;
+  ok("corsa: senza toccare niente si arriva in cima lo stesso, con l'aiuto e una stella, mai zero", festaC && aiutoVisto && stelleC === "1" && erroriC === 0, `festa ${festaC} aiuto ${aiutoVisto} stelle ${stelleC}`);
+  const dettoC = await c.evaluate(() => (window.__voceMizi || []).map((v) => v.testo));
+  ok("corsa: anche sbattendo Mizi dice solo frasi del copione, senza «sbagliato»", dettoC.length > 10 && dettoC.every((t) => tuttoC.has(t)) && !dettoC.some((t) => /sbagliat|Brav[oa]|perso/i.test(t)), dettoC.filter((t) => !tuttoC.has(t)).join(" | "));
+  await ctxC.close();
+}
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("giochi") ? 0 : 1);
