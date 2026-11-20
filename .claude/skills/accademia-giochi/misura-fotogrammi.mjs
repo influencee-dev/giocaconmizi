@@ -49,6 +49,8 @@ const misura = await pagina.evaluate(
           media_ms: +(tempi.reduce((a, b) => a + b) / tempi.length).toFixed(1),
           p95_ms: +tempi[Math.floor(tempi.length * 0.95)].toFixed(1),
           massimo_ms: +tempi[tempi.length - 1].toFixed(1),
+          // Fotogrammi oltre 25 ms: quelli che l'occhio vede come scatti.
+          scatti_percento: +((tempi.filter((t) => t > 25).length / tempi.length) * 100).toFixed(1),
           canvas: tela ? `${tela.width}x${tela.height}` : "nessuno",
         });
       }

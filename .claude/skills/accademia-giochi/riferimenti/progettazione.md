@@ -2,7 +2,7 @@
 
 ## Dal sentimento alla regola
 
-Si parte da cosa deve provare chi gioca e si risale alle regole, non il contrario (è lo schema «meccaniche → dinamiche → estetica» letto dalla fine). Per un gioco di Mizi il sentimento è quasi sempre uno di questi: scoperta, bravura che cresce, fare insieme alla mamma, far ridere. La sfida fine a sé stessa e la competizione non sono tra gli obiettivi del sito.
+Si parte da cosa deve provare chi gioca e si risale alle regole, non il contrario (è lo schema «meccaniche → dinamiche → estetica» letto dalla fine). I sentimenti possibili sono molti: scoperta, bravura che cresce, sfida, fare insieme, far ridere. Se ne sceglie uno come guida; nei giochi per bambini piccoli la sfida fine a sé stessa e la competizione di solito restano fuori.
 
 ## Un verbo
 
@@ -23,11 +23,11 @@ Un solo elemento nuovo per volta. Mai due novità nello stesso round.
 
 ## Tensione e respiro
 
-Un tratto impegnativo è seguito da un tratto facile e generoso (una fila di cose da raccogliere senza ostacoli). Senza respiro la bravura non si sente. La difficoltà giusta è quella in cui il bambino riesce quasi sempre ma deve stare attento: troppo facile annoia, troppo difficile mortifica. Qui si regola con l'età (`?eta=`), con la quantità e con l'aiuto dopo tre errori, mai con la fretta.
+Un tratto impegnativo è seguito da un tratto facile e generoso (una fila di cose da raccogliere senza ostacoli). Senza respiro la bravura non si sente. La difficoltà giusta è quella in cui il bambino riesce quasi sempre ma deve stare attento: troppo facile annoia, troppo difficile mortifica. Si regola con la quantità, con le combinazioni e con un aiuto che scatta dopo qualche errore; con i bambini mai con la fretta.
 
 ## Dove cercare varietà
 
-| Leva | Esempi adatti al sito |
+| Leva | Esempi |
 |---|---|
 | Ostacoli | fermi, che si aprono e chiudono con ritmo regolare, da saltare, da passarci sotto |
 | Raccolta | cose in fila, cose in alto che chiedono il salto, una cosa rara per round |
