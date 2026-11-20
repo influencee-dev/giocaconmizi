@@ -29,6 +29,10 @@ Apre il gioco con un profilo da telefono (390×800, densità 3), tocca il pulsan
 - Un contatore nel gioco, acceso da un parametro dell'indirizzo, che mostra media e massimo degli ultimi 60 fotogrammi: costa poco e dice la verità su quel telefono.
 - La latenza del tocco si giudica con la mano: un oggetto che segue il dito deve restargli sotto. Se resta indietro di un dito, sono oltre 100 ms.
 
+## Misurare il tremolio, non solo i fotogrammi
+
+Un gioco può avere 60 fotogrammi regolari e mostrare lo stesso un movimento irregolare. Si misura facendo scrivere al gioco, a ogni fotogramma, l'istante e la posizione disegnata di una cosa che va a velocità costante; poi si calcola la velocità vista (spazio diviso tempo tra due fotogrammi) e la sua deviazione rispetto alla media. Sotto l'1% non si vede; al 5–7% si vede come un tremolio fine. È la misura che dice se l'interpolazione serve e se funziona (numeri nostri in `fonti.md`).
+
 ## Leggere i risultati
 
 - **Media alta, percentile vicino alla media**: troppo lavoro costante → pixel, sfumature, cose disegnate fuori schermo (`disegno-veloce.md`).

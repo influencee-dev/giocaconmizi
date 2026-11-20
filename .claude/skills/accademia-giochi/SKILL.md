@@ -65,4 +65,4 @@ Ogni regola ha la spiegazione e il codice pronto nei file di `riferimenti/`.
 
 ## Se il gioco è di Giocamizi
 
-Le regole del sito vengono prima di ogni tecnica: `CLAUDE.md`, `docs/GAME-DESIGN-CHECKLIST.md` e la skill `game-designer-mizi` (niente vite, tempo, suoni negativi, fretta, classifiche). Le tecniche dei giochi d'azione si prendono; vite, sconfitta e pressione si lasciano fuori. Il modello già fatto è `games/_engine/Corsa.tsx` con `corsa-logica.ts` («La corsa nella piramide»): passi fissi a 1/120 s, stato nei `ref`, logica senza React usata da schermo, demo e prove.
+Le regole del sito vengono prima di ogni tecnica: `CLAUDE.md`, `docs/GAME-DESIGN-CHECKLIST.md` e la skill `game-designer-mizi` (niente vite, tempo, suoni negativi, fretta, classifiche). Le tecniche dei giochi d'azione si prendono; vite, sconfitta e pressione si lasciano fuori. Il modello già fatto è `games/_engine/Corsa.tsx` con `corsa-logica.ts` («La corsa nella piramide»): passi fissi a 1/120 s con disegno interpolato, stato nei `ref`, logica senza React usata da schermo, demo e prove.

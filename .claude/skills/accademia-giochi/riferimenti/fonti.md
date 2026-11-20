@@ -30,4 +30,11 @@ Con il browser di prova, profilo telefono 390×800:
 - Scena su griglia grossa (138×288 punti): 16,7 ms per fotogramma anche con CPU rallentata 6 volte. Non era lenta: si muoveva a scalini.
 - Scena alla risoluzione dello schermo (780×1600): 16,7 ms a velocità normale; con CPU rallentata 4–6 volte la risoluzione adattiva scende e la media sale a 21–25 ms.
 
+Interpolazione del disegno («La corsa nella piramide», 20/11/2026), stesso profilo, schermo a 60 Hz, 7 secondi di corsa a velocità costante. Si misura la velocità che si vede (strada disegnata diviso tempo tra due fotogrammi) e quanto varia:
+- senza interpolazione: irregolarità 6,9%, il 2% dei fotogrammi fuori di oltre il 10%;
+- con l'interpolazione: irregolarità 0,0%, nessun fotogramma fuori.
+Con la CPU rallentata 4 volte la differenza quasi sparisce (0,3% contro 0,0%): i fotogrammi arrivavano già regolari. Il guadagno c'è quando il tempo tra i fotogrammi oscilla; su schermi a 90 Hz, dove i passi da 1/120 s non cadono mai pari, ci si aspetta di più, ma non è stato misurato.
+
+Per rifarla: `window.__corsaFotogrammi = []` prima che la pagina parta (il gioco ci scrive istante e strada disegnata) e `window.__corsaSenzaInterpolazione = true` per il confronto.
+
 Il browser di prova disegna via software: su un telefono vero non è stato provato.

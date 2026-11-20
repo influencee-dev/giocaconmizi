@@ -39,6 +39,16 @@ export interface CorsaProps extends GameProps {
   tratti: SpecTratto[];
 }
 
+/**
+ * Due appigli per misurare la fluidità da fuori (scripts di prova, mai il sito):
+ * un elenco in cui il gioco scrive [istante, strada disegnata] a ogni
+ * fotogramma, e un interruttore per spegnere l'interpolazione e confrontare.
+ */
+interface SondaCorsa {
+  __corsaFotogrammi?: number[][];
+  __corsaSenzaInterpolazione?: boolean;
+}
+
 interface Particella {
   x: number;
   y: number;
@@ -310,7 +320,26 @@ export function Corsa({ titolo, tratti, age, onProgress, onComplete, demo = fals
           passo(PASSO);
           accumulo -= PASSO;
         }
-        disegna(ctx, m, stato.current, vista.current, { indice: ora.current.indice, mizi, riduci });
+        // Interpolazione: tra un passo e l'altro resta un pezzetto di tempo non
+        // ancora simulato. Si disegna Mizi dove sarà dopo quel pezzetto, poi si
+        // rimette lo stato com'era: senza, la corsa avanza a scatti piccoli e
+        // irregolari anche a 60 fotogrammi pieni.
+        const s = stato.current;
+        const sonda = window as unknown as SondaCorsa;
+        let avanti = 0;
+        let inAlto = 0;
+        if (s && !ora.current.finito && vista.current.fermo <= 0 && !sonda.__corsaSenzaInterpolazione) {
+          avanti = s.velocitaOra * accumulo;
+          if (s.y > 0) inAlto = Math.max(0.001 - s.y, s.vy * accumulo);
+          s.percorso += avanti;
+          s.y += inAlto;
+        }
+        disegna(ctx, m, s, vista.current, { indice: ora.current.indice, mizi, riduci });
+        if (s) {
+          sonda.__corsaFotogrammi?.push([adesso, s.percorso]);
+          s.percorso -= avanti;
+          s.y -= inAlto;
+        }
         scrivi();
         // Risoluzione adattiva: se la media di 30 fotogrammi è sotto i 48 al secondo, meno pixel.
         if (trascorso < 1) {
