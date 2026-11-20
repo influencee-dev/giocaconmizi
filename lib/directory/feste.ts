@@ -28,6 +28,12 @@
 // Atlantic Park ha solo la pagina Facebook e il sito indicato è di un'altra
 // struttura. Attenzione: «Il Borgo dei Piccoli» esce nelle ricerche di molte
 // città ma è a Bologna.
+// Il 20/11/2026: Gela, Lamezia Terme, Massa e Trani (nessun locale con un sito
+// suo); Quartu Sant'Elena (solido solo Freedom Party, salafestequartu.it;
+// Festalandia ha schede vecchie di anni); Viareggio (solo il parco Bim Bum Bam
+// a Torre del Lago, all'aperto e senza sito trovato); Cuneo (in città solo sale
+// di oratori e circoli: i parchi al coperto col sito, Michiland e Jump Jump,
+// sono a Genola e a Roccabruna).
 
 export interface LocaleFesta {
   nome: string;
@@ -2643,6 +2649,24 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Dove si fa una festa di compleanno per bambini a Casoria?", risposta: "Al chiuso: da Funjungle, il parco giochi a tema giungla del centro Funteam in via Calvanese, oppure al Castello Sale Eventi in via De Nicola, una ludoteca con una sala grande per le feste a tema." },
       { domanda: "Quanto costa la festa?", risposta: "Nessuno dei due pubblica i prezzi. Funjungle propone un pacchetto a prezzo unico con menù, due animatori, allestimento e ingresso ai giochi: chiedete la cifra per il vostro numero di invitati." },
       { domanda: "Si può fare una festa con il calcio?", risposta: "Sì: da Funjungle, che sta dentro un centro con i campi di calcetto, al pacchetto festa si può aggiungere una partita con telecronaca e video." },
+      { domanda: "Vanno bene anche d'inverno o se piove?", risposta: "Sì: tutti e due sono al chiuso." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "pomezia",
+    citta: "Pomezia",
+    aggiornata: "2026-11-20",
+    rispostaBreve: "A Pomezia la festa di compleanno per bambini si fa da Junior Park, il parco giochi al coperto del centro commerciale Sedici Pini, in via del Mare, con sala privata e animazione comprese nel menù, oppure da PlayZone, in via dei Castelli Romani, che ha sale feste private e un'area giochi con realtà virtuale e videogiochi. Chiedete per tempo le date libere.",
+    intro: "A Pomezia trovate due posti al chiuso con il loro sito ufficiale: un parco giochi per bambini fino a 12 anni dentro un centro commerciale, e una struttura che unisce le sale feste a un'agenzia che cura allestimenti ed eventi.",
+    locali: [
+      { nome: "Junior Park", zona: "Pomezia, via del Mare (centro commerciale Sedici Pini)", tipo: "parco giochi al coperto con sale feste", sito: "https://www.junior-park.it/pomezia", descrizione: "Parco giochi al coperto nel centro commerciale Sedici Pini, in via del Mare: più di 500 metri quadrati climatizzati per bambini da 0 a 12 anni, con scivoli, tappeti elastici, piscina di palline, una pista per i velocipedi e un'area per i più piccoli. Per i compleanni il sito propone la festa in sala privata con menù a prezzo fisso, che comprendono la sala e l'animazione. Non si può portare cibo da fuori; allergie e intolleranze vanno dette prima. I menù con i prezzi sono sul sito: controllate lì quelli in vigore." },
+      { nome: "PlayZone Pomezia", zona: "Pomezia, via dei Castelli Romani", tipo: "sala feste con area giochi al coperto", sito: "https://www.playzonepomezia.com/", descrizione: "Struttura per compleanni ed eventi per bambini in via dei Castelli Romani. Il sito descrive sale feste private, allestimenti con i palloncini e a tema, un'area giochi al coperto con realtà virtuale e videogiochi da sala, e un angolo con zucchero filato e popcorn. Ogni mese ci sono laboratori ed eventi. La stessa gestione ha un'agenzia che organizza feste ed eventi anche fuori sede. I prezzi non sono pubblicati: si chiedono alla struttura." },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno per bambini a Pomezia?", risposta: "Al chiuso: da Junior Park, il parco giochi del centro commerciale Sedici Pini in via del Mare, oppure da PlayZone in via dei Castelli Romani, che ha sale feste private e un'area giochi." },
+      { domanda: "Quanto costa la festa?", risposta: "Junior Park pubblica sul suo sito i menù a prezzo fisso, con sala e animazione comprese: guardate lì le cifre in vigore. PlayZone non pubblica i prezzi: si chiedono alla struttura." },
+      { domanda: "Si può portare la torta o il cibo da casa?", risposta: "Da Junior Park il sito dice che non si può portare cibo da fuori, e chiede di segnalare prima allergie e intolleranze. Per PlayZone chiedete alla struttura." },
       { domanda: "Vanno bene anche d'inverno o se piove?", risposta: "Sì: tutti e due sono al chiuso." },
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],

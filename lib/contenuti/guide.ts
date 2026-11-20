@@ -1083,8 +1083,8 @@ const GUIDE_BREVI: Guida[] = [
       "Fino a 6-7 anni non saper perdere è normale: il bambino vive la sconfitta come «sono meno bravo», e la capacità di gestire la delusione si sta ancora formando. Non serve farlo vincere sempre né schiacciarlo: si sceglie un gioco adatto all'età, si annuncia prima che si può perdere, l'adulto mostra ad alta voce come si perde bene, e dopo si accoglie la delusione ma non i gesti — le carte non si lanciano.",
     etaMin: 3,
     etaMax: 10,
-    minutiLettura: 6,
-    aggiornata: "2026-10-27",
+    minutiLettura: 9,
+    aggiornata: "2026-11-20",
     skill: "emozioni",
     sezioni: [
       {
@@ -1116,6 +1116,41 @@ const GUIDE_BREVI: Guida[] = [
         ],
       },
       {
+        titolo: "I giochi cooperativi: una palestra, non una scorciatoia",
+        paragrafi: [
+          "Nei giochi da tavolo cooperativi non c'è un vincitore tra i giocatori: si sta tutti dalla stessa parte contro il gioco, e si vince o si perde insieme. Per un bambino che fa fatica a perdere è spesso il primo modo sopportabile di incontrare la sconfitta, perché nessuno esulta mentre lui è ultimo. Ne esistono dai quattro anni in su, con partite da un quarto d'ora.",
+          "Due avvertenze. La prima: perdere insieme contro un mazzo di carte è un allenamento leggero, e non sostituisce quello vero. Prima o poi si perde contro un compagno, e quello si impara solo dove c'è un avversario: i cooperativi vanno alternati ai giochi normali, non messi al loro posto. La seconda: in questi giochi il più grande tende a decidere le mosse di tutti. Mettete una regola di casa, «ognuno decide il proprio turno», altrimenti il piccolo sta solo guardando giocare gli altri. Nella guida sui giochi da tavolo cooperativi, tra le letture consigliate qui sotto, trovate dieci titoli con età e durata dichiarate dagli editori.",
+        ],
+      },
+      {
+        titolo: "Fratelli: quando a perdere è sempre il più piccolo",
+        paragrafi: [
+          "Tre o quattro anni di differenza, in un gioco di abilità, sono troppi: il grande vince sempre e il piccolo impara solo che non vale la pena provarci. Chiedere al grande di perdere apposta non funziona, perché il piccolo se ne accorge e il grande si sente preso in giro.",
+          "Funzionano meglio tre cose. Il vantaggio dichiarato, come regola e non come regalo: «lui parte con due carte in più», «tu giochi con la mano sinistra». Le squadre miste: il grande e il piccolo insieme contro un genitore, così per una volta la bravura del grande è un aiuto. E i giochi dove conta la fortuna, in cui l'età non serve a niente. Al grande date un compito che lo faccia sentire importante senza fargli comandare la partita: leggere le carte, tenere il punteggio, spiegare le regole.",
+        ],
+      },
+      {
+        titolo: "Cinque errori che facciamo noi grandi",
+        paragrafi: [
+          "Il primo è prendere in giro, anche con affetto: «ma come, piangi per una partita?». Detto da un adulto, a caldo, brucia. Il secondo è legare un premio alla vittoria: «chi vince sceglie il cartone» alza la posta proprio dove vorremmo abbassarla. Il terzo è fare la predica mentre è ancora arrabbiato: in quel momento non ascolta, e si parla meglio la sera, o il giorno dopo.",
+          "Il quarto è il confronto: «tua sorella alla tua età non faceva così». Non lo aiuta a perdere meglio, gli dà un motivo in più per sentirsi il meno bravo. Il quinto è smettere di giocare per evitare le scenate. È comprensibile, ma è l'unica mossa che garantisce di non migliorare: saper perdere si allena solo perdendo, in piccole dosi e con qualcuno accanto.",
+        ],
+      },
+      {
+        titolo: "Un piano per due settimane",
+        paragrafi: [
+          "Scegliete un solo gioco, breve e con un po' di fortuna, e giocatelo tre volte a settimana: sempre lo stesso, così le regole non sono più una fatica e resta solo da allenare la parte difficile. Prima di ogni partita, la stessa frase: «Si può vincere e si può perdere». Dopo ogni partita, chiunque abbia vinto, la stretta di mano e la domanda «rivincita?».",
+          "Su un foglio attaccato al frigo segnate una crocetta per ogni partita finita senza lanciare niente, non per ogni vittoria. È un dettaglio, ma sposta il traguardo: l'obiettivo non è vincere, è arrivare in fondo. Dopo due settimane non avrete un bambino che perde col sorriso; avrete, di solito, crisi più corte e una rivincita chiesta più spesso. È già moltissimo.",
+        ],
+      },
+      {
+        titolo: "A calcio, in piscina, alle gare",
+        paragrafi: [
+          "Nello sport la sconfitta è pubblica, e pesa di più. Il viaggio di ritorno in macchina non è il momento dell'analisi della partita: bastano un abbraccio, la merenda e, se ne ha voglia lui, due parole. Quando ne parlate, commentate quello che ha fatto e non il risultato: «ho visto che non hai mollato nel secondo tempo» vale più di «avete perso per colpa dell'arbitro», che gli insegna a cercare un colpevole.",
+          "Se le reazioni a ogni sconfitta diventano un problema per lui o per la squadra, parlatene con l'allenatore: ha visto passare decine di bambini della stessa età e spesso ha già una strada.",
+        ],
+      },
+      {
         titolo: "Quando parlarne con qualcuno",
         paragrafi: [
           "Le scenate dopo una sconfitta si diradano di solito tra i sei e gli otto anni, e a fasi alterne: una settimana va meglio, poi arriva la partita di calcio persa e sembra di essere tornati indietro. È normale. Vale la pena parlarne con le maestre o col pediatra se dopo i sette-otto anni le reazioni restano molto forti e frequenti, se compaiono in tutte le situazioni (scuola, sport, giochi in casa) o se il bambino arriva a evitare qualunque attività dove potrebbe non riuscire: in quel caso conviene capire insieme che cosa c'è dietro.",
@@ -1143,8 +1178,18 @@ const GUIDE_BREVI: Guida[] = [
         risposta:
           "Partite brevi, con un po' di fortuna (gioco dell'oca, tombola, carte semplici) e i giochi cooperativi, dove si vince o si perde tutti insieme. Anche i giochi da soli senza timer, come puzzle e labirinti, allenano a sbagliare e riprovare.",
       },
+      {
+        domanda: "I giochi cooperativi aiutano un bambino che non sa perdere?",
+        risposta:
+          "Aiutano, perché la sconfitta è di tutta la squadra e pesa meno. Ma non insegnano a perdere contro un'altra persona: vanno alternati ai giochi in cui si vince e si perde, non messi al loro posto.",
+      },
+      {
+        domanda: "Cosa fare se a perdere è sempre il fratello più piccolo?",
+        risposta:
+          "Dategli un vantaggio dichiarato, come regola («lui parte con due carte in più»), fate squadre miste con il grande e il piccolo insieme contro un adulto, e scegliete giochi di fortuna, dove l'età non conta. Non chiedete al grande di perdere apposta: se ne accorgono tutti e due.",
+      },
     ],
-    giochi: ["memory-animali", "le-emozioni-di-mizi", "puzzle-facile", "labirinto-a-blocchi"],
+    giochi: ["memory-animali", "le-emozioni-di-mizi", "puzzle-facile", "labirinto-dei-tesori", "labirinto-a-blocchi"],
     foto: {
       scena:
         "Tavolo del soggiorno dopo una partita a un gioco da tavolo. Un bambino di circa 6 anni ha il broncio con le braccia incrociate; la mamma, seduta accanto, gli tende la mano per stringerla con un sorriso affettuoso, e la sorella maggiore sorride. Il tabellone ha solo caselle colorate senza scritte. Mizi è seduta sul tabellone.",
@@ -1415,6 +1460,26 @@ export function guida(slug: string): Guida | undefined {
 }
 
 /**
+ * Coppie di guide che parlano della stessa cosa da due lati: compaiono per
+ * prime in «Leggi anche», in tutte e due le direzioni (20/11/2026). Prima la
+ * scelta era solo per fascia d'età, e due guide gemelle non si linkavano.
+ */
+const LEGGI_ANCHE: Record<string, string[]> = {
+  "bambino-non-sa-perdere": ["giochi-da-tavolo-cooperativi-per-bambini"],
+  "giochi-da-tavolo-cooperativi-per-bambini": ["bambino-non-sa-perdere"],
+  "roblox-e-sicuro-per-bambini": ["parental-control-roblox", "minecraft-vs-roblox"],
+  "parental-control-roblox": ["roblox-e-sicuro-per-bambini"],
+  "minecraft-per-bambini": ["minecraft-vs-roblox"],
+  "minecraft-vs-roblox": ["minecraft-per-bambini", "roblox-e-sicuro-per-bambini"],
+  "tempo-davanti-allo-schermo": ["tempo-di-utilizzo-iphone-ipad", "google-family-link"],
+  "tempo-di-utilizzo-iphone-ipad": ["google-family-link", "tempo-davanti-allo-schermo"],
+  "google-family-link": ["tempo-di-utilizzo-iphone-ipad", "tempo-davanti-allo-schermo"],
+  "tabelline-senza-lacrime": ["frazioni-spiegate-ai-bambini", "imparare-a-contare"],
+  "imparare-a-contare": ["tabelline-senza-lacrime"],
+  "frazioni-spiegate-ai-bambini": ["tabelline-senza-lacrime"],
+};
+
+/**
  * Le guide da leggere dopo questa: le più vicine per fascia d'età.
  * Link interni veri su ogni pagina — per le mamme e per i motori (SEO/AEO).
  */
@@ -1423,7 +1488,8 @@ export function guideCorrelate(slug: string, quante = 3): Guida[] {
   if (!questa) return [];
   const sovrapposizione = (g: Guida) =>
     Math.min(g.etaMax, questa.etaMax) - Math.max(g.etaMin, questa.etaMin);
-  return GUIDE.filter((g) => g.slug !== slug)
-    .sort((a, b) => sovrapposizione(b) - sovrapposizione(a))
-    .slice(0, quante);
+  // Prima le guide scelte a mano perché parlano della stessa cosa, poi le più vicine per età.
+  const scelte = (LEGGI_ANCHE[slug] ?? []).map((s) => guida(s)).filter((g): g is Guida => Boolean(g));
+  const altre = GUIDE.filter((g) => g.slug !== slug && !scelte.includes(g)).sort((a, b) => sovrapposizione(b) - sovrapposizione(a));
+  return [...scelte, ...altre].slice(0, quante);
 }

@@ -220,6 +220,24 @@ ok(
   ok("schede delle attività: la descrizione sta nei 160 caratteri", schede.length > 200 && lunghe.length === 0, `${schede.length} schede; ${lunghe.slice(0, 3).join(" ")}`);
 }
 
+// 3-quater. «Leggi anche»: le guide gemelle si linkano tra loro (dal 20/11/2026).
+{
+  const { readFileSync } = await import("node:fs");
+  const sorgente = readFileSync("lib/contenuti/guide.ts", "utf8");
+  const mappa = sorgente.split("const LEGGI_ANCHE")[1].split("};")[0];
+  const coppie = [...mappa.matchAll(/"([a-z0-9-]+)": \[([^\]]*)\]/g)].flatMap((m) => [...m[2].matchAll(/"([a-z0-9-]+)"/g)].map((x) => [m[1], x[1]]));
+  const inSitemap = new Set(locs.map((l) => new URL(l).pathname));
+  const sconosciute = coppie.flat().filter((slug) => !inSitemap.has(`/guide/${slug}`));
+  const mancanti = [];
+  for (const [da, a] of coppie) {
+    const html = await testo(`/guide/${da}`);
+    const leggiAnche = html.split("Leggi anche")[1] ?? "";
+    if (!leggiAnche.includes(`href="/guide/${a}"`)) mancanti.push(`${da} → ${a}`);
+  }
+  ok("guide: quelle sullo stesso tema si linkano in «Leggi anche»", coppie.length >= 10 && sconosciute.length === 0 && mancanti.length === 0,
+    `${coppie.length} coppie; sconosciute: ${[...new Set(sconosciute)].join(", ")}; mancanti: ${mancanti.slice(0, 4).join(" | ")}`);
+}
+
 // 3-bis. I dati strutturati di ogni pagina (dal 04/11/2026, scripts/verifica/jsonld.mjs):
 // JSON leggibile, tipi schema.org veri, FAQ complete e VISIBILI nella pagina,
 // una sola FAQPage, briciole dalla Home con indirizzi sul dominio, Article
