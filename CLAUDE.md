@@ -31,6 +31,24 @@ Partidea SRL (dati in lib/contenuti/legal.ts → SOCIETA). Mascotte: Mizi, una p
   Se il deploy è READY sul commit appena pushato e le verifiche locali sono
   passate, non serve scaricare le pagine live.
 
+## Percorso per i genitori «sotto pressione» (20/11/2026)
+- `/genitori/sotto-pressione`: 35 affermazioni sulle cinque spinte dell'Analisi
+  Transazionale (Kahler) e 10 situazioni di casa, poi un profilo. Domande,
+  calcolo e letture in `lib/famiglia/sotto-pressione.ts`, schermo in
+  `components/genitori/`, prove in `scripts/verifica/genitori.mjs`.
+- È una BOZZA finché `PERCORSO_PUBBLICO` è false: noindex, fuori dalla sitemap,
+  nessun collegamento dal sito. La accende solo Giorgia, dopo che uno psicologo
+  ha riletto domande e letture.
+- Non è un test validato e non fa diagnosi: i testi dicono «può», mai «sei».
+  Il punteggio è un conto fisso; nessuna AI decide o ritocca i numeri.
+- Le risposte restano nel browser (sessionStorage): niente server, niente
+  database, niente statistiche. Salvarle altrove = decisione di Giorgia più
+  informativa nuova.
+- Il questionario ESQ-R-I sugli stati dell'Io (Laghi, Crea, Filipponi, 2020)
+  NON si copia: i diritti d'uso non sono verificati. Niente profili dei
+  bambini. La versione per i collaboratori non si fa qui senza un parere
+  legale (test di personalità e lavoratori).
+
 ## Dove va ogni file (17/11/2026, docs/ARCHITETTURA.md)
 - Prima di creare un file si cerca la sua cartella in `docs/ARCHITETTURA.md`.
   Se non c'è non se ne inventa una: prima si scrive lì la cartella nuova.

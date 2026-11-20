@@ -27,7 +27,7 @@ export const TITOLARE = {
 } as const;
 
 /** Data dell'ultima revisione delle informative (si aggiorna a ogni modifica). */
-export const AGGIORNATA = "18 novembre 2026";
+export const AGGIORNATA = "20 novembre 2026";
 
 export interface VoceRegistro {
   nome: string;
@@ -122,6 +122,16 @@ export const REGISTRO: VoceRegistro[] = [
     necessario: true,
     chi: "noi",
     quando: "A ogni visita dal telefono",
+  },
+  {
+    nome: "giocamizi-percorso-genitori",
+    tipo: "sessionStorage",
+    scopo:
+      "Tiene le risposte al percorso per i genitori «sotto pressione» mentre lo compili, per non perderle se la pagina si ricarica. Restano solo nel tuo browser: non le riceviamo.",
+    durata: "Finché chiudi la scheda, o subito con «Cancella le mie risposte»",
+    necessario: true,
+    chi: "noi",
+    quando: "Quando rispondi alla prima domanda del percorso",
   },
   {
     nome: "giocamizi-app-chiusa",
