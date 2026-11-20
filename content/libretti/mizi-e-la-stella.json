@@ -1,0 +1,64 @@
+{
+  "slug": "mizi-e-la-stella",
+  "raccolta": "natale-2026",
+  "ordine": 1,
+  "stato": "testo-approvato",
+  "titolo": "Mizi e la stella che non voleva accendersi",
+  "eta": "3-7",
+  "personaggi": ["mizi", "tobia", "lilla", "nocciola", "stella"],
+  "pagine": [
+    {
+      "testo": "Era la sera della Vigilia. Nel paese di Mizi tutto era pronto: la neve, i biscotti, il grande albero in piazza.",
+      "scena": "Piazza di un paesino sotto la neve al tramonto, casette con le finestre accese, un grande abete addobbato al centro. Mizi in primo piano guarda l'albero con un vassoio di biscotti."
+    },
+    {
+      "testo": "Mancava solo una cosa. La stella in cima all'albero era spenta. «Accenditi, stellina!» disse Mizi. Niente.",
+      "scena": "Mizi ai piedi dell'albero guarda in su e indica la cima. In cima la stella è spenta, giallo pallido, con gli occhi bassi. Cielo blu notte."
+    },
+    {
+      "testo": "Mizi provò a soffiarci sopra, piano piano. La stella dondolò un pochino, ma restò buia.",
+      "scena": "Mizi in punta di zampe su una scala di legno soffia verso la stella: una piccola nuvola di fiato nell'aria fredda. La stella è inclinata, ancora spenta."
+    },
+    {
+      "testo": "Allora Mizi cantò la canzone più allegra che conosceva. La cantò forte, fortissimo. La stella restò buia.",
+      "scena": "Mizi canta a becco spalancato con le ali aperte, note musicali colorate nell'aria, qualche fiocco di neve che cade. La stella in alto resta spenta."
+    },
+    {
+      "testo": "Mizi si arrampicò fino in cima, ramo dopo ramo. «Stellina, perché non ti accendi?»",
+      "scena": "Mizi aggrappata ai rami alti dell'abete tra palline e ghirlande, vicinissima alla stella, la guarda con dolcezza. Sotto si vedono piccoli i tetti del paese."
+    },
+    {
+      "testo": "La stella rispose con una vocina piccola piccola: «Quassù è tanto alto. È tanto buio. E io sono da sola.»",
+      "scena": "Primo piano della stella spenta con gli occhi lucidi e la bocca timida, intorno solo cielo scuro. Di Mizi si vede un'ala che le fa una carezza."
+    },
+    {
+      "testo": "Mizi ci pensò su. Poi sorrise: «Aspettami qui. Torno subito, e non torno da sola.»",
+      "scena": "Mizi scivola giù dall'albero sorridendo, con un'ala alzata verso la stella come per dire «aspetta». La stella la segue con lo sguardo, curiosa."
+    },
+    {
+      "testo": "Corse da Tobia il capibara, che non aveva mai fretta. «Vengo» disse Tobia. «Con calma, ma vengo.» E prese la sua lanterna.",
+      "scena": "Davanti a una casetta con il camino che fuma, Tobia seduto tranquillo su una panchina prende una lanterna accesa. Mizi è arrivata di corsa, con la neve che si alza dietro di lei."
+    },
+    {
+      "testo": "Corse da Lilla l'axolotl, che sorrideva sempre. Corse da Nocciola, la renna più piccola del bosco. Ognuno prese una lucina.",
+      "scena": "Sentiero nel bosco innevato: Mizi davanti, dietro Tobia con la lanterna, Lilla con una lucina a forma di goccia e Nocciola con una lanterna appesa al collo. Camminano in fila verso il paese."
+    },
+    {
+      "testo": "Tornarono in piazza tutti insieme e alzarono le lanterne. Una, due, tre, quattro piccole luci nel buio.",
+      "scena": "I quattro amici ai piedi dell'albero visti dall'alto, ognuno alza la sua luce verso la cima. Quattro aloni caldi nella piazza buia."
+    },
+    {
+      "testo": "La stella guardò giù. Vide le luci. Vide gli amici. «Non sono da sola» sussurrò. E si accese: prima piano, poi sempre di più.",
+      "scena": "La stella in cima all'albero comincia a brillare, sorride con gli occhi aperti. Sotto, piccoli, i quattro amici con le lanterne alzate."
+    },
+    {
+      "testo": "Quella notte la stella brillò su tutto il paese. E Mizi imparò una cosa: il coraggio arriva prima, quando qualcuno ti aspetta con una lucina. Buon Natale!",
+      "scena": "La piazza illuminata dalla stella dorata, neve che cade, Mizi, Tobia, Lilla e Nocciola abbracciati sotto l'albero che guardano in su felici."
+    }
+  ],
+  "parliamone": [
+    "Perché la stella non si accendeva?",
+    "Chi ti fa compagnia quando hai un po' paura?",
+    "Tu a chi porteresti una lucina?"
+  ]
+}
