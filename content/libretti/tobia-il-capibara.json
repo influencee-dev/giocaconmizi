@@ -1,0 +1,70 @@
+{
+  "slug": "tobia-il-capibara",
+  "raccolta": "natale-2026",
+  "ordine": 2,
+  "stato": "testo-scritto",
+  "titolo": "Tobia, il capibara che faceva amicizia con tutti",
+  "eta": "3-7",
+  "personaggi": [
+    "mizi",
+    "tobia",
+    "riccio",
+    "gufetta",
+    "volpacchiotto"
+  ],
+  "pagine": [
+    {
+      "testo": "Era la mattina della Vigilia. Tobia il capibara uscì di casa con una pentola di cioccolata calda. Andava piano, come sempre.",
+      "scena": "Tobia esce da una casetta innevata con il camino che fuma, tiene tra le zampe una pentola rossa fumante. Luce del mattino, neve fresca."
+    },
+    {
+      "testo": "«Sbrigati, Tobia!» gli gridò Mizi dalla piazza. «La festa comincia stasera!» «Arrivo» disse Tobia. «Con calma, ma arrivo.»",
+      "scena": "Mizi in lontananza nella piazza, accanto all'albero di Natale, agita un'ala. In primo piano Tobia di spalle sul sentiero, tranquillo, con la pentola."
+    },
+    {
+      "testo": "Lungo il sentiero trovò un riccio seduto da solo. «Nessuno si siede vicino a me» brontolò il riccio. «Pungo.»",
+      "scena": "Il riccio seduto da solo su un tronco coperto di neve, imbronciato, con le spine dritte. Tobia arriva dal sentiero."
+    },
+    {
+      "testo": "Tobia non disse niente. Si sedette lì accanto, a un passo dalle spine, e versò due tazze di cioccolata.",
+      "scena": "Tobia seduto sul tronco accanto al riccio, a poca distanza, versa la cioccolata in due tazze gialle. Il riccio lo guarda sorpreso."
+    },
+    {
+      "testo": "Più avanti trovò una gufetta su un ramo basso. «Non voglio venire alla festa» disse. «C'è troppo rumore.»",
+      "scena": "La gufetta su un ramo basso di un abete, con le ali sulle orecchie. Sotto, Tobia e il riccio la guardano."
+    },
+    {
+      "testo": "Tobia non disse niente. Si sedette sotto il ramo e restò zitto zitto con lei, a guardare la neve che cadeva.",
+      "scena": "Tobia seduto sotto il ramo, la gufetta sopra di lui, il riccio poco più in là. Tutti guardano i fiocchi che cadono piano. Scena silenziosa."
+    },
+    {
+      "testo": "Più avanti ancora trovò un volpacchiotto nascosto dietro un cespuglio. «Io non conosco nessuno» sussurrò.",
+      "scena": "Un cespuglio innevato da cui spuntano solo due occhi e la punta di una coda arancione e bianca. Tobia si ferma davanti."
+    },
+    {
+      "testo": "Tobia non disse niente. Si sedette vicino al cespuglio e aspettò. Dopo un po' spuntò un naso. Poi due orecchie. Poi tutto il volpacchiotto.",
+      "scena": "Tobia seduto accanto al cespuglio con una tazza appoggiata sulla neve. Il volpacchiotto esce a metà dal cespuglio, curioso."
+    },
+    {
+      "testo": "Quando Tobia si rialzò, si accorse di una cosa. Dietro di lui camminavano il riccio, la gufetta e il volpacchiotto.",
+      "scena": "Tobia cammina sul sentiero con la pentola e si volta sorridendo: dietro di lui in fila il riccio, la gufetta che svolazza bassa e il volpacchiotto."
+    },
+    {
+      "testo": "Arrivarono in piazza che era già buio. «Tobia, sei in ritardo!» disse Mizi. Poi vide chi c'era con lui. «Anzi no. Sei arrivato giusto.»",
+      "scena": "Piazza di sera con l'albero illuminato. Mizi a braccia aperte accoglie Tobia e i tre nuovi amici che stanno un passo dietro di lui."
+    },
+    {
+      "testo": "Alla tavola di Natale si strinsero tutti. Il riccio stava attento alle spine. La gufetta sceglieva il posto più tranquillo. Il volpacchiotto conosceva già tre amici.",
+      "scena": "Lunga tavola apparecchiata in piazza con lucine e dolci. Tutti seduti vicini: Mizi, Tobia, il riccio, la gufetta all'angolo, il volpacchiotto che sorride."
+    },
+    {
+      "testo": "«Come hai fatto a portarli tutti?» chiese Mizi. Tobia ci pensò, con calma. «Non ho fatto niente» disse. «Mi sono solo seduto vicino.» Buon Natale!",
+      "scena": "Primo piano di Mizi e Tobia seduti vicini con le tazze di cioccolata, sullo sfondo sfocato gli amici e le luci dell'albero."
+    }
+  ],
+  "parliamone": [
+    "Perché il riccio stava da solo?",
+    "Tu cosa fai quando un bambino non conosce nessuno?",
+    "È più bello arrivare primi o arrivare insieme?"
+  ]
+}
