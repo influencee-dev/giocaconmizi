@@ -536,8 +536,8 @@ ok("og:image di una città", await ogServita("/feste/milano"));
     proposte: [...document.querySelectorAll("[data-proposta]")].map((x) => x.getAttribute("data-proposta")),
     sbordo: document.documentElement.scrollWidth - window.innerWidth,
   }));
-  ok("album: 3 figurine prese su 39, coccarda contata, tre giochi nuovi da provare",
-    album.prese === 3 && album.tutte === 39 && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
+  ok("album: 3 figurine prese su 40, coccarda contata, tre giochi nuovi da provare",
+    album.prese === 3 && album.tutte === 40 && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
     !album.proposte.some((s) => ["memory-animali", "conta-fino-a-10", "abbina-i-colori"].includes(s)) && album.sbordo <= 0, JSON.stringify(album));
   await m.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
   await m.waitForTimeout(400);
@@ -901,6 +901,7 @@ ok("og:image di una città", await ogServita("/feste/milano"));
 // «La corsa nella piramide» (20/11/2026): corsa a tre strade, motore Corsa.tsx.
 // Niente vite e niente tempo: chi sbatte dappertutto arriva in cima lo stesso.
 {
+  const { readFileSync } = await import("node:fs");
   const copioneC = JSON.parse(readFileSync("content/voce-mizi.json", "utf8"));
   const frasiC = new Set(copioneC.frasi["corsa-nella-piramide"] ?? []);
   const tuttoC = new Set(Object.values(copioneC.frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
