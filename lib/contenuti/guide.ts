@@ -1467,6 +1467,8 @@ export function guida(slug: string): Guida | undefined {
 const LEGGI_ANCHE: Record<string, string[]> = {
   "bambino-non-sa-perdere": ["giochi-da-tavolo-cooperativi-per-bambini"],
   "giochi-da-tavolo-cooperativi-per-bambini": ["bambino-non-sa-perdere"],
+  "lettera-a-babbo-natale-come-scriverla-insieme-ai-bambini": ["calendario-dell-avvento-fai-da-te-con-i-bambini"],
+  "calendario-dell-avvento-fai-da-te-con-i-bambini": ["lettera-a-babbo-natale-come-scriverla-insieme-ai-bambini"],
   "roblox-e-sicuro-per-bambini": ["parental-control-roblox", "minecraft-vs-roblox"],
   "parental-control-roblox": ["roblox-e-sicuro-per-bambini"],
   "minecraft-per-bambini": ["minecraft-vs-roblox"],
