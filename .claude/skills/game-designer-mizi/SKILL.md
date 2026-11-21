@@ -85,7 +85,7 @@ Due giochi al giorno, li fa la routine «Giocamizi · Due giochi al giorno». L'
 | 1 | memory-animali | memory online · 1.600 | FATTO il 15/11/2026 (voce: 30 frasi in copione, da registrare) |
 | 2 | pixel-art | pixel art · 49.500 | da fare |
 | 3 | puzzle-facile | puzzle online · 27.100 | da fare |
-| 4 | tabelline | giochi tabelline · 8.100 (giochi matematica · 18.100) | da fare |
+| 4 | tabelline | giochi tabelline · 8.100 (giochi matematica · 18.100) | FATTO il 21/11/2026: dieci domande tutte diverse dalle facili alle difficili, quattro risposte, trucco dopo l'errore, «Ancora» torna alla scelta, 11 prove. Voce: le domande e i trucchi non sono nel copione (sono 90 + 90 frasi: restano alla sintesi del telefono finché Giorgia non decide di registrarle) |
 | 5 | pizza-delle-frazioni | frazioni · 9.900 | da fare |
 | 6 | addizioni-entro-20 | giochi matematica · 18.100 | da fare |
 | 7 | trova-le-differenze | trova le differenze · 2.900 | PRIMO PASSO il 17/11/2026: sul nucleo, aiuto dopo tre tocchi a vuoto, doppio tocco sistemato, 7 prove. Restano: scene nuove (sono 4, sempre le stesse) e differenze «sostituzione» |
@@ -109,3 +109,4 @@ Molti giochi usano lo stesso motore (`games/_engine/SceltaMultipla.tsx`, `PixelA
 - 16/11/2026 — Demo ferme in 6 giochi: nei tre di coding la demo tirava una riga dritta e sbatteva nei muri (ora c'è un risolutore vero); in «Vesti Mizi» premeva «Fatto» con i vestiti vecchi; «Tabelline» restava sulla schermata di scelta.
 - 16/11/2026 — Lodi al maschile («Bravo!», «Bravissimo!») in 7 file: tutte diventate «Evviva!».
 - **Trova le differenze (17/11/2026).** Due tocchi nello stesso istante sull'ultima differenza saltavano la scena dopo: lo stato non era ancora aggiornato. Serve un ref, come nel nucleo. Qui un tocco a vuoto è esplorazione: le stelle contano i tocchi a vuoto di tutta la partita (`stelleDi` del nucleo), non il round. Il cerchio dell'aiuto giallo, intorno al sole giallo, sembrava i raggi del sole: un aiuto deve avere un colore che non c'è nella scena (viola tratteggiato con bordo bianco).
+- 21/11/2026 — «Tabelline»: le otto domande uscivano a caso con ripetizioni (sulla tabellina del 7: «7 × 10» tre volte, quattro domande diverse in tutto), «per 1» aveva solo tre risposte e «Ancora» ripeteva le stesse domande nello stesso ordine. Un gioco che genera i round a caso va controllato contando i round DIVERSI di una partita vera.
