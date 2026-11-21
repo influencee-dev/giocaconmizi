@@ -34,6 +34,12 @@
 // a Torre del Lago, all'aperto e senza sito trovato); Cuneo (in città solo sale
 // di oratori e circoli: i parchi al coperto col sito, Michiland e Jump Jump,
 // sono a Genola e a Roccabruna).
+// Il 21/11/2026: Fano, Crotone e Teramo (solo schede di elenchi o blog vecchi di
+// anni); Carrara e Molfetta (nomi senza una sede confermata in città); Mantova
+// (col sito c'è solo il Bowling, a Borgo Virgilio); Moncalieri (Casa Zoe senza
+// sito suo; PlayZone è a La Loggia); Siena (Children's House, via Mentana, ha
+// il sito ma pagine ferme al 2018-2019; il parco Nemo col sito aggiornato è a
+// Barberino Tavarnelle, in provincia di Firenze).
 
 export interface LocaleFesta {
   nome: string;
@@ -2667,6 +2673,24 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Dove si fa una festa di compleanno per bambini a Pomezia?", risposta: "Al chiuso: da Junior Park, il parco giochi del centro commerciale Sedici Pini in via del Mare, oppure da PlayZone in via dei Castelli Romani, che ha sale feste private e un'area giochi." },
       { domanda: "Quanto costa la festa?", risposta: "Junior Park pubblica sul suo sito i menù a prezzo fisso, con sala e animazione comprese: guardate lì le cifre in vigore. PlayZone non pubblica i prezzi: si chiedono alla struttura." },
       { domanda: "Si può portare la torta o il cibo da casa?", risposta: "Da Junior Park il sito dice che non si può portare cibo da fuori, e chiede di segnalare prima allergie e intolleranze. Per PlayZone chiedete alla struttura." },
+      { domanda: "Vanno bene anche d'inverno o se piove?", risposta: "Sì: tutti e due sono al chiuso." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "rovigo",
+    citta: "Rovigo",
+    aggiornata: "2026-11-21",
+    rispostaBreve: "A Rovigo la festa di compleanno per bambini si fa da Ludosfera, una ludoteca con playground, area per i più piccoli, sale per le feste e pizzeria, oppure al Bosco delle Meraviglie, in via del Commercio, una sala compleanni con ludoteca dove la festa può avere laboratori creativi e un'animatrice. Chiedete per tempo le date libere.",
+    intro: "A Rovigo trovate due posti al chiuso con il loro sito ufficiale: una ludoteca grande, dove si va anche solo a giocare il pomeriggio e la sera si può cenare, e una sala compleanni più raccolta, che punta sui laboratori e sulle fiabe animate.",
+    locali: [
+      { nome: "Ludosfera", zona: "Rovigo", tipo: "ludoteca con playground e sale feste", sito: "https://ludosfera.net/", descrizione: "Ludoteca e family park a Rovigo. Il sito descrive un playground, un'area per i bambini da 0 a 4 anni, le sale per feste ed eventi e un bar con ristorante e pizzeria. Per giocare si entra senza prenotare: il sito indica l'apertura ogni giorno dalle 16 alle 20, con serate fino alle 23 nel fine settimana. Per i compleanni non pubblica i prezzi: si chiedono alla struttura, insieme all'indirizzo esatto." },
+      { nome: "Il Bosco delle Meraviglie", zona: "Rovigo, via del Commercio", tipo: "sala feste con ludoteca e laboratori", sito: "https://www.boscomeraviglie.it/", descrizione: "Sala compleanni con ludoteca in via del Commercio; la stessa gestione ha una sede anche a Ferrara. Il sito elenca laboratori, ludoteca, sala compleanni e intrattenimento per i bambini; per le feste propone pacchetti di animazione fino a tre ore con un'animatrice, con giochi, laboratori creativi e fiabe animate. I prezzi non sono pubblicati: si chiedono alla struttura." },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno per bambini a Rovigo?", risposta: "Al chiuso: da Ludosfera, una ludoteca con playground, sale feste e pizzeria, oppure al Bosco delle Meraviglie in via del Commercio, una sala compleanni con ludoteca e laboratori." },
+      { domanda: "Quanto costa la festa?", risposta: "Nessuno dei due pubblica i prezzi. Chiedete un preventivo scritto per il vostro numero di invitati e fatevi dire che cosa è compreso." },
+      { domanda: "C'è l'animazione?", risposta: "Il Bosco delle Meraviglie propone pacchetti fino a tre ore con un'animatrice, con giochi, laboratori creativi e fiabe animate. Per Ludosfera chiedete alla struttura." },
       { domanda: "Vanno bene anche d'inverno o se piove?", risposta: "Sì: tutti e due sono al chiuso." },
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],

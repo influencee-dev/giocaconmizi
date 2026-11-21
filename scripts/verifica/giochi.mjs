@@ -898,6 +898,85 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   await ctxT.close();
 }
 
+{
+  // «Tabelline con Mizi» (21/11/2026). Prima in otto domande sulla tabellina del 7
+  // usciva tre volte «7 × 10»: ora sono dieci, tutte diverse, dalle facili alle
+  // difficili, con quattro risposte e un trucco dopo l'errore.
+  const ctxB = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxB.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const t = await ctxB.newPage();
+  let erroriT = 0;
+  t.on("pageerror", () => erroriT++);
+  const campoT = t.locator("[data-scelta-multipla]");
+  const inGioco = (n) => t.waitForFunction((r) => { const e = document.querySelector("[data-scelta-multipla]"); return e?.getAttribute("data-round") === String(r) && e.getAttribute("data-partita") === "gioca"; }, n, { timeout: 8000 }).catch(() => {});
+  /** Gioca una partita intera; `sbadato` = a ogni domanda prima una risposta sbagliata. */
+  const partita = async (sbadato) => {
+    await campoT.waitFor({ timeout: 10000 });
+    const totali = Number(await campoT.getAttribute("data-round-totali"));
+    const viste = [];
+    for (let r = 1; r <= totali; r++) {
+      await inGioco(r);
+      const [tab, per] = ((await t.locator("[data-domanda]").getAttribute("data-domanda")) ?? "0x0").split("x").map(Number);
+      const opzioni = (await t.locator("[data-opzione]").evaluateAll((e) => e.map((x) => x.textContent.trim()))).map(Number);
+      let trucco = "";
+      if (sbadato) {
+        await t.locator(`[data-opzione][data-stato=libera]:not([aria-label="Numero ${tab * per}"])`).first().tap();
+        trucco = ((await t.locator("[data-aiuto]").textContent({ timeout: 3000 }).catch(() => "")) ?? "").trim();
+        await t.waitForTimeout(200);
+      }
+      viste.push({ tab, per, opzioni, trucco });
+      await t.locator(`[data-opzione][aria-label="Numero ${tab * per}"]`).tap();
+    }
+    const festa = await t.locator("[data-festa]").waitFor({ timeout: 8000 }).then(() => true, () => false);
+    return { totali, viste, festa };
+  };
+
+  await t.goto(`${BASE}/giochi/tabelline/gioca?eta=8`, { waitUntil: "networkidle" });
+  const scelte = await t.locator("[data-tabellina]").evaluateAll((e) => e.map((x) => ({ quale: x.dataset.tabellina, alto: x.getBoundingClientRect().height })));
+  ok("tabelline: si sceglie fra 2…10 e «tutte insieme», con bottoni grandi", scelte.map((x) => x.quale).join(",") === "2,3,4,5,6,7,8,9,10,mix" && scelte.every((x) => x.alto >= 64));
+  await t.locator('[data-tabellina="7"]').tap();
+  const sette = await partita(true);
+  ok("tabelline del 7: dieci domande, tutte del 7 e tutte diverse", sette.totali === 10 && sette.viste.every((d) => d.tab === 7) && new Set(sette.viste.map((d) => d.per)).size === 10, sette.viste.map((d) => d.per).join(","));
+  const posto = (per) => sette.viste.findIndex((d) => d.per === per);
+  ok("tabelline: prima le facili (per 1, 2, 5, 10), in fondo le difficili (per 6, 7, 8)", [1, 2, 5, 10].every((f) => posto(f) < 4) && [6, 7, 8].every((f) => posto(f) >= 7));
+  ok("tabelline: sempre quattro risposte diverse, con quella giusta", sette.viste.every((d) => d.opzioni.length === 4 && new Set(d.opzioni).size === 4 && d.opzioni.includes(d.tab * d.per) && d.opzioni.every((n) => n > 0)), sette.viste.filter((d) => new Set(d.opzioni).size !== 4).map((d) => `${d.tab}x${d.per}:${d.opzioni}`).join(" "));
+  const nove = sette.viste.find((d) => d.per === 9);
+  ok("tabelline: dopo un errore Mizi mostra un trucco, non il risultato", sette.viste.every((d) => d.trucco.length > 8) && nove?.trucco === "7 per 10 fa 70. Togli un 7." && sette.viste.filter((d) => d.per > 1).every((d) => !new RegExp(`\\b${d.tab * d.per}\\b`).test(d.trucco)), nove?.trucco);
+  const dettoT = (await t.evaluate(() => window.__voceMizi ?? [])).map((x) => x.testo);
+  ok("tabelline: il trucco lo dice anche a voce", dettoT.includes("7 per 10 fa 70. Togli un 7.") && dettoT.includes("Quanto fa 7 per 9?"));
+  ok("tabelline: anche sbagliando a ogni domanda si arriva alla festa, senza errori JS", sette.festa && erroriT === 0);
+
+  // «Ancora» non ripete le stesse domande: riporta alla scelta, col segno sulla tabellina fatta.
+  await t.locator("[data-festa] [data-ancora]").tap();
+  const tornata = await t.locator("[data-scelta-tabellina]").waitFor({ timeout: 5000 }).then(() => true, () => false);
+  ok("tabelline: «Ancora» riporta alla scelta e segna la tabellina fatta", tornata && (await t.locator('[data-tabellina="7"]').getAttribute("data-fatta")) === "si" && (await t.locator('[data-tabellina="8"]').getAttribute("data-fatta")) === null);
+  await ctxB.close();
+
+  // «Tutte insieme» a 7 anni: solo le prime tabelline, dieci coppie diverse, dalla più piccola.
+  const ctxM = await b.newContext({ viewport: { width: 320, height: 568 }, isMobile: true, hasTouch: true });
+  await ctxM.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const m = await ctxM.newPage();
+  await m.goto(`${BASE}/giochi/tabelline/gioca?eta=7`, { waitUntil: "networkidle" });
+  await m.locator('[data-tabellina="mix"]').tap();
+  await m.locator("[data-scelta-multipla]").waitFor({ timeout: 10000 });
+  const misteViste = [];
+  for (let r = 1; r <= 10; r++) {
+    await m.waitForFunction((n) => { const e = document.querySelector("[data-scelta-multipla]"); return e?.getAttribute("data-round") === String(n) && e.getAttribute("data-partita") === "gioca"; }, r, { timeout: 8000 }).catch(() => {});
+    const [tab, per] = ((await m.locator("[data-domanda]").getAttribute("data-domanda")) ?? "0x0").split("x").map(Number);
+    misteViste.push({ tab, per });
+    if (r === 1) {
+      const misure = await m.locator("[data-opzione]").evaluateAll((e) => e.map((x) => Math.round(Math.min(x.getBoundingClientRect().width, x.getBoundingClientRect().height))));
+      ok("tabelline: a 320 px le risposte restano grandi e niente sborda", misure.every((x) => x >= 64) && (await m.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)), misure.join(","));
+    }
+    await m.locator(`[data-opzione][aria-label="Numero ${tab * per}"]`).tap();
+  }
+  const coppie = new Set(misteViste.map((d) => `${Math.min(d.tab, d.per)}x${Math.max(d.tab, d.per)}`));
+  const prodotti = misteViste.map((d) => d.tab * d.per);
+  ok("tutte insieme a 7 anni: solo le tabelline del 2, 3, 4, 5 e 10", misteViste.every((d) => [2, 3, 4, 5, 10].includes(d.tab)), misteViste.map((d) => d.tab).join(","));
+  ok("tutte insieme: dieci coppie diverse, dalla più piccola alla più grande", coppie.size === 10 && prodotti.every((n, i) => i === 0 || n >= prodotti[i - 1]), prodotti.join(","));
+  await ctxM.close();
+}
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("giochi") ? 0 : 1);

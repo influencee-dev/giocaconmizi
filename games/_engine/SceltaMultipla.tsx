@@ -64,6 +64,8 @@ export interface SceltaMultiplaProps extends GameProps {
   round: Round[];
   /** Colonne della griglia di opzioni; di default si adatta al numero. */
   colonne?: number;
+  /** Chiamata quando si tocca «Ancora»: serve ai giochi che prima fanno scegliere qualcosa (le tabelline). */
+  onRicomincia?: () => void;
 }
 
 export function SceltaMultipla({
@@ -72,6 +74,7 @@ export function SceltaMultipla({
   colonne,
   onProgress,
   onComplete,
+  onRicomincia,
   demo = false,
 }: SceltaMultiplaProps) {
   const totale = round.length;
@@ -111,7 +114,8 @@ export function SceltaMultipla({
   const ricomincia = useCallback(() => {
     setSbagliateDi({ round: 0, ids: [] });
     partita.ricomincia();
-  }, [partita]);
+    onRicomincia?.();
+  }, [partita, onRicomincia]);
 
   const colonneEffettive =
     corrente.colonne ??
