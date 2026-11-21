@@ -53,6 +53,7 @@ I file segnati «generato» li scrive uno script: non si modificano a mano.
   - `arte.tsx`, `scena.tsx`, `casuale.ts`, `tipi.ts`: disegni, numeri a caso, il contratto comune.
 - `content/games/<slug>.md`: il testo della pagina del gioco.
 - `content/voce-mizi.json`: le frasi che Mizi dice, identiche a quelle nel codice.
+- `lib/giochi/novita.ts`: gli ultimi arrivati, cioè i giochi ordinati per ultima modifica. Li mostrano la home e il catalogo.
 - Il metodo per migliorare un gioco è in `.claude/skills/game-designer-mizi/SKILL.md`.
 
 ## `components/`: una cartella per zona

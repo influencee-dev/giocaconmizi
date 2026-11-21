@@ -32,12 +32,20 @@ function delGiorno<T>(lista: T[]): T | undefined {
   return lista[giorno % lista.length];
 }
 
-export function HomeApp({ giochi, inVetrina }: { giochi: GiocoBreve[]; inVetrina: string[] }) {
+/**
+ * `recenti`: gli slug degli ultimi arrivati, dal più recente (lib/giochi/novita.ts).
+ */
+export function HomeApp({ giochi, inVetrina, recenti = [] }: { giochi: GiocoBreve[]; inVetrina: string[]; recenti?: string[] }) {
   const { profilo, pronto } = useProfilo();
   const bimbo = bimboAttivo(profilo);
   const adatti = bimbo ? giochi.filter((g) => bimbo.eta >= g.etaMin && bimbo.eta <= g.etaMax) : giochi.filter((g) => inVetrina.includes(g.slug));
   const oggi = delGiorno(adatti.length ? adatti : giochi);
   const carosello = (adatti.length ? adatti : giochi).filter((g) => g.slug !== oggi?.slug).slice(0, 8);
+  // Gli ultimi arrivati: i due più recenti adatti all'età del bimbo, diversi dal gioco di oggi.
+  const ultimi = recenti
+    .map((s) => giochi.find((g) => g.slug === s))
+    .filter((g): g is GiocoBreve => Boolean(g) && g!.slug !== oggi?.slug && (!bimbo || (bimbo.eta >= g!.etaMin && bimbo.eta <= g!.etaMax)))
+    .slice(0, 2);
 
   return (
     <section className="px-4 pt-4 md:hidden" aria-label="La tua giornata su Giocamizi" data-home-app>
@@ -98,6 +106,33 @@ export function HomeApp({ giochi, inVetrina }: { giochi: GiocoBreve[]; inVetrina
               <IconaGioco slug={oggi.slug} skill={oggi.skill} lato="h-14 w-14" />
             </span>
           </div>
+        </div>
+      )}
+
+      {ultimi.length > 0 && (
+        <div className="mt-5" data-ultimi-arrivati-app>
+          <p className="text-lg font-black text-notte">Gli ultimi arrivati</p>
+          <ul className="mt-2 flex flex-col gap-2">
+            {ultimi.map((g, i) => (
+              <li key={g.slug}>
+                <Link
+                  href={`/giochi/${g.slug}`}
+                  className="flex items-center gap-3 rounded-[1.4rem] bg-white p-3 shadow-[0_8px_20px_-14px_rgba(31,36,48,0.5)]"
+                  data-ultimo-arrivato={g.slug}
+                >
+                  <span className={`flex h-16 w-24 shrink-0 items-center justify-center rounded-2xl ${TONI[(i + 2) % TONI.length]}`}>
+                    <IconaGioco slug={g.slug} skill={g.skill} lato="h-9 w-9" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[17px] font-black leading-tight text-notte [overflow-wrap:anywhere]">{g.titolo}</span>
+                    <span className="block text-sm font-bold text-notte-tenue">
+                      {g.etaMin}–{g.etaMax} anni · {g.minuti} minuti
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 

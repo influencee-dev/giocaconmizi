@@ -323,6 +323,12 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   vite, tempo o velocità che cresce: un urto fa ripartire piano, al terzo la
   strada libera si illumina. Un gioco nuovo di questo tipo è un elenco di
   tratti. Metodo in `.claude/skills/accademia-giochi/SKILL.md`.
+- «Gli ultimi arrivati» (21/11/2026): `giochiRecenti()` in lib/giochi/novita.ts
+  ordina i giochi vivi per ultima modifica vera (lib/seo/date-pagine.json). Un
+  gioco nuovo o appena migliorato sale da solo in cima al catalogo /giochi
+  (quattro giochi, finché non si sceglie un filtro) e in home (due sul
+  telefono in HomeApp, quattro dal tablet in su). Niente elenchi a mano: i
+  «consigliati per cominciare» restano quelli di IN_VETRINA.
 - Nucleo comune dei giochi (16/11/2026): `games/_engine/nucleo.ts` (`useRound`:
   round, blocco del doppio tocco, punto ai round puliti, aiuto dopo N errori,
   suoni, lodi senza genere, attributi `data-partita`/`data-round`, esito con

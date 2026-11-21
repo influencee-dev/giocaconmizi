@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { games } from "@/games/registry";
+import { giochiRecenti } from "@/lib/giochi/novita";
 import {
   MiziIntero,
   ScenaBiglietti,
@@ -73,6 +74,7 @@ export default function Home() {
   const vetrina = IN_VETRINA.map((s) => games.find((g) => g.slug === s)).filter(
     (g): g is NonNullable<typeof g> => Boolean(g),
   );
+  const ultimiArrivati = giochiRecenti(4);
   const storie = tutteLeStorie().length;
   const citta = CITTA_FESTE.length;
   const guide = [...GUIDE].sort((a, b) => b.aggiornata.localeCompare(a.aggiornata));
@@ -123,6 +125,7 @@ export default function Home() {
       <HomeApp
         giochi={games.filter((g) => g.status === "live").map((g) => ({ slug: g.slug, titolo: g.title, etaMin: g.ageMin, etaMax: g.ageMax, minuti: g.minutes, skill: g.skill }))}
         inVetrina={IN_VETRINA}
+        recenti={ultimiArrivati.map((g) => g.slug)}
       />
 
       {/* Il Natale, in stagione: sul telefono subito dopo la home-app. */}
@@ -229,6 +232,27 @@ export default function Home() {
               azione="Gioca"
             />
           ))}
+        </div>
+        <div className="mt-10 hidden md:block" data-ultimi-arrivati>
+          <h3 className="text-xl font-extrabold text-notte">Gli ultimi arrivati</h3>
+          <p className="mt-1 font-bold text-notte-tenue">Giochi nuovi o appena migliorati.</p>
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+            {ultimiArrivati.map((g, i) => (
+              <CardPastello
+                key={g.slug}
+                href={`/giochi/${g.slug}`}
+                tono={TONI_GIOCHI[(i + 2) % TONI_GIOCHI.length]}
+                foto={
+                  <span aria-hidden className="flex h-28 items-center justify-center p-3 sm:h-36 sm:p-4">
+                    <IconaGioco slug={g.slug} skill={g.skill} />
+                  </span>
+                }
+                titolo={g.title}
+                etichette={[`${g.ageMin}–${g.ageMax} anni`]}
+                azione="Gioca"
+              />
+            ))}
+          </div>
         </div>
         <div className="mt-10 grid gap-6 rounded-[1.8rem] bg-white p-5 sm:p-8 lg:grid-cols-2">
           <div className="flex flex-col gap-3">

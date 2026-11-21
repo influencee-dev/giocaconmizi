@@ -898,6 +898,26 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   await ctxT.close();
 }
 
+// «Gli ultimi arrivati» (21/11/2026): home e catalogo mostrano da soli i giochi
+// nuovi o appena migliorati, dal più recente (lib/giochi/novita.ts).
+{
+  const { readFileSync } = await import("node:fs");
+  const date = JSON.parse(readFileSync("lib/seo/date-pagine.json", "utf8"));
+  const registroN = readFileSync("games/registry.ts", "utf8");
+  const viviN = [...registroN.matchAll(/slug: "([^"]+)"[^}]*?status: "live"/g)].map((x) => x[1]);
+  const giornoN = (s) => [date[`games/${s}`], date[`content/games/${s}.md`]].filter(Boolean).sort().at(-1) ?? "";
+  const attesi = viviN.map((s, i) => ({ s, i })).sort((a, b) => giornoN(b.s).localeCompare(giornoN(a.s)) || b.i - a.i).slice(0, 4).map((v) => v.s);
+  const ctxN = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const n = await ctxN.newPage();
+  await n.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
+  const inCatalogo = await n.locator("[data-ultimi-arrivati] a").evaluateAll((els) => els.map((el) => el.getAttribute("href")?.replace("/giochi/", "")));
+  ok("ultimi arrivati: in cima al catalogo i quattro giochi modificati più di recente, in ordine", inCatalogo.join() === attesi.join(), `${inCatalogo.join(" ")} (attesi ${attesi.join(" ")})`);
+  await n.goto(`${BASE}/`, { waitUntil: "networkidle" });
+  const inHome = await n.locator("[data-ultimi-arrivati-app] [data-ultimo-arrivato]").evaluateAll((els) => els.map((el) => el.getAttribute("data-ultimo-arrivato")));
+  ok("ultimi arrivati: sul telefono la home ne mostra due, tra i più recenti", inHome.length === 2 && inHome.every((s) => attesi.includes(s)), inHome.join(" "));
+  await ctxN.close();
+}
+
 // «La corsa nella piramide» (20/11/2026): corsa a tre strade, motore Corsa.tsx.
 // Niente vite e niente tempo: chi sbatte dappertutto arriva in cima lo stesso.
 {
