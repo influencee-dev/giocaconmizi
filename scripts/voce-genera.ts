@@ -82,14 +82,22 @@ function registra(testo: string, lingua: string, voce: string, semitoni: number,
     return `${perche}${chiamata.stderr ? ` — ${chiamata.stderr.trim().slice(0, 160)}` : ""}`;
   }
   // Più acuta senza diventare più veloce: si alza la frequenza e si rimette il tempo.
+  // In due passaggi: su alcune frasi il taglio del silenzio e il volume nella
+  // stessa catena lasciano ffmpeg fermo per sempre (visto il 21/11/2026 con
+  // ffmpeg 6.1). Ogni passaggio ha un limite di tempo, così un blocco diventa un errore.
   const r = Math.pow(2, semitoni / 12);
-  const filtri = [
+  const taglio = [
     ...(semitoni ? [`asetrate=24000*${r.toFixed(5)}`, "aresample=24000", `atempo=${(1 / r).toFixed(5)}`] : []),
     "silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.05",
-    "loudnorm=I=-16:TP=-1.5:LRA=11",
   ].join(",");
-  const mp3 = spawnSync("ffmpeg", ["-y", "-loglevel", "error", "-i", wav, "-af", filtri, "-ac", "1", "-ar", "24000", "-b:a", "48k", uscita], { encoding: "utf8" });
-  if (mp3.status !== 0) return `ffmpeg: ${mp3.stderr.trim().slice(0, 200)}`;
+  const pulita = join(lavoro, "pulita.wav");
+  const primo = spawnSync("ffmpeg", ["-nostdin", "-y", "-loglevel", "error", "-i", wav, "-af", taglio, pulita], { encoding: "utf8", timeout: 60_000 });
+  if (primo.status !== 0) return `ffmpeg (taglio): ${primo.stderr?.trim().slice(0, 200) || "fermo oltre un minuto"}`;
+  const mp3 = spawnSync("ffmpeg", ["-nostdin", "-y", "-loglevel", "error", "-i", pulita, "-af", "loudnorm=I=-16:TP=-1.5:LRA=11", "-ac", "1", "-ar", "24000", "-b:a", "48k", uscita], { encoding: "utf8", timeout: 60_000 });
+  if (mp3.status !== 0) {
+    rmSync(uscita, { force: true });
+    return `ffmpeg (volume): ${mp3.stderr?.trim().slice(0, 200) || "fermo oltre un minuto"}`;
+  }
   return null;
 }
 
