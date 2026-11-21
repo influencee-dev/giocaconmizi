@@ -160,6 +160,26 @@
       "rapporto": 1.7777777777777777,
       "chi": "routine articoli",
       "prenotataIl": "2026-11-19"
+    },
+    {
+      "nomeFile": "articolo-lettera-babbo-natale-disegno",
+      "perIl": "2026-11-21",
+      "titolo": "Foto dentro l'articolo «Lettera a Babbo Natale»: i più piccoli disegnano",
+      "scena": "Salotto italiano in un pomeriggio d'inverno, tappeto morbido e luce calda. Un bambino di circa 4 anni, generato, è sdraiato a pancia in giù sul tappeto e disegna con un pastello a cera grosso su un grande foglio: scarabocchi colorati e forme semplici, senza lettere né parole. Un nonno generato è seduto per terra accanto a lui e gli porge un altro pastello, sorridendo. Sul tappeto una scatola di pastelli aperta e una busta rossa ancora vuota. Seduta vicino al foglio, Mizi pupazzo di stoffa. Nessuna scritta leggibile, nessun logo, nessun personaggio delle feste riconoscibile.",
+      "alt": "Un bambino di 4 anni disegna la sua letterina sul tappeto insieme al nonno, con il pupazzo Mizi accanto",
+      "rapporto": 1.5,
+      "chi": "chat Co-work",
+      "prenotataIl": "2026-11-21"
+    },
+    {
+      "nomeFile": "articolo-lettera-babbo-natale-imbucare",
+      "perIl": "2026-11-21",
+      "titolo": "Foto dentro l'articolo «Lettera a Babbo Natale»: imbucare la lettera",
+      "scena": "Strada di un paese italiano in una mattina d'inverno, luce limpida. Una bambina di circa 7 anni, generata, con cappotto, sciarpa e berretto in tinta unita, si alza in punta di piedi per infilare una busta rossa nella fessura di una cassetta delle lettere rossa fissata al muro: la cassetta non ha scritte, stemmi né loghi. Un papà generato, accanto a lei, la guarda sorridendo con le mani in tasca. Dallo zainetto della bambina spunta Mizi pupazzo di stoffa. Sullo sfondo, sfocate, case con qualche lucina. Nessuna scritta leggibile, nessun logo, nessuna insegna.",
+      "alt": "Una bambina di 7 anni imbuca una busta rossa in una cassetta delle lettere insieme al papà, con il pupazzo Mizi nello zainetto",
+      "rapporto": 1.5,
+      "chi": "chat Co-work",
+      "prenotataIl": "2026-11-21"
     }
   ]
 }
