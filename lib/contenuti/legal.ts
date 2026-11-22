@@ -27,7 +27,7 @@ export const TITOLARE = {
 } as const;
 
 /** Data dell'ultima revisione delle informative (si aggiorna a ogni modifica). */
-export const AGGIORNATA = "20 novembre 2026";
+export const AGGIORNATA = "22 novembre 2026";
 
 export interface VoceRegistro {
   nome: string;
@@ -142,6 +142,16 @@ export const REGISTRO: VoceRegistro[] = [
     necessario: true,
     chi: "noi",
     quando: "Quando chiudi la barretta con la X",
+  },
+  {
+    nome: "giocamizi-senza-rete",
+    tipo: "localStorage",
+    scopo:
+      "Ricorda che hai scelto «Scarica i giochi» e quale versione hai sul dispositivo, per aggiornarla quando esce un gioco nuovo. Insieme, nella memoria del browser restano i file dei giochi (pagine, voce di Mizi, disegni): servono a farli funzionare senza connessione. Niente di chi gioca.",
+    durata: "Finché tocchi «Togli i giochi dal telefono» o cancelli i dati del browser",
+    necessario: true,
+    chi: "noi",
+    quando: "Solo se tocchi «Scarica i giochi»",
   },
   {
     nome: "sb-wrkderhcbzlppkveknyd-auth-token",

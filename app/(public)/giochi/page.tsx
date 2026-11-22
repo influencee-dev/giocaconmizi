@@ -4,6 +4,7 @@ import { games } from "@/games/registry";
 import { giochiRecenti } from "@/lib/giochi/novita";
 import { Contenitore } from "@/components/ui";
 import { CatalogoGiochi } from "@/components/giochi/CatalogoGiochi";
+import { GiochiSenzaRete } from "@/components/app/GiochiSenzaRete";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
@@ -46,6 +47,10 @@ export default function GiochiPage() {
           skill: g.skill,
         }))}
       />
+
+      <div className="mt-10">
+        <GiochiSenzaRete />
+      </div>
     </Contenitore>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { aggiornaSeServe } from "@/lib/giochi/offline";
 import { Download, Share, SquarePlus, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -70,6 +71,8 @@ export function BarraApp() {
         /* senza service worker il sito funziona uguale */
       });
     }
+    // Chi tiene i giochi sul telefono li riceve aggiornati dopo una pubblicazione nuova.
+    const riallinea = window.setTimeout(() => void aggiornaSeServe(), 4000);
     setOs(piattaforma());
     setChiusa(giaApp() || chiusaDaPoco());
     setBanner(consensoStatistiche() === null);
@@ -85,6 +88,7 @@ export function BarraApp() {
     window.addEventListener("appinstalled", suInstallata);
     window.addEventListener("giocamizi-consenso", suConsenso);
     return () => {
+      window.clearTimeout(riallinea);
       window.removeEventListener("beforeinstallprompt", suRichiesta);
       window.removeEventListener("appinstalled", suInstallata);
       window.removeEventListener("giocamizi-consenso", suConsenso);

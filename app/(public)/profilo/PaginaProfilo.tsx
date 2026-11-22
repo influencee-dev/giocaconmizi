@@ -1,5 +1,6 @@
 "use client";
 
+import { GiochiSenzaRete } from "@/components/app/GiochiSenzaRete";
 import { Lock, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Contenitore } from "@/components/ui";
@@ -165,6 +166,8 @@ export function PaginaProfilo() {
           )}
           <p className="mt-2 text-xs text-notte-tenue">Ho almeno 18 anni e accendendola accetto di ricevere la posta di Mizi (vedi la privacy).</p>
         </section>
+
+        <GiochiSenzaRete />
 
         <section className="rounded-[1.5rem] bg-white p-5 shadow-[0_8px_20px_-14px_rgba(31,36,48,0.4)]" aria-label="I tuoi dati">
           <p className="flex items-start gap-2 text-sm font-semibold text-notte-tenue">
