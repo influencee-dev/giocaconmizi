@@ -56,6 +56,7 @@ fonti:
   - { titolo: "Che giochi comprare a un bambino o una bambina?", editore: "Uppa", url: "https://www.uppa.it/che-giochi-comprare-bambino/", consultata: 2026-11-21 }
 immagini:
   - { file: "/immagini/articolo-lettera-babbo-natale-disegno-960.webp", alt: "Un bambino di 4 anni disegna la sua letterina sul tappeto insieme al nonno, con il pupazzo Mizi accanto", didascalia: "A tre e quattro anni la lettera è un disegno: lui disegna, e tu scrivi sotto quello che racconta.", origine: "Foto generata per Giocamizi con l'intelligenza artificiale: le persone non sono reali", licenza: "Di Giocamizi (Partidea SRL)" }
+  - { file: "/immagini/articolo-lettera-babbo-natale-imbucare-960.webp", alt: "Una bambina di 7 anni in punta di piedi infila una busta rossa in una cassetta delle lettere, accanto al papà; dallo zainetto spunta il pupazzo Mizi", didascalia: "La busta la imbuca chi ha scritto la lettera: tu resti un passo indietro.", origine: "Foto generata per Giocamizi con l'intelligenza artificiale: le persone non sono reali", licenza: "Di Giocamizi (Partidea SRL)" }
 esperienzeAutentiche: []
 relazioniCommerciali: null
 trasparenza: "Ricerca e prima stesura con l'aiuto dell'intelligenza artificiale. Storia, numeri, indirizzi e indicazioni su disegno, scrittura e regali vengono solo dalle fonti elencate, tutte aperte e lette il 21/11/2026 (Treccani, Wikipedia, sito ufficiale del Villaggio di Babbo Natale di Rovaniemi, Poste Italiane, Ospedale Pediatrico Bambino Gesù, Uppa). Uno degli articoli di Uppa citati è sponsorizzato da un produttore di matite: ne abbiamo usato solo le indicazioni sull'impugnatura, non i prodotti. Le idee pratiche, i tempi, il numero di desideri e il calendario di dicembre sono una proposta della redazione: non è il racconto di una prova fatta in casa."
@@ -279,6 +280,8 @@ Qui trovi quattro strade, tutte vere. Scegli quella che fa per voi.
 Attenzione però a due cose. La prima: quelle regole sono del 2020. Al 21 novembre 2026 sul sito di Poste Italiane non abbiamo trovato una pagina con le modalità di quest'anno. Prima di promettere una risposta a tuo figlio, chiedi al tuo ufficio postale se c'è una cassetta dedicata e come funziona. La seconda: se vuoi una risposta, sulla lettera o sulla busta serve l'indirizzo completo del bambino, scritto chiaro.
 
 Per una lettera normale, la pagina di Poste sulla Posta Ordinaria dice una cosa semplice: applica il francobollo, imbuca la lettera e indica in modo chiaro l'indirizzo del destinatario. Il prezzo del francobollo dipende dal peso e dal formato: lo trovi aggiornato sul sito di Poste o allo sportello.
+
+![Una bambina di 7 anni in punta di piedi infila una busta rossa in una cassetta delle lettere, accanto al papà; dallo zainetto spunta il pupazzo Mizi](/immagini/articolo-lettera-babbo-natale-imbucare-960.webp "La busta la imbuca chi ha scritto la lettera: tu resti un passo indietro.")
 
 ### 2. A Rovaniemi, in Finlandia
 
