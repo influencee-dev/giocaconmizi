@@ -22,6 +22,12 @@ import { useRound } from "./nucleo";
  * Round, punti, stelle, suoni, lodi e aiuto vengono dal nucleo comune
  * (nucleo.ts). Qui restano solo le opzioni da toccare: dopo due errori nello
  * stesso round la risposta giusta dondola, così nessuno resta bloccato.
+ *
+ * Il movimento (22/11/2026, .claude/skills/accademia-giochi): niente compare o
+ * cambia di colpo. Le opzioni di un round nuovo entrano una dopo l'altra, la
+ * giusta fa un saltello, quella sbagliata un dondolio morbido prima di
+ * spegnersi. Si muovono solo `transform` e `opacity`, la spunta non sposta
+ * niente, e con «meno movimento» tutto resta fermo (app/globals.css).
  */
 
 export interface Opzione {
@@ -135,16 +141,18 @@ export function SceltaMultipla({
     >
       <div data-scelta-multipla {...partita.attributi} className="flex h-full w-full max-w-3xl flex-col items-center justify-center gap-6">
         {corrente.centro && (
-          <div className="flex items-center justify-center">{corrente.centro}</div>
+          <div key={indice} className="centro-entra flex items-center justify-center">{corrente.centro}</div>
         )}
 
         <div
           className="grid w-full gap-4"
           style={{ gridTemplateColumns: `repeat(${colonneEffettive}, minmax(0, 1fr))` }}
         >
-          {corrente.opzioni.map((opzione) => (
+          {corrente.opzioni.map((opzione, posto) => (
             <BottoneOpzione
-              key={opzione.id}
+              // La chiave cambia a ogni round: i bottoni rinascono e rientrano in scena.
+              key={`${indice}-${opzione.id}`}
+              posto={posto}
               opzione={opzione}
               stato={
                 azzeccata === opzione.id
@@ -178,11 +186,14 @@ function contenutoVisivo(opzione: Opzione): boolean {
 
 function BottoneOpzione({
   opzione,
+  posto,
   stato,
   aiuto,
   onScegli,
 }: {
   opzione: Opzione;
+  /** Il posto nella griglia: decide dopo quanto entra in scena. */
+  posto: number;
   stato: "libera" | "giusta" | "sbagliata";
   /** Dopo due errori la risposta giusta dondola. */
   aiuto: boolean;
@@ -190,12 +201,12 @@ function BottoneOpzione({
 }) {
   const bordo =
     stato === "giusta"
-      ? "border-verde bg-verde/10 scale-105"
+      ? "border-verde bg-verde/10 opzione-giusta"
       : stato === "sbagliata"
-        ? "border-crema-scuro bg-white opacity-40"
+        ? "border-crema-scuro bg-white opzione-riprova"
         : aiuto
           ? "border-giallo bg-giallo/20 opzione-aiuto"
-          : "border-crema-scuro bg-white active:scale-95";
+          : "border-crema-scuro bg-white opzione-entra active:scale-95";
 
   const contenuto = useMemo(() => {
     const scala = opzione.scala ?? 1;
@@ -243,7 +254,9 @@ function BottoneOpzione({
       data-stato={stato}
       data-aiuto-opzione={aiuto ? "si" : undefined}
       aria-label={opzione.descrizione ?? opzione.etichetta ?? opzione.id}
-      className={`flex min-h-24 flex-col items-center justify-center gap-1 rounded-morbido border-4 p-3 transition-all ${bordo}`}
+      // Si animano solo trasformazione, trasparenza e colori: niente che faccia ricalcolare la pagina.
+      className={`relative flex min-h-24 touch-manipulation flex-col items-center justify-center gap-1 rounded-morbido border-4 p-3 transition-[transform,opacity,background-color,border-color] duration-150 ${bordo}`}
+      style={stato === "libera" && !aiuto ? { animationDelay: `${Math.min(posto, 8) * 45}ms` } : undefined}
     >
       {contenuto}
       {/* L'etichetta accompagna una figura solo quando il gioco la chiede:
@@ -251,7 +264,12 @@ function BottoneOpzione({
       {opzione.etichetta && opzione.tipo !== "testo" && !!contenutoVisivo(opzione) && (
         <span className="text-lg font-bold text-notte">{opzione.etichetta}</span>
       )}
-      {stato === "giusta" && <span className="text-2xl" aria-hidden>✓</span>}
+      {/* In un angolo, fuori dal flusso: quando compare il bottone non cambia altezza. */}
+      {stato === "giusta" && (
+        <span className="spunta-entra absolute right-2 top-1 text-2xl" aria-hidden>
+          ✓
+        </span>
+      )}
     </button>
   );
 }

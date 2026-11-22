@@ -37,4 +37,6 @@ Con la CPU rallentata 4 volte la differenza quasi sparisce (0,3% contro 0,0%): i
 
 Per rifarla: `window.__corsaFotogrammi = []` prima che la pagina parta (il gioco ci scrive istante e strada disegnata) e `window.__corsaSenzaInterpolazione = true` per il confronto.
 
+Giro su tutti i 40 giochi (22/11/2026), CPU rallentata 4 volte: 38 giochi con media 16,7 ms e scatti sotto l'1%. Sono giochi fatti di elementi della pagina, il ritmo non è il loro problema. Fuori dal coro solo «La corsa nella piramide» (scatti 5,3%, è l'unico su canvas) e un blocco isolato nel Memory che non si è ripetuto. Nei giochi a risposta il lavoro utile era sulla qualità del movimento, non sui fotogrammi.
+
 Il browser di prova disegna via software: su un telefono vero non è stato provato.

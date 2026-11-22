@@ -325,6 +325,73 @@ a[role="button"],
 /* Giochi «tocca la risposta giusta»: dopo due errori la risposta giusta dondola
    tre volte e poi resta ferma col bordo giallo (games/_engine/nucleo.ts). Con
    «riduci movimento» resta solo il bordo. */
+/* «Tocca la risposta giusta» (games/_engine/SceltaMultipla.tsx): il movimento
+   delle opzioni. Solo transform e opacity, durate brevi, niente che si ripete:
+   un bersaglio fermo si tocca meglio. */
+.opzione-entra {
+  animation: opzione-entra 0.26s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+.centro-entra {
+  animation: opzione-entra 0.3s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+.opzione-giusta {
+  animation: opzione-giusta 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.opzione-riprova {
+  animation: opzione-riprova 0.36s ease-out both;
+}
+.spunta-entra {
+  animation: salta-fuori 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes opzione-entra {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.94);
+  }
+}
+@keyframes opzione-giusta {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.07) translateY(-4px);
+  }
+  100% {
+    transform: scale(1.04);
+  }
+}
+@keyframes opzione-riprova {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  55% {
+    transform: translateX(4px);
+  }
+  100% {
+    opacity: 0.4;
+    transform: translateX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .opzione-entra,
+  .centro-entra,
+  .opzione-giusta,
+  .spunta-entra {
+    animation: none;
+  }
+  .opzione-giusta {
+    transform: scale(1.04);
+  }
+  .opzione-riprova {
+    animation: none;
+    opacity: 0.4;
+  }
+}
+
 .opzione-aiuto {
   /* Tre dondolii e poi ferma, col bordo giallo: un bersaglio che non smette di
      muoversi è più difficile da toccare (e le prove automatiche aspettano che stia fermo). */

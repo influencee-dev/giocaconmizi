@@ -23,6 +23,13 @@ Apre il gioco con un profilo da telefono (390×800, densità 3), tocca il pulsan
 
 **Limite da dire sempre:** il browser di prova disegna via software, senza scheda grafica. Esagera il costo dei pixel e non misura la latenza del tocco. I suoi numeri valgono per confrontare due versioni, non per promettere come andrà su un telefono.
 
+## Il giro su tutti i giochi
+
+```bash
+node .claude/skills/accademia-giochi/giro-fluidita.mjs http://localhost:3200 giro.json
+```
+Gioca la demo di ogni gioco vivo per 7 secondi e mette in fila media, 95° percentile, massimo, scatti e lavori lunghi (oltre 50 ms). Serve a trovare da dove cominciare e a controllare che una modifica a un motore non abbia peggiorato gli altri. Un valore strano in un solo giro non basta: si rifà la misura due volte prima di cercare la causa (il 22/11/2026 un blocco di 550 ms nel Memory non è più comparso in tre giri).
+
 ## Sul telefono vero
 
 - Collegato al computer, gli strumenti del browser registrano una partita: si cercano i fotogrammi lunghi e che cosa c'era dentro (codice, disegno, memoria).
