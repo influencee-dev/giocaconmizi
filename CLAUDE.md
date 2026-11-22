@@ -31,16 +31,16 @@ Partidea SRL (dati in lib/contenuti/legal.ts → SOCIETA). Mascotte: Mizi, una p
   Se il deploy è READY sul commit appena pushato e le verifiche locali sono
   passate, non serve scaricare le pagine live.
 
-## Ordine dei contenuti nell'app (decisione di Giorgia, 22/11/2026)
-- Sul telefono l'ordine è SEMPRE: prima i giochi, poi le location (dove fare
-  la festa), poi le storie, poi gli articoli. Vale per le sezioni della home
-  dell'app (`components/app/HomeApp.tsx`) e per la barra in basso
-  (`components/app/BarraSchede.tsx`: Home, Giochi, Feste, Storie, Profilo).
-- Una sezione nuova si mette al suo posto in quest'ordine, mai sopra i giochi.
-  Lo controlla la batteria `app` («l'ordine è giochi, location, storie, articoli»).
-- Gli articoli nuovi compaiono da soli: nella home dell'app («Articoli per i
-  genitori», i quattro più recenti) e in cima a /guide (`guideInOrdine()` in
-  lib/contenuti/guide.ts: prima gli articoli dal più recente, poi le guide brevi).
+## Articoli nell'app e ordine dei contenuti (Giorgia, 22/11/2026)
+- La home dell'app (`components/app/HomeApp.tsx`) e la barra in basso restano
+  com'erano: Giorgia ha chiesto di aggiungere SOLO il blocco degli articoli
+  («Articoli per i genitori», i quattro più recenti, in fondo). Non rifare la
+  home né spostare le schede senza che lo chieda lei.
+- Per i blocchi futuri vale il suo ordine: prima i giochi, poi le location,
+  poi le storie, poi gli articoli. Mai niente sopra i giochi.
+- Gli articoli nuovi compaiono da soli: nella home dell'app e in cima a /guide
+  (`guideInOrdine()` in lib/contenuti/guide.ts: prima gli articoli dal più
+  recente, poi le guide brevi).
 
 ## Percorso per i genitori «sotto pressione» (20/11/2026)
 - `/genitori/sotto-pressione`: 35 affermazioni sulle cinque spinte dell'Analisi

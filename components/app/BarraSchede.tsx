@@ -14,16 +14,13 @@ import { useEffect, useState } from "react";
  * una sua barra fissa in basso ([data-barra-fissa]). Quando c'è, scrive la
  * sua altezza in --barra-schede: banner cookie e barretta «Scarica» si
  * appoggiano sopra.
- *
- * L'ordine delle schede è una decisione di Giorgia (22/11/2026): prima i
- * giochi, poi le location (Feste), poi le storie (con guide e articoli).
  */
 
 const SCHEDE: { href: string; nome: string; icona: LucideIcon; attiva: (p: string) => boolean }[] = [
   { href: "/", nome: "Home", icona: House, attiva: (p) => p === "/" },
   { href: "/giochi", nome: "Giochi", icona: Gamepad2, attiva: (p) => p.startsWith("/giochi") || p.startsWith("/coding") || p.startsWith("/compiti") },
-  { href: "/feste", nome: "Feste", icona: PartyPopper, attiva: (p) => p.startsWith("/feste") || p.startsWith("/biglietti") || /^\/(ludoteche|sale-feste|parchi-|musei-|laser-game)/.test(p) },
   { href: "/storie", nome: "Storie", icona: BookOpen, attiva: (p) => p.startsWith("/storie") || p.startsWith("/guide") },
+  { href: "/feste", nome: "Feste", icona: PartyPopper, attiva: (p) => p.startsWith("/feste") || p.startsWith("/biglietti") || /^\/(ludoteche|sale-feste|parchi-|musei-|laser-game)/.test(p) },
   { href: "/profilo", nome: "Profilo", icona: UserRound, attiva: (p) => p.startsWith("/profilo") },
 ];
 
