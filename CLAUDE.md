@@ -362,6 +362,13 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   e il campo `immagine` delle opzioni; fatti con l'API immagini di OpenAI
   (gpt-image-2, un soggetto, sfondo bianco, nessuna scritta, nessun
   personaggio protetto), guardati uno per uno: regole in public/figure/LICENZA.txt.
+- Giochi senza connessione (22/11/2026): il bottone «Scarica i giochi»
+  (components/app/GiochiSenzaRete.tsx, in fondo a /giochi e nel Profilo) mette
+  sul telefono tutti i giochi con voce e disegni; logica in lib/giochi/offline.ts,
+  elenco scritto dalla build (scripts/offline-elenco.mjs → public/offline-elenco.json,
+  generato, fuori dal repo), servito da public/sw.js. Niente si scarica da solo:
+  senza quel tocco il service worker lascia passare tutto. Senza rete la pagina
+  del gioco arriva salvata con l'età minima e Giocatore.tsx rilegge «?eta=».
 - «Gli ultimi arrivati» (21/11/2026): `giochiRecenti()` in lib/giochi/novita.ts
   ordina i giochi vivi per ultima modifica vera (lib/seo/date-pagine.json). Un
   gioco nuovo o appena migliorato sale da solo in cima al catalogo /giochi
