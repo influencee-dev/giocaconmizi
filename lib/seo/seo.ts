@@ -64,3 +64,38 @@ export function riassunto(testo: string, massimo = 155): string {
   if (fineFrase >= 90) return pezzo.slice(0, fineFrase + 1);
   return `${pezzo.slice(0, pezzo.lastIndexOf(" ", massimo - 1)).replace(/[,;:(]+$/, "")}…`;
 }
+
+/**
+ * Titoli di pagina (22/11/2026). Google mostra circa 60 caratteri di titolo e
+ * taglia il resto: 318 pagine su 761 superavano i 70, e le schede dei locali
+ * arrivavano a 150-200 («Nome, tipo lungo a Città (zona) — Giocamizi»), col
+ * nome del posto e la città persi in mezzo. Regola: un titolo sta in
+ * `TITOLO_MAX` caratteri; se col nome del sito in coda non ci sta, esce senza.
+ */
+export const TITOLO_MAX = 65;
+const CODA_SITO = ` — ${site.nome}`;
+
+/** Il titolo così com'è se col nome del sito sta nel limite; altrimenti senza « — Giocamizi». */
+export function titoloPagina(titolo: string): string | { absolute: string } {
+  return titolo.length + CODA_SITO.length > TITOLO_MAX ? { absolute: titolo } : titolo;
+}
+
+/**
+ * Il titolo di una scheda: nome, che cos'è e città, nella forma più ricca che
+ * sta nel limite. La zona non c'è più: resta nella descrizione e nella pagina.
+ */
+export function titoloScheda(s: { nome: string; tipo: string; citta: string }): string | { absolute: string } {
+  // «parco giochi al coperto con gonfiabili e area per i più piccoli» → «parco giochi al coperto»
+  const tipoCorto = s.tipo.split(/ con |, |: | \(| e | in | per /)[0];
+  return titoloCheSta(`${s.nome}, ${s.tipo} a ${s.citta}`, `${s.nome}, ${tipoCorto} a ${s.citta}`, `${s.nome} a ${s.citta}`);
+}
+
+/**
+ * La prima forma che sta nel limite, dalla più ricca alla più corta: prima col
+ * nome del sito in coda, poi senza. Se non ne sta nessuna, l'ultima (la più corta).
+ */
+export function titoloCheSta(...forme: string[]): string | { absolute: string } {
+  const scelta =
+    forme.find((f) => f.length + CODA_SITO.length <= TITOLO_MAX) ?? forme.find((f) => f.length <= TITOLO_MAX) ?? forme[forme.length - 1];
+  return titoloPagina(scelta);
+}

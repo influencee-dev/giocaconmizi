@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { titoloPagina } from "@/lib/seo/seo";
 import Link from "next/link";
 import { IconaLucide } from "@/components/directory/IconaLucide";
 import { notFound } from "next/navigation";
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ categoria
   const cat = categoria((await params).categoria);
   if (!cat) return {};
   return {
-    title: `${cat.titolo}: città per città`,
+    title: titoloPagina(`${cat.titolo}: città per città`),
     description: cat.giornata
       ? `${cat.sottotitolo} Cosa c'è per i bambini, quando aprono e cosa controllare prima di partire.`
       : `${cat.sottotitolo} Zone, tipo di spazio e consigli per la festa di compleanno.`,

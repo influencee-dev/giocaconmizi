@@ -22,7 +22,7 @@ etaMax: 9
 skill: lettura
 stato: pubblicata
 pubblicata: 2026-11-21
-aggiornata: 2026-11-21
+aggiornata: 2026-11-22
 giochi:
   - colora-con-mizi
   - lettera-iniziale
@@ -54,7 +54,8 @@ fonti:
   - { titolo: "Pregrafismo: cos'è, a cosa serve e come esercitarsi?", editore: "Uppa", url: "https://www.uppa.it/pregrafismo/", consultata: 2026-11-21 }
   - { titolo: "Matite colorate o pennarelli? Come scegliere i materiali per il disegno in base all'età del bambino (articolo sponsorizzato da un produttore di matite)", editore: "Uppa", url: "https://www.uppa.it/matite-colorate-o-pennarelli-come-scegliere/", consultata: 2026-11-21 }
   - { titolo: "Che giochi comprare a un bambino o una bambina?", editore: "Uppa", url: "https://www.uppa.it/che-giochi-comprare-bambino/", consultata: 2026-11-21 }
-immagini: []
+immagini:
+  - { file: "/immagini/articolo-lettera-babbo-natale-disegno-960.webp", alt: "Un bambino di 4 anni disegna la sua letterina sul tappeto insieme al nonno, con il pupazzo Mizi accanto", didascalia: "A tre e quattro anni la lettera è un disegno: lui disegna, e tu scrivi sotto quello che racconta.", origine: "Foto generata per Giocamizi con l'intelligenza artificiale: le persone non sono reali", licenza: "Di Giocamizi (Partidea SRL)" }
 esperienzeAutentiche: []
 relazioniCommerciali: null
 trasparenza: "Ricerca e prima stesura con l'aiuto dell'intelligenza artificiale. Storia, numeri, indirizzi e indicazioni su disegno, scrittura e regali vengono solo dalle fonti elencate, tutte aperte e lette il 21/11/2026 (Treccani, Wikipedia, sito ufficiale del Villaggio di Babbo Natale di Rovaniemi, Poste Italiane, Ospedale Pediatrico Bambino Gesù, Uppa). Uno degli articoli di Uppa citati è sponsorizzato da un produttore di matite: ne abbiamo usato solo le indicazioni sull'impugnatura, non i prodotti. Le idee pratiche, i tempi, il numero di desideri e il calendario di dicembre sono una proposta della redazione: non è il racconto di una prova fatta in casa."
@@ -151,6 +152,8 @@ A quest'età la lettera è un disegno con una voce sopra. Lui disegna, poi ti ra
 Non suggerire che cosa disegnare e non chiedere «che cos'è?» mentre lavora. L'articolo di Uppa sui disegni dei piccoli consiglia di lasciare libertà e di far dare il «titolo» al disegno a lavoro finito, non prima. Alla fine la firma: il segno che sa fare, un'impronta della mano, l'iniziale se la conosce.
 
 Tempo realistico: dieci minuti. Se dopo cinque vuole andare a giocare, la lettera è finita.
+
+![Un bambino di 4 anni disegna la sua letterina sul tappeto insieme al nonno, con il pupazzo Mizi accanto](/immagini/articolo-lettera-babbo-natale-disegno-960.webp "A tre e quattro anni la lettera è un disegno: lui disegna, e tu scrivi sotto quello che racconta.")
 
 ### 5 e 6 anni: il nome, qualche parola, il resto dettato
 

@@ -5,7 +5,7 @@ import { CATEGORIE_ATTIVE, LISTING, categoria, datiCard, haListing, percorsoSche
 import { RicercaCosaDove } from "@/components/directory/RicercaCosaDove";
 import { cittaFeste } from "@/lib/directory/feste";
 import { conModifiche, pubblicate } from "@/lib/directory/directory-db";
-import { url } from "@/lib/seo/seo";
+import { titoloCheSta, url } from "@/lib/seo/seo";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { Briciole, CtaAttivita, InBreve } from "@/components/directory/Briciole";
@@ -37,9 +37,18 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   const d = await dati(params);
   if (!d) return {};
   return {
+    // Dalla forma più ricca alla più corta: vince la prima che sta in 65 caratteri (lib/seo/seo.ts).
     title: d.cat.giornata
-      ? `${d.cat.nome} a ${d.nomeCitta} e dintorni: dove portare i bambini`
-      : `${d.cat.nome} a ${d.nomeCitta}: dove portare i bambini e fare la festa`,
+      ? titoloCheSta(
+          `${d.cat.nome} a ${d.nomeCitta} e dintorni: dove portare i bambini`,
+          `${d.cat.nome} a ${d.nomeCitta} e dintorni: cosa c'è per i bambini`,
+          `${d.cat.nome} a ${d.nomeCitta} e dintorni`,
+        )
+      : titoloCheSta(
+          `${d.cat.nome} a ${d.nomeCitta}: dove portare i bambini e fare la festa`,
+          `${d.cat.nome} a ${d.nomeCitta}: dove fare la festa`,
+          `${d.cat.nome} a ${d.nomeCitta}`,
+        ),
     description: d.cat.giornata
       ? `${d.schede.length} ${d.cat.nome.toLowerCase()} a ${d.nomeCitta} e dintorni: cosa c'è per i bambini, quando aprono e cosa controllare prima di partire.`
       : `${d.schede.length} ${d.cat.nome.toLowerCase()} a ${d.nomeCitta}, zona per zona: tipo di spazio, feste di compleanno e consigli prima di prenotare.`,

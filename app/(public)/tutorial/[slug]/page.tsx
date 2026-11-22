@@ -5,7 +5,7 @@ import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { Briciole, InBreve } from "@/components/directory/Briciole";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { PlayerTutorial } from "@/components/tutorial/PlayerTutorial";
-import { url } from "@/lib/seo/seo";
+import { titoloPagina, url } from "@/lib/seo/seo";
 import { GRUPPI, PERCORSO_TUTORIAL, TUTORIAL, minuti, percorsoTutorial, tutorialDaSlug, tutorialDi } from "@/lib/contenuti/tutorial";
 
 /** La pagina di un video tutorial di Mizi (lib/contenuti/tutorial.ts). */
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   if (!t) return {};
   const titolo = `Video tutorial: ${t.titolo}`;
   return {
-    title: titolo,
+    title: titoloPagina(titolo),
     description: t.descrizione,
     alternates: { canonical: percorsoTutorial(t) },
     openGraph: {

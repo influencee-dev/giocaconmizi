@@ -8,7 +8,7 @@ import { pubblicate } from "@/lib/directory/directory-db";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { ReelInstagram } from "@/components/feste/ReelInstagram";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
-import { site } from "@/lib/seo/seo";
+import { site, titoloPagina } from "@/lib/seo/seo";
 import { cittaVicine } from "@/lib/directory/coordinate-citta";
 
 /**
@@ -33,7 +33,7 @@ export async function generateMetadata({
   const voce = cittaFeste(citta);
   if (!voce) return {};
   return {
-    title: `Festa di compleanno per bambini a ${voce.citta}: dove farla`,
+    title: titoloPagina(`Festa di compleanno per bambini a ${voce.citta}: dove farla`),
     description: `Le location per una festa di compleanno per bambini a ${voce.citta}, zona per zona: ludoteche, sale feste e spazi gioco, con consigli su inviti, conferme e budget.`,
     alternates: { canonical: `/feste/${voce.slug}` },
   };

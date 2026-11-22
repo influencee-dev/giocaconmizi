@@ -10,7 +10,7 @@ import { JsonLd, jsonLdBreadcrumb, jsonLdElenco, jsonLdFaq } from "@/components/
 import { LogoRisorsa } from "@/components/risorse/CardRisorsa";
 import { CardRisorsaDirectory } from "@/components/risorse/CardRisorsaDirectory";
 import { CtaRisorsa, NavCategorieRisorse } from "@/components/risorse/Directory";
-import { url } from "@/lib/seo/seo";
+import { titoloPagina, url } from "@/lib/seo/seo";
 import { RISORSE } from "@/lib/risorse/risorse-educative-dati";
 import { DATA_ANTEPRIME, anteprimaSito } from "@/lib/risorse/risorse-anteprime";
 import { AVVISO_LINK, DISCLAIMER, PERCORSO_RISORSE, chiaveRisorsa, dominio, percorsoRisorsa } from "@/lib/risorse/risorse-educative";
@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
     const { cat } = t;
     const dove = cat.ambito === "territorio" ? ": provincia per provincia" : " per famiglie e scuole";
     return {
-      title: `${cat.titolo}${dove}`,
+      title: titoloPagina(`${cat.titolo}${dove}`),
       description: `${cat.sottotitolo} Schede con cosa fanno, per chi e come scegliere.`,
       alternates: { canonical: percorsoCategoriaRisorse(cat) },
     };
@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   const titolo = `${r.nome}${r.localita ? `, ${r.localita}` : ""}: cosa fa e per chi`;
   const descrizione = `${r.descrizione} ${cat.nome}${r.localita ? ` a ${r.localita}` : ""}: scheda, contatti e come scegliere.`;
   return {
-    title: titolo,
+    title: titoloPagina(titolo),
     description: descrizione,
     alternates: { canonical: percorsoRisorsa(r) },
     openGraph: { title: titolo, description: r.descrizione, url: percorsoRisorsa(r), type: "website" },

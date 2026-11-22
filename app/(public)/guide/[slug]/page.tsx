@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { titoloPagina } from "@/lib/seo/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { fotoGuida } from "@/lib/foto/foto";
@@ -42,7 +43,7 @@ export async function generateMetadata({
   const voce = guida(slug);
   if (!voce) return {};
   return {
-    title: voce.approfondimento?.titoloSeo ?? voce.titolo,
+    title: titoloPagina(voce.approfondimento?.titoloSeo ?? voce.titolo),
     description: voce.descrizione,
     alternates: { canonical: `/guide/${voce.slug}` },
   };

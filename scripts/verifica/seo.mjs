@@ -218,6 +218,20 @@ ok(
   const schede = teste.filter((t) => /^\/[a-z-]+\/[a-z-]+\/[a-z0-9-]+$/.test(t.percorso) && !/^\/(giochi|guide|natale|biglietti|storie|tutorial|risorse-educative-bambini|admin|feste)\//.test(t.percorso));
   const lunghe = schede.filter((t) => t.descrizione.length > 160).map((t) => `${t.percorso} (${t.descrizione.length})`);
   ok("schede delle attività: la descrizione sta nei 160 caratteri", schede.length > 200 && lunghe.length === 0, `${schede.length} schede; ${lunghe.slice(0, 3).join(" ")}`);
+
+  // Titoli (dal 22/11/2026). Google mostra circa 60 caratteri: 318 pagine su 761 ne avevano più di 70,
+  // e le schede arrivavano a 150-200 («Nome, tipo lungo a Città (zona) — Giocamizi»).
+  const TITOLO_MAX = 65;
+  const titoliLunghi = schede.filter((t) => t.titolo.length > TITOLO_MAX).map((t) => `${t.percorso} (${t.titolo.length})`);
+  ok("schede delle attività: il titolo sta in 65 caratteri", titoliLunghi.length === 0, titoliLunghi.slice(0, 3).join(" "));
+  const elenchi = teste.filter((t) => /^\/[a-z-]+\/[a-z-]+$/.test(t.percorso) && !/^\/(giochi|guide|natale|biglietti|storie|tutorial|risorse-educative-bambini|admin|feste|genitori)\//.test(t.percorso));
+  const elenchiLunghi = elenchi.filter((t) => t.titolo.length > TITOLO_MAX).map((t) => `${t.percorso} (${t.titolo.length})`);
+  ok("elenchi per città: il titolo sta in 65 caratteri", elenchi.length > 40 && elenchiLunghi.length === 0, `${elenchi.length} elenchi; ${elenchiLunghi.slice(0, 3).join(" ")}`);
+  // Chi supera i 65 col nome del sito in coda esce senza: il nome del sito non deve allungare un titolo già lungo.
+  const conCoda = teste.filter((t) => t.titolo.length > TITOLO_MAX && / — Giocamizi$/.test(t.titolo) && !t.percorso.startsWith("/natale")).map((t) => `${t.percorso} (${t.titolo.length})`);
+  ok("titoli: nelle pagine con la regola nuova il nome del sito non allunga un titolo già lungo", conCoda.length <= 12, `${conCoda.length} pagine, es. ${conCoda.slice(0, 3).join(" ")}`);
+  const oltre70 = teste.filter((t) => t.titolo.length > 70);
+  ok("titoli: oltre i 70 caratteri resta meno del 6% delle pagine", oltre70.length < teste.length * 0.06, `${oltre70.length} su ${teste.length}`);
 }
 
 // 3-quater. «Leggi anche»: le guide gemelle si linkano tra loro (dal 20/11/2026).

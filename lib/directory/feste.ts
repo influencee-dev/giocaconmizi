@@ -40,6 +40,15 @@
 // sito suo; PlayZone è a La Loggia); Siena (Children's House, via Mentana, ha
 // il sito ma pagine ferme al 2018-2019; il parco Nemo col sito aggiornato è a
 // Barberino Tavarnelle, in provincia di Firenze).
+// Il 22/11/2026: Rho (solo una pagina di recensioni su una ludoteca in un centro
+// commerciale); Foligno (solida solo Sala Foligno, via Roma, che affitta le
+// sale; la ludoteca Neverland è a Trevi e ha pagine di due anni fa). A Gallarate
+// «La Baia dei Pirati» ha ancora il sito, ma una scheda la dà chiusa: non inserita.
+// Gallarate NON ha una pagina sua: La Tana di Ninì (viale Milano) è già nella
+// pagina di Busto Arsizio, e la Ludoteca Wonderland (via Piceni) è stata aggiunta
+// lì il 22/11/2026. Per aprire Gallarate serve un altro locale solido, non questi.
+// Prima di aggiungere un locale, cercarne il nome in questo file: lo stesso posto
+// sotto due città crea due schede uguali.
 
 export interface LocaleFesta {
   nome: string;
@@ -2332,12 +2341,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "busto-arsizio",
     citta: "Busto Arsizio",
-    aggiornata: "2026-11-09",
+    aggiornata: "2026-11-22",
     rispostaBreve: "A Busto Arsizio la festa di compleanno per bambini si può fare in fattoria da Erba Fina, in via Favana, tra animali, orto e laboratori, con un giardino e una serra al chiuso. A pochi chilometri, a Gallarate, c'è La Tana di Ninì, una ludoteca con laboratori creativi, uno spazio interno e il giardino. Prenotate con qualche settimana di anticipo, soprattutto per il fine settimana.",
     intro: "Intorno a Busto Arsizio le feste dei bambini si dividono fra la campagna, con gli animali e l'orto, e la ludoteca con i laboratori creativi. Conviene prenotare con anticipo per il fine settimana.",
     locali: [
       { nome: "Erba Fina", zona: "Busto Arsizio, via Favana", tipo: "fattoria didattica con spazi per feste", descrizione: "Una fattoria didattica alla periferia della città, tra prati e un bosco di robinie, con piccoli animali tra l'aia e l'orto. Organizza feste di compleanno con laboratori creativi, esperienze con gli animali o nell'orto didattico, giochi sul prato e cacce al tesoro, seguite da operatori di fattoria didattica o da educatori. Per la festa si può prenotare il giardino, anche in esclusiva, oppure la Serra Urbana, uno spazio al chiuso." },
       { nome: "La Tana di Ninì", zona: "Gallarate, viale Milano, a pochi chilometri da Busto Arsizio", tipo: "ludoteca con laboratori e giardino per feste", descrizione: "Una ludoteca con laboratori creativi per bambini da 12 mesi a 10 anni, con uno spazio interno e un ampio giardino. Per i compleanni ci sono più formule: solo l'affitto degli spazi, la festa con allestimento a tema e animazione, oppure una festa con un allestimento più ricco. Si possono chiedere anche laboratori privati per il compleanno; gli spazi accolgono circa 25-30 persone." },
+      { nome: "Ludoteca Wonderland", zona: "Gallarate, via Piceni, a pochi chilometri da Busto Arsizio", tipo: "ludoteca con sala feste e animazione", sito: "http://www.ludotecawonderland.it/", descrizione: "Ludoteca di Gallarate che il sito chiama «centro di cultura ludica». Per i compleanni propone l'animazione con giochi di gruppo e musicali, un'accoglienza con truccabimbi, magia comica e paracadute, e un buffet di pasticceria artigianale dolce e salata con la torta; allergie e intolleranze si segnalano alla prenotazione. Per gli adulti c'è una sala separata. Le feste non si sovrappongono: ogni festa ha la sala in esclusiva. I prezzi non sono pubblicati: si chiede un preventivo." },
     ],
     faq: [
       { domanda: "C'è un posto al coperto per una festa d'inverno a Busto Arsizio?", risposta: "Sì: da Erba Fina c'è la Serra Urbana, uno spazio al chiuso pensato anche per le feste, e a Gallarate La Tana di Ninì ha uno spazio interno oltre al giardino. Chiedete quale spazio è libero nella vostra data." },
@@ -2691,6 +2701,24 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Dove si fa una festa di compleanno per bambini a Rovigo?", risposta: "Al chiuso: da Ludosfera, una ludoteca con playground, sale feste e pizzeria, oppure al Bosco delle Meraviglie in via del Commercio, una sala compleanni con ludoteca e laboratori." },
       { domanda: "Quanto costa la festa?", risposta: "Nessuno dei due pubblica i prezzi. Chiedete un preventivo scritto per il vostro numero di invitati e fatevi dire che cosa è compreso." },
       { domanda: "C'è l'animazione?", risposta: "Il Bosco delle Meraviglie propone pacchetti fino a tre ore con un'animatrice, con giochi, laboratori creativi e fiabe animate. Per Ludosfera chiedete alla struttura." },
+      { domanda: "Vanno bene anche d'inverno o se piove?", risposta: "Sì: tutti e due sono al chiuso." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "collegno",
+    citta: "Collegno",
+    aggiornata: "2026-11-22",
+    rispostaBreve: "A Collegno la festa di compleanno per bambini si fa da Allegropolis, in via Tommaseo, uno spazio per feste ed eventi privati con giochi per bambini da 0 a 12 anni, oppure da Mi Ci Porti, il baby parking di via Vittorio Sassi che affitta la sala in esclusiva con addobbi, inviti e musica compresi. Chiedete per tempo le date libere.",
+    intro: "A Collegno, alle porte di Torino, trovate due posti al chiuso con il loro sito ufficiale: uno spazio per eventi privati pensato per le famiglie, e un baby parking che nei momenti liberi diventa una sala feste per i più piccoli.",
+    locali: [
+      { nome: "Allegropolis", zona: "Collegno, via Tommaseo", tipo: "sala feste con area giochi per bambini", sito: "https://www.allegropolis.it/", descrizione: "Spazio per feste ed eventi privati in via Niccolò Tommaseo, che il sito presenta come accogliente, sicuro e polivalente, con giochi per bambini da 0 a 12 anni. Ospita feste di compleanno, battesimi, baby shower e pranzi o cene di classe. Prezzi e pacchetti non sono pubblicati: si chiedono alla struttura." },
+      { nome: "Mi Ci Porti Baby Parking", zona: "Collegno, via Vittorio Sassi", tipo: "sala feste in un baby parking", sito: "https://babyparkingmiciporti.it/", descrizione: "Baby parking in via Vittorio Sassi che ospita feste di compleanno, battesimi, baby party e feste a tema, con la sala in affitto in esclusiva. Il sito elenca cosa comprende il compleanno: sala riservata con frigo per le bevande, addobbi, tavoli e sedie, inviti di carta o digitali, musica, pulizia prima e dopo, e l'arrivo della torta con la canzone degli auguri. I prezzi non sono pubblicati: si chiedono alla struttura." },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno per bambini a Collegno?", risposta: "Al chiuso: da Allegropolis in via Tommaseo, uno spazio per eventi privati con giochi da 0 a 12 anni, oppure da Mi Ci Porti in via Vittorio Sassi, un baby parking che affitta la sala in esclusiva." },
+      { domanda: "Quanto costa la festa?", risposta: "Nessuno dei due pubblica i prezzi: si chiedono alla struttura, con il numero degli invitati." },
+      { domanda: "Che cosa è compreso?", risposta: "Da Mi Ci Porti il sito elenca sala riservata, frigo per le bevande, addobbi, tavoli e sedie, inviti, musica e pulizia. Per Allegropolis chiedete che cosa comprende il pacchetto." },
       { domanda: "Vanno bene anche d'inverno o se piove?", risposta: "Sì: tutti e due sono al chiuso." },
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
