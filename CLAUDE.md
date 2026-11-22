@@ -32,12 +32,16 @@ Partidea SRL (dati in lib/contenuti/legal.ts → SOCIETA). Mascotte: Mizi, una p
   passate, non serve scaricare le pagine live.
 
 ## Articoli nell'app e ordine dei contenuti (Giorgia, 22/11/2026)
-- La home dell'app (`components/app/HomeApp.tsx`) e la barra in basso restano
-  com'erano: Giorgia ha chiesto di aggiungere SOLO il blocco degli articoli
-  («Articoli per i genitori», i quattro più recenti, in fondo). Non rifare la
-  home né spostare le schede senza che lo chieda lei.
-- Per i blocchi futuri vale il suo ordine: prima i giochi, poi le location,
-  poi le storie, poi gli articoli. Mai niente sopra i giochi.
+Scelte confermate da Giorgia con tre risposte a scelta, dopo due letture sbagliate:
+- L'ordine «giochi, poi location, poi storie, poi articoli» è l'ordine in cui
+  i contenuti si vedono NELL'APP. Mai niente sopra i giochi.
+- La home dell'app (`components/app/HomeApp.tsx`) resta com'era: giochi, le
+  quattro caselle «Per la mamma» (Inviti, Feste, Storie, Guide) e in fondo il
+  blocco «Articoli per i genitori» (i quattro più recenti). Niente sezioni
+  nuove con le città o le storie: le ha viste e non le ha volute.
+- La barra in basso (`components/app/BarraSchede.tsx`) è Home, Giochi, Feste,
+  Storie, Profilo.
+- Non rifare la home né spostare le schede senza che lo chieda lei.
 - Gli articoli nuovi compaiono da soli: nella home dell'app e in cima a /guide
   (`guideInOrdine()` in lib/contenuti/guide.ts: prima gli articoli dal più
   recente, poi le guide brevi).

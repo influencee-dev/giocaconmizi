@@ -45,7 +45,8 @@ export interface LetturaBreve {
  * La home dell'app resta com'era: Giorgia (22/11/2026) ha chiesto di
  * aggiungere SOLO il blocco degli articoli, in fondo. Prima nell'app c'era
  * solo una casella «Guide» e gli articoli nuovi non si vedevano mai.
- * Per i blocchi futuri vale il suo ordine: giochi, location, storie, articoli.
+ * L'ordine nell'app è: giochi, location, storie, articoli (le caselle «Per la
+ * mamma» lo seguono già). La barra in basso: Home, Giochi, Feste, Storie, Profilo.
  *
  * `recenti`: gli slug degli ultimi arrivati, dal più recente (lib/giochi/novita.ts).
  * `letture`: gli articoli e le guide più recenti.

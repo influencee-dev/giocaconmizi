@@ -263,7 +263,7 @@ const benvenuto = (p) => p.locator("[data-benvenuto]");
   const caselle = await p.locator("[data-per-la-mamma] a").evaluateAll((e) => e.map((x) => x.getAttribute("href")));
   ok("home dell'app: «Per la mamma» è rimasta com'era", caselle.join(",") === "/biglietti,/feste,/storie,/guide", caselle.join(","));
   const barra = await p.locator("[data-barra-schede] a").evaluateAll((e) => e.map((x) => x.textContent.trim()));
-  ok("barra in basso: è rimasta com'era", barra.join(",") === "Home,Giochi,Storie,Feste,Profilo", barra.join(","));
+  ok("barra in basso: Home, Giochi, Feste, Storie, Profilo (ordine scelto da Giorgia)", barra.join(",") === "Home,Giochi,Feste,Storie,Profilo", barra.join(","));
   ok("home dell'app: nessuno sbordo con il blocco degli articoli", await p.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1));
   ok("home dell'app: gli articoli sono i quattro più recenti, gli stessi in cima alle guide",
     letture.length === 4 && letture.every((l) => l.visibile && l.href === `/guide/${l.slug}`) && letture.map((l) => l.slug).join() === elenco.slice(0, 4).map((g) => g.slug).join(),
