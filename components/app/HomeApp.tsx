@@ -32,10 +32,51 @@ function delGiorno<T>(lista: T[]): T | undefined {
   return lista[giorno % lista.length];
 }
 
+/** Una guida o un articolo da mostrare nella home dell'app. */
+export interface LetturaBreve {
+  slug: string;
+  titolo: string;
+  minuti: number;
+  /** La foto piccola di testata, se è già arrivata. */
+  foto?: string;
+}
+
+/** Una storia da mostrare nella home dell'app. */
+export interface StoriaBreve {
+  slug: string;
+  titolo: string;
+  eta: number;
+  minuti: number;
+}
+
 /**
+ * L'ORDINE DELLA HOME DELL'APP È UNA DECISIONE DI GIORGIA (22/11/2026) e vale
+ * sempre: prima i GIOCHI, poi le LOCATION (dove fare la festa), poi le STORIE,
+ * poi gli ARTICOLI. Una sezione nuova va messa al suo posto in quest'ordine,
+ * mai sopra i giochi. La stessa regola vale per la barra in basso (BarraSchede).
+ *
  * `recenti`: gli slug degli ultimi arrivati, dal più recente (lib/giochi/novita.ts).
+ * `citta`: le prime città delle feste, per popolazione. `storie`: le storie.
+ * `letture`: gli articoli e le guide più recenti. Prima nell'app c'era solo una
+ * casella «Guide»: gli articoli nuovi non si vedevano mai.
  */
-export function HomeApp({ giochi, inVetrina, recenti = [] }: { giochi: GiocoBreve[]; inVetrina: string[]; recenti?: string[] }) {
+export function HomeApp({
+  giochi,
+  inVetrina,
+  recenti = [],
+  citta = [],
+  quanteCitta = 0,
+  storie = [],
+  letture = [],
+}: {
+  giochi: GiocoBreve[];
+  inVetrina: string[];
+  recenti?: string[];
+  citta?: { slug: string; nome: string }[];
+  quanteCitta?: number;
+  storie?: StoriaBreve[];
+  letture?: LetturaBreve[];
+}) {
   const { profilo, pronto } = useProfilo();
   const bimbo = bimboAttivo(profilo);
   const adatti = bimbo ? giochi.filter((g) => bimbo.eta >= g.etaMin && bimbo.eta <= g.etaMax) : giochi.filter((g) => inVetrina.includes(g.slug));
@@ -180,22 +221,111 @@ export function HomeApp({ giochi, inVetrina, recenti = [] }: { giochi: GiocoBrev
         ))}
       </ul>
 
-      {/* Per la mamma */}
-      <p className="mt-5 text-lg font-black text-notte">Per la mamma</p>
-      <div className="mt-2 grid grid-cols-2 gap-3">
-        {[
-          { href: "/biglietti", nome: "Inviti", sotto: "per il compleanno", Icona: Gift, tono: "bg-[#FDE8F0]" },
-          { href: "/feste", nome: "Feste", sotto: "posti nella tua città", Icona: PartyPopper, tono: "bg-[#FFF3CF]" },
-          { href: "/storie", nome: "Storie", sotto: "da leggere stasera", Icona: BookOpen, tono: "bg-[#E3F5FC]" },
-          { href: "/guide", nome: "Guide", sotto: "3 minuti, pratiche", Icona: Sparkles, tono: "bg-[#E6F5EA]" },
-        ].map(({ href, nome, sotto, Icona, tono }) => (
-          <Link key={href} href={href} className={`flex flex-col gap-1 rounded-[1.3rem] px-4 py-3.5 ${tono}`}>
-            <Icona className="h-6 w-6 text-notte" strokeWidth={2.4} aria-hidden />
-            <span className="text-[17px] font-black text-notte">{nome}</span>
-            <span className="text-[13px] font-bold text-notte-tenue">{sotto}</span>
+      {/* 2. Location: dove fare la festa, città per città. */}
+      {citta.length > 0 && (
+        <div className="mt-6" data-location-app>
+          <div className="flex items-center justify-between">
+            <p className="text-lg font-black text-notte">Dove fare la festa</p>
+            <Link href="/feste" className="text-sm font-black text-viola" style={{ minHeight: 0, minWidth: 0 }}>
+              {quanteCitta} città
+            </Link>
+          </div>
+          <ul className="mt-2 flex snap-x snap-mandatory gap-2 overflow-x-auto pb-2 [scrollbar-width:none]">
+            {citta.map((c, i) => (
+              <li key={c.slug} className="shrink-0 snap-start">
+                <Link
+                  href={`/feste/${c.slug}`}
+                  className={`flex h-16 items-center gap-2 rounded-[1.3rem] px-4 text-[16px] font-black text-notte ${TONI[i % TONI.length]}`}
+                  data-citta-app={c.slug}
+                >
+                  <PartyPopper className="h-5 w-5 shrink-0" strokeWidth={2.4} aria-hidden />
+                  {c.nome}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Link
+            href="/biglietti"
+            className="mt-1 flex items-center gap-3 rounded-[1.3rem] bg-[#FDE8F0] px-4 py-3.5"
+            data-inviti-app
+          >
+            <Gift className="h-6 w-6 shrink-0 text-notte" strokeWidth={2.4} aria-hidden />
+            <span className="min-w-0">
+              <span className="block text-[17px] font-black leading-tight text-notte">Inviti di compleanno</span>
+              <span className="block text-[13px] font-bold text-notte-tenue">da mandare su WhatsApp, con la conferma</span>
+            </span>
           </Link>
-        ))}
-      </div>
+        </div>
+      )}
+
+      {/* 3. Storie: da leggere stasera. */}
+      {storie.length > 0 && (
+        <div className="mt-6" data-storie-app>
+          <div className="flex items-center justify-between">
+            <p className="text-lg font-black text-notte">Storie da leggere</p>
+            <Link href="/storie" className="text-sm font-black text-viola" style={{ minHeight: 0, minWidth: 0 }}>
+              Vedi tutte
+            </Link>
+          </div>
+          <ul className="mt-2 flex flex-col gap-2">
+            {(bimbo ? [...storie].sort((a, b) => Math.abs(a.eta - bimbo.eta) - Math.abs(b.eta - bimbo.eta)) : storie).slice(0, 3).map((st, i) => (
+              <li key={st.slug}>
+                <Link
+                  href={`/storie/${st.slug}`}
+                  className="flex items-center gap-3 rounded-[1.4rem] bg-white p-3 shadow-[0_8px_20px_-14px_rgba(31,36,48,0.5)]"
+                  data-storia-app={st.slug}
+                >
+                  <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl ${TONI[(i + 1) % TONI.length]}`}>
+                    <BookOpen className="h-7 w-7 text-notte" strokeWidth={2.2} aria-hidden />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[16px] font-black leading-tight text-notte [overflow-wrap:anywhere]">{st.titolo}</span>
+                    <span className="mt-0.5 block text-sm font-bold text-notte-tenue">
+                      dai {st.eta} anni · {st.minuti} min
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* 4. Articoli: le ultime guide e gli ultimi articoli, con la foto. */}
+      {letture.length > 0 && (
+        <div className="mt-6" data-letture-app>
+          <div className="flex items-center justify-between">
+            <p className="text-lg font-black text-notte">Articoli per i genitori</p>
+            <Link href="/guide" className="text-sm font-black text-viola" style={{ minHeight: 0, minWidth: 0 }}>
+              Vedi tutte
+            </Link>
+          </div>
+          <ul className="mt-2 flex flex-col gap-2">
+            {letture.map((l, i) => (
+              <li key={l.slug}>
+                <Link
+                  href={`/guide/${l.slug}`}
+                  className="flex items-center gap-3 rounded-[1.4rem] bg-white p-3 shadow-[0_8px_20px_-14px_rgba(31,36,48,0.5)]"
+                  data-lettura={l.slug}
+                >
+                  {l.foto ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- foto già pronta in tre misure: qui basta la piccola
+                    <img src={l.foto} alt="" width={96} height={64} loading="lazy" decoding="async" className="h-16 w-24 shrink-0 rounded-2xl object-cover" />
+                  ) : (
+                    <span className={`flex h-16 w-24 shrink-0 items-center justify-center rounded-2xl ${TONI[i % TONI.length]}`}>
+                      <BookOpen className="h-7 w-7 text-notte" strokeWidth={2.2} aria-hidden />
+                    </span>
+                  )}
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[16px] font-black leading-tight text-notte [overflow-wrap:anywhere]">{l.titolo}</span>
+                    <span className="mt-0.5 block text-sm font-bold text-notte-tenue">{l.minuti} minuti di lettura</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
 }

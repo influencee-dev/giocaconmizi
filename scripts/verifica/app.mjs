@@ -244,6 +244,40 @@ const benvenuto = (p) => p.locator("[data-benvenuto]");
   await ctx.close();
 }
 
+{
+  // Gli articoli nell'app (22/11/2026). Prima sul telefono c'era solo la casella «Guide»,
+  // e nella pagina delle guide gli articoli nuovi stavano in fondo, dopo tutte le guide brevi.
+  // Senza UMANO: nel browser automatico il benvenuto non compare e non copre la home.
+  const ctx = await b.newContext(telefono); await ctx.addInitScript(() => localStorage.setItem("mizi.consenso-statistiche", "no"));
+  const p = await ctx.newPage();
+  await p.goto(BASE + "/guide", { waitUntil: "networkidle" });
+  const elenco = await p.locator("[data-elenco-guide] [data-guida]").evaluateAll((e) => e.map((x) => ({ slug: x.dataset.guida, foto: Boolean(x.querySelector("img")), articolo: /Articolo/.test(x.textContent) })));
+  ok("guide: in cima all'elenco ci sono gli ultimi articoli, con la foto", elenco.length >= 20 && elenco.slice(0, 2).every((g) => g.articolo && g.foto), elenco.slice(0, 3).map((g) => g.slug).join(", "));
+  ok("guide: nessuno sbordo sul telefono", await p.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1));
+  await p.goto(BASE + "/", { waitUntil: "networkidle" });
+  const letture = await p.locator("[data-letture-app] [data-lettura]").evaluateAll((e) => e.map((x) => ({ slug: x.dataset.lettura, href: x.getAttribute("href"), foto: Boolean(x.querySelector("img")), visibile: x.getBoundingClientRect().width > 0 })));
+  // L'ordine è una decisione di Giorgia (22/11/2026): giochi, location, storie, articoli. Sempre.
+  const alto = (sel) => p.locator(sel).first().evaluate((e) => Math.round(e.getBoundingClientRect().top + window.scrollY)).catch(() => -1);
+  const ordine = [await alto("[data-carosello]"), await alto("[data-location-app]"), await alto("[data-storie-app]"), await alto("[data-letture-app]")];
+  ok("home dell'app: l'ordine è giochi, location, storie, articoli", ordine.every((y) => y > 0) && ordine.every((y, i) => i === 0 || y > ordine[i - 1]), ordine.join(" < "));
+  const citta = await p.locator("[data-location-app] [data-citta-app]").evaluateAll((e) => e.map((x) => x.getAttribute("href")));
+  const storieApp = await p.locator("[data-storie-app] [data-storia-app]").evaluateAll((e) => e.map((x) => x.getAttribute("href")));
+  ok("home dell'app: dieci città delle feste, gli inviti e tre storie", citta.length === 10 && citta[0] === "/feste/milano" && (await p.locator("[data-inviti-app]").getAttribute("href")) === "/biglietti" && storieApp.length === 3 && storieApp.every((h) => h.startsWith("/storie/")), `${citta.length} città, ${storieApp.length} storie`);
+  const stati = await Promise.all([...citta.slice(0, 2), ...storieApp].map((h) => fetch(BASE + h).then((r) => r.status)));
+  ok("home dell'app: città e storie portano a pagine vere", stati.every((s) => s === 200), stati.join(","));
+  const barra = await p.locator("[data-barra-schede] a").evaluateAll((e) => e.map((x) => x.textContent.trim()));
+  ok("barra in basso: Home, Giochi, Feste, Storie, Profilo", barra.join(",") === "Home,Giochi,Feste,Storie,Profilo", barra.join(","));
+  ok("home dell'app: nessuno sbordo con le sezioni nuove", await p.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1));
+  ok("home dell'app: gli articoli sono i quattro più recenti, gli stessi in cima alle guide",
+    letture.length === 4 && letture.every((l) => l.visibile && l.href === `/guide/${l.slug}`) && letture.map((l) => l.slug).join() === elenco.slice(0, 4).map((g) => g.slug).join(),
+    letture.map((l) => l.slug).join(", "));
+  ok("home dell'app: le letture hanno la foto quando c'è", letture.filter((l) => l.foto).length >= 2);
+  await p.locator("[data-letture-app] [data-lettura]").first().tap();
+  await p.waitForURL(/\/guide\//, { timeout: 8000 }).catch(() => null);
+  ok("home dell'app: toccando una lettura si apre l'articolo", new URL(p.url()).pathname === `/guide/${letture[0]?.slug}` && (await p.locator("h1").count()) === 1);
+  await ctx.close();
+}
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("app") ? 0 : 1);

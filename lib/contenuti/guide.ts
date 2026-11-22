@@ -1460,6 +1460,17 @@ export function guida(slug: string): Guida | undefined {
 }
 
 /**
+ * Le guide nell'ordine in cui si mostrano (22/11/2026): prima gli articoli
+ * approfonditi, dal più recente, poi le guide brevi, dalla più recente. Così
+ * un articolo appena uscito è il primo che si vede, nell'elenco delle guide e
+ * nella home dell'app, e una guida breve ritoccata non lo scavalca.
+ */
+export function guideInOrdine(): Guida[] {
+  const perData = (a: Guida, b: Guida) => b.aggiornata.localeCompare(a.aggiornata);
+  return [...GUIDE.filter((g) => g.approfondimento).sort(perData), ...GUIDE.filter((g) => !g.approfondimento).sort(perData)];
+}
+
+/**
  * Coppie di guide che parlano della stessa cosa da due lati: compaiono per
  * prime in «Leggi anche», in tutte e due le direzioni (20/11/2026). Prima la
  * scelta era solo per fascia d'età, e due guide gemelle non si linkavano.
