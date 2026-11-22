@@ -126,9 +126,6 @@ export default function Home() {
         giochi={games.filter((g) => g.status === "live").map((g) => ({ slug: g.slug, titolo: g.title, etaMin: g.ageMin, etaMax: g.ageMax, minuti: g.minutes, skill: g.skill }))}
         inVetrina={IN_VETRINA}
         recenti={ultimiArrivati.map((g) => g.slug)}
-        citta={CITTA_FESTE.slice(0, 10).map((c) => ({ slug: c.slug, nome: c.citta }))}
-        quanteCitta={CITTA_FESTE.length}
-        storie={tutteLeStorie().map((st) => ({ slug: st.slug, titolo: st.title, eta: st.age, minuti: st.minutes }))}
         letture={guideInOrdine().slice(0, 4).map((g) => ({
           slug: g.slug,
           titolo: g.titoloBreve,

@@ -31,16 +31,20 @@ Partidea SRL (dati in lib/contenuti/legal.ts → SOCIETA). Mascotte: Mizi, una p
   Se il deploy è READY sul commit appena pushato e le verifiche locali sono
   passate, non serve scaricare le pagine live.
 
-## Ordine dei contenuti nell'app (decisione di Giorgia, 22/11/2026)
-- Sul telefono l'ordine è SEMPRE: prima i giochi, poi le location (dove fare
-  la festa), poi le storie, poi gli articoli. Vale per le sezioni della home
-  dell'app (`components/app/HomeApp.tsx`) e per la barra in basso
-  (`components/app/BarraSchede.tsx`: Home, Giochi, Feste, Storie, Profilo).
-- Una sezione nuova si mette al suo posto in quest'ordine, mai sopra i giochi.
-  Lo controlla la batteria `app` («l'ordine è giochi, location, storie, articoli»).
-- Gli articoli nuovi compaiono da soli: nella home dell'app («Articoli per i
-  genitori», i quattro più recenti) e in cima a /guide (`guideInOrdine()` in
-  lib/contenuti/guide.ts: prima gli articoli dal più recente, poi le guide brevi).
+## Articoli nell'app e ordine dei contenuti (Giorgia, 22/11/2026)
+Scelte confermate da Giorgia con tre risposte a scelta, dopo due letture sbagliate:
+- L'ordine «giochi, poi location, poi storie, poi articoli» è l'ordine in cui
+  i contenuti si vedono NELL'APP. Mai niente sopra i giochi.
+- La home dell'app (`components/app/HomeApp.tsx`) resta com'era: giochi, le
+  quattro caselle «Per la mamma» (Inviti, Feste, Storie, Guide) e in fondo il
+  blocco «Articoli per i genitori» (i quattro più recenti). Niente sezioni
+  nuove con le città o le storie: le ha viste e non le ha volute.
+- La barra in basso (`components/app/BarraSchede.tsx`) è Home, Giochi, Feste,
+  Storie, Profilo.
+- Non rifare la home né spostare le schede senza che lo chieda lei.
+- Gli articoli nuovi compaiono da soli: nella home dell'app e in cima a /guide
+  (`guideInOrdine()` in lib/contenuti/guide.ts: prima gli articoli dal più
+  recente, poi le guide brevi).
 
 ## Percorso per i genitori «sotto pressione» (20/11/2026)
 - `/genitori/sotto-pressione`: 35 affermazioni sulle cinque spinte dell'Analisi

@@ -15,8 +15,8 @@ import { useEffect, useState } from "react";
  * sua altezza in --barra-schede: banner cookie e barretta «Scarica» si
  * appoggiano sopra.
  *
- * L'ordine delle schede è una decisione di Giorgia (22/11/2026): prima i
- * giochi, poi le location (Feste), poi le storie (con guide e articoli).
+ * L'ordine delle schede l'ha scelto Giorgia (22/11/2026): Home, Giochi,
+ * Feste, Storie, Profilo. Prima i giochi, poi le location, poi le storie.
  */
 
 const SCHEDE: { href: string; nome: string; icona: LucideIcon; attiva: (p: string) => boolean }[] = [
