@@ -1117,11 +1117,12 @@ ok("og:image di una città", await ogServita("/feste/milano"));
     const festa = pg.locator("[data-festa]");
     for (let giro = 0; giro < 400 && !(await festa.count()); giro++) {
       const stato = await pg.evaluate(() => ({
-        figure: [...document.querySelectorAll("[data-figura]")].map((i) => i.complete && i.naturalWidth > 0),
+        // Rotto = finito di caricare e vuoto. Un disegno ancora in arrivo non è rotto.
+        figure: [...document.querySelectorAll("[data-figura]")].map((i) => !(i.complete && i.naturalWidth === 0)),
         bottoni: [...document.querySelectorAll("main [data-opzione], main [data-ascolta]")].map((e) => Math.min(e.offsetWidth, e.offsetHeight)),
       }));
       figureViste += stato.figure.length;
-      figureRotte += stato.figure.filter((v) => !v).length > 0 && giro > 3 ? 1 : 0;
+      figureRotte += stato.figure.filter((v) => !v).length;
       piccoli += stato.bottoni.filter((l) => l > 0 && l < 56).length;
       await pg.waitForTimeout(300);
     }
