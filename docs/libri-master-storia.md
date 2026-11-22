@@ -33,13 +33,39 @@ Come si usa un evento: l'evento dà il luogo, gli oggetti e l'attesa (la sera de
 la maschera). La storia però parla di un sentimento piccolo e vero dentro l'evento: avere paura di stare
 soli, non riuscire ad aspettare, volere il regalo dell'altro.
 
+## Il tono di voce (decisione di Giorgia del 22/11/2026)
+
+Il riferimento è il **mood** di Bluey e Bingo: lo si prende come atmosfera, non come modello da copiare.
+
+Cosa vuol dire, in pratica:
+
+- **Tutto nasce da un gioco di tutti i giorni.** La storia sta in casa, in giardino, in bagno, in cucina.
+  L'avventura è un gioco inventato dai personaggi con quello che hanno sotto mano: una scatola, un cuscino,
+  uno spazzolino.
+- **Il gioco ha regole serie.** I personaggi ci credono fino in fondo, e la comicità viene da lì: chi
+  rompe la regola, chi la prende troppo alla lettera, chi vuole cambiare gioco a metà.
+- **Parlano come bambini veri.** Frasi corte, domande buffe, logica tutta loro, piccoli battibecchi che
+  durano un attimo. Niente frasi da adulto in bocca a un cucciolo.
+- **Si ride con dolcezza.** Nessuno viene preso in giro. La gag è una cosa che torna, ogni volta un po' più esagerata.
+- **I sentimenti si chiamano per nome, senza drammi.** «Sono un po' arrabbiata.» «Mi dispiace.» Poi si
+  torna a giocare.
+- **La morale non si pronuncia.** Si vede in quello che i personaggi fanno alla fine. Chi legge ad alta
+  voce deve sorridere anche lui.
+- **Se compare un grande, gioca.** Non comanda e non spiega: entra nel gioco e ne segue le regole.
+- **Il finale è caldo e piccolo.** Un abbraccio, una risata, una frase semplice. Mai una lezione.
+
+Cosa NON si prende, mai: nomi, personaggi, la famiglia di cani, frasi tipiche, giochi che hanno un nome
+in quella serie, trame di episodi, lo stile dei disegni, modi di dire australiani. I nostri personaggi
+sono Mizi, Tobia, Lilla e Nocciola, con il loro carattere, e il nostro stile visivo resta quello della
+bibbia personaggi. Se una scena ricorda un episodio preciso, si cambia.
+
 ## I mattoni fissi
 
 - **Personaggi**: Mizi protagonista, sempre. Tobia (capibara, calmo, non ha mai fretta), Lilla (axolotl,
   sorride sempre), Nocciola (renna piccola, coraggiosa suo malgrado). Ne compaiono almeno due. Un
   personaggio nuovo per volume al massimo, originale, descritto nella bibbia personaggi prima di disegnarlo.
 - **Età**: 3-7 anni. Si legge ad alta voce in cinque minuti.
-- **Tono**: tenero e buffo. Dialoghi brevi. Una gag che torna tre volte.
+- **Tono**: quello descritto sopra. Dialoghi brevi. Una gag che torna tre volte.
 - **Mai**: paura vera, punizioni, prese in giro, cattivi senza riscatto, affermazioni mediche o numeri
   («tre minuti», «due volte al giorno»), marche, personaggi di altri, bambini o persone reali.
 - **Finale**: Mizi dice in una frase, con parole sue, quello che ha capito. Poi una riga leggera.
@@ -83,6 +109,7 @@ Solo dopo l'approvazione delle 12 scene si passa a storyboard e immagini («04 B
 - Un bambino di quattro anni riderebbe almeno due volte?
 - Ogni scena si disegna con una sola azione?
 - Mizi risolve grazie agli amici, non da sola e non grazie a un adulto?
+- I personaggi parlano come bambini veri? C'è un gioco inventato da loro al centro della storia?
 - Ogni testo sta in 190 caratteri e si legge bene ad alta voce?
 - Il titolo sta in tre righe?
 - C'è qualcosa che somiglia a una storia o a un personaggio famoso? Se sì, si cambia.
