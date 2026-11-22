@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { Disegno, FacciaMizi, Secchiello, type Emozione, type NomeFigura } from "./arte";
+import { Figura } from "./figura";
 import type { Lingua } from "@/lib/giochi/audio";
 import type { GameProps } from "./tipi";
 import { useRound } from "./nucleo";
@@ -36,6 +37,8 @@ export interface Opzione {
   etichetta?: string;
   /** Figura del catalogo SVG. */
   disegno?: NomeFigura;
+  /** Un disegno di public/figure (figura.tsx): sta sopra l'etichetta, se c'è. */
+  immagine?: string;
   /** Colore di riempimento: forme geometriche e secchielli. */
   colore?: string;
   /** Come va disegnata l'opzione. */
@@ -219,6 +222,14 @@ function BottoneOpzione({
     }
     if (opzione.tipo === "faccia" && opzione.emozione) {
       return <FacciaMizi emozione={opzione.emozione} className="figura-ombra aspect-square w-full max-w-28" />;
+    }
+    if (opzione.immagine) {
+      return (
+        <>
+          <Figura nome={opzione.immagine} alt="" className="aspect-square w-full max-w-36" />
+          {opzione.etichetta && <span className="text-center text-lg font-extrabold leading-snug text-notte">{opzione.etichetta}</span>}
+        </>
+      );
     }
     if (opzione.disegno && opzione.ripeti) {
       return (

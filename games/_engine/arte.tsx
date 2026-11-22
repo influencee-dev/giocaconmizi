@@ -428,6 +428,53 @@ const FIGURE: Record<string, ReactNode> = {
       <path d="M50 50 L8 50 Q7 50 8 49 L49 8 Q50 7 50 8 Z" fill={LUCE_TENUE} />
     </>
   ),
+  // Le forme delle foglie (gioco «Le foglie»): colore, ombra sulla metà destra, nervature.
+  "foglia-ovale": (
+    <>
+      <path d="M50 78v18" fill="none" stroke="#6b8f3a" strokeWidth="4" strokeLinecap="round" />
+      <path d="M50 6c30 14 36 52 0 74C14 58 20 20 50 6z" fill="#4caf6d" />
+      <path d="M50 6c30 14 36 52 0 74z" fill="#000" opacity="0.12" />
+      <path d="M50 12v66M50 30l-15-7M50 30l15-7M50 46l-20-8M50 46l20-8M50 61l-15-5M50 61l15-5" fill="none" stroke="#2f7a4a" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M38 20q-9 12-7 28" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.3" />
+    </>
+  ),
+  "foglia-palmata": (
+    <>
+      <path d="M50 64v32" fill="none" stroke="#6b8f3a" strokeWidth="4" strokeLinecap="round" />
+      <path d="M50 4l8 22 17-10-5 22 22-2-16 18 13 12H62L50 80 38 66H11l13-12L8 36l22 2-5-22 17 10z" fill="#5cb85c" strokeLinejoin="round" stroke="#5cb85c" strokeWidth="2" />
+      <path d="M50 4l8 22 17-10-5 22 22-2-16 18 13 12H62L50 80z" fill="#000" opacity="0.12" />
+      <path d="M50 66V10M50 66L22 22M50 66l28-44M50 66L14 40M50 66l36-26M50 66l-30-4M50 66l30-4" fill="none" stroke="#2f7a4a" strokeWidth="1.5" strokeLinecap="round" />
+    </>
+  ),
+  "foglia-cuoriforme": (
+    <>
+      <path d="M50 30c0-8 4-16 2-24" fill="none" stroke="#6b8f3a" strokeWidth="4" strokeLinecap="round" />
+      <path d="M50 92C20 68 6 46 14 30c8-14 30-10 36 4 6-14 28-18 36-4 8 16-6 38-36 62z" fill="#4caf6d" />
+      <path d="M50 92V34c6-14 28-18 36-4 8 16-6 38-36 62z" fill="#000" opacity="0.12" />
+      <path d="M50 34v54M50 46L28 36M50 46l22-10M50 60L32 54M50 60l18-6" fill="none" stroke="#2f7a4a" strokeWidth="1.6" strokeLinecap="round" />
+      <path d="M24 34q-4 12 6 26" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" opacity="0.3" />
+    </>
+  ),
+  "foglia-lanceolata": (
+    <>
+      <path d="M50 84v13" fill="none" stroke="#6b8f3a" strokeWidth="4" strokeLinecap="round" />
+      <path d="M50 3c13 26 13 58 0 83C37 61 37 29 50 3z" fill="#6fbf6a" />
+      <path d="M50 3c13 26 13 58 0 83z" fill="#000" opacity="0.12" />
+      <path d="M50 8v76M50 28l-6-5M50 28l6-5M50 44l-8-6M50 44l8-6M50 60l-7-5M50 60l7-5" fill="none" stroke="#2f7a4a" strokeWidth="1.4" strokeLinecap="round" />
+    </>
+  ),
+  "foglia-aghiforme": (
+    <>
+      <path d="M50 6v90" fill="none" stroke="#a9683a" strokeWidth="4" strokeLinecap="round" />
+      <path
+        d="M50 14L30 4M50 14l20-10M50 24L24 12M50 24l26-12M50 34L20 22M50 34l30-12M50 44L18 32M50 44l32-12M50 54L18 42M50 54l32-12M50 64L20 52M50 64l30-12M50 74L24 62M50 74l26-12M50 84L30 74M50 84l20-10"
+        fill="none"
+        stroke="#3f9a5a"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+      />
+    </>
+  ),
 };
 
 /** Nomi delle forme, per la voce e per le etichette. */
