@@ -10,6 +10,10 @@ import type { GameProps } from "@/games/_engine/tipi";
  * Abbina i colori (3–4 anni).
  * Un oggetto colorato al centro, i secchielli sotto: si tocca quello dello
  * stesso colore. Le opzioni passano da 3 a 5 mano a mano che il gioco procede.
+ *
+ * Alla risposta giusta Mizi dice il nome del colore: si impara anche quando
+ * si indovina. Tutte le frasi (sette istruzioni e sette nomi) stanno nel
+ * copione della voce, content/voce-mizi.json sotto «abbina-i-colori».
  */
 
 const OGGETTI = ["palla", "mela", "fiore", "macchina", "stella", "cerchio"] as const;
@@ -27,6 +31,7 @@ export default function Game(props: GameProps) {
 
       return {
         istruzione: `Tocca il secchiello ${NOMI_COLORE[giusto]}, come questo.`,
+        lode: `${NOMI_COLORE[giusto][0].toUpperCase()}${NOMI_COLORE[giusto].slice(1)}!`,
         opzioni: mescola([giusto, ...distrattori]).map((colore) => ({
           id: colore,
           tipo: "secchiello" as const,

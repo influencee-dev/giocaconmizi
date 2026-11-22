@@ -59,6 +59,8 @@ export interface Round {
   centro?: ReactNode;
   opzioni: Opzione[];
   correttaId: string;
+  /** Detta alla risposta giusta al posto della lode comune: il nome della cosa toccata («Rosso!»). */
+  lode?: string;
   /** Il trucco da dire (e mostrare) dopo un errore, al posto del solito «Riprova». */
   aiuto?: string;
   /** Colonne solo per questo round: vince sulle colonne del gioco. */
@@ -99,7 +101,7 @@ export function SceltaMultipla({
       if (inPausa || finito) return;
       if (id === corrente.correttaId) {
         // Il punto vale solo se azzeccata al primo colpo; l'errore non toglie nulla.
-        giusto();
+        giusto(corrente.lode);
         return;
       }
       // Errore: feedback gentile, l'opzione si spegne, si resta nel round.
@@ -107,7 +109,7 @@ export function SceltaMultipla({
       setSbagliateDi({ round: indice, ids: [...sbagliate, id] });
       sbagliato(corrente.aiuto);
     },
-    [inPausa, finito, corrente.correttaId, corrente.aiuto, giusto, sbagliato, sbagliate, indice],
+    [inPausa, finito, corrente.correttaId, corrente.aiuto, corrente.lode, giusto, sbagliato, sbagliate, indice],
   );
 
   // Modalità demo per i reel: risponde giusto da sola, una volta al secondo.

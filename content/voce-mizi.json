@@ -129,6 +129,22 @@
       "Quarto piano fatto!",
       "Ultimo piano! Prendi la stella: ti protegge.",
       "Sei in cima alla piramide!"
+    ],
+    "abbina-i-colori": [
+      "Tocca il secchiello rosso, come questo.",
+      "Tocca il secchiello giallo, come questo.",
+      "Tocca il secchiello azzurro, come questo.",
+      "Tocca il secchiello verde, come questo.",
+      "Tocca il secchiello viola, come questo.",
+      "Tocca il secchiello rosa, come questo.",
+      "Tocca il secchiello arancione, come questo.",
+      "Rosso!",
+      "Giallo!",
+      "Azzurro!",
+      "Verde!",
+      "Viola!",
+      "Rosa!",
+      "Arancione!"
     ]
   }
 }

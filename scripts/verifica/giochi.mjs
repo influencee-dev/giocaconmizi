@@ -658,6 +658,9 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   ok("nucleo: chi sbaglia a ogni round prende una stella, mai zero", stelleS === String(stelleAttese), `stelle ${stelleS}`);
   ok("nucleo: la partita finita mette la figurina nell'album", album.giochi?.["abbina-i-colori"]?.stelle === stelleAttese && album.giochi["abbina-i-colori"].volte === 1, JSON.stringify(album.giochi ?? {}));
   ok("nucleo: lodi e incoraggiamenti detti sono quelli del copione", detto.some((t) => nucleo.has(t)) && !detto.some((t) => /Brav[oa]/.test(t)), detto.slice(0, 6).join(" | "));
+  // «Abbina i colori» (22/11/2026): istruzioni e nomi dei colori sono nel copione, quindi registrati.
+  const tuttoIlCopioneA = new Set(Object.values(copione.frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
+  ok("abbina i colori: tutto quello che Mizi dice è nel copione, e alla risposta giusta dice il colore", detto.every((t) => tuttoIlCopioneA.has(t)) && detto.some((t) => (copione.frasi["abbina-i-colori"] ?? []).slice(7).includes(t)), detto.filter((t) => !tuttoIlCopioneA.has(t)).join(" | "));
   // La pagina del gioco mostra la sua figurina: presa (con le stelle) dopo la partita, da prendere prima.
   await s.goto(`${BASE}/giochi/abbina-i-colori`, { waitUntil: "networkidle" });
   const presa = s.locator("[data-figurina-gioco=presa]");
