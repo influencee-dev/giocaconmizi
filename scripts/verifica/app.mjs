@@ -275,6 +275,55 @@ const benvenuto = (p) => p.locator("[data-benvenuto]");
   await ctx.close();
 }
 
+// Giochi senza connessione (22/11/2026): niente si scarica da solo; dopo
+// «Scarica i giochi» il catalogo, la scheda e il gioco si aprono a rete
+// staccata, con l'età scelta, i disegni e la voce; «Togli» rimette tutto com'era.
+{
+  const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctx.addInitScript(() => { try { localStorage.setItem("mizi.consenso-statistiche", "no"); localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const p = await ctx.newPage();
+  await p.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
+  await p.waitForFunction(() => navigator.serviceWorker?.controller != null, null, { timeout: 15000 }).catch(() => null);
+  const prima = await p.evaluate(async () => ({ memoria: await caches.has("giocamizi-senza-rete"), stato: localStorage.getItem("giocamizi-senza-rete") }));
+  ok("senza rete: prima del tocco non c'è niente in memoria", prima.memoria === false && prima.stato === null);
+
+  await p.locator("[data-scarica-giochi]").tap();
+  const scaricati = await p.locator("[data-senza-rete=scaricati]").waitFor({ timeout: 240000 }).then(() => true, () => false);
+  const dopo = await p.evaluate(async () => ({ voci: (await (await caches.open("giocamizi-senza-rete")).keys()).length, stato: JSON.parse(localStorage.getItem("giocamizi-senza-rete") ?? "null") }));
+  ok("senza rete: «Scarica i giochi» mette in memoria pagine, codice, voce e disegni", scaricati && dopo.voci > 500 && dopo.stato?.giochi >= 51, `${dopo.voci} voci, ${dopo.stato?.giochi} giochi`);
+
+  await ctx.setOffline(true);
+  await p.goto(`${BASE}/giochi`, { waitUntil: "load" }).catch(() => null);
+  ok("senza rete: il catalogo si apre", (await p.locator("a[href^='/giochi/']").count()) > 50);
+
+  // Dalla scheda si sceglie l'età e si entra nel gioco toccando: la pagina salvata è quella dell'età minima.
+  await p.goto(`${BASE}/giochi/numeri-in-ordine`, { waitUntil: "load" }).catch(() => null);
+  await p.locator("a[href='/giochi/numeri-in-ordine/gioca?eta=7']").first().tap();
+  await p.locator("main button[aria-label^='Numero ']").first().waitFor({ timeout: 15000 }).catch(() => null);
+  await p.waitForTimeout(800);
+  const numeri = await p.locator("main button[aria-label^='Numero ']").evaluateAll((e) => e.map((x) => Number(x.getAttribute("aria-label").replace("Numero ", ""))));
+  ok("senza rete: il gioco parte con l'età scelta (a 7 anni i numeri passano il 20)", new URL(p.url()).searchParams.get("eta") === "7" && numeri.length >= 4 && Math.max(...numeri) > 20, numeri.join(","));
+
+  await p.goto(`${BASE}/giochi/mb-o-mp/gioca?eta=7&demo=1`, { waitUntil: "load" }).catch(() => null);
+  await p.locator("[data-figura]").first().waitFor({ timeout: 15000 }).catch(() => null);
+  await p.waitForTimeout(600);
+  const disegno = await p.evaluate(() => { const i = document.querySelector("[data-figura]"); return Boolean(i && i.complete && i.naturalWidth > 0); });
+  const voce = await p.evaluate(async () => { const m = await caches.open("giocamizi-senza-rete"); const k = (await m.keys()).find((r) => r.url.includes("/voce/")); return k ? (await fetch(k.url)).ok : false; }).catch(() => false);
+  const festa = await p.locator("[data-festa]").waitFor({ timeout: 90000 }).then(() => true, () => false);
+  ok("senza rete: disegni e voce arrivano dalla memoria e la partita finisce", disegno && voce && festa, `disegno ${disegno}, voce ${voce}, festa ${festa}`);
+
+  await p.goto(`${BASE}/feste`, { waitUntil: "load" }).catch(() => null);
+  ok("senza rete: una pagina non scaricata lo dice e rimanda ai giochi", (await p.locator("h1").first().innerText().catch(() => "")).includes("senza connessione") && (await p.locator("a[href='/giochi']").count()) === 1);
+
+  await ctx.setOffline(false);
+  await p.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
+  await p.locator("[data-togli-giochi]").tap();
+  await p.locator("[data-senza-rete=da-scaricare]").waitFor({ timeout: 10000 }).catch(() => null);
+  const tolti = await p.evaluate(async () => ({ memoria: await caches.has("giocamizi-senza-rete"), stato: localStorage.getItem("giocamizi-senza-rete") }));
+  ok("senza rete: «Togli i giochi dal telefono» cancella memoria e scelta", tolti.memoria === false && tolti.stato === null);
+  await ctx.close();
+}
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("app") ? 0 : 1);
