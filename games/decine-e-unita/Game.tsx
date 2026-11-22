@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import { SceltaMultipla, type Round } from "@/games/_engine/SceltaMultipla";
-import { mescola, numero } from "@/games/_engine/casuale";
+import { numero } from "@/games/_engine/casuale";
 import { limitePerEta, scelteNumeriche } from "@/games/_engine/numeri";
 import type { GameProps } from "@/games/_engine/tipi";
 

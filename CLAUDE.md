@@ -350,10 +350,12 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   la cosa toccata). Figure ridisegnate col volume in games/_engine/arte.tsx
   (colore + ombra + riflesso): forme, secchiello, pesce, palla, mela, fiore,
   macchina; `tinta` di Disegno cambia il colore principale di una figura.
-- Giochi dei compiti di seconda elementare (22/11/2026, 47 giochi in tutto):
+- Giochi dei compiti di seconda elementare (22/11/2026, 51 giochi in tutto):
   i-suoni-difficili, mb-o-mp, maggiore-minore-uguale, numeri-in-ordine,
-  causa-ed-effetto, le-parti-della-pianta, le-foglie; competenza nuova
-  «scienze». Nascono dagli ARGOMENTI che Giorgia manda (registro di classe,
+  causa-ed-effetto, le-parti-della-pianta, le-foglie; matematica senza
+  disegni: problemi-con-mizi, decine-e-unita, il-numero-prima-e-dopo,
+  piu-e-meno (risposte e limiti per età in games/_engine/numeri.ts: 20 a sei
+  anni, 60 a sette, 100 dagli otto). Competenza nuova «scienze». Nascono dagli ARGOMENTI che Giorgia manda (registro di classe,
   pagine del libro): gli esercizi e i disegni si rifanno da zero, MAI copiati
   dal libro, e niente del registro (nomi, classe, scuola) entra nel repo.
   Disegni: `public/figure/<nome>.webp` con `Figura` (games/_engine/figura.tsx)

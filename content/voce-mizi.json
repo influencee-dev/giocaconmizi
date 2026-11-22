@@ -285,6 +285,36 @@
       "Tocca la foglia cuoriforme: ha la forma di un cuore.",
       "Tocca la foglia lanceolata: è lunga e stretta come la punta di una lancia.",
       "Tocca la foglia aghiforme: è sottile come un ago."
+    ],
+    "problemi-con-mizi": [
+      "Leggi il problema. Quale operazione serve?",
+      "Adesso fai il calcolo. Quanto fa?",
+      "Le cose si mettono insieme o aumentano: serve l'addizione.",
+      "Qualcosa va via, oppure si cerca la differenza: serve la sottrazione.",
+      "Conta con calma: puoi usare le dita o la linea dei numeri.",
+      "Addizione!",
+      "Sottrazione!"
+    ],
+    "decine-e-unita": [
+      "Conta le decine e le unità. Che numero è?",
+      "Che numero formano?",
+      "Quante decine ci sono in questo numero?",
+      "Quante unità ci sono in questo numero?",
+      "Ogni barra lunga vale dieci, ogni quadratino vale uno.",
+      "Le decine sono la cifra a sinistra, le unità quella a destra."
+    ],
+    "il-numero-prima-e-dopo": [
+      "Che numero viene subito dopo?",
+      "Che numero viene subito prima?",
+      "Che numero manca nella fila?",
+      "Il numero dopo è uno in più.",
+      "Il numero prima è uno in meno.",
+      "Conta in avanti, un numero alla volta."
+    ],
+    "piu-e-meno": [
+      "Quanto fa?",
+      "Parti dal numero più grande e conta in avanti.",
+      "Parti dal primo numero e conta all'indietro."
     ]
   }
 }

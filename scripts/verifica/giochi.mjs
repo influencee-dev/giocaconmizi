@@ -536,8 +536,8 @@ ok("og:image di una città", await ogServita("/feste/milano"));
     proposte: [...document.querySelectorAll("[data-proposta]")].map((x) => x.getAttribute("data-proposta")),
     sbordo: document.documentElement.scrollWidth - window.innerWidth,
   }));
-  ok("album: 3 figurine prese su 47, coccarda contata, tre giochi nuovi da provare",
-    album.prese === 3 && album.tutte === 47 && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
+  ok("album: 3 figurine prese su 51, coccarda contata, tre giochi nuovi da provare",
+    album.prese === 3 && album.tutte === 51 && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
     !album.proposte.some((s) => ["memory-animali", "conta-fino-a-10", "abbina-i-colori"].includes(s)) && album.sbordo <= 0, JSON.stringify(album));
   await m.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
   await m.waitForTimeout(400);
@@ -1100,14 +1100,14 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   await ctxM.close();
 }
 
-// I sette giochi della seconda elementare (22/11/2026): ognuno gioca da solo
+// Gli undici giochi della seconda elementare (22/11/2026): ognuno gioca da solo
 // fino alla festa. Tutto quello che Mizi dice è registrato (non le sillabe e i
 // numeri toccati, che restano alla sintesi), i disegni di public/figure si
 // caricano davvero, e nessun bottone è più piccolo di 56 px.
 {
   const { readFileSync } = await import("node:fs");
   const copione = new Set(Object.values(JSON.parse(readFileSync("content/voce-mizi.json", "utf8")).frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
-  const scuola = ["i-suoni-difficili", "mb-o-mp", "maggiore-minore-uguale", "numeri-in-ordine", "causa-ed-effetto", "le-parti-della-pianta", "le-foglie"];
+  const scuola = ["i-suoni-difficili", "mb-o-mp", "maggiore-minore-uguale", "numeri-in-ordine", "causa-ed-effetto", "le-parti-della-pianta", "le-foglie", "problemi-con-mizi", "decine-e-unita", "il-numero-prima-e-dopo", "piu-e-meno"];
   const esiti = await Promise.all(scuola.map(async (slug) => {
     const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
     await ctx.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} window.__voceMizi = []; });
@@ -1133,7 +1133,7 @@ ok("og:image di una città", await ogServita("/feste/milano"));
     return { slug, finito, figureViste, figureRotte, piccoli, mute: [...new Set(frasi.filter((d) => !d.registrata || !copione.has(d.testo)).map((d) => d.testo))], frasi: frasi.length };
   }));
   const male = esiti.filter((e) => !e.finito || e.mute.length || e.frasi < 6);
-  ok("seconda elementare: i sette giochi arrivano alla festa e ogni frase di Mizi è registrata e nel copione", male.length === 0, male.map((e) => `${e.slug}: ${e.finito ? "" : "non finisce "}${e.mute.slice(0, 3).join(" | ")}`).join(" · "));
+  ok("seconda elementare: gli undici giochi arrivano alla festa e ogni frase di Mizi è registrata e nel copione", male.length === 0, male.map((e) => `${e.slug}: ${e.finito ? "" : "non finisce "}${e.mute.slice(0, 3).join(" | ")}`).join(" · "));
   const conFigure = esiti.filter((e) => ["i-suoni-difficili", "mb-o-mp", "causa-ed-effetto"].includes(e.slug));
   ok("seconda elementare: i disegni dei giochi si caricano", conFigure.every((e) => e.figureViste > 0 && e.figureRotte === 0), conFigure.map((e) => `${e.slug} ${e.figureViste}/${e.figureRotte}`).join(", "));
   ok("seconda elementare: nessun bottone sotto i 56 px", esiti.every((e) => e.piccoli === 0), esiti.filter((e) => e.piccoli).map((e) => e.slug).join(", "));
