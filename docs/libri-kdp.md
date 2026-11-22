@@ -2,6 +2,7 @@
 
 Versione 2 del 22/11/2026, dopo il Volume 1 («Mizi e la stella che non voleva accendersi»).
 Copia su Drive: 1 Progetti → 02 Editoria Giocamizi → 00 STANDARD COMUNI, «03 PROCEDURA LIBRO».
+Il master delle storie è in `docs/libri-master-storia.md` (su Drive «05 MASTER STORIA»): è il primo passo di ogni volume.
 Il brief per ChatGPT è in `docs/libri-brief-chatgpt.md` (su Drive «04 BRIEF CHATGPT»).
 
 ## In una riga

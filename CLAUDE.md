@@ -414,8 +414,9 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 ## Libri per Amazon KDP (22/11/2026, docs/libri-kdp.md)
 - Collana di libri da colorare (8,5 × 8,5 pollici, 32 pagine, interno B/N, copertina a colori). Fonte unica su
   Drive: 1 Progetti → «02 Editoria Giocamizi · Amazon e Libretti» (standard globale, cartelle V01, V02…).
-  Procedura in `docs/libri-kdp.md`, brief per ChatGPT in `docs/libri-brief-chatgpt.md`: leggerle PRIMA di
-  toccare un libro.
+  Master delle storie in `docs/libri-master-storia.md` (ogni volume parte da uno spunto educativo o da un
+  evento), brief per ChatGPT in `docs/libri-brief-chatgpt.md`, procedura in `docs/libri-kdp.md`: leggerli
+  PRIMA di toccare un libro.
 - Un volume = una scheda `content/libri/<codice>.json` (modello: `_modello.json`; dati comuni a tutti i
   volumi in `_collana.json`) + `npm run libro -- <codice>`: fa interno, copertina, ingrandimento, controlli
   e report in `/tmp/libri/<codice>/out`. Si ferma da solo se manca un file o un dato non è definitivo:
