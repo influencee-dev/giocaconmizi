@@ -97,6 +97,7 @@ export default function Game(props: GameProps) {
         lode: lode(p),
         aiuto: FRASI_MB_MP.aiutoRegola,
         centro: <Figura nome={giusta} alt="" className="h-32 w-32" />,
+        colonne: 1,
       };
     });
 

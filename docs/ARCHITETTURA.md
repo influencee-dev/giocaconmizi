@@ -47,6 +47,7 @@ I file segnati «generato» li scrive uno script: non si modificano a mano.
 - `games/registry.ts`: l'elenco dei giochi. Un gioco esiste solo se è qui.
 - `games/<slug>/Game.tsx`: il gioco. Di solito sono poche righe: i contenuti del gioco passati a un motore.
 - `games/_engine/`: i motori e le parti comuni.
+- `public/figure/`: i disegni fatti apposta per i giochi (WebP 384 px, regole in `LICENZA.txt` lì dentro); li mostra `games/_engine/figura.tsx`.
   - `nucleo.ts`: la logica di partita uguale per tutti (round, punti, stelle, suoni, aiuto, lodi). Un motore nuovo parte da qui.
   - `SceltaMultipla.tsx`, `Memory.tsx`, `Ordina.tsx`, `GrigliaCoding.tsx`, `Tartaruga.tsx`, `Puntini.tsx`, `Differenze.tsx`, `PixelArt.tsx`, `CreaGioco.tsx`, `Esplora.tsx`, `Corsa.tsx`: i motori.
   - `griglia-logica.ts` (coding su griglia), `esplora-logica.ts` (esplorazione a sale) e `corsa-logica.ts` (corsa a tre strade): logica pura, senza interfaccia. La usano lo schermo, la demo e le prove.

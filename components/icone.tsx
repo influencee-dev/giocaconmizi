@@ -51,6 +51,7 @@ export const ICONE_SKILL: Record<Skill, NomeIcona[]> = {
   comprensione: ["libro", "domanda"],
   coding: ["robot"],
   tempo: ["orologio"],
+  scienze: ["albero"],
 };
 
 /** Icone su misura per i giochi dove si può fare di meglio della competenza. */
@@ -73,6 +74,13 @@ export const ICONE_GIOCO: Record<string, NomeIcona[]> = {
   "l-orologio": ["orologio"],
   tabelline: ["per", "numeri"],
   "leggi-e-rispondi": ["libro", "domanda"],
+  "i-suoni-difficili": ["orecchio", "abc-mai"],
+  "mb-o-mp": ["matita", "abc-mai"],
+  "maggiore-minore-uguale": ["numeri", "domanda"],
+  "numeri-in-ordine": ["numeri", "abaco"],
+  "causa-ed-effetto": ["lampadina", "domanda"],
+  "le-parti-della-pianta": ["albero", "lente"],
+  "le-foglie": ["albero", "matita"],
   "guida-mizi": ["pinguino", "pesce"],
   "pixel-art": ["alieno-pixel", "tavolozza"],
   "robot-ballerino": ["robot", "note"],

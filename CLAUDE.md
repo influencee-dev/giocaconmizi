@@ -346,6 +346,16 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   la cosa toccata). Figure ridisegnate col volume in games/_engine/arte.tsx
   (colore + ombra + riflesso): forme, secchiello, pesce, palla, mela, fiore,
   macchina; `tinta` di Disegno cambia il colore principale di una figura.
+- Giochi dei compiti di seconda elementare (22/11/2026, 47 giochi in tutto):
+  i-suoni-difficili, mb-o-mp, maggiore-minore-uguale, numeri-in-ordine,
+  causa-ed-effetto, le-parti-della-pianta, le-foglie; competenza nuova
+  «scienze». Nascono dagli ARGOMENTI che Giorgia manda (registro di classe,
+  pagine del libro): gli esercizi e i disegni si rifanno da zero, MAI copiati
+  dal libro, e niente del registro (nomi, classe, scuola) entra nel repo.
+  Disegni: `public/figure/<nome>.webp` con `Figura` (games/_engine/figura.tsx)
+  e il campo `immagine` delle opzioni; fatti con l'API immagini di OpenAI
+  (gpt-image-2, un soggetto, sfondo bianco, nessuna scritta, nessun
+  personaggio protetto), guardati uno per uno: regole in public/figure/LICENZA.txt.
 - «Gli ultimi arrivati» (21/11/2026): `giochiRecenti()` in lib/giochi/novita.ts
   ordina i giochi vivi per ultima modifica vera (lib/seo/date-pagine.json). Un
   gioco nuovo o appena migliorato sale da solo in cima al catalogo /giochi

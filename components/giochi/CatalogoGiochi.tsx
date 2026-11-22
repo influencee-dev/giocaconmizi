@@ -42,6 +42,7 @@ export const AREE: { slug: string; nome: string; skills: Skill[] }[] = [
   { slug: "emozioni", nome: "emozioni", skills: ["emozioni"] },
   { slug: "coding", nome: "coding", skills: ["coding"] },
   { slug: "tempo", nome: "orologio", skills: ["tempo"] },
+  { slug: "scienze", nome: "scienze", skills: ["scienze"] },
 ];
 
 function Chip({

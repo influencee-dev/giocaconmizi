@@ -3,7 +3,7 @@
 export type Skill =
   | "memoria" | "colori" | "forme" | "numeri" | "spazio" | "ascolto" | "logica" | "emozioni"
   | "fonetica" | "alfabeto" | "lettura" | "attenzione" | "matematica" | "ortografia" | "inglese"
-  | "comprensione" | "coding" | "tempo";
+  | "comprensione" | "coding" | "tempo" | "scienze";
 
 export interface GameMeta {
   slug: string;
@@ -49,6 +49,14 @@ export const games: GameMeta[] = [
   { slug: "pizza-delle-frazioni", title: "La pizza delle frazioni", ageMin: 8, ageMax: 10, skill: "matematica", subskill: "frazioni come parti di un intero", difficulty: 2, minutes: 5, mechanic: "Pizza tagliata in 2-8 fette; 4 round: alcune fette col salame, scegli la frazione giusta fra 3 (le sbagliate sono gli errori tipici: fette bianche, parti bianche sotto la linea); 4 round: metti il salame su K/N toccando le fette, poi Fatto; 8 round.", status: "live" },
   { slug: "tabelline", title: "Tabelline con Mizi", ageMin: 7, ageMax: 10, skill: "matematica", subskill: "tabelline 2–10", difficulty: 2, minutes: 6, mechanic: "Scegli la tabellina; 10 domande tutte diverse, dalle facili alle difficili; risposta tra 4; dopo un errore Mizi dice un trucco. Tutte insieme a misura d'età; «Ancora» torna alla scelta.", status: "live" },
   { slug: "leggi-e-rispondi", title: "Leggi e rispondi", ageMin: 6, ageMax: 8, skill: "comprensione", subskill: "comprensione di un testo breve", difficulty: 2, minutes: 6, mechanic: "Testo 3–5 frasi in stampatello; 3 domande a scelta multipla con immagini.", status: "live" },
+  // Seconda elementare: i compiti di italiano, matematica, storia e scienze (22/11/2026)
+  { slug: "i-suoni-difficili", title: "I suoni difficili", ageMin: 6, ageMax: 8, skill: "ortografia", subskill: "gruppi di consonanti: BR, PR, FR, TR, SP, SC, STR, SPR", difficulty: 2, minutes: 5, mechanic: "Disegno + parola detta a voce (strada, fragola, spremuta); si toccano i pezzi nell'ordine giusto. La parola non è scritta: «Ascolta ancora» la ripete.", status: "live" },
+  { slug: "mb-o-mp", title: "MB o MP?", ageMin: 6, ageMax: 8, skill: "ortografia", subskill: "M davanti a B e P", difficulty: 2, minutes: 4, mechanic: "Disegno e parola con un buco (ta__uro): tocca MB o MP. Ultimi due round: la parola scritta con M e con N, tocca quella giusta.", status: "live" },
+  { slug: "maggiore-minore-uguale", title: "Maggiore, minore o uguale?", ageMin: 6, ageMax: 8, skill: "matematica", subskill: "confronto di numeri con i segni >, < e =", difficulty: 2, minutes: 4, mechanic: "Due numeri e un posto vuoto: tocca >, < o =. Fino a 20 a sei anni, 60 a sette, 100 dagli otto; metà coppie nella stessa decina.", status: "live" },
+  { slug: "numeri-in-ordine", title: "Numeri in ordine", ageMin: 6, ageMax: 8, skill: "matematica", subskill: "ordine crescente e decrescente", difficulty: 2, minutes: 5, mechanic: "Quattro o cinque numeri da toccare in fila: tre round dal più piccolo al più grande, tre al contrario.", status: "live" },
+  { slug: "causa-ed-effetto", title: "Causa ed effetto", ageMin: 6, ageMax: 8, skill: "logica", subskill: "relazioni di causa ed effetto: perché e perciò", difficulty: 2, minutes: 5, mechanic: "Frase che finisce con «perché…» (tocca la causa) o «perciò…» (tocca l'effetto); due scenette disegnate: quale è la causa, quale l'effetto.", status: "live" },
+  { slug: "le-parti-della-pianta", title: "Le parti della pianta", ageMin: 6, ageMax: 8, skill: "scienze", subskill: "radici, fusto, rami, foglie, fiori e a cosa servono", difficulty: 2, minutes: 5, mechanic: "Pianta disegnata con un cerchio rosa su una parte: tocca il nome. Poi le domande sul lavoro di ogni parte.", status: "live" },
+  { slug: "le-foglie", title: "Le foglie", ageMin: 6, ageMax: 8, skill: "scienze", subskill: "parti della foglia e forme delle foglie", difficulty: 2, minutes: 5, mechanic: "Foglia con una parte colorata di rosa: margine, lamina, nervature o picciolo. Poi cinque forme: ovale, palmata, cuoriforme, lanceolata, aghiforme.", status: "live" },
   // Coding
   { slug: "guida-mizi", title: "Guida Mizi", ageMin: 3, ageMax: 6, skill: "coding", subskill: "sequenze di istruzioni", difficulty: 1, minutes: 5, mechanic: "Griglia 3x3 → 5x5; trascina frecce (su/giù/sinistra/destra) nella barra; premi Via: Mizi esegue e arriva al pesce. Max frecce per livello.", status: "live" },
   { slug: "pixel-art", title: "Pixel art", ageMin: 4, ageMax: 9, skill: "coding", subskill: "coordinate e codifica", difficulty: 1, minutes: 6, mechanic: "Griglia 6x6 → 10x10; livello 1 colora seguendo la legenda per righe; livello 2 coordinate (B3 = rosso); livello 3 inventa e genera il codice.", status: "live" },

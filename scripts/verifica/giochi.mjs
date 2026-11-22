@@ -536,8 +536,8 @@ ok("og:image di una città", await ogServita("/feste/milano"));
     proposte: [...document.querySelectorAll("[data-proposta]")].map((x) => x.getAttribute("data-proposta")),
     sbordo: document.documentElement.scrollWidth - window.innerWidth,
   }));
-  ok("album: 3 figurine prese su 40, coccarda contata, tre giochi nuovi da provare",
-    album.prese === 3 && album.tutte === 40 && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
+  ok("album: 3 figurine prese su 47, coccarda contata, tre giochi nuovi da provare",
+    album.prese === 3 && album.tutte === 47 && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
     !album.proposte.some((s) => ["memory-animali", "conta-fino-a-10", "abbina-i-colori"].includes(s)) && album.sbordo <= 0, JSON.stringify(album));
   await m.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
   await m.waitForTimeout(400);
@@ -957,7 +957,8 @@ ok("og:image di una città", await ogServita("/feste/milano"));
     await n.waitForFunction((k) => { const c = document.querySelector("[data-scelta-multipla]"); return c?.getAttribute("data-round") === String(k) && c?.getAttribute("data-partita") === "gioca"; }, r, { timeout: 8000 }).catch(() => {});
     const pesci = n.locator("[data-pesce]");
     const quanti = await pesci.count();
-    latoPesce = Math.min(latoPesce, await pesci.first().evaluate((el) => Math.round(el.getBoundingClientRect().width)));
+    // La misura vera del bottone (offsetWidth): il riquadro a schermo, mentre il centro entra in scena, è più piccolo.
+    latoPesce = Math.min(latoPesce, await pesci.first().evaluate((el) => el.offsetWidth));
     for (let i = 0; i < quanti; i++) await pesci.nth(i).tap();
     // Un secondo tocco sullo stesso pesce non lo conta due volte.
     await pesci.first().tap();
@@ -1097,6 +1098,44 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   ok("tutte insieme a 7 anni: solo le tabelline del 2, 3, 4, 5 e 10", misteViste.every((d) => [2, 3, 4, 5, 10].includes(d.tab)), misteViste.map((d) => d.tab).join(","));
   ok("tutte insieme: dieci coppie diverse, dalla più piccola alla più grande", coppie.size === 10 && prodotti.every((n, i) => i === 0 || n >= prodotti[i - 1]), prodotti.join(","));
   await ctxM.close();
+}
+
+// I sette giochi della seconda elementare (22/11/2026): ognuno gioca da solo
+// fino alla festa. Tutto quello che Mizi dice è registrato (non le sillabe e i
+// numeri toccati, che restano alla sintesi), i disegni di public/figure si
+// caricano davvero, e nessun bottone è più piccolo di 56 px.
+{
+  const { readFileSync } = await import("node:fs");
+  const copione = new Set(Object.values(JSON.parse(readFileSync("content/voce-mizi.json", "utf8")).frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
+  const scuola = ["i-suoni-difficili", "mb-o-mp", "maggiore-minore-uguale", "numeri-in-ordine", "causa-ed-effetto", "le-parti-della-pianta", "le-foglie"];
+  const esiti = await Promise.all(scuola.map(async (slug) => {
+    const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+    await ctx.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} window.__voceMizi = []; });
+    const pg = await ctx.newPage();
+    await pg.goto(`${BASE}/giochi/${slug}/gioca?eta=7&demo=1`, { waitUntil: "domcontentloaded" });
+    let figureRotte = 0, figureViste = 0, piccoli = 0;
+    const festa = pg.locator("[data-festa]");
+    for (let giro = 0; giro < 400 && !(await festa.count()); giro++) {
+      const stato = await pg.evaluate(() => ({
+        figure: [...document.querySelectorAll("[data-figura]")].map((i) => i.complete && i.naturalWidth > 0),
+        bottoni: [...document.querySelectorAll("main [data-opzione], main [data-ascolta]")].map((e) => Math.min(e.offsetWidth, e.offsetHeight)),
+      }));
+      figureViste += stato.figure.length;
+      figureRotte += stato.figure.filter((v) => !v).length > 0 && giro > 3 ? 1 : 0;
+      piccoli += stato.bottoni.filter((l) => l > 0 && l < 56).length;
+      await pg.waitForTimeout(300);
+    }
+    const finito = (await festa.count()) > 0;
+    const dette = await pg.evaluate(() => window.__voceMizi);
+    await ctx.close();
+    const frasi = dette.filter((d) => !/^[A-ZÀ-Ù]{1,6}$/.test(d.testo) && !/^\d+$/.test(d.testo));
+    return { slug, finito, figureViste, figureRotte, piccoli, mute: [...new Set(frasi.filter((d) => !d.registrata || !copione.has(d.testo)).map((d) => d.testo))], frasi: frasi.length };
+  }));
+  const male = esiti.filter((e) => !e.finito || e.mute.length || e.frasi < 6);
+  ok("seconda elementare: i sette giochi arrivano alla festa e ogni frase di Mizi è registrata e nel copione", male.length === 0, male.map((e) => `${e.slug}: ${e.finito ? "" : "non finisce "}${e.mute.slice(0, 3).join(" | ")}`).join(" · "));
+  const conFigure = esiti.filter((e) => ["i-suoni-difficili", "mb-o-mp", "causa-ed-effetto"].includes(e.slug));
+  ok("seconda elementare: i disegni dei giochi si caricano", conFigure.every((e) => e.figureViste > 0 && e.figureRotte === 0), conFigure.map((e) => `${e.slug} ${e.figureViste}/${e.figureRotte}`).join(", "));
+  ok("seconda elementare: nessun bottone sotto i 56 px", esiti.every((e) => e.piccoli === 0), esiti.filter((e) => e.piccoli).map((e) => e.slug).join(", "));
 }
 
 await b.close();
