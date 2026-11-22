@@ -938,6 +938,39 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   await ctxF.close();
 }
 
+// «Conta fino a 10» (22/11/2026): i pesci si contano toccandoli, uno alla volta, e Mizi dice il numero.
+{
+  const { readFileSync } = await import("node:fs");
+  const copioneN = JSON.parse(readFileSync("content/voce-mizi.json", "utf8"));
+  const tuttoN = new Set(Object.values(copioneN.frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
+  const ctxN = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxN.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const n = await ctxN.newPage();
+  let erroriN = 0;
+  n.on("pageerror", () => erroriN++);
+  await n.goto(`${BASE}/giochi/conta-fino-a-10/gioca?eta=3`, { waitUntil: "networkidle" });
+  const campoN = n.locator("[data-scelta-multipla]");
+  await campoN.waitFor({ timeout: 10000 });
+  let contatiBene = 0, latoPesce = 999;
+  const totaliN = Number(await campoN.getAttribute("data-round-totali"));
+  for (let r = 1; r <= totaliN; r++) {
+    await n.waitForFunction((k) => { const c = document.querySelector("[data-scelta-multipla]"); return c?.getAttribute("data-round") === String(k) && c?.getAttribute("data-partita") === "gioca"; }, r, { timeout: 8000 }).catch(() => {});
+    const pesci = n.locator("[data-pesce]");
+    const quanti = await pesci.count();
+    latoPesce = Math.min(latoPesce, await pesci.first().evaluate((el) => Math.round(el.getBoundingClientRect().width)));
+    for (let i = 0; i < quanti; i++) await pesci.nth(i).tap();
+    // Un secondo tocco sullo stesso pesce non lo conta due volte.
+    await pesci.first().tap();
+    if ((await n.locator("[data-banco]").getAttribute("data-contati")) === String(quanti) && (await pesci.last().getAttribute("data-pesce")) === String(quanti)) contatiBene++;
+    await n.locator(`[data-opzione="${quanti}"]`).tap();
+  }
+  const festaN = await n.locator("[data-festa]").waitFor({ timeout: 8000 }).then(() => true, () => false);
+  const dettoN = await n.evaluate(() => (window.__voceMizi || []).map((v) => v.testo));
+  ok("conta fino a 10: ogni pesce toccato prende il suo numero, una volta sola, in tutti i round", festaN && contatiBene === totaliN && erroriN === 0 && latoPesce >= 56, `${contatiBene} su ${totaliN}, pesce ${latoPesce}px`);
+  ok("conta fino a 10: Mizi conta a voce e dice solo frasi del copione", dettoN.includes("Uno!") && dettoN.includes("Dieci pesci!") && dettoN.every((t) => tuttoN.has(t)), dettoN.filter((t) => !tuttoN.has(t)).join(" | "));
+  await ctxN.close();
+}
+
 // «La corsa nella piramide» (20/11/2026): corsa a tre strade, motore Corsa.tsx.
 // Niente vite e niente tempo: chi sbatte dappertutto arriva in cima lo stesso.
 {

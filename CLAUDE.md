@@ -342,7 +342,10 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   Grafica (22/11/2026): nel guscio parla il viso vero di Mizi
   (public/mizi/mizi-faccia.webp), macchie pastello dietro al gioco, bottoni
   con spessore, figure con ombra. Con tutta la voce nel copione: abbina i
-  colori e trova la forma (campo `lode` dei round: Mizi dice la cosa toccata).
+  colori, trova la forma, conta fino a 10 (campo `lode` dei round: Mizi dice
+  la cosa toccata). Figure ridisegnate col volume in games/_engine/arte.tsx
+  (colore + ombra + riflesso): forme, secchiello, pesce, palla, mela, fiore,
+  macchina; `tinta` di Disegno cambia il colore principale di una figura.
 - «Gli ultimi arrivati» (21/11/2026): `giochiRecenti()` in lib/giochi/novita.ts
   ordina i giochi vivi per ultima modifica vera (lib/seo/date-pagine.json). Un
   gioco nuovo o appena migliorato sale da solo in cima al catalogo /giochi

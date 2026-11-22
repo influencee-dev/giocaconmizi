@@ -10,7 +10,7 @@ description: "Gioco gratis per imparare a contare fino a 10, dai 3 ai 5 anni: co
 
 # Conta fino a 10
 
-Sullo schermo compare un gruppo di pesci: il bambino li conta e tocca il numero corrispondente fra tre. Si comincia con due pesci e si arriva a dieci. I numeri sbagliati proposti sono sempre quelli vicini — se i pesci sono sei, le alternative sono cinque e sette — perché è lì che si sbaglia davvero quando si impara a contare.
+Sullo schermo compare un gruppo di pesci: il bambino li tocca uno alla volta, ognuno prende il suo numero e Mizi lo dice a voce («Uno!», «Due!»…), poi tocca il numero corrispondente fra tre. Si comincia con due pesci e si arriva a dieci. I numeri sbagliati proposti sono sempre quelli vicini — se i pesci sono sei, le alternative sono cinque e sette — perché è lì che si sbaglia davvero quando si impara a contare.
 
 ## Cosa impara
 - Conta una quantità toccando ogni elemento una volta sola

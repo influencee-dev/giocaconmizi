@@ -7,9 +7,13 @@
  *
  * Le figure sono volutamente geometriche e ad alto contrasto: devono essere
  * riconoscibili da un bambino di tre anni su uno schermo da 360px.
+ *
+ * Dal 22/11/2026 si ridisegnano una alla volta con il volume (vedi OMBRA e
+ * LUCE più sotto). Fatte: le sette forme, il secchiello, pesce, palla, mela,
+ * fiore, macchina. Le altre sono ancora piatte.
  */
 
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 export const COLORI = {
   rosso: "#E8474B",
@@ -85,6 +89,29 @@ function Testa({
 }
 
 // --- Il catalogo -----------------------------------------------------------
+
+/*
+ * Il volume delle figure (22/11/2026). Le figure erano forme piatte a tinta
+ * unita. Ora ognuna ha tre strati: il colore, un'ombra (nero trasparente) dove
+ * la luce non arriva e un riflesso (bianco trasparente) dove batte. Ombra e
+ * riflesso sono trasparenti apposta: funzionano con qualunque tinta, anche
+ * quella scelta dal gioco. La luce viene sempre dall'alto a sinistra.
+ */
+const OMBRA = "rgba(31,36,48,0.16)";
+const OMBRA_FORTE = "rgba(31,36,48,0.28)";
+const LUCE = "rgba(255,255,255,0.42)";
+const LUCE_TENUE = "rgba(255,255,255,0.2)";
+
+/** Il colore di una figura che il gioco può tingere (`tinta` di Disegno), con il suo colore di sempre. */
+const tinta = (diBase: string) => ({ fill: `var(--tinta, ${diBase})` });
+
+/** Mezzaluna d'ombra in basso a destra e riflesso in alto a sinistra, per una palla di raggio 36 al centro. */
+const SFERA = (
+  <>
+    <path d="M77.6 26.9 A36 36 0 0 1 26.9 77.6 A46 46 0 0 0 77.6 26.9 Z" fill={OMBRA} />
+    <ellipse cx="37" cy="33" rx="10" ry="6" fill={LUCE} transform="rotate(-38 37 33)" />
+  </>
+);
 
 const FIGURE: Record<string, ReactNode> = {
   // Animali
@@ -195,10 +222,19 @@ const FIGURE: Record<string, ReactNode> = {
   ),
   pesce: (
     <>
-      <ellipse cx="46" cy="50" rx="32" ry="22" fill={COLORI.arancione} />
-      <path d="M78 50 L96 32 L96 68 Z" fill={COLORI.arancione} />
-      <circle cx="32" cy="44" r="5" fill={COLORI.nero} />
-      <path d="M40 62 Q50 68 60 62" stroke="#00000033" strokeWidth="3" fill="none" />
+      <path d="M74 50 Q88 34 96 30 Q92 50 96 70 Q88 66 74 50 Z" style={tinta(COLORI.arancione)} />
+      <path d="M74 50 Q88 34 96 30 Q92 50 96 70 Q88 66 74 50 Z" fill={OMBRA} />
+      <path d="M40 30 Q52 14 64 30 Z" style={tinta(COLORI.arancione)} />
+      <path d="M40 30 Q52 14 64 30 Z" fill={OMBRA} />
+      <ellipse cx="46" cy="50" rx="33" ry="22" style={tinta(COLORI.arancione)} />
+      <path d="M14 54 A33 22 0 0 0 78 54 A40 30 0 0 1 14 54 Z" fill={OMBRA} />
+      <ellipse cx="44" cy="60" rx="20" ry="8" fill={LUCE_TENUE} />
+      <path d="M52 40 Q58 50 52 60 M62 42 Q67 50 62 58" stroke={OMBRA_FORTE} strokeWidth="2.5" fill="none" strokeLinecap="round" />
+      <ellipse cx="38" cy="38" rx="12" ry="5" fill={LUCE} transform="rotate(-14 38 38)" />
+      <circle cx="30" cy="46" r="7" fill={COLORI.bianco} />
+      <circle cx="29" cy="47" r="4" fill={COLORI.nero} />
+      <circle cx="27.5" cy="45.5" r="1.4" fill={COLORI.bianco} />
+      <path d="M20 58 Q26 62 31 58" stroke={OMBRA_FORTE} strokeWidth="2.5" fill="none" strokeLinecap="round" />
     </>
   ),
   pinguino: (
@@ -214,16 +250,20 @@ const FIGURE: Record<string, ReactNode> = {
   // Oggetti
   mela: (
     <>
-      <circle cx="50" cy="58" r="30" fill={COLORI.rosso} />
-      <rect x="47" y="22" width="6" height="16" rx="3" fill="#6B4A2F" />
-      <ellipse cx="63" cy="28" rx="12" ry="7" fill={COLORI.verde} />
+      <path d="M50 36 Q51 26 56 20" stroke="#6B4A2F" strokeWidth="5" fill="none" strokeLinecap="round" />
+      <path d="M56 26 Q70 14 80 24 Q70 36 56 26 Z" fill={COLORI.verde} />
+      <path d="M58 26 Q68 22 78 24" stroke={OMBRA_FORTE} strokeWidth="1.8" fill="none" strokeLinecap="round" />
+      <path d="M50 38 Q34 28 22 44 Q12 62 26 80 Q38 92 50 86 Q62 92 74 80 Q88 62 78 44 Q66 28 50 38 Z" style={tinta(COLORI.rosso)} />
+      <path d="M78 44 Q88 62 74 80 Q62 92 50 86 Q72 78 78 44 Z" fill={OMBRA} />
+      <ellipse cx="34" cy="52" rx="7" ry="11" fill={LUCE} transform="rotate(24 34 52)" />
     </>
   ),
   palla: (
     <>
-      <circle cx="50" cy="50" r="34" fill={COLORI.rosa} />
-      <path d="M16 50 Q50 26 84 50" stroke={COLORI.bianco} strokeWidth="5" fill="none" />
-      <path d="M16 50 Q50 74 84 50" stroke={COLORI.bianco} strokeWidth="5" fill="none" />
+      <circle cx="50" cy="50" r="36" style={tinta(COLORI.rosa)} />
+      <path d="M17 38 Q50 22 83 38" stroke={COLORI.bianco} strokeWidth="6" fill="none" strokeLinecap="round" />
+      <path d="M17 62 Q50 78 83 62" stroke={COLORI.bianco} strokeWidth="6" fill="none" strokeLinecap="round" />
+      {SFERA}
     </>
   ),
   casa: (
@@ -270,27 +310,34 @@ const FIGURE: Record<string, ReactNode> = {
   ),
   fiore: (
     <>
-      <rect x="47" y="52" width="6" height="36" fill={COLORI.verde} />
+      <path d="M50 54 Q46 72 50 92" stroke={COLORI.verde} strokeWidth="6" fill="none" strokeLinecap="round" />
+      <path d="M49 76 Q34 66 28 76 Q38 86 49 76 Z" fill={COLORI.verde} />
+      <path d="M51 70 Q66 60 72 70 Q62 80 51 70 Z" fill={COLORI.verde} />
+      <path d="M51 70 Q62 76 72 70 Q62 80 51 70 Z" fill={OMBRA} />
       {Array.from({ length: 6 }, (_, i) => (
-        <ellipse
-          key={i}
-          cx="50"
-          cy="26"
-          rx="10"
-          ry="16"
-          fill={COLORI.rosa}
-          transform={`rotate(${i * 60} 50 44)`}
-        />
+        <g key={i} transform={`rotate(${i * 60} 50 40)`}>
+          <ellipse cx="50" cy="20" rx="11" ry="16" style={tinta(COLORI.rosa)} />
+          <ellipse cx="50" cy="17" rx="5" ry="8" fill={LUCE_TENUE} />
+        </g>
       ))}
-      <circle cx="50" cy="44" r="10" fill={COLORI.giallo} />
+      <circle cx="50" cy="40" r="11" fill={COLORI.giallo} />
+      <path d="M58.4 33 A11 11 0 0 1 43 48.4 A14 14 0 0 0 58.4 33 Z" fill={OMBRA} />
+      <circle cx="46.5" cy="36.5" r="3" fill={LUCE} />
     </>
   ),
   macchina: (
     <>
-      <rect x="14" y="48" width="72" height="22" rx="8" fill={COLORI.azzurro} />
-      <path d="M30 48 L38 32 L64 32 L72 48 Z" fill={COLORI.azzurro} />
-      <circle cx="32" cy="72" r="11" fill={COLORI.nero} />
-      <circle cx="68" cy="72" r="11" fill={COLORI.nero} />
+      <path d="M28 50 L36 32 Q38 28 43 28 L62 28 Q67 28 69 32 L76 50 Z" style={tinta(COLORI.azzurro)} />
+      <path d="M38 48 L43 35 L56 35 L56 48 Z M60 35 L64 35 L70 48 L60 48 Z" fill="#DDF3FC" />
+      <path d="M41 46 L45 37 L49 37 L45 46 Z" fill={LUCE} />
+      <rect x="10" y="46" width="80" height="26" rx="11" style={tinta(COLORI.azzurro)} />
+      <path d="M10 62 H90 V61 Q90 72 79 72 H21 Q10 72 10 61 Z" fill={OMBRA} />
+      <rect x="18" y="50" width="34" height="5" rx="2.5" fill={LUCE} />
+      <circle cx="84" cy="56" r="4" fill={COLORI.giallo} />
+      <circle cx="30" cy="74" r="12" fill={COLORI.nero} />
+      <circle cx="30" cy="74" r="5" fill={COLORI.grigio} />
+      <circle cx="70" cy="74" r="12" fill={COLORI.nero} />
+      <circle cx="70" cy="74" r="5" fill={COLORI.grigio} />
     </>
   ),
   barca: (
@@ -326,18 +373,61 @@ const FIGURE: Record<string, ReactNode> = {
   ),
 
   // Forme geometriche
-  cerchio: <circle cx="50" cy="50" r="36" fill="currentColor" />,
-  quadrato: <rect x="16" y="16" width="68" height="68" rx="4" fill="currentColor" />,
-  triangolo: <path d="M50 12 L88 84 L12 84 Z" fill="currentColor" />,
-  rettangolo: <rect x="10" y="30" width="80" height="40" rx="4" fill="currentColor" />,
-  stella: (
-    <path
-      d="M50 8 L61 38 L93 38 L67 57 L77 88 L50 69 L23 88 L33 57 L7 38 L39 38 Z"
-      fill="currentColor"
-    />
+  // Le forme geometriche: la sagoma resta quella esatta, il volume è solo luce e ombra.
+  cerchio: (
+    <>
+      <circle cx="50" cy="50" r="36" fill="currentColor" />
+      {SFERA}
+    </>
   ),
-  ovale: <ellipse cx="50" cy="50" rx="40" ry="26" fill="currentColor" />,
-  rombo: <path d="M50 8 L92 50 L50 92 L8 50 Z" fill="currentColor" />,
+  quadrato: (
+    <>
+      <rect x="16" y="16" width="68" height="68" rx="6" fill="currentColor" />
+      <path d="M16 68 H84 V78 Q84 84 78 84 H22 Q16 84 16 78 Z" fill={OMBRA} />
+      <rect x="24" y="23" width="30" height="6" rx="3" fill={LUCE} />
+    </>
+  ),
+  triangolo: (
+    <>
+      <path d="M50 16 L84 80 L16 80 Z" fill="currentColor" stroke="currentColor" strokeWidth="8" strokeLinejoin="round" />
+      <path d="M21 70 H79 L86 82 Q86 84 84 84 H16 Q14 84 14 82 Z" fill={OMBRA} />
+      <path d="M46 30 L32 57" stroke={LUCE} strokeWidth="6" strokeLinecap="round" />
+    </>
+  ),
+  rettangolo: (
+    <>
+      <rect x="10" y="30" width="80" height="40" rx="6" fill="currentColor" />
+      <path d="M10 58 H90 V64 Q90 70 84 70 H16 Q10 70 10 64 Z" fill={OMBRA} />
+      <rect x="18" y="36" width="34" height="5" rx="2.5" fill={LUCE} />
+    </>
+  ),
+  stella: (
+    <>
+      <path
+        d="M50 8 L61 38 L93 38 L67 57 L77 88 L50 69 L23 88 L33 57 L7 38 L39 38 Z"
+        fill="currentColor"
+        stroke="currentColor"
+        strokeWidth="6"
+        strokeLinejoin="round"
+      />
+      {/* Cinque facce in ombra, una per punta: la stella sembra in rilievo. */}
+      <path d="M50 51 L50 8 L61 38 Z M50 51 L93 38 L67 57 Z M50 51 L77 88 L50 69 Z M50 51 L23 88 L33 57 Z M50 51 L7 38 L39 38 Z" fill={OMBRA} />
+      <path d="M44 26 L40 37" stroke={LUCE} strokeWidth="4" strokeLinecap="round" />
+    </>
+  ),
+  ovale: (
+    <>
+      <ellipse cx="50" cy="50" rx="40" ry="26" fill="currentColor" />
+      <g transform="translate(50 50) scale(1.111 0.722) translate(-50 -50)">{SFERA}</g>
+    </>
+  ),
+  rombo: (
+    <>
+      <path d="M50 10 L90 50 L50 90 L10 50 Z" fill="currentColor" stroke="currentColor" strokeWidth="6" strokeLinejoin="round" />
+      <path d="M50 50 L92 50 Q93 50 92 51 L51 92 Q50 93 50 92 Z" fill={OMBRA} />
+      <path d="M50 50 L8 50 Q7 50 8 49 L49 8 Q50 7 50 8 Z" fill={LUCE_TENUE} />
+    </>
+  ),
 };
 
 /** Nomi delle forme, per la voce e per le etichette. */
@@ -349,16 +439,20 @@ export type NomeFigura = keyof typeof FIGURE;
 /**
  * Disegna una figura del catalogo.
  * `colore` vale solo per le forme geometriche, che usano currentColor.
+ * `tinta` cambia il colore principale delle figure che lo permettono (palla,
+ * mela, fiore, macchina, pesce): senza, restano del loro colore di sempre.
  */
 export function Disegno({
   id,
   colore,
+  tinta: tintaScelta,
   className = "h-full w-full",
   titolo,
   lato,
 }: {
   id: NomeFigura;
   colore?: string;
+  tinta?: string;
   className?: string;
   titolo?: string;
   /**
@@ -377,7 +471,7 @@ export function Disegno({
       width={lato}
       height={lato}
       className={className}
-      style={colore ? { color: colore } : undefined}
+      style={colore || tintaScelta ? ({ color: colore, "--tinta": tintaScelta } as CSSProperties) : undefined}
       role={titolo ? "img" : "presentation"}
       aria-label={titolo}
       aria-hidden={titolo ? undefined : true}
@@ -391,14 +485,23 @@ export function Disegno({
 export function Secchiello({ colore, className = "h-full w-full" }: { colore: string; className?: string }) {
   return (
     <svg viewBox="0 0 100 100" className={className} aria-hidden>
-      <path d="M22 34 L78 34 L70 86 L30 86 Z" fill={colore} />
-      <ellipse cx="50" cy="34" rx="28" ry="9" fill={colore} stroke="#00000022" strokeWidth="2" />
-      <path d="M26 32 Q50 4 74 32" stroke={colore} strokeWidth="6" fill="none" />
+      {/* Il manico di metallo, dietro al secchiello. */}
+      <path d="M24 34 Q50 2 76 34" stroke="#9AA3B2" strokeWidth="5" fill="none" strokeLinecap="round" />
+      <path d="M22 36 L78 36 L71 84 Q70 90 64 90 L36 90 Q30 90 29 84 Z" fill={colore} />
+      <path d="M62 36 L78 36 L71 84 Q70 90 64 90 L56 90 Z" fill={OMBRA} />
+      <path d="M30 44 L34 80" stroke={LUCE} strokeWidth="6" strokeLinecap="round" />
+      {/* Il bordo e la vernice dentro, un po' più chiara. */}
+      <ellipse cx="50" cy="36" rx="29" ry="9.5" fill={colore} />
+      <ellipse cx="50" cy="36" rx="29" ry="9.5" fill={OMBRA_FORTE} />
+      <ellipse cx="50" cy="37.5" rx="24" ry="6.5" fill={colore} />
+      <ellipse cx="50" cy="37.5" rx="24" ry="6.5" fill={LUCE_TENUE} />
+      <ellipse cx="42" cy="36.5" rx="8" ry="2" fill={LUCE} />
+      <circle cx="23" cy="36" r="3" fill="#9AA3B2" />
+      <circle cx="77" cy="36" r="3" fill="#9AA3B2" />
     </svg>
   );
 }
 
-/** Le facce di Mizi: servono al gioco sulle emozioni. */
 export type Emozione = "felice" | "triste" | "arrabbiato" | "spaventato" | "sorpreso";
 
 export const NOMI_EMOZIONE: Record<Emozione, string> = {

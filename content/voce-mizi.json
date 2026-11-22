@@ -161,6 +161,25 @@
       "La stella!",
       "L'ovale!",
       "Il rombo!"
+    ],
+    "conta-fino-a-10": [
+      "Tocca i pesci per contarli, poi tocca il numero giusto.",
+      "Uno!",
+      "Due!",
+      "Tre!",
+      "Quattro!",
+      "Cinque!",
+      "Sei!",
+      "Sette!",
+      "Otto!",
+      "Nove!",
+      "Dieci!",
+      "Due pesci!",
+      "Tre pesci!",
+      "Cinque pesci!",
+      "Sei pesci!",
+      "Otto pesci!",
+      "Dieci pesci!"
     ]
   }
 }
