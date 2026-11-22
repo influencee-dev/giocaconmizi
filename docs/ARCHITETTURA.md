@@ -12,7 +12,7 @@ Il progetto cresce a pezzi e da più chat insieme. Per questo la regola è una s
 | `components/` | I pezzi di interfaccia, una cartella per zona del sito. | Dati e regole: stanno in `lib/`. |
 | `games/` | I giochi. Una cartella per gioco, più i motori comuni in `games/_engine/`. | Le pagine dei giochi (stanno in `app/`), l'album e la voce (stanno in `lib/giochi/`). |
 | `lib/` | Dati, regole e funzioni senza interfaccia, divisi per argomento. | File sciolti: ogni file sta in una cartella per argomento. |
-| `content/` | Testi e dati scritti a mano: schede dei giochi, storie, articoli, copione della voce, video, libretti da vendere (`content/libretti/`: una scheda per libretto con testo e scena di ogni pagina, più `_personaggi.json` con stile e personaggi fissi). | Codice. |
+| `content/` | Testi e dati scritti a mano: schede dei giochi, storie, articoli, copione della voce, video, libretti da vendere (`content/libretti/`: una scheda per libretto con testo e scena di ogni pagina, più `_personaggi.json` con stile e personaggi fissi), schede dei libri per Amazon (`content/libri/`: una per volume, `_collana.json` per i dati comuni). | Codice. |
 | `cards/` | Il registro dei temi dei biglietti (`registry.ts`). | Altro: i componenti dei biglietti sono in `components/biglietti/`. |
 | `public/` | File serviti così come sono: foto, icone, voce registrata, video. | Sorgenti. |
 | `assets/` | Materiali di lavoro non serviti dal sito (musiche e grafiche social). | File usati dalle pagine: quelli vanno in `public/`. |

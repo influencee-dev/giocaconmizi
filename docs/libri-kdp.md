@@ -1,108 +1,130 @@
 # Libri Giocamizi per Amazon KDP: come si fa un volume
 
-Scritto il 22/11/2026 dopo il Volume 1 («Mizi e la stella che non voleva accendersi»).
-Vale per tutti i volumi. Copia su Drive: 1 Progetti → 02 Editoria Giocamizi → 00 STANDARD COMUNI,
-«03 PROCEDURA LIBRO». Se le due copie divergono, vale la più recente (data nel titolo).
+Versione 2 del 22/11/2026, dopo il Volume 1 («Mizi e la stella che non voleva accendersi»).
+Copia su Drive: 1 Progetti → 02 Editoria Giocamizi → 00 STANDARD COMUNI, «03 PROCEDURA LIBRO».
+Il brief per ChatGPT è in `docs/libri-brief-chatgpt.md` (su Drive «04 BRIEF CHATGPT»).
 
-## Chi fa cosa
+## In una riga
 
-- **Giorgia** approva: storia, tavola dei personaggi, tavole, fronte della copertina, testi di quarta, PDF finali.
-- **ChatGPT** fa: soggetto, storyboard, illustrazioni (line art in bianco e nero per l'interno, fronte a colori
-  senza scritte per la copertina). Salva ogni file approvato su Drive, nella cartella del volume.
-- **Claude** fa: ingrandimento del fronte, copertina completa, interno, controlli, pacchetto, note in Bacheca.
+ChatGPT mette su Drive 13 immagini e una scheda, lascia in Bacheca la nota «Vnn INPUT COMPLETI»;
+Claude lancia `npm run libro -- vnn` e consegna interno, copertina e report; Giorgia approva e carica su Amazon.
+
+## Gli stati di un volume
+
+| Stato | Chi lo scrive | Vuol dire |
+|---|---|---|
+| BOZZA | ChatGPT | storia, tavole o fronte ancora in lavorazione |
+| INPUT COMPLETI | ChatGPT, con una nota in Bacheca | i 13 file e la scheda sono in «01 INPUT_APPROVATI», approvati da Giorgia |
+| REVIEW | Claude, dopo `npm run libro` senza problemi | i due PDF sono in «03 BOZZE_REVIEW» con il report |
+| APPROVATO | Giorgia | ha guardato i due PDF e ha detto sì |
+| PRINT_READY | Giorgia | ha visto l'anteprima KDP e la copia di prova |
+
+Uno stato non si deduce: sta scritto nel titolo dell'ultima nota di Bacheca su quel volume.
+
+## Cosa resta a Giorgia (e non si può automatizzare)
+
+1. Approvare con ChatGPT: storia, tavola dei personaggi, 12 tavole, fronte della copertina, scheda dati.
+2. Guardare i due PDF che Claude consegna.
+3. Caricare i due PDF su KDP, scegliere l'ISBN, guardare l'anteprima, ordinare la copia di prova.
+
+## Cosa fa ChatGPT
+
+Vedi `docs/libri-brief-chatgpt.md`. In breve: 13 immagini quadrate come file singoli, una scheda dati
+compilata, una nota in Bacheca. Niente PDF, niente scritte nelle immagini, niente ZIP.
+
+## Cosa fa Claude, passo per passo
+
+Parte quando in «0 Bacheca» c'è una nota «… · ChatGPT · Vnn INPUT COMPLETI» senza una nota successiva
+di Claude su quel volume. La routine delle 7:00 la legge ogni giorno: nessuno deve chiamare Claude.
+
+1. Legge lo standard globale e la cartella del volume su Drive.
+2. Scarica in `/tmp/libri/vnn/in/` il fronte e le 12 tavole da «01 INPUT_APPROVATI» (file singoli, sotto i 10 MB).
+3. Copia `content/libri/_modello.json` in `content/libri/vnn.json` e lo riempie con la «Vnn · SCHEDA DATI»
+   di Drive, parola per parola. Non corregge e non completa: se un campo manca o è dubbio, si ferma.
+4. `npm run libro -- vnn`. Il comando prepara da solo caratteri e strumenti, ingrandisce quello che è
+   troppo piccolo, costruisce interno e copertina, fa i controlli e scrive il report.
+5. Se il comando si ferma o il report ha «PROBLEMI»: nota in Bacheca «… · Claude · Vnn FERMO» con
+   l'elenco esatto, e basta. Non si aggira un controllo.
+6. Se passa: guarda `Vnn_interno_provino.png` e `Vnn_copertina_anteprima_guide.jpg`. Controlli a occhio:
+   il titolo non copre il soggetto, la firma si legge, i testi non escono dalla cornice, le tavole sono
+   nell'ordine giusto, il fronte ingrandito è uguale all'originale (occhi, becco, mani).
+7. Carica in «03 BOZZE_REVIEW» i due PDF e l'anteprima, in «05 PREFLIGHT_E_PROVE» il report e l'anteprima
+   con le guide, in «02 SORGENTI_COPERTINA» il fronte derivato (se sta sotto i 3 MB in JPEG).
+8. Commit della scheda sul ramo di lavoro (con le verifiche di sempre), nota in Bacheca
+   «… · Claude · Vnn REVIEW» con i link, e i due PDF a Giorgia.
+
+## Il comando
+
+```
+npm run libro -- v02                      # cartella di lavoro predefinita /tmp/libri/v02
+npm run libro -- v02 --lavoro <cartella>
+```
+
+- Ingresso: `content/libri/v02.json` (la scheda), `content/libri/_collana.json` (firma, crediti, storia,
+  formato: uguali per tutti i volumi), e in `<lavoro>/in/` un'immagine col nome che contiene `COVER` o
+  `fronte` e dodici immagini coi nomi che contengono `S01` … `S12`.
+- Uscita in `<lavoro>/out/`: `Vnn_interno_32p.pdf`, `Vnn_copertina_wrap.pdf`, due anteprime della
+  copertina, il provino delle 32 pagine, il fronte derivato se è stato ingrandito, `Vnn_report.txt`.
+- Si ferma da solo, dicendo perché, se: manca la scheda o un suo campo; le scene non sono 12; il titolo a
+  righe non ricompone il titolo; c'è un dato non definitivo (`[`, `SEGNAPOSTO`, `DA CONFERMARE`, `...`);
+  manca un'immagine; un'immagine non è quadrata.
+- Controlli nel report: 32 pagine, formato, caratteri incorporati, nessun segnaposto, testi identici alla
+  scheda, tavole ≥ 300 dpi, misure della copertina e del dorso, fronte ≥ 300 dpi, peso dei file,
+  testo di quarta che non arriva sulla foto.
+- PDF e immagini dei libri non entrano nel repo (è pubblico): restano nella cartella di lavoro e su Drive.
 
 ## Il libro tipo
 
 Copertina morbida, 8,5 × 8,5 pollici, 32 pagine, interno in bianco e nero su carta bianca senza abbondanza,
 copertina a colori lucida. Pagine: 1 frontespizio, 2 dedica e crediti, 3 «Questo libro è di»,
-4–27 dodici coppie testo + tavola, 28–30 attività, 31 «Parliamone», 32 colophon.
+4–27 dodici coppie testo + tavola, 28 disegna, 29 racconta, 30 labirinto (diverso per ogni volume),
+31 «Parliamone», 32 colophon. Dorso: pagine × 0,002252 pollici, senza testo.
 
 ## Stile fisso (decisioni di Giorgia del 22/11/2026)
 
 - Titolo in copertina: maiuscolo, lettere piene come ritagliate a mano (Londrina Solid Black, licenza OFL).
-  Prima riga gialla, le altre crema, senza bordo. Niente caratteri «da fumetto».
+  Prima riga gialla, le altre crema. Niente caratteri «da fumetto».
 - Testi e firme in copertina: Roboto. Interno: Poppins.
 - Firma sul fronte, sempre: «Un libro di Giorgia Palazzo e Domiziana Bonaccorso».
-- Quarta: logo, testo di quarta, in basso a sinistra la foto vera di Giorgia e Domiziana
-  (`public/immagini/giorgia-e-domiziana-giocamizi.webp`) in un tondo con «La nostra storia»
-  (frasi di Giorgia dalla pagina Chi siamo, mai inventate), in basso a destra il riquadro del codice a barre.
-- Logo: il PNG orizzontale originale ha già la trasparenza. Si usa com'è, non si scontorna e non si rigenera.
-  Per l'interno si converte in scala di grigi.
-- Pagina 2: dedica piccola in corsivo al centro, crediti in basso. I crediti sono quelli dello standard globale.
+- Quarta: logo, testo di quarta, in basso a sinistra la foto vera di Giorgia e Domiziana in un tondo con
+  «La nostra storia» (frasi di Giorgia dalla pagina Chi siamo, mai inventate), a destra il codice a barre.
+- Logo: l'originale orizzontale con la trasparenza (`scripts/libri/risorse/`). Non si scontorna e non si
+  rigenera. Per l'interno si converte in scala di grigi.
+- Pagina 2: dedica piccola in corsivo al centro, crediti in basso.
 - Mizi: pinguina, caschetto marrone, niente fiocco. Tobia capibara, Lilla axolotl, Nocciola renna (naso marrone).
 
-## Cosa deve esserci su Drive prima che Claude cominci
+Cambiare lo stile = cambiare `content/libri/_collana.json` o `scripts/libri/libro.py`, e scriverlo qui.
 
-Nella cartella del volume, «01 INPUT_APPROVATI», come **file singoli** (mai solo dentro uno ZIP):
+## Limiti tecnici
 
-1. `Vnn_COVER_FRONT_ART_…png`: fronte a colori senza scritte, approvato.
-2. Le 12 tavole line art approvate, 2550 px di lato.
-3. Il testo delle 12 scene, approvato.
-4. Una scheda con: titolo esatto, dedica, testo di quarta, anno, scelta ISBN, attività delle pagine 28–30.
+- Connettore Drive: si scarica fino a 10 MB per file, si carica fino a circa 3 MB per file. Il comando
+  tiene i PDF sotto i 3 MB e lo scrive nel report. Mai uno ZIP come unico contenitore.
+- I documenti Google non si modificano dal connettore: versione nuova con la data, la vecchia «zz_SUPERATO — ».
+- Il sito KDP non è raggiungibile dalle sessioni: le misure vengono dalla formula pubblica. L'anteprima KDP
+  e la copia di prova sono il controllo vero, e le fa Giorgia.
+- Niente servizi esterni per le immagini: l'ingrandimento è locale (Real-ESRGAN, modello per illustrazioni).
+- Generare immagini con l'API OpenAI si può solo dall'ambiente cloud «Giocamizi». Il comando del libro non
+  ne ha bisogno e gira in qualsiasi ambiente.
 
-Un file che esiste solo in una chat non esiste. Se manca qualcosa Claude si ferma e lo scrive in Bacheca.
+## I disguidi del Volume 1 e come sono chiusi
 
-## Passi di Claude
-
-```
-scripts/libri/prepara.sh <cartella di lavoro>      # caratteri, modello, strumenti (fuori dal repo)
-cd <cartella di lavoro>                            # in/ fronte.png, logo.png, foto, interno di partenza
-python3 ingrandisci.py in/fronte.png in/fronte_2625_esrgan.png 2625
-python3 copertina.py                               # quarta + dorso + prima, PDF e anteprime in out/
-python3 interno.py                                 # interno a 32 pagine in out/
-```
-
-- `ingrandisci.py`: Real-ESRGAN 4× in locale (modello per illustrazioni), poi riduzione a 2625 px = 300 dpi.
-  Il risultato è un **derivato** del fronte approvato: si guarda da vicino (occhi, becco, stella) accanto
-  all'originale prima di usarlo, e si salva in «02 SORGENTI_COPERTINA» con «DERIVATO» nel nome.
-- `copertina.py`: titolo, firma, testo di quarta e storia stanno in cima al file. Il dorso si calcola da solo:
-  pagine × 0,002252 pollici (carta bianca, bianco e nero). Abbondanza 0,125 pollici, testi ad almeno 0,25 dal rifilo.
-- `interno.py`: oggi parte dall'interno v02 del Volume 1 e ne sostituisce le pagine 1, 2, 30 e 32.
-  Per un volume nuovo va adattato (vedi «Cosa manca per automatizzare»).
-
-## Controlli prima di consegnare
-
-- Interno: 32 pagine, 612 × 612 punti, caratteri tutti incorporati (`pdffonts`), immagini ≥ 300 dpi
-  (`pdfimages -list`), nessuna stringa `[`, `SEGNAPOSTO`, `DA CONFERMARE` (`pdftotext | grep`).
-- Copertina: 17,322 × 8,75 pollici per 32 pagine, anteprima con le guide guardata a occhio
-  (titolo che non copre il soggetto, niente testo sul dorso, riquadro del codice a barre libero).
-- Su KDP si caricano **due PDF separati**. Lo ZIP è solo archivio.
-- Stato: REVIEW finché Giorgia non ha visto anteprima KDP e copia di prova. Solo dopo, PRINT_READY.
-
-## Limiti tecnici da ricordare
-
-- Connettore Drive: si scarica fino a 10 MB per file, si carica fino a circa 3 MB per file.
-  Quindi PDF sotto i 3 MB (JPEG a qualità 90, loghi ridotti) e niente ZIP come unico contenitore.
-- I documenti Google non si modificano dal connettore: si crea la versione nuova con la data.
-- La chiave OpenAI è solo nell'ambiente cloud «Giocamizi». Una sessione partita in un altro ambiente non
-  può generare immagini: le sessioni dei libri si aprono in «Giocamizi».
-- Il sito KDP non è raggiungibile dalle sessioni: le misure vengono dalla formula pubblica.
-  Il template ufficiale lo scarica Giorgia dal calcolatore, una volta per formato.
-- Niente servizi esterni di ingrandimento: le immagini non si mandano fuori.
-
-## I disguidi del Volume 1 e la regola che ne esce
-
-| Cosa è successo | Regola |
+| Cosa è successo | Come è chiuso |
 |---|---|
-| Due impostazioni nate in due chat (libretti a colori per il sito, collana da colorare per Amazon) | I libri hanno una sola fonte: «02 Editoria Giocamizi». Chi apre una chat nuova legge prima lo standard globale e questa procedura. |
-| Il fronte approvato stava solo in chat | Vale solo ciò che è su Drive in «01 INPUT_APPROVATI». |
-| Il fronte era a 1254 px (143 dpi) | Si ingrandisce sempre con `ingrandisci.py` e lo si dichiara derivato. |
-| L'interno aggiornato era chiuso in uno ZIP da 14 MB | File singoli, ognuno sotto i 3 MB. |
-| Segnaposto «da confermare» rimasti nell'interno | Tutti i dati editoriali si chiedono una volta, all'inizio, in una scheda sola. |
-| Personaggi cambiati tra le immagini (Mizi gatta, fiocco, capelli blu, Tobia ippopotamo) | Tavola dei personaggi approvata prima delle tavole; ogni immagine si confronta con quella. |
-| Carattere del titolo rifiutato | Lo stile è fisso (sopra) e non si ridiscute a ogni volume. |
-| Logo con riquadro scuro nella prima bozza | Il PNG originale ha la trasparenza: si usa quello. |
-| Immagini non generabili dalla sessione | Sessioni dei libri nell'ambiente «Giocamizi». |
+| Due impostazioni nate in due chat | Una sola fonte («02 Editoria Giocamizi») e questa procedura in CLAUDE.md |
+| Il fronte approvato stava solo in chat | Il comando legge solo dalla cartella di lavoro, riempita da Drive |
+| Fronte a 1254 px | Il comando ingrandisce da solo e lo segnala come derivato |
+| Interno chiuso in uno ZIP da 14 MB | File singoli; il comando controlla il peso |
+| Segnaposto rimasti nell'interno | La scheda con un dato non definitivo ferma il comando; il PDF viene ricontrollato |
+| Dati editoriali chiesti uno alla volta | Una scheda sola, compilata prima di cominciare |
+| Personaggi cambiati tra le immagini | Brief per ChatGPT: tavola dei personaggi prima, confronto a ogni tavola. Claude guarda il provino |
+| Carattere del titolo rifiutato | Stile fisso nel codice |
+| Logo con riquadro scuro | Logo originale con trasparenza nel repo |
+| Titolo sopra il soggetto | Brief: zona alta libera. Il titolo si adatta allo spazio; controllo a occhio sull'anteprima |
+| Nessuno sapeva a che punto fosse il volume | Stati scritti nei titoli delle note di Bacheca |
 
-## Cosa manca per automatizzare davvero
+## Provato
 
-Oggi i tre script producono il Volume 1 e hanno i testi dentro. Per fare un volume con un solo comando servono:
-
-1. Una scheda per volume (`content/libri/<volume>.json`: titolo, righe del titolo, dedica, quarta, storia,
-   pagine, attività, nomi dei file) letta dagli script al posto dei testi scritti dentro.
-2. `interno.py` che costruisce le 32 pagine da zero (cornice, testi, tavole), invece di partire dal PDF del Volume 1.
-3. Un comando unico (`npm run libro -- <volume>`) che fa ingrandimento, copertina, interno, controlli e
-   scrive il report; si ferma con un elenco se manca un file.
-4. Lo scarico degli input da Drive e il carico dei risultati, con la nota in Bacheca.
-
-Con questi quattro pezzi a Giorgia restano tre approvazioni per volume: storia, tavole, PDF finale.
+Il 22/11/2026 il comando ha rifatto il Volume 1 da zero (scheda `content/libri/v01.json`, 12 tavole e
+fronte originali) in circa 3 minuti, con tutti i controlli passati. Provati anche i tre arresti: scheda
+mancante, immagini mancanti, dato non definitivo. Il PDF del Volume 1 già consegnato a Giorgia (v05) resta
+quello valido finché lei non sceglie il rifatto.

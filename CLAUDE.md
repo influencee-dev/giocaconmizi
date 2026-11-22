@@ -250,7 +250,8 @@ NUOVE le scrive solo la routine articoli delle 9:00, mai questa) · (c) giochi �
 Prima di iniziare importa le foto arrivate in «99 Immagini pronte»; se il
 contenuto di domani avrà bisogno di foto, prenotale oggi (`npm run foto:prenota`).
 Prima leggi le note recenti in «0 Bacheca» e le richieste aperte in
-«0 Richieste di Giorgia»: una richiesta aperta viene PRIMA della rotazione
+«0 Richieste di Giorgia»: una richiesta aperta, o una nota «Vnn INPUT COMPLETI» di
+ChatGPT senza risposta (vedi «Libri per Amazon KDP»), viene PRIMA della rotazione
 (se è piccola si fa e basta; se è grande, se ne fa un pezzo e lo si dice).
 Il lunedì controlla anche che i quattro documenti base di 3 Risorse siano
 ancora veri: se no, versione nuova con la data. Alla fine lascia una nota
@@ -413,10 +414,18 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 ## Libri per Amazon KDP (22/11/2026, docs/libri-kdp.md)
 - Collana di libri da colorare (8,5 × 8,5 pollici, 32 pagine, interno B/N, copertina a colori). Fonte unica su
   Drive: 1 Progetti → «02 Editoria Giocamizi · Amazon e Libretti» (standard globale, cartelle V01, V02…).
-  Procedura, stile fisso e limiti in `docs/libri-kdp.md`: leggerla PRIMA di toccare un libro.
-- Script in `scripts/libri/` (`prepara.sh`, `ingrandisci.py`, `copertina.py`, `interno.py`): si lavora in una
-  cartella fuori dal repo; PDF e immagini dei libri non si mettono nel repo (è pubblico).
-- Firma: «Un libro di Giorgia Palazzo e Domiziana Bonaccorso». Titolo in Londrina Solid, testi in Roboto.
+  Procedura in `docs/libri-kdp.md`, brief per ChatGPT in `docs/libri-brief-chatgpt.md`: leggerle PRIMA di
+  toccare un libro.
+- Un volume = una scheda `content/libri/<codice>.json` (modello: `_modello.json`; dati comuni a tutti i
+  volumi in `_collana.json`) + `npm run libro -- <codice>`: fa interno, copertina, ingrandimento, controlli
+  e report in `/tmp/libri/<codice>/out`. Si ferma da solo se manca un file o un dato non è definitivo:
+  un arresto non si aggira, si scrive in Bacheca «Vnn FERMO».
+- Parte da sola: se in «0 Bacheca» c'è una nota «… · ChatGPT · Vnn INPUT COMPLETI» senza risposta di
+  Claude, chi lavora (anche la routine delle 7:00) segue i passi di `docs/libri-kdp.md` e chiude con la
+  nota «Vnn REVIEW» o «Vnn FERMO». Viene prima della rotazione, come una richiesta di Giorgia.
+- PDF e immagini dei libri non si mettono nel repo (è pubblico): cartella di lavoro e Drive.
+- Stile fisso: firma «Un libro di Giorgia Palazzo e Domiziana Bonaccorso», titolo in Londrina Solid,
+  testi in Roboto, interno in Poppins, foto e storia sulla quarta. Si cambia solo su decisione di Giorgia.
 - I vecchi `content/libretti/` (cinque libretti a colori per il sito) sono un'impostazione precedente:
   restano come testi, ma per i libri vale la collana KDP.
 

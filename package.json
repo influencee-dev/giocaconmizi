@@ -25,7 +25,8 @@
     "foto:prenota": "tsx scripts/foto-prenota.ts",
     "foto:genera": "tsx scripts/foto-genera.ts",
     "voce": "tsx scripts/voce-genera.ts",
-    "video": "bash scripts/video/fai.sh"
+    "video": "bash scripts/video/fai.sh",
+    "libro": "python3 scripts/libri/libro.py"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.9.0",

@@ -1,0 +1,29 @@
+{
+  "collana": "Collana Giocamizi",
+  "sito": "giocamizi.it",
+  "firma": [
+    "UN LIBRO DI",
+    "Giorgia Palazzo e Domiziana Bonaccorso"
+  ],
+  "crediti": [
+    "Testi: Giorgia Palazzo, con il supporto dell’intelligenza artificiale",
+    "Illustrazioni: Giorgia Palazzo, con il supporto dell’intelligenza artificiale",
+    "© {anno} Giorgia Palazzo"
+  ],
+  "storia_titolo": "La nostra storia",
+  "storia": [
+    "Domi non aveva voglia di fare i compiti.",
+    "Per spronarla ho iniziato a giocarci insieme,",
+    "e da lì è nato Giocamizi. La pinguina l'ha voluta",
+    "Domi: le abbiamo dato i suoi capelli, e il nome",
+    "è un pezzetto del suo. Domiziana, Mizi."
+  ],
+  "foto_autrici": "public/immagini/giorgia-e-domiziana-giocamizi.webp",
+  "logo": "scripts/libri/risorse/logo-giocamizi-orizzontale.webp",
+  "formato": {
+    "lato_pollici": 8.5,
+    "pagine": 32,
+    "abbondanza_pollici": 0.125,
+    "spessore_pagina_pollici": 0.002252
+  }
+}
