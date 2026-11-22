@@ -6,7 +6,6 @@ import { parla, zittisci, type Lingua } from "@/lib/giochi/audio";
 import { suona } from "@/lib/giochi/suoni";
 import { GIOCHI_PER_COCCARDA, leggiAlbum, prossimiGiochi } from "@/lib/giochi/album";
 import { FigurinaGioco } from "@/components/icone";
-import { FacciaMizi } from "@/games/_engine/arte";
 import { usePartita, type Partita } from "./partita";
 
 /**
@@ -112,9 +111,9 @@ export function GameShell({
         aria-label="Ripeti l'istruzione a voce"
         className="mx-4 flex items-center gap-3 text-left"
       >
-        <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
-          <FacciaMizi emozione="felice" className="h-11 w-11" />
-        </span>
+        {/* Il viso vero di Mizi (public/mizi), non la faccina stilizzata: è lei che parla. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/mizi/mizi-faccia.webp" alt="" aria-hidden width={64} height={64} className="h-16 w-16 shrink-0 rounded-full shadow-sm" />
         <span className="fumetto relative flex-1 rounded-morbido border-2 border-crema-scuro bg-white px-4 py-3">
           <span className="block text-lg font-extrabold leading-snug text-notte">
             {istruzione}
@@ -125,7 +124,7 @@ export function GameShell({
       {/* Se il gioco è più alto dello schermo si scorre: un bottone
           irraggiungibile è un gioco che "non funziona". */}
       {/* Non un secondo <main>: la pagina ne ha già uno. */}
-      <div className="flex-1 overflow-y-auto p-4" data-campo-di-gioco>
+      <div className="campo-gioco flex-1 overflow-y-auto p-4" data-campo-di-gioco>
         <div className="flex min-h-full items-center justify-center">{children}</div>
       </div>
 
@@ -219,9 +218,8 @@ function Festa({ stelle, onAncora, partita }: { stelle: number; onAncora: () => 
       </div>
 
       <div className="relative mx-auto flex min-h-full w-full max-w-md flex-col items-center justify-center gap-4 p-5 text-center">
-        <span className="h-20 w-20">
-          <FacciaMizi emozione="felice" />
-        </span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/mizi/mizi-faccia.webp" alt="" aria-hidden width={112} height={112} className="h-28 w-28 rounded-full shadow-sm" />
         <p className="flex gap-1 text-5xl" role="img" aria-label={`${quante} ${quante === 1 ? "stella" : "stelle"} su 3`} data-stelle={quante}>
           {Array.from({ length: quante }, (_, i) => (
             <span key={i} className="stella-festa" style={{ animationDelay: `${0.15 + i * 0.18}s` }} aria-hidden>

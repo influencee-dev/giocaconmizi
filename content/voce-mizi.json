@@ -145,6 +145,22 @@
       "Viola!",
       "Rosa!",
       "Arancione!"
+    ],
+    "trova-la-forma": [
+      "Tocca il cerchio.",
+      "Tocca il quadrato.",
+      "Tocca il triangolo.",
+      "Tocca il rettangolo.",
+      "Tocca la stella.",
+      "Tocca l'ovale.",
+      "Tocca il rombo.",
+      "Il cerchio!",
+      "Il quadrato!",
+      "Il triangolo!",
+      "Il rettangolo!",
+      "La stella!",
+      "L'ovale!",
+      "Il rombo!"
     ]
   }
 }

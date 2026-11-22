@@ -10,6 +10,10 @@ import type { GameProps } from "@/games/_engine/tipi";
  * Trova la forma (3–5 anni).
  * La voce dice la forma, il bambino la tocca. Tutte le forme hanno lo stesso
  * colore in ogni round: così si guarda la sagoma, non la tinta.
+ *
+ * Alla risposta giusta Mizi ripete il nome della forma. Tutte le frasi (una
+ * istruzione e un nome per forma) stanno nel copione della voce,
+ * content/voce-mizi.json sotto «trova-la-forma».
  */
 
 const ARTICOLI: Record<string, string> = {
@@ -34,6 +38,7 @@ export default function Game(props: GameProps) {
 
       return {
         istruzione: `Tocca ${ARTICOLI[giusta]}.`,
+        lode: `${ARTICOLI[giusta][0].toUpperCase()}${ARTICOLI[giusta].slice(1)}!`,
         opzioni: mescola([giusta, ...altre]).map((forma) => ({
           id: forma,
           disegno: forma,

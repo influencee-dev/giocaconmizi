@@ -542,7 +542,8 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   await m.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
   await m.waitForTimeout(400);
   ok("catalogo: la fascia dell'album e le stelle sui giochi già finiti",
-    (await m.locator("[data-fascia-album]").getAttribute("data-fascia-album")) === "3" && (await m.locator("[data-stelle-gioco]").count()) === 3);
+    (await m.locator("[data-fascia-album]").getAttribute("data-fascia-album")) === "3" && // Un gioco finito può comparire due volte (in «Gli ultimi arrivati» e nella sua fascia d'età): si contano i giochi, non le card.
+    new Set(await m.locator("[data-stelle-gioco]").evaluateAll((els) => els.map((el) => el.closest("a")?.getAttribute("href")))).size === 3);
 
   // Demo (per i reel): prima si bloccava alla seconda carta. E non riempie l'album.
   const d = await ctx.newPage();
@@ -919,6 +920,22 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   const inHome = await n.locator("[data-ultimi-arrivati-app] [data-ultimo-arrivato]").evaluateAll((els) => els.map((el) => el.getAttribute("data-ultimo-arrivato")));
   ok("ultimi arrivati: sul telefono la home ne mostra due, tra i più recenti", inHome.length === 2 && inHome.every((s) => attesi.includes(s)), inHome.join(" "));
   await ctxN.close();
+}
+
+// «Trova la forma» (22/11/2026): istruzioni e nomi delle forme nel copione; alla risposta giusta Mizi dice la forma.
+{
+  const { readFileSync } = await import("node:fs");
+  const copioneF = JSON.parse(readFileSync("content/voce-mizi.json", "utf8"));
+  const tuttoF = new Set(Object.values(copioneF.frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
+  const nomiF = (copioneF.frasi["trova-la-forma"] ?? []).slice(7);
+  const ctxF = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxF.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const f = await ctxF.newPage();
+  await f.goto(`${BASE}/giochi/trova-la-forma/gioca?eta=3&demo=1`, { waitUntil: "networkidle" });
+  const festaF = await f.locator("[data-festa]").waitFor({ timeout: 60000 }).then(() => true, () => false);
+  const dettoF = await f.evaluate(() => (window.__voceMizi || []).map((v) => v.testo));
+  ok("trova la forma: tutto quello che Mizi dice è nel copione, e alla risposta giusta dice la forma", festaF && dettoF.length >= 12 && dettoF.every((t) => tuttoF.has(t)) && dettoF.filter((t) => nomiF.includes(t)).length === 6, dettoF.filter((t) => !tuttoF.has(t)).join(" | "));
+  await ctxF.close();
 }
 
 // «La corsa nella piramide» (20/11/2026): corsa a tre strade, motore Corsa.tsx.

@@ -143,7 +143,7 @@ export function SceltaMultipla({
     >
       <div data-scelta-multipla {...partita.attributi} className="flex h-full w-full max-w-3xl flex-col items-center justify-center gap-6">
         {corrente.centro && (
-          <div key={indice} className="centro-entra flex items-center justify-center">{corrente.centro}</div>
+          <div key={indice} className="centro-entra palco figura-ombra flex items-center justify-center">{corrente.centro}</div>
         )}
 
         <div
@@ -203,22 +203,22 @@ function BottoneOpzione({
 }) {
   const bordo =
     stato === "giusta"
-      ? "border-verde bg-verde/10 opzione-giusta"
+      ? "border-verde bg-verde/10 opzione-giusta tasto-giusto"
       : stato === "sbagliata"
         ? "border-crema-scuro bg-white opzione-riprova"
         : aiuto
-          ? "border-giallo bg-giallo/20 opzione-aiuto"
-          : "border-crema-scuro bg-white opzione-entra active:scale-95";
+          ? "border-giallo bg-giallo/20 opzione-aiuto tasto"
+          : "border-crema-scuro bg-white opzione-entra tasto";
 
   const contenuto = useMemo(() => {
     const scala = opzione.scala ?? 1;
     const stile = { width: `${scala * 100}%`, height: `${scala * 100}%` };
 
     if (opzione.tipo === "secchiello" && opzione.colore) {
-      return <Secchiello colore={opzione.colore} className="h-20 w-20" />;
+      return <Secchiello colore={opzione.colore} className="figura-ombra aspect-square w-full max-w-28" />;
     }
     if (opzione.tipo === "faccia" && opzione.emozione) {
-      return <FacciaMizi emozione={opzione.emozione} className="h-20 w-20" />;
+      return <FacciaMizi emozione={opzione.emozione} className="figura-ombra aspect-square w-full max-w-28" />;
     }
     if (opzione.disegno && opzione.ripeti) {
       return (
@@ -231,7 +231,7 @@ function BottoneOpzione({
     }
     if (opzione.disegno) {
       return (
-        <div className="flex h-20 w-20 items-center justify-center">
+        <div className="figura-ombra flex aspect-square w-full max-w-28 items-center justify-center">
           <div style={stile} className="flex items-center justify-center">
             <Disegno id={opzione.disegno} colore={opzione.colore} />
           </div>

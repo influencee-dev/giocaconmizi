@@ -325,6 +325,41 @@ a[role="button"],
 /* Giochi «tocca la risposta giusta»: dopo due errori la risposta giusta dondola
    tre volte e poi resta ferma col bordo giallo (games/_engine/nucleo.ts). Con
    «riduci movimento» resta solo il bordo. */
+/* La grafica dei giochi a risposta e del guscio (22/11/2026).
+   - .campo-gioco: quattro macchie pastello dietro al gioco, al posto del fondo vuoto;
+   - .tasto: i bottoni hanno uno spessore sotto e si schiacciano davvero;
+   - .figura-ombra: le figure piatte poggiano su un'ombra;
+   - .palco: la cosa da guardare sta su un disco chiaro. */
+.campo-gioco {
+  background:
+    radial-gradient(circle at 10% 14%, rgba(155, 109, 214, 0.11) 0 6.5rem, transparent 6.6rem),
+    radial-gradient(circle at 92% 30%, rgba(249, 200, 70, 0.18) 0 4.5rem, transparent 4.6rem),
+    radial-gradient(circle at 84% 90%, rgba(61, 181, 230, 0.13) 0 7.5rem, transparent 7.6rem),
+    radial-gradient(circle at 6% 78%, rgba(242, 138, 178, 0.13) 0 4rem, transparent 4.1rem);
+}
+.tasto {
+  box-shadow:
+    0 6px 0 var(--color-crema-scuro),
+    0 14px 20px -14px rgba(31, 36, 48, 0.45);
+}
+.tasto:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--color-crema-scuro);
+}
+.tasto-giusto {
+  box-shadow:
+    0 6px 0 rgba(47, 122, 74, 0.35),
+    0 14px 20px -14px rgba(31, 36, 48, 0.45);
+}
+.figura-ombra {
+  filter: drop-shadow(0 4px 0 rgba(31, 36, 48, 0.1));
+}
+.palco {
+  padding: 1.25rem;
+  border-radius: 9999px;
+  background: radial-gradient(closest-side, #fff 0, #fff 64%, rgba(255, 255, 255, 0) 100%);
+}
+
 /* «Tocca la risposta giusta» (games/_engine/SceltaMultipla.tsx): il movimento
    delle opzioni. Solo transform e opacity, durate brevi, niente che si ripete:
    un bersaglio fermo si tocca meglio. */
