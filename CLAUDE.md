@@ -410,6 +410,16 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   `public/immagini/<file>-<larghezza>.webp`; finché mancano si vede Mizi
   su fondo pastello. Brand: "Giocamizi" (tagline Gioca con Mizi).
 
+## Libri per Amazon KDP (22/11/2026, docs/libri-kdp.md)
+- Collana di libri da colorare (8,5 × 8,5 pollici, 32 pagine, interno B/N, copertina a colori). Fonte unica su
+  Drive: 1 Progetti → «02 Editoria Giocamizi · Amazon e Libretti» (standard globale, cartelle V01, V02…).
+  Procedura, stile fisso e limiti in `docs/libri-kdp.md`: leggerla PRIMA di toccare un libro.
+- Script in `scripts/libri/` (`prepara.sh`, `ingrandisci.py`, `copertina.py`, `interno.py`): si lavora in una
+  cartella fuori dal repo; PDF e immagini dei libri non si mettono nel repo (è pubblico).
+- Firma: «Un libro di Giorgia Palazzo e Domiziana Bonaccorso». Titolo in Londrina Solid, testi in Roboto.
+- I vecchi `content/libretti/` (cinque libretti a colori per il sito) sono un'impostazione precedente:
+  restano come testi, ma per i libri vale la collana KDP.
+
 ## In attesa (cose ferme lato Giorgia)
 - Immagini AI di Mizi per gli 11 slot in `public/mizi/` (lib/foto/immagini.ts)
   (la foto vera di Giorgia e Domiziana è in public/immagini/, fatta il 2/11).

@@ -16,7 +16,7 @@ Il progetto cresce a pezzi e da più chat insieme. Per questo la regola è una s
 | `cards/` | Il registro dei temi dei biglietti (`registry.ts`). | Altro: i componenti dei biglietti sono in `components/biglietti/`. |
 | `public/` | File serviti così come sono: foto, icone, voce registrata, video. | Sorgenti. |
 | `assets/` | Materiali di lavoro non serviti dal sito (musiche e grafiche social). | File usati dalle pagine: quelli vanno in `public/`. |
-| `scripts/` | Strumenti da riga di comando. Le prove automatiche sono in `scripts/verifica/`. | Codice usato dal sito mentre gira. |
+| `scripts/` | Strumenti da riga di comando. Le prove automatiche sono in `scripts/verifica/`; gli strumenti dei libri per Amazon in `scripts/libri/` (procedura in `docs/libri-kdp.md`). | Codice usato dal sito mentre gira. |
 | `supabase/` | Le tabelle del database, in SQL. | |
 | `docs/` | Documenti di progetto e procedure. | Codice. |
 
