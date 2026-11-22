@@ -20,7 +20,7 @@ export function Giocatore({
   etaMin,
   etaMax,
   difficolta,
-  demo,
+  demo: demoDelServer,
   giochi,
 }: {
   slug: string;
@@ -39,9 +39,12 @@ export function Giocatore({
   // Senza connessione la pagina arriva dalla memoria del telefono, salvata con
   // l'età più piccola (public/sw.js): l'età scelta si rilegge dall'indirizzo.
   const [eta, setEta] = useState(etaDelServer);
+  const [demo, setDemo] = useState(demoDelServer);
   useEffect(() => {
-    const scelta = Number(new URLSearchParams(window.location.search).get("eta"));
-    if (Number.isFinite(scelta) && scelta >= etaMin && scelta <= etaMax) setEta(scelta);
+    const domanda = new URLSearchParams(window.location.search);
+    const scelta = Number(domanda.get("eta"));
+    if (domanda.has("eta") && Number.isFinite(scelta) && scelta >= etaMin && scelta <= etaMax) setEta(scelta);
+    if (domanda.get("demo") === "1") setDemo(true);
   }, [etaMin, etaMax]);
 
   const [finita, setFinita] = useState(false);
