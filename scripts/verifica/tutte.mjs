@@ -7,7 +7,7 @@ import { conServer } from "./comune.mjs";
 const servito = await conServer(); // un server per tutte e tre
 const esiti = {};
 // «struttura» per prima: è immediata e ferma subito un file messo nel posto sbagliato.
-for (const nome of ["struttura", "biglietti", "giochi", "sbordi", "seo", "admin", "app", "genitori"]) {
+for (const nome of ["struttura", "biglietti", "giochi", "sbordi", "seo", "admin", "app", "genitori", "negozio"]) {
   const r = spawnSync("node", [`scripts/verifica/${nome}.mjs`], { encoding: "utf8" });
   esiti[nome] = r.status === 0;
   // in caso di guaio si stampa tutto, altrimenti solo l'ultima riga

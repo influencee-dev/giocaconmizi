@@ -40,6 +40,7 @@ const LIB = {
   foto: "registro delle foto, prenotazioni, misure, caricatore delle immagini",
   giochi: "album di Mizi, voce, suoni, conto delle partite",
   natale: "letterina, biglietti ed eventi di Natale",
+  negozio: "il negozio dei PDF da stampare: catalogo, Stripe, archivio dei file",
   protezione: "limiti e difese contro gli abusi",
   risorse: "la directory delle risorse educative",
   seo: "dominio, date delle pagine, immagini di anteprima, Search Console",
@@ -52,7 +53,7 @@ for (const c of cartelle("lib")) if (!LIB[c]) ko(`cartella «lib/${c}/» non pre
 // 3. components/: una cartella per zona del sito, più tre file condivisi da tutti.
 const COMPONENTI = [
   "app", "biglietti", "directory", "feste", "font-switcher", "form", "game-shell", "genitori", "giochi", "guide", "legal", "mappa",
-  "natale", "progress", "risorse", "seo", "storie", "tutorial", "ui", "vetrina",
+  "natale", "negozio", "progress", "risorse", "seo", "storie", "tutorial", "ui", "vetrina",
 ];
 const COMPONENTI_SCIOLTI = ["decor.tsx", "icone.tsx", "illustrazioni.tsx"];
 for (const c of cartelle("components")) if (!COMPONENTI.includes(c)) ko(`cartella «components/${c}/» non prevista: aggiungila alla mappa o usa una zona che esiste già.`);
@@ -84,7 +85,7 @@ for (const c of ["content", "docs"]) {
 }
 
 // 6. scripts/: gli strumenti stanno qui, e le prove in scripts/verifica.
-for (const c of cartelle("scripts")) if (!["articoli", "verifica", "video"].includes(c)) ko(`cartella «scripts/${c}/» non prevista.`);
+for (const c of cartelle("scripts")) if (!["articoli", "negozio", "verifica", "video"].includes(c)) ko(`cartella «scripts/${c}/» non prevista.`);
 
 // 7. La mappa esiste e nomina ogni cartella di lib.
 const mappa = existsSync("docs/ARCHITETTURA.md") ? readFileSync("docs/ARCHITETTURA.md", "utf8") : "";

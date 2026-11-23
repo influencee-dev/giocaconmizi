@@ -11,6 +11,8 @@
  */
 
 /** Dati societari del gestore (D.Lgs. 70/2003 art. 7, art. 2250 c.c.). */
+import { NEGOZIO_APERTO } from "../negozio/catalogo";
+
 export const SOCIETA = {
   ragioneSociale: "Partidea SRL",
   sede: "Via Antonio Beltramelli 13, 47923 Rimini (RN)",
@@ -192,6 +194,20 @@ export const REGISTRO: VoceRegistro[] = [
     chi: "Google Analytics",
     quando: "Solo se accetti dal banner",
   },
+  // Il carrello del negozio dei PDF: entra nell'informativa quando il negozio apre (lib/negozio/catalogo.ts).
+  ...(NEGOZIO_APERTO
+    ? [
+        {
+          nome: "giocamizi.carrello",
+          tipo: "localStorage" as const,
+          scopo: "Ricorda i PDF che hai messo nel carrello del negozio, finché non paghi o non li togli. Contiene solo i codici dei prodotti.",
+          durata: "Finché non completi l'acquisto o svuoti il carrello",
+          necessario: true,
+          chi: "noi",
+          quando: "Solo se aggiungi qualcosa al carrello del negozio",
+        },
+      ]
+    : []),
 ];
 
 /** Servizi esterni che trattano dati per conto del sito (art. 28 GDPR). */
@@ -224,6 +240,16 @@ export const FORNITORI = [
       "Statistiche di visita, SOLO se acconsenti dal banner: pagine viste e uso dei giochi, senza Google Signals né personalizzazione degli annunci.",
     dove: "Irlanda; possibili trasferimenti verso Google LLC (USA) coperti dal Data Privacy Framework UE-USA",
   },
+  ...(NEGOZIO_APERTO
+    ? [
+        {
+          nome: "Stripe Payments Europe Ltd.",
+          scopo:
+            "Solo se compri un PDF nel negozio: gestisce il pagamento e la ricevuta. Riceve l'email e i dati del pagamento (noi non vediamo i dati della carta) e li conserva anche per gli obblighi fiscali e antiriciclaggio.",
+          dove: "Irlanda; possibili trasferimenti verso Stripe, Inc. (USA) coperti dal Data Privacy Framework UE-USA",
+        },
+      ]
+    : []),
 ] as const;
 
 /**

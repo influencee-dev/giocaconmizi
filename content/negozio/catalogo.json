@@ -1,0 +1,20 @@
+{
+  "_nota": "Catalogo del negozio dei PDF. Prezzi in centesimi, IVA inclusa. Un volume si vende solo con in_vendita: true e i file caricati nell'archivio privato (docs/negozio.md). Le proposte di prezzo del 23/11/2026 sono da confermare con Giorgia.",
+  "prezzi": {
+    "libretto": 150,
+    "disegni": 99,
+    "disegno": 20,
+    "minimo_ordine": 99
+  },
+  "volumi": [
+    {
+      "codice": "v01",
+      "titolo": "Mizi e la stella che non voleva accendersi",
+      "tema": "Natale",
+      "in_vendita": false,
+      "descrizione": "È la sera della Vigilia e la stella in cima all'albero non si accende. Mizi prova a soffiarci sopra, a cantare, ad arrampicarsi: alla fine la risposta arriva dagli amici, con una lucina ciascuno.",
+      "pagine_libretto": 32,
+      "disegni": 12
+    }
+  ]
+}

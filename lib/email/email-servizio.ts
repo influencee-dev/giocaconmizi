@@ -15,7 +15,7 @@ import { TITOLARE } from "../contenuti/legal";
 
 const SITO = "https://giocamizi.it";
 /** Dove arrivano gli avvisi per Giorgia: AVVISI_EMAIL su Vercel, se no la casella del sito. */
-const AVVISI = process.env.AVVISI_EMAIL || TITOLARE.email;
+export const AVVISI = process.env.AVVISI_EMAIL || TITOLARE.email;
 
 /** La prova dal pannello va dove arrivano gli avvisi: se parte questa, partono anche le altre. */
 export async function provaVersoAvvisi(): Promise<{ ok: boolean; motivo: string; a: string }> {
@@ -23,13 +23,13 @@ export async function provaVersoAvvisi(): Promise<{ ok: boolean; motivo: string;
 }
 
 /** Tutto ciò che arriva dai moduli va ripulito prima di entrare nell'HTML. */
-const h = (testo: string) =>
+export const h = (testo: string) =>
   testo.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
-const bottone = (href: string, testo: string) =>
+export const bottone = (href: string, testo: string) =>
   `<a href="${h(href)}" style="display:inline-block;background:#9B6DD6;color:#FFFFFF;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;text-decoration:none;padding:14px 22px;border-radius:14px;">${h(testo)}</a>`;
 
-function pagina(titolo: string, corpo: string): string {
+export function pagina(titolo: string, corpo: string): string {
   return `<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${h(titolo)}</title></head>
 <body style="margin:0;background:#FFF3E6;padding:24px 12px;font-family:Arial,Helvetica,sans-serif;color:#1F2430;">
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0"><tr><td align="center">
@@ -43,7 +43,7 @@ ${corpo}
 </td></tr></table></body></html>`;
 }
 
-const par = (testo: string) => `<p style="margin:0 0 14px;font-size:16px;line-height:1.55;">${testo}</p>`;
+export const par = (testo: string) => `<p style="margin:0 0 14px;font-size:16px;line-height:1.55;">${testo}</p>`;
 
 // ---------- 1. Avviso a Giorgia ----------
 

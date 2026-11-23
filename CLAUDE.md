@@ -580,6 +580,15 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   `public/immagini/<file>-<larghezza>.webp`; finché mancano si vede Mizi
   su fondo pastello. Brand: "Giocamizi" (tagline Gioca con Mizi).
 
+## Negozio dei PDF (23/11/2026, docs/negozio.md)
+- Vende in PDF i libretti della collana e i loro disegni da colorare, da stampare a casa su A4 (anche A5 due per
+  foglio). I giochi restano gratis. Catalogo `content/negozio/catalogo.json`, regole `lib/negozio/`, pagine `/negozio`.
+- È una BOZZA finché `NEGOZIO_APERTO` (lib/negozio/catalogo.ts) è false: noindex, fuori dalla sitemap, nessun
+  collegamento dal sito, si paga solo con chiave Stripe di prova. Lo accende solo Giorgia (lista in docs/negozio.md).
+- Ordini solo in Stripe (metadati), nessuna tabella. PDF nel contenitore PRIVATO «negozio» di Supabase Storage,
+  mai nel repo; si preparano con `npm run negozio-pdf` dall'interno approvato del libro.
+- Prima di pagare serve la spunta sulla consegna immediata e la perdita del recesso: non si toglie.
+
 ## In attesa (cose ferme lato Giorgia)
 - Immagini AI di Mizi per gli 11 slot in `public/mizi/` (lib/foto/immagini.ts)
   (la foto vera di Giorgia e Domiziana è in public/immagini/, fatta il 2/11).

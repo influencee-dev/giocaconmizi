@@ -16,7 +16,7 @@ Il progetto cresce a pezzi e da più chat insieme. Per questo la regola è una s
 | `cards/` | Il registro dei temi dei biglietti (`registry.ts`). | Altro: i componenti dei biglietti sono in `components/biglietti/`. |
 | `public/` | File serviti così come sono: foto, icone, voce registrata, video. | Sorgenti. |
 | `assets/` | Materiali di lavoro non serviti dal sito (musiche e grafiche social). | File usati dalle pagine: quelli vanno in `public/`. |
-| `scripts/` | Strumenti da riga di comando. Le prove automatiche sono in `scripts/verifica/`. | Codice usato dal sito mentre gira. |
+| `scripts/` | Strumenti da riga di comando. Le prove automatiche sono in `scripts/verifica/`; i PDF del negozio si preparano con `scripts/negozio/`. | Codice usato dal sito mentre gira. |
 | `supabase/` | Le tabelle del database, in SQL. | |
 | `docs/` | Documenti di progetto e procedure. | Codice. |
 
@@ -30,6 +30,7 @@ Nella radice restano solo i file di configurazione (`package.json`, `next.config
 | `lib/directory/` | Feste per città e directory delle attività | `feste.ts` (i locali), `directory.ts` (categorie e schede), `esperienze.ts` (filtri), `etichette.ts`, `coordinate-citta.ts`, `directory-db.ts`, `posizioni.ts`, `statistiche.ts`, `rete.ts`, `reclamo.ts`, `admin.ts` |
 | `lib/risorse/` | La directory delle risorse educative | `risorse-categorie.ts`, `risorse-educative.ts`, `risorse-educative-dati.ts`, `risorse-reclamo.ts`, `risorse-anteprime.ts` |
 | `lib/natale/` | Il Natale di Mizi | `natale.ts`, `natale-esporta.ts`, `eventi-natale.ts` |
+| `lib/negozio/` | Il negozio dei PDF da stampare (dal 23/11/2026, docs/negozio.md) | `catalogo.ts` (volumi, prodotti, prezzi, carrello, interruttore `NEGOZIO_APERTO`), `stripe.ts` (pagamento e firma dei webhook), `archivio.ts` (link firmati ai PDF privati) |
 | `lib/biglietti/` | Inviti e kit della festa | `biglietti.ts`, `condivisione.ts`, `esempi.ts` |
 | `lib/contenuti/` | Guide, articoli, tutorial, note legali | `guide.ts` (guide brevi), `content.ts` (lettura di `content/`), `approfondimenti.json` (generato), `tutorial.ts`, `tutorial-dati.json` (generato), `legal.ts` |
 | `lib/foto/` | Le foto del sito | `foto.ts`, `foto-dati.ts`, `foto-del-giorno.ts`, `foto-in-arrivo.ts`, `caricatore-immagini.ts`, `immagini-varianti.json` (generato) |
@@ -60,7 +61,7 @@ I file segnati «generato» li scrive uno script: non si modificano a mano.
 
 ## `components/`: una cartella per zona
 
-`app` (l'app installata), `biglietti`, `directory`, `feste`, `form`, `game-shell` (il guscio comune dei giochi, con la festa finale), `genitori` (i percorsi per gli adulti, dal 20/11/2026: non sono guide né giochi), `giochi` (catalogo e album), `guide`, `legal`, `mappa`, `natale`, `risorse`, `seo`, `storie`, `tutorial`, `ui` (bottoni e contenitori di base), `vetrina` (testata, menu, piede), `font-switcher`, `progress`.
+`app` (l'app installata), `biglietti`, `directory`, `feste`, `form`, `game-shell` (il guscio comune dei giochi, con la festa finale), `genitori` (i percorsi per gli adulti, dal 20/11/2026: non sono guide né giochi), `giochi` (catalogo e album), `guide`, `legal`, `mappa`, `natale`, `negozio` (carrello e bottoni del negozio dei PDF), `risorse`, `seo`, `storie`, `tutorial`, `ui` (bottoni e contenitori di base), `vetrina` (testata, menu, piede), `font-switcher`, `progress`.
 
 Tre file restano sciolti perché li usano tutte le zone: `icone.tsx`, `illustrazioni.tsx`, `decor.tsx`.
 
