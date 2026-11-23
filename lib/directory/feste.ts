@@ -47,15 +47,17 @@
 // Gallarate NON ha una pagina sua: La Tana di Ninì (viale Milano) è già nella
 // pagina di Busto Arsizio, e la Ludoteca Wonderland (via Piceni) è stata aggiunta
 // lì il 22/11/2026. Per aprire Gallarate serve un altro locale solido, non questi.
-// Il 23/11/2026 (SOLO dai risultati di ricerca: quel giorno i siti dei locali non
-// si aprivano dalla sessione, quindi niente è stato letto sulle pagine):
-// Vittoria e Caltanissetta, nessun locale con un sito suo (solo Facebook,
-// Instagram o schede di elenchi; bowling e fattorie della zona sono a San
-// Cataldo e a Mazzarino); Afragola, col sito c'è solo Afragola Park (statale
-// Sannitica). DA RIPROVARE con la rete aperta, non scartata: Castellammare di
-// Stabia, dove due locali hanno un dominio loro (L'Acchiappasogni, traversa
-// Pozzillo; Nuvoletta Bianca, via Plinio il Vecchio) ma non ne abbiamo letto
-// le pagine né trovato una data recente.
+// Il 23/11/2026: Vittoria e Caltanissetta (nessun locale con un sito suo: solo
+// Facebook, Instagram o schede di elenchi; bowling e fattorie della zona sono a
+// San Cataldo e a Mazzarino); Afragola (col sito c'è solo Afragola Park, statale
+// Sannitica); Castellammare di Stabia (due locali col sito e con le feste,
+// L'Acchiappasogni in traversa Pozzillo e Nuvoletta Bianca in via Plinio il
+// Vecchio, ma nessun segnale recente: sul primo l'ultimo avviso datato è del
+// 2020/21, il secondo ha pagine di negozio di prova).
+// COME SI VERIFICA: i siti dei locali NON si aprono dalle sessioni (la rete
+// ammette solo un elenco di siti). Si leggono con la ricerca web limitata al
+// dominio ufficiale del locale (allowed_domains): è il metodo usato dall'inizio.
+// Non chiedere a un aiutante di «aprire le pagine»: fallisce e sembra un blocco.
 // Prima di aggiungere un locale, cercarne il nome in questo file: lo stesso posto
 // sotto due città crea due schede uguali.
 
