@@ -24,6 +24,11 @@ const sitemap = await fetch(`${BASE}/sitemap.xml`).then((r) => r.text());
 const noindex = /<meta name="robots" content="[^"]*noindex/.test(html);
 if (pubblico) {
   ok("pubblica: indicizzabile e in sitemap", !noindex && sitemap.includes(PERCORSO));
+  // il richiamo «E tu che tipo di mamma sei?» porta al test da «Per le mamme» e dalle guide
+  const richiami = await Promise.all(["/per-le-mamme", "/guide"].map((x) => fetch(BASE + x).then((r) => r.text())));
+  ok("pubblica: «Per le mamme» e le guide invitano al test", richiami.every((t) => t.includes("data-invito-test") && t.includes(`href="${PERCORSO}"`)));
+  ok("pubblica: titolo per Google e social che invoglia, e il tasto condividi in cima",
+    /<title>E tu che mamma diventi sotto pressione\?/.test(html) && /property="og:title" content="E tu che mamma/.test(html) && html.includes("data-condividi-test"));
 } else {
   ok("bozza: noindex e fuori dalla sitemap", noindex && !sitemap.includes(PERCORSO));
   const altre = await Promise.all(["/", "/guide", "/per-le-mamme", "/chi-siamo", "/llms.txt"].map((p) => fetch(BASE + p).then((r) => r.text())));
@@ -142,6 +147,18 @@ const risultato = (p) => p.locator("[data-risultato]").evaluate((e) => ({ ...e.d
   const unici = [...new Map(link.map((l) => [l.href, l])).values()];
   const stati = await Promise.all(unici.map((l) => fetch(BASE + l.href).then((r) => r.status)));
   ok("i collegamenti «Su Giocamizi» rispondono 200 e hanno un titolo", unici.length >= 10 && stati.every((s) => s === 200) && unici.every((l) => l.testo && !l.testo.startsWith("/")), unici.map((l, i) => `${l.href}:${stati[i]}`).filter((_, i) => stati[i] !== 200).join(" "));
+
+  // condividere: nel messaggio solo l'invito e l'indirizzo, mai il risultato
+  ok("profilo: c'è il tasto per condividere il test", (await p.locator("[data-risultato] [data-condividi-test] button").count()) === 1);
+  await p.evaluate(() => { Object.defineProperty(navigator, "share", { value: undefined, configurable: true }); });
+  await p.locator("[data-risultato] [data-condividi-test] button").first().tap();
+  const voci = await p.locator("[data-risultato] [data-condividi-voci] a").evaluateAll((e) => e.map((x) => x.getAttribute("href")));
+  const wa = decodeURIComponent(voci.find((h) => h.startsWith("https://wa.me/")) ?? "");
+  ok("condividi: WhatsApp, Facebook, Telegram ed email, con l'invito e il link al test", voci.length === 4 && wa.includes("che tipo di mamma") && wa.includes(`giocamizi.it${PERCORSO}`));
+  ok("condividi: nel messaggio non c'è il risultato di chi ha compilato", !/sbrigati|\/100|spinta/i.test(voci.map(decodeURIComponent).join(" ")));
+  // iscrizione: c'è il modulo della Posta di Mizi, ma non parte niente se non lo si compila
+  ok("profilo: c'è il modulo per iscriversi, con consenso non spuntato", (await p.locator("[data-iscrizione-test] input[type=email]").count()) === 1 &&
+    (await p.locator("[data-iscrizione-test] input[type=checkbox]").evaluateAll((e) => e.every((x) => !x.checked))));
 
   ok("nessuna risposta lascia il browser (zero invii al server)", invii.length === 0, invii.join(" | "));
 

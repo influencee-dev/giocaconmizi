@@ -2,6 +2,7 @@ import { TestataPagina } from "@/components/vetrina";
 import { ScenaCompiti } from "@/components/illustrazioni";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { InvitoTest } from "@/components/genitori/InvitoTest";
 import { guideInOrdine } from "@/lib/contenuti/guide";
 import { fotoGuidaPiccola } from "@/lib/foto/foto";
 import { Contenitore, TitoloSezione } from "@/components/ui";
@@ -40,6 +41,8 @@ export default function GuidePage() {
           riviste a ogni aggiornamento del sito.
         </p>
       </TestataPagina>
+
+      <InvitoTest className="mt-6" />
 
       <section className="mt-10">
         <TitoloSezione>Gli articoli e le guide, dai più recenti</TitoloSezione>

@@ -15,17 +15,25 @@
  *   i diritti d'uso con gli autori.
  * - Le risposte restano nel browser di chi compila: niente server, niente
  *   database, niente statistiche sulle risposte.
- * - Finché Giorgia non dà il via (e uno psicologo non ha riletto domande e
- *   letture) `PERCORSO_PUBBLICO` resta false: la pagina esiste ma non è
- *   indicizzata, non è in sitemap e nessuna pagina la collega.
+ * - Pubblicato il 23/11/2026 su decisione di Giorgia, che lo vuole anche per
+ *   raccogliere iscrizioni: alla fine c'è il modulo della Posta di Mizi
+ *   (origine «test-sotto-pressione» in Brevo). Al server arriva SOLO l'email
+ *   di chi si iscrive, mai le risposte o il profilo. La rilettura di uno
+ *   psicologo resta consigliata: se arriva, si aggiornano le letture qui.
+ * - Con `PERCORSO_PUBBLICO` false la pagina torna bozza: fuori da Google, dalla
+ *   sitemap e dal sito (InvitoTest sparisce da solo).
  */
 
 /** false = bozza: pagina raggiungibile solo dal link, fuori da Google e dal sito. */
-export const PERCORSO_PUBBLICO = false;
+export const PERCORSO_PUBBLICO = true;
 
 export const PERCORSO = {
   percorso: "/genitori/sotto-pressione",
   titolo: "Che genitore diventi quando sei sotto pressione?",
+  /** Il titolo per Google e per l'anteprima sui social: deve far venire voglia di farlo. */
+  titoloSocial: "E tu che mamma diventi sotto pressione? Il test in 10 minuti",
+  /** Il testo che parte con il tasto «Condividi» (niente risultati dentro: restano privati). */
+  testoCondividi: "E tu che tipo di mamma sei quando sei sotto pressione? Io ho fatto il test di Giocamizi: 10 minuti, gratis, e le risposte restano sul telefono. Provalo 👇",
   descrizione:
     "Un percorso di dieci minuti per riconoscere le tue reazioni automatiche con i figli: 45 domande, un profilo delle tue cinque spinte e un esercizio per la settimana.",
   /** La chiave in sessionStorage (registro in lib/contenuti/legal.ts). */

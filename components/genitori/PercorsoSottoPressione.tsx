@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { FormGenitore } from "@/components/form/FormGenitore";
+import { CondividiTest } from "./CondividiTest";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   AFFERMAZIONI,
@@ -372,6 +374,22 @@ function Risultato({
         oggi: tra un mese potrebbe essere diverso. Se in questo periodo la fatica ti sembra troppa, parlane con il pediatra o con uno
         psicologo.
       </p>
+
+      <section className="flex flex-col gap-3 rounded-2xl bg-rosa/10 p-4 sm:p-5 print:hidden">
+        <h3 className="text-xl font-extrabold text-notte">Chissà le tue amiche che mamme diventano sotto pressione</h3>
+        <p className="text-lg text-notte-tenue">
+          Mandagli il test: nel messaggio c&apos;è solo l&apos;invito, il tuo risultato resta tuo.
+        </p>
+        <CondividiTest />
+      </section>
+
+      <div className="print:hidden" data-iscrizione-test>
+        <FormGenitore
+          origine="test-sotto-pressione"
+          titolo="Vuoi altre idee come questa, ogni tanto, via email?"
+          sottotitolo="È la Posta di Mizi: idee per i genitori, giochi nuovi e guide pratiche. Gratis, ti cancelli quando vuoi. Ci arriva solo la tua email: le risposte al test non le riceviamo."
+        />
+      </div>
 
       <div className="flex flex-wrap gap-3 print:hidden">
         <button

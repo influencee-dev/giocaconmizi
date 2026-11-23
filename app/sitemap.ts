@@ -15,6 +15,7 @@ import { percorsoRisorsa } from "@/lib/risorse/risorse-educative";
 import { PERCORSO_TUTORIAL, TUTORIAL, percorsoTutorial } from "@/lib/contenuti/tutorial";
 import { categorieAttive, listingRisorse, percorsoCategoriaRisorse, percorsoListingRisorse } from "@/lib/risorse/risorse-categorie";
 import { risorseVisibili } from "@/lib/risorse/risorse-reclamo";
+import { PERCORSO as TEST_GENITORI, PERCORSO_PUBBLICO as TEST_GENITORI_PUBBLICO } from "@/lib/famiglia/sotto-pressione";
 
 /**
  * Sitemap generata dal registry e dai contenuti: un nuovo gioco o una nuova
@@ -90,6 +91,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/aggiungi-attivita",
     "/per-insegnanti",
     "/per-le-mamme",
+    // il test per i genitori, solo quando non è in bozza
+    ...(TEST_GENITORI_PUBBLICO ? [TEST_GENITORI.percorso] : []),
     "/risorse-educative-bambini",
     "/natale",
     "/natale/letterina-babbo-natale",
