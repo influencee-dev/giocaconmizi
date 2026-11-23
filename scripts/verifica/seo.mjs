@@ -295,5 +295,11 @@ const linkLlms = [...llms.matchAll(/https?:\/\/[^\s)]+/g)].map((m) => m[0])
 const llmsFuori = linkLlms.filter((l) => new URL(l).origin !== dominio);
 ok("llms.txt: link sul dominio", linkLlms.length > 0 && llmsFuori.length === 0, `${linkLlms.length} link`);
 
+// 6. Le ricerche già lavorate dal SEO manager (content/seo/parole-chiave.json,
+// stato «fatto») hanno ancora le loro parole nel titolo o nell'H1 della pagina:
+// un titolo riscritto per sbaglio non deve buttare via il lavoro (23/11/2026).
+const copertura = spawnSync("node", ["scripts/seo-copertura.mjs", "--controlla"], { encoding: "utf8" });
+ok("parole chiave fatte ancora al loro posto", copertura.status === 0, (copertura.stdout + copertura.stderr).trim().split("\n").slice(-3).join(" · "));
+
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("seo") ? 0 : 1);

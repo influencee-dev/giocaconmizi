@@ -1,5 +1,6 @@
 ---
 title: "Le doppie"
+titoloSeo: "Le doppie: esercizi e gioco online per bambini"
 slug: le-doppie
 ageMin: 6
 ageMax: 8

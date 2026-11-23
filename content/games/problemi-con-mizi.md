@@ -1,5 +1,6 @@
 ---
 title: "Problemi con Mizi"
+titoloSeo: "Problemi di matematica per la seconda elementare"
 slug: problemi-con-mizi
 ageMin: 6
 ageMax: 8

@@ -31,6 +31,16 @@ Partidea SRL (dati in lib/contenuti/legal.ts → SOCIETA). Mascotte: Mizi, una p
   Se il deploy è READY sul commit appena pushato e le verifiche locali sono
   passate, non serve scaricare le pagine live.
 
+## SEO, GEO e AEO manager (23/11/2026)
+- Metodo: `.claude/skills/seo-geo-aeo-manager/SKILL.md` (da leggere prima di toccare titoli,
+  descrizioni, JSON-LD, sitemap, llms.txt, hub o link interni). Coda dei cantieri, in ordine:
+  `docs/piano-seo.md`. Ricerche vere con volume, pagina e stato: `content/seo/parole-chiave.json`
+  (Ubersuggest, 22/11/2026; pagina «Ricerca SEO Giocamizi», copia su Drive in 2 Aree → Sito e SEO).
+- Misura: `npm run seo:copertura` (dopo la build; `-- --md file` per il rapporto). Una ricerca
+  segnata «fatto» che perde le sue parole dal titolo o dall'H1 fa fallire la batteria seo.
+- Giochi: il `<title>` viene da `titoloSeo` nel frontmatter di `content/games/<slug>.md` (le
+  parole cercate); il nome del gioco resta nell'H1, nel catalogo e nell'album.
+
 ## Articoli nell'app e ordine dei contenuti (Giorgia, 22/11/2026)
 Scelte confermate da Giorgia con tre risposte a scelta, dopo due letture sbagliate:
 - L'ordine «giochi, poi location, poi storie, poi articoli» è l'ordine in cui
@@ -279,7 +289,8 @@ Scelte confermate da Giorgia con tre risposte a scelta, dopo due letture sbaglia
 Un miglioramento al giorno, piccolo e finito, a rotazione:
 (a) biglietti · (b) guide: migliorare una guida breve esistente (le guide
 NUOVE le scrive solo la routine articoli delle 9:00, mai questa) · (c) giochi ·
-(d) SEO/AEO tecnico. Non toccare content/guide/ né content/piano-editoriale.json.
+(d) SEO/AEO tecnico: un pezzo del primo cantiere aperto di docs/piano-seo.md, col metodo
+della skill seo-geo-aeo-manager. Non toccare content/guide/ né content/piano-editoriale.json.
 Prima di iniziare importa le foto arrivate in «99 Immagini pronte»; se il
 contenuto di domani avrà bisogno di foto, prenotale oggi (`npm run foto:prenota`).
 Prima leggi le note recenti in «0 Bacheca» e le richieste aperte in

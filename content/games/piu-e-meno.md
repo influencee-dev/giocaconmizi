@@ -1,5 +1,6 @@
 ---
 title: "Più e meno"
+titoloSeo: "Addizioni e sottrazioni con il cambio: gioco online"
 slug: piu-e-meno
 ageMin: 6
 ageMax: 8

@@ -1,5 +1,6 @@
 ---
 title: "Tabelline con Mizi"
+titoloSeo: "Tabelline dal 1 al 10: gioco online gratis"
 slug: tabelline
 ageMin: 7
 ageMax: 10

@@ -1,5 +1,6 @@
 ---
 title: "MB o MP?"
+titoloSeo: "Parole con MB e MP: gioco online per bambini"
 slug: mb-o-mp
 ageMin: 6
 ageMax: 8

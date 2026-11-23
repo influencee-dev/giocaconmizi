@@ -34,6 +34,12 @@ export interface Storia {
 export interface TestoGioco {
   slug: string;
   title: string;
+  /**
+   * Il titolo per Google (23/11/2026, .claude/skills/seo-geo-aeo-manager): le
+   * parole che la gente cerca («Tabelline dal 1 al 10») al posto del nome del
+   * gioco («Tabelline con Mizi»), che resta nell'H1, nel catalogo e nell'album.
+   */
+  titoloSeo?: string;
   description: string;
   ageMin: number;
   ageMax: number;
@@ -133,6 +139,7 @@ export function testoGioco(slug: string): TestoGioco | null {
   return {
     slug,
     title: dati.title ?? slug,
+    titoloSeo: dati.titoloSeo,
     description: dati.description ?? "",
     ageMin: dati.ageMin ?? 3,
     ageMax: dati.ageMax ?? 12,

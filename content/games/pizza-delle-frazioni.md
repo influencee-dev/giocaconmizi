@@ -1,5 +1,6 @@
 ---
 title: "La pizza delle frazioni"
+titoloSeo: "Frazioni per bambini: la pizza delle frazioni"
 slug: pizza-delle-frazioni
 ageMin: 8
 ageMax: 10

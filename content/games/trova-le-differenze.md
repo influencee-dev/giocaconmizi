@@ -1,5 +1,6 @@
 ---
 title: "Trova le differenze"
+titoloSeo: "Trova le differenze: gioco online gratis per bambini"
 slug: trova-le-differenze
 ageMin: 5
 ageMax: 8

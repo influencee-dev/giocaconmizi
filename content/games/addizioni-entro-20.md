@@ -1,5 +1,6 @@
 ---
 title: "Addizioni entro 20"
+titoloSeo: "Addizioni per bambini: gioco online entro 20"
 slug: addizioni-entro-20
 ageMin: 6
 ageMax: 8

@@ -1,5 +1,6 @@
 ---
 title: "Numeri in ordine"
+titoloSeo: "Numeri in ordine crescente e decrescente: gioco"
 slug: numeri-in-ordine
 ageMin: 6
 ageMax: 8

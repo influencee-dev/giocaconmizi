@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { games } from "@/games/registry";
 import { testoGioco } from "@/lib/contenuti/content";
+import { titoloPagina } from "@/lib/seo/seo";
 import { Contenitore, Prosa } from "@/components/ui";
 import { FigurinaDelGioco } from "@/components/giochi/FigurinaDelGioco";
 import {
@@ -29,11 +30,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     testo?.description ??
     `${gioco.title}: gioco educativo gratis per bambini dai ${gioco.ageMin} ai ${gioco.ageMax} anni. Senza pubblicità e senza timer.`;
 
+  // Il titolo per Google nomina quello che la gente cerca; il nome del gioco resta nell'H1.
+  const titolo = testo?.titoloSeo ?? gioco.title;
   return {
-    title: gioco.title,
+    title: titoloPagina(titolo),
     description: descrizione,
     alternates: { canonical: `/giochi/${slug}` },
-    openGraph: { title: gioco.title, description: descrizione },
+    openGraph: { title: titolo, description: descrizione },
   };
 }
 
