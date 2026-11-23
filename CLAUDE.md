@@ -325,6 +325,12 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   precedente in 4 Archivio rinominandolo «zz_SUPERATO — …».
 - Le ricerche web sono circa 200 per turno, condivise anche dagli aiutanti:
   non lanciare più di 3-4 aiutanti di ricerca insieme.
+- Dal 23/11/2026 (Giorgia: «quelle mail sono tutte sbagliate») anche le 80
+  realtà dell'archivio ex Gmail (righe GM-: cooperative, scuole, blog,
+  riviste) stanno nello stesso registro e partono da Zoho: le 80 bozze Gmail
+  vecchie non si spediscono. Il testo lo fa lo strumento (`--realta` con il
+  JSON tratto dal foglio «archivio-contatti-giocamizi-influencee», una volta
+  sola: poi le righe restano nel registro e si portano avanti da sole).
 - Le mail NON si spediscono mai. Il connettore Zoho di questa sessione legge e
   spedisce ma non salva bozze: per questo il testo sta nel foglio e Giorgia lo
   incolla in Zoho (casella giorgia@influencee.it, ciao@giocamizi.it in copia).
