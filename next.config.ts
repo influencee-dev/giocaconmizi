@@ -38,6 +38,10 @@ const nextConfig: NextConfig = {
   // leggono dal disco Mizi, le foto delle guide e il carattere Nunito: su
   // Vercel quei file vanno inclusi a mano nella funzione.
   outputFileTracingIncludes: {
+    // le anteprime di condivisione (lib/seo/og.tsx) leggono Nunito, Mizi e il logo;
+    // i loro percorsi interni hanno un suffisso (opengraph-image-xxxx): basta il prefisso
+    "/**/opengraph-image*": ["./lib/social/caratteri/*.ttf", "./public/mizi/mizi-intera.webp", "./public/mizi/giocamizi-logo-orizzontale.webp"],
+    "/opengraph-image*": ["./lib/social/caratteri/*.ttf", "./public/mizi/mizi-intera.webp", "./public/mizi/giocamizi-logo-orizzontale.webp"],
     "/social/[id]/[file]": ["./lib/social/caratteri/*.ttf", "./public/mizi/mizi-intera.webp", "./public/immagini/guida-*.webp"],
     "/admin/[codice]/social/anteprima/[id]/[file]": [
       "./lib/social/caratteri/*.ttf",

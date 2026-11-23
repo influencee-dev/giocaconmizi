@@ -1,8 +1,7 @@
-import { ImageResponse } from "next/og";
 import { cittaFeste, localiDaFesta } from "@/lib/directory/feste";
-import { dimensioniOg, ImmagineOg } from "@/lib/seo/og";
+import { dimensioniOg, immagineOg } from "@/lib/seo/og";
 
-export const alt = "Festa di compleanno per bambini — Gioca con Mizi";
+export const alt = "Festa di compleanno per bambini — Giocamizi";
 export const size = dimensioniOg;
 export const contentType = "image/png";
 
@@ -10,18 +9,11 @@ export const contentType = "image/png";
 export default async function Image({ params }: { params: Promise<{ citta: string }> }) {
   const { citta } = await params;
   const voce = cittaFeste(citta);
-
-  return new ImageResponse(
-    (
-      <ImmagineOg
-        titolo={
-          voce
-            ? `Festa di compleanno per bambini a ${voce.citta}`
-            : "Feste di compleanno per bambini"
-        }
-        sottotitolo={voce ? `${localiDaFesta(voce).length} location, zona per zona` : "città per città"}
-      />
-    ),
-    size,
-  );
+  return immagineOg({
+    titolo: voce ? `Festa di compleanno per bambini a ${voce.citta}` : "Feste di compleanno per bambini",
+    etichetta: voce ? `${localiDaFesta(voce).length} posti verificati` : "Città per città",
+    sottotitolo: "Zona per zona, con prezzi, età e cosa chiedere",
+    tinta: "rosa",
+    invito: "Scegli su giocamizi.it",
+  });
 }

@@ -1,19 +1,16 @@
-import { ImageResponse } from "next/og";
-import { dimensioniOg, ImmagineOg } from "@/lib/seo/og";
+import { dimensioniOg, immagineOg } from "@/lib/seo/og";
 
-export const alt = "Gioca con Mizi — giochi educativi gratis per bambini dai 3 ai 12 anni";
+export const alt = "Giocamizi — giochi educativi gratis per bambini dai 3 ai 12 anni";
 export const size = dimensioniOg;
 export const contentType = "image/png";
 
-/** L'anteprima di default per tutto il sito (home comprese le pagine senza immagine propria). */
+/** L'anteprima di default del sito (home e pagine senza anteprima propria). */
 export default function Image() {
-  return new ImageResponse(
-    (
-      <ImmagineOg
-        titolo="Giochi educativi per bambini dai 3 ai 12 anni"
-        sottotitolo="giochi · storie · coding · biglietti"
-      />
-    ),
-    size,
-  );
+  return immagineOg({
+    titolo: "Giochi educativi gratis per bambini dai 3 ai 12 anni",
+    etichetta: "Gratis · senza pubblicità",
+    sottotitolo: "Giochi, storie, inviti di compleanno e guide per i genitori",
+    tinta: "viola",
+    invito: "Gioca su giocamizi.it",
+  });
 }
