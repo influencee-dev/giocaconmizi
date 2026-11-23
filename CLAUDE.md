@@ -290,11 +290,57 @@ contenuto di domani avrà bisogno di foto, prenotale oggi (`npm run foto:prenota
 Prima leggi le note recenti in «0 Bacheca» e le richieste aperte in
 «0 Richieste di Giorgia»: una richiesta aperta viene PRIMA della rotazione
 (se è piccola si fa e basta; se è grande, se ne fa un pezzo e lo si dice).
+ATTIVITÀ NUOVE OGNI GIORNO (Giorgia, 23/11/2026: «ho bisogno di aggiungere
+più attività ogni giorno»): almeno 8 schede nuove al giorno, sempre vere e
+verificate. Prima le città nuove (fino a 3, con 2 locali solidi ciascuna); poi,
+per arrivare a 8, attività nuove nelle città GIÀ aperte, partendo dalle più
+grandi con meno schede e dalle categorie della directory (fattorie didattiche,
+teatro, corsi, parchi): lì i locali solidi abbondano. Stesse regole di sempre
+(sito ufficiale, segnali recenti, mai inventare, nome cercato nel file prima
+di aggiungerlo). Se in un giorno non si arriva a 8, si scrive perché.
+CONTATTI E MAIL DI OGNI ATTIVITÀ: vedi la sezione «Registro contatti
+attività» qui sotto. Si fa nello stesso giro, per ogni scheda nuova.
 Il lunedì controlla anche che i quattro documenti base di 3 Risorse siano
 ancora veri: se no, versione nuova con la data. Alla fine lascia una nota
 («AAAA-MM-GG 07:00 · Claude · Miglioramento», docs/bacheca.md).
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
+
+## Registro contatti attività (23/11/2026, richiesta di Giorgia)
+- Ogni attività del sito ha una riga nel foglio PRIVATO su Drive «Registro
+  contatti attività Giocamizi (AAAA-MM-GG)» in 1 Progetti (il più recente: i
+  vecchi vanno in 4 Archivio con «zz_SUPERATO»). Colonne: link della scheda,
+  sito, email, telefono, fonte, e la mail già scritta (oggetto e testo) con il
+  link della scheda, la pagina /come-reclamare-la-scheda e il video
+  /tutorial/come-reclamare-la-scheda. Stato: «Pronta da inviare», «Contatto da
+  trovare», «Senza email: chiamare…»; Giorgia scrive «Inviata» e la data.
+- Email e telefoni stanno SOLO in quel foglio, MAI nel repo né in Bacheca.
+  Si prendono dal sito ufficiale (o dalla pagina social ufficiale) con
+  WebSearch limitato al dominio; mai indovinati. Fonte scritta in colonna.
+- Giro di ogni giorno: (1) scarica il registro più recente come CSV
+  (download_file_content, exportMimeType text/csv); (2) scrivi in un file
+  dello scratchpad i contatti trovati oggi, come JSON
+  `[{link, sito, email, telefono, fonte_email, fonte_telefono, nota}]` (link =
+  indirizzo pieno della scheda): tutte le schede nuove di oggi e almeno 20
+  righe «Contatto da trovare» dell'arretrato; (3) `npx tsx
+  scripts/registro-contatti.ts --registro <csv> --contatti <json> --uscita
+  <csv nuovo>`: tiene le righe e le correzioni di Giorgia, aggiunge le schede
+  nuove del sito con la mail pronta, riempie solo le celle vuote; (4) carica il
+  CSV come foglio nuovo con la data di oggi in 1 Progetti e sposta il
+  precedente in 4 Archivio rinominandolo «zz_SUPERATO — …».
+- Le ricerche web sono circa 200 per turno, condivise anche dagli aiutanti:
+  non lanciare più di 3-4 aiutanti di ricerca insieme.
+- Dal 23/11/2026 (Giorgia: «quelle mail sono tutte sbagliate») anche le 80
+  realtà dell'archivio ex Gmail (righe GM-: cooperative, scuole, blog,
+  riviste) stanno nello stesso registro e partono da Zoho: le 80 bozze Gmail
+  vecchie non si spediscono. Il testo lo fa lo strumento (`--realta` con il
+  JSON tratto dal foglio «archivio-contatti-giocamizi-influencee», una volta
+  sola: poi le righe restano nel registro e si portano avanti da sole).
+- Le mail NON si spediscono mai. Il connettore Zoho di questa sessione legge e
+  spedisce ma non salva bozze: per questo il testo sta nel foglio e Giorgia lo
+  incolla in Zoho (casella giorgia@influencee.it, ciao@giocamizi.it in copia).
+  Le 81 bozze Zoho del 31/10 hanno il testo vecchio, senza video: non vanno
+  spedite; si cancellano solo con il sì di Giorgia.
 
 ## Video di Mizi (15/11/2026, docs/video-tutorial.md)
 - Nei video parla SEMPRE Mizi, in prima persona: pinguina-bambina di ~10 anni,
