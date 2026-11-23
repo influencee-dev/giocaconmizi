@@ -64,7 +64,7 @@
   "app/(public)/termini-attivita/page.tsx": "2026-11-08",
   "app/(public)/tutorial/[slug]/page.tsx": "2026-11-22",
   "app/(public)/tutorial/page.tsx": "2026-11-16",
-  "cards/registry.ts": "2026-11-19",
+  "cards/registry.ts": "2026-11-23",
   "content/games/abbina-i-colori.md": "2026-08-23",
   "content/games/addizioni-entro-20.md": "2026-08-23",
   "content/games/causa-ed-effetto.md": "2026-11-22",
@@ -200,6 +200,6 @@
   "games/unisci-i-puntini": "2026-10-11",
   "games/unisci-le-sillabe": "2026-11-17",
   "games/vesti-mizi": "2026-11-17",
-  "lib/biglietti/biglietti.ts": "2026-11-14",
+  "lib/biglietti/biglietti.ts": "2026-11-23",
   "lib/biglietti/esempi.ts": "2026-08-23"
 }

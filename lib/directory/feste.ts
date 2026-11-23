@@ -47,6 +47,15 @@
 // Gallarate NON ha una pagina sua: La Tana di Ninì (viale Milano) è già nella
 // pagina di Busto Arsizio, e la Ludoteca Wonderland (via Piceni) è stata aggiunta
 // lì il 22/11/2026. Per aprire Gallarate serve un altro locale solido, non questi.
+// Il 23/11/2026 (SOLO dai risultati di ricerca: quel giorno i siti dei locali non
+// si aprivano dalla sessione, quindi niente è stato letto sulle pagine):
+// Vittoria e Caltanissetta, nessun locale con un sito suo (solo Facebook,
+// Instagram o schede di elenchi; bowling e fattorie della zona sono a San
+// Cataldo e a Mazzarino); Afragola, col sito c'è solo Afragola Park (statale
+// Sannitica). DA RIPROVARE con la rete aperta, non scartata: Castellammare di
+// Stabia, dove due locali hanno un dominio loro (L'Acchiappasogni, traversa
+// Pozzillo; Nuvoletta Bianca, via Plinio il Vecchio) ma non ne abbiamo letto
+// le pagine né trovato una data recente.
 // Prima di aggiungere un locale, cercarne il nome in questo file: lo stesso posto
 // sotto due città crea due schede uguali.
 
