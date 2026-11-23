@@ -56,9 +56,25 @@ Scelte confermate da Giorgia con tre risposte a scelta, dopo due letture sbaglia
   consigliata. Titolo per Google e social «E tu che mamma diventi sotto
   pressione?» (`titoloSocial`), tasto «Condividi il test con le amiche»
   (components/genitori/CondividiTest.tsx: mai il risultato nel messaggio),
-  modulo della Posta di Mizi alla fine (origine «test-sotto-pressione» in
-  Brevo, al server SOLO l'email), richiamo «E tu che tipo di mamma sei?»
-  (InvitoTest) su /per-le-mamme e /guide. Con false torna bozza e tutto sparisce.
+  richiamo «E tu che tipo di mamma sei?» (InvitoTest) su /per-le-mamme e
+  /guide. Con false torna bozza e tutto sparisce.
+- Dati PRIMA del profilo (decisione di Giorgia, 23/11 sera): dopo l'ultima
+  domanda la fase «dati» (components/genitori/ModuloDati.tsx: nome, cognome,
+  email, fascia d'età, città, età del figlio, spunta per la Posta di Mizi),
+  detto già nella schermata iniziale. Va a /api/brevo con origine
+  «test-sotto-pressione» (LASTNAME, ETA_GENITORE): SOLO il modulo, mai le
+  risposte. Se Brevo non risponde il profilo si apre lo stesso.
+
+## Condividere e anteprime social (23/11/2026)
+- Tasto comune `components/condivisione/Condividi.tsx` (foglio del telefono,
+  altrimenti WhatsApp, Facebook, Telegram, email, copia link; link con UTM
+  utm_source=condivisione&utm_campaign=<guida|gioco|attivita|test-…>) su guide
+  e articoli, giochi, schede delle attività e test. Pagina nuova da far
+  condividere = un <Condividi> con un invito che porta sul sito.
+- Anteprime (opengraph-image) disegnate da `immagineOg` in lib/seo/og.tsx sul
+  design system: logo, Mizi, Nunito, etichetta colorata, «… su giocamizi.it →».
+  Ci sono per home, guide, feste/[città], giochi, schede, test; i file letti
+  stanno in outputFileTracingIncludes («/**/opengraph-image*»).
 - Non è un test validato e non fa diagnosi: i testi dicono «può», mai «sei».
   Il punteggio è un conto fisso; nessuna AI decide o ritocca i numeri.
 - Le risposte restano nel browser (sessionStorage): niente server, niente
