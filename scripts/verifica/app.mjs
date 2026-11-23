@@ -230,6 +230,8 @@ const benvenuto = (p) => p.locator("[data-benvenuto]");
 {
   // Accedi: errori detti come li direbbe una persona
   const ctx = await b.newContext(telefono); await ctx.addInitScript(UMANO);
+  // Supabase finto irraggiungibile: la prova non deve mai chiedere un link vero.
+  await ctx.route(/supabase\.co/, (r) => r.abort());
   const p = await ctx.newPage();
   await p.goto(BASE + "/accedi?errore=link-scaduto", { waitUntil: "networkidle" });
   ok("accedi: link scaduto, lo spiega", (await p.locator("form [role=alert]").textContent())?.includes("scaduto"));
