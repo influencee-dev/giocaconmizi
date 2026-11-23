@@ -107,7 +107,7 @@ ok("piè di pagina: dati della società e quattro porte", piede.includes("044055
 
 // 6. Listing in stile Booking: filtri per esperienze, conteggi, indirizzo
 // condivisibile; etichette del tipo di attività; «Cosa offre» nella scheda.
-await page.goto(`${BASE}/sale-feste/milano`, { waitUntil: "networkidle" });
+await page.goto(`${BASE}/ludoteche/milano`, { waitUntil: "networkidle" });
 const risultati = async () => Number(await page.locator("[data-risultati]").getAttribute("data-risultati"));
 const prima = await risultati();
 // Filtri per il telefono (15/11/2026): «Filtri» apre un foglio dal basso che
@@ -132,7 +132,7 @@ ok("listing: chiuso il foglio, «Filtri» mostra quanti sono accesi e la pillola
   (await page.locator("[data-filtro-rapido='animazione']").getAttribute("aria-pressed")) === "true");
 ok("listing: il filtro esperienze restringe i risultati", prima > dopo && dopo >= 1, `${dopo}/${prima}`);
 ok("listing: il filtro finisce nell'indirizzo", page.url().includes("servizi=animazione"));
-await page.goto(`${BASE}/sale-feste/milano?servizi=animazione`, { waitUntil: "networkidle" });
+await page.goto(`${BASE}/ludoteche/milano?servizi=animazione`, { waitUntil: "networkidle" });
 ok("listing: un link con i filtri li riapre", (await risultati()) === dopo);
 ok("listing: etichette del tipo su ogni card", (await page.locator("[data-risultato] [data-etichetta-tipo]").count()) === dopo);
 await page.locator("[data-salva]").first().tap();

@@ -349,6 +349,11 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   nuove del sito con la mail pronta, riempie solo le celle vuote; (4) carica il
   CSV come foglio nuovo con la data di oggi in 1 Progetti e sposta il
   precedente in 4 Archivio rinominandolo «zz_SUPERATO — …».
+- Schede arricchite (23/11/2026): 170 descrizioni riscritte dai siti ufficiali
+  (età, spazi, cosa include la festa), siti aggiunti o corretti; prezzi solo con
+  l'anno; personaggi protetti scritti come «feste a tema». La rete
+  dell'ambiente «Giocamizi» è aperta a tutti i siti pubblici (23/11, approvata
+  da Giorgia) per leggere i siti dei locali.
 - Le ricerche web sono circa 200 per turno, condivise anche dagli aiutanti:
   non lanciare più di 3-4 aiutanti di ricerca insieme.
 - Dal 23/11/2026 (Giorgia: «quelle mail sono tutte sbagliate») anche le 80
@@ -357,9 +362,14 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   vecchie non si spediscono. Il testo lo fa lo strumento (`--realta` con il
   JSON tratto dal foglio «archivio-contatti-giocamizi-influencee», una volta
   sola: poi le righe restano nel registro e si portano avanti da sole).
-- Le mail NON si spediscono mai. Il connettore Zoho di questa sessione legge e
-  spedisce ma non salva bozze: per questo il testo sta nel foglio e Giorgia lo
-  incolla in Zoho (casella giorgia@influencee.it, ciao@giocamizi.it in copia).
+- Invio (decisione di Giorgia del 23/11/2026, che sostituisce «le mail non si
+  spediscono mai»): le spedisce Claude dal connettore Zoho, da
+  giorgia@influencee.it con ciao@giocamizi.it in copia, con il testo del
+  registro, al massimo 40 al giorno, solo righe «Pronta da inviare» con email
+  presa da fonte ufficiale. Dopo ogni invio, nel registro: Stato «Inviata» e
+  Data invio. Mai a un'attività segnata «da controllare» (sito fermo da anni,
+  forse chiusa, nome che non corrisponde). Prima del primo invio Giorgia ha
+  visto due mail di prova arrivate a ciao@giocamizi.it.
   Le 81 bozze Zoho del 31/10 hanno il testo vecchio, senza video: non vanno
   spedite; si cancellano solo con il sì di Giorgia.
 
