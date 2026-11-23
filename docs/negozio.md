@@ -12,7 +12,7 @@ foglio e li carica nell'archivio privato; il volume si accende nel catalogo; la 
 
 | Prodotto | Codice | File | Prezzo proposto |
 |---|---|---|---|
-| Il libretto completo (storia + disegni) | `v01-libretto` | `libretto-A4.pdf` (una pagina per foglio), `libretto-A5.pdf` (doppie pagine, due per foglio) | 1,50 € |
+| Il libricino (storia + disegni + copertina a colori) | `v01-libretto` | `libricino-A5.pdf` (fronte-retro su A4, si piega e si pinza: 36 facciate A5), `libretto-A4.pdf` (una pagina per foglio, con la copertina) | 1,50 € |
 | I 12 disegni da colorare, senza storia | `v01-disegni` | `disegni-A4.pdf`, `disegni-A5.pdf` (due per foglio da tagliare) | 0,99 € |
 | Un disegno da solo | `v01-disegno-01` … `-12` | `disegno-NN-A4.pdf` | 0,20 € |
 
@@ -20,6 +20,11 @@ Ordine minimo 0,99 €. I prezzi sono proposte da confermare con Giorgia: si cam
 (in centesimi, IVA inclusa). Su un ordine da 1 € la commissione di Stripe per le carte europee (1,5% + 0,25 €,
 listino standard da ricontrollare sul pannello) si prende circa un quarto: per questo il disegno singolo si vende
 solo dentro un ordine minimo, e conviene spingere libretto e pacchetto.
+
+Il libricino si stampa fronte-retro «sul lato corto», si piegano i fogli a metà, si infilano uno dentro l'altro e
+si pinzano: le pagine tornano in ordine (imposizione a quartino in `scripts/negozio/pdf-casa.py`). Fuori c'è la
+copertina a colori del libro, ritagliata dalla copertina di Amazon; sul retro il riquadro del codice a barre diventa
+un'etichetta «giocamizi.it». Le pagine quadrate stanno su metà A4: chi vuole un libricino quadrato rifila sopra e sotto.
 
 Il disegno quadrato non si deforma: sul foglio A4 resta quadrato, con sopra il titolo e sotto «Colorato da».
 I prodotti non si scrivono a mano: nascono dal volume (`lib/negozio/catalogo.ts`). Se nel carrello c'è il pacchetto
@@ -58,17 +63,17 @@ Quando Giorgia ha approvato l'interno del libro (stato APPROVATO in `docs/libri-
 
 ```
 npm run negozio-pdf -- --interno /tmp/libri/v01/out/V01_interno_32p.pdf --codice v01 \
-  --titolo "Mizi e la stella che non voleva accendersi"
+  --titolo "Mizi e la stella che non voleva accendersi" --copertina /tmp/libri/v01/out/V01_copertina_wrap.pdf
 ```
 
-Fa tutto in `/tmp/negozio/v01`: libretto A4 e A5, disegni A4 e A5, i dodici disegni singoli, le anteprime e
+Fa tutto in `/tmp/negozio/v01`: libricino da piegare, libro in A4, disegni A4 e A5, i dodici disegni singoli, le anteprime, l'immagine della copertina per il negozio e
 `report.txt`. Si ferma se l'interno non ha 32 pagine, se manca una tavola o se non è quadrata; segnala le tavole
 sotto i 300 dpi in A4. Guardare a occhio almeno la prima pagina di ogni PDF, poi rilanciare con `--carica`
 (serve `SUPABASE_SERVICE_ROLE_KEY` nell'ambiente) per mettere i file negli archivi. Infine `"in_vendita": true`
 nel catalogo, con le verifiche di sempre.
 
-Provato il 23/11/2026 sull'interno del Volume 1 (bozza REVIEW v05): 17 PDF tra 114 KB e 2,8 MB, tavole a 348 dpi
-in A4 e 504 dpi in A5.
+Provato il 23/11/2026 sull'interno e sulla copertina del Volume 1 (bozze REVIEW v05): 17 PDF tra 114 KB e 5 MB,
+tavole a 348 dpi in A4 e 504 dpi in A5, libricino di 18 facciate A4 (9 fogli).
 
 ## Cosa serve per aprire (lato Giorgia)
 

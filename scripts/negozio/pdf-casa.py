@@ -4,18 +4,24 @@
 Il libro della collana è quadrato (8,5 × 8,5 pollici, 32 pagine): le pagine 5, 7, … 27
 sono le dodici tavole, le pari prima di ognuna il testo. Da quell'unico PDF escono:
 
-  libretto-A4.pdf         il libro intero, una pagina quadrata per foglio A4
-  libretto-A5.pdf         il libro a doppie pagine: due pagine per foglio A4 orizzontale,
-                          testo a sinistra e disegno a destra, linea di taglio al centro
+  libretto-A4.pdf         il libro intero, una pagina quadrata per foglio A4 (con la copertina)
+  libricino-A5.pdf        il libricino da piegare: si stampa fronte-retro su A4 (lato corto),
+                          si piega a metà e si pinza; copertina a colori fuori, 36 facciate
   disegni-A4.pdf          solo i dodici disegni, uno per foglio A4
   disegni-A5.pdf          solo i disegni, due per foglio A4 orizzontale da tagliare
   disegno-NN-A4.pdf       ogni disegno da solo (NN = 01…12)
   anteprime/disegno-NN.webp   anteprime piccole per la pagina del negozio (480 px)
+  anteprime/copertina.webp    il fronte della copertina per il negozio (720 px)
   report.txt              pagine, misure, pesi e risoluzione delle tavole
 
 Uso:
   python3 scripts/negozio/pdf-casa.py --interno V01_interno_32p.pdf --codice v01 \\
-      --titolo "Mizi e la stella che non voleva accendersi" [--uscita /tmp/negozio/v01] [--carica]
+      --titolo "Mizi e la stella che non voleva accendersi" \\
+      --copertina V01_copertina_wrap.pdf [--uscita /tmp/negozio/v01] [--carica]
+
+La copertina è il PDF avvolgente di Amazon (retro, dorso, fronte, 0,125" di abbondanza):
+se ne ritagliano il fronte e il retro, e sul retro il riquadro del codice a barre si copre
+con un'etichetta del sito.
 
 Con --carica i file vanno negli archivi di Supabase («negozio», privato, e
 «negozio-anteprime», pubblico): serve SUPABASE_SERVICE_ROLE_KEY nell'ambiente.
@@ -27,7 +33,9 @@ from __future__ import annotations
 import argparse
 import io
 import os
+import subprocess
 import sys
+import tempfile
 import urllib.request
 from pathlib import Path
 
@@ -77,11 +85,11 @@ def fondo(larghezza: float, altezza: float, taglio: bool) -> PageObject:
     return PdfReader(io.BytesIO(buf.getvalue())).pages[0]
 
 
-def libretto_a4(libro: PdfReader, uscita: Path) -> None:
+def libretto_a4(pagine: list[PageObject], uscita: Path) -> None:
     w, h = A4
     lato = w - 2 * 14 * mm
     out = PdfWriter()
-    for src in libro.pages:
+    for src in pagine:
         s = lato / float(src.mediabox.width)
         foglio = PageObject.create_blank_page(width=w, height=h)
         foglio.merge_page(fondo(w, h, False))
@@ -90,26 +98,99 @@ def libretto_a4(libro: PdfReader, uscita: Path) -> None:
     out.write(uscita / "libretto-A4.pdf")
 
 
-def libretto_a5(libro: PdfReader, uscita: Path) -> None:
-    """Doppie pagine come nel libro: (–,1) (2,3) (4,5) … (32,–)."""
+# ---------- la copertina (raster: è già un'immagine a 300 dpi) ----------
+
+ABBONDANZA = 9  # 0,125 pollici in punti
+LATO = 612      # 8,5 pollici in punti
+# Il riquadro bianco del codice a barre sul retro, in punti dal basso a sinistra del retro
+# (misurato sulla copertina del Volume 1: la collana lo tiene sempre lì).
+CODICE_A_BARRE = (451, 18, 593, 103)
+
+
+def ritaglia(wrap: Path, x0: float, cartella: Path, nome: str) -> Image.Image:
+    """Ritaglia un riquadro quadrato di 8,5" dalla copertina avvolgente, a 300 dpi."""
+    k = 300 / 72
+    base = cartella / nome
+    subprocess.run(
+        ["pdftoppm", "-r", "300", "-png", "-singlefile", "-x", str(round(x0 * k)), "-y", str(round(ABBONDANZA * k)),
+         "-W", str(round(LATO * k)), "-H", str(round(LATO * k)), str(wrap), str(base)],
+        check=True,
+    )
+    return Image.open(f"{base}.png").convert("RGB")
+
+
+def copertine(wrap: Path, cartella: Path) -> tuple[Image.Image, Image.Image]:
+    lettore = PdfReader(str(wrap))
+    larghezza = float(lettore.pages[0].mediabox.width)
+    altezza = float(lettore.pages[0].mediabox.height)
+    if abs(altezza - (LATO + 2 * ABBONDANZA)) > 1:
+        ferma(f"la copertina è alta {altezza:.0f} punti: mi aspetto 8,5\" più l'abbondanza ({LATO + 2 * ABBONDANZA}).")
+    fronte = ritaglia(wrap, larghezza - ABBONDANZA - LATO, cartella, "fronte")
+    retro = ritaglia(wrap, ABBONDANZA, cartella, "retro")
+    # Sul retro il posto del codice a barre di Amazon diventa un'etichetta del sito.
+    k = fronte.width / LATO
+    x0, y0, x1, y1 = CODICE_A_BARRE
+    d = ImageDraw.Draw(retro)
+    riquadro = (x0 * k, (LATO - y1) * k, x1 * k, (LATO - y0) * k)
+    d.rounded_rectangle(riquadro, radius=14 * k, fill="white")
+    f1 = ImageFont.truetype(str(CARATTERI / "nunito-800.ttf"), round(15 * k))
+    f2 = ImageFont.truetype(str(CARATTERI / "nunito-600.ttf"), round(9.5 * k))
+    cx = (riquadro[0] + riquadro[2]) / 2
+    d.text((cx, riquadro[1] + 30 * k), "giocamizi.it", font=f1, fill=(155, 109, 214), anchor="mm")
+    d.text((cx, riquadro[1] + 55 * k), "stampato a casa", font=f2, fill=(74, 81, 100), anchor="mm")
+    return fronte, retro
+
+
+def pagina_da_immagine(im: Image.Image | None) -> PageObject:
+    """Una pagina quadrata di 8,5" con l'immagine (o bianca, per l'interno della copertina)."""
+    if im is None:
+        return PageObject.create_blank_page(width=LATO, height=LATO)
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=(LATO, LATO))
+    jpg = io.BytesIO()
+    im.save(jpg, "JPEG", quality=88)
+    jpg.seek(0)
+    c.drawImage(ImageReader(jpg), 0, 0, LATO, LATO)
+    c.showPage()
+    c.save()
+    return PdfReader(io.BytesIO(buf.getvalue())).pages[0]
+
+
+def libricino(pagine: list[PageObject], uscita: Path) -> None:
+    """Imposizione a quartino: fogli A4 orizzontali, fronte e retro, da piegare e pinzare.
+
+    Con N facciate (multiplo di 4), il foglio k ha sul fronte N-1-2k | 2k e sul retro
+    2k+1 | N-2-2k (contando da 0). Stampando fronte-retro sul lato corto e piegando
+    i fogli uno dentro l'altro, le pagine tornano in ordine.
+    """
+    n = len(pagine)
+    if n % 4:
+        ferma(f"il libricino ha {n} facciate: devono essere un multiplo di 4.")
     w, h = landscape(A4)
     meta = w / 2
-    lato = meta - 2 * 10 * mm
-    pagine = list(libro.pages)
-    coppie = [(None, 0)] + [(i, i + 1 if i + 1 < len(pagine) else None) for i in range(1, len(pagine), 2)]
+    lato = meta - 2 * 7 * mm
     out = PdfWriter()
-    for sinistra, destra in coppie:
-        foglio = PageObject.create_blank_page(width=w, height=h)
-        foglio.merge_page(fondo(w, h, True))
-        for lato_foglio, indice in ((0, sinistra), (1, destra)):
-            if indice is None:
-                continue
-            src = pagine[indice]
-            s = lato / float(src.mediabox.width)
-            x = lato_foglio * meta + (meta - lato) / 2
-            foglio.merge_transformed_page(src, Transformation().scale(s).translate(x, (h - lato) / 2 + 3 * mm))
-        out.add_page(foglio)
-    out.write(uscita / "libretto-A5.pdf")
+    for k in range(n // 4):
+        for sinistra, destra in ((n - 1 - 2 * k, 2 * k), (2 * k + 1, n - 2 - 2 * k)):
+            foglio = PageObject.create_blank_page(width=w, height=h)
+            # Due piccoli segni in alto e in basso: dove piegare.
+            buf = io.BytesIO()
+            c = canvas.Canvas(buf, pagesize=(w, h))
+            c.setLineWidth(0.5)
+            c.setStrokeGray(0.6)
+            c.line(meta, h - 5 * mm, meta, h)
+            c.line(meta, 0, meta, 5 * mm)
+            c.showPage()
+            c.save()
+            foglio.merge_page(PdfReader(io.BytesIO(buf.getvalue())).pages[0])
+            for lato_foglio, indice in ((0, sinistra), (1, destra)):
+                src = pagine[indice]
+                s = lato / float(src.mediabox.width)
+                # Le pagine stanno vicino alla piega, come in un libro vero.
+                x = meta - lato - 2 * mm if lato_foglio == 0 else meta + 2 * mm
+                foglio.merge_transformed_page(src, Transformation().scale(s).translate(x, (h - lato) / 2))
+            out.add_page(foglio)
+    out.write(uscita / "libricino-A5.pdf")
 
 
 # ---------- i disegni da colorare ----------
@@ -207,6 +288,7 @@ def main() -> None:
     a.add_argument("--interno", required=True, help="il PDF dell'interno del libro (32 pagine quadrate)")
     a.add_argument("--codice", required=True, help="il codice del volume, es. v01 (come in content/negozio/catalogo.json)")
     a.add_argument("--titolo", required=True)
+    a.add_argument("--copertina", required=True, help="il PDF avvolgente della copertina (retro, dorso, fronte)")
     a.add_argument("--uscita", help="cartella di lavoro (predefinita /tmp/negozio/<codice>)")
     a.add_argument("--carica", action="store_true", help="carica i file negli archivi di Supabase")
     o = a.parse_args()
@@ -218,13 +300,18 @@ def main() -> None:
     libro = PdfReader(o.interno)
 
     ims = tavole(libro)
-    libretto_a4(libro, uscita)
-    libretto_a5(libro, uscita)
+    with tempfile.TemporaryDirectory() as tmp:
+        fronte, retro = copertine(Path(o.copertina), Path(tmp))
+    interno = list(libro.pages)
+    libretto_a4([pagina_da_immagine(fronte), *interno, pagina_da_immagine(retro)], uscita)
+    bianca = pagina_da_immagine(None)
+    libricino([pagina_da_immagine(fronte), bianca, *interno, bianca, pagina_da_immagine(retro)], uscita)
     disegni_a4(ims, o.titolo, uscita / "disegni-A4.pdf", list(range(1, len(ims) + 1)))
     disegni_a5(ims, o.titolo, uscita / "disegni-A5.pdf")
     for n in range(1, len(ims) + 1):
         disegni_a4(ims, o.titolo, uscita / f"disegno-{n:02d}-A4.pdf", [n])
     anteprime(ims, uscita / "anteprime")
+    fronte.resize((720, 720), Image.LANCZOS).save(uscita / "anteprime" / "copertina.webp", "WEBP", quality=80, method=6)
 
     righe = [f"Volume {o.codice} · {o.titolo}", f"Interno: {o.interno}, {len(libro.pages)} pagine"]
     dpi_a4 = min(im.width for im in ims) / ((A4[0] - 24 * mm) / 72)

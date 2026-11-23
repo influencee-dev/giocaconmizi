@@ -88,7 +88,8 @@ export default async function GraziePage({ searchParams }: { searchParams: Promi
         <p className="font-extrabold">Come stamparli</p>
         <p className="mt-1 text-notte-tenue">
           Carta A4 normale, stampa «a dimensione reale» (non «adatta alla pagina»). I PDF con due pagine per foglio si
-          tagliano a metà lungo la linea tratteggiata. Puoi tornare su questa pagina per {GIORNI_SCARICO} giorni.
+          tagliano a metà lungo la linea tratteggiata. Il libricino si stampa fronte-retro «sul lato corto»: pieghi i
+          fogli a metà, li infili uno dentro l&apos;altro e li pinzi al centro. Puoi tornare su questa pagina per {GIORNI_SCARICO} giorni.
         </p>
       </div>
       <p className="mt-8">

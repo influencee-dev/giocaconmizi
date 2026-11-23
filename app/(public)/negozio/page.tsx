@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Contenitore } from "@/components/ui";
 import { LinkCarrello } from "@/components/negozio/BottoneCarrello";
-import { NEGOZIO_APERTO, PREZZI, VOLUMI, euro, volumeVisibile } from "@/lib/negozio/catalogo";
+import { NEGOZIO_APERTO, PREZZI, VOLUMI, copertina, euro, volumeVisibile } from "@/lib/negozio/catalogo";
+import { SUPABASE_URL } from "@/lib/supabase/config";
 import { stripeDiProva } from "@/lib/negozio/stripe";
 
 // Finché NEGOZIO_APERTO è false il negozio è una bozza: si apre dal link,
@@ -23,7 +24,7 @@ export default function NegozioPage() {
         <div className="max-w-2xl">
           <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">Libretti e disegni da stampare</h1>
           <p className="mt-3 text-lg text-notte-tenue">
-            Le storie di Mizi in PDF, da stampare a casa su fogli A4. Puoi prendere il libretto completo, solo i disegni
+            Le storie di Mizi in PDF, da stampare a casa su fogli A4. Puoi prendere il libricino con la storia, solo i disegni
             da colorare, oppure un disegno alla volta. I giochi del sito restano gratis, sempre.
           </p>
         </div>
@@ -40,16 +41,26 @@ export default function NegozioPage() {
             <li key={v.codice}>
               <Link
                 href={`/negozio/${v.codice}`}
-                className="flex h-full flex-col rounded-[1.4rem] border-2 border-transparent bg-white p-6 hover:border-viola"
+                className="flex h-full flex-col overflow-hidden rounded-[1.4rem] border-2 border-transparent bg-white hover:border-viola"
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={copertina(v, SUPABASE_URL)}
+                  alt={`Copertina di «${v.titolo}»`}
+                  width={720}
+                  height={720}
+                  className="aspect-square w-full bg-viola/20 object-cover"
+                />
+                <span className="flex flex-1 flex-col p-6">
                 <p className="text-sm font-extrabold uppercase tracking-wide text-viola">
                   Volume {Number(v.codice.slice(1))} · {v.tema}
                 </p>
                 <p className="mt-2 text-xl font-extrabold text-notte">{v.titolo}</p>
                 <p className="mt-2 flex-1 leading-relaxed text-notte-tenue">{v.descrizione}</p>
                 <p className="mt-4 font-bold text-notte">
-                  Libretto {euro(PREZZI.libretto)} · {v.disegni} disegni {euro(PREZZI.disegni)} · un disegno {euro(PREZZI.disegno)}
+                  Libricino {euro(PREZZI.libretto)} · {v.disegni} disegni {euro(PREZZI.disegni)} · un disegno {euro(PREZZI.disegno)}
                 </p>
+                </span>
               </Link>
             </li>
           ))}
@@ -58,7 +69,7 @@ export default function NegozioPage() {
 
       <section className="mt-12 grid gap-4 sm:grid-cols-3">
         {[
-          { t: "Si stampa a casa", d: "PDF pronti per fogli A4: un disegno per foglio, oppure due per foglio da tagliare a metà." },
+          { t: "Si stampa a casa", d: "PDF pronti per fogli A4. Il libricino si stampa fronte-retro e si piega: copertina a colori e pagine in ordine." },
           { t: "Subito tuoi", d: "Dopo il pagamento li scarichi dalla pagina e te li mandiamo per email. Il link vale un anno." },
           { t: "Per la famiglia e la classe", d: "Stampali tutte le volte che vuoi, a casa o a scuola. Non si rivendono e non si mettono online." },
         ].map((x) => (

@@ -92,7 +92,7 @@ export function Carrello({ prova }: { prova: boolean }) {
 
       {tolti.length > 0 && (
         <p className="text-sm text-notte-tenue">
-          Alcuni disegni singoli non sono nel conto: sono già dentro il pacchetto o il libretto che hai scelto.
+          Alcuni disegni singoli non sono nel conto: sono già dentro il pacchetto o il libricino che hai scelto.
         </p>
       )}
 

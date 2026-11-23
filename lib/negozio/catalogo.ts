@@ -4,7 +4,8 @@ import dati from "@/content/negozio/catalogo.json";
  * Il negozio dei PDF da stampare a casa (23/11/2026, docs/negozio.md).
  *
  * Per ogni volume della collana si vendono tre cose:
- *   - il libretto completo (storia + disegni), in A4 e in A5 due per foglio;
+ *   - il libricino (storia + disegni + copertina a colori): da stampare fronte-retro,
+ *     piegare e pinzare, oppure una pagina per foglio A4;
  *   - il pacchetto dei disegni da colorare, senza storia, in A4 e in A5 due per foglio;
  *   - ogni disegno da solo, in A4.
  * I prodotti non si scrivono a mano: nascono dal volume (content/negozio/catalogo.json).
@@ -70,12 +71,12 @@ function prodottiDel(v: Volume): Prodotto[] {
       codice: `${v.codice}-libretto`,
       volume: v,
       tipo: "libretto",
-      nome: "Il libretto completo",
-      sotto: `La storia e i ${v.disegni} disegni, ${v.pagine_libretto} pagine. Da stampare su fogli A4, oppure due pagine per foglio come un vero libretto.`,
+      nome: "Il libricino",
+      sotto: `La storia e i ${v.disegni} disegni, ${v.pagine_libretto} pagine con la copertina a colori. Lo stampi fronte-retro, pieghi i fogli a metà, li pinzi: ed è un libricino vero. C'è anche la versione con una pagina per foglio A4.`,
       prezzo: PREZZI.libretto,
       file: [
-        { chiave: "libretto-a4", nome: nomeFile(v, "libretto-A4"), percorso: `${v.codice}/libretto-A4.pdf` },
-        { chiave: "libretto-a5", nome: nomeFile(v, "libretto-due-pagine-per-foglio"), percorso: `${v.codice}/libretto-A5.pdf` },
+        { chiave: "libricino", nome: nomeFile(v, "libricino-da-piegare"), percorso: `${v.codice}/libricino-A5.pdf` },
+        { chiave: "libretto-a4", nome: nomeFile(v, "libro-una-pagina-per-foglio-A4"), percorso: `${v.codice}/libretto-A4.pdf` },
       ],
     },
     {
@@ -116,6 +117,11 @@ export const prodottiDelVolume = (codice: string) => PRODOTTI.filter((p) => p.vo
 /** L'anteprima del disegno: piccola, con il segno del sito, nell'archivio pubblico «negozio-anteprime». */
 export function anteprima(v: Volume, numero: number, base: string) {
   return `${base}/storage/v1/object/public/negozio-anteprime/${v.codice}/disegno-${due(numero)}.webp`;
+}
+
+/** Il fronte della copertina, ritagliato dalla copertina del libro, nello stesso archivio pubblico. */
+export function copertina(v: Volume, base: string) {
+  return `${base}/storage/v1/object/public/negozio-anteprime/${v.codice}/copertina.webp`;
 }
 
 /** Prezzo in euro all'italiana: 99 → «0,99 €». */
