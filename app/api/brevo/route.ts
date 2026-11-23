@@ -15,6 +15,9 @@ interface CorpoContatto {
   azione: "contatto";
   email: string;
   nomeGenitore?: string;
+  cognome?: string;
+  /** Fascia d'età di chi si iscrive (modulo del test per i genitori). */
+  etaGenitore?: string;
   citta?: string;
   professione?: string;
   etaFiglio?: number;
@@ -58,6 +61,8 @@ export async function POST(request: NextRequest) {
     const esito = await creaContatto({
       email,
       nomeGenitore: corto(corpo.nomeGenitore, 60),
+      cognome: corto(corpo.cognome, 60),
+      etaGenitore: corto(corpo.etaGenitore, 20),
       citta: corto(corpo.citta, 60),
       professione: corto(corpo.professione, 40),
       etaFiglio: Number.isInteger(eta) && eta >= 0 && eta <= 18 ? eta : undefined,

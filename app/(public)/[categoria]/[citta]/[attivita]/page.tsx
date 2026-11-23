@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Condividi } from "@/components/ui/Condividi";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SCHEDE, datiCard, haListing, percorsoScheda, scheda, schedeDi } from "@/lib/directory/directory";
@@ -211,6 +212,14 @@ export default async function SchedaPage({ params }: P) {
             {faFeste && valori.fannoFeste !== false && <span data-fa-feste className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">Fa feste di compleanno</span>}
             <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">{cat.nome}</span>
           </div>
+          <Condividi
+            percorso={percorsoScheda(s)}
+            titolo={`${s.nome}, ${s.citta}`}
+            testo={`${s.nome} a ${s.citta}: ${faFeste ? "per la festa di compleanno" : "per i bambini"} trovi tutte le info sulla scheda di Giocamizi 👇`}
+            campagna="attivita"
+            etichetta="Condividi la scheda"
+            compatto
+          />
         </div>
 
         <div className="mt-6 flex flex-col gap-3">

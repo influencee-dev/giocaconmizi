@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormGenitore } from "@/components/form/FormGenitore";
+import { ModuloDati, sbloccato } from "./ModuloDati";
 import { CondividiTest } from "./CondividiTest";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
@@ -27,11 +27,16 @@ import {
  *
  * Le risposte NON lasciano il browser: stanno nella memoria della pagina e in
  * sessionStorage (per riprendere se la scheda si ricarica), e spariscono
- * chiudendo la scheda o toccando «Cancella le mie risposte». Niente invii al
- * server, niente statistiche: lo controlla la batteria `genitori`.
+ * chiudendo la scheda o toccando «Cancella le mie risposte». Niente
+ * statistiche: lo controlla la batteria `genitori`.
+ *
+ * Prima del profilo (decisione di Giorgia del 23/11/2026) c'è la fase «dati»:
+ * nome, cognome, email, fascia d'età, città, età del figlio e iscrizione alla
+ * Posta di Mizi (ModuloDati). Al server va SOLO quel modulo, mai le risposte.
+ * Lo si dice già nella schermata iniziale.
  */
 
-type Fase = "inizio" | "domande" | "risultato";
+type Fase = "inizio" | "domande" | "dati" | "risultato";
 
 interface Salvato {
   versione: string;
@@ -71,7 +76,7 @@ export function PercorsoSottoPressione({ titoli }: { titoli: Record<string, stri
     if (!dato || !Object.keys(dato.risposte).length) return;
     if (completo(dato.risposte)) {
       setRisposte(dato.risposte);
-      setFase("risultato");
+      setFase(sbloccato() ? "risultato" : "dati");
     } else setDaRiprendere(dato);
   }, []);
 
@@ -109,7 +114,7 @@ export function PercorsoSottoPressione({ titoli }: { titoli: Record<string, stri
     // Un attimo per vedere la scelta accendersi, poi si passa da soli alla domanda dopo.
     passaggio.current = window.setTimeout(() => {
       if (indice + 1 < TOTALE_DOMANDE) vai("domande", indice + 1, nuove);
-      else if (completo(nuove)) vai("risultato", indice, nuove);
+      else if (completo(nuove)) vai(sbloccato() ? "risultato" : "dati", indice, nuove);
     }, 260);
   };
 
@@ -144,6 +149,10 @@ export function PercorsoSottoPressione({ titoli }: { titoli: Record<string, stri
               </li>
               <li>
                 <strong className="text-notte">Le risposte restano su questo dispositivo.</strong> Non le riceviamo e non le salviamo.
+              </li>
+              <li>
+                <strong className="text-notte">Alla fine ti chiediamo chi sei.</strong> Per vedere il profilo lasci nome ed email e ti iscrivi
+                alla Posta di Mizi: ti cancelli con un clic quando vuoi. A noi arrivano solo quei dati, non le risposte.
               </li>
             </ul>
             <div className="flex flex-wrap gap-3">
@@ -239,7 +248,7 @@ export function PercorsoSottoPressione({ titoli }: { titoli: Record<string, stri
                 <button
                   type="button"
                   data-avanti
-                  onClick={() => (indice + 1 < TOTALE_DOMANDE ? vai("domande", indice + 1, risposte) : completo(risposte) && vai("risultato", indice, risposte))}
+                  onClick={() => (indice + 1 < TOTALE_DOMANDE ? vai("domande", indice + 1, risposte) : completo(risposte) && vai(sbloccato() ? "risultato" : "dati", indice, risposte))}
                   className="rounded-2xl bg-notte px-5 py-3 text-base font-extrabold text-white hover:bg-viola"
                 >
                   {indice + 1 < TOTALE_DOMANDE ? "Avanti" : "Vedi il profilo"}
@@ -248,6 +257,8 @@ export function PercorsoSottoPressione({ titoli }: { titoli: Record<string, stri
             </div>
           </div>
         )}
+
+        {fase === "dati" && <ModuloDati onFatto={() => vai("risultato", indice, risposte)} />}
 
         {fase === "risultato" && <Risultato profilo={calcola(risposte)} titoli={titoli} onRicomincia={() => vai("domande", 0, {})} onCancella={cancella} />}
       </div>
@@ -382,14 +393,6 @@ function Risultato({
         </p>
         <CondividiTest />
       </section>
-
-      <div className="print:hidden" data-iscrizione-test>
-        <FormGenitore
-          origine="test-sotto-pressione"
-          titolo="Vuoi altre idee come questa, ogni tanto, via email?"
-          sottotitolo="È la Posta di Mizi: idee per i genitori, giochi nuovi e guide pratiche. Gratis, ti cancelli quando vuoi. Ci arriva solo la tua email: le risposte al test non le riceviamo."
-        />
-      </div>
 
       <div className="flex flex-wrap gap-3 print:hidden">
         <button

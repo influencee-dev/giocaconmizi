@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Condividi } from "@/components/ui/Condividi";
 import { titoloPagina } from "@/lib/seo/seo";
 import Image from "next/image";
 import Link from "next/link";
@@ -109,6 +110,17 @@ export default async function GuidaPage({
         )}
       </p>
 
+      <div className="mt-4">
+        <Condividi
+          percorso={`/guide/${voce.slug}`}
+          titolo={voce.titolo}
+          testo={`Ho trovato questa guida su Giocamizi, scritta da una mamma: «${voce.titolo}». Ti può servire 👇`}
+          campagna="guida"
+          etichetta={voce.approfondimento ? "Condividi l'articolo" : "Condividi la guida"}
+          compatto
+        />
+      </div>
+
       {foto && (
         <figure className="relative mt-6 aspect-video overflow-hidden rounded-morbido bg-crema-scuro" data-foto-guida>
           <Image
@@ -201,6 +213,15 @@ export default async function GuidaPage({
         >
           Tutte le guide
         </Link>
+      </section>
+      <section className="mt-10 flex flex-col gap-3 rounded-morbido border-2 border-rosa/40 bg-rosa/10 p-6">
+        <h2 className="text-xl font-extrabold text-notte">Ti è stata utile? Mandala a un&apos;altra mamma</h2>
+        <Condividi
+          percorso={`/guide/${voce.slug}`}
+          titolo={voce.titolo}
+          testo={`Ho trovato questa guida su Giocamizi, scritta da una mamma: «${voce.titolo}». Ti può servire 👇`}
+          campagna="guida"
+        />
       </section>
     </Contenitore>
   );

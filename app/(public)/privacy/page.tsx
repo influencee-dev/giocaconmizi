@@ -76,7 +76,10 @@ export default function PrivacyPage() {
         <p>
           <strong className="text-notte">3. Novità via email (facoltative).</strong> Se ti
           iscrivi salviamo l&apos;email e i campi facoltativi che scegli di darci (nome,
-          città, professione, età del bambino). Base giuridica: il tuo consenso
+          città, professione, età del bambino). Se ti iscrivi alla fine del test per i
+          genitori «sotto pressione» ci dai nome, cognome, email, fascia d&apos;età, città
+          ed età del figlio più piccolo: le risposte al test e il profilo non ci arrivano,
+          restano nel tuo browser. Base giuridica: il tuo consenso
           (art. 6.1.a), che non è mai pre-spuntato e puoi revocare quando vuoi con il link
           in fondo a ogni email. L&apos;iscrizione funziona con il doppio opt-in: ti mandiamo
           un&apos;email di conferma e ti scriviamo solo dopo il tuo clic. Insieme al contatto
