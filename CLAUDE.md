@@ -61,9 +61,30 @@ Scelte confermate da Giorgia con tre risposte a scelta, dopo due letture sbaglia
   Transazionale (Kahler) e 10 situazioni di casa, poi un profilo. Domande,
   calcolo e letture in `lib/famiglia/sotto-pressione.ts`, schermo in
   `components/genitori/`, prove in `scripts/verifica/genitori.mjs`.
-- È una BOZZA finché `PERCORSO_PUBBLICO` è false: noindex, fuori dalla sitemap,
-  nessun collegamento dal sito. La accende solo Giorgia, dopo che uno psicologo
-  ha riletto domande e letture.
+- PUBBLICATO il 23/11/2026 per decisione di Giorgia (`PERCORSO_PUBBLICO` true),
+  anche per raccogliere iscrizioni; la rilettura di uno psicologo resta
+  consigliata. Titolo per Google e social «E tu che mamma diventi sotto
+  pressione?» (`titoloSocial`), tasto «Condividi il test con le amiche»
+  (components/genitori/CondividiTest.tsx: mai il risultato nel messaggio),
+  richiamo «E tu che tipo di mamma sei?» (InvitoTest) su /per-le-mamme e
+  /guide. Con false torna bozza e tutto sparisce.
+- Dati PRIMA del profilo (decisione di Giorgia, 23/11 sera): dopo l'ultima
+  domanda la fase «dati» (components/genitori/ModuloDati.tsx: nome, cognome,
+  email, fascia d'età, città, età del figlio, spunta per la Posta di Mizi),
+  detto già nella schermata iniziale. Va a /api/brevo con origine
+  «test-sotto-pressione» (LASTNAME, ETA_GENITORE): SOLO il modulo, mai le
+  risposte. Se Brevo non risponde il profilo si apre lo stesso.
+
+## Condividere e anteprime social (23/11/2026)
+- Tasto comune `components/ui/Condividi.tsx` (foglio del telefono,
+  altrimenti WhatsApp, Facebook, Telegram, email, copia link; link con UTM
+  utm_source=condivisione&utm_campaign=<guida|gioco|attivita|test-…>) su guide
+  e articoli, giochi, schede delle attività e test. Pagina nuova da far
+  condividere = un <Condividi> con un invito che porta sul sito.
+- Anteprime (opengraph-image) disegnate da `immagineOg` in lib/seo/og.tsx sul
+  design system: logo, Mizi, Nunito, etichetta colorata, «… su giocamizi.it →».
+  Ci sono per home, guide, feste/[città], giochi, schede, test; i file letti
+  stanno in outputFileTracingIncludes («/**/opengraph-image*»).
 - Non è un test validato e non fa diagnosi: i testi dicono «può», mai «sei».
   Il punteggio è un conto fisso; nessuna AI decide o ritocca i numeri.
 - Le risposte restano nel browser (sessionStorage): niente server, niente

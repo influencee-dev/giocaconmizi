@@ -127,7 +127,7 @@ export const REGISTRO: VoceRegistro[] = [
     nome: "giocamizi-percorso-genitori",
     tipo: "sessionStorage",
     scopo:
-      "Tiene le risposte al percorso per i genitori «sotto pressione» mentre lo compili, per non perderle se la pagina si ricarica. Restano solo nel tuo browser: non le riceviamo.",
+      "Tiene le risposte al percorso per i genitori «sotto pressione» mentre lo compili, per non perderle se la pagina si ricarica, e ricorda (giocamizi-percorso-genitori-dati) che hai già lasciato i tuoi dati, così il profilo si riapre senza chiederli di nuovo. Restano solo nel tuo browser: le risposte non le riceviamo.",
     durata: "Finché chiudi la scheda, o subito con «Cancella le mie risposte»",
     necessario: true,
     chi: "noi",

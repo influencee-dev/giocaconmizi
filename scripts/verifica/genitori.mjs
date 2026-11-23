@@ -24,10 +24,23 @@ const sitemap = await fetch(`${BASE}/sitemap.xml`).then((r) => r.text());
 const noindex = /<meta name="robots" content="[^"]*noindex/.test(html);
 if (pubblico) {
   ok("pubblica: indicizzabile e in sitemap", !noindex && sitemap.includes(PERCORSO));
+  // il richiamo «E tu che tipo di mamma sei?» porta al test da «Per le mamme» e dalle guide
+  const richiami = await Promise.all(["/per-le-mamme", "/guide"].map((x) => fetch(BASE + x).then((r) => r.text())));
+  ok("pubblica: «Per le mamme» e le guide invitano al test", richiami.every((t) => t.includes("data-invito-test") && t.includes(`href="${PERCORSO}"`)));
+  ok("pubblica: titolo per Google e social che invoglia, e il tasto condividi in cima",
+    /<title>E tu che mamma diventi sotto pressione\?/.test(html) && /property="og:title" content="E tu che mamma/.test(html) && html.includes("data-condividi-test"));
 } else {
   ok("bozza: noindex e fuori dalla sitemap", noindex && !sitemap.includes(PERCORSO));
   const altre = await Promise.all(["/", "/guide", "/per-le-mamme", "/chi-siamo", "/llms.txt"].map((p) => fetch(BASE + p).then((r) => r.text())));
   ok("bozza: nessuna pagina del sito la collega", altre.every((t) => !t.includes(PERCORSO)));
+}
+// Il tasto «Condividi» comune (components/ui/Condividi.tsx) e l'anteprima disegnata
+// stanno su articoli, giochi e schede delle attività (decisione del 23/11/2026).
+for (const [x, campagna] of [["/guide/imparare-a-leggere-giocando", "guida"], ["/giochi/tabelline", "gioco"], ["/ludoteche/milano/il-nano-gigante", "attivita"]]) {
+  const t = await fetch(BASE + x).then((r) => r.text());
+  const og = t.match(/property="og:image" content="https?:\/\/[^/"]+([^"]+)"/)?.[1];
+  const img = og ? await fetch(BASE + og.replaceAll("&amp;", "&")) : null;
+  ok(`condividi su ${x}: tasto e anteprima disegnata`, t.includes(`data-condividi="${campagna}"`) && img?.status === 200 && img.headers.get("content-type") === "image/png");
 }
 ok("pagina: dice che non è una diagnosi e che le risposte restano nel browser", html.includes("Non è una diagnosi") && html.includes("restano nel tuo browser"));
 ok("codice: il questionario ESQ-R-I non è copiato (solo citato nelle regole)", (sorgente.match(/ESQ-R-I/g) ?? []).length === 1);
@@ -36,17 +49,40 @@ const b = await apriBrowser();
 const telefono = { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true };
 const UMANO = () => localStorage.setItem("mizi.consenso-statistiche", "no");
 
-/** Apre la pagina e tiene il conto di tutto ciò che parte verso la rete. */
-async function apri(opzioni = telefono) {
+/**
+ * Apre la pagina e tiene il conto di tutto ciò che parte verso la rete.
+ * L'iscrizione (/api/brevo) non arriva a Brevo: risponde la prova con `esitoBrevo`
+ * e il corpo inviato finisce in `moduli`, per controllare che non porti le risposte.
+ */
+async function apri(opzioni = telefono, esitoBrevo = 200) {
   const ctx = await b.newContext(opzioni);
   await ctx.addInitScript(UMANO);
   const p = await ctx.newPage();
   const invii = [];
+  const moduli = [];
+  await p.route("**/api/brevo", (r) => {
+    moduli.push(JSON.parse(r.request().postData() ?? "{}"));
+    return r.fulfill({ status: esitoBrevo, contentType: "application/json", body: JSON.stringify({ ok: esitoBrevo === 200 }) });
+  });
   p.on("request", (r) => {
     if (r.method() !== "GET") invii.push(`${r.method()} ${r.url()}`);
   });
   await p.goto(BASE + PERCORSO, { waitUntil: "networkidle" });
-  return { ctx, p, invii };
+  return { ctx, p, invii, moduli };
+}
+
+/** Il modulo prima del profilo: lo compila con dati finti e lo manda. */
+async function lasciaDati(p) {
+  const m = p.locator("[data-modulo-dati]");
+  await m.locator("input[name=nome]").fill("Anna");
+  await m.locator("input[name=cognome]").fill("Prova");
+  await m.locator("input[name=email]").fill("anna.prova@esempio.it");
+  await m.locator("select[name=eta]").selectOption({ index: 2 });
+  await m.locator("input[name=citta]").fill("Milano");
+  await m.locator("select[name=etaFiglio]").selectOption("6");
+  await m.locator("input[name=consenso]").check();
+  await m.locator("[data-vedi-profilo]").tap();
+  await p.locator("[data-risultato]").waitFor({ timeout: 5000 }).catch(() => null);
 }
 
 const stato = (p) => p.locator("[data-percorso]").evaluate((e) => ({ fase: e.dataset.fase, indice: Number(e.dataset.indice) }));
@@ -102,7 +138,7 @@ const risultato = (p) => p.locator("[data-risultato]").evaluate((e) => ({ ...e.d
 
 // 2. Tutto su «Sbrigati»: la spinta va a 100, le altre a 0.
 {
-  const { ctx, p, invii } = await apri();
+  const { ctx, p, invii, moduli } = await apri();
   ok("inizio: spiega durata, niente risposte giuste, risposte sul dispositivo",
     await p.locator("[data-percorso]").evaluate((e) => /45 domande/.test(e.textContent) && /Non esistono risposte giuste/.test(e.textContent) && /restano su questo dispositivo/.test(e.textContent)));
   await p.locator("[data-comincia]").tap();
@@ -123,7 +159,23 @@ const risultato = (p) => p.locator("[data-risultato]").evaluate((e) => ({ ...e.d
     situazioni.every((d) => d.versi.length === 4 && d.versi.filter((v) => v === "calma").length === 1) && SPINTE.every((k) => versi.filter((v) => v === k).length === 6));
   ok("situazioni: la risposta pensata cambia posto", new Set(situazioni.map((d) => d.versi.indexOf("calma"))).size >= 3);
 
-  ok("alla fine si arriva al profilo", (await stato(p)).fase === "risultato");
+  // prima del profilo: il modulo con i dati (decisione di Giorgia del 23/11/2026)
+  ok("dopo l'ultima domanda arriva il modulo, non ancora il profilo", (await stato(p)).fase === "dati" && (await p.locator("[data-risultato]").count()) === 0);
+  const campi = await p.locator("[data-modulo-dati] [name]").evaluateAll((e) => e.map((x) => x.getAttribute("name")));
+  ok("modulo: nome, cognome, email, età, città, età del figlio e consenso",
+    ["nome", "cognome", "email", "eta", "citta", "etaFiglio", "consenso"].every((n) => campi.includes(n)));
+  ok("modulo: il consenso non è spuntato in partenza", !(await p.locator("[data-modulo-dati] input[name=consenso]").isChecked()));
+  const altezze = await p.locator("[data-modulo-dati] input:not([type=checkbox]):not([tabindex='-1']), [data-modulo-dati] select, [data-vedi-profilo]").evaluateAll((e) => e.map((x) => x.getBoundingClientRect().height));
+  ok("modulo: campi e bottone grandi da toccare (almeno 48 px)", altezze.length === 7 && altezze.every((h) => h >= 48), altezze.join(","));
+  ok("nessuno sbordo sul modulo (390 px)", await p.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1));
+  await lasciaDati(p);
+  ok("mandati i dati, si arriva al profilo", (await stato(p)).fase === "risultato");
+  const [modulo] = moduli;
+  ok("al server va solo il modulo: dati, origine «test-sotto-pressione», consenso",
+    moduli.length === 1 && modulo.origine === "test-sotto-pressione" && modulo.consenso === true && modulo.cognome === "Prova" && modulo.etaFiglio === 6 && modulo.citta === "Milano");
+  ok("nel modulo non c'è niente delle risposte né del profilo",
+    Object.keys(modulo).every((k) => ["azione", "email", "nomeGenitore", "cognome", "etaGenitore", "citta", "etaFiglio", "origine", "consenso", "maggiorenne", "sito"].includes(k)) &&
+    !/sbrigati|perfetto|compiaci|sforzati|forte|risposte|punteggi/i.test(JSON.stringify(modulo)));
   const bar = await barre(p);
   const conto = attesi(viste);
   ok("il punteggio è il conto dichiarato (somma delle 7 risposte, da 0 a 100)", SPINTE.every((k) => bar[k]?.punti === conto[k]), JSON.stringify(bar));
@@ -143,7 +195,15 @@ const risultato = (p) => p.locator("[data-risultato]").evaluate((e) => ({ ...e.d
   const stati = await Promise.all(unici.map((l) => fetch(BASE + l.href).then((r) => r.status)));
   ok("i collegamenti «Su Giocamizi» rispondono 200 e hanno un titolo", unici.length >= 10 && stati.every((s) => s === 200) && unici.every((l) => l.testo && !l.testo.startsWith("/")), unici.map((l, i) => `${l.href}:${stati[i]}`).filter((_, i) => stati[i] !== 200).join(" "));
 
-  ok("nessuna risposta lascia il browser (zero invii al server)", invii.length === 0, invii.join(" | "));
+  // condividere: nel messaggio solo l'invito e l'indirizzo, mai il risultato
+  ok("profilo: c'è il tasto per condividere il test", (await p.locator("[data-risultato] [data-condividi-test] button").count()) === 1);
+  await p.evaluate(() => { Object.defineProperty(navigator, "share", { value: undefined, configurable: true }); });
+  await p.locator("[data-risultato] [data-condividi-test] button").first().tap();
+  const voci = await p.locator("[data-risultato] [data-condividi-voci] a").evaluateAll((e) => e.map((x) => x.getAttribute("href")));
+  const wa = decodeURIComponent(voci.find((h) => h.startsWith("https://wa.me/")) ?? "");
+  ok("condividi: WhatsApp, Facebook, Telegram ed email, con l'invito e il link al test", voci.length === 4 && wa.includes("che tipo di mamma") && wa.includes(`giocamizi.it${PERCORSO}`));
+  ok("condividi: nel messaggio non c'è il risultato di chi ha compilato", !/sbrigati|\/100|spinta/i.test(voci.map(decodeURIComponent).join(" ")));
+  ok("nessuna risposta lascia il browser: l'unico invio è il modulo", invii.length === 1 && invii[0].startsWith("POST ") && invii[0].endsWith("/api/brevo"), invii.join(" | "));
 
   // 3. Ricaricando si ritrova il profilo; «Cancella» lo toglie davvero.
   await p.reload({ waitUntil: "networkidle" });
@@ -157,7 +217,7 @@ const risultato = (p) => p.locator("[data-risultato]").evaluate((e) => ({ ...e.d
 
 // 4. Tutto «A volte» e sempre la risposta pensata: cinque spinte alla pari, nessuna guida.
 {
-  const { ctx, p } = await apri({ ...telefono, viewport: { width: 320, height: 640 } });
+  const { ctx, p } = await apri({ ...telefono, viewport: { width: 320, height: 640 } }, 502);
   await p.locator("[data-comincia]").tap();
   ok("nessuno sbordo sulla domanda (320 px)", await p.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1));
   await compila(p, (d) => (d.spinta ? 3 : d.versi.indexOf("calma")), 12);
@@ -174,6 +234,13 @@ const risultato = (p) => p.locator("[data-risultato]").evaluate((e) => ({ ...e.d
   ok("«Indietro»: la risposta data è ancora accesa", (await p.locator('[data-percorso] [role=radio][aria-checked="true"]').getAttribute("data-valore")) === "3");
   await p.locator("[data-avanti]").tap();
   await compila(p, (d) => (d.spinta ? 3 : d.versi.indexOf("calma")), 33);
+  ok("nessuno sbordo sul modulo (320 px)", await p.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1));
+  // senza spunta il profilo non si apre
+  await p.locator("[data-modulo-dati] input[name=nome]").fill("Anna");
+  await p.locator("[data-vedi-profilo]").tap();
+  ok("senza i dati obbligatori il profilo resta chiuso", (await stato(p)).fase === "dati");
+  await lasciaDati(p);
+  ok("se Brevo non risponde il profilo si apre lo stesso", (await stato(p)).fase === "risultato");
 
   const bar = await barre(p);
   const ris = await risultato(p);
@@ -190,6 +257,7 @@ const risultato = (p) => p.locator("[data-risultato]").evaluate((e) => ({ ...e.d
   await p.locator("[data-comincia]").tap();
   const alte = ["perfetto", "forte"];
   await compila(p, (d) => (d.spinta ? (alte.includes(d.spinta) !== d.rovescio ? 5 : 1) : d.versi.indexOf("calma")));
+  await lasciaDati(p);
   const ris = await risultato(p);
   ok("due spinte alla pari in testa: tutte e due principali", ris.principali === "perfetto,forte" && ris.allaPari === "no");
   ok("la frase della coppia c'è", ((await p.locator("[data-coppia]").textContent()) ?? "").includes("senza aiuto"));

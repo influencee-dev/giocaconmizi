@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
 import { Contenitore, Faq } from "@/components/ui";
 import { PercorsoSottoPressione } from "@/components/genitori/PercorsoSottoPressione";
+import { CondividiTest } from "@/components/genitori/CondividiTest";
 import { metaDi } from "@/games/registry";
 import { guida } from "@/lib/contenuti/guide";
 import { FONTI_PERCORSO, LETTURE, PERCORSO, PERCORSO_PUBBLICO, SPINTE, TITOLI_PAGINE } from "@/lib/famiglia/sotto-pressione";
 
-// Finché PERCORSO_PUBBLICO è false la pagina è una bozza: si apre dal link,
+// Con PERCORSO_PUBBLICO false la pagina è una bozza: si apre dal link,
 // ma i motori di ricerca non la prendono e nessuna pagina del sito la collega.
+// Il titolo per Google e per l'anteprima social è quello che invoglia
+// («E tu che mamma diventi…»); in pagina resta il titolo per tutti i genitori.
 export const metadata: Metadata = {
-  title: PERCORSO.titolo,
+  title: PERCORSO.titoloSocial,
   description: PERCORSO.descrizione,
   alternates: { canonical: PERCORSO.percorso },
+  openGraph: { title: PERCORSO.titoloSocial, description: PERCORSO.descrizione, url: PERCORSO.percorso, type: "website" },
   robots: PERCORSO_PUBBLICO ? undefined : { index: false, follow: false },
 };
 
@@ -62,6 +66,7 @@ export default function SottoPressionePage() {
           reagiamo come siamo abituati. Questo percorso ti aiuta a riconoscere la tua reazione più frequente, per poterne
           scegliere un&apos;altra quando serve.
         </p>
+        <CondividiTest compatto />
       </header>
 
       <PercorsoSottoPressione titoli={titoliDeiCollegamenti()} />

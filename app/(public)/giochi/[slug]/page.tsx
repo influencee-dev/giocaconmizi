@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Condividi } from "@/components/ui/Condividi";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { games } from "@/games/registry";
@@ -89,6 +90,16 @@ export default async function GiocoPage({ params }: Params) {
 
           <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">{gioco.title}</h1>
           <p className="mt-3 text-lg text-notte-tenue">{descrizione}</p>
+          <div className="mt-4">
+            <Condividi
+              percorso={`/giochi/${gioco.slug}`}
+              titolo={gioco.title}
+              testo={`«${gioco.title}»: un gioco gratis per bambini dai ${gioco.ageMin} ai ${gioco.ageMax} anni, senza pubblicità e senza app. Provatelo su Giocamizi 👇`}
+              campagna="gioco"
+              etichetta="Condividi il gioco"
+              compatto
+            />
+          </div>
         </div>
 
         <aside className="mt-6 lg:col-start-2 lg:row-span-2 lg:mt-0">
