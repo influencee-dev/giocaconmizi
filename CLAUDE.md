@@ -51,9 +51,14 @@ Scelte confermate da Giorgia con tre risposte a scelta, dopo due letture sbaglia
   Transazionale (Kahler) e 10 situazioni di casa, poi un profilo. Domande,
   calcolo e letture in `lib/famiglia/sotto-pressione.ts`, schermo in
   `components/genitori/`, prove in `scripts/verifica/genitori.mjs`.
-- È una BOZZA finché `PERCORSO_PUBBLICO` è false: noindex, fuori dalla sitemap,
-  nessun collegamento dal sito. La accende solo Giorgia, dopo che uno psicologo
-  ha riletto domande e letture.
+- PUBBLICATO il 23/11/2026 per decisione di Giorgia (`PERCORSO_PUBBLICO` true),
+  anche per raccogliere iscrizioni; la rilettura di uno psicologo resta
+  consigliata. Titolo per Google e social «E tu che mamma diventi sotto
+  pressione?» (`titoloSocial`), tasto «Condividi il test con le amiche»
+  (components/genitori/CondividiTest.tsx: mai il risultato nel messaggio),
+  modulo della Posta di Mizi alla fine (origine «test-sotto-pressione» in
+  Brevo, al server SOLO l'email), richiamo «E tu che tipo di mamma sei?»
+  (InvitoTest) su /per-le-mamme e /guide. Con false torna bozza e tutto sparisce.
 - Non è un test validato e non fa diagnosi: i testi dicono «può», mai «sei».
   Il punteggio è un conto fisso; nessuna AI decide o ritocca i numeri.
 - Le risposte restano nel browser (sessionStorage): niente server, niente
