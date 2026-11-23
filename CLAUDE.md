@@ -328,10 +328,10 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   nuove del sito con la mail pronta, riempie solo le celle vuote; (4) carica il
   CSV come foglio nuovo con la data di oggi in 1 Progetti e sposta il
   precedente in 4 Archivio rinominandolo «zz_SUPERATO — …».
-- Schede arricchite (24/11/2026): 170 descrizioni riscritte dai siti ufficiali
+- Schede arricchite (23/11/2026): 170 descrizioni riscritte dai siti ufficiali
   (età, spazi, cosa include la festa), siti aggiunti o corretti; prezzi solo con
   l'anno; personaggi protetti scritti come «feste a tema». La rete
-  dell'ambiente «Giocamizi» è aperta a tutti i siti pubblici (24/11, approvata
+  dell'ambiente «Giocamizi» è aperta a tutti i siti pubblici (23/11, approvata
   da Giorgia) per leggere i siti dei locali.
 - Le ricerche web sono circa 200 per turno, condivise anche dagli aiutanti:
   non lanciare più di 3-4 aiutanti di ricerca insieme.
@@ -341,7 +341,7 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   vecchie non si spediscono. Il testo lo fa lo strumento (`--realta` con il
   JSON tratto dal foglio «archivio-contatti-giocamizi-influencee», una volta
   sola: poi le righe restano nel registro e si portano avanti da sole).
-- Invio (decisione di Giorgia del 24/11/2026, che sostituisce «le mail non si
+- Invio (decisione di Giorgia del 23/11/2026, che sostituisce «le mail non si
   spediscono mai»): le spedisce Claude dal connettore Zoho, da
   giorgia@influencee.it con ciao@giocamizi.it in copia, con il testo del
   registro, al massimo 40 al giorno, solo righe «Pronta da inviare» con email
