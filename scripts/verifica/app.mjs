@@ -324,6 +324,20 @@ const benvenuto = (p) => p.locator("[data-benvenuto]");
   await ctx.close();
 }
 
+{
+  // Video dei tutorial (23/11/2026): sul telefono verticale 9:16, dal computer orizzontale 16:9
+  for (const [nome, opz, atteso] of [["telefono", telefono, "verticale"], ["computer", { viewport: { width: 1280, height: 900 } }, "orizzontale"]]) {
+    const ctx = await b.newContext(opz); await ctx.addInitScript(UMANO);
+    const p = await ctx.newPage();
+    await p.goto(BASE + "/tutorial/come-creare-l-invito", { waitUntil: "networkidle" });
+    await p.waitForTimeout(300);
+    const v = await p.locator("video[data-video-tutorial]").evaluate((e) => ({ formato: e.dataset.formato, src: e.querySelector("source")?.getAttribute("src"), w: e.getBoundingClientRect().width, h: e.getBoundingClientRect().height }));
+    const ris = await fetch(BASE + v.src, { method: "HEAD" });
+    ok(`tutorial dal ${nome}: video ${atteso}, il file risponde`, v.formato === atteso && (atteso === "verticale" ? v.h > v.w && v.src.endsWith("-verticale.mp4") : v.w > v.h) && ris.status === 200, JSON.stringify(v));
+    await ctx.close();
+  }
+}
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("app") ? 0 : 1);

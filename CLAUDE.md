@@ -75,6 +75,11 @@ Scelte confermate da Giorgia con tre risposte a scelta, dopo due letture sbaglia
   design system: logo, Mizi, Nunito, etichetta colorata, «… su giocamizi.it →».
   Ci sono per home, guide, feste/[città], giochi, schede, test; i file letti
   stanno in outputFileTracingIncludes («/**/opengraph-image*»).
+- Su guide, giochi e schede il tasto è la pillola piccola (`piccolo`, 40 px:
+  sotto la regola dei 64 px dei bottoni, che è per i bambini); nella scheda sta
+  nel riquadro dei contatti, accanto ai link del locale. Nel test resta grande.
+- Video dei tutorial: sul telefono si vede la versione 9:16
+  (public/video/<slug>-verticale.mp4, la fa `npm run video`), dal computer la 16:9.
 - Non è un test validato e non fa diagnosi: i testi dicono «può», mai «sei».
   Il punteggio è un conto fisso; nessuna AI decide o ritocca i numeri.
 - Le risposte restano nel browser (sessionStorage): niente server, niente

@@ -116,8 +116,7 @@ export default async function GuidaPage({
           titolo={voce.titolo}
           testo={`Ho trovato questa guida su Giocamizi, scritta da una mamma: «${voce.titolo}». Ti può servire 👇`}
           campagna="guida"
-          etichetta={voce.approfondimento ? "Condividi l'articolo" : "Condividi la guida"}
-          compatto
+          piccolo
         />
       </div>
 
@@ -214,15 +213,16 @@ export default async function GuidaPage({
           Tutte le guide
         </Link>
       </section>
-      <section className="mt-10 flex flex-col gap-3 rounded-morbido border-2 border-rosa/40 bg-rosa/10 p-6">
-        <h2 className="text-xl font-extrabold text-notte">Ti è stata utile? Mandala a un&apos;altra mamma</h2>
+      <div className="mt-10 flex flex-wrap items-center gap-3 border-t-2 border-crema-scuro pt-6">
+        <p className="font-extrabold text-notte">Ti è stata utile? Mandala a un&apos;altra mamma</p>
         <Condividi
           percorso={`/guide/${voce.slug}`}
           titolo={voce.titolo}
           testo={`Ho trovato questa guida su Giocamizi, scritta da una mamma: «${voce.titolo}». Ti può servire 👇`}
           campagna="guida"
+          piccolo
         />
-      </section>
+      </div>
     </Contenitore>
   );
 }

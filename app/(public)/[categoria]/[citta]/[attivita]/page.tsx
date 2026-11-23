@@ -57,7 +57,22 @@ const wa = (t: string) => {
   return `https://wa.me/${/^3\d{8,9}$/.test(n) ? `39${n}` : n}`;
 };
 
-function Contatti({ sito, instagram, extra, festa, prezzo }: { sito?: string; instagram?: string; extra: DatiModifica; festa: boolean; prezzo: { prezzo: string; nota?: string } }) {
+function Contatti({
+  sito,
+  instagram,
+  extra,
+  festa,
+  prezzo,
+  condividi,
+}: {
+  sito?: string;
+  instagram?: string;
+  extra: DatiModifica;
+  festa: boolean;
+  prezzo: { prezzo: string; nota?: string };
+  /** La pillola «Condividi», accanto ai link dei social del locale. */
+  condividi: { percorso: string; titolo: string; testo: string };
+}) {
   return (
     <div className="flex flex-col gap-3 rounded-[1.4rem] border border-notte/10 bg-white p-5 shadow-[0_10px_30px_rgba(31,36,48,0.08)]">
       <div>
@@ -102,6 +117,7 @@ function Contatti({ sito, instagram, extra, festa, prezzo }: { sito?: string; in
           </a>
         ) : null,
       )}
+      <Condividi {...condividi} campagna="attivita" etichetta="Condividi la scheda" piccolo />
       {!sito && !instagram && !extra.whatsapp && !extra.telefono && (
         <p className="rounded-xl bg-crema px-4 py-3 text-sm font-bold text-notte">
           I contatti arrivano quando l&apos;attività completa la scheda.
@@ -156,6 +172,11 @@ export default async function SchedaPage({ params }: P) {
     ...(typeof valori.tiktok === "string" && { tiktok: valori.tiktok }),
   };
 
+  const condividiScheda = {
+    percorso: percorsoScheda(s),
+    titolo: `${s.nome}, ${s.citta}`,
+    testo: `${s.nome} a ${s.citta}: ${faFeste ? "per la festa di compleanno" : "per i bambini"} trovi tutte le info sulla scheda di Giocamizi 👇`,
+  };
   return (
     <>
       <Contenitore largo className="pb-28 pt-6 lg:pb-12">
@@ -212,14 +233,6 @@ export default async function SchedaPage({ params }: P) {
             {faFeste && valori.fannoFeste !== false && <span data-fa-feste className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">Fa feste di compleanno</span>}
             <span className="rounded-bolla bg-crema px-3 py-1 text-xs font-extrabold text-notte">{cat.nome}</span>
           </div>
-          <Condividi
-            percorso={percorsoScheda(s)}
-            titolo={`${s.nome}, ${s.citta}`}
-            testo={`${s.nome} a ${s.citta}: ${faFeste ? "per la festa di compleanno" : "per i bambini"} trovi tutte le info sulla scheda di Giocamizi 👇`}
-            campagna="attivita"
-            etichetta="Condividi la scheda"
-            compatto
-          />
         </div>
 
         <div className="mt-6 flex flex-col gap-3">
@@ -280,11 +293,11 @@ export default async function SchedaPage({ params }: P) {
             <VideoAttivita valori={{ ...valori, video: (valori.video as string[] | undefined) ?? (s.extra.video ? [s.extra.video] : undefined) }} nome={s.nome} />
             {s.reel && <ReelInstagram url={s.reel} nome={s.nome} />}
             <div className="lg:hidden">
-              <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} festa={faFeste} prezzo={testoPrezzo(prezzo)} />
+              <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} festa={faFeste} prezzo={testoPrezzo(prezzo)} condividi={condividiScheda} />
             </div>
           </div>
           <aside className="hidden lg:sticky lg:top-24 lg:block">
-            <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} festa={faFeste} prezzo={testoPrezzo(prezzo)} />
+            <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} festa={faFeste} prezzo={testoPrezzo(prezzo)} condividi={condividiScheda} />
           </aside>
         </div>
 
