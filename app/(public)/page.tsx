@@ -93,7 +93,7 @@ export default function Home() {
   const ALTRO = [
     { href: "/storie", tono: "viola" as const, foto: "S-01" as const, scena: <ScenaStorie />, titolo: "Storie da leggere", testo: `${storie} storie in stampatello, minuscolo e corsivo, con la lettura ad alta voce.`, azione: "Leggi" },
     { href: "/coding", tono: "azzurro" as const, foto: "S-02" as const, scena: <ScenaCoding />, titolo: "Coding", testo: "Dalle frecce ai blocchi fino al codice vero, dai 3 ai 12 anni.", azione: "Programma" },
-    { href: "/compiti-vacanze/prima-elementare", tono: "giallo" as const, foto: "S-03" as const, scena: <ScenaCompiti />, titolo: "Compiti delle vacanze", testo: "Schede per classe, dalla prima alla quinta: online o da stampare.", azione: "Apri" },
+    { href: "/compiti-vacanze/prima-elementare", tono: "giallo" as const, foto: "S-03" as const, scena: <ScenaCompiti />, titolo: "Esercizi per classe", testo: "Matematica e italiano dalla prima alla quinta elementare, tutto l'anno.", azione: "Apri" },
     { href: "/biglietti", tono: "rosa" as const, foto: "F-02" as const, scena: <ScenaBiglietti />, titolo: "Biglietti e inviti", testo: "Inviti, auguri, etichette e versioni da colorare, gratis.", azione: "Crea" },
   ];
 

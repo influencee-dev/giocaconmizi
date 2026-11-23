@@ -173,9 +173,13 @@
       "volume": 1600,
       "difficolta": 16,
       "sezione": "matematica",
-      "pagina": null,
-      "stato": "manca",
-      "cosa_fare": "Pagina nuova «Seconda elementare» che raccoglie i giochi della classe."
+      "pagina": "/compiti-vacanze/seconda-elementare",
+      "stato": "fatto",
+      "cosa_fare": "Pagina nuova «Seconda elementare» che raccoglie i giochi della classe.",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "le pagine delle classi diventano «Esercizi di … elementare: matematica e italiano», tutto l'anno (cantiere 5)"
+      }
     },
     {
       "ricerca": "decine e unità",
@@ -200,9 +204,13 @@
       "volume": 1000,
       "difficolta": 13,
       "sezione": "matematica",
-      "pagina": null,
-      "stato": "manca",
-      "cosa_fare": "Pagina «Terza elementare»: tabelline, frazioni, orologio."
+      "pagina": "/compiti-vacanze/terza-elementare",
+      "stato": "fatto",
+      "cosa_fare": "Pagina «Terza elementare»: tabelline, frazioni, orologio.",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "le pagine delle classi diventano «Esercizi di … elementare: matematica e italiano», tutto l'anno (cantiere 5)"
+      }
     },
     {
       "ricerca": "numeri in ordine crescente",
@@ -285,9 +293,13 @@
       "volume": 1600,
       "difficolta": 15,
       "sezione": "italiano",
-      "pagina": null,
-      "stato": "manca",
-      "cosa_fare": "Pagina «Prima elementare»."
+      "pagina": "/compiti-vacanze/prima-elementare",
+      "stato": "fatto",
+      "cosa_fare": "Pagina «Prima elementare».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "le pagine delle classi diventano «Esercizi di … elementare: matematica e italiano», tutto l'anno (cantiere 5)"
+      }
     },
     {
       "ricerca": "le doppie esercizi",
@@ -316,9 +328,13 @@
       "volume": 720,
       "difficolta": 14,
       "sezione": "italiano",
-      "pagina": null,
-      "stato": "manca",
-      "cosa_fare": "Pagina «Seconda elementare»."
+      "pagina": "/compiti-vacanze/seconda-elementare",
+      "stato": "fatto",
+      "cosa_fare": "Pagina «Seconda elementare».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "le pagine delle classi diventano «Esercizi di … elementare: matematica e italiano», tutto l'anno (cantiere 5)"
+      }
     },
     {
       "ricerca": "imparare a leggere",

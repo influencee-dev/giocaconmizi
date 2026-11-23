@@ -18,7 +18,7 @@ Stati: **fatto** · **in corso** · **da fare** · **da decidere** (serve una ri
 | 2 | Natale | auguri 40.500, disegni di Natale 27.100, lavoretti 18.100 | **di un'altra chat** (co-work) |
 | 3 | Elenchi scritti nelle pagine dei giochi | tabelline dal 1 al 10 18.100, doppie 4.400+3.600+3.600, MB e MP 1.600 | da fare |
 | 4 | Una pagina per tabellina | tabelline 7 18.100, del 3 9.900 (e le altre) | da fare |
-| 5 | Le pagine delle classi tutto l'anno | esercizi seconda elementare 1.600+720, prima 1.600, terza 1.000 | **da decidere** |
+| 5 | Le pagine delle classi tutto l'anno | esercizi seconda elementare 1.600+720, prima 1.600, terza 1.000 | **fatto** 23/11 |
 | 6 | «Vicino a me» negli hub della directory | parco avventura vicino a me 5.400, ludoteca 4.400, parco acquatico 3.600… | da fare |
 | 7 | Inviti e biglietti: le parole che mancano | inviti digitali 1.900, frasi per inviti 880, cosa scrivere 390 | da fare |
 | 8 | Storie: «favole della buonanotte» | 12.100 + 720 | da fare |
@@ -66,14 +66,14 @@ Ricerche da 9.900 a 18.100 al mese per ciascuna, dal 2 al 10. Una pagina per num
 due FAQ e il gioco che parte già su quella tabellina (il gioco oggi la fa scegliere a schermo:
 serve un parametro nell'indirizzo). Nascono da un elenco, non a mano. Prima si chiude il 3.
 
-## 5. Le pagine delle classi tutto l'anno · da decidere
+## 5. Le pagine delle classi tutto l'anno · fatto il 23/11/2026
 
-Esistono già `/compiti-vacanze/prima-elementare` … `quinta-elementare`, ma dicono «compiti
-delle vacanze»: d'inverno non rispondono a «esercizi di seconda elementare». Due strade:
-(a) cambiare titolo e testo delle stesse pagine in «Esercizi di seconda elementare: giochi
-online», con un riquadro per le vacanze d'estate; (b) pagine nuove `/esercizi/<classe>` e le
-vecchie lasciate per l'estate. Si consiglia (a): una pagina sola che raccoglie i link. La
-scelta è di Giorgia, perché cambia una sezione che lei conosce col nome di oggi.
+Scelta di Giorgia (23/11): strada (a). Le pagine `/compiti-vacanze/prima-elementare` …
+`quinta-elementare` restano allo stesso indirizzo (i link che hanno non si perdono) ma
+diventano «Esercizi di seconda elementare: matematica e italiano»: H1 «Esercizi di …», giochi
+divisi per materia (Matematica, Italiano, Scienze, poi logica e coding), un riquadro «Per i
+compiti delle vacanze» e FAQ nuove. Anche il piede, la home, `/per-insegnanti` e llms.txt
+dicono «Esercizi per classe». Quattro ricerche segnate «fatto».
 
 ## 6. «Vicino a me» negli hub della directory
 

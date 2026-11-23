@@ -46,7 +46,7 @@ export default function PerInsegnantiPage() {
       </section>
 
       <section className="mt-10">
-        <TitoloSezione>Compiti delle vacanze per classe</TitoloSezione>
+        <TitoloSezione>Esercizi per classe, tutto l’anno</TitoloSezione>
         <div className="flex flex-wrap gap-3">
           {classi.map((c) => (
             <Link
