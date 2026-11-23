@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Condividi } from "@/components/condivisione/Condividi";
+import { Condividi } from "@/components/ui/Condividi";
 import { titoloPagina } from "@/lib/seo/seo";
 import Image from "next/image";
 import Link from "next/link";

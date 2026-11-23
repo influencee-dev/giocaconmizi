@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Condividi } from "@/components/condivisione/Condividi";
+import { Condividi } from "@/components/ui/Condividi";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { games } from "@/games/registry";

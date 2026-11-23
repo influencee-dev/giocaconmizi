@@ -1,11 +1,11 @@
 "use client";
 
-import { Condividi } from "@/components/condivisione/Condividi";
+import { Condividi } from "@/components/ui/Condividi";
 import { PERCORSO } from "@/lib/famiglia/sotto-pressione";
 
 /**
  * Il tasto «Condividi» del test «sotto pressione»: il tasto comune del sito
- * (components/condivisione/Condividi.tsx) con l'invito del test. Nel messaggio
+ * (components/ui/Condividi.tsx) con l'invito del test. Nel messaggio
  * c'è solo l'invito e l'indirizzo: MAI il risultato di chi ha compilato.
  */
 export function CondividiTest({ compatto = false }: { compatto?: boolean }) {

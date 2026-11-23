@@ -66,7 +66,7 @@ Scelte confermate da Giorgia con tre risposte a scelta, dopo due letture sbaglia
   risposte. Se Brevo non risponde il profilo si apre lo stesso.
 
 ## Condividere e anteprime social (23/11/2026)
-- Tasto comune `components/condivisione/Condividi.tsx` (foglio del telefono,
+- Tasto comune `components/ui/Condividi.tsx` (foglio del telefono,
   altrimenti WhatsApp, Facebook, Telegram, email, copia link; link con UTM
   utm_source=condivisione&utm_campaign=<guida|gioco|attivita|test-…>) su guide
   e articoli, giochi, schede delle attività e test. Pagina nuova da far

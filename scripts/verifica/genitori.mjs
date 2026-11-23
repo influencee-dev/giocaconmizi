@@ -34,7 +34,7 @@ if (pubblico) {
   const altre = await Promise.all(["/", "/guide", "/per-le-mamme", "/chi-siamo", "/llms.txt"].map((p) => fetch(BASE + p).then((r) => r.text())));
   ok("bozza: nessuna pagina del sito la collega", altre.every((t) => !t.includes(PERCORSO)));
 }
-// Il tasto «Condividi» comune (components/condivisione/Condividi.tsx) e l'anteprima disegnata
+// Il tasto «Condividi» comune (components/ui/Condividi.tsx) e l'anteprima disegnata
 // stanno su articoli, giochi e schede delle attività (decisione del 23/11/2026).
 for (const [x, campagna] of [["/guide/imparare-a-leggere-giocando", "guida"], ["/giochi/tabelline", "gioco"], ["/ludoteche/milano/il-nano-gigante", "attivita"]]) {
   const t = await fetch(BASE + x).then((r) => r.text());
