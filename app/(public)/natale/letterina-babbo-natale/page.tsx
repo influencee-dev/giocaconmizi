@@ -8,9 +8,9 @@ import { url } from "@/lib/seo/seo";
 import { FAQ_LETTERINA, PERCORSO_LETTERINA, PERCORSO_NATALE, RISPOSTA_BREVE_LETTERINA } from "@/lib/natale/natale";
 
 export const metadata: Metadata = {
-  title: "Letterina a Babbo Natale da stampare e compilare online, gratis",
+  title: "Lettera a Babbo Natale da stampare: letterina da compilare online gratis",
   description:
-    "Scrivi la letterina a Babbo Natale con Mizi: frasi pronte per età, lista dei desideri, sette carte da lettera anche da colorare e la busta da ritagliare. PDF A4 da stampare. Gratis, senza registrazione.",
+    "Scrivi la lettera a Babbo Natale con Mizi: frasi pronte per età, lista dei desideri, sette carte da lettera anche da colorare e la busta da ritagliare. PDF A4 da stampare. Gratis, senza registrazione.",
   alternates: { canonical: PERCORSO_LETTERINA },
 };
 
@@ -65,7 +65,7 @@ export default function LetterinaPage() {
         / Letterina a Babbo Natale
       </nav>
 
-      <h1 className="mt-4 text-3xl font-extrabold text-notte sm:text-4xl">Letterina a Babbo Natale da stampare e compilare</h1>
+      <h1 className="mt-4 text-3xl font-extrabold text-notte sm:text-4xl">Lettera a Babbo Natale da stampare e compilare</h1>
       <p className="mt-3 max-w-2xl text-lg text-notte-tenue">
         Scegli l&apos;età, la carta da lettera e le frasi, scrivi i desideri. Poi la scarichi in A4, la condividi o la stampi da
         colorare. Gratis, senza registrazione, dal telefono.

@@ -7,7 +7,7 @@ import { CITTA_EVENTI, EVENTI_VERIFICATI_IL, eventiAttivi } from "@/lib/natale/e
 import { PERCORSO_EVENTI, PERCORSO_NATALE } from "@/lib/natale/natale";
 
 export const metadata: Metadata = {
-  title: "Eventi di Natale per bambini nelle città italiane",
+  title: "Eventi di Natale per bambini: villaggi di Babbo Natale e mercatini, città per città",
   description:
     "Villaggi e case di Babbo Natale, mercatini di Natale per famiglie, laboratori e spettacoli per bambini, città per città: solo eventi verificati sui siti ufficiali.",
   alternates: { canonical: PERCORSO_EVENTI },

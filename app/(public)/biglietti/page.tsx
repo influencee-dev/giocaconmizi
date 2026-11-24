@@ -51,6 +51,7 @@ export const metadata: Metadata = {
 };
 
 const SEZIONI = [
+  { href: "/natale/biglietti-di-natale", nome: "Biglietti di Natale", testo: "Auguri di Natale con frasi pronte, anche da colorare." },
   { href: "/biglietti/inviti-compleanno-bambini", nome: "Inviti", testo: "Per la festa: data, ora, indirizzo e a chi confermare." },
   { href: "/biglietti/auguri-compleanno-bambini", nome: "Auguri", testo: "Da regalare o da mandare il giorno del compleanno." },
   { href: "/biglietti/ringraziamento-compleanno-bambini", nome: "Ringraziamenti", testo: "Dopo la festa, per chi è venuto." },

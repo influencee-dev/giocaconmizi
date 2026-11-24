@@ -679,27 +679,39 @@
       "volume": 40500,
       "difficolta": 24,
       "sezione": "natale",
-      "pagina": "/biglietti",
-      "stato": "manca",
-      "cosa_fare": "Un biglietto di auguri di Natale con frasi pronte."
+      "pagina": "/natale/biglietti-di-natale",
+      "stato": "fatto",
+      "cosa_fare": "Un biglietto di auguri di Natale con frasi pronte.",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "titolo, H1 e sezione «Frasi di auguri di Natale brevi» in /natale/biglietti-di-natale"
+      }
     },
     {
       "ricerca": "frasi e auguri di natale",
       "volume": 22200,
       "difficolta": 18,
       "sezione": "natale",
-      "pagina": null,
-      "stato": "manca",
-      "cosa_fare": "Pagina di frasi di auguri brevi, per bambini e famiglie."
+      "pagina": "/natale/biglietti-di-natale",
+      "stato": "fatto",
+      "cosa_fare": "Pagina di frasi di auguri brevi, per bambini e famiglie.",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "sezione di frasi brevi divise per nonni, maestra, amici, famiglia e bambini"
+      }
     },
     {
       "ricerca": "villaggio di babbo natale",
       "volume": 18100,
       "difficolta": 14,
       "sezione": "natale",
-      "pagina": "/natale",
-      "stato": "da-sistemare",
-      "cosa_fare": "Gli eventi di Natale ci sono già: nominare «villaggi di Babbo Natale» città per città."
+      "pagina": "/natale/eventi",
+      "stato": "fatto",
+      "cosa_fare": "Gli eventi di Natale ci sono già: nominare «villaggi di Babbo Natale» città per città.",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "titolo dell'indice eventi; in ogni città riga e FAQ «C'è un villaggio di Babbo Natale a …?»"
+      }
     },
     {
       "ricerca": "lavoretti di natale",
@@ -716,17 +728,25 @@
       "difficolta": 20,
       "sezione": "natale",
       "pagina": "/natale/letterina-babbo-natale",
-      "stato": "da-sistemare",
-      "cosa_fare": "Nel titolo anche «lettera», oltre a «letterina»."
+      "stato": "fatto",
+      "cosa_fare": "Nel titolo anche «lettera», oltre a «letterina».",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "«lettera» nel titolo e nell'H1, «letterina» resta nel titolo"
+      }
     },
     {
       "ricerca": "auguri di natale brevi",
       "volume": 12100,
       "difficolta": 17,
       "sezione": "natale",
-      "pagina": null,
-      "stato": "manca",
-      "cosa_fare": "Come «frasi e auguri»."
+      "pagina": "/natale/biglietti-di-natale",
+      "stato": "fatto",
+      "cosa_fare": "Come «frasi e auguri».",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "sezione «Frasi di auguri di Natale brevi» e FAQ"
+      }
     },
     {
       "ricerca": "babbo natale esiste",
@@ -760,9 +780,13 @@
       "volume": 5400,
       "difficolta": 25,
       "sezione": "natale",
-      "pagina": "/biglietti",
-      "stato": "da-sistemare",
-      "cosa_fare": "Nominare i biglietti di Natale."
+      "pagina": "/natale/biglietti-di-natale",
+      "stato": "fatto",
+      "cosa_fare": "Nominare i biglietti di Natale.",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "titolo e H1 di /natale/biglietti-di-natale; la pagina dei biglietti ha la voce «Biglietti di Natale» che ci porta"
+      }
     },
     {
       "ricerca": "nome renne babbo natale",

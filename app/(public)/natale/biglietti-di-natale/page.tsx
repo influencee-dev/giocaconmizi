@@ -8,9 +8,9 @@ import { linkAlTool } from "@/lib/biglietti/biglietti";
 import { PERCORSO_BIGLIETTI_NATALE, PERCORSO_LETTERINA, PERCORSO_NATALE } from "@/lib/natale/natale";
 
 export const metadata: Metadata = {
-  title: "Biglietti di Natale da stampare e personalizzare gratis",
+  title: "Auguri di Natale: biglietti con frasi pronte da stampare, gratis",
   description:
-    "Biglietti di auguri di Natale da personalizzare con il nome, da stampare, mandare su WhatsApp o colorare. Frasi pronte per nonni, maestre e amici. Gratis, senza registrazione.",
+    "Biglietti di auguri di Natale da personalizzare con il nome, da stampare, mandare su WhatsApp o colorare. Frasi di auguri di Natale brevi per nonni, maestre, amici e famiglia. Gratis, senza registrazione.",
   alternates: { canonical: PERCORSO_BIGLIETTI_NATALE },
 };
 
@@ -18,6 +18,11 @@ const RISPOSTA_BREVE =
   "Un biglietto di Natale fatto in casa si prepara in due minuti: scegli lo sfondo di Natale, scrivi il nome di chi lo riceve e una frase di auguri, poi lo stampi in A6 (quattro per foglio A4), lo mandi su WhatsApp o lo stampi in bianco e nero da far colorare ai bambini. Su Giocamizi è gratis e senza registrazione.";
 
 const FAQ = [
+  {
+    domanda: "Quali auguri di Natale brevi si possono scrivere su un biglietto?",
+    risposta:
+      "Bastano poche parole e il nome di chi lo riceve: «Buon Natale, nonni: il regalo più bello siete voi», «Grazie per quest'anno insieme. Buon Natale, maestra!», «Auguri di un Natale sereno e di un anno nuovo felice». In questa pagina trovi le frasi divise per nonni, maestre, amici e famiglia, da copiare sul biglietto.",
+  },
   {
     domanda: "Come faccio un biglietto di Natale personalizzato gratis?",
     risposta:
@@ -40,10 +45,44 @@ const FAQ = [
   },
 ];
 
-const PER_CHI = [
-  { chi: "Per i nonni", frase: "Ti auguro un Natale caldo come una tazza di cioccolata." },
-  { chi: "Per la maestra", frase: "Grazie di esserci, buone feste!" },
-  { chi: "Per gli amici", frase: "Buone feste! Ci vediamo sotto l'albero." },
+/** Frasi di auguri di Natale brevi, per chi le riceve (24/11/2026, ricerche «auguri di Natale brevi»). */
+const FRASI_BREVI = [
+  {
+    chi: "Per i nonni",
+    frasi: [
+      "Buon Natale, nonni: il regalo più bello siete voi.",
+      "Tanti auguri e un abbraccio grande come l'albero.",
+      "Ti auguro un Natale caldo come una tazza di cioccolata.",
+    ],
+  },
+  {
+    chi: "Per la maestra",
+    frasi: [
+      "Grazie per quest'anno insieme. Buon Natale, maestra!",
+      "Buone feste, maestra: ci vediamo a gennaio!",
+      "Auguri di buon Natale da tutta la classe.",
+    ],
+  },
+  {
+    chi: "Per amici e compagni",
+    frasi: [
+      "Buon Natale! Ci vediamo dopo le vacanze.",
+      "Auguri! Che Babbo Natale ti porti quello che desideri.",
+      "Buone feste! Ci vediamo sotto l'albero.",
+    ],
+  },
+  {
+    chi: "Per tutta la famiglia",
+    frasi: [
+      "Auguri di un Natale sereno e di un anno nuovo felice.",
+      "Buon Natale da tutti noi, con affetto.",
+      "Salute, pace e tanti sorrisi: buone feste!",
+    ],
+  },
+  {
+    chi: "Da scrivere con i bambini",
+    frasi: ["Ti voglio bene. Buon Natale!", "Buon Natale! L'ho disegnato io per te.", "Auguri! Ho scelto io i colori."],
+  },
 ];
 
 export default function BigliettiNatalePage() {
@@ -71,7 +110,7 @@ export default function BigliettiNatalePage() {
         / Biglietti di Natale
       </nav>
 
-      <h1 className="mt-4 text-3xl font-extrabold text-notte sm:text-4xl">Biglietti di Natale da stampare e personalizzare</h1>
+      <h1 className="mt-4 text-3xl font-extrabold text-notte sm:text-4xl">Biglietti di auguri di Natale brevi, con frasi pronte</h1>
       <p className="mt-3 max-w-2xl text-lg text-notte-tenue">
         Scegli il biglietto, scrivi il nome di chi lo riceve, stampalo o mandalo su WhatsApp. C&apos;è anche la versione da colorare.
       </p>
@@ -88,7 +127,7 @@ export default function BigliettiNatalePage() {
       </div>
 
       <section className="mt-12">
-        <h2 className="text-2xl font-extrabold text-notte sm:text-3xl">Le frasi di auguri pronte</h2>
+        <h2 className="text-2xl font-extrabold text-notte sm:text-3xl">Le frasi pronte nel creatore</h2>
         <p className="mt-2 text-notte-tenue">Nel creatore compaiono per prime quando scegli lo sfondo di Natale; le puoi sempre cambiare.</p>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2">
           {auguriPerTema.natale.map((f) => (
@@ -97,11 +136,25 @@ export default function BigliettiNatalePage() {
             </li>
           ))}
         </ul>
-        <div className="mt-6 grid gap-3 sm:grid-cols-3">
-          {PER_CHI.map((p) => (
-            <div key={p.chi} className="rounded-[1.2rem] border border-notte/10 bg-white p-4">
-              <p className="font-extrabold text-viola">{p.chi}</p>
-              <p className="mt-1 italic text-notte">«{p.frase}»</p>
+      </section>
+
+      <section className="mt-12" data-frasi-brevi>
+        <h2 className="text-2xl font-extrabold text-notte sm:text-3xl">Frasi di auguri di Natale brevi</h2>
+        <p className="mt-2 max-w-2xl text-notte-tenue">
+          Su un biglietto piccolo una frase corta funziona meglio. Scegline una per chi lo riceve, copiala nel creatore e
+          aggiungi il nome.
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {FRASI_BREVI.map((g) => (
+            <div key={g.chi} className="rounded-[1.2rem] border border-notte/10 bg-white p-4">
+              <h3 className="font-extrabold text-viola">{g.chi}</h3>
+              <ul className="mt-2 flex flex-col gap-2">
+                {g.frasi.map((f) => (
+                  <li key={f} className="italic text-notte">
+                    «{f}»
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

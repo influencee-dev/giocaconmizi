@@ -6,6 +6,7 @@ import { FaqVetrina, InBreve } from "@/components/vetrina";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { CITTA_EVENTI, EVENTI_VERIFICATI_IL, NOMI_TIPO_EVENTO, cittaEventi, eventiAttivi, quando } from "@/lib/natale/eventi-natale";
 import { CITTA_FESTE } from "@/lib/directory/feste";
+import type { EventoNatale } from "@/lib/natale/eventi-natale";
 import { PERCORSO_BIGLIETTI_NATALE, PERCORSO_EVENTI, PERCORSO_LETTERINA, PERCORSO_NATALE } from "@/lib/natale/natale";
 
 /**
@@ -20,12 +21,20 @@ export function generateStaticParams() {
   return CITTA_EVENTI.map((c) => ({ citta: c.slug }));
 }
 
+/** Villaggi di Natale e case di Babbo Natale (per chi cerca «villaggio di Babbo Natale»). */
+function conBabboNatale(eventi: EventoNatale[]): EventoNatale[] {
+  return eventi.filter((e) => e.tipo === "villaggio" || e.tipo === "casa-babbo-natale");
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ citta: string }> }): Promise<Metadata> {
   const { citta } = await params;
   const voce = cittaEventi(citta);
   if (!voce) return {};
+  const villaggi = conBabboNatale(eventiAttivi(voce)).length > 0;
   return {
-    title: `Eventi di Natale per bambini a ${voce.citta}: villaggi, mercatini e laboratori`,
+    title: villaggi
+      ? `Eventi di Natale per bambini a ${voce.citta}: villaggio di Babbo Natale e mercatini`
+      : `Eventi di Natale per bambini a ${voce.citta}: mercatini, laboratori e spettacoli`,
     description: `Cosa fare a Natale con i bambini a ${voce.citta}: villaggio e casa di Babbo Natale, mercatini per famiglie, laboratori e spettacoli, con date e link ufficiali.`,
     alternates: { canonical: `${PERCORSO_EVENTI}/${voce.slug}` },
   };
@@ -41,7 +50,17 @@ export default async function EventiCittaPage({ params }: { params: Promise<{ ci
   const risposta = eventi.length
     ? `A ${voce.citta} a Natale con i bambini si può scegliere tra ${eventi.length} eventi verificati: ${tipi.slice(0, 4).join(", ")}. Le date vengono dai siti ufficiali e sono state controllate il ${verificati}: prima di andare conviene ricontrollare orari e prenotazioni sul sito dell'evento.`
     : `Gli eventi di Natale per bambini di quest'anno a ${voce.citta} sono finiti: torna il prossimo novembre.`;
+  const villaggi = conBabboNatale(eventi);
   const faq = [
+    {
+      domanda: `C'è un villaggio di Babbo Natale a ${voce.citta}?`,
+      risposta: villaggi.length
+        ? `Sì. Quest'anno a ${voce.citta} ci sono questi villaggi di Natale e case di Babbo Natale: ${villaggi
+            .slice(0, 4)
+            .map((e) => `${e.nome} (${e.luogo}, ${quando(e)})`)
+            .join("; ")}. Prima di andare controllate orari e prenotazioni sul sito dell'evento.`
+        : `Quest'anno non abbiamo trovato un villaggio di Babbo Natale a ${voce.citta} con le date confermate da una fonte ufficiale. In questa pagina ci sono gli altri eventi di Natale per bambini.`,
+    },
     {
       domanda: `Cosa fare a Natale con i bambini a ${voce.citta}?`,
       risposta: eventi.length
@@ -100,6 +119,11 @@ export default async function EventiCittaPage({ params }: { params: Promise<{ ci
       </nav>
       <h1 className="mt-4 text-3xl font-extrabold text-notte sm:text-4xl">Eventi di Natale per bambini a {voce.citta}</h1>
       <InBreve className="mt-6">{risposta}</InBreve>
+      {villaggi.length > 0 && (
+        <p className="mt-4 text-notte" data-villaggi-babbo-natale>
+          <strong>Villaggi di Natale e case di Babbo Natale a {voce.citta}:</strong> {villaggi.map((e) => e.nome).join(", ")}.
+        </p>
+      )}
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {eventi.map((e) => (
