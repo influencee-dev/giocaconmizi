@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Contenitore } from "@/components/ui";
 import { Editor } from "@/components/biglietti/Editor";
+import { TITOLO_CREA, TitoloCreaDinamico } from "@/components/biglietti/TitoloCrea";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { url } from "@/lib/seo/seo";
 
@@ -44,7 +45,9 @@ export default function CreaPage() {
       />
 
       <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
-        Crea il tuo biglietto di compleanno
+        <Suspense fallback={TITOLO_CREA}>
+          <TitoloCreaDinamico />
+        </Suspense>
       </h1>
       <p className="mt-3 max-w-2xl text-lg text-notte-tenue">
         Scegli lo sfondo, scrivi il nome, aggiungi adesivi e foto, scarica o

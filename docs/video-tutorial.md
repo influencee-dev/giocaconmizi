@@ -51,6 +51,19 @@ caricare su Drive (2 Aree → Giocamizi · Video) e su YouTube.
 - Nella voce si scrive «giocamizi punto it» (si pronuncia bene); nei
   sottotitoli diventa giocamizi.it.
 
+## Reel per Instagram (24/11/2026, decisione di Giorgia)
+
+- Scheda come le altre in content/video/, con `"reel": true` e `"voce": "mamma"`
+  (slug che comincia con `reel-`). fai.sh si ferma dopo il montaggio: niente
+  public/video, niente pagina del tutorial; restano «<slug> · 9x16.mp4» (da
+  caricare) e «· 16x9.mp4» nella cartella di lavoro.
+- Voce «mamma»: voce artificiale di donna adulta (OpenAI «coral»), tono caldo da
+  mamma che parla ad altre mamme. Mai esperienze inventate («mia figlia…»,
+  «Domi…»): dice solo cosa fa il sito e consigli generali. Su Instagram va
+  segnato che la voce è generata.
+- La chiave OpenAI c'è solo nell'ambiente cloud «Giocamizi»: i reel si fanno
+  in una sessione su quell'ambiente.
+
 ## Regole
 
 - Parla sempre Mizi, in prima persona, frasi brevi e calde, mai da spot.

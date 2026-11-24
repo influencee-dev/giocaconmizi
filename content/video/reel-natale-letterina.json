@@ -1,0 +1,145 @@
+{
+  "gruppo": "reel",
+  "reel": true,
+  "voce": "mamma",
+  "slug": "reel-natale-letterina",
+  "titolo": "Reel · La letterina a Babbo Natale",
+  "schermate": {
+    "inizio": {
+      "url": "/natale/letterina-babbo-natale",
+      "azioni": [],
+      "selettori": [
+        "[data-editor-letterina]",
+        "[data-mizi-guida]"
+      ]
+    },
+    "carta": {
+      "url": "/natale/letterina-babbo-natale",
+      "azioni": [
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "attendi": 500
+        }
+      ],
+      "selettori": [
+        "[data-editor-letterina]"
+      ]
+    },
+    "desideri": {
+      "url": "/natale/letterina-babbo-natale",
+      "azioni": [
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "attendi": 400
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "attendi": 400
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "attendi": 500
+        }
+      ],
+      "selettori": [
+        "[data-desideri-figura]"
+      ]
+    },
+    "fatto": {
+      "url": "/natale/letterina-babbo-natale",
+      "azioni": [
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "attendi": 400
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "attendi": 400
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "attendi": 400
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "attendi": 400
+        },
+        {
+          "clicca": "[data-avanti]"
+        },
+        {
+          "attendi": 600
+        }
+      ],
+      "selettori": [
+        "[data-scarica-letterina-pdf]",
+        "[data-sezione-busta]"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per le mamme",
+      "titolo": "La letterina a Babbo Natale",
+      "sottotitolo": "Dal telefono, gratis, da stampare.",
+      "voce": "Mamme, la letterina a Babbo Natale si può scrivere insieme ai bambini, con calma, direttamente dal telefono. Vi faccio vedere come."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Si parte dall'età",
+      "testo": "Le frasi pronte cambiano per i piccoli e per i grandi.",
+      "schermata": "inizio",
+      "evidenzia": [
+        "[data-editor-letterina]"
+      ],
+      "voce": "Si apre la letterina su giocamizi punto it e si sceglie l'età. Le frasi pronte cambiano per i piccoli e per i più grandi, e Mizi le legge ad alta voce."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "I desideri a figure",
+      "testo": "Chi non sa ancora scrivere li sceglie da solo.",
+      "schermata": "desideri",
+      "evidenzia": [
+        "[data-desideri-figura]"
+      ],
+      "voce": "I desideri si scelgono anche toccando i disegni. Così anche chi non sa ancora scrivere la sua letterina la compone da solo."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 3,
+      "titolo": "Pronta da stampare",
+      "testo": "PDF in A4 e la busta da ritagliare.",
+      "schermata": "fatto",
+      "evidenzia": [
+        "[data-scarica-letterina-pdf]",
+        "[data-sezione-busta]"
+      ],
+      "voce": "Alla fine si scarica il PDF in A4, c'è anche la versione da colorare, e la busta da ritagliare. Gratis, e senza registrarsi."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/natale",
+      "sotto": "Letterina, biglietti ed eventi di Natale.",
+      "voce": "La trovate su giocamizi punto it, nella pagina di Natale. Buone feste a tutte voi!"
+    }
+  ]
+}

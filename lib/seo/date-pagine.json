@@ -15,7 +15,7 @@
   "app/(public)/admin/page.tsx": "2026-11-03",
   "app/(public)/aggiungi-attivita/page.tsx": "2026-11-08",
   "app/(public)/biglietti/[slug]/page.tsx": "2026-10-31",
-  "app/(public)/biglietti/crea/page.tsx": "2026-10-08",
+  "app/(public)/biglietti/crea/page.tsx": "2026-11-24",
   "app/(public)/biglietti/esempi/[slug]/page.tsx": "2026-10-31",
   "app/(public)/biglietti/esempi/page.tsx": "2026-10-31",
   "app/(public)/biglietti/kit-festa/page.tsx": "2026-11-14",

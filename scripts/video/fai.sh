@@ -25,7 +25,7 @@ if ! curl -s -o /dev/null http://localhost:3100/robots.txt; then
 fi
 echo "· schermate"; node "$QUI/schermi.mjs" "$SPEC" "$LAVORO"
 [ -n "$AVVIATO" ] && pkill -f next-server || true
-echo "· voce di Mizi"; python3 "$QUI/voce.py" "$SPEC" "$LAVORO"
+echo "· voce"; python3 "$QUI/voce.py" "$SPEC" "$LAVORO"
 DUR=$(python3 "$QUI/prepara.py" "$SPEC" "$LAVORO")
 echo "· musica e audio ($DUR s)"; python3 "$QUI/musica.py" "$DUR" "$LAVORO/musica.wav" >/dev/null; python3 "$QUI/audio.py" "$SPEC" "$LAVORO"
 echo "· fotogrammi (16:9 e 9:16 insieme)"
@@ -38,6 +38,11 @@ echo "· montaggio"
 ffmpeg -y -v error -framerate $FPS -i "$LAVORO/fotogrammi/f%05d.jpg" -i "$LAVORO/audio.wav" -c:v libx264 -preset slow -crf 24 -pix_fmt yuv420p -profile:v high -c:a aac -b:a 128k -movflags +faststart -shortest "$LAVORO/$SLUG · 16x9.mp4"
 ffmpeg -y -v error -framerate $FPS -i "$LAVORO/fotogrammi-v/f%05d.jpg" -i "$LAVORO/audio.wav" -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p -profile:v high -c:a aac -b:a 160k -movflags +faststart -shortest "$LAVORO/$SLUG · 9x16.mp4"
 python3 -c "from PIL import Image; Image.open('$LAVORO/fotogrammi/f00075.jpg').convert('RGB').resize((1280,720)).save('$LAVORO/poster.webp','WEBP',quality=80)"
+# I reel per Instagram («reel»: true nella scheda) non diventano pagine del sito:
+# restano solo i due file nella cartella di lavoro, da caricare su Drive.
+if python3 -c "import json,sys; sys.exit(0 if json.load(open('$SPEC')).get('reel') else 1)"; then
+  ls -la "$LAVORO"/*.mp4; exit 0
+fi
 mkdir -p "$RADICE/public/video"
 cp "$LAVORO/$SLUG · 16x9.mp4" "$RADICE/public/video/$SLUG.mp4"
 cp "$LAVORO/poster.webp" "$RADICE/public/video/$SLUG.webp"

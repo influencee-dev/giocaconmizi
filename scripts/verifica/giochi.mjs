@@ -536,8 +536,10 @@ ok("og:image di una città", await ogServita("/feste/milano"));
     proposte: [...document.querySelectorAll("[data-proposta]")].map((x) => x.getAttribute("data-proposta")),
     sbordo: document.documentElement.scrollWidth - window.innerWidth,
   }));
-  ok("album: 3 figurine prese su 51, coccarda contata, tre giochi nuovi da provare",
-    album.prese === 3 && album.tutte === 51 && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
+  // Le figurine sono una per gioco vivo: il numero si legge dal registro (prima era scritto a mano).
+  const giochiVivi = [...readFileSync("games/registry.ts", "utf8").matchAll(/status: "live"/g)].length;
+  ok(`album: 3 figurine prese su ${giochiVivi}, coccarda contata, tre giochi nuovi da provare`,
+    album.prese === 3 && album.tutte === giochiVivi && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
     !album.proposte.some((s) => ["memory-animali", "conta-fino-a-10", "abbina-i-colori"].includes(s)) && album.sbordo <= 0, JSON.stringify(album));
   await m.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
   await m.waitForTimeout(400);
