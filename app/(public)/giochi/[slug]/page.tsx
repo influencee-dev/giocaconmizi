@@ -90,14 +90,13 @@ export default async function GiocoPage({ params }: Params) {
 
           <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">{gioco.title}</h1>
           <p className="mt-3 text-lg text-notte-tenue">{descrizione}</p>
-          <div className="mt-4">
+          <div className="mt-3">
             <Condividi
               percorso={`/giochi/${gioco.slug}`}
               titolo={gioco.title}
               testo={`«${gioco.title}»: un gioco gratis per bambini dai ${gioco.ageMin} ai ${gioco.ageMax} anni, senza pubblicità e senza app. Provatelo su Giocamizi 👇`}
               campagna="gioco"
-              etichetta="Condividi il gioco"
-              compatto
+              piccolo
             />
           </div>
         </div>

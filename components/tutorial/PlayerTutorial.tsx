@@ -1,20 +1,27 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { minuti, type Capitolo } from "@/lib/contenuti/tutorial-base";
+import { VideoMizi, type FileVideo } from "./VideoMizi";
 
 /**
  * Il video di un tutorial con i passi sotto: toccare un passo porta il video
  * a quel punto e lo fa partire. Il video è un file nostro (niente player di
  * terzi, niente cookie), con i sottotitoli già stampati nelle immagini: la traccia
  * .vtt resta spenta (accesa faceva il doppio sottotitolo) e serve a chi la sceglie.
+ * Sul telefono si vede la versione verticale (VideoMizi).
  */
-export function PlayerTutorial({ t }: { t: { titolo: string; capitoli: Capitolo[]; video: { src: string; poster: string; sottotitoli: string } } }) {
+export function PlayerTutorial({
+  t,
+}: {
+  t: { titolo: string; capitoli: Capitolo[]; video: { src: string; poster: string; sottotitoli: string }; verticale?: FileVideo };
+}) {
   const video = useRef<HTMLVideoElement>(null);
   const [ora, setOra] = useState(0);
   const attivo = [...t.capitoli].reverse().find((c) => ora >= c.da)?.da ?? 0;
-  // ?t=36 nell'indirizzo (i «momenti chiave» di Google): il video parte da lì.
-  useEffect(() => {
+  // ?t=36 nell'indirizzo (i «momenti chiave» di Google): il video parte da lì,
+  // anche dopo il passaggio alla versione verticale sul telefono.
+  const daIndirizzo = useCallback(() => {
     const t0 = Number(new URLSearchParams(window.location.search).get("t"));
     if (video.current && Number.isFinite(t0) && t0 > 0) video.current.currentTime = t0;
   }, []);
@@ -26,20 +33,15 @@ export function PlayerTutorial({ t }: { t: { titolo: string; capitoli: Capitolo[
   };
   return (
     <div>
-      <video
+      <VideoMizi
         ref={video}
-        controls
-        playsInline
-        preload="metadata"
-        poster={t.video.poster}
-        onTimeUpdate={(e) => setOra(e.currentTarget.currentTime)}
-        className="aspect-video w-full rounded-[1.4rem] bg-notte shadow-[0_20px_40px_-24px_rgba(31,36,48,0.6)]"
-        data-video-tutorial
-      >
-        <source src={t.video.src} type="video/mp4" />
-        <track kind="captions" src={t.video.sottotitoli} srcLang="it" label="Italiano" />
-        Il tuo browser non riproduce il video: qui sotto trovi il testo completo.
-      </video>
+        orizzontale={{ src: t.video.src, poster: t.video.poster }}
+        verticale={t.verticale}
+        sottotitoli={t.video.sottotitoli}
+        onTimeUpdate={setOra}
+        onCambio={daIndirizzo}
+        datiVideo={{ "video-tutorial": "" }}
+      />
       <nav aria-label={`I passi del video «${t.titolo}»`} className="mt-4">
         <ol className="flex flex-wrap gap-2">
           {t.capitoli.map((c) => (

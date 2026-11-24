@@ -21,6 +21,7 @@ export function Condividi({
   campagna,
   etichetta = "Condividi",
   compatto = false,
+  piccolo = false,
 }: {
   /** La pagina da condividere (es. /giochi/tabelline). */
   percorso: string;
@@ -32,6 +33,12 @@ export function Condividi({
   campagna: string;
   etichetta?: string;
   compatto?: boolean;
+  /**
+   * La pillola discreta (23/11 sera, richiesta di Giorgia): accanto ai link, non
+   * invade. È per gli adulti: alta 40 px invece dei 64 della regola generale dei
+   * bottoni (globals.css, pensata per i bambini), sopra il minimo WCAG di 24 px.
+   */
+  piccolo?: boolean;
 }) {
   const [aperto, setAperto] = useState(false);
   const [copiato, setCopiato] = useState(false);
@@ -69,14 +76,18 @@ export function Condividi({
   ];
 
   return (
-    <div className="flex flex-col gap-3 print:hidden" data-condividi={campagna}>
+    <div className={`flex flex-col print:hidden ${piccolo ? "gap-2" : "gap-3"}`} data-condividi={campagna}>
       <button
         type="button"
         onClick={condividi}
         aria-expanded={aperto}
-        className={`inline-flex min-h-14 w-fit items-center gap-2.5 rounded-2xl bg-rosa-forte px-6 py-3 font-extrabold text-white shadow-[0_10px_24px_-14px_rgba(196,42,107,0.9)] hover:bg-notte ${compatto ? "text-base" : "text-lg"}`}
+        className={
+          piccolo
+            ? "inline-flex !min-h-10 !min-w-0 w-fit items-center gap-1.5 rounded-full border-2 border-notte/15 bg-white px-3.5 py-1.5 text-sm font-extrabold text-notte hover:border-rosa-forte hover:text-rosa-forte"
+            : `inline-flex min-h-14 w-fit items-center gap-2.5 rounded-2xl bg-rosa-forte px-6 py-3 font-extrabold text-white shadow-[0_10px_24px_-14px_rgba(196,42,107,0.9)] hover:bg-notte ${compatto ? "text-base" : "text-lg"}`
+        }
       >
-        <svg aria-hidden viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        <svg aria-hidden viewBox="0 0 24 24" width={piccolo ? 16 : 22} height={piccolo ? 16 : 22} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="18" cy="5" r="3" />
           <circle cx="6" cy="12" r="3" />
           <circle cx="18" cy="19" r="3" />
@@ -92,7 +103,7 @@ export function Condividi({
               href={v.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center rounded-2xl border-2 border-notte/15 bg-white px-4 py-2 font-extrabold text-notte hover:border-viola"
+              className={`inline-flex items-center rounded-full border-2 border-notte/15 bg-white font-extrabold text-notte hover:border-viola ${piccolo ? "!min-h-10 !min-w-0 px-3 py-1 text-sm" : "min-h-12 px-4 py-2"}`}
             >
               {v.nome}
             </a>
@@ -100,7 +111,7 @@ export function Condividi({
           <button
             type="button"
             onClick={copia}
-            className="inline-flex min-h-12 items-center rounded-2xl border-2 border-notte/15 bg-white px-4 py-2 font-extrabold text-notte hover:border-viola"
+            className={`inline-flex items-center rounded-full border-2 border-notte/15 bg-white font-extrabold text-notte hover:border-viola ${piccolo ? "!min-h-10 !min-w-0 px-3 py-1 text-sm" : "min-h-12 px-4 py-2"}`}
           >
             {copiato ? "Link copiato!" : "Copia il link"}
           </button>

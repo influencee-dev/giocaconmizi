@@ -22,7 +22,9 @@ Il comando (scripts/video/fai.sh) fa da solo:
    9:16 (1080×1920) insieme;
 4. **musica** originale (musica.py) e **audio** (audio.py: voce al suo posto,
    musica che si abbassa quando parla Mizi, sottotitoli .vtt);
-5. **montaggio** H.264 + AAC; copia in public/video/<slug>.mp4/.webp/.vtt;
+5. **montaggio** H.264 + AAC; copia in public/video/<slug>.mp4/.webp/.vtt e la
+   versione verticale leggera <slug>-verticale.mp4/.webp (720×1280): sul
+   telefono il lettore del sito mostra quella (components/tutorial/VideoMizi.tsx);
 6. **pagina del tutorial** (registra.py): salva content/video/<slug>.tempi.json
    e ricompila lib/contenuti/tutorial-dati.json → /tutorial/<slug> nasce da sola.
 

@@ -32,6 +32,9 @@ for p in sorted(glob.glob(os.path.join(cartella_video, "*.json"))):
     elenco.append({
         "slug": slug, "gruppo": s["gruppo"], "titolo": s["titolo"], "ordine": s.get("ordine", 99),
         "descrizione": s["descrizione"], "rispostaBreve": s["rispostaBreve"],
+        # la versione 9:16 (dal 23/11/2026): sul telefono il lettore mostra questa
+        **({"verticale": {"src": f"/video/{slug}-verticale.mp4", "poster": f"/video/{slug}-verticale.webp"}}
+           if os.path.exists(os.path.join(radice, "public", "video", f"{slug}-verticale.mp4")) else {}),
         "video": {"src": f"/video/{slug}.mp4", "poster": f"/video/{slug}.webp", "sottotitoli": f"/video/{slug}.vtt",
                   "durata": f"PT{m}M{sec}S", "secondi": tm["secondi"], "caricato": tm["caricato"],
                   "testo": [sc["voce"].replace("giocamizi punto it", "giocamizi.it") for sc in s["scene"]]},

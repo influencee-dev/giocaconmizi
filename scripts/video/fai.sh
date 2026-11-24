@@ -42,6 +42,9 @@ mkdir -p "$RADICE/public/video"
 cp "$LAVORO/$SLUG · 16x9.mp4" "$RADICE/public/video/$SLUG.mp4"
 cp "$LAVORO/poster.webp" "$RADICE/public/video/$SLUG.webp"
 cp "$LAVORO/sottotitoli.vtt" "$RADICE/public/video/$SLUG.vtt"
+# la versione 9:16 leggera per il sito: sul telefono il lettore mostra questa
+ffmpeg -y -v error -i "$LAVORO/$SLUG · 9x16.mp4" -vf scale=720:1280 -c:v libx264 -preset slow -crf 27 -pix_fmt yuv420p -profile:v high -c:a aac -b:a 96k -movflags +faststart "$RADICE/public/video/$SLUG-verticale.mp4"
+ffmpeg -y -v error -ss 3 -i "$LAVORO/$SLUG · 9x16.mp4" -frames:v 1 -vf scale=540:960 -c:v libwebp -quality 80 "$RADICE/public/video/$SLUG-verticale.webp"
 echo "· pagina del tutorial"; python3 "$QUI/registra.py" "$SLUG" "$LAVORO"
 ffprobe -v error -show_entries format=duration -of csv=p=0 "$LAVORO/$SLUG · 16x9.mp4" | xargs printf "· fatto: %.1f s\n"
 ls -la "$LAVORO"/*.mp4

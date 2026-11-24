@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { VideoMizi } from "@/components/tutorial/VideoMizi";
 import Link from "next/link";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { Briciole, InBreve } from "@/components/directory/Briciole";
@@ -128,18 +129,14 @@ export default function ComeReclamare() {
         <h2 id="titolo-video" className="text-2xl font-black text-notte sm:text-3xl">
           Mizi ti fa vedere come si fa (meno di 2 minuti)
         </h2>
-        <video
-          controls
-          playsInline
-          preload="metadata"
-          poster={TUTORIAL_RECLAMO.video.poster}
-          className="mt-4 aspect-video w-full rounded-[1.4rem] bg-notte shadow-[0_20px_40px_-24px_rgba(31,36,48,0.6)]"
-          data-video-reclamo
-        >
-          <source src={TUTORIAL_RECLAMO.video.src} type="video/mp4" />
-          <track kind="captions" src={TUTORIAL_RECLAMO.video.sottotitoli} srcLang="it" label="Italiano" />
-          Il tuo browser non riproduce il video: qui sotto trovi tutti i passi scritti.
-        </video>
+        <div className="mt-4">
+          <VideoMizi
+            orizzontale={{ src: TUTORIAL_RECLAMO.video.src, poster: TUTORIAL_RECLAMO.video.poster }}
+            verticale={TUTORIAL_RECLAMO.verticale}
+            sottotitoli={TUTORIAL_RECLAMO.video.sottotitoli}
+            datiVideo={{ "video-reclamo": "" }}
+          />
+        </div>
         <details className="mt-3 rounded-2xl bg-white px-5 py-3">
           <summary className="cursor-pointer font-extrabold text-notte">Leggi il testo del video</summary>
           <div className="mt-2 flex flex-col gap-2 text-notte-tenue">
