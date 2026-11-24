@@ -252,6 +252,17 @@ ok(
     `${coppie.length} coppie; sconosciute: ${[...new Set(sconosciute)].join(", ")}; mancanti: ${mancanti.slice(0, 4).join(" | ")}`);
 }
 
+// 3-quinquies. Gli strumenti di una guida (dal 24/11/2026): la guida della festa
+// porta all'invito, al kit, ai posti per città e al biglietto di ringraziamento.
+{
+  const html = await testo("/guide/festa-di-compleanno-semplice");
+  const riquadro = html.split("data-strumenti-guida")[1]?.split("</section>")[0] ?? "";
+  const attesi = ["/biglietti/crea?tipo=invito", "/biglietti/kit-festa", "/feste", "/biglietti/crea?tipo=ringraziamento"];
+  const mancano = attesi.filter((h) => !riquadro.includes(`href="${h.replace(/&/g, "&amp;")}"`));
+  ok("guida della festa: il riquadro porta agli strumenti gratis", riquadro.length > 0 && mancano.length === 0, `mancano: ${mancano.join(", ")}`);
+  ok("guida della festa: niente «bimbo» e il nome giusto del sito", !/\bbimb[oi]\b/i.test(html.split("<main")[1] ?? html) && !html.includes("Gioca con Mizi gli inviti"));
+}
+
 // 3-bis. I dati strutturati di ogni pagina (dal 04/11/2026, scripts/verifica/jsonld.mjs):
 // JSON leggibile, tipi schema.org veri, FAQ complete e VISIBILI nella pagina,
 // una sola FAQPage, briciole dalla Home con indirizzi sul dominio, Article

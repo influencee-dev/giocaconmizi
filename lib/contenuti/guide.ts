@@ -33,6 +33,12 @@ export interface Guida {
   /** Slug dei giochi del sito citati come "per esercitarsi". */
   giochi: string[];
   /**
+   * Gli strumenti gratis del sito che servono a fare quello che la guida dice
+   * (dal 24/11/2026): un riquadro di link sotto le sezioni. I paragrafi sono
+   * testo semplice, quindi i link stanno qui.
+   */
+  strumenti?: { testo: string; href: string; nota: string }[];
+  /**
    * La foto di testata, prodotta con ChatGPT dal documento su Drive
    * «00 PROMPT GUIDE» (Giocamizi · Prompt immagini): scena del prompt e
    * testo alternativo. Il file è public/immagini/guida-<slug>-<larghezza>.webp;
@@ -927,13 +933,13 @@ const GUIDE_BREVI: Guida[] = [
       "La festa riuscita non \u00e8 quella con pi\u00f9 attrazioni: \u00e8 due ore al massimo, pochi invitati (per i piccoli vale la regola degli anni del bambino pi\u00f9 uno), tre giochi semplici guidati da un adulto e una torta. Decidete il budget prima, mettete il programma per iscritto e chiedete le conferme con una scadenza: il resto \u2014 inviti, conferme e ringraziamenti \u2014 oggi si prepara gratis in dieci minuti.",
     etaMin: 3,
     etaMax: 10,
-    minutiLettura: 6,
-    aggiornata: "2026-10-19",
+    minutiLettura: 7,
+    aggiornata: "2026-11-24",
     sezioni: [
       {
         titolo: "Quanto grande deve essere (meno di cos\u00ec)",
         paragrafi: [
-          "La domanda giusta non \u00e8 \u00abcosa manca?\u00bb ma \u00abcosa posso togliere?\u00bb. Per i bambini piccoli funziona la vecchia regola degli anni pi\u00f9 uno: quattro invitati per un bimbo di tre anni, cinque per uno di quattro. Un bambino di tre anni a una festa con venti coetanei non si diverte di pi\u00f9: si perde. Crescendo il gruppo si allarga da solo, ma fino alle elementari una festa piccola \u00e8 quasi sempre una festa migliore.",
+          "La domanda giusta non \u00e8 \u00abcosa manca?\u00bb ma \u00abcosa posso togliere?\u00bb. Per i bambini piccoli funziona la vecchia regola degli anni pi\u00f9 uno: quattro invitati per un bambino di tre anni, cinque per uno di quattro. Un bambino di tre anni a una festa con venti coetanei non si diverte di pi\u00f9: si perde. Crescendo il gruppo si allarga da solo, ma fino alle elementari una festa piccola \u00e8 quasi sempre una festa migliore.",
           "Anche la durata va al ribasso: due ore bastano a qualunque et\u00e0, e per i pi\u00f9 piccoli ne avanzano. Il pomeriggio tra le 16 e le 18 \u00e8 la fascia che regge meglio: niente pisolino saltato, niente cena da gestire, e un orario di fine dichiarato nell'invito \u00e8 un regalo che fate a tutti i genitori.",
         ],
       },
@@ -942,13 +948,21 @@ const GUIDE_BREVI: Guida[] = [
         paragrafi: [
           "La scaletta che non tradisce \u00e8 sempre la stessa: venti minuti di arrivi e gioco libero, due o tre giochi guidati, la merenda, la torta con le candeline, i regali. I giochi di sempre funzionano perch\u00e9 sono di sempre: le belle statuine, la caccia al tesoro con tre indizi, i balli da copiare. Serve per\u00f2 un adulto che li guidi davvero: un gioco semplice condotto con energia batte qualunque gonfiabile.",
           "Tenete sempre un gioco di riserva in tasca per il momento in cui l'attenzione cala \u2014 succede, non \u00e8 un fallimento. E sotto i cinque anni mettete in conto che i genitori restano: contateli nelle sedie e nel caff\u00e8.",
+          "Se volete la caccia al tesoro senza inventarla da zero, nel kit della festa di Giocamizi ci sono gli indizi da stampare, con lo stesso sfondo dell'invito; nello stesso kit trovate segnaposto, etichette per i sacchettini, festone col nome e topper per la torta. Si stampano a casa, gratis.",
+        ],
+      },
+      {
+        titolo: "Dove farla, se in casa non ci state",
+        paragrafi: [
+          "Casa, cortile e parco restano la scelta pi\u00f9 semplice. Quando lo spazio non basta, o \u00e8 inverno e il parco non \u00e8 un'opzione, le alternative sono di tre tipi: la sala feste in affitto (lo spazio \u00e8 vostro, il programma lo fate voi), la ludoteca o il parco giochi al coperto (spesso con un pacchetto che comprende animazione e merenda), e l'attivit\u00e0 vera e propria \u2014 una fattoria, un laboratorio, un laser game per i pi\u00f9 grandi \u2014 dove la festa \u00e8 l'esperienza.",
+          "Prima di prenotare fate sempre le stesse quattro domande: cosa \u00e8 compreso nel prezzo (merenda, torta, animazione, pulizie), quanti bambini al massimo, quanto dura, e se potete portare la vostra torta. I prezzi cambiano molto da posto a posto e da stagione a stagione: chiedeteli scritti. Su Giocamizi, nella pagina della vostra citt\u00e0, trovate i posti per le feste presi dai loro siti ufficiali, con quello che dicono di offrire.",
         ],
       },
       {
         titolo: "Inviti e conferme senza rincorrere nessuno",
         paragrafi: [
           "Un buon invito risponde a tutto senza che nessuno debba scrivervi: giorno, orario di inizio e di fine, indirizzo, un numero per confermare e una riga per le allergie. La scadenza per le conferme \u2014 \u00abfateci sapere entro luned\u00ec\u00bb \u2014 non \u00e8 scortesia: \u00e8 quello che vi evita di comprare trenta pizzette per dodici bambini.",
-          "Qui su Gioca con Mizi gli inviti si fanno gratis nel creatore di biglietti: scegliete il tema, scrivete nome ed et\u00e0, e chi riceve l'invito conferma con un tocco su WhatsApp; sul biglietto stampato si pu\u00f2 mettere il QR \u00abInquadra e conferma\u00bb. Le conferme arrivano da sole, senza inseguire nessuno nelle chat.",
+          "Qui su Giocamizi gli inviti si fanno gratis nel creatore di biglietti: scegliete il tema, scrivete nome ed et\u00e0, e chi riceve l'invito conferma con un tocco su WhatsApp; sul biglietto stampato si pu\u00f2 mettere il QR \u00abInquadra e conferma\u00bb. Le conferme arrivano da sole, senza inseguire nessuno nelle chat.",
         ],
       },
       {
@@ -961,7 +975,7 @@ const GUIDE_BREVI: Guida[] = [
       {
         titolo: "Il giorno dopo: i grazie (e le foto)",
         paragrafi: [
-          "Il biglietto di ringraziamento scritto insieme al festeggiato \u00e8 il modo pi\u00f9 semplice di chiudere bene: cinque minuti, un grazie per il regalo ricevuto, e un piccolo esercizio di gratitudine che vale pi\u00f9 di una lezione. Anche questi si preparano gratis nel creatore del sito.",
+          "Il biglietto di ringraziamento scritto insieme al festeggiato \u00e8 il modo pi\u00f9 semplice di chiudere bene: cinque minuti, un grazie per il regalo ricevuto, e un piccolo esercizio di gratitudine che vale pi\u00f9 di una lezione. Anche questi si preparano gratis nel creatore del sito, con le frasi pronte dello stesso tema dell'invito.",
           "Sulle foto, una sola regola: prima di condividere immagini in cui compaiono i bambini degli altri, chiedete ai loro genitori. Un messaggio nel gruppo \u2014 \u00abposso mandare le foto della festa?\u00bb \u2014 costa dieci secondi e evita dispiaceri veri.",
         ],
       },
@@ -983,12 +997,23 @@ const GUIDE_BREVI: Guida[] = [
           "No, non \u00e8 un obbligo: vale il buon senso. Se invitate quasi tutti, meglio tutti; se invitate pochi amici stretti, consegnate gli inviti fuori da scuola per non ferire nessuno.",
       },
       {
+        domanda: "Dove si fa la festa se in casa non c'\u00e8 spazio?",
+        risposta:
+          "In una sala feste in affitto, in una ludoteca o in un parco giochi al coperto, oppure in un posto dove la festa \u00e8 un'esperienza (fattoria, laboratorio, laser game). Prima di prenotare chiedete per iscritto cosa \u00e8 compreso, quanti bambini al massimo, quanto dura e se potete portare la torta.",
+      },
+      {
         domanda: "Come gestisco le conferme che non arrivano?",
         risposta:
           "Mettete nell'invito una scadenza (\u00abentro luned\u00ec\u00bb) e un modo per confermare a un tocco: col nostro invito digitale la conferma parte da WhatsApp gi\u00e0 scritta. Chi non risponde entro la data, contatelo come assente e vivete sereni.",
       },
     ],
     giochi: ["le-emozioni-di-mizi", "memory-animali", "robot-ballerino"],
+    strumenti: [
+      { testo: "Crea l'invito", href: "/biglietti/crea?tipo=invito", nota: "Con la conferma a un tocco su WhatsApp e il QR sul biglietto stampato." },
+      { testo: "Il kit della festa", href: "/biglietti/kit-festa", nota: "Caccia al tesoro, segnaposto, etichette, festone e topper da stampare." },
+      { testo: "Dove fare la festa nella tua citt\u00e0", href: "/feste", nota: "Sale feste, ludoteche e parchi al coperto, citt\u00e0 per citt\u00e0." },
+      { testo: "Il biglietto di ringraziamento", href: "/biglietti/crea?tipo=ringraziamento", nota: "Con le frasi pronte dello stesso tema dell'invito." },
+    ],
     foto: {
       scena:
         "Soggiorno di casa addobbato in modo semplice: un festone di carta colorato senza scritte, pochi palloncini. Cinque bambini di circa 6 anni seduti in cerchio sul tappeto giocano a passarsi un pacco regalo, ridendo. Una torta fatta in casa sul tavolino. Mizi è seduta nel cerchio con un cappellino di carta.",
@@ -1476,7 +1501,8 @@ export function guideInOrdine(): Guida[] {
  * scelta era solo per fascia d'età, e due guide gemelle non si linkavano.
  */
 const LEGGI_ANCHE: Record<string, string[]> = {
-  "bambino-non-sa-perdere": ["giochi-da-tavolo-cooperativi-per-bambini"],
+  "bambino-non-sa-perdere": ["giochi-da-tavolo-cooperativi-per-bambini", "festa-di-compleanno-semplice"],
+  "festa-di-compleanno-semplice": ["bambino-non-sa-perdere"],
   "giochi-da-tavolo-cooperativi-per-bambini": ["bambino-non-sa-perdere"],
   "lettera-a-babbo-natale-come-scriverla-insieme-ai-bambini": ["calendario-dell-avvento-fai-da-te-con-i-bambini"],
   "calendario-dell-avvento-fai-da-te-con-i-bambini": ["lettera-a-babbo-natale-come-scriverla-insieme-ai-bambini"],

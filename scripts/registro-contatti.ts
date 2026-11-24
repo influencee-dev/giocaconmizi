@@ -74,6 +74,8 @@ export function leggiCsv(testo: string): string[][] {
 const csv = (righe: string[][]) =>
   righe.map((r) => r.map((c) => (/[",\n]/.test(c) ? `"${c.replace(/"/g, '""')}"` : c)).join(",")).join("\n") + "\n";
 
+const STATI_AUTOMATICI = new Set(["Pronta da inviare", "Senza email: chiamare o scrivere dal sito", "Contatto da trovare"]);
+
 /** La mail per un'attività: una sola richiesta, i tre link, la nota privacy. */
 export function mail(nome: string, citta: string, link: string): { oggetto: string; testo: string } {
   return {
@@ -255,7 +257,7 @@ function principale() {
     riga.Note = link ? "" : "non è sul sito: la mail non parla di scheda";
     righeGm.push(riga);
   }
-  for (const r of righeGm) if (!r.Stato) r.Stato = r.Email ? "Pronta da inviare" : "Contatto da trovare";
+  for (const r of righeGm) if (!r.Stato || STATI_AUTOMATICI.has(r.Stato)) r.Stato = r.Email ? "Pronta da inviare" : "Contatto da trovare";
   righeGm.sort((a, b) => a.Rif.localeCompare(b.Rif));
 
   // Contatti nuovi: riempiono solo le celle vuote.
@@ -269,7 +271,10 @@ function principale() {
         r["Fonte contatto"] = [c.fonte_email && `email: ${c.fonte_email}`, c.fonte_telefono && `tel: ${c.fonte_telefono}`].filter(Boolean).join(" · ");
       if (c.nota && !r.Note.includes(c.nota)) r.Note = [r.Note, c.nota].filter(Boolean).join(" · ");
     }
-    if (!r.Stato) r.Stato = r.Email ? "Pronta da inviare" : r.Telefono ? "Senza email: chiamare o scrivere dal sito" : "Contatto da trovare";
+    // Gli stati automatici si ricalcolano (un'email trovata oggi rende la riga
+    // «Pronta»); quelli scritti a mano («Inviata», «Ha risposto»…) restano.
+    if (!r.Stato || STATI_AUTOMATICI.has(r.Stato))
+      r.Stato = r.Email ? "Pronta da inviare" : r.Telefono ? "Senza email: chiamare o scrivere dal sito" : "Contatto da trovare";
   }
 
   const uscita = [[...COLONNE], ...righe.map((r) => COLONNE.map((c) => r[c]))];

@@ -35,7 +35,7 @@
   "app/(public)/giochi/competenza/[skill]/page.tsx": "2026-11-18",
   "app/(public)/giochi/eta/[eta]/page.tsx": "2026-10-07",
   "app/(public)/giochi/page.tsx": "2026-11-22",
-  "app/(public)/guide/[slug]/page.tsx": "2026-11-23",
+  "app/(public)/guide/[slug]/page.tsx": "2026-11-24",
   "app/(public)/guide/page.tsx": "2026-11-23",
   "app/(public)/iscrizione-confermata/page.tsx": "2026-11-07",
   "app/(public)/la-tua-scheda/[codice]/page.tsx": "2026-11-08",

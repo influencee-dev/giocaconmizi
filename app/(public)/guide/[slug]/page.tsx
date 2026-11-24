@@ -159,6 +159,20 @@ export default async function GuidaPage({
         ))
       )}
 
+      {!voce.approfondimento && voce.strumenti && voce.strumenti.length > 0 && (
+        <section className="mt-12" data-strumenti-guida>
+          <TitoloSezione>Gli strumenti gratis per farlo</TitoloSezione>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {voce.strumenti.map((s) => (
+              <Link key={s.href} href={s.href} className="flex flex-col gap-1 rounded-[1.2rem] border-2 border-notte/10 bg-white p-4 hover:border-viola">
+                <span className="font-extrabold text-viola">{s.testo} →</span>
+                <span className="text-sm text-notte-tenue">{s.nota}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       {correlati.length > 0 && (
         <section className="mt-12">
           <TitoloSezione>Per esercitarsi giocando, gratis</TitoloSezione>
