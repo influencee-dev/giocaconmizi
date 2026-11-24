@@ -51,6 +51,7 @@ export const slugGiocabili = [
   "piu-e-meno",
   "guida-mizi",
   "pixel-art",
+  "pixel-art-di-natale",
   "robot-ballerino",
   "labirinto-a-blocchi",
   "trova-l-errore",

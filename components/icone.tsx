@@ -87,6 +87,7 @@ export const ICONE_GIOCO: Record<string, NomeIcona[]> = {
   "piu-e-meno": ["piu", "numeri"],
   "guida-mizi": ["pinguino", "pesce"],
   "pixel-art": ["alieno-pixel", "tavolozza"],
+  "pixel-art-di-natale": ["albero", "stella"],
   "robot-ballerino": ["robot", "note"],
   "labirinto-a-blocchi": ["bussola", "pinguino"],
   "labirinto-dei-tesori": ["mappa", "chiave"],

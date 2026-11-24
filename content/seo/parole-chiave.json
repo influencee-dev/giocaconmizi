@@ -431,9 +431,13 @@
       "volume": 5400,
       "difficolta": 19,
       "sezione": "giochi",
-      "pagina": "/giochi/pixel-art",
-      "stato": "manca",
-      "cosa_fare": "Disegni natalizi dentro il gioco della pixel art."
+      "pagina": "/giochi/pixel-art-di-natale",
+      "stato": "fatto",
+      "cosa_fare": "Disegni natalizi dentro il gioco della pixel art.",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "gioco nuovo «Pixel art di Natale» (sei disegni di Natale), titolo per Google nel titoloSeo; scheda nella pagina /natale"
+      }
     },
     {
       "ricerca": "pixel art facile",

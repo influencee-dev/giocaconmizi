@@ -60,6 +60,7 @@ export const componenti: Record<string, ComponentType<GameProps>> = {
   "piu-e-meno": dynamic(() => import("@/games/piu-e-meno/Game"), { ssr: false }),
   "guida-mizi": dynamic(() => import("@/games/guida-mizi/Game"), { ssr: false }),
   "pixel-art": dynamic(() => import("@/games/pixel-art/Game"), { ssr: false }),
+  "pixel-art-di-natale": dynamic(() => import("@/games/pixel-art-di-natale/Game"), { ssr: false }),
   "robot-ballerino": dynamic(() => import("@/games/robot-ballerino/Game"), { ssr: false }),
   "labirinto-a-blocchi": dynamic(() => import("@/games/labirinto-a-blocchi/Game"), { ssr: false }),
   "trova-l-errore": dynamic(() => import("@/games/trova-l-errore/Game"), { ssr: false }),
