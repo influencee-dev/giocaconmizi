@@ -21,7 +21,7 @@ export async function mandaPdfAcquistati(a: string, sessione: string, codici: st
     `<ul style="margin:0 0 16px;padding-left:20px;font-size:15px;line-height:1.5;">${elenco}</ul>` +
     `<p style="margin:0 0 18px;">${bottone(link, "Scarica i PDF")}</p>` +
     par(`Il link funziona per ${GIORNI_SCARICO} giorni: puoi tornare a scaricarli quando vuoi, anche da un altro dispositivo. Tienilo per te, è il tuo.`) +
-    par("Per stampare: carta A4 normale, stampa «a dimensione reale». I disegni due per foglio si tagliano a metà lungo la linea tratteggiata. Il libricino si stampa fronte-retro «sul lato corto»: pieghi i fogli a metà, li infili uno dentro l'altro e li pinzi al centro.") +
+    par("Per stampare: carta A4 normale, stampa «a dimensione reale». I disegni due per foglio si tagliano a metà lungo la linea tratteggiata. Il libricino si stampa fronte-retro «sul lato corto»: il primo foglio del PDF spiega passo passo come piegarlo e chiuderlo.") +
     par("Come promemoria: prima di pagare hai chiesto di ricevere subito i PDF e hai preso atto che, con la consegna immediata, il diritto di recesso non si applica (art. 59, lettera o, Codice del consumo). Se un file non si apre o è sbagliato, rispondi a questa email e lo sistemiamo.");
   return inviaEmailServizio({ a, oggetto: "I tuoi disegni di Mizi sono pronti", html: pagina("I tuoi PDF da stampare", corpo), etichetta: "negozio-acquisto" });
 }

@@ -21,7 +21,8 @@ Ordine minimo 0,99 €. I prezzi sono proposte da confermare con Giorgia: si cam
 listino standard da ricontrollare sul pannello) si prende circa un quarto: per questo il disegno singolo si vende
 solo dentro un ordine minimo, e conviene spingere libretto e pacchetto.
 
-Il libricino si stampa fronte-retro «sul lato corto», si piegano i fogli a metà, si infilano uno dentro l'altro e
+Il PDF del libricino si apre con un foglio di istruzioni illustrate (retro bianco, così la stampa fronte-retro
+dei fogli dopo resta allineata), e ogni foglio ha in basso il suo numero («foglio 1 di 9»). Il libricino si stampa fronte-retro «sul lato corto», si piegano i fogli a metà, si infilano uno dentro l'altro e
 si pinzano: le pagine tornano in ordine (imposizione a quartino in `scripts/negozio/pdf-casa.py`). Fuori c'è la
 copertina a colori del libro, ritagliata dalla copertina di Amazon; sul retro il riquadro del codice a barre diventa
 un'etichetta «giocamizi.it». Le pagine quadrate stanno su metà A4: chi vuole un libricino quadrato rifila sopra e sotto.
@@ -73,7 +74,7 @@ sotto i 300 dpi in A4. Guardare a occhio almeno la prima pagina di ogni PDF, poi
 nel catalogo, con le verifiche di sempre.
 
 Provato il 23/11/2026 sull'interno e sulla copertina del Volume 1 (bozze REVIEW v05): 17 PDF tra 114 KB e 5 MB,
-tavole a 348 dpi in A4 e 504 dpi in A5, libricino di 18 facciate A4 (9 fogli).
+tavole a 348 dpi in A4 e 504 dpi in A5, libricino di 20 facciate A4 (foglio di istruzioni più 9 fogli).
 
 ## Cosa serve per aprire (lato Giorgia)
 

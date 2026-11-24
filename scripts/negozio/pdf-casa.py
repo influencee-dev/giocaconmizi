@@ -5,8 +5,9 @@ Il libro della collana è quadrato (8,5 × 8,5 pollici, 32 pagine): le pagine 5,
 sono le dodici tavole, le pari prima di ognuna il testo. Da quell'unico PDF escono:
 
   libretto-A4.pdf         il libro intero, una pagina quadrata per foglio A4 (con la copertina)
-  libricino-A5.pdf        il libricino da piegare: si stampa fronte-retro su A4 (lato corto),
-                          si piega a metà e si pinza; copertina a colori fuori, 36 facciate
+  libricino-A5.pdf        il libricino da piegare: un foglio di istruzioni (retro bianco), poi i
+                          fogli da stampare fronte-retro su A4 (lato corto), piegare a metà e
+                          pinzare; copertina a colori fuori, 36 facciate, fogli numerati
   disegni-A4.pdf          solo i dodici disegni, uno per foglio A4
   disegni-A5.pdf          solo i disegni, due per foglio A4 orizzontale da tagliare
   disegno-NN-A4.pdf       ogni disegno da solo (NN = 01…12)
@@ -156,7 +157,130 @@ def pagina_da_immagine(im: Image.Image | None) -> PageObject:
     return PdfReader(io.BytesIO(buf.getvalue())).pages[0]
 
 
-def libricino(pagine: list[PageObject], uscita: Path) -> None:
+VIOLA = (155 / 255, 109 / 255, 214 / 255)
+NOTTE = (31 / 255, 36 / 255, 48 / 255)
+TENUE = (74 / 255, 81 / 255, 100 / 255)
+CREMA = (1, 243 / 255, 230 / 255)
+
+
+def righe_a_capo(c: canvas.Canvas, testo: str, x: float, y: float, larghezza: float, font: str, corpo: float, interlinea: float) -> float:
+    """Scrive un paragrafo andando a capo dentro la larghezza; restituisce la y sotto l'ultima riga."""
+    c.setFont(font, corpo)
+    riga = ""
+    for parola in testo.split():
+        prova = f"{riga} {parola}".strip()
+        if pdfmetrics.stringWidth(prova, font, corpo) > larghezza and riga:
+            c.drawString(x, y, riga)
+            y -= interlinea
+            riga = parola
+        else:
+            riga = prova
+    if riga:
+        c.drawString(x, y, riga)
+        y -= interlinea
+    return y
+
+
+def foglio_istruzioni(titolo: str, fogli: int) -> list[PageObject]:
+    """Il primo foglio del libricino: come stamparlo, piegarlo e chiuderlo. Retro bianco,
+    così la stampa fronte-retro dei fogli che seguono resta allineata."""
+    w, h = landscape(A4)
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=(w, h))
+    m = 14 * mm
+    c.setFillColorRGB(*VIOLA)
+    c.setFont("NunitoBold", 9)
+    c.drawString(m, h - m, "GIOCAMIZI · ISTRUZIONI")
+    c.setFillColorRGB(*NOTTE)
+    c.setFont("NunitoBold", 22)
+    c.drawString(m, h - m - 26, "Come costruire il tuo libricino")
+    c.setFillColorRGB(*TENUE)
+    c.setFont("Nunito", 11)
+    c.drawString(m, h - m - 44, f"«{titolo}» · {fogli} fogli A4 · questo primo foglio non fa parte del libro: tienilo da parte.")
+
+    # Quattro passi, ognuno con un disegnino.
+    passi = [
+        ("1. Stampa fronte-retro",
+         "Nelle opzioni di stampa scegli «fronte-retro» e «capovolgi sul lato corto», dimensioni reali (100%). "
+         "Va bene la carta normale; se ce l'hai, una carta un po' più spessa per il primo foglio fa una copertina più robusta."),
+        ("2. Metti i fogli in ordine",
+         f"In basso, vicino al centro, ogni foglio ha un numerino: da 1 a {fogli}. Il foglio 1 è quello con la copertina a colori "
+         "e va fuori; l'ultimo va al centro del libricino."),
+        ("3. Piega a metà",
+         "Piega ogni foglio a metà lungo il centro, con la parte stampata della copertina verso l'esterno. "
+         "I segnini in alto e in basso ti dicono dove. Ripassa la piega con l'unghia."),
+        ("4. Infila e pinza",
+         "Infila i fogli uno dentro l'altro: il 2 dentro l'1, il 3 dentro il 2, e così via. Chiudi con due punti di "
+         "pinzatrice sulla piega. Senza pinzatrice vanno bene ago e filo, o un nastro adesivo colorato sul dorso."),
+    ]
+    larg = (w - 2 * m - 3 * 8 * mm) / 4
+    alto = 118 * mm
+    y0 = h - m - 60 - alto
+    for i, (tit, testo) in enumerate(passi):
+        x = m + i * (larg + 8 * mm)
+        c.setFillColorRGB(*CREMA)
+        c.roundRect(x, y0, larg, alto, 10, stroke=0, fill=1)
+        # disegnino in alto nel riquadro
+        cx, cy = x + larg / 2, y0 + alto - 32 * mm
+        c.setStrokeColorRGB(*NOTTE)
+        c.setLineWidth(1.2)
+        c.setFillColorRGB(1, 1, 1)
+        if i == 0:  # un foglio orizzontale con le due pagine e la freccia che gira sul lato corto
+            c.rect(cx - 24 * mm, cy - 10 * mm, 40 * mm, 24 * mm, fill=1)
+            c.setDash(2, 2); c.line(cx - 4 * mm, cy - 10 * mm, cx - 4 * mm, cy + 14 * mm); c.setDash()
+            c.setStrokeColorRGB(*VIOLA); c.setLineWidth(2)
+            c.arc(cx + 12 * mm, cy - 8 * mm, cx + 26 * mm, cy + 12 * mm, startAng=-90, extent=180)
+            c.line(cx + 19 * mm, cy - 8 * mm, cx + 22 * mm, cy - 5.5 * mm)
+            c.line(cx + 19 * mm, cy - 8 * mm, cx + 22 * mm, cy - 10.5 * mm)
+        elif i == 1:  # una pila di fogli numerati: il numero sull'angolo che resta scoperto
+            for k in range(3, -1, -1):
+                ox, oy = k * 4 * mm, -k * 4 * mm
+                c.setStrokeColorRGB(*NOTTE); c.setFillColorRGB(1, 1, 1)
+                c.rect(cx - 24 * mm + ox, cy - 4 * mm + oy, 34 * mm, 20 * mm, fill=1)
+                c.setFillColorRGB(*VIOLA); c.setFont("NunitoBold", 9)
+                c.drawRightString(cx + 8.5 * mm + ox, cy - 2.8 * mm + oy, str(k + 1))
+        elif i == 2:  # foglio che si piega: metà piatta, metà alzata
+            c.rect(cx - 22 * mm, cy - 12 * mm, 22 * mm, 26 * mm, fill=1)
+            p = c.beginPath(); p.moveTo(cx, cy - 12 * mm); p.lineTo(cx + 12 * mm, cy - 7 * mm)
+            p.lineTo(cx + 12 * mm, cy + 19 * mm); p.lineTo(cx, cy + 14 * mm); p.close()
+            c.drawPath(p, fill=1)
+            c.setStrokeColorRGB(*VIOLA); c.setLineWidth(2)
+            c.arc(cx - 2 * mm, cy + 4 * mm, cx + 24 * mm, cy + 26 * mm, startAng=10, extent=120)
+        else:  # libricino chiuso con due punti sul dorso
+            c.rect(cx - 16 * mm, cy - 14 * mm, 32 * mm, 32 * mm, fill=1)
+            c.setFillColorRGB(*VIOLA); c.rect(cx - 16 * mm, cy - 14 * mm, 3 * mm, 32 * mm, stroke=0, fill=1)
+            c.setStrokeColorRGB(*NOTTE); c.setLineWidth(2)
+            for sy in (cy - 6 * mm, cy + 10 * mm):
+                c.line(cx - 15 * mm, sy - 2.5 * mm, cx - 15 * mm, sy + 2.5 * mm)
+        c.setFillColorRGB(*NOTTE)
+        c.setFont("NunitoBold", 13)
+        c.drawString(x + 5 * mm, y0 + alto - 64 * mm, tit)
+        c.setFillColorRGB(*TENUE)
+        righe_a_capo(c, testo, x + 5 * mm, y0 + alto - 71 * mm, larg - 10 * mm, "Nunito", 9.5, 13)
+
+    # Due consigli in fondo.
+    y = y0 - 12 * mm
+    c.setFillColorRGB(*NOTTE); c.setFont("NunitoBold", 11)
+    c.drawString(m, y, "La stampante non fa il fronte-retro da sola?")
+    c.setFillColorRGB(*TENUE)
+    righe_a_capo(c, f"Stampa prima solo le pagine dispari (3, 5, 7 … {2 * fogli + 1}). Rimetti la pila nel cassetto girata come "
+                    "indica la tua stampante (spesso c'è un disegnino sul cassetto) e stampa le pagine pari (4, 6 … "
+                    f"{2 * fogli + 2}). Fai una prova con il primo foglio.", m, y - 15, (w - 2 * m) / 2 - 6 * mm, "Nunito", 9.5, 13)
+    x2 = m + (w - 2 * m) / 2 + 6 * mm
+    c.setFillColorRGB(*NOTTE); c.setFont("NunitoBold", 11)
+    c.drawString(x2, y, "Lo vuoi quadrato, come il libro vero?")
+    c.setFillColorRGB(*TENUE)
+    righe_a_capo(c, "Quando è pinzato, taglia con le forbici (o con l'aiuto di un grande) la striscia bianca sopra e sotto "
+                    "le pagine. Poi è pronto da colorare!", x2, y - 15, (w - 2 * m) / 2 - 6 * mm, "Nunito", 9.5, 13)
+    c.setFillColorRGB(*TENUE); c.setFont("Nunito", 8)
+    c.drawRightString(w - m, 9 * mm, NOTA)
+    c.showPage()
+    c.showPage()  # retro bianco
+    c.save()
+    return list(PdfReader(io.BytesIO(buf.getvalue())).pages)
+
+
+def libricino(pagine: list[PageObject], uscita: Path, titolo: str) -> None:
     """Imposizione a quartino: fogli A4 orizzontali, fronte e retro, da piegare e pinzare.
 
     Con N facciate (multiplo di 4), il foglio k ha sul fronte N-1-2k | 2k e sul retro
@@ -170,8 +294,10 @@ def libricino(pagine: list[PageObject], uscita: Path) -> None:
     meta = w / 2
     lato = meta - 2 * 7 * mm
     out = PdfWriter()
+    for istr in foglio_istruzioni(titolo, n // 4):
+        out.add_page(istr)
     for k in range(n // 4):
-        for sinistra, destra in ((n - 1 - 2 * k, 2 * k), (2 * k + 1, n - 2 - 2 * k)):
+        for lato_stampa, (sinistra, destra) in enumerate(((n - 1 - 2 * k, 2 * k), (2 * k + 1, n - 2 - 2 * k))):
             foglio = PageObject.create_blank_page(width=w, height=h)
             # Due piccoli segni in alto e in basso: dove piegare.
             buf = io.BytesIO()
@@ -180,6 +306,11 @@ def libricino(pagine: list[PageObject], uscita: Path) -> None:
             c.setStrokeGray(0.6)
             c.line(meta, h - 5 * mm, meta, h)
             c.line(meta, 0, meta, 5 * mm)
+            if lato_stampa == 0:
+                # Il numero del foglio, piccolo, in basso vicino alla piega: dice l'ordine.
+                c.setFont("Nunito", 7)
+                c.setFillGray(0.55)
+                c.drawRightString(meta - 4 * mm, 7 * mm, f"foglio {k + 1} di {n // 4}")
             c.showPage()
             c.save()
             foglio.merge_page(PdfReader(io.BytesIO(buf.getvalue())).pages[0])
@@ -305,7 +436,7 @@ def main() -> None:
     interno = list(libro.pages)
     libretto_a4([pagina_da_immagine(fronte), *interno, pagina_da_immagine(retro)], uscita)
     bianca = pagina_da_immagine(None)
-    libricino([pagina_da_immagine(fronte), bianca, *interno, bianca, pagina_da_immagine(retro)], uscita)
+    libricino([pagina_da_immagine(fronte), bianca, *interno, bianca, pagina_da_immagine(retro)], uscita, o.titolo)
     disegni_a4(ims, o.titolo, uscita / "disegni-A4.pdf", list(range(1, len(ims) + 1)))
     disegni_a5(ims, o.titolo, uscita / "disegni-A5.pdf")
     for n in range(1, len(ims) + 1):
