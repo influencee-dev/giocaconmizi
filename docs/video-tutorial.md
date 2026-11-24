@@ -78,3 +78,34 @@ caricare su Drive (2 Aree → Giocamizi · Video) e su YouTube.
   si ascolta, o si trascrive un pezzo a metà con whisper.
 - I sottotitoli sono stampati nelle immagini: nel lettore del sito la traccia
   .vtt resta spenta (senza `default`), se no si vedono doppi.
+
+## Reel (24/11/2026)
+
+I reel promozionali hanno un motore loro, diverso dai tutorial, pensato per
+Instagram: solo 9:16, 15–35 secondi, ritmo veloce.
+
+```
+npm run build                                  # sito di prova fresco
+bash scripts/video/reel.sh <slug> [cartella]   # scheda in content/video/reel/<slug>.json
+```
+
+- **Registrazioni vere** (scripts/video/reel-clip.mjs): ogni voce di `clip` apre
+  una pagina dal telefono, fa le azioni (`tocca`, `scrivi` lettera per lettera,
+  `scorri`, `vedi`, `attendi`) e registra a risoluzione piena dallo screencast
+  del browser (il registratore di Playwright dimezza la risoluzione). Un cerchio
+  rosa mostra il dito. I giochi hanno `?demo=1`: giocano da soli.
+- **Scene** (scripts/video/reel.html): `gancio` (la frase grande visibile dal
+  PRIMO fotogramma), `clip` (registrazione con la scritta sopra), `domanda`
+  (per i commenti, con `scelte` A/B/C), `finale` (viola, corto: 1,6 s).
+  Ogni clip ha `da` (secondo della registrazione), `velocita` e `ritaglio`
+  {x, y, w, h} in px della pagina: ritagliare SOTTO i fumetti scritti del sito.
+- **Un solo strato di testo** (richiesta di Giorgia): la scritta grande e i
+  sottotitoli non dicono mai la stessa cosa. Gancio, domanda e finale hanno
+  `"sottotitoli": false`. Tre file per reel: con sottotitoli, senza (per i
+  sottotitoli automatici di Instagram), muto (per l'audio di tendenza).
+- `tempoVoce` (es. 1,1) fa parlare Mizi un po' più svelta. La scheda tiene
+  anche `didascalia`, `storia` e tre `aperture` da provare con le «reel di prova».
+- Le zone coperte da Instagram restano libere: 70 px in alto, 200 in basso,
+  70 a destra (su 540×960).
+- Prima di consegnare: campioni dei fotogrammi (niente passaggi a metà, niente
+  barre del sito nel ritaglio) e trascrizione whisper dell'audio finito.

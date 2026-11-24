@@ -403,6 +403,11 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   nostro incorporato, passi cliccabili, ?t=, trascrizione, VideoObject con i
   Clip, video in sitemap). Gruppi «partner» e «utenti» come su Drive;
   IN_ARRIVO in lib/contenuti/tutorial.ts = solo testo nell'hub. 12 tutorial fatti il 16/11.
+- Reel promozionali (24/11/2026): motore a parte, `bash scripts/video/reel.sh <slug>`
+  con la scheda in content/video/reel/<slug>.json (registrazioni vere del sito,
+  gancio dal primo fotogramma, UN SOLO strato di testo, tre versioni: con
+  sottotitoli, senza, muto). Regole in docs/video-tutorial.md, «Reel». Primi tre
+  di prova: sfida-piramide, pov-invito, letterina.
 
 ## Giochi: upgrade uno alla volta, voce registrata, album di Mizi (15/11/2026)
 - Metodo e coda in `.claude/skills/game-designer-mizi/SKILL.md` (da leggere prima

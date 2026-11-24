@@ -25,23 +25,38 @@ norm = lambda w: re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFD", w.lower()
 parole = [p for p in ((norm(w["word"]), w["start"], w["end"]) for w in tr["words"]) if p[0]]
 dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", intera], capture_output=True, text=True).stdout)
 inizi = [0.0]; k = 0
-for f in testi[1:]:
+def cerca(parole_frase, k):
+    """La prima parola della frase nella trascrizione, da k in poi (None se non c'è)."""
     # confronto le lettere di seguito (senza spazi né apostrofi): «un'attività»
     # trascritto «un attività» combacia lo stesso
-    obiettivo = norm("".join(f.replace("giocamizi punto it", "giocamizi").split()))[:12]
-    trovato = None
+    obiettivo = norm("".join(parole_frase))[:12]
+    if len(obiettivo) < 6: return None
     for j in range(k, len(parole)):
         seguito = "".join(p[0] for p in parole[j:j + 6])
         # whisper a volte sbaglia una doppia («dicci» → «dici»): basta che quasi tutte le lettere combacino
         if seguito.startswith(obiettivo) or (len(obiettivo) >= 8 and seguito[:10] == obiettivo[:10]) \
                 or (len(obiettivo) >= 10 and difflib.SequenceMatcher(None, seguito[:len(obiettivo)], obiettivo).ratio() >= 0.85):
-            trovato = j; break
+            return j
+    return None
+
+for f in testi[1:]:
+    pf = f.replace("giocamizi punto it", "giocamizi").split()
+    trovato = cerca(pf, k)
+    # se whisper ha sbagliato le prime parole («un paio» → «un taglio»), si cerca dalla
+    # seconda o dalla terza parola e si torna indietro di altrettante parole trascritte
+    for salto in (1, 2):
+        if trovato is not None: break
+        j = cerca(pf[salto:], k + salto)
+        if j is not None: trovato = j - salto
     if trovato is None: raise SystemExit(f"frase non trovata nella registrazione: {f[:50]}")
     k = trovato + 1; inizi.append(parole[trovato][1])
 for n, a in enumerate(inizi):
     fine_frase = inizi[n + 1] if n + 1 < len(inizi) else dur + 1
     b = max(p[2] for p in parole if p[1] < fine_frase)
-    a, b = max(0, a - 0.12), min(dur, b + 0.25)
+    # whisper a volte dà alla prima parola un inizio troppo tardi (durata zero: «Scegli» → «egli»):
+    # si parte fino a 0,4 s prima, ma mai prima della fine della frase precedente
+    fine_prima = max([p[2] for p in parole if p[2] <= a - 0.02], default=0)
+    a, b = max(0, fine_prima + 0.05, a - 0.4) if n else 0, min(dur, b + 0.25)
     # Il taglio si fa DENTRO il filtro e poi si riparte da zero (asetpts): così la
     # dissolvenza finale conta dall'inizio della frase. Prima (fino al 16/11/2026)
     # contava dall'inizio della registrazione e azzerava tutte le frasi dopo la prima.

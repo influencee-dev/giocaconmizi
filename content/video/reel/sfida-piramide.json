@@ -1,0 +1,80 @@
+{
+  "slug": "sfida-piramide",
+  "titolo": "Sfida: arrivi in cima alla piramide?",
+  "formato": "Sfida a mamma",
+  "didascalia": "Scommettiamo che non arrivate al quinto piano? 🏆 La corsa nella piramide: Mizi corre, voi la guidate col dito. Niente vite, niente timer, niente pubblicità. Gratis, dal telefono, senza app.\n\nScrivete nei commenti a che piano arriva il vostro bimbo 👇 e mandate il video a chi pensa di batterlo.\n\n🔗 giocamizi.it/giochi/corsa-nella-piramide\n\n#giochiperbambini #giochieducativi #mammeitaliane #attivitàperbambini #giocamizi",
+  "storia": "Sticker «Sondaggio»: «Al quinto piano ci arrivi?» Sì / Ci provo. Sticker «Link» su giocamizi.it/giochi/corsa-nella-piramide",
+  "aperture": [
+    "Tuo figlio arriva al *quinto piano*?",
+    "Questo gioco sembra facile. *Fino al terzo piano.*",
+    "Mamme: chi batte Mizi in *questa corsa*?"
+  ],
+  "clip": {
+    "corsa": {
+      "url": "/giochi/corsa-nella-piramide/gioca?eta=7&demo=1",
+      "secondi": 42,
+      "attesaIniziale": 300
+    }
+  },
+  "scene": [
+    {
+      "tipo": "gancio",
+      "sopra": "Sfida",
+      "testo": "Tuo figlio arriva al *quinto piano*?",
+      "clip": "corsa",
+      "da": 9,
+      "velocita": 1.4,
+      "ritaglio": {
+        "x": 12,
+        "y": 232,
+        "w": 366,
+        "h": 440
+      },
+      "voce": "Ehi, scommetti che non arrivi in cima alla mia piramide?",
+      "sottotitoli": false
+    },
+    {
+      "tipo": "clip",
+      "testo": "Scorri per cambiare strada, tocca per *saltare*",
+      "clip": "corsa",
+      "da": 14,
+      "velocita": 1.5,
+      "ritaglio": {
+        "x": 12,
+        "y": 232,
+        "w": 366,
+        "h": 440
+      },
+      "voce": "Io corro e tu mi guidi col dito: a destra, a sinistra, e salto i fossi!"
+    },
+    {
+      "tipo": "clip",
+      "testo": "Niente vite. Niente timer. *Cinque piani.*",
+      "clip": "corsa",
+      "da": 27,
+      "velocita": 1.5,
+      "ritaglio": {
+        "x": 12,
+        "y": 232,
+        "w": 366,
+        "h": 440
+      },
+      "voce": "E se sbatto contro un blocco? Nessun problema, riparto piano piano."
+    },
+    {
+      "tipo": "domanda",
+      "testo": "A che piano arriva il tuo bimbo?",
+      "sotto": "Scrivilo nei commenti 👇",
+      "sottotitoli": false,
+      "voce": "Dimmi nei commenti fino a che piano arrivi!"
+    },
+    {
+      "tipo": "finale",
+      "sopra": "Gioca gratis, senza app",
+      "url": "giocamizi.it/giochi",
+      "sottotitoli": false,
+      "minimo": 1.6,
+      "voce": "Ti aspetto su giocamizi punto it!"
+    }
+  ]
+}
