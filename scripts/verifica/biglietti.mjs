@@ -471,7 +471,7 @@ const byteBustaL = bustaPdfL ? readFileSync(await bustaPdfL.path()) : null;
 ok("busta: PDF A4", byteBustaL && byteBustaL.subarray(0, 5).toString() === "%PDF-");
 ok("letterina: il nome del bambino non è mai uscito dalla pagina", richiesteConNome.length === 0, richiesteConNome.join(", "));
 await page.goto(`${BASE}/natale`, { waitUntil: "networkidle" });
-ok("hub del Natale: sei schede (con la pixel art di Natale dal 24/11/2026), ognuna col suo disegno", (await page.locator("[data-scheda-natale] svg").count()) === 6);
+ok("hub del Natale: sette schede (pixel art dal 24/11/2026, Colora il Natale dal 25/11), ognuna col suo disegno", (await page.locator("[data-scheda-natale] svg").count()) === 7);
 await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
 ok("home: in stagione c'è il riquadro del Natale", await page.locator("[data-riquadro-natale]").first().isVisible());
 

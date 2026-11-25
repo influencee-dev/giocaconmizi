@@ -385,6 +385,23 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   ok("vesti Mizi: fino alla festa, senza errori", (await page.locator("[data-festa]").isVisible().catch(() => false)) && erroriJs === prima);
 }
 
+// Colora il Natale (25/11/2026): stesso gioco, quattro disegni di Natale. Il
+// primo è l'albero: il secchiello riempie il piano di sotto, «Fatto» porta al
+// pupazzo di neve.
+{
+  const prima = erroriJs;
+  await page.goto(`${BASE}/giochi/colora-il-natale/gioca`, { waitUntil: "networkidle" });
+  await page.waitForTimeout(800);
+  await page.locator('[data-colore="verde"]').tap();
+  await page.locator('[data-parte="piano-basso"]').dispatchEvent("click");
+  const verde = await page.locator('[data-parte="piano-basso"]').getAttribute("fill");
+  await page.locator("[data-fatto]").tap();
+  await page.waitForTimeout(400);
+  ok("colora il Natale: l'albero si riempie e «Fatto» porta al pupazzo di neve",
+    verde === "#43A047" && (await page.locator('[data-parte="naso"]').count()) === 1 && erroriJs === prima,
+    `fill ${verde}`);
+}
+
 // Colora con Mizi: secchiello, pennello col dito, annulla, salva, sei disegni.
 {
   const prima = erroriJs;

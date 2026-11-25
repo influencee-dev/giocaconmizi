@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { parla } from "@/lib/giochi/audio";
 import type { GameProps } from "@/games/_engine/tipi";
-import { DISEGNI, type Forma } from "./disegni";
+import { DISEGNI, type Disegno, type Forma } from "./disegni";
 
 /**
  * Colora con Mizi (3–8 anni): i colori, con il secchiello o con il dito.
@@ -82,7 +82,12 @@ function disegnaTratto(ctx: CanvasRenderingContext2D, t: Tratto) {
   ctx.restore();
 }
 
-export default function Game({ onComplete, onProgress, demo }: GameProps) {
+/**
+ * Il gioco, con l'elenco di disegni e il titolo che gli si passa: «Colora con
+ * Mizi» usa DISEGNI, «Colora il Natale» (24-25/11/2026) i disegni di Natale.
+ */
+export function Colora({ onComplete, onProgress, demo, disegni, titolo }: GameProps & { disegni: Disegno[]; titolo: string }) {
+  const DISEGNI = disegni;
   const [livello, setLivello] = useState(0);
   const [riempite, setRiempite] = useState<Record<string, string>>({});
   const [strumento, setStrumento] = useState<Strumento>("secchiello");
@@ -97,7 +102,7 @@ export default function Game({ onComplete, onProgress, demo }: GameProps) {
   const svgContorni = useRef<SVGSVGElement>(null);
   const disegno = DISEGNI[Math.min(livello, DISEGNI.length - 1)];
 
-  useEffect(() => onProgress?.(livello, DISEGNI.length), [livello, onProgress]);
+  useEffect(() => onProgress?.(livello, DISEGNI.length), [livello, onProgress, DISEGNI.length]);
 
   const ridisegna = useCallback(() => {
     const ctx = tela.current?.getContext("2d");
@@ -182,7 +187,7 @@ export default function Game({ onComplete, onProgress, demo }: GameProps) {
     setLivello((l) => l + 1);
     pulisci();
     setStrumento("secchiello");
-  }, [livello, onComplete, pulisci]);
+  }, [livello, onComplete, pulisci, DISEGNI.length]);
 
   // ?demo=1: si colora da solo, una parte ogni mezzo secondo.
   useEffect(() => {
@@ -246,7 +251,7 @@ export default function Game({ onComplete, onProgress, demo }: GameProps) {
   ];
 
   return (
-    <GameShell titolo="Colora con Mizi" istruzione={disegno.istruzione} round={livello} totaleRound={DISEGNI.length} finito={finito} stelle={3} onAncora={ancora}>
+    <GameShell titolo={titolo} istruzione={disegno.istruzione} round={livello} totaleRound={DISEGNI.length} finito={finito} stelle={3} onAncora={ancora}>
       <div className="flex w-full max-w-xl flex-col items-center gap-3">
         {/* Il foglio */}
         <div className="relative aspect-square w-[min(100%,44vh)] overflow-hidden rounded-[1.6rem] border-2 border-crema-scuro bg-white shadow-sm">
@@ -365,4 +370,8 @@ export default function Game({ onComplete, onProgress, demo }: GameProps) {
       </div>
     </GameShell>
   );
+}
+
+export default function Game(props: GameProps) {
+  return <Colora {...props} disegni={DISEGNI} titolo="Colora con Mizi" />;
 }

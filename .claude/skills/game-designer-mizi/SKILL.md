@@ -89,7 +89,7 @@ Due giochi al giorno, li fa la routine «Giocamizi · Due giochi al giorno». L'
 | 5 | pizza-delle-frazioni | frazioni · 9.900 | da fare |
 | 6 | addizioni-entro-20 | giochi matematica · 18.100 | da fare |
 | 7 | trova-le-differenze | trova le differenze · 2.900 | PRIMO PASSO il 17/11/2026: sul nucleo, aiuto dopo tre tocchi a vuoto, doppio tocco sistemato, 7 prove. Restano: scene nuove (sono 4, sempre le stesse) e differenze «sostituzione» |
-| 8 | colora-con-mizi | giochi da colorare · 1.900 | da fare |
+| 8 | colora-con-mizi | giochi da colorare · 1.900 | da fare (25/11/2026: il gioco ora riceve disegni e titolo come proprietà, `Colora`; lo usa anche il gioco nuovo «Colora il Natale», quattro disegni di Natale, per «disegni da colorare di Natale» · 27.100. Il miglioramento di Colora con Mizi in sé resta da fare) |
 | 9 | unisci-i-puntini | unisci i puntini · 1.600 | da fare |
 | 10 | salvadanaio | giochi matematica · 18.100 | da fare |
 | 11 | vesti-mizi | giochi di vestire · 720 | da fare |

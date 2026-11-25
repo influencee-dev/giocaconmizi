@@ -41,6 +41,7 @@ export default function NatalePage() {
     { titolo: "Biglietti di Natale", testo: "Auguri da personalizzare con il nome, per nonni, maestre e amici.", href: PERCORSO_BIGLIETTI_NATALE, tono: "bg-giallo/15 border-giallo/50", motivo: "natale" },
     { titolo: "Eventi di Natale per bambini", testo: "Villaggi di Babbo Natale, mercatini e laboratori nella tua città.", href: PERCORSO_EVENTI, tono: "bg-azzurro/15 border-azzurro/40", motivo: "natale-renne" },
     { titolo: "Pixel art di Natale", testo: "Un gioco: colori i quadretti seguendo il codice e spuntano albero, regalo e omino di pan di zenzero.", href: "/giochi/pixel-art-di-natale", tono: "bg-verde/10 border-verde/40", motivo: "natale-neve" },
+    { titolo: "Colora il Natale", testo: "Disegni di Natale da colorare online: albero, pupazzo di neve, Mizi col cappello. Si salvano in PNG.", href: "/giochi/colora-il-natale", tono: "bg-rosa/15 border-rosa/40", motivo: "natale-regali" },
     { titolo: "Le favole di Mizi", testo: "In arrivo a dicembre: storie buffe da leggere e da colorare.", href: "/storie", tono: "bg-viola/10 border-viola/40", motivo: "natale-dolci" },
   ];
   return (
