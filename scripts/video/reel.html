@@ -13,7 +13,7 @@
     escono proprio (per chi usa i sottotitoli automatici di Instagram);
   - le zone coperte da Instagram restano libere: in alto 70 px, in basso 200 px,
     a destra 70 px (dove stanno i bottoni).
-  Tipi di scena: gancio · clip · domanda · finale (breve, sempre l'ultima).
+  Tipi di scena: gancio · clip · domanda · mani (il trucco del 9) · finale (breve, sempre l'ultima).
 -->
 <style>
 @font-face { font-family: Nunito; src: url(asset/nunito-600.ttf); font-weight: 600; }
@@ -99,6 +99,34 @@ const TIPI = {
       const c = n.querySelector('.carta'); const p = back(tra(t, 0, .45)); c.style.transform = `scale(${0.85 + 0.15 * p})`;
       n.querySelectorAll('.scelta').forEach((s, i) => { const q = out(tra(t, .3 + i * .18, .6 + i * .18)); s.style.opacity = q; s.style.transform = `translateX(${(1 - q) * 40}px)`; });
       const m = n.querySelector('.mizi'); m.style.transform = `rotate(${Math.sin(t * 3) * 5}deg)`;
+    },
+  },
+  // Il trucco del 9 con le mani: dieci dita, il dito n si abbassa; con «risultato»
+  // si colorano le dita prima (decine) e dopo (unità) e compare il numero.
+  mani: {
+    html: (sc) => {
+      const dita = Array.from({ length: 10 }, (_, i) => `<div class="dito" data-i="${i + 1}" style="position:absolute;left:${48 + i * 42 + (i >= 5 ? 24 : 0)}px;top:${518 - [150, 175, 190, 175, 120, 120, 175, 190, 175, 150][i]}px;width:32px;height:${[150, 175, 190, 175, 120, 120, 175, 190, 175, 150][i]}px;border-radius:16px 16px 10px 10px;background:#F6E3CF;border:3px solid #1F2430;transform-origin:50% 100%"></div>`).join('');
+      return `<div>
+        <div class="grande" style="font-size:40px">${evid(sc.testo)}</div>
+        <div style="position:absolute;left:40px;top:500px;width:210px;height:110px;border-radius:30px 30px 50px 50px;background:#F6E3CF;border:3px solid #1F2430"></div>
+        <div style="position:absolute;left:274px;top:500px;width:210px;height:110px;border-radius:30px 30px 50px 50px;background:#F6E3CF;border:3px solid #1F2430"></div>
+        ${dita}
+        <div class="numeri" style="position:absolute;left:0;right:40px;top:300px;display:flex;justify-content:center;gap:10px"></div>
+        ${sc.risultato ? `<div class="ris" style="position:absolute;left:0;right:40px;top:620px;text-align:center;font-weight:800;font-size:64px;color:#7E4FC4">${esc(sc.risultato)}</div>` : ''}
+      </div>`;
+    },
+    anima(n, t, sc) {
+      const giu = sc.dito;
+      n.querySelectorAll('.dito').forEach((d) => {
+        const i = Number(d.dataset.i);
+        if (i === giu) { const p = out(tra(t, sc.risultato ? 0 : .6, sc.risultato ? .01 : 1.1)); d.style.transform = `scaleY(${1 - .55 * p})`; d.style.background = '#F28AB2'; }
+        if (sc.risultato) {
+          const q = tra(t, .3, .6);
+          if (i < giu) d.style.background = q > 0 ? '#F9C846' : '#F6E3CF';
+          if (i > giu) d.style.background = q > 0 ? '#8FD3F0' : '#F6E3CF';
+        }
+      });
+      const r = n.querySelector('.ris'); if (r) { const p = back(tra(t, .9, 1.4)); r.style.transform = `scale(${p})`; r.style.opacity = p > 0 ? 1 : 0; }
     },
   },
   // Il finale corto: viola, Mizi, l'indirizzo. Un secondo e mezzo, poi il reel ricomincia.

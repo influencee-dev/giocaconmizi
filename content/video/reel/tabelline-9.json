@@ -1,0 +1,87 @@
+{
+  "clip": {
+    "gioco": {
+      "url": "/giochi/tabelline/gioca?eta=8&demo=1",
+      "attesaIniziale": 300,
+      "secondi": 22
+    }
+  },
+  "slug": "tabelline-9",
+  "scene": [
+    {
+      "tipo": "gancio",
+      "sopra": "Il trucco",
+      "testo": "La tabellina del 9 *con le mani*",
+      "clip": "gioco",
+      "da": 21.0,
+      "velocita": 0.05,
+      "ritaglio": {
+        "x": 8,
+        "y": 330,
+        "w": 374,
+        "h": 300
+      },
+      "sottotitoli": false,
+      "voce": "Vuoi un trucco magico per la tabellina del nove?"
+    },
+    {
+      "tipo": "mani",
+      "testo": "9 × 4? Abbassa il *quarto* dito",
+      "dito": 4,
+      "voce": "Apri le mani. Per nove per quattro, abbassa il quarto dito.",
+      "sottotitoli": false
+    },
+    {
+      "tipo": "mani",
+      "testo": "3 dita prima, 6 dopo:",
+      "dito": 4,
+      "risultato": "36",
+      "voce": "Le dita prima sono le decine, quelle dopo le unità. Trentasei!",
+      "sottotitoli": false
+    },
+    {
+      "tipo": "clip",
+      "testo": "Dal 2 al 10, *a misura d'età*",
+      "clip": "gioco",
+      "da": 1.0,
+      "velocita": 2.2,
+      "ritaglio": {
+        "x": 8,
+        "y": 330,
+        "w": 374,
+        "h": 300
+      },
+      "voce": "Poi ti alleni col mio gioco: dieci domande, e se sbagli ti dico un trucco."
+    },
+    {
+      "tipo": "domanda",
+      "testo": "Quale tabellina fa *più paura* a casa vostra?",
+      "scelte": [
+        "Il 7",
+        "L'8",
+        "Il 9 (non più 😉)"
+      ],
+      "sotto": "Rispondi nei commenti 👇",
+      "sottotitoli": false,
+      "voce": "Quale tabellina fa più paura a casa tua? Scrivilo qui sotto!"
+    },
+    {
+      "tipo": "finale",
+      "sopra": "Gratis, senza pubblicità",
+      "url": "giocamizi.it/giochi/tabelline",
+      "sottotitoli": false,
+      "minimo": 1.6,
+      "voce": "Ti aspetto su giocamizi punto it!"
+    }
+  ],
+  "titolo": "Il trucco della tabellina del 9 con le mani",
+  "formato": "Il trucco",
+  "tempoVoce": 1.06,
+  "didascalia": "Il trucco della tabellina del 9 con le mani ✋✋ Apri le dita: per 9×4 abbassa il quarto dito. Le dita prima sono le decine (3), quelle dopo le unità (6): 36! Funziona da 9×1 a 9×10.\n\nPoi ci si allena col gioco delle tabelline di Mizi: 10 domande, e dopo un errore Mizi dice un trucco. Gratis, senza pubblicità.\n\nSalvalo per stasera, ai compiti 📌\n\n🔗 giocamizi.it/giochi/tabelline · la guida: giocamizi.it/guide/tabelline-senza-lacrime\n\n#tabelline #compiti #scuolaprimaria #mammeitaliane #giocamizi",
+  "storia": "Sticker «Quiz»: «Quanto fa 9×7?» 56 / 63 ✅ / 72. Sticker «Link» su giocamizi.it/guide/tabelline-senza-lacrime",
+  "aperture": [
+    "La tabellina del 9 *con le mani*",
+    "Il trucco che a scuola *non ti insegnano*",
+    "9 × 4? *Guarda le dita*"
+  ]
+}

@@ -7,6 +7,18 @@ spec_path, cart = sys.argv[1], sys.argv[2]
 qui = os.path.dirname(os.path.abspath(__file__))
 spec = json.load(open(spec_path))
 scene = spec["scene"]
+# Regola di Giorgia: MAI doppio testo. Se una scena ha i sottotitoli, la scritta grande
+# e la voce non devono dire la stessa cosa: due parole importanti in comune = errore.
+import re, unicodedata
+VUOTE = set("alla allo agli alle anche come con così dalla dalle dello della delle degli dove fino ogni perché più poi quando questo questa quello quella sono sempre senza solo tutti tutte tutto una uno nella nelle sulla sulle tuo tua tuoi tue mio mia miei mie che chi non per dai dal del dei gli lei lui noi voi loro ecco".split())
+def parole(t):
+    t = unicodedata.normalize("NFD", t.lower()).encode("ascii", "ignore").decode()
+    return {w[:6] for w in re.findall(r"[a-z]{4,}", t) if w not in VUOTE}
+for i, s in enumerate(scene):
+    if s.get("sottotitoli") is False or not s.get("testo"): continue
+    comuni = parole(s["testo"].replace("*", "")) & parole(s["voce"])
+    if len(comuni) >= 2:
+        raise SystemExit(f"scena {i}: la scritta e la voce dicono la stessa cosa ({', '.join(sorted(comuni))}): cambiale o metti \"sottotitoli\": false")
 dur = lambda f: float(subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f], capture_output=True, text=True).stdout)
 # «tempoVoce» (es. 1.1): Mizi parla un po' più svelta, senza cambiare il tono (atempo)
 TEMPO = spec.get("tempoVoce", 1)

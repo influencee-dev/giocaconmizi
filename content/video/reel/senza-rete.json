@@ -1,0 +1,96 @@
+{
+  "clip": {
+    "giochi": {
+      "url": "/giochi",
+      "attesaIniziale": 800,
+      "azioni": [
+        {
+          "vedi": "[data-scarica-giochi]",
+          "attendi": 1500
+        },
+        {
+          "tocca": "[data-scarica-giochi]",
+          "attendi": 6000
+        }
+      ],
+      "secondi": 1
+    }
+  },
+  "slug": "senza-rete",
+  "scene": [
+    {
+      "tipo": "gancio",
+      "sopra": "In viaggio",
+      "testo": "51 giochi *senza internet*, per il viaggio",
+      "clip": "giochi",
+      "da": 1.7,
+      "velocita": 0.05,
+      "ritaglio": {
+        "x": 8,
+        "y": 185,
+        "w": 374,
+        "h": 300
+      },
+      "sottotitoli": false,
+      "voce": "In macchina o in aereo, e lì non c'è la rete? Nessun problema!"
+    },
+    {
+      "tipo": "clip",
+      "testo": "A casa, col Wi-Fi: *«Scarica i giochi»*",
+      "clip": "giochi",
+      "da": 2.0,
+      "velocita": 0.6,
+      "ritaglio": {
+        "x": 8,
+        "y": 185,
+        "w": 374,
+        "h": 300
+      },
+      "voce": "Basta un tocco, e il telefono li tiene tutti."
+    },
+    {
+      "tipo": "clip",
+      "testo": "Circa *14 MB*, si tolgono quando vuoi",
+      "clip": "giochi",
+      "da": 3.6,
+      "velocita": 1.3,
+      "ritaglio": {
+        "x": 8,
+        "y": 185,
+        "w": 374,
+        "h": 300
+      },
+      "voce": "Aspetti un attimo, e ci sono tutti, con la mia voce e i disegni."
+    },
+    {
+      "tipo": "domanda",
+      "testo": "Quante ore di viaggio vi aspettano *a Natale*?",
+      "scelte": [
+        "Meno di 2",
+        "Da 2 a 5",
+        "Più di 5 😱"
+      ],
+      "sotto": "Rispondi nei commenti 👇",
+      "sottotitoli": false,
+      "voce": "Quante ore di viaggio ti aspettano? Scrivilo qui sotto!"
+    },
+    {
+      "tipo": "finale",
+      "sopra": "Gratis, anche senza rete",
+      "url": "giocamizi.it/giochi",
+      "sottotitoli": false,
+      "minimo": 1.6,
+      "voce": "Ti aspetto su giocamizi punto it!"
+    }
+  ],
+  "titolo": "51 giochi senza internet per il viaggio",
+  "formato": "Mamma, aiutami",
+  "tempoVoce": 1.08,
+  "didascalia": "Viaggio in macchina, in treno o in aereo senza rete? 🚗✈️ Su Giocamizi tocchi «Scarica i giochi» a casa col Wi-Fi e tutti i 51 giochi restano sul telefono, con la voce di Mizi e i disegni (circa 14 MB). Si possono togliere quando vuoi. Gratis, senza pubblicità.\n\nSalvalo per le partenze di Natale 📌\n\n🔗 giocamizi.it/giochi\n\n#viaggiareconibambini #giochiperbambini #natale #giocamizi",
+  "storia": "Sticker «Sondaggio»: «Quante ore di viaggio a Natale?» Meno di 2 / Più di 5 😱. Sticker «Link» su giocamizi.it/giochi",
+  "aperture": [
+    "51 giochi *senza internet*, per il viaggio",
+    "In aereo senza rete? *Nessun problema*",
+    "Prima di partire, *tocca questo bottone*"
+  ]
+}

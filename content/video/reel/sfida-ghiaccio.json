@@ -1,0 +1,81 @@
+{
+  "clip": {
+    "gioco": {
+      "url": "/giochi/missione-ghiaccio/gioca?eta=9&demo=1",
+      "attesaIniziale": 300,
+      "secondi": 35
+    }
+  },
+  "slug": "sfida-ghiaccio",
+  "scene": [
+    {
+      "tipo": "gancio",
+      "sopra": "Sfida",
+      "testo": "Scommetti che non porti Mizi *al pesce*?",
+      "clip": "gioco",
+      "da": 8.5,
+      "velocita": 0.3,
+      "ritaglio": {
+        "x": 8,
+        "y": 170,
+        "w": 374,
+        "h": 390
+      },
+      "sottotitoli": false,
+      "voce": "Riesci a portarmi fino al pesce? Attento agli ostacoli!"
+    },
+    {
+      "tipo": "clip",
+      "testo": "È *coding*, dagli 8 anni",
+      "clip": "gioco",
+      "da": 1.0,
+      "velocita": 1.2,
+      "ritaglio": {
+        "x": 8,
+        "y": 170,
+        "w": 374,
+        "h": 600
+      },
+      "voce": "Metti in fila i comandi, avanti e gira, poi premi via."
+    },
+    {
+      "tipo": "clip",
+      "testo": "Sei livelli, sempre *più difficili*",
+      "clip": "gioco",
+      "da": 18.0,
+      "velocita": 1.6,
+      "ritaglio": {
+        "x": 8,
+        "y": 170,
+        "w": 374,
+        "h": 600
+      },
+      "voce": "E alla fine ci sono anche i cicli: ripeti due volte!"
+    },
+    {
+      "tipo": "domanda",
+      "testo": "A che livello si ferma il tuo bimbo?",
+      "sotto": "Scrivilo nei commenti 👇",
+      "sottotitoli": false,
+      "voce": "Dimmi nei commenti a che livello arrivi!"
+    },
+    {
+      "tipo": "finale",
+      "sopra": "Gioca gratis, senza app",
+      "url": "giocamizi.it/giochi/missione-ghiaccio",
+      "sottotitoli": false,
+      "minimo": 1.6,
+      "voce": "Ti aspetto su giocamizi punto it!"
+    }
+  ],
+  "titolo": "Sfida: porti Mizi fino al pesce?",
+  "formato": "Sfida a mamma",
+  "tempoVoce": 1.08,
+  "didascalia": "Sfida di coding 🐧🐟 Mizi deve arrivare al pesce: si mettono in fila i comandi (avanti, gira) e si preme Via. Sei livelli, sempre più difficili, e alla fine ci sono anche i cicli. Dagli 8 anni, gratis, senza pubblicità.\n\nA che livello si ferma il vostro bimbo? E voi? 👇\n\n🔗 giocamizi.it/giochi/missione-ghiaccio\n\n#coding #codingperbambini #giochieducativi #giocamizi",
+  "storia": "Sticker «Slider» con 🐟: «Quanto sei bravo col coding?». Sticker «Link» su giocamizi.it/giochi/missione-ghiaccio",
+  "aperture": [
+    "Scommetti che non porti Mizi *al pesce*?",
+    "Il coding a 8 anni? *Provate voi*",
+    "Livello 4: *qui si fermano quasi tutti*"
+  ]
+}
