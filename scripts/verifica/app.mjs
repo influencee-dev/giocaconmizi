@@ -31,7 +31,21 @@ ok("iPhone: col banner cookie aperto la barra non c'è", !(await visibile(p)));
 await p.getByRole("region", { name: /Consenso/ }).getByRole("button").first().tap();
 await barra(p).waitFor({ timeout: 4000 }).catch(() => null);
 ok("iPhone: chiuso il banner, la barra compare", await visibile(p));
-ok("iPhone: dice «Scarica Giocamizi sul tuo telefono»", (await barra(p).textContent())?.includes("Scarica Giocamizi sul tuo telefono"));
+// La novità (25/11/2026): prima della barretta per l'app c'è il test per i genitori.
+ok("iPhone: la barra mostra la novità, il test, con il link giusto",
+  (await barra(p).getAttribute("data-novita")) === "test-sotto-pressione" &&
+  (await barra(p).textContent())?.includes("sotto pressione") &&
+  ((await p.locator("[data-apri-novita]").getAttribute("href")) ?? "").startsWith("/genitori/sotto-pressione"));
+await p.goto(BASE + "/genitori/sotto-pressione", { waitUntil: "networkidle" });
+await p.waitForTimeout(500);
+ok("iPhone: nella pagina del test la novità non c'è (c'è la barretta dell'app)", (await barra(p).getAttribute("data-novita").catch(() => null)) === null);
+await p.goto(BASE + "/", { waitUntil: "networkidle" });
+await barra(p).waitFor({ timeout: 4000 }).catch(() => null);
+await p.locator("[data-chiudi-novita]").tap();
+await p.waitForTimeout(300);
+ok("iPhone: chiusa la novità torna «Scarica Giocamizi sul tuo telefono»",
+  (await visibile(p)) && (await barra(p).textContent())?.includes("Scarica Giocamizi sul tuo telefono") &&
+  JSON.parse((await p.evaluate(() => localStorage.getItem("giocamizi-novita-chiusa"))) ?? "{}").id === "test-sotto-pressione");
 await p.locator("[data-installa]").tap();
 ok("iPhone: «Scarica» spiega Condividi → Aggiungi alla schermata Home",
   (await p.getByRole("dialog", { name: /installare/ }).textContent())?.includes("Aggiungi alla schermata Home"));
@@ -56,7 +70,10 @@ await iphone.close();
 
 // 5. Android senza finestra d'installazione del browser: istruzioni dal menu.
 const android = await b.newContext({ viewport: { width: 360, height: 780 }, isMobile: true, hasTouch: true, userAgent: ANDROID });
-await android.addInitScript(() => localStorage.setItem("mizi.consenso-statistiche", "no"));
+await android.addInitScript(() => {
+  localStorage.setItem("mizi.consenso-statistiche", "no");
+  localStorage.setItem("giocamizi-novita-chiusa", JSON.stringify({ id: "test-sotto-pressione", t: Date.now() }));
+});
 const a = await android.newPage();
 await a.goto(BASE + "/feste", { waitUntil: "networkidle" });
 await barra(a).waitFor({ timeout: 4000 }).catch(() => null);

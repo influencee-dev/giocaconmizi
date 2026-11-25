@@ -134,6 +134,16 @@ export const REGISTRO: VoceRegistro[] = [
     quando: "Quando rispondi alla prima domanda del percorso",
   },
   {
+    nome: "giocamizi-novita-chiusa",
+    tipo: "localStorage",
+    scopo:
+      "Ricorda che hai chiuso (o aperto) la novità nella barretta in basso del telefono, così non ricompare per 30 giorni. Contiene solo il nome della novità e la data.",
+    durata: "30 giorni",
+    necessario: true,
+    chi: "noi",
+    quando: "Quando chiudi la novità con la X o tocchi il suo bottone",
+  },
+  {
     nome: "giocamizi-app-chiusa",
     tipo: "localStorage",
     scopo:
