@@ -54,6 +54,13 @@
 // L'Acchiappasogni in traversa Pozzillo e Nuvoletta Bianca in via Plinio il
 // Vecchio, ma nessun segnale recente: sul primo l'ultimo avviso datato è del
 // 2020/21, il secondo ha pagine di negozio di prova).
+// Il 25/11/2026: Velletri, Anzio, Marano di Napoli, Sanremo e Bisceglie (solo
+// Facebook, elenchi o locali di altri comuni); Cerignola, Modica e Agrigento
+// (siti senza un anno 2025/2026); Bitonto e Civitavecchia (un solo locale
+// solido: Galleria Devanna, Aquafelix). Tivoli e Chieti NON aperte: solidi solo
+// musei e siti archeologici (Villa Adriana, Santuario di Ercole Vincitore;
+// Museo Universitario, La Civitella), nessuna sala feste: la pagina feste
+// resterebbe vuota. Junior Village (Tivoli) ha il sito ma nessun segnale recente.
 // COME SI VERIFICA: i siti dei locali NON si aprono dalle sessioni (la rete
 // ammette solo un elenco di siti). Si leggono con la ricerca web limitata al
 // dominio ufficiale del locale (allowed_domains): è il metodo usato dall'inizio.
@@ -480,7 +487,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "palermo",
     citta: "Palermo",
-    aggiornata: "2026-10-20",
+    aggiornata: "2026-11-25",
     rispostaBreve:
       "A Palermo le feste di compleanno per bambini si organizzano nelle ludoteche e sale feste della citt\u00e0 \u2014 da via Resuttana a via Di Marzo fino alla Favorita \u2014 con pacchetti che spesso comprendono animazione, gonfiabili, feste a tema con scenografia e perfino la torta personalizzata. Molte strutture lavorano su prenotazione con preventivo gratuito: chiedetelo scritto, con l'elenco di cosa comprende davvero.",
     intro:
@@ -542,6 +549,8 @@ export const CITTA_FESTE: CittaFeste[] = [
           "Agenzia di animazione per feste che lavora a Palermo e nella Sicilia occidentale, con sale convenzionate in città e in provincia. Tra queste la Caffetteria Silvio Massaro dentro il bowling della Favorita, in viale del Fante, con sala per adulti e bambini, e la Sala Feste Joungo a Villabate, con spazio verde e area gonfiabili. Altre sale sono in via del Bersagliere, via Zappalà, via La Marmora e a Casteldaccia. Il preventivo per sala e animazione è gratuito e si chiede su WhatsApp o per telefono.",
         sito: "https://dueffeanimazione.it/sale-feste-bambini-palermo/",
       },
+      { nome: "Museo delle Marionette Antonio Pasqualino", zona: "Palermo, Kalsa (piazzetta Antonio Pasqualino 5)", tipo: "museo delle marionette con teatro per bambini", descrizione: "Museo delle marionette e dell'opera dei pupi in piazzetta Antonio Pasqualino 5, una traversa di via Butera, a Palermo. Oltre alle collezioni e agli spettacoli di opera dei pupi, propone attività per le scuole, letture e laboratori per bambini sulle sue collezioni. La domenica pomeriggio c'è la rassegna «Teatro al Museo», teatro d'immagine e di figura per bambini e famiglie: la stagione 2025/26 è andata dal 12 ottobre 2025 al 19 aprile 2026, con spettacoli come «Pinocchio» con la sabbia e «Un'Odissea». Nella stagione 2025/26 il biglietto costava 10 euro intero e 8 euro ridotto per bambini e studenti, l'abbonamento a 7 spettacoli 35 euro.", sito: "https://www.museodellemarionette.it/", festa: false },
+      { nome: "Piccolo Teatro Patafisico", zona: "Palermo, Complesso Pietro Pisani (via Gaetano La Loggia 5)", tipo: "teatro e corsi per bambini", descrizione: "Teatro per le nuove generazioni con sede operativa nel Complesso Pietro Pisani, in via Gaetano La Loggia 5, a Palermo. Durante l'anno tiene corsi per bambini e ragazzi divisi per età: laboratori teatrali dai 4 anni (4-6, 6-8 e 8-11 anni), circo per i più piccoli, inglese, taekwondo e canto. Ogni autunno organizza PataPùm, festival di teatro per bambini dai 2 anni, famiglie e scuole, con spettacoli e laboratori: l'edizione 2025 si è tenuta dal 2 al 5 ottobre 2025. Orari e quote dei corsi vanno confermati con il teatro, perché sulle pagine del sito non coincidono.", sito: "https://www.piccoloteatropatafisico.it/", festa: false },
     ],
     faq: [
       {
@@ -569,7 +578,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "genova",
     citta: "Genova",
-    aggiornata: "2026-11-15",
+    aggiornata: "2026-11-25",
     rispostaBreve:
       "A Genova il compleanno dei bambini si festeggia in ludoteca \u2014 dal centro a Sampierdarena \u2014 o nelle sale di quartiere e parrocchiali, molto usate e pi\u00f9 economiche: la sala di via Donghi a San Fruttuoso \u00e8 tra le pi\u00f9 richieste. I pacchetti delle strutture attrezzate partono da circa 220 euro nei giorni feriali (260 nel weekend) per la fascia 15:30\u201318:30, spesso con addobbi e pulizie inclusi.",
     intro:
@@ -606,6 +615,7 @@ export const CITTA_FESTE: CittaFeste[] = [
         sito: "https://www.compleannogenova.it",
       },
       { nome: "Parco Avventura Righi", zona: "Genova, Righi (sulle alture della città)", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Parco avventura in via Carso, sulle colline del Righi, a 10 minuti di funicolare dal centro di Genova. Ha undici percorsi tra gli alberi con ponti tibetani, carrucole e reti; il percorso Cip e Ciop, con 7 piattaforme, è per i bambini dai 3 ai 6 anni. I minorenni vengono con un adulto e la prenotazione è sempre obbligatoria. Organizza feste di compleanno da 10 bambini in su, tutti i giorni, con tavoli, panche e gazebo riservati; ci sono anche barbecue per gruppi e famiglie e un centro estivo.", sito: "https://parcoavventuragenova.it/", },
+      { nome: "La Città dei Bambini e dei Ragazzi", zona: "Genova, Porto Antico (Ponte Spinola)", tipo: "museo interattivo per bambini", descrizione: "Museo interattivo per bambini dai 2 ai 12 anni a Ponte Spinola, nel Porto Antico di Genova, gestito insieme all'Acquario. Ha oltre quaranta installazioni da toccare e provare dedicate ai cinque sensi e alla scienza; nei fine settimana e nei festivi lo staff propone i Science Snack, brevi attività di 15-20 minuti comprese nel biglietto. La prenotazione della data e della fascia oraria è obbligatoria e i biglietti si comprano online o alla biglietteria dell'Acquario. Organizza feste di compleanno per le fasce 2-4 e 5-12 anni, con un operatore dedicato, accesso ai giochi e uno spazio riservato per la torta; il cibo non è compreso.", sito: "https://www.cittadeibambini.net/" },
     ],
     faq: [
       {
@@ -702,7 +712,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "firenze",
     citta: "Firenze",
-    aggiornata: "2026-11-15",
+    aggiornata: "2026-11-25",
     rispostaBreve:
       "A Firenze le feste di compleanno per bambini si organizzano nelle ludoteche \u2014 dall'Oltrarno a via Pisana \u2014 nei saloni attrezzati in citt\u00e0 o nei grandi spazi con gonfiabili della piana, come Calenzano e Campi Bisenzio. Dalle fonti pubbliche i pacchetti partono da circa 150 euro nei feriali per 10 bambini; le sale pi\u00f9 richieste lavorano il sabato e la domenica pomeriggio e vanno prenotate con almeno una settimana d'anticipo.",
     intro:
@@ -752,6 +762,7 @@ export const CITTA_FESTE: CittaFeste[] = [
       },
       { nome: "Tree Experience Vincigliata", zona: "Vincigliata (Fiesole), a una decina di minuti da Firenze", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Parco avventura in via Vincigliata 21, a Fiesole, a circa 10 minuti di macchina dal centro di Firenze. Ha 8 percorsi sugli alberi con ponti tibetani, liane, reti e carrucole, più la Net Experience, il softair e un salto nel vuoto da 15 metri dai 10 anni. Il percorso Kaa è per i bambini dai 3 anni (90 cm al polso col braccio alzato); il Pitone chiede 1,40 m. Fa feste di compleanno e centro estivo, ed è aperto tutto l'anno per gruppi e compleanni: prezzo e numero di bambini si chiedono al parco.", sito: "https://treeexperience.it/parco-avventura-vincigliata/", },
       { nome: "Parco Avventura Il Gigante", zona: "Pratolino (Vaglia), a nord di Firenze", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Parco avventura lungo via Bolognese, all'altezza di Villa Demidoff, prima di Pratolino (Vaglia), a circa 10 minuti da Firenze: si entra dal parcheggio davanti alla villa. Ha 18 percorsi sugli alberi, di cui 12 adatti ai bambini dai 3 anni; i più facili chiedono 100 cm di altezza. Il biglietto vale due ore e mezzo e non serve prenotare, tranne per gruppi e compleanni. Per le feste ci sono 15 tavoli da pic-nic da riservare gratis e il catering del bar del parco, oppure il rinfresco si porta da sé. Il calendario delle aperture è sul sito.", sito: "https://parcoavventurailgigante.it/", },
+      { nome: "MUS.E Musei Civici Fiorentini", zona: "Firenze, piazza della Signoria (Palazzo Vecchio)", tipo: "museo con laboratori per bambini", descrizione: "La Fondazione MUS.E cura le attività per bambini e famiglie nei Musei Civici Fiorentini, a partire dal Museo di Palazzo Vecchio in piazza della Signoria, e poi al Museo Novecento, a Palazzo Medici Riccardi e in altri musei della città. Propone visite animate e laboratori per famiglie, il programma Pollicino Verde per i bambini dai 3 ai 6 anni e, nell'estate 2026, campi estivi tra arte, gioco e inglese per i 6-10 anni. Nel maggio 2026 ha organizzato «Firenze dei Bambini», tre giorni dedicati a Pinocchio con laboratori per i bambini da 0 a 12 anni.", sito: "https://musefirenze.it/", festa: false },
     ],
     faq: [
       {
@@ -779,7 +790,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "bari",
     citta: "Bari",
-    aggiornata: "2026-10-21",
+    aggiornata: "2026-11-25",
     rispostaBreve:
       "A Bari le feste di compleanno per bambini si fanno nelle ludoteche e sale feste della citt\u00e0 \u2014 da Poggiofranco a via Amendola \u2014 e nei comuni alle porte, come Valenzano: i pacchetti comprendono in genere animazione, buffet a fasce di prezzo e spesso anche addobbi e pulizie. Molte strutture seguono anche battesimi e feste a tema: chiedete un preventivo scritto con l'elenco di cosa \u00e8 incluso.",
     intro:
@@ -828,6 +839,7 @@ export const CITTA_FESTE: CittaFeste[] = [
         descrizione:
           "Sala per compleanni e feste a tema alle porte della citt\u00e0, con servizio di baby parking.",
       },
+      { nome: "Teatro Casa di Pulcinella", zona: "Bari, Arena della Vittoria", tipo: "teatro di burattini per bambini", descrizione: "Teatro stabile di burattini e marionette fondato nel 1988 dalla compagnia Granteatrino, dentro l'Arena della Vittoria, a Bari. Ha una stagione per famiglie con spettacoli il sabato e la domenica, in genere alle 18, divisi per età dai 3 ai 10 anni: in cartellone per l'autunno 2026 ci sono «Il brutto anatroccolo», «Melina» e spettacoli di Natale fino al 20 dicembre 2026. Nella stagione 2026/27 il biglietto della maggior parte degli spettacoli costa 8 euro. Fa anche spettacoli per le scuole e, su richiesta, uno spettacolo dedicato al festeggiato per i compleanni.", sito: "https://casadipulcinella.it/" },
     ],
     faq: [
       {
@@ -855,7 +867,7 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "catania",
     citta: "Catania",
-    aggiornata: "2026-11-15",
+    aggiornata: "2026-11-25",
     rispostaBreve:
       "A Catania la festa di compleanno per bambini si fa quasi sempre in una sala feste o ludoteca con playground: in citt\u00e0 ci sono spazi grandi con area baby e sala per i genitori, e appena fuori \u2014 San Gregorio, Misterbianco, Acireale \u2014 parchi giochi al chiuso e ville con spazi all'aperto. I pacchetti comprendono spesso allestimento e catering: fatevi dare un preventivo scritto con l'elenco di cosa \u00e8 incluso.",
     intro:
@@ -908,6 +920,7 @@ export const CITTA_FESTE: CittaFeste[] = [
         sito: "https://villaanzalone.it",
       },
       { nome: "Monti Rossi Etna Adventure Park", zona: "Nicolosi, sull'Etna, a pochi chilometri da Catania", tipo: "parco avventura con percorsi sugli alberi", descrizione: "Parco avventura nella pineta dei Monti Rossi di Nicolosi, in via Goethe, su un cono vulcanico spento dell'Etna a pochi chilometri da Catania. Ha nove percorsi sospesi tra gli alberi, divisi per difficoltà, con moschettoni che impediscono lo sgancio, l'arrampicata sull'albero Up2Tree, slackline, un sentiero natura e un'area pic-nic. C'è un piccolo punto ristoro con bibite e snack. Fa laboratori per scuole e gruppi ed eventi privati per gruppi numerosi: per una festa chiedete direttamente al parco.", sito: "https://montirossietnaadventurepark.understory.io/it", festa: false },
+      { nome: "Ludum Science Center", zona: "Catania, via Guido Gozzano 2", tipo: "museo della scienza", descrizione: "Museo della scienza interattivo per bambini e ragazzi, nella nuova sede di via Guido Gozzano 2, a Catania (prima era a Misterbianco). Ha oltre cento esperimenti da provare in sei aree tematiche, un insettario e un planetario, con laboratori didattici e science show. Nei fine settimana organizza pomeriggi a tema per famiglie con laboratori, sfide con i mattoncini e spettacoli scientifici: nel 2026 ci sono stati, tra gli altri, il Lego Day del 10-11 gennaio, il weekend sulla mente del 28 febbraio-1 marzo e «Dalla Terra... alla Luna!» il 26 aprile. Dal lunedì al venerdì apre solo su prenotazione (9:30-17:30); nel weekend gli orari cambiano secondo le attività.", sito: "https://www.museodellascienza.com/", festa: false },
     ],
     faq: [
       {

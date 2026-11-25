@@ -1,0 +1,86 @@
+{
+  "gruppo": "reel",
+  "reel": true,
+  "voce": "mamma",
+  "slug": "reel-natale-auguri",
+  "titolo": "Reel · Gli auguri di Natale",
+  "schermate": {
+    "frasi": {
+      "url": "/natale/biglietti-di-natale",
+      "azioni": [],
+      "selettori": [
+        "[data-frasi-brevi]"
+      ]
+    },
+    "crea": {
+      "url": "/biglietti/crea?tipo=auguri&tema=natale&variante=colorato&formato=a6",
+      "azioni": [
+        {
+          "attendi": 800
+        }
+      ],
+      "selettori": [
+        "button:has-text(\"Invia su WhatsApp\")"
+      ]
+    },
+    "colorare": {
+      "url": "/biglietti/crea?tipo=auguri&tema=natale&variante=colorare&formato=a6",
+      "azioni": [
+        {
+          "attendi": 800
+        }
+      ],
+      "selettori": [
+        "button:has-text(\"Invia su WhatsApp\")"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per le mamme",
+      "titolo": "Gli auguri di Natale",
+      "sottotitolo": "Biglietti con frasi pronte, gratis.",
+      "voce": "A dicembre i biglietti da preparare sono tanti: per i nonni, per la maestra, per gli amici. Ecco un modo semplice per farli, anche insieme ai bambini."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Le frasi brevi",
+      "testo": "Divise per nonni, maestra, amici e famiglia.",
+      "schermata": "frasi",
+      "evidenzia": [
+        "[data-frasi-brevi]"
+      ],
+      "voce": "Nella pagina dei biglietti di Natale ci sono le frasi di auguri brevi, divise per chi le riceve. Ne scegliete una e siete già a metà."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Il nome e lo sfondo",
+      "testo": "Poi lo mandi su WhatsApp o lo stampi.",
+      "schermata": "crea",
+      "evidenzia": [
+        "button:has-text(\"Invia su WhatsApp\")"
+      ],
+      "voce": "Nel creatore si scrive il nome di chi lo riceve, si aggiungono adesivi o una foto, e il biglietto si manda su WhatsApp oppure si stampa."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 3,
+      "titolo": "Anche da colorare",
+      "testo": "Contorni neri: lo colorano i bambini.",
+      "schermata": "colorare",
+      "evidenzia": [
+        "button:has-text(\"Invia su WhatsApp\")"
+      ],
+      "voce": "E c'è la versione da colorare: si stampa a contorni neri, e il regalo per i nonni lo finiscono i bambini, con i loro colori."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/natale/biglietti-di-natale",
+      "sotto": "Biglietti di auguri di Natale, gratis.",
+      "voce": "Li trovate su giocamizi punto it, nella pagina di Natale. Buone feste!"
+    }
+  ]
+}

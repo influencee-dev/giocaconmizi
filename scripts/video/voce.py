@@ -1,15 +1,24 @@
 # La voce di Mizi: python3 voce.py <scheda.json> <cartella-lavoro>
 # Decisione di Giorgia del 15/11/2026: voce «sage», pinguina-bambina di ~10 anni.
+# Dal 24/11/2026 anche «mamma» (voce «coral») per i reel: campo «voce» della scheda.
 # Tutto il testo in UNA registrazione (la voce resta uguale); poi whisper-1 dà i
 # tempi delle parole e si taglia frase per frase in <cartella>/voce/<n>.wav.
 import json, subprocess, re, unicodedata, os, sys, difflib
 spec, cart = json.load(open(sys.argv[1])), sys.argv[2]
 os.makedirs(f"{cart}/voce", exist_ok=True)
-VOCE = 'sage'
-ISTR = ("Sei Mizi, una piccola pinguina dei cartoni animati: hai la voce di una bambina di circa dieci anni, allegra, curiosa e gentile. "
+ISTR_MIZI = ("Sei Mizi, una piccola pinguina dei cartoni animati: hai la voce di una bambina di circa dieci anni, allegra, curiosa e gentile. "
         "Sorridi mentre parli, sei entusiasta ma non urli, e spieghi le cose con calma perché tutti capiscano. "
         "Parla un italiano perfetto, con accento neutro, ritmo naturale e piccole pause dopo le virgole. Niente toni da pubblicità. "
         "Fai una pausa di un secondo tra un paragrafo e l'altro.")
+# Reel per Instagram (decisione di Giorgia del 24/11/2026): «voce»: «mamma» nella
+# scheda = una voce artificiale di donna adulta che parla ad altre mamme. Il testo
+# non racconta mai esperienze di Giorgia o di Domi: dice solo cosa fa il sito.
+ISTR_MAMMA = ("Sei una mamma italiana di circa trentacinque anni che parla ad altre mamme, come a un'amica davanti a un caffè. "
+              "Voce calda, accogliente, serena, con il sorriso. Ritmo tranquillo e naturale, mai da pubblicità, mai urlato. "
+              "Parla un italiano perfetto, con accento neutro, e piccole pause dopo le virgole. "
+              "Fai una pausa di un secondo tra un paragrafo e l'altro.")
+VOCI = {"mizi": ("sage", ISTR_MIZI), "mamma": ("coral", ISTR_MAMMA)}
+VOCE, ISTR = VOCI[spec.get("voce", "mizi")]
 testi = [s["voce"] for s in spec["scene"]]
 def curl(args, out=None):
     return subprocess.run(["curl", "-sS", "-m", "300", *args] + (["-o", out] if out else []), capture_output=True, text=True, check=True).stdout

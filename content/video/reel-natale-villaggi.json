@@ -1,0 +1,76 @@
+{
+  "gruppo": "reel",
+  "reel": true,
+  "voce": "mamma",
+  "slug": "reel-natale-villaggi",
+  "titolo": "Reel · I villaggi di Babbo Natale",
+  "schermate": {
+    "citta": {
+      "url": "/natale/eventi",
+      "azioni": [],
+      "selettori": [
+        "main a[href^=\"/natale/eventi/\"]"
+      ]
+    },
+    "milano": {
+      "url": "/natale/eventi/milano",
+      "azioni": [],
+      "selettori": [
+        "[data-villaggi-babbo-natale]",
+        "article"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per le mamme",
+      "titolo": "I villaggi di Babbo Natale",
+      "sottotitolo": "Gli eventi di Natale per bambini, città per città.",
+      "voce": "Se state cercando un villaggio di Babbo Natale vicino a casa, o un pomeriggio diverso da fare insieme, vi lascio un posto dove guardare."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Scegli la tua città",
+      "testo": "Solo eventi con le date confermate.",
+      "schermata": "citta",
+      "evidenzia": [
+        "main a[href^=\"/natale/eventi/\"]"
+      ],
+      "voce": "Su giocamizi punto it ci sono gli eventi di Natale per bambini, città per città. Solo quelli con le date confermate dai siti ufficiali."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Villaggi, mercatini, laboratori",
+      "testo": "Con date, luogo e il link ufficiale.",
+      "schermata": "milano",
+      "evidenzia": [
+        "[data-villaggi-babbo-natale]",
+        "article"
+      ],
+      "voce": "Per ogni città trovate i villaggi di Natale e le case di Babbo Natale, i mercatini e i laboratori, con le date e il link dell'evento."
+    },
+    {
+      "tipo": "carta",
+      "passo": 3,
+      "titolo": "Prima di uscire",
+      "testo": "Orari e prenotazioni cambiano.",
+      "carta": {
+        "icona": "lampadina",
+        "titolo": "Un consiglio",
+        "sotto": "Prima di partire",
+        "testo": "Controllate orari e prenotazioni sul sito dell'evento: il link è sempre nella scheda.",
+        "spunta": true
+      },
+      "voce": "Un consiglio da mamma a mamma: prima di partire, controllate sempre orari e prenotazioni sul sito dell'evento. Il link è sempre lì."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/natale/eventi",
+      "sotto": "Eventi di Natale per bambini.",
+      "voce": "Li trovate su giocamizi punto it, nella pagina di Natale. Buone feste e buone passeggiate!"
+    }
+  ]
+}
