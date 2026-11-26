@@ -196,9 +196,11 @@ const risultato = (p) => p.locator("[data-risultato]").evaluate((e) => ({ ...e.d
   ok("i collegamenti «Su Giocamizi» rispondono 200 e hanno un titolo", unici.length >= 10 && stati.every((s) => s === 200) && unici.every((l) => l.testo && !l.testo.startsWith("/")), unici.map((l, i) => `${l.href}:${stati[i]}`).filter((_, i) => stati[i] !== 200).join(" "));
 
   // condividere: nel messaggio solo l'invito e l'indirizzo, mai il risultato
-  ok("profilo: c'è il tasto per condividere il test", (await p.locator("[data-risultato] [data-condividi-test] button").count()) === 1);
+  // Dal 26/11/2026 i tasti sono due: «Condividi nelle storie» e quello comune.
+  ok("profilo: ci sono i tasti per condividere il test (storie e link)",
+    (await p.locator("[data-risultato] [data-condividi-storia] button").count()) === 1 && (await p.locator("[data-risultato] [data-condividi] > button").count()) === 1);
   await p.evaluate(() => { Object.defineProperty(navigator, "share", { value: undefined, configurable: true }); });
-  await p.locator("[data-risultato] [data-condividi-test] button").first().tap();
+  await p.locator("[data-risultato] [data-condividi] > button").first().tap();
   const voci = await p.locator("[data-risultato] [data-condividi-voci] a").evaluateAll((e) => e.map((x) => x.getAttribute("href")));
   const wa = decodeURIComponent(voci.find((h) => h.startsWith("https://wa.me/")) ?? "");
   ok("condividi: WhatsApp, Facebook, Telegram ed email, con l'invito e il link al test", voci.length === 4 && wa.includes("che tipo di mamma") && wa.includes(`giocamizi.it${PERCORSO}`));
