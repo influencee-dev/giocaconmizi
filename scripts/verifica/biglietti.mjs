@@ -471,7 +471,14 @@ const byteBustaL = bustaPdfL ? readFileSync(await bustaPdfL.path()) : null;
 ok("busta: PDF A4", byteBustaL && byteBustaL.subarray(0, 5).toString() === "%PDF-");
 ok("letterina: il nome del bambino non è mai uscito dalla pagina", richiesteConNome.length === 0, richiesteConNome.join(", "));
 await page.goto(`${BASE}/natale`, { waitUntil: "networkidle" });
-ok("hub del Natale: sette schede (pixel art dal 24/11/2026, Colora il Natale dal 25/11), ognuna col suo disegno", (await page.locator("[data-scheda-natale] svg").count()) === 7);
+ok("hub del Natale: otto schede (pixel art dal 24/11/2026, Colora il Natale dal 25/11, disegni da colorare dal 26/11), ognuna col suo disegno", (await page.locator("[data-scheda-natale] svg").count()) === 8);
+// Disegni di Natale da colorare (26/11/2026): dieci anteprime che si caricano,
+// dieci PDF e quello con tutti, che sono PDF veri.
+await page.goto(`${BASE}/natale/disegni-da-colorare`, { waitUntil: "networkidle" });
+const anteprime = await page.locator("[data-disegni-natale] img").evaluateAll((im) => im.map((i) => { i.loading = "eager"; return i.src; }));
+const pdfDisegni = await page.locator("[data-scarica-disegno], [data-scarica-tutti]").evaluateAll((a) => a.map((x) => x.href));
+const controlli = await Promise.all([...anteprime, ...pdfDisegni].map(async (u) => { const r = await page.request.get(u); const b = await r.body(); return r.ok() && (u.endsWith(".pdf") ? b.subarray(0, 5).toString() === "%PDF-" : b.length > 1000); }));
+ok("disegni di Natale: dieci anteprime e undici PDF che si aprono", anteprime.length === 10 && pdfDisegni.length === 11 && controlli.every(Boolean), `${anteprime.length} anteprime, ${pdfDisegni.length} PDF, ${controlli.filter((c) => !c).length} non vanno`);
 await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
 ok("home: in stagione c'è il riquadro del Natale", await page.locator("[data-riquadro-natale]").first().isVisible());
 

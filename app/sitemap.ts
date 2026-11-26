@@ -57,6 +57,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/natale/letterina-babbo-natale": ["lib/natale/natale.ts", "components/natale/EditorLetterina.tsx"],
     "/natale/biglietti-di-natale": ["cards/registry.ts"],
     "/natale/eventi": ["lib/natale/eventi-natale.ts"],
+    "/natale/disegni-da-colorare": ["lib/natale/disegni-natale.ts"],
     "/guide": [ultimaGuida],
     "/feste": [ultimaCitta],
     "/metodo": ["content/hubs/metodo.md"],
@@ -98,6 +99,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/natale/letterina-babbo-natale",
     "/natale/biglietti-di-natale",
     "/natale/eventi",
+    "/natale/disegni-da-colorare",
   ];
 
   const competenze = [
