@@ -118,3 +118,43 @@ export async function immagineOg({ titolo, etichetta, sottotitolo, tinta = "viol
     { ...dimensioniOg, fonts: caratteri() },
   );
 }
+
+export const dimensioniStoria = { width: 1080, height: 1920 };
+
+/**
+ * L'immagine per le storie di Instagram e WhatsApp (1080×1920), 26/11/2026,
+ * richiesta di Giorgia: chi tocca «Condividi nelle storie» la riceve pronta e
+ * con il link già copiato da incollare nello sticker «Link». Sotto l'indirizzo
+ * resta uno spazio libero, con la freccia, dove mettere lo sticker: il fondo
+ * della storia lo copre la barra delle risposte di Instagram.
+ */
+export async function immagineStoria({ titolo, etichetta, sottotitolo, tinta = "rosa", indirizzo }: DatiOg & { indirizzo: string }) {
+  const [mizi, logo] = await Promise.all([png("mizi/mizi-intera.webp", 720), png("mizi/giocamizi-logo-orizzontale.webp", 620)]);
+  const t = TINTE[tinta];
+  const corpo = titolo.length > 60 ? 86 : 98;
+  return new ImageResponse(
+    (
+      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", position: "relative", backgroundColor: C.crema, fontFamily: "Nunito" }}>
+        <div style={{ display: "flex", position: "absolute", left: -160, top: 980, width: 820, height: 820, borderRadius: 999, backgroundColor: t.alone }} />
+        <div style={{ display: "flex", position: "absolute", right: 120, top: 250, width: 46, height: 46, borderRadius: 999, backgroundColor: TINTE.giallo.fondo }} />
+        <div style={{ display: "flex", position: "absolute", left: 110, top: 330, width: 30, height: 30, borderRadius: 999, backgroundColor: TINTE.azzurro.fondo }} />
+        {/* eslint-disable-next-line @next/next/no-img-element -- satori disegna solo <img> */}
+        <img src={logo} width={420} height={106} alt="" style={{ marginTop: 120, objectFit: "contain" }} />
+        <div style={{ display: "flex", marginTop: 90, backgroundColor: t.fondo, color: t.testo, borderRadius: 999, padding: "14px 34px", fontSize: 38, fontWeight: 800 }}>{etichetta}</div>
+        <div style={{ display: "flex", textAlign: "center", justifyContent: "center", marginTop: 44, padding: "0 80px", fontSize: corpo, fontWeight: 800, color: C.notte, lineHeight: 1.05, letterSpacing: -2 }}>
+          {titolo}
+        </div>
+        {sottotitolo && (
+          <div style={{ display: "flex", textAlign: "center", marginTop: 30, padding: "0 110px", fontSize: 40, fontWeight: 600, color: C.notteTenue, lineHeight: 1.3 }}>{sottotitolo}</div>
+        )}
+        {/* eslint-disable-next-line @next/next/no-img-element -- satori disegna solo <img> */}
+        <img src={mizi} width={420} height={420} alt="" style={{ marginTop: 30, objectFit: "contain" }} />
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "absolute", bottom: 380, gap: 18 }}>
+          <div style={{ display: "flex", backgroundColor: C.rosaForte, color: "#FFFFFF", borderRadius: 999, padding: "22px 46px", fontSize: 46, fontWeight: 800 }}>{indirizzo}</div>
+          <div style={{ display: "flex", fontSize: 34, fontWeight: 800, color: C.notte }}>Tocca il link qui sotto ↓</div>
+        </div>
+      </div>
+    ),
+    { ...dimensioniStoria, fonts: caratteri() },
+  );
+}

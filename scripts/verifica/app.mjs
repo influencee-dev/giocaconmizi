@@ -68,6 +68,49 @@ await p.waitForTimeout(500);
 ok("iPhone: chiusa resta chiusa (30 giorni)", !(await visibile(p)) && Number(await p.evaluate(() => localStorage.getItem("giocamizi-app-chiusa"))) > 0);
 await iphone.close();
 
+// La novità chiusa RICOMPARE (26/11/2026, richiesta di Giorgia): chiusa due
+// giorni fa torna negli articoli ma non altrove; chiusa quattro giorni fa torna ovunque.
+for (const [giorni, pagina, attesa] of [[2, "/guide/festa-di-compleanno-semplice", true], [2, "/feste", false], [4, "/feste", true]]) {
+  const c = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, userAgent: IPHONE });
+  await c.addInitScript((g) => {
+    localStorage.setItem("mizi.consenso-statistiche", "no");
+    localStorage.setItem("giocamizi-novita-chiusa", JSON.stringify({ id: "test-sotto-pressione", t: Date.now() - g * 24 * 3600 * 1000 }));
+  }, giorni);
+  const q = await c.newPage();
+  await q.goto(BASE + pagina, { waitUntil: "networkidle" });
+  await barra(q).waitFor({ timeout: 4000 }).catch(() => null);
+  const novita = (await barra(q).getAttribute("data-novita").catch(() => null)) === "test-sotto-pressione";
+  ok(`novità chiusa ${giorni} giorni fa: su ${pagina} ${attesa ? "ricompare" : "resta chiusa"}`, novita === attesa);
+  await c.close();
+}
+
+// Il test nelle storie (26/11/2026): l'immagine verticale, il link corto e il tasto.
+{
+  const r = await fetch(`${BASE}/genitori/sotto-pressione/storia`);
+  const png = Buffer.from(await r.arrayBuffer());
+  const lato = png.length > 24 ? [png.readUInt32BE(16), png.readUInt32BE(20)] : [0, 0];
+  ok("storia del test: PNG verticale 1080×1920", r.ok && r.headers.get("content-type")?.includes("png") && lato[0] === 1080 && lato[1] === 1920, lato.join("×"));
+  const corto = await fetch(`${BASE}/test`, { redirect: "manual" });
+  ok("giocamizi.it/test porta al test con la campagna delle storie",
+    [302, 307].includes(corto.status) && (corto.headers.get("location") ?? "").includes("/genitori/sotto-pressione?utm_source=storia"));
+  const c = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, userAgent: IPHONE });
+  await c.grantPermissions(["clipboard-read", "clipboard-write"]).catch(() => null);
+  const q = await c.newPage();
+  await q.addInitScript(() => localStorage.setItem("mizi.consenso-statistiche", "no"));
+  await q.goto(BASE + "/genitori/sotto-pressione", { waitUntil: "networkidle" });
+  const tasto = q.locator("[data-condividi-storia] button").first();
+  const c1 = await tasto.count();
+  if (c1) {
+    const scarico = q.waitForEvent("download", { timeout: 8000 }).catch(() => null);
+    await tasto.tap();
+    await scarico;
+    await q.locator("[data-storia-istruzioni]").waitFor({ timeout: 8000 }).catch(() => null);
+  }
+  ok("pagina del test: «Condividi nelle storie» prepara l'immagine e spiega lo sticker «Link»",
+    c1 > 0 && ((await q.locator("[data-storia-istruzioni]").textContent().catch(() => "")) ?? "").includes("sticker"));
+  await c.close();
+}
+
 // 5. Android senza finestra d'installazione del browser: istruzioni dal menu.
 const android = await b.newContext({ viewport: { width: 360, height: 780 }, isMobile: true, hasTouch: true, userAgent: ANDROID });
 await android.addInitScript(() => {

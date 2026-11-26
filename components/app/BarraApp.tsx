@@ -26,7 +26,9 @@ import Link from "next/link";
  * dentro l'app installata. Per cambiarla basta cambiare NOVITA: un id nuovo la
  * fa ricomparire anche a chi aveva chiuso quella vecchia.
  *
- * Non compare: se l'app è già aperta come app, se l'hai chiusa (per 30 giorni,
+ * La novità chiusa ritorna dopo un giorno negli articoli e dopo tre giorni
+ * altrove (pausaNovita). La barretta dell'app invece: non compare se l'app è
+ * già aperta come app, se l'hai chiusa (per 30 giorni,
  * ricordato in localStorage, vedi lib/contenuti/legal.ts), finché c'è il banner dei
  * cookie, dentro i giochi e il pannello, e dove la pagina ha già una sua barra
  * fissa in basso ([data-barra-fissa], es. la scheda di un locale).
@@ -50,10 +52,19 @@ export const NOVITA = {
   nascostaSu: [/^\/genitori\/sotto-pressione/],
 };
 
-function novitaChiusa(): boolean {
+/**
+ * La novità chiusa con la X RICOMPARE (26/11/2026, richiesta di Giorgia): dopo
+ * un giorno negli articoli (/guide/…), dove si legge con calma e il test è più
+ * vicino a quello che si sta leggendo, e dopo tre giorni nel resto del sito.
+ */
+const UN_GIORNO = 24 * 60 * 60 * 1000;
+export function pausaNovita(percorso: string): number {
+  return /^\/guide\//.test(percorso) ? UN_GIORNO : 3 * UN_GIORNO;
+}
+function novitaChiusa(percorso: string): boolean {
   try {
     const d = JSON.parse(window.localStorage.getItem(CHIAVE_NOVITA_CHIUSA) ?? "null") as { id?: string; t?: number } | null;
-    return !!d && d.id === NOVITA.id && Date.now() - Number(d.t ?? 0) < TRENTA_GIORNI;
+    return !!d && d.id === NOVITA.id && Date.now() - Number(d.t ?? 0) < pausaNovita(percorso);
   } catch {
     return false;
   }
@@ -112,7 +123,6 @@ export function BarraApp() {
     setOs(piattaforma());
     setChiusa(giaApp() || chiusaDaPoco());
     setInstallata(giaApp());
-    setNovitaVia(novitaChiusa());
     setBanner(consensoStatistiche() === null);
     setPronta(true);
 
@@ -137,6 +147,8 @@ export function BarraApp() {
   useEffect(() => {
     setAltraBarra(document.querySelector("[data-barra-fissa]") !== null);
     setAiuto(false);
+    // A ogni pagina si ricontrolla: la novità chiusa ieri torna negli articoli.
+    setNovitaVia(novitaChiusa(percorso));
   }, [percorso]);
 
   const posto = pronta && !banner && !altraBarra && !NASCOSTA.some((r) => r.test(percorso));
