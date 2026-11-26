@@ -15,11 +15,11 @@ Stati: **fatto** · **in corso** · **da fare** · **da decidere** (serve una ri
 | # | Cantiere | Ricerche (al mese) | Stato |
 |---|---|---|---|
 | 1 | Titoli per Google dei giochi | tabelline 90.500, disegni da colorare 110.000, sottrazioni… | **fatto** 23/11 |
-| 2 | Natale | auguri 40.500, disegni di Natale 27.100, lavoretti 18.100 | **di un'altra chat** (co-work) |
+| 2 | Natale | auguri 40.500, disegni di Natale 27.100, lavoretti 18.100 | fatto il 24-26/11/2026 (co-work), restano le guide della routine articoli |
 | 3 | Elenchi scritti nelle pagine dei giochi | tabelline dal 1 al 10 18.100, doppie 4.400+3.600+3.600, MB e MP 1.600 | da fare |
 | 4 | Una pagina per tabellina | tabelline 7 18.100, del 3 9.900 (e le altre) | da fare |
 | 5 | Le pagine delle classi tutto l'anno | esercizi seconda elementare 1.600+720, prima 1.600, terza 1.000 | **fatto** 23/11 |
-| 6 | «Vicino a me» negli hub della directory | parco avventura vicino a me 5.400, ludoteca 4.400, parco acquatico 3.600… | da fare |
+| 6 | «Vicino a me» negli hub della directory | parco avventura vicino a me 5.400, ludoteca 4.400, parco acquatico 3.600… | fatto il 26/11/2026 |
 | 7 | Inviti e biglietti: le parole che mancano | inviti digitali 1.900, frasi per inviti 880, cosa scrivere 390 | da fare |
 | 8 | Storie: «favole della buonanotte» | 12.100 + 720 | da fare |
 | 9 | Stampabili veri (PDF) | disegni da colorare da stampare 40.500, puntini 880 | da fare |
@@ -51,6 +51,11 @@ eventi città per città (18.100), «lettera» oltre a «letterina» nel titolo 
 rispondere» (12.100) e i nomi delle renne (5.400) sono idee per la routine articoli delle 9:00.
 Picco dal 25/11 al 24/12: dopo il 15/12 non conviene più cominciare.
 
+Fatto (co-work, 24-26/11/2026): auguri con frasi brevi in `/natale/biglietti-di-natale`, «lettera»
+nel titolo della letterina, villaggi di Babbo Natale in ogni città degli eventi, voce «Biglietti di
+Natale» in `/biglietti`, i giochi «Pixel art di Natale» e «Colora il Natale», la pagina
+`/natale/disegni-da-colorare` con dieci PDF A4. Restano alla routine articoli le tre guide.
+
 ## 3. Elenchi scritti nelle pagine dei giochi
 
 Sotto il gioco, nel testo di `content/games/<slug>.md`, gli elenchi che la gente cerca come
@@ -75,7 +80,12 @@ divisi per materia (Matematica, Italiano, Scienze, poi logica e coding), un riqu
 compiti delle vacanze» e FAQ nuove. Anche il piede, la home, `/per-insegnanti` e llms.txt
 dicono «Esercizi per classe». Quattro ricerche segnate «fatto».
 
-## 6. «Vicino a me» negli hub della directory
+## 6. «Vicino a me» negli hub della directory · fatto il 26/11/2026
+
+Fatto in `app/(public)/[categoria]/page.tsx` per tutte le categorie: sotto «In breve» la frase
+«Cerchi una ludoteca vicino a te? Scegli la tua città:» con le otto città con più posti come
+link, e in fondo la FAQ «Come trovo … vicino a me?» (anche nei dati strutturati). Titolo e H1
+restano quelli della categoria: le quattro righe sono «c-e», non «fatto». Prova in verifica/seo.
 
 Gli hub `/parchi-avventura`, `/ludoteche`, `/parchi-acquatici`, `/fattorie-didattiche`, laser
 game: una frase vera in apertura («Cerchi un parco avventura vicino a te? Scegli la città») e

@@ -1,7 +1,7 @@
 {
   "app/(public)/[categoria]/[citta]/[attivita]/page.tsx": "2026-11-23",
   "app/(public)/[categoria]/[citta]/page.tsx": "2026-11-22",
-  "app/(public)/[categoria]/page.tsx": "2026-11-22",
+  "app/(public)/[categoria]/page.tsx": "2026-11-26",
   "app/(public)/admin/[codice]/candidature/page.tsx": "2026-11-08",
   "app/(public)/admin/[codice]/immagini/page.tsx": "2026-11-02",
   "app/(public)/admin/[codice]/importa/page.tsx": "2026-11-16",
