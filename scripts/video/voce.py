@@ -26,7 +26,8 @@ ISTR_MAMMA = ("Sei una grande attrice italiana di teatro e di doppiaggio. Interp
               "- Pause teatrali: fermati mezzo secondo PRIMA delle parole importanti, per creare attesa.\n"
               "- Il sorriso si sente in ogni frase; nei punti più belli lascia scappare un piccolo sorriso udibile o un respiro di emozione.\n\n"
               "Niente tono da pubblicità, da annunciatrice o da lettura: è recitazione viva. Italiano perfetto, accento neutro. "
-              "\"giocamizi punto it\" detto con naturalezza. Pausa di un secondo tra un paragrafo e l'altro.")
+              "\"giocamizi punto it\" detto con naturalezza. Pausa di un secondo tra un paragrafo e l'altro. "
+              "Leggi TUTTO il testo, parola per parola, fino all'ultima: il saluto finale si dice sempre, per intero.")
 VOCI = {"mizi": ("sage", ISTR_MIZI), "mamma": ("marin", ISTR_MAMMA)}
 VOCE, ISTR = VOCI[spec.get("voce", "mizi")]
 if spec.get("regia"):
