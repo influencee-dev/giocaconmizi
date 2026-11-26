@@ -2,6 +2,13 @@
   "gruppo": "reel",
   "reel": true,
   "voce": "mamma",
+  "regia": [
+    "Apertura: atmosfera calda e raccolta, come una coperta sul divano; voce morbida su \"i pomeriggi di dicembre in casa\", poi la sorpresa: \"un gioco NUOVO e TRANQUILLO\", e con un piccolo annuncio \"la pixel art… di Natale\".",
+    "Racconto quasi magico: rallenta su \"riga per riga… e piano piano… SPUNTA il disegno\", poi meraviglia sull'elenco \"l'albero, il regalo, la campanella\".",
+    "Tono giocoso e complice su \"come nella BATTAGLIA NAVALE\"; poi curiosità e meraviglia su \"come sono fatte le immagini sugli schermi\".",
+    "Momento tenero: \"Un'idea in più\" detto come un piccolo segreto; voce morbida e orgogliosa su \"un biglietto di auguri… fatto a MANO\".",
+    "Finale: caldo e festoso. \"BUONE FESTE!\" con un grande sorriso."
+  ],
   "slug": "reel-natale-pixel-art",
   "titolo": "Reel · La pixel art di Natale",
   "schermate": {

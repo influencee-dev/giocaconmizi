@@ -57,8 +57,11 @@ caricare su Drive (2 Aree → Giocamizi · Video) e su YouTube.
   (slug che comincia con `reel-`). fai.sh si ferma dopo il montaggio: niente
   public/video, niente pagina del tutorial; restano «<slug> · 9x16.mp4» (da
   caricare) e «· 16x9.mp4» nella cartella di lavoro.
-- Voce «mamma»: voce artificiale di donna adulta (OpenAI «coral»), tono caldo da
-  mamma che parla ad altre mamme. Mai esperienze inventate («mia figlia…»,
+- Voce «mamma»: voce artificiale di donna adulta (OpenAI «marin» dal 26/11/2026,
+  scelta da Giorgia fra coral, shimmer e marin), recitata come un'attrice: regia
+  teatrale in scripts/video/voce.py e, in ogni scheda, il campo «regia» (emozione
+  e parole da calcare, un punto per paragrafo). La regia cambia solo COME si dice:
+  i testi restano quelli approvati. Mai esperienze inventate («mia figlia…»,
   «Domi…»): dice solo cosa fa il sito e consigli generali. Su Instagram va
   segnato che la voce è generata.
 - La chiave OpenAI c'è solo nell'ambiente cloud «Giocamizi»: i reel si fanno
