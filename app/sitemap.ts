@@ -89,6 +89,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/note-legali",
     "/perche-lo-facciamo",
     "/chi-siamo",
+    "/libri",
     "/aggiungi-attivita",
     "/per-insegnanti",
     "/per-le-mamme",

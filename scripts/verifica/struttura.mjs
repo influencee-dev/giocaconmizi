@@ -84,7 +84,7 @@ for (const c of ["content", "docs"]) {
 }
 
 // 6. scripts/: gli strumenti stanno qui, e le prove in scripts/verifica.
-for (const c of cartelle("scripts")) if (!["articoli", "verifica", "video"].includes(c)) ko(`cartella «scripts/${c}/» non prevista.`);
+for (const c of cartelle("scripts")) if (!["articoli", "libri", "verifica", "video"].includes(c)) ko(`cartella «scripts/${c}/» non prevista.`);
 
 // 7. La mappa esiste e nomina ogni cartella di lib.
 const mappa = existsSync("docs/ARCHITETTURA.md") ? readFileSync("docs/ARCHITETTURA.md", "utf8") : "";

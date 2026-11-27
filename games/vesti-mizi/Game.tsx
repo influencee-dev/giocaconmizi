@@ -264,8 +264,8 @@ export default function Game({ onComplete, onProgress, demo }: GameProps) {
 
   return (
     <GameShell titolo="Vesti Mizi" istruzione={uscita.istruzione} round={round} totaleRound={totale} finito={finito} stelle={stelle(punti, totale - 1)} onAncora={ancora}>
-      <div className="flex w-full max-w-xl flex-col items-center gap-3">
-        <div className="relative flex h-[min(42vh,26rem)] w-full items-center justify-center overflow-hidden rounded-[1.6rem] border-2 border-crema-scuro bg-white">
+      <div className="flex w-full max-w-xl flex-col items-center gap-3 basso:gap-2">
+        <div className="relative flex h-[min(42vh,26rem)] basso:h-[36dvh] w-full items-center justify-center overflow-hidden rounded-[1.6rem] border-2 border-crema-scuro bg-white">
           <Palco scena={uscita.scena} vestiti={vestiti} trucchi={trucchi} svgRef={palco} />
           {messaggio && (
             <p
@@ -280,17 +280,17 @@ export default function Game({ onComplete, onProgress, demo }: GameProps) {
 
         <div className="flex w-full gap-2">
           {uscita.scena === "libero" && (
-            <button type="button" onClick={() => void salvaFoto()} className="flex flex-1 items-center justify-center gap-2 rounded-2xl border-2 border-viola bg-white py-3 font-black text-viola" data-salva-foto>
+            <button type="button" onClick={() => void salvaFoto()} className="flex flex-1 items-center justify-center gap-2 rounded-2xl border-2 border-viola bg-white py-3 font-black text-viola basso:py-2" data-salva-foto>
               <Camera className="h-5 w-5" strokeWidth={2.6} aria-hidden /> Salva la foto
             </button>
           )}
-          <button type="button" onClick={fatto} className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-viola py-3 text-lg font-black text-white" data-fatto>
+          <button type="button" onClick={fatto} className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-viola py-3 text-lg font-black text-white basso:py-2" data-fatto>
             <Check className="h-5 w-5" strokeWidth={3} aria-hidden /> Fatto
           </button>
         </div>
 
         {/* Il guardaroba: prima la zona, poi il capo. */}
-        <div className="flex w-full gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none]" role="tablist" aria-label="Zone del guardaroba">
+        <div className="flex w-full flex-wrap justify-center gap-1.5" role="tablist" aria-label="Zone del guardaroba">
           {ZONE.map((z) => (
             <button
               key={z.id}
@@ -298,7 +298,7 @@ export default function Game({ onComplete, onProgress, demo }: GameProps) {
               role="tab"
               aria-selected={zona === z.id}
               onClick={() => setZona(z.id)}
-              className={`shrink-0 rounded-full border-2 px-3.5 py-2 text-sm font-black ${zona === z.id ? "border-notte bg-notte text-white" : "border-crema-scuro bg-white text-notte"}`}
+              className={`min-h-11 shrink-0 touch-manipulation rounded-full border-2 px-3.5 py-2 text-sm font-black ${zona === z.id ? "border-notte bg-notte text-white" : "border-crema-scuro bg-white text-notte"}`}
               style={{ minHeight: 0, minWidth: 0 }}
               data-zona={z.id}
             >

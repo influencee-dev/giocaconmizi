@@ -12,11 +12,11 @@ Il progetto cresce a pezzi e da più chat insieme. Per questo la regola è una s
 | `components/` | I pezzi di interfaccia, una cartella per zona del sito. | Dati e regole: stanno in `lib/`. |
 | `games/` | I giochi. Una cartella per gioco, più i motori comuni in `games/_engine/`. | Le pagine dei giochi (stanno in `app/`), l'album e la voce (stanno in `lib/giochi/`). |
 | `lib/` | Dati, regole e funzioni senza interfaccia, divisi per argomento. | File sciolti: ogni file sta in una cartella per argomento. |
-| `content/` | Testi e dati scritti a mano: schede dei giochi, storie, articoli, copione della voce, video. | Codice. |
+| `content/` | Testi e dati scritti a mano: schede dei giochi, storie, articoli, copione della voce, video, libretti da vendere (`content/libretti/`: una scheda per libretto con testo e scena di ogni pagina, più `_personaggi.json` con stile e personaggi fissi), schede dei libri per Amazon (`content/libri/`: una per volume, `_collana.json` per i dati comuni). | Codice. |
 | `cards/` | Il registro dei temi dei biglietti (`registry.ts`). | Altro: i componenti dei biglietti sono in `components/biglietti/`. |
 | `public/` | File serviti così come sono: foto, icone, voce registrata, video. | Sorgenti. |
 | `assets/` | Materiali di lavoro non serviti dal sito (musiche e grafiche social). | File usati dalle pagine: quelli vanno in `public/`. |
-| `scripts/` | Strumenti da riga di comando. Le prove automatiche sono in `scripts/verifica/`. | Codice usato dal sito mentre gira. |
+| `scripts/` | Strumenti da riga di comando. Le prove automatiche sono in `scripts/verifica/`; gli strumenti dei libri per Amazon in `scripts/libri/` (procedura in `docs/libri-kdp.md`). | Codice usato dal sito mentre gira. |
 | `supabase/` | Le tabelle del database, in SQL. | |
 | `docs/` | Documenti di progetto e procedure. | Codice. |
 
@@ -31,7 +31,7 @@ Nella radice restano solo i file di configurazione (`package.json`, `next.config
 | `lib/risorse/` | La directory delle risorse educative | `risorse-categorie.ts`, `risorse-educative.ts`, `risorse-educative-dati.ts`, `risorse-reclamo.ts`, `risorse-anteprime.ts` |
 | `lib/natale/` | Il Natale di Mizi | `natale.ts`, `natale-esporta.ts`, `eventi-natale.ts` |
 | `lib/biglietti/` | Inviti e kit della festa | `biglietti.ts`, `condivisione.ts`, `esempi.ts` |
-| `lib/contenuti/` | Guide, articoli, tutorial, note legali | `guide.ts` (guide brevi), `content.ts` (lettura di `content/`), `approfondimenti.json` (generato), `tutorial.ts`, `tutorial-dati.json` (generato), `legal.ts` |
+| `lib/contenuti/` | Guide, articoli, tutorial, note legali | `guide.ts` (guide brevi), `content.ts` (lettura di `content/`), `approfondimenti.json` (generato), `tutorial.ts`, `tutorial-dati.json` (generato), `legal.ts`, `libri.ts` (i libri di Mizi nella vetrina /libri, letti da `content/libri/`) |
 | `lib/foto/` | Le foto del sito | `foto.ts`, `foto-dati.ts`, `foto-del-giorno.ts`, `foto-in-arrivo.ts`, `caricatore-immagini.ts`, `immagini-varianti.json` (generato) |
 | `lib/email/` | Email | `brevo.ts`, `brevo-conferma.ts`, `brevo-benvenuto.ts`, `email-servizio.ts` |
 | `lib/seo/` | Motori di ricerca | `seo.ts`, `date-pagine.ts`, `date-pagine.json` (generato), `og.tsx`, `gsc.ts`, `precarico.ts` |

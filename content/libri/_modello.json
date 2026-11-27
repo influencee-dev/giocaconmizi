@@ -1,0 +1,54 @@
+{
+  "codice": "V00",
+  "volume": 0,
+  "stato": "DRAFT",
+  "anno": 2027,
+  "titolo": "Il titolo esatto del libro",
+  "titolo_righe": [
+    "Il titolo esatto",
+    "del",
+    "libro"
+  ],
+  "dedica": [
+    "Prima riga della dedica,",
+    "seconda riga",
+    "terza riga."
+  ],
+  "quarta": [
+    "Primo paragrafo della quarta di copertina, due righe al massimo.",
+    "Secondo paragrafo, quattro righe al massimo.",
+    "Una storia da leggere insieme e da colorare."
+  ],
+  "scene": [
+    "Testo della scena 1, come approvato da Giorgia.",
+    "Testo della scena 2, come approvato da Giorgia.",
+    "Testo della scena 3, come approvato da Giorgia.",
+    "Testo della scena 4, come approvato da Giorgia.",
+    "Testo della scena 5, come approvato da Giorgia.",
+    "Testo della scena 6, come approvato da Giorgia.",
+    "Testo della scena 7, come approvato da Giorgia.",
+    "Testo della scena 8, come approvato da Giorgia.",
+    "Testo della scena 9, come approvato da Giorgia.",
+    "Testo della scena 10, come approvato da Giorgia.",
+    "Testo della scena 11, come approvato da Giorgia.",
+    "Testo della scena 12, come approvato da Giorgia."
+  ],
+  "attivita": {
+    "disegna": "Titolo dell'attività da disegnare",
+    "racconta": "Domanda a cui rispondere con tre disegni",
+    "labirinto": "Titolo del labirinto"
+  },
+  "parliamone": [
+    "Prima domanda per i grandi?",
+    "Seconda domanda?",
+    "Terza domanda?"
+  ],
+  "vetrina": {
+    "pubblico": false,
+    "copertina": "/immagini/libro-<slug>-copertina-960.webp",
+    "alt": "Descrizione della copertina per chi non vede l'immagine",
+    "tema": "Educativo o nome dell'evento",
+    "eta": "3-7 anni",
+    "amazon": ""
+  }
+}

@@ -144,13 +144,13 @@ export function SceltaMultipla({
       stelle={partita.stelle}
       onAncora={ricomincia}
     >
-      <div data-scelta-multipla {...partita.attributi} className="flex h-full w-full max-w-3xl flex-col items-center justify-center gap-6">
+      <div data-scelta-multipla {...partita.attributi} className="flex h-full w-full max-w-3xl flex-col items-center justify-center gap-6 basso:gap-3">
         {corrente.centro && (
           <div key={indice} className="centro-entra palco figura-ombra flex items-center justify-center">{corrente.centro}</div>
         )}
 
         <div
-          className="grid w-full gap-4"
+          className="grid w-full gap-4 basso:gap-3"
           style={{ gridTemplateColumns: `repeat(${colonneEffettive}, minmax(0, 1fr))` }}
         >
           {corrente.opzioni.map((opzione, posto) => (
@@ -173,7 +173,7 @@ export function SceltaMultipla({
         </div>
 
         {corrente.aiuto && sbagliate.length > 0 && !azzeccata && (
-          <p role="status" className="max-w-xl rounded-2xl bg-giallo/30 px-4 py-3 text-center text-lg font-bold text-notte" data-aiuto>
+          <p role="status" className="max-w-xl rounded-2xl bg-giallo/30 px-4 py-3 text-center text-lg font-bold text-notte basso:py-2 basso:text-base basso:leading-snug" data-aiuto>
             {corrente.aiuto}
           </p>
         )}
@@ -268,7 +268,7 @@ function BottoneOpzione({
       data-aiuto-opzione={aiuto ? "si" : undefined}
       aria-label={opzione.descrizione ?? opzione.etichetta ?? opzione.id}
       // Si animano solo trasformazione, trasparenza e colori: niente che faccia ricalcolare la pagina.
-      className={`relative flex min-h-24 touch-manipulation flex-col items-center justify-center gap-1 rounded-morbido border-4 p-3 transition-[transform,opacity,background-color,border-color] duration-150 ${bordo}`}
+      className={`relative flex min-h-24 touch-manipulation basso:min-h-20 flex-col items-center justify-center gap-1 rounded-morbido border-4 p-3 transition-[transform,opacity,background-color,border-color] duration-150 ${bordo}`}
       style={stato === "libera" && !aiuto ? { animationDelay: `${Math.min(posto, 8) * 45}ms` } : undefined}
     >
       {contenuto}

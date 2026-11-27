@@ -203,7 +203,7 @@ export function CreaGioco({ titolo, onComplete, demo = false }: CreaGiocoProps) 
           <button
             type="button"
             onClick={inProva ? () => setInProva(false) : avviaProva}
-            className="rounded-bolla bg-rosa px-8 py-3 text-lg font-extrabold text-white"
+            className="rounded-bolla bg-rosa-forte px-8 py-3 text-lg font-extrabold text-white"
           >
             {inProva ? "⏸ Ferma" : "▶ Prova"}
           </button>
@@ -265,7 +265,7 @@ export function CreaGioco({ titolo, onComplete, demo = false }: CreaGiocoProps) 
                 type="button"
                 onClick={() => setRegole((r) => r.filter((_, j) => j !== i))}
                 aria-label="Togli questa regola"
-                className="ml-auto h-10 w-10 rounded-full bg-crema text-xl font-extrabold text-notte-tenue"
+                className="ml-auto h-11 w-11 touch-manipulation rounded-full bg-crema text-xl font-extrabold text-notte-tenue"
                 style={{ minHeight: "2.5rem", minWidth: "2.5rem" }}
               >
                 ×

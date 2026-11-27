@@ -28,14 +28,16 @@ function Striscia({ figura, indice, totale }: { figura: NomeFigura; indice: numb
   const id = `taglio-${figura}-${indice}`;
 
   return (
-    <svg viewBox={`0 ${indice * altezza} 100 ${altezza}`} className="h-full w-full" aria-hidden>
+    <svg viewBox={`0 ${indice * altezza} 100 ${altezza}`} className="block h-full w-full" preserveAspectRatio="none" aria-hidden>
       <defs>
         <clipPath id={id}>
           <rect x="0" y={indice * altezza} width="100" height={altezza} />
         </clipPath>
       </defs>
       <g clipPath={`url(#${id})`}>
-        <Disegno id={figura} className="" />
+        {/* `lato` è obbligatorio dentro un altro SVG: senza, il disegno si
+            schiacciava nella striscia e i pezzi uscivano vuoti (giro del 27/11/2026). */}
+        <Disegno id={figura} lato={100} className="" />
       </g>
     </svg>
   );
@@ -56,14 +58,9 @@ export default function Game(props: GameProps) {
           descrizione: `Pezzo ${k + 1}`,
         })),
         vocePremio: `Evviva! È ${immagine.nome}.`,
-        centro: (
-          <figure className="flex flex-col items-center">
-            <div className="h-24 w-24 opacity-30">
-              <Disegno id={immagine.figura} />
-            </div>
-            <figcaption className="text-sm font-bold text-notte-tenue">il modello</figcaption>
-          </figure>
-        ),
+        // Il modello in trasparenza sta dentro il riquadro: le strisce ci si
+        // impilano sopra dall'alto e il disegno si ricompone davvero.
+        pila: <Disegno id={immagine.figura} />,
       };
     });
   }, []);

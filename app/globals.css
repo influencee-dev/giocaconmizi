@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+/* Schermi bassi: il telefono con le barre del browser aperte (un iPhone 13 in
+   Safari lascia 664 px) e i telefoni piccoli. Nei giochi si usa `basso:` per
+   stringere margini e figure, così le risposte restano in vista senza scorrere
+   (giro dei giochi del 27/11/2026). */
+@custom-variant basso (@media (max-height: 700px));
+
 /* ---------------------------------------------------------------
    Gioca con Mizi — design tokens (piano §7 Setup)
    Palette derivata dal personaggio di Mizi il pinguino (§12).
@@ -358,6 +364,11 @@ a[role="button"],
   padding: 1.25rem;
   border-radius: 9999px;
   background: radial-gradient(closest-side, #fff 0, #fff 64%, rgba(255, 255, 255, 0) 100%);
+}
+@media (max-height: 700px) {
+  .palco {
+    padding: 0.5rem;
+  }
 }
 
 /* «Tocca la risposta giusta» (games/_engine/SceltaMultipla.tsx): il movimento

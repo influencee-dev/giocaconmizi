@@ -1,0 +1,54 @@
+{
+  "codice": "V01",
+  "volume": 1,
+  "stato": "REVIEW",
+  "anno": 2026,
+  "titolo": "Mizi e la stella che non voleva accendersi",
+  "titolo_righe": [
+    "Mizi e la stella",
+    "che non voleva",
+    "accendersi"
+  ],
+  "dedica": [
+    "Alla mia dolcissima Domi,",
+    "che mi aiuta da sempre",
+    "a diventare una persona migliore."
+  ],
+  "quarta": [
+    "È la Vigilia di Natale e in cima al grande albero la stella non vuole accendersi.",
+    "Mizi le prova tutte, poi scopre il perché: lassù, tutta sola, la stellina ha paura del buio. Con Tobia, Lilla e Nocciola, e con quattro piccole lanterne, le prepara una sorpresa.",
+    "Una storia da leggere insieme e da colorare."
+  ],
+  "scene": [
+    "Era la sera della Vigilia. Nel paese di Mizi tutto era pronto: la neve, i biscotti, il grande albero in piazza.",
+    "Mancava solo una cosa. La stella in cima all'albero era spenta. «Accenditi, stellina!» disse Mizi. Niente.",
+    "Mizi provò a soffiarci sopra, piano piano. La stella dondolò un pochino, ma restò buia.",
+    "Allora Mizi cantò la canzone più allegra che conosceva. La cantò forte, fortissimo. La stella restò buia.",
+    "Mizi si arrampicò fino in cima, ramo dopo ramo. «Stellina, perché non ti accendi?»",
+    "La stella rispose con una vocina piccola piccola: «Quassù è tanto alto. È tanto buio. E io sono da sola.»",
+    "Mizi ci pensò su. Poi sorrise: «Aspettami qui. Torno subito, e non torno da sola.»",
+    "Corse da Tobia il capibara, che non aveva mai fretta. «Vengo» disse Tobia. «Con calma, ma vengo.» E prese la sua lanterna.",
+    "Corse da Lilla l'axolotl, che sorrideva sempre. Corse da Nocciola, la renna più piccola del bosco. Ognuno prese una lucina.",
+    "Tornarono in piazza tutti insieme e alzarono le lanterne. Una, due, tre, quattro piccole luci nel buio.",
+    "La stella guardò giù. Vide le luci. Vide gli amici. «Non sono da sola» sussurrò. E si accese: prima piano, poi sempre di più.",
+    "Quella notte la stella brillò su tutto il paese. E Mizi imparò una cosa: il coraggio arriva prima, quando qualcuno ti aspetta con una lucina. Buon Natale!"
+  ],
+  "attivita": {
+    "disegna": "Disegna una stellina che si sente coraggiosa",
+    "racconta": "Chi ti aiuta quando hai paura?",
+    "labirinto": "Porta una lucina a un amico"
+  },
+  "parliamone": [
+    "Perché la stella non si accendeva?",
+    "Chi ti fa compagnia quando hai un po' paura?",
+    "Tu a chi porteresti una lucina?"
+  ],
+  "vetrina": {
+    "pubblico": true,
+    "copertina": "/immagini/libro-mizi-e-la-stella-copertina-960.webp",
+    "alt": "Copertina del libro «Mizi e la stella che non voleva accendersi»: la pinguina Mizi, un capibara, un axolotl e una renna guardano una stellina che brilla sopra un villaggio innevato",
+    "tema": "Natale",
+    "eta": "3-7 anni",
+    "amazon": ""
+  }
+}

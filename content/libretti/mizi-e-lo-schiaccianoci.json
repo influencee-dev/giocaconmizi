@@ -1,0 +1,70 @@
+{
+  "slug": "mizi-e-lo-schiaccianoci",
+  "raccolta": "natale-2026",
+  "ordine": 5,
+  "stato": "testo-scritto",
+  "titolo": "Mizi e lo Schiaccianoci",
+  "eta": "3-7",
+  "personaggi": [
+    "mizi",
+    "tobia",
+    "schiaccianoci",
+    "re-dei-topi",
+    "topolini"
+  ],
+  "pagine": [
+    {
+      "testo": "La notte di Natale Mizi trovò sotto l'albero un regalo strano: un soldatino di legno con la bocca grande. Era uno schiaccianoci.",
+      "scena": "Salotto caldo con un albero di Natale e un camino. Mizi seduta sul tappeto scarta un pacchetto e tiene in mano lo Schiaccianoci di legno."
+    },
+    {
+      "testo": "«Serve a rompere le noci» spiegò Tobia. A Mizi sembrò bellissimo. Lo mise sotto l'albero e si addormentò lì accanto.",
+      "scena": "Mizi addormentata sul tappeto sotto l'albero, con una copertina. Lo Schiaccianoci in piedi accanto a lei. Tobia spegne una lampada."
+    },
+    {
+      "testo": "A mezzanotte l'orologio fece dodici rintocchi. Mizi aprì gli occhi: l'albero era diventato altissimo. O era lei che era diventata piccola?",
+      "scena": "Vista dal basso: l'albero enorme come un grattacielo, palline grandi come lune. Mizi piccolissima sul tappeto guarda in su. Un orologio a pendolo segna mezzanotte, senza numeri leggibili."
+    },
+    {
+      "testo": "Lo Schiaccianoci si mosse. Fece un inchino. «Buonasera, Mizi. Ho bisogno del tuo aiuto.»",
+      "scena": "Lo Schiaccianoci, ora alto quanto Mizi, fa un inchino elegante con il cappello in mano. Mizi stupita."
+    },
+    {
+      "testo": "Da sotto la credenza uscì il Re dei Topi, con la corona storta. «I dolci dell'albero sono miei! Tutti miei!»",
+      "scena": "Il Re dei Topi esce da sotto una credenza con la coroncina storta e il mantello rattoppato, indicando i dolci appesi all'albero. Buffo, non pauroso."
+    },
+    {
+      "testo": "Dietro di lui c'erano cento topolini. Lo Schiaccianoci alzò la sua spada di legno. Ma erano davvero troppi.",
+      "scena": "Una folla di topolini con sciarpine colorate dietro al Re dei Topi. Lo Schiaccianoci davanti a Mizi con la spadina di legno alzata, un po' preoccupato."
+    },
+    {
+      "testo": "Mizi ebbe un'idea. Fece un passo avanti. «Re dei Topi, hai fame?» chiese.",
+      "scena": "Mizi tra lo Schiaccianoci e il Re dei Topi, con un'ala tesa in avanti in gesto gentile. Tutti fermi a guardarla."
+    },
+    {
+      "testo": "Il Re dei Topi restò a bocca aperta. Nessuno glielo aveva mai chiesto. «Sì» disse piano. «Tantissima.»",
+      "scena": "Primo piano del Re dei Topi a bocca aperta, la corona che gli scivola su un orecchio, gli occhi grandi."
+    },
+    {
+      "testo": "Lo Schiaccianoci schiacciò una noce: crac! Poi un'altra, e un'altra ancora. Mizi le portava in giro: una per ogni topolino.",
+      "scena": "Lo Schiaccianoci schiaccia noci con la sua grande bocca, gusci che volano. Mizi distribuisce i gherigli ai topolini in fila ordinata."
+    },
+    {
+      "testo": "I topolini mangiarono. Il Re dei Topi si raddrizzò la corona. «Di solito ci cacciano con la scopa» disse. «Grazie.»",
+      "scena": "Topolini seduti in cerchio che mangiano contenti. Il Re dei Topi si sistema la corona e porge la zampa a Mizi."
+    },
+    {
+      "testo": "Poi lo Schiaccianoci portò Mizi a fare un giro tra i rami: le luci sembravano stelle e i bastoncini di zucchero sembravano torri.",
+      "scena": "Mizi e lo Schiaccianoci camminano su un ramo dell'albero come su un ponte, tra lucine grandi come stelle e bastoncini di zucchero alti come torri."
+    },
+    {
+      "testo": "Al mattino Mizi si svegliò sotto l'albero. Lo Schiaccianoci era di nuovo di legno. Ma accanto a lui c'era un guscio di noce, e dentro una briciola di formaggio: il regalo del Re dei Topi. Buon Natale!",
+      "scena": "Mattino, luce dalla finestra. Mizi di nuovo grande, seduta sul tappeto, tiene un mezzo guscio di noce con dentro una briciola di formaggio. Lo Schiaccianoci di legno accanto a lei."
+    }
+  ],
+  "parliamone": [
+    "Perché il Re dei Topi voleva tutti i dolci?",
+    "Cosa ha fatto Mizi invece di litigare?",
+    "Secondo te era un sogno oppure no?"
+  ]
+}
