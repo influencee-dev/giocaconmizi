@@ -39,6 +39,7 @@
   "app/(public)/guide/page.tsx": "2026-11-23",
   "app/(public)/iscrizione-confermata/page.tsx": "2026-11-07",
   "app/(public)/la-tua-scheda/[codice]/page.tsx": "2026-11-08",
+  "app/(public)/libri/page.tsx": "2026-11-27",
   "app/(public)/metodo/page.tsx": "2026-10-31",
   "app/(public)/natale/biglietti-di-natale/page.tsx": "2026-11-24",
   "app/(public)/natale/disegni-da-colorare/page.tsx": "2026-11-26",
