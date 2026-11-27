@@ -159,7 +159,7 @@
   "games/abbina-i-colori": "2026-11-22",
   "games/addizioni-entro-20": "2026-08-23",
   "games/causa-ed-effetto": "2026-11-22",
-  "games/colora-con-mizi": "2026-11-25",
+  "games/colora-con-mizi": "2026-11-27",
   "games/colora-il-natale": "2026-11-25",
   "games/con-l-h-o-senza": "2026-11-07",
   "games/conta-fino-a-10": "2026-11-22",
@@ -195,7 +195,7 @@
   "games/pizza-delle-frazioni": "2026-11-27",
   "games/prime-parole-inglese": "2026-10-10",
   "games/problemi-con-mizi": "2026-11-22",
-  "games/puzzle-facile": "2026-11-17",
+  "games/puzzle-facile": "2026-11-27",
   "games/robot-ballerino": "2026-11-27",
   "games/salto-di-mizi": "2026-09-06",
   "games/salvadanaio": "2026-11-27",
@@ -208,7 +208,7 @@
   "games/trova-le-differenze": "2026-08-23",
   "games/unisci-i-puntini": "2026-10-11",
   "games/unisci-le-sillabe": "2026-11-17",
-  "games/vesti-mizi": "2026-11-17",
+  "games/vesti-mizi": "2026-11-27",
   "lib/biglietti/biglietti.ts": "2026-11-23",
   "lib/biglietti/esempi.ts": "2026-08-23"
 }
