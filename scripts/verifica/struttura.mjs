@@ -40,6 +40,7 @@ const LIB = {
   foto: "registro delle foto, prenotazioni, misure, caricatore delle immagini",
   giochi: "album di Mizi, voce, suoni, conto delle partite",
   natale: "letterina, biglietti ed eventi di Natale",
+  pagamenti: "contributi con Stripe: ricerca AI delle mamme, compilazione AI delle schede",
   protezione: "limiti e difese contro gli abusi",
   risorse: "la directory delle risorse educative",
   seo: "dominio, date delle pagine, immagini di anteprima, Search Console",

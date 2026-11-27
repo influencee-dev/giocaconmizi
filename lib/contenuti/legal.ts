@@ -223,6 +223,12 @@ export const FORNITORI = [
     dove: "Unione Europea (Francia)",
   },
   {
+    nome: "Stripe Payments Europe Ltd.",
+    scopo:
+      "Incassa i contributi facoltativi (ricerca con l'AI per le famiglie, compilazione con l'AI per le attività) con carta, Apple Pay, Google Pay o PayPal, e manda la ricevuta. I dati di pagamento li tratta solo Stripe: il sito riceve l'esito, l'importo e l'email.",
+    dove: "Irlanda; possibili trasferimenti verso Stripe Inc. (USA) coperti dal Data Privacy Framework UE-USA",
+  },
+  {
     nome: "Google Ireland Ltd. (Gemini API)",
     scopo:
       "Solo nel pannello di Giorgia: legge le pagine pubbliche del sito e dei social di un'attività (testi già pubblici, nessun dato di famiglie o bambini) e propone i campi della scheda, che Giorgia controlla prima di pubblicarli. Può arrivarci direttamente o tramite l'AI Gateway di Vercel (che fa da passaggio, già nostro fornitore di hosting). Con il piano gratuito diretto Google può usare questi testi pubblici per migliorare i suoi servizi.",

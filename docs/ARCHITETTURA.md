@@ -37,6 +37,7 @@ Nella radice restano solo i file di configurazione (`package.json`, `next.config
 | `lib/seo/` | Motori di ricerca | `seo.ts`, `date-pagine.ts`, `date-pagine.json` (generato), `og.tsx`, `gsc.ts`, `precarico.ts` |
 | `lib/famiglia/` | Il profilo della famiglia nell'app e i percorsi di riflessione per i genitori | `profilo.ts`, `sotto-pressione.ts` (domande, calcolo e letture del percorso «sotto pressione») |
 | `lib/social/` | Slide e testi per Instagram | `post.ts`, `instagram.ts`, `disegna.tsx` |
+| `lib/pagamenti/` | I contributi pagati con Stripe (ricerca AI delle mamme, compilazione AI delle schede), dal 27/11/2026 | `stripe.ts`, `contributi.ts`, `accesso-ai.ts` |
 | `lib/protezione/` | Limiti e difese contro gli abusi | `limiti.ts` |
 | `lib/supabase/` | Collegamenti al database | |
 
