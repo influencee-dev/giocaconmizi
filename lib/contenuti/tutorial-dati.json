@@ -995,5 +995,64 @@
     "risposta": "No, il profilo vive sul telefono."
    }
   ]
+ },
+ {
+  "slug": "gli-eventi-di-natale",
+  "gruppo": "utenti",
+  "titolo": "Gli eventi di Natale per bambini nella tua città",
+  "ordine": 10,
+  "descrizione": "Mizi ti mostra dove trovare villaggi di Babbo Natale, mercatini, laboratori e piste di pattinaggio per bambini, città per città.",
+  "rispostaBreve": "Su Giocamizi gli eventi di Natale per bambini sono raccolti città per città nella pagina «Eventi di Natale»: villaggi e case di Babbo Natale, mercatini, laboratori, spettacoli, piste di pattinaggio. Per ogni evento ci sono le date, il luogo e il link al sito ufficiale; le date si controllano sulle fonti ufficiali e gli eventi finiti spariscono da soli.",
+  "verticale": {
+   "src": "/video/gli-eventi-di-natale-verticale.mp4",
+   "poster": "/video/gli-eventi-di-natale-verticale.webp"
+  },
+  "video": {
+   "src": "/video/gli-eventi-di-natale.mp4",
+   "poster": "/video/gli-eventi-di-natale.webp",
+   "sottotitoli": "/video/gli-eventi-di-natale.vtt",
+   "durata": "PT0M55S",
+   "secondi": 55,
+   "caricato": "2026-11-27",
+   "testo": [
+    "Ciao, sono Mizi! Per una pinguina il Natale è la stagione perfetta. Ti faccio vedere dove trovare gli eventi per bambini nella tua città.",
+    "Apri la pagina Eventi di Natale e tocca la tua città.",
+    "Trovi i villaggi di Babbo Natale, i mercatini, i laboratori, le piste di pattinaggio. Per ognuno ci sono le date, il posto e il link al sito ufficiale.",
+    "Le date le controlliamo sulle fonti ufficiali, e quando un evento finisce sparisce da solo. Prima di partire, però, dai un'occhiata al sito dell'evento: il freddo lo reggo io, le code no.",
+    "Tutti gli eventi di Natale ti aspettano su giocamizi.it. Buone feste, ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 13,
+    "titolo": "1 · Scegli la città"
+   },
+   {
+    "da": 18,
+    "titolo": "2 · Villaggi, mercatini, laboratori"
+   },
+   {
+    "da": 31,
+    "titolo": "3 · Date controllate"
+   }
+  ],
+  "pagina": {
+   "href": "/natale/eventi",
+   "testo": "Gli eventi di Natale, città per città"
+  },
+  "faq": [
+   {
+    "domanda": "Gli eventi sono verificati?",
+    "risposta": "Sì: solo eventi dell'edizione in corso con le date prese dal sito dell'organizzatore, del comune o da un giornale locale. Prima di andare conviene comunque ricontrollare sul sito ufficiale."
+   },
+   {
+    "domanda": "La mia città non c'è: perché?",
+    "risposta": "Una città compare quando ha almeno tre eventi verificati. Ne aggiungiamo man mano."
+   }
+  ]
  }
 ]
