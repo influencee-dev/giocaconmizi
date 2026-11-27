@@ -70,7 +70,7 @@ export const TUTORIAL: Tutorial[] = (dati as (Tutorial & { ordine?: number })[])
 /** I tutorial in preparazione (01 Catalogo dei video su Drive): solo testo nell'hub. */
 export const IN_ARRIVO: Record<GruppoTutorial, string[]> = {
   partner: ["Come inserire un evento, anche ricorrente", "Come leggere le statistiche della tua scheda"],
-  utenti: ["Ciao, sono Mizi: cos'è Giocamizi in un minuto", "Come si gioca: un video per ogni gioco", "Gli eventi per bambini nella tua città"],
+  utenti: ["Come si gioca: un video per ogni gioco"],
 };
 
 export const tutorialDaSlug = (slug: string) => TUTORIAL.find((t) => t.slug === slug);
