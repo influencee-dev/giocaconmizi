@@ -221,7 +221,8 @@ export default function Game({ onProgress, onComplete, demo = false }: GameProps
     chiuso.current = true;
     setFatto(true);
     setAvviso(null);
-    parla(`${LODI[indice % LODI.length]} ${aParole(f)}.`);
+    const nome = aParole(f);
+    parla(`${LODI[indice % LODI.length]} ${nome.charAt(0).toUpperCase()}${nome.slice(1)}.`);
     window.setTimeout(() => prossimoRound(errori === 0), 1400);
   }, [errori, f, indice, prossimoRound]);
 
@@ -263,8 +264,8 @@ export default function Game({ onProgress, onComplete, demo = false }: GameProps
       if (piene === f.n) return vinci();
       sbaglia(
         piene < f.n
-          ? `Ne mancano: il salame va su ${f.n} fette su ${f.d}.`
-          : `Sono troppe: tocca una fetta per togliere il salame. Ne servono ${f.n}.`,
+          ? `Ne mancano: il salame va su ${f.n} ${f.n === 1 ? "fetta" : "fette"} su ${f.d}.`
+          : `Sono troppe: tocca una fetta per togliere il salame. ${f.n === 1 ? "Ne serve 1" : `Ne servono ${f.n}`}.`,
       );
     },
     [f, fette, finito, sbaglia, vinci],

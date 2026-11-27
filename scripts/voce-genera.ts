@@ -61,14 +61,56 @@ function tutteLeFrasi(gruppo?: string | null) {
     );
 }
 
+/** I numeri da 0 a 100 in parole: «50» da solo la voce a volte lo diceva in inglese («fifty»). */
+function numeroInParole(n: number): string {
+  const unita = ["zero", "uno", "due", "tre", "quattro", "cinque", "sei", "sette", "otto", "nove", "dieci", "undici", "dodici", "tredici", "quattordici", "quindici", "sedici", "diciassette", "diciotto", "diciannove"];
+  const decine = ["", "", "venti", "trenta", "quaranta", "cinquanta", "sessanta", "settanta", "ottanta", "novanta"];
+  if (n < 20) return unita[n];
+  if (n === 100) return "cento";
+  const d = decine[Math.floor(n / 10)], u = n % 10;
+  if (u === 0) return d;
+  const radice = u === 1 || u === 8 ? d.slice(0, -1) : d; // ventuno, ventotto
+  return radice + (u === 3 ? "tré" : unita[u]);
+}
+
+/**
+ * Il testo che si manda alla voce. L'id del file resta quello della frase vera;
+ * cambia solo come la si legge (27/11/2026, dopo il riascolto con whisper):
+ * - le parole tutte maiuscole («CASA. Con che lettera…», «PALA, con una L…»,
+ *   le sillabe «GRIL», «STRUZ») la voce le compitava come sigle: vanno in minuscolo;
+ * - un numero da solo («7», «50») va in parole italiane.
+ * Le lettere singole («L», «A») restano come sono.
+ */
+// Sillabe che in minuscolo sono parole inglesi («to», «be»): la voce le leggeva «tu», «bi».
+const SILLABE_DIFFICILI: Record<string, string> = { TO: "Tò.", BE: "Beh." };
+
+function daPronunciare(testo: string): string {
+  if (SILLABE_DIFFICILI[testo.trim()]) return SILLABE_DIFFICILI[testo.trim()];
+  const nudo = testo.trim().match(/^(\d{1,3})([.!?]?)$/);
+  if (nudo && Number(nudo[1]) <= 100) return numeroInParole(Number(nudo[1])) + (nudo[2] || ".");
+  return testo.replace(/\b[A-ZÀÈÉÌÒÙ]{2,}\b/g, (p) => p.charAt(0) + p.slice(1).toLowerCase());
+}
+
+/**
+ * Istruzioni in più per le frasi cortissime: una sillaba da sola («TA», «SCE»)
+ * o una parola sola. Senza, la voce a volte le leggeva in inglese o le storpiava.
+ */
+function istruzioniPer(testo: string, lingua: string): string {
+  if (lingua !== "it-IT") return `${copione.istruzioni} Questa frase è in inglese britannico: dilla con pronuncia inglese chiara e lenta.`;
+  const t = testo.trim();
+  if (/^[A-ZÀÈÉÌÒÙ]{1,6}$/.test(t)) return `${copione.istruzioni} Questa è UNA SOLA SILLABA italiana, da leggere come si legge in italiano (C e G davanti a E e I dolci, CH e GH dure, SC davanti a E e I come in «scena»): dilla una volta sola, chiara e scandita, senza aggiungere altro.`;
+  if (!/\s/.test(t)) return `${copione.istruzioni} È una parola sola in italiano: dilla una volta sola, chiara, con pronuncia italiana, senza aggiungere altro.`;
+  return `${copione.istruzioni} Leggi la frase una volta sola, esattamente come è scritta, senza ripetere parole.`;
+}
+
 /** Chiede una frase a OpenAI e la salva in mp3, più acuta di `semitoni`. */
 function registra(testo: string, lingua: string, voce: string, semitoni: number, uscita: string): string | null {
   const wav = join(lavoro, "frase.wav");
   const corpo = JSON.stringify({
     model: copione.modello,
     voice: voce,
-    input: testo,
-    instructions: lingua === "it-IT" ? copione.istruzioni : `${copione.istruzioni} Questa frase è in inglese britannico: dilla con pronuncia inglese chiara e lenta.`,
+    input: daPronunciare(testo),
+    instructions: istruzioniPer(testo, lingua),
     response_format: "wav",
   });
   const chiamata = spawnSync(

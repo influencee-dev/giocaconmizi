@@ -11,11 +11,12 @@ import type { GameProps } from "@/games/_engine/tipi";
  * Le coreografie crescono da 4 a 8 mosse e le ultime contengono una ripetizione.
  */
 
-const MOSSE: Record<string, { icona: string; nome: string }> = {
-  salta: { icona: "⬆", nome: "salta" },
-  gira: { icona: "↻", nome: "gira" },
-  batti: { icona: "👏", nome: "batti le mani" },
-  piega: { icona: "⬇", nome: "piegati" },
+// «voce» è quello che Mizi dice al tocco: prima diceva l'icona («⬆», «👏»).
+const MOSSE: Record<string, { icona: string; nome: string; voce: string }> = {
+  salta: { icona: "⬆", nome: "salta", voce: "Salta!" },
+  gira: { icona: "↻", nome: "gira", voce: "Gira!" },
+  batti: { icona: "👏", nome: "batti le mani", voce: "Batti le mani!" },
+  piega: { icona: "⬇", nome: "piegati", voce: "Piegati!" },
 };
 
 const COREOGRAFIE: string[][] = [
@@ -37,6 +38,7 @@ export default function Game(props: GameProps) {
         valore: mossa,
         etichetta: MOSSE[mossa].icona,
         descrizione: MOSSE[mossa].nome,
+        voce: MOSSE[mossa].voce,
       })),
       vocePremio: "Che ballerino! Coreografia giusta.",
       centro: (
