@@ -5,6 +5,7 @@ import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { Briciole, InBreve } from "@/components/directory/Briciole";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { PlayerTutorial } from "@/components/tutorial/PlayerTutorial";
+import { Condividi } from "@/components/ui/Condividi";
 import { titoloPagina, url } from "@/lib/seo/seo";
 import { GRUPPI, PERCORSO_TUTORIAL, TUTORIAL, minuti, percorsoTutorial, tutorialDaSlug, tutorialDi } from "@/lib/contenuti/tutorial";
 
@@ -64,6 +65,16 @@ export default async function PaginaTutorial({ params }: P) {
 
       <div className="mt-6">
         <PlayerTutorial t={t} />
+      </div>
+      <div className="mt-3">
+        <Condividi
+          percorso={percorsoTutorial(t)}
+          titolo={t.titolo}
+          testo={`«${t.titolo}»: Mizi te lo spiega in un video di ${minuti(t.video.secondi)} minuti, gratis. Guardalo su Giocamizi 👇`}
+          campagna="tutorial"
+          etichetta="Condividi il video"
+          piccolo
+        />
       </div>
 
       <div className="mt-8">

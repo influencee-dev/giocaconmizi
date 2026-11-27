@@ -1,0 +1,73 @@
+{
+  "slug": "ciao-sono-mizi",
+  "titolo": "Ciao, sono Mizi: cos'è Giocamizi in un minuto",
+  "gruppo": "utenti",
+  "ordine": 0,
+  "descrizione": "Mizi ti fa fare il giro di Giocamizi: giochi educativi, inviti per le feste, posti dove festeggiare, storie e guide per i genitori.",
+  "rispostaBreve": "Giocamizi è un sito gratuito per bambini dai 3 ai 12 anni e per i loro genitori: giochi educativi senza pubblicità e senza timer, inviti per le feste da creare e condividere, posti dove festeggiare città per città, storie da leggere e guide per i genitori. Si usa dal browser, anche sul telefono come un'app.",
+  "pagina": { "href": "/", "testo": "Vai alla home di Giocamizi" },
+  "faq": [
+    { "domanda": "Giocamizi è gratis?", "risposta": "Sì: giochi, inviti, storie e guide sono gratis, senza pubblicità." },
+    { "domanda": "Serve scaricare un'app?", "risposta": "No: si usa dal browser. Se vuoi, sul telefono puoi aggiungerla alla schermata Home come un'app." },
+    { "domanda": "Per che età è?", "risposta": "I giochi sono per bambini dai 3 ai 12 anni; inviti, feste e guide sono per i genitori." }
+  ],
+  "schermate": {
+    "home": { "url": "/", "selettori": ["h1"] },
+    "giochi": { "url": "/giochi", "selettori": ["h2:has-text(\"Dai 3 ai 5 anni\")"] },
+    "inviti": { "url": "/biglietti", "selettori": ["h1"] },
+    "feste": { "url": "/feste", "selettori": ["h1"] },
+    "storie": { "url": "/storie", "selettori": ["h1"] },
+    "guide": { "url": "/guide", "selettori": ["h1"] }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per bambini dai 3 ai 12 anni e i loro grandi",
+      "titolo": "Ciao, sono Mizi!",
+      "sottotitolo": "Giocamizi in un minuto.",
+      "voce": "Ciao, sono Mizi! Sono una pinguina, e questa è casa mia: Giocamizi. Ti faccio fare il giro, giuro che ci mettiamo un minuto."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Tutto gratis, dal browser",
+      "testo": "Niente pubblicità, niente app da scaricare.",
+      "schermata": "home",
+      "evidenzia": ["h1"],
+      "voce": "Si apre dal browser, anche sul telefono. È tutto gratis e non c'è pubblicità: nemmeno quella che spunta proprio quando stai vincendo."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "I giochi",
+      "testo": "Dai 3 ai 12 anni: lettere, numeri, logica, coding.",
+      "schermata": "giochi",
+      "evidenzia": ["h2:has-text(\"Dai 3 ai 5 anni\")"],
+      "voce": "Prima di tutto i giochi: più di cinquanta, divisi per età. Lettere, numeri, forme, logica, coding. Niente timer e niente classifiche: si gioca e basta."
+    },
+    {
+      "tipo": "due",
+      "passo": 3,
+      "titolo": "Inviti e posti per la festa",
+      "testo": "Crei l'invito e trovi dove festeggiare.",
+      "schermate": ["inviti", "feste"],
+      "scorri": [null, null],
+      "voce": "Arriva un compleanno? Qui crei l'invito e lo mandi su WhatsApp, e lì trovi i posti dove festeggiare, città per città."
+    },
+    {
+      "tipo": "due",
+      "passo": 4,
+      "titolo": "Storie e guide",
+      "testo": "Storie da leggere e guide per i genitori.",
+      "schermate": ["storie", "guide"],
+      "scorri": [null, null],
+      "voce": "Poi ci sono le storie da leggere insieme, e le guide per i grandi: risposte brevi e chiare, senza prediche. Promesso."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it",
+      "sotto": "Gratis, senza pubblicità.",
+      "voce": "Ecco, questa è Giocamizi. Ti aspetto su giocamizi punto it. Ciao ciao!"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "slug": "la-letterina-a-babbo-natale",
+  "titolo": "Come scrivere la letterina a Babbo Natale con Mizi",
+  "gruppo": "utenti",
+  "ordine": 9,
+  "descrizione": "Mizi accompagna il tuo bimbo passo passo nella letterina a Babbo Natale: carta, prima frase, desideri, saluto, e poi stampa e busta da colorare.",
+  "rispostaBreve": "Su Giocamizi la letterina a Babbo Natale si scrive in sei passi guidati da Mizi, che legge ogni frase ad alta voce: chi scrive, la carta, la frase per cominciare, i desideri (toccando un disegno o scrivendoli), il saluto. Alla fine la letterina si stampa o si scarica in PDF, e c'è la busta da colorare. È gratis e non serve registrarsi.",
+  "pagina": { "href": "/natale/letterina-babbo-natale", "testo": "Scrivi la letterina con Mizi" },
+  "faq": [
+    { "domanda": "Serve saper scrivere?", "risposta": "No: le frasi e i desideri si scelgono toccando, e Mizi li legge ad alta voce. Chi sa scrivere può anche scriverli da sé." },
+    { "domanda": "Come si stampa?", "risposta": "All'ultimo passo ci sono «Stampa» e il PDF da scaricare; poi c'è la busta da stampare e colorare." },
+    { "domanda": "È gratis?", "risposta": "Sì, ed è senza registrazione." }
+  ],
+  "schermate": {
+    "chi": { "url": "/natale/letterina-babbo-natale", "azioni": [{ "attendi": 1500 }], "selettori": ["[data-mizi-guida]", "[data-avanti]"] },
+    "carta": {
+      "url": "/natale/letterina-babbo-natale",
+      "azioni": [{ "attendi": 1200 }, { "clicca": "[data-avanti]" }],
+      "selettori": ["[role=\"radiogroup\"][aria-label=\"Carta da lettera\"]"]
+    },
+    "desideri": {
+      "url": "/natale/letterina-babbo-natale",
+      "azioni": [{ "attendi": 1200 }, { "clicca": "[data-avanti]" }, { "clicca": "[data-avanti]" }, { "clicca": "[data-avanti]" }],
+      "selettori": ["[data-desideri-figura]"]
+    },
+    "fatto": {
+      "url": "/natale/letterina-babbo-natale",
+      "azioni": [{ "attendi": 1200 }, { "clicca": "[data-avanti]" }, { "clicca": "[data-avanti]" }, { "clicca": "[data-avanti]" }, { "clicca": "[data-avanti]" }, { "clicca": "[data-avanti]" }],
+      "selettori": ["[data-stampa-letterina]", "[data-scarica-letterina-pdf]"]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Il Natale di Mizi",
+      "titolo": "La letterina a Babbo Natale",
+      "sottotitolo": "Passo passo, con Mizi.",
+      "voce": "Ciao, sono Mizi! Quest'anno la letterina a Babbo Natale la scriviamo insieme. Anche se non sai ancora scrivere: ci penso io."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Ti guido io",
+      "testo": "Sei passi, e leggo tutto ad alta voce.",
+      "schermata": "chi",
+      "evidenzia": ["[data-mizi-guida]", "[data-avanti]"],
+      "voce": "Sono sei passi, e ogni volta ti dico cosa fare, ad alta voce. Prima mi dici quanti anni hai e, se vuoi, il tuo nome. Poi tocca «Avanti»."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Scegli la carta",
+      "testo": "Tocca il disegno che ti piace.",
+      "schermata": "carta",
+      "evidenzia": ["[role=\"radiogroup\"][aria-label=\"Carta da lettera\"]"],
+      "voce": "Adesso scegli la carta da lettera: neve, regali, dolci, renne. Tocca quella che ti piace di più."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 3,
+      "titolo": "I desideri",
+      "testo": "Tocca un disegno, oppure scrivili.",
+      "schermata": "desideri",
+      "evidenzia": ["[data-desideri-figura]"],
+      "voce": "Poi la frase per cominciare, e arriviamo alla parte importante: i desideri. Tocchi un disegno, oppure li scrivi tu. Babbo Natale apprezza anche quelli ragionevoli."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 4,
+      "titolo": "Stampa e busta",
+      "testo": "Stampa o PDF, e la busta da colorare.",
+      "schermata": "fatto",
+      "evidenzia": ["[data-stampa-letterina]", "[data-scarica-letterina-pdf]"],
+      "voce": "Scegli come salutare, ed è pronta! Chiedi a un grande di stamparla o di scaricare il PDF. Poi c'è la busta da colorare."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/natale",
+      "sotto": "Gratis, senza registrazione.",
+      "voce": "La letterina ti aspetta su giocamizi punto it, nella pagina del Natale. Ciao ciao!"
+    }
+  ]
+}
