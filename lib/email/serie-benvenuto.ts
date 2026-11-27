@@ -11,24 +11,21 @@
  *
  * Solo fatti già scritti sul sito (Chi siamo, Perché lo facciamo): niente
  * episodi inventati. Tono: niente «bimbi», «magico», «fantastico».
- * La community è su Instagram (decisione di Giorgia del 27/11/2026): le email
- * invitano a scrivere «MIZI» in DM a @giocamizi, e l'automazione dei messaggi (le
- * di Meta Business Suite, senza ManyChat) risponde con l'invito al canale e i giochi.
- * Finché COMMUNITY_ATTIVA è false, i riquadri della community non compaiono.
+ * La community è il canale broadcast di @giocamizi su Instagram (decisione di
+ * Giorgia del 27/11/2026): il bottone porta dritto al canale con un tocco.
+ * Chi scrive MIZI in DM riceve lo stesso invito dalle risposte automatiche di
+ * Meta (documento su Drive). COMMUNITY_ATTIVA = false spegne i riquadri.
  */
 
 import { SOCIETA } from "../contenuti/legal";
 
 const SITO = "https://giocamizi.it";
 
-/** Si accende quando l'automazione dei messaggi su Instagram risponde a «MIZI». */
-export const COMMUNITY_ATTIVA = false;
+/** I riquadri della community nelle email: accesi dal 27/11/2026. */
+export const COMMUNITY_ATTIVA = true;
 
-/** La parola che fa partire l'automazione nei messaggi di Instagram. */
-export const PAROLA_CHIAVE = "MIZI";
-
-/** Apre direttamente la chat con @giocamizi su Instagram. */
-export const LINK_DM_INSTAGRAM = "https://ig.me/m/giocamizi";
+/** Il canale broadcast «Mamme di Giocamizi» su Instagram (link d'invito di Giorgia). */
+export const LINK_CANALE = "https://ig.me/j/m29IQFmKmAzCfpxe/";
 
 /** Il messaggio già scritto per il passaparola (email 3). */
 export const MESSAGGIO_PASSAPAROLA =
@@ -50,8 +47,7 @@ function community(titolo: string, testo: string): string {
   return `<div style="background:#FBEAF2;border-radius:16px;padding:16px 18px;margin:6px 0 18px 0;">
 <p style="margin:0 0 8px 0;font-weight:bold;font-size:17px;">${titolo}</p>
 <p style="margin:0 0 12px 0;">${testo}</p>
-<p style="margin:0 0 12px 0;">Scrivi <strong>${PAROLA_CHIAVE}</strong> in un messaggio a @giocamizi: ti rispondo subito con l'invito.</p>
-${bottone(LINK_DM_INSTAGRAM, `📩 Scrivi ${PAROLA_CHIAVE} su Instagram`, "#C42A6B")}
+${bottone(LINK_CANALE, "📣 Entra nel canale delle mamme", "#C42A6B")}
 </div>`;
 }
 
@@ -104,7 +100,7 @@ export const SERIE_BENVENUTO: EmailSerie[] = [
         p("La pinguina l'ha voluta lei, perché è un animale che le piace. Le abbiamo dato i suoi capelli e un pezzetto del suo nome: Domiziana, Mizi."),
         p("Da lì è nato Giocamizi, ed è gratis davvero. Niente pubblicità, niente account da creare, niente timer o «hai perso». Si apre e si gioca."),
         community(
-          "Ti aspetto nella community delle mamme su Instagram",
+          "Ti aspetto nel canale delle mamme su Instagram",
           "Ogni giorno una cosa utile: un gioco per la sua età, un posto per il weekend, un'idea per la festa, un consiglio tra mamme. E non solo cose nostre: anche quello che di buono trovo in giro.",
         ),
         p("Se vuoi cominciare subito:"),
@@ -127,7 +123,7 @@ export const SERIE_BENVENUTO: EmailSerie[] = [
         bottone(link("/feste", 2), "🎈 Dove festeggiare in 78 città", "#F9C846", true),
         bottone(link("/guide", 2), "📚 Guide per genitori", "#3DB5E6"),
         p("Hai un'idea per un gioco, o c'è qualcosa su cui tuo figlio fa fatica? <strong>Rispondi a questa email</strong>: le idee delle mamme e delle maestre sono la fonte principale dei giochi nuovi."),
-        community("Un'idea al giorno, già pronta", "Se non l'hai ancora fatto, entra nella community su Instagram: ogni giorno un'idea già pronta."),
+        community("Un'idea al giorno, già pronta", "Se non l'hai ancora fatto, entra nel canale delle mamme su Instagram: ogni giorno un'idea già pronta."),
         `<p style="margin:12px 0 0 0;"><strong>Giorgia</strong></p>`,
       ].join("\n")),
   },
@@ -142,7 +138,7 @@ export const SERIE_BENVENUTO: EmailSerie[] = [
         p("Giocamizi non l'ho fatto per guadagnare. Per me il digitale non è un problema: è un amplificatore, e va usato con cura. Per questo qui non ci sono pubblicità, trucchi per farti restare o dati dei bambini. Dietro però c'è tanto lavoro, e l'unico modo per farlo crescere senza pubblicità è il passaparola tra mamme."),
         p("<strong>Il favore è questo: mandalo a un'amica, o nel gruppo WhatsApp della classe.</strong> Ti ho già scritto il messaggio, basta un tocco:"),
         bottone(`https://wa.me/?text=${encodeURIComponent(MESSAGGIO_PASSAPAROLA)}`, "💬 Mandalo su WhatsApp", "#25D366"),
-        community("Invita le amiche anche nella community", "Così le idee ce le scambiamo tutte insieme."),
+        community("Invita le amiche anche nel canale", "Così le idee arrivano anche a loro, ogni giorno."),
         p("Grazie davvero. Ogni mamma che arriva da un'amica vale più di qualunque pubblicità."),
         `<p style="margin:12px 0 0 0;"><strong>Giorgia</strong></p>`,
       ].join("\n")),
