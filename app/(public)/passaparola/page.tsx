@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Contenitore } from "@/components/ui";
 import { TestataPagina } from "@/components/vetrina";
-import { Passaparola } from "@/components/condivisione/Passaparola";
+import { Passaparola } from "@/components/ui/Passaparola";
 
 export const metadata: Metadata = {
   title: "Fai conoscere Giocamizi",
