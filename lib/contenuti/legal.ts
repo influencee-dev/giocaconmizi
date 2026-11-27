@@ -225,7 +225,7 @@ export const FORNITORI = [
   {
     nome: "Google Ireland Ltd. (Gemini API)",
     scopo:
-      "Solo nel pannello di Giorgia: legge le pagine pubbliche del sito e dei social di un'attività (testi già pubblici, nessun dato di famiglie o bambini) e propone i campi della scheda, che Giorgia controlla prima di pubblicarli. Con il piano gratuito Google può usare questi testi pubblici per migliorare i suoi servizi.",
+      "Solo nel pannello di Giorgia: legge le pagine pubbliche del sito e dei social di un'attività (testi già pubblici, nessun dato di famiglie o bambini) e propone i campi della scheda, che Giorgia controlla prima di pubblicarli. Può arrivarci direttamente o tramite l'AI Gateway di Vercel (che fa da passaggio, già nostro fornitore di hosting). Con il piano gratuito diretto Google può usare questi testi pubblici per migliorare i suoi servizi.",
     dove: "Irlanda; possibili trasferimenti verso Google LLC (USA) coperti dal Data Privacy Framework UE-USA",
   },
   {
