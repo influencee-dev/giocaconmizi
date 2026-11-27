@@ -71,6 +71,9 @@ for j in range(len(parole) - 1, -1, -1):
         k, lette = j, parole[j][0]
         while len(lette) < len(fine_testo) - 1 and k + 1 < len(parole):
             k += 1; lette += parole[k][0]
+        # «giocamizi punto it» si cerca come «giocamizi»: il «punto it» va tenuto
+        while testi[-1].rstrip(" !.").endswith("punto it") and k + 1 < len(parole) and parole[k + 1][0] in ("punto", "it", "puntoit"):
+            k += 1
         fine_vera = parole[k][2]
         inizio_coda = parole[k + 1][1] if k + 1 < len(parole) else None
         break

@@ -96,7 +96,8 @@ caricare su Drive (2 Aree → Giocamizi · Video) e su YouTube.
   feste!»): il modello a volte non dice la fine del testo. voce.py ora registra dopo
   l'ultima frase una coda di sicurezza («Fine del video.») e poi la scarta: l'ultima
   frase si chiude sull'ultima parola vera. Il controllo della fine accetta anche le
-  parole storpiate da whisper («giocanizzi»).
+  parole storpiate da whisper («giocanizzi»), e se il testo finisce con «giocamizi punto
+  it» tiene anche «punto it» (prima del 27/11 sera lo tagliava).
 - I sottotitoli sono stampati nelle immagini: nel lettore del sito la traccia
   .vtt resta spenta (senza `default`), se no si vedono doppi.
 
