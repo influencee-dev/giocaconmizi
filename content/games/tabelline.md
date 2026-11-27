@@ -27,6 +27,23 @@ Nelle Indicazioni Nazionali rientra nel nucleo *Numeri* dalla seconda classe in 
 - Cominciate da quelle facili — il 2, il 5, il 10 — per costruire fiducia.
 - Il 7 e l'8 sono le più difficili per tutti. Non è un difetto di vostro figlio.
 
+## Le tabelline dal 1 al 10
+
+Ogni tabellina è il numero moltiplicato per 1, 2, 3… fino a 10. Eccole tutte, da leggere insieme prima di giocare:
+
+- **Tabellina del 1:** 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+- **Tabellina del 2:** 2, 4, 6, 8, 10, 12, 14, 16, 18, 20
+- **Tabellina del 3:** 3, 6, 9, 12, 15, 18, 21, 24, 27, 30
+- **Tabellina del 4:** 4, 8, 12, 16, 20, 24, 28, 32, 36, 40
+- **Tabellina del 5:** 5, 10, 15, 20, 25, 30, 35, 40, 45, 50
+- **Tabellina del 6:** 6, 12, 18, 24, 30, 36, 42, 48, 54, 60
+- **Tabellina del 7:** 7, 14, 21, 28, 35, 42, 49, 56, 63, 70
+- **Tabellina del 8:** 8, 16, 24, 32, 40, 48, 56, 64, 72, 80
+- **Tabellina del 9:** 9, 18, 27, 36, 45, 54, 63, 72, 81, 90
+- **Tabellina del 10:** 10, 20, 30, 40, 50, 60, 70, 80, 90, 100
+
+Tre cose che aiutano: la tabellina del 10 è quella dell'1 con uno zero in fondo; quella del 5 finisce sempre per 5 o per 0; quella del 9 si fa «per dieci meno uno» (9 × 4 = 40 − 4 = 36).
+
 ## Domande frequenti
 
 **In che classe si imparano le tabelline?**

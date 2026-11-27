@@ -16,12 +16,12 @@ Stati: **fatto** · **in corso** · **da fare** · **da decidere** (serve una ri
 |---|---|---|---|
 | 1 | Titoli per Google dei giochi | tabelline 90.500, disegni da colorare 110.000, sottrazioni… | **fatto** 23/11 |
 | 2 | Natale | auguri 40.500, disegni di Natale 27.100, lavoretti 18.100 | fatto il 24-26/11/2026 (co-work), restano le guide della routine articoli |
-| 3 | Elenchi scritti nelle pagine dei giochi | tabelline dal 1 al 10 18.100, doppie 4.400+3.600+3.600, MB e MP 1.600 | da fare |
+| 3 | Elenchi scritti nelle pagine dei giochi | tabelline dal 1 al 10 18.100, doppie 4.400+3.600+3.600, MB e MP 1.600 | fatto il 27/11/2026 (restano i suoni difficili) |
 | 4 | Una pagina per tabellina | tabelline 7 18.100, del 3 9.900 (e le altre) | da fare |
 | 5 | Le pagine delle classi tutto l'anno | esercizi seconda elementare 1.600+720, prima 1.600, terza 1.000 | **fatto** 23/11 |
 | 6 | «Vicino a me» negli hub della directory | parco avventura vicino a me 5.400, ludoteca 4.400, parco acquatico 3.600… | fatto il 26/11/2026 |
 | 7 | Inviti e biglietti: le parole che mancano | inviti digitali 1.900, frasi per inviti 880, cosa scrivere 390 | fatto il 27/11/2026 |
-| 8 | Storie: «favole della buonanotte» | 12.100 + 720 | da fare |
+| 8 | Storie: «favole della buonanotte» | 12.100 + 720 | fatto il 27/11/2026 |
 | 9 | Stampabili veri (PDF) | disegni da colorare da stampare 40.500, puntini 880 | da fare |
 | 10 | Autorità: bollino per i locali e link dalle scuole | tutte (autorità oggi 1/100) | da fare |
 | 11 | Search Console, Bing e IndexNow | tutte | da fare (serve la chiave) |
@@ -63,6 +63,12 @@ elenchi: la tabella delle tabelline dal 1 al 10 (`tabelline`), parole con le dop
 lettera e parole con due e tre doppie (`le-doppie`), parole con MB e MP (`mb-o-mp`), i gruppi
 BR, PR, STR… con esempi (`i-suoni-difficili`). Parole scelte da noi, mai copiate da un libro.
 Sono anche il testo che le AI citano.
+
+Fatto il 27/11/2026: «Le tabelline dal 1 al 10» (una riga per tabellina e tre trucchi) in
+`tabelline`, «Parole con le doppie, lettera per lettera» e «Parole con due e tre doppie» in
+`le-doppie`, «Parole con MB e MP» in `mb-o-mp`. Resta `i-suoni-difficili` (gruppi BR, PR, STR).
+Insieme al cantiere 8 e alla ricerca «laser game» collegata a /laser-game: ricerche nel titolo
+da 47 a 50 su 81 (dal 63% al 66% del volume), presenti nella pagina da 61 a 66.
 
 ## 4. Una pagina per tabellina
 
@@ -108,6 +114,10 @@ quattro frasi d'invito e cinque di auguri comuni in `cards/registry.ts`.
 
 `/storie` si chiama «Storie per bambini da leggere»: la ricerca grande è «favole della
 buonanotte» (12.100). Titolo e prima frase con la durata di lettura delle storie brevi.
+
+Fatto il 27/11/2026: titolo «Favole della buonanotte brevi: storie per bambini da leggere», H1
+«Favole della buonanotte e storie da leggere», prima frase col numero delle storie e i minuti di
+lettura (calcolati dalle storie, non scritti a mano).
 
 ## 9. Stampabili veri
 

@@ -37,9 +37,13 @@
       "difficolta": 22,
       "sezione": "matematica",
       "pagina": "/giochi/tabelline",
-      "stato": "da-sistemare",
+      "stato": "fatto",
       "cosa_fare": "Stessa pagina: la tabella completa scritta in pagina, non solo nel gioco.",
-      "nota": "23/11: già nel titolo; manca ancora la tabella scritta in pagina."
+      "nota": "23/11: già nel titolo; manca ancora la tabella scritta in pagina.",
+      "fatto": {
+        "data": "2026-11-27",
+        "come": "Sezione «Le tabelline dal 1 al 10» scritta nella pagina del gioco, una riga per tabellina."
+      }
     },
     {
       "ricerca": "tabelline 7",
@@ -231,8 +235,9 @@
       "difficolta": 15,
       "sezione": "italiano",
       "pagina": "/giochi/le-doppie",
-      "stato": "da-sistemare",
-      "cosa_fare": "Aggiungere in pagina un elenco di parole con le doppie, divise per lettera."
+      "stato": "c-e",
+      "cosa_fare": "Aggiungere in pagina un elenco di parole con le doppie, divise per lettera.",
+      "nota": "27/11: elenco delle parole con le doppie lettera per lettera scritto nella pagina."
     },
     {
       "ricerca": "le parole doppie",
@@ -240,8 +245,9 @@
       "difficolta": 17,
       "sezione": "italiano",
       "pagina": "/giochi/le-doppie",
-      "stato": "da-sistemare",
-      "cosa_fare": "Stessa pagina."
+      "stato": "c-e",
+      "cosa_fare": "Stessa pagina.",
+      "nota": "27/11: elenco delle parole con le doppie scritto nella pagina."
     },
     {
       "ricerca": "parole con tre doppie",
@@ -249,8 +255,9 @@
       "difficolta": 16,
       "sezione": "italiano",
       "pagina": "/giochi/le-doppie",
-      "stato": "manca",
-      "cosa_fare": "Un riquadro «Parole con due e tre doppie» (frittella, tavolozza…)."
+      "stato": "c-e",
+      "cosa_fare": "Un riquadro «Parole con due e tre doppie» (frittella, tavolozza…).",
+      "nota": "27/11: elenco «Parole con due e tre doppie» scritto nella pagina; manca nel titolo."
     },
     {
       "ricerca": "comprensione del testo",
@@ -284,9 +291,9 @@
       "difficolta": 22,
       "sezione": "italiano",
       "pagina": "/giochi/mb-o-mp",
-      "stato": "da-sistemare",
+      "stato": "c-e",
       "cosa_fare": "Aggiungere in pagina l'elenco delle parole con MB e MP.",
-      "nota": "23/11: il titolo dice «Parole con MB e MP»; manca l'elenco in pagina."
+      "nota": "27/11: elenco «Parole con MB e MP» scritto nella pagina."
     },
     {
       "ricerca": "esercizi prima elementare italiano",
@@ -586,10 +593,13 @@
       "volume": 14800,
       "difficolta": 31,
       "sezione": "locali",
-      "pagina": null,
-      "stato": "c-e",
+      "pagina": "/laser-game",
+      "stato": "fatto",
       "cosa_fare": "Pagina della categoria.",
-      "nota_pagina": "categoria laser game"
+      "fatto": {
+        "data": "2026-11-27",
+        "come": "Ricerca collegata alla pagina /laser-game, che ha già «laser game» nel titolo e nell'H1."
+      }
     },
     {
       "ricerca": "ludoteca",
@@ -668,10 +678,9 @@
       "volume": 1900,
       "difficolta": 14,
       "sezione": "locali",
-      "pagina": null,
+      "pagina": "/laser-game",
       "stato": "da-sistemare",
-      "cosa_fare": "Come sopra.",
-      "nota_pagina": "categoria laser game"
+      "cosa_fare": "Come sopra."
     },
     {
       "ricerca": "parco giochi al coperto",
@@ -847,8 +856,12 @@
       "difficolta": 24,
       "sezione": "storie",
       "pagina": "/storie",
-      "stato": "da-sistemare",
-      "cosa_fare": "Titolo «Storie per bambini da leggere»: diventa «Favole della buonanotte da leggere»."
+      "stato": "fatto",
+      "cosa_fare": "Titolo «Storie per bambini da leggere»: diventa «Favole della buonanotte da leggere».",
+      "fatto": {
+        "data": "2026-11-27",
+        "come": "Titolo, H1 e prima frase di /storie con «favole della buonanotte»."
+      }
     },
     {
       "ricerca": "roblox cos'è",
@@ -866,8 +879,12 @@
       "difficolta": 11,
       "sezione": "storie",
       "pagina": "/storie",
-      "stato": "da-sistemare",
-      "cosa_fare": "Nominare «brevi» e la durata di lettura."
+      "stato": "fatto",
+      "cosa_fare": "Nominare «brevi» e la durata di lettura.",
+      "fatto": {
+        "data": "2026-11-27",
+        "come": "Titolo di /storie «Favole della buonanotte brevi…» e durata di lettura nella prima frase."
+      }
     }
   ]
 }
