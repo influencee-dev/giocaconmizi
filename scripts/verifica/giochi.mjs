@@ -613,22 +613,28 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   const registro = readFileSync("games/registry.ts", "utf8");
   const vivi = [...registro.matchAll(/slug: "([^"]+)"[^}]*?ageMin: (\d+)[^}]*?status: "live"/g)].map((x) => ({ slug: x[1], eta: Number(x[2]) }));
   const fermi = [];
+  // Voce robot (27/11/2026, Giorgia: «controlla soprattutto i giochi ancora con
+  // voci robot»): ogni frase detta in partita deve avere la sua registrazione.
+  const robot = [];
   const coda = [...vivi];
   await Promise.all(Array.from({ length: 6 }, async () => {
     while (coda.length) {
       const g = coda.shift();
       const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
-      await ctx.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+      await ctx.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
       const pg = await ctx.newPage();
       let rotto = 0;
       pg.on("pageerror", () => rotto++);
       await pg.goto(`${BASE}/giochi/${g.slug}/gioca?eta=${g.eta}&demo=1`, { waitUntil: "domcontentloaded" });
       const festa = await pg.locator("[data-festa]").waitFor({ timeout: 120000 }).then(() => true, () => false);
       if (!festa || rotto) fermi.push(`${g.slug}${rotto ? " (errore JS)" : ""}`);
+      const senzaFile = await pg.evaluate(() => (window.__voceMizi || []).filter((v) => !v.registrata).map((v) => v.testo)).catch(() => []);
+      for (const t of new Set(senzaFile)) robot.push(`${g.slug}: «${t}»`);
       await ctx.close();
     }
   }));
   ok(`tutti i ${vivi.length} giochi del registro arrivano da soli alla festa`, vivi.length >= 38 && fermi.length === 0, fermi.join(", "));
+  ok("voce: in partita nessun gioco parla con la sintesi del telefono (ogni frase è nel copione e registrata)", robot.length === 0, robot.slice(0, 8).join(" | "));
 
   const copione = JSON.parse(readFileSync("content/voce-mizi.json", "utf8"));
   const nucleo = new Set(copione.frasi.nucleo ?? []);
