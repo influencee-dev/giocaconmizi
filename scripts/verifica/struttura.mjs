@@ -51,7 +51,7 @@ for (const c of cartelle("lib")) if (!LIB[c]) ko(`cartella «lib/${c}/» non pre
 
 // 3. components/: una cartella per zona del sito, più tre file condivisi da tutti.
 const COMPONENTI = [
-  "app", "biglietti", "directory", "feste", "font-switcher", "form", "game-shell", "genitori", "giochi", "guide", "legal", "mappa",
+  "app", "biglietti", "condivisione", "directory", "feste", "font-switcher", "form", "game-shell", "genitori", "giochi", "guide", "legal", "mappa",
   "natale", "progress", "risorse", "seo", "storie", "tutorial", "ui", "vetrina",
 ];
 const COMPONENTI_SCIOLTI = ["decor.tsx", "icone.tsx", "illustrazioni.tsx"];
