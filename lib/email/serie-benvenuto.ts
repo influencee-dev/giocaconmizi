@@ -11,15 +11,24 @@
  *
  * Solo fatti già scritti sul sito (Chi siamo, Perché lo facciamo): niente
  * episodi inventati. Tono: niente «bimbi», «magico», «fantastico».
- * Finché LINK_COMMUNITY è vuoto, i riquadri della community non compaiono.
+ * La community è su Instagram (decisione di Giorgia del 27/11/2026): le email
+ * invitano a scrivere «MIZI» in DM a @giocamizi, e l'automazione dei messaggi
+ * (ManyChat o Meta) risponde con l'invito al canale e il gioco del giorno.
+ * Finché COMMUNITY_ATTIVA è false, i riquadri della community non compaiono.
  */
 
 import { SOCIETA } from "../contenuti/legal";
 
 const SITO = "https://giocamizi.it";
 
-/** Il link d'invito alla community o al canale WhatsApp: lo dà Giorgia. */
-export const LINK_COMMUNITY = "";
+/** Si accende quando l'automazione dei messaggi su Instagram risponde a «MIZI». */
+export const COMMUNITY_ATTIVA = false;
+
+/** La parola che fa partire l'automazione nei messaggi di Instagram. */
+export const PAROLA_CHIAVE = "MIZI";
+
+/** Apre direttamente la chat con @giocamizi su Instagram. */
+export const LINK_DM_INSTAGRAM = "https://ig.me/m/giocamizi";
 
 /** Il messaggio già scritto per il passaparola (email 3). */
 export const MESSAGGIO_PASSAPAROLA =
@@ -35,13 +44,14 @@ const bottone = (href: string, testo: string, colore: string, scuro = false) =>
 
 const p = (testo: string) => `<p style="margin:0 0 14px 0;">${testo}</p>`;
 
-/** Il riquadro verde della community WhatsApp: vuoto finché manca il link. */
+/** Il riquadro della community su Instagram: vuoto finché l'automazione non è accesa. */
 function community(titolo: string, testo: string): string {
-  if (!LINK_COMMUNITY) return "";
-  return `<div style="background:#E8F6EC;border-radius:16px;padding:16px 18px;margin:6px 0 18px 0;">
+  if (!COMMUNITY_ATTIVA) return "";
+  return `<div style="background:#FBEAF2;border-radius:16px;padding:16px 18px;margin:6px 0 18px 0;">
 <p style="margin:0 0 8px 0;font-weight:bold;font-size:17px;">${titolo}</p>
 <p style="margin:0 0 12px 0;">${testo}</p>
-${bottone(LINK_COMMUNITY, "💬 Entra su WhatsApp", "#25D366")}
+<p style="margin:0 0 12px 0;">Scrivi <strong>${PAROLA_CHIAVE}</strong> in un messaggio a @giocamizi: ti rispondo subito con l'invito.</p>
+${bottone(LINK_DM_INSTAGRAM, `📩 Scrivi ${PAROLA_CHIAVE} su Instagram`, "#C42A6B")}
 </div>`;
 }
 
@@ -94,7 +104,7 @@ export const SERIE_BENVENUTO: EmailSerie[] = [
         p("La pinguina l'ha voluta lei, perché è un animale che le piace. Le abbiamo dato i suoi capelli e un pezzetto del suo nome: Domiziana, Mizi."),
         p("Da lì è nato Giocamizi, ed è gratis davvero. Niente pubblicità, niente account da creare, niente timer o «hai perso». Si apre e si gioca."),
         community(
-          "Ti aspetto nella community WhatsApp delle mamme",
+          "Ti aspetto nella community delle mamme su Instagram",
           "Ogni giorno una cosa utile: un gioco per la sua età, un posto per il weekend, un'idea per la festa, un consiglio tra mamme. E non solo cose nostre: anche quello che di buono trovo in giro.",
         ),
         p("Se vuoi cominciare subito:"),
@@ -117,7 +127,7 @@ export const SERIE_BENVENUTO: EmailSerie[] = [
         bottone(link("/feste", 2), "🎈 Dove festeggiare in 78 città", "#F9C846", true),
         bottone(link("/guide", 2), "📚 Guide per genitori", "#3DB5E6"),
         p("Hai un'idea per un gioco, o c'è qualcosa su cui tuo figlio fa fatica? <strong>Rispondi a questa email</strong>: le idee delle mamme e delle maestre sono la fonte principale dei giochi nuovi."),
-        community("Un'idea al giorno, già pronta", "Se non l'hai ancora fatto, nella community WhatsApp ti arriva ogni giorno un'idea già pronta."),
+        community("Un'idea al giorno, già pronta", "Se non l'hai ancora fatto, entra nella community su Instagram: ogni giorno un'idea già pronta."),
         `<p style="margin:12px 0 0 0;"><strong>Giorgia</strong></p>`,
       ].join("\n")),
   },
