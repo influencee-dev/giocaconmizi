@@ -137,7 +137,9 @@ export const SERIE_BENVENUTO: EmailSerie[] = [
         p("oggi ti chiedo una cosa, ma prima ti spiego perché."),
         p("Giocamizi non l'ho fatto per guadagnare. Per me il digitale non è un problema: è un amplificatore, e va usato con cura. Per questo qui non ci sono pubblicità, trucchi per farti restare o dati dei bambini. Dietro però c'è tanto lavoro, e l'unico modo per farlo crescere senza pubblicità è il passaparola tra mamme."),
         p("<strong>Il favore è questo: mandalo a un'amica, o nel gruppo WhatsApp della classe.</strong> Ti ho già scritto il messaggio, basta un tocco:"),
-        bottone(`https://wa.me/?text=${encodeURIComponent(MESSAGGIO_PASSAPAROLA)}`, "💬 Mandalo su WhatsApp", "#25D366"),
+        // Una pagina del sito, non wa.me: dalle app di posta (e dal contatore dei
+        // clic di Brevo) wa.me apriva WhatsApp senza la chat (27/11/2026).
+        bottone(link("/passaparola", 3), "💬 Mandalo su WhatsApp", "#25D366"),
         community("Invita le amiche anche nel canale", "Così le idee arrivano anche a loro, ogni giorno."),
         p("Grazie davvero. Ogni mamma che arriva da un'amica vale più di qualunque pubblicità."),
         `<p style="margin:12px 0 0 0;"><strong>Giorgia</strong></p>`,
