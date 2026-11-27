@@ -252,9 +252,9 @@ export function Colora({ onComplete, onProgress, demo, disegni, titolo }: GamePr
 
   return (
     <GameShell titolo={titolo} istruzione={disegno.istruzione} round={livello} totaleRound={DISEGNI.length} finito={finito} stelle={3} onAncora={ancora}>
-      <div className="flex w-full max-w-xl flex-col items-center gap-3">
+      <div className="flex w-full max-w-xl flex-col items-center gap-3 basso:gap-2">
         {/* Il foglio */}
-        <div className="relative aspect-square w-[min(100%,44vh)] overflow-hidden rounded-[1.6rem] border-2 border-crema-scuro bg-white shadow-sm">
+        <div className="relative aspect-square w-[min(100%,44vh)] basso:w-[min(100%,36dvh)] overflow-hidden rounded-[1.6rem] border-2 border-crema-scuro bg-white shadow-sm">
           <svg ref={svgColori} viewBox="0 0 400 400" className="absolute inset-0 h-full w-full" data-colori>
             {disegno.parti.map((p) => (
               <Figura
@@ -360,10 +360,10 @@ export function Colora({ onComplete, onProgress, demo, disegni, titolo }: GamePr
         )}
 
         <div className="flex w-full gap-2">
-          <button type="button" onClick={() => void salva()} className="flex flex-1 items-center justify-center gap-2 rounded-2xl border-2 border-viola bg-white py-3 font-black text-viola" data-salva>
+          <button type="button" onClick={() => void salva()} className="flex flex-1 items-center justify-center gap-2 rounded-2xl border-2 border-viola bg-white py-3 font-black text-viola basso:py-2" data-salva>
             <Camera className="h-5 w-5" strokeWidth={2.6} aria-hidden /> Salva
           </button>
-          <button type="button" onClick={fatto} className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-viola py-3 text-lg font-black text-white" data-fatto>
+          <button type="button" onClick={fatto} className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-viola py-3 text-lg font-black text-white basso:py-2" data-fatto>
             <Check className="h-5 w-5" strokeWidth={3} aria-hidden /> Fatto
           </button>
         </div>
