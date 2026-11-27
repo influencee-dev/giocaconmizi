@@ -42,6 +42,8 @@ export default async function GiocaPage({ params, searchParams }: Params & Query
       slug={slug}
       titolo={gioco.title}
       eta={etaGioco}
+      etaMin={gioco.ageMin}
+      etaMax={gioco.ageMax}
       difficolta={gioco.difficulty}
       demo={demo === "1"}
       giochi={giochiBrevi()}

@@ -1,5 +1,6 @@
 ---
 title: "Pixel art"
+titoloSeo: "Pixel art per bambini: gioco online facile e gratis"
 slug: pixel-art
 ageMin: 4
 ageMax: 9

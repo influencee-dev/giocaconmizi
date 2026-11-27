@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Suspense } from "react";
 import { Contenitore } from "@/components/ui";
 import { Editor } from "@/components/biglietti/Editor";
+import { TITOLO_CREA, TitoloCreaDinamico } from "@/components/biglietti/TitoloCrea";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { url } from "@/lib/seo/seo";
 
 export const metadata: Metadata = {
   title: "Crea inviti e biglietti di compleanno online gratis",
   description:
-    "Crea l'invito o il biglietto di compleanno di tuo figlio in due minuti: scegli lo sfondo, scrivi il nome, scarica. Gratis, senza registrazione e senza filigrana.",
+    "Inviti di compleanno digitali da mandare su WhatsApp o da stampare, senza scaricare app: scegli lo sfondo, scrivi il nome, scarica. Gratis e senza filigrana.",
   alternates: { canonical: "/biglietti/crea" },
 };
 
@@ -44,12 +46,21 @@ export default function CreaPage() {
       />
 
       <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
-        Crea il tuo biglietto di compleanno
+        <Suspense fallback={TITOLO_CREA}>
+          <TitoloCreaDinamico />
+        </Suspense>
       </h1>
-      <p className="mt-3 max-w-2xl text-lg text-notte-tenue">
-        Scegli lo sfondo, scrivi il nome, aggiungi adesivi e foto, scarica o
-        manda l&apos;invito su WhatsApp con la conferma a un tocco. Gratis, senza
-        registrazione, senza filigrana. Funziona dal telefono.
+      {/* 27/11/2026 (piano SEO §7): in cima a Google ci sono solo app da
+          scaricare, quindi la prima riga dice subito che qui non serve. */}
+      <p className="mt-3 max-w-2xl text-lg text-notte-tenue" data-senza-app>
+        <strong className="text-notte">Senza scaricare app</strong>: funziona
+        dal browser del telefono. Inviti digitali da mandare su WhatsApp, con la
+        conferma a un tocco, oppure da stampare. Scegli lo sfondo, scrivi il
+        nome, aggiungi adesivi e foto. Gratis, senza registrazione, senza
+        filigrana.{" "}
+        <Link href="/biglietti/frasi-inviti-compleanno-bambini" className="font-bold text-viola hover:text-notte">
+          Non sai cosa scrivere? Le frasi pronte
+        </Link>
       </p>
 
       <div className="mt-8">

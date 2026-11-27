@@ -1,4 +1,4 @@
-import { auguriPerTema, cardBackgrounds, cardFormats, phrases, phrasesPerTema, type Gender } from "@/cards/registry";
+import { auguriPerTema, cardBackgrounds, cardFormats, graziePerTema, phrases, phrasesPerTema, type Gender } from "@/cards/registry";
 
 /**
  * Dati condivisi fra il tool dei biglietti e le pagine SEO (piano §14).
@@ -52,10 +52,10 @@ export function temiPer(eta?: number, genere?: Gender) {
 
 /** Le frasi pronte per un tipo di biglietto, con i segnaposto già sostituiti. */
 export function frasi(tipo: Tipo, nome = "{nome}", eta: number | string = "{eta}", tema?: string): string[] {
-  // Le frasi a tema (solo inviti) vengono prima: sono il motivo per cui
-  // la mamma ha scelto quel tema.
-  const aTema =
-    tipo === "invito" && tema ? (phrasesPerTema[tema] ?? []) : tipo === "auguri" && tema ? (auguriPerTema[tema] ?? []) : [];
+  // Le frasi a tema vengono prima: sono il motivo per cui la mamma ha scelto
+  // quel tema. Ogni tipo di biglietto ha le sue.
+  const perTipo = { invito: phrasesPerTema, auguri: auguriPerTema, ringraziamento: graziePerTema }[tipo];
+  const aTema = tema ? (perTipo[tema] ?? []) : [];
   return [...aTema, ...phrases[tipo]].map((f) =>
     f.replace(/\{nome\}/g, String(nome)).replace(/\{eta\}/g, String(eta)),
   );

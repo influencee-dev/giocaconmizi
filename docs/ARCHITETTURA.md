@@ -35,7 +35,7 @@ Nella radice restano solo i file di configurazione (`package.json`, `next.config
 | `lib/foto/` | Le foto del sito | `foto.ts`, `foto-dati.ts`, `foto-del-giorno.ts`, `foto-in-arrivo.ts`, `caricatore-immagini.ts`, `immagini-varianti.json` (generato) |
 | `lib/email/` | Email | `brevo.ts`, `brevo-conferma.ts`, `brevo-benvenuto.ts`, `email-servizio.ts` |
 | `lib/seo/` | Motori di ricerca | `seo.ts`, `date-pagine.ts`, `date-pagine.json` (generato), `og.tsx`, `gsc.ts`, `precarico.ts` |
-| `lib/famiglia/` | Il profilo della famiglia nell'app | `profilo.ts` |
+| `lib/famiglia/` | Il profilo della famiglia nell'app e i percorsi di riflessione per i genitori | `profilo.ts`, `sotto-pressione.ts` (domande, calcolo e letture del percorso «sotto pressione») |
 | `lib/social/` | Slide e testi per Instagram | `post.ts`, `instagram.ts`, `disegna.tsx` |
 | `lib/protezione/` | Limiti e difese contro gli abusi | `limiti.ts` |
 | `lib/supabase/` | Collegamenti al database | |
@@ -47,17 +47,20 @@ I file segnati «generato» li scrive uno script: non si modificano a mano.
 - `games/registry.ts`: l'elenco dei giochi. Un gioco esiste solo se è qui.
 - `games/<slug>/Game.tsx`: il gioco. Di solito sono poche righe: i contenuti del gioco passati a un motore.
 - `games/_engine/`: i motori e le parti comuni.
+- `public/figure/`: i disegni fatti apposta per i giochi (WebP 384 px, regole in `LICENZA.txt` lì dentro); li mostra `games/_engine/figura.tsx`.
   - `nucleo.ts`: la logica di partita uguale per tutti (round, punti, stelle, suoni, aiuto, lodi). Un motore nuovo parte da qui.
-  - `SceltaMultipla.tsx`, `Memory.tsx`, `Ordina.tsx`, `GrigliaCoding.tsx`, `Tartaruga.tsx`, `Puntini.tsx`, `Differenze.tsx`, `PixelArt.tsx`, `CreaGioco.tsx`, `Esplora.tsx`: i motori.
-  - `griglia-logica.ts` (coding su griglia) e `esplora-logica.ts` (esplorazione a sale): logica pura, senza interfaccia. La usano lo schermo, la demo e le prove.
+  - `SceltaMultipla.tsx`, `Memory.tsx`, `Ordina.tsx`, `GrigliaCoding.tsx`, `Tartaruga.tsx`, `Puntini.tsx`, `Differenze.tsx`, `PixelArt.tsx`, `CreaGioco.tsx`, `Esplora.tsx`, `Corsa.tsx`: i motori.
+  - `griglia-logica.ts` (coding su griglia), `esplora-logica.ts` (esplorazione a sale) e `corsa-logica.ts` (corsa a tre strade): logica pura, senza interfaccia. La usano lo schermo, la demo e le prove.
   - `arte.tsx`, `scena.tsx`, `casuale.ts`, `tipi.ts`: disegni, numeri a caso, il contratto comune.
 - `content/games/<slug>.md`: il testo della pagina del gioco.
 - `content/voce-mizi.json`: le frasi che Mizi dice, identiche a quelle nel codice.
+- `content/seo/parole-chiave.json`: le ricerche vere su cui lavora il SEO manager (volume, pagina che risponde, stato); `titoloSeo` nel frontmatter di `content/games/<slug>.md` è il titolo per Google del gioco.
+- `lib/giochi/novita.ts`: gli ultimi arrivati, cioè i giochi ordinati per ultima modifica. Li mostrano la home e il catalogo.
 - Il metodo per migliorare un gioco è in `.claude/skills/game-designer-mizi/SKILL.md`.
 
 ## `components/`: una cartella per zona
 
-`app` (l'app installata), `biglietti`, `directory`, `feste`, `form`, `game-shell` (il guscio comune dei giochi, con la festa finale), `giochi` (catalogo e album), `guide`, `legal`, `mappa`, `natale`, `risorse`, `seo`, `storie`, `tutorial`, `ui` (bottoni e contenitori di base), `vetrina` (testata, menu, piede), `font-switcher`, `progress`.
+`app` (l'app installata), `biglietti`, `directory`, `feste`, `form`, `game-shell` (il guscio comune dei giochi, con la festa finale), `genitori` (i percorsi per gli adulti, dal 20/11/2026: non sono guide né giochi), `giochi` (catalogo e album), `guide`, `legal`, `mappa`, `natale`, `risorse`, `seo`, `storie`, `tutorial`, `ui` (bottoni e contenitori di base), `vetrina` (testata, menu, piede), `font-switcher`, `progress`.
 
 Tre file restano sciolti perché li usano tutte le zone: `icone.tsx`, `illustrazioni.tsx`, `decor.tsx`.
 

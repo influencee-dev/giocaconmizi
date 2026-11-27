@@ -175,20 +175,147 @@ export const auguriPerTema: Record<string, string[]> = {
   ],
 };
 
+/**
+ * Grazie a tema (dal 23/11/2026): dopo la festa il biglietto di ringraziamento
+ * riprende lo sfondo dell'invito. Due frasi per tema, firmate da {nome} (chi ha
+ * festeggiato), senza genere: vanno bene per chiunque le riceva.
+ */
+export const graziePerTema: Record<string, string[]> = {
+  unicorno: [
+    "Grazie per aver reso magica la mia festa! Un abbraccio, {nome}",
+    "Un arcobaleno di grazie per aver festeggiato con me! {nome}",
+  ],
+  dinosauri: [
+    "Un grazie grande come un T-Rex per aver festeggiato con me! {nome}",
+    "Che festa da ruggito! Grazie di cuore, {nome}",
+  ],
+  calcio: [
+    "Che partita, la mia festa! Grazie per aver giocato con me. {nome}",
+    "Grazie: con te in squadra, che gol la mia festa! {nome}",
+  ],
+  principessa: [
+    "Grazie per aver festeggiato a corte con me! Con affetto, {nome}",
+    "Una festa da favola, grazie a te. Un abbraccio, {nome}",
+  ],
+  supereroe: [
+    "Missione festa compiuta, anche grazie a te! {nome}",
+    "Un super grazie per aver festeggiato con me! {nome}",
+  ],
+  spazio: [
+    "Grazie per il viaggio tra le stelle alla mia festa! {nome}",
+    "Un grazie grande come la galassia! Con affetto, {nome}",
+  ],
+  "animali-foresta": [
+    "Grazie per aver festeggiato nel bosco con me! Un abbraccio, {nome}",
+    "Volpi, orsetti e tu: che bella festa! Grazie, {nome}",
+  ],
+  fattoria: [
+    "Grazie per la festa in fattoria! Un abbraccio, {nome}",
+    "Chicchirichì, che festa! Grazie per aver festeggiato con me. {nome}",
+  ],
+  sirena: [
+    "Un mare di grazie per aver festeggiato con me! {nome}",
+    "Grazie per il tuffo nella mia festa! Con affetto, {nome}",
+  ],
+  pirati: [
+    "Il tesoro più bello della festa? Avere te a bordo. Grazie! {nome}",
+    "Grazie, ciurma: che avventura la mia festa! {nome}",
+  ],
+  "mondo-a-cubetti": [
+    "Una festa costruita cubetto dopo cubetto, anche grazie a te! {nome}",
+    "Grazie per aver giocato con me alla mia festa! {nome}",
+  ],
+  macchinine: [
+    "Grazie per la corsa fino alla mia festa! Un abbraccio, {nome}",
+    "Pronti, via... grazie! Che bella festa insieme. {nome}",
+  ],
+  cuccioli: [
+    "Grazie per le coccole e i giochi alla mia festa! {nome}",
+    "Tanti grazie e una zampa sul cuore. Con affetto, {nome}",
+  ],
+  "farfalle-fiori": [
+    "Un mazzo di grazie per aver festeggiato con me! {nome}",
+    "Grazie: con te la mia festa è fiorita! Un abbraccio, {nome}",
+  ],
+  arcobaleno: [
+    "Grazie per aver colorato la mia festa! Con affetto, {nome}",
+    "Tutti i colori dell'arcobaleno per dirti grazie! {nome}",
+  ],
+  circo: [
+    "Che spettacolo, la mia festa! Grazie per l'applauso. {nome}",
+    "Grazie per aver riso e giocato sotto il tendone con me! {nome}",
+  ],
+  safari: [
+    "Un grazie alto come una giraffa! Con affetto, {nome}",
+    "Grazie per l'avventura alla mia festa! Un abbraccio, {nome}",
+  ],
+  "mare-estate": [
+    "Un'onda di grazie per aver festeggiato con me! {nome}",
+    "Grazie per le risate al sole della mia festa! {nome}",
+  ],
+  "dolci-torta": [
+    "Grazie: la torta era buona, ma con te di più! {nome}",
+    "Un grazie dolce come la mia torta! Con affetto, {nome}",
+  ],
+  palloncini: [
+    "Grazie per aver fatto volare la mia festa! {nome}",
+    "Coriandoli, palloncini e tu: grazie di cuore! {nome}",
+  ],
+  robot: [
+    "Bip bip: grazie per aver festeggiato con me! {nome}",
+    "Messaggio per te: festa riuscita, grazie! {nome}",
+  ],
+  fate: [
+    "Un pizzico di magia e tanti grazie! Con affetto, {nome}",
+    "Grazie per aver volato fino alla mia festa! {nome}",
+  ],
+  ballerina: [
+    "Grazie per aver ballato con me alla mia festa! {nome}",
+    "Un inchino e un grazie grande così! Con affetto, {nome}",
+  ],
+  mattoncini: [
+    "Mattoncino dopo mattoncino, che bella festa! Grazie, {nome}",
+    "Grazie per aver costruito con me una festa bellissima! {nome}",
+  ],
+  halloween: [
+    "Grazie per la festa da brivido! Un abbraccio, {nome}",
+    "Dolcetti, scherzetti e tu: grazie di cuore! {nome}",
+  ],
+  natale: [
+    "Grazie per il pensiero sotto l'albero! Con affetto, {nome}",
+    "Grazie per aver festeggiato con me tra luci e biscotti! {nome}",
+  ],
+  "stelle-luna": [
+    "Grazie per aver festeggiato con noi {nome}!",
+    "Sotto la luna e le stelle, un grazie da {nome}.",
+  ],
+};
+
 export const phrases = {
   invito: [
     "{nome} compie {eta} anni e vuole festeggiare con te!",
     "Vieni alla festa di {nome}? Ci saranno giochi, torta e tanti amici.",
     "{nome} ti aspetta per spegnere {eta} candeline insieme!",
     "Una festa senza di te non è una festa: vieni al compleanno di {nome}!",
+    // 27/11/2026: altre quattro frasi d'invito comuni (pagina delle frasi, piano SEO §7)
+    "Segnati la data: {nome} compie {eta} anni e ti aspetta alla sua festa!",
+    "Palloncini pronti e torta in forno: manca solo tu alla festa di {nome}!",
+    "{eta} anni si festeggiano in compagnia: vieni alla festa di {nome}?",
+    "Giochi, musica e torta: {nome} ti invita a festeggiare i suoi {eta} anni!",
   ],
   auguri: [
     "Tanti auguri {nome}! {eta} anni di risate, giochi e abbracci.",
     "Buon compleanno {nome}! Che questo sia un anno pieno di scoperte.",
     "Auguri {nome}: {eta} anni e sei già un piccolo grande campione.",
+    // 27/11/2026: altre cinque frasi di auguri comuni (pagina delle frasi, piano SEO §7)
+    "Buon compleanno {nome}! {eta} candeline e un desiderio per ognuna.",
+    "Tanti auguri {nome}, oggi la festa è tutta per te!",
+    "Auguri {nome}! Che i tuoi {eta} anni siano pieni di amici e cose nuove.",
+    "Buon compleanno {nome}: soffia forte ed esprimi un desiderio!",
+    "Auguri di cuore, {nome}! Un anno in più di sorrisi e avventure.",
   ],
   ringraziamento: [
-    "Grazie per essere venuto alla mia festa! Con affetto, {nome}",
+    "Grazie per aver festeggiato con me! Con affetto, {nome}",
     "È stato bellissimo festeggiare insieme. Grazie! {nome}",
   ],
 };

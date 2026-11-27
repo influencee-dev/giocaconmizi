@@ -31,6 +31,75 @@ Partidea SRL (dati in lib/contenuti/legal.ts → SOCIETA). Mascotte: Mizi, una p
   Se il deploy è READY sul commit appena pushato e le verifiche locali sono
   passate, non serve scaricare le pagine live.
 
+## SEO, GEO e AEO manager (23/11/2026)
+- Metodo: `.claude/skills/seo-geo-aeo-manager/SKILL.md` (da leggere prima di toccare titoli,
+  descrizioni, JSON-LD, sitemap, llms.txt, hub o link interni). Coda dei cantieri, in ordine:
+  `docs/piano-seo.md`. Ricerche vere con volume, pagina e stato: `content/seo/parole-chiave.json`
+  (Ubersuggest, 22/11/2026; pagina «Ricerca SEO Giocamizi», copia su Drive in 2 Aree → Sito e SEO).
+- Misura: `npm run seo:copertura` (dopo la build; `-- --md file` per il rapporto). Una ricerca
+  segnata «fatto» che perde le sue parole dal titolo o dall'H1 fa fallire la batteria seo.
+- Giochi: il `<title>` viene da `titoloSeo` nel frontmatter di `content/games/<slug>.md` (le
+  parole cercate); il nome del gioco resta nell'H1, nel catalogo e nell'album.
+
+## Articoli nell'app e ordine dei contenuti (Giorgia, 22/11/2026)
+Scelte confermate da Giorgia con tre risposte a scelta, dopo due letture sbagliate:
+- L'ordine «giochi, poi location, poi storie, poi articoli» è l'ordine in cui
+  i contenuti si vedono NELL'APP. Mai niente sopra i giochi.
+- La home dell'app (`components/app/HomeApp.tsx`) resta com'era: giochi, le
+  quattro caselle «Per la mamma» (Inviti, Feste, Storie, Guide) e in fondo il
+  blocco «Articoli per i genitori» (i quattro più recenti). Niente sezioni
+  nuove con le città o le storie: le ha viste e non le ha volute.
+- La barra in basso (`components/app/BarraSchede.tsx`) è Home, Giochi, Feste,
+  Storie, Profilo.
+- Non rifare la home né spostare le schede senza che lo chieda lei.
+- Gli articoli nuovi compaiono da soli: nella home dell'app e in cima a /guide
+  (`guideInOrdine()` in lib/contenuti/guide.ts: prima gli articoli dal più
+  recente, poi le guide brevi).
+
+## Percorso per i genitori «sotto pressione» (20/11/2026)
+- `/genitori/sotto-pressione`: 35 affermazioni sulle cinque spinte dell'Analisi
+  Transazionale (Kahler) e 10 situazioni di casa, poi un profilo. Domande,
+  calcolo e letture in `lib/famiglia/sotto-pressione.ts`, schermo in
+  `components/genitori/`, prove in `scripts/verifica/genitori.mjs`.
+- PUBBLICATO il 23/11/2026 per decisione di Giorgia (`PERCORSO_PUBBLICO` true),
+  anche per raccogliere iscrizioni; la rilettura di uno psicologo resta
+  consigliata. Titolo per Google e social «E tu che mamma diventi sotto
+  pressione?» (`titoloSocial`), tasto «Condividi il test con le amiche»
+  (components/genitori/CondividiTest.tsx: mai il risultato nel messaggio),
+  richiamo «E tu che tipo di mamma sei?» (InvitoTest) su /per-le-mamme e
+  /guide. Con false torna bozza e tutto sparisce.
+- Dati PRIMA del profilo (decisione di Giorgia, 23/11 sera): dopo l'ultima
+  domanda la fase «dati» (components/genitori/ModuloDati.tsx: nome, cognome,
+  email, fascia d'età, città, età del figlio, spunta per la Posta di Mizi),
+  detto già nella schermata iniziale. Va a /api/brevo con origine
+  «test-sotto-pressione» (LASTNAME, ETA_GENITORE): SOLO il modulo, mai le
+  risposte. Se Brevo non risponde il profilo si apre lo stesso.
+
+## Condividere e anteprime social (23/11/2026)
+- Tasto comune `components/ui/Condividi.tsx` (foglio del telefono,
+  altrimenti WhatsApp, Facebook, Telegram, email, copia link; link con UTM
+  utm_source=condivisione&utm_campaign=<guida|gioco|attivita|test-…>) su guide
+  e articoli, giochi, schede delle attività e test. Pagina nuova da far
+  condividere = un <Condividi> con un invito che porta sul sito.
+- Anteprime (opengraph-image) disegnate da `immagineOg` in lib/seo/og.tsx sul
+  design system: logo, Mizi, Nunito, etichetta colorata, «… su giocamizi.it →».
+  Ci sono per home, guide, feste/[città], giochi, schede, test; i file letti
+  stanno in outputFileTracingIncludes («/**/opengraph-image*»).
+- Su guide, giochi e schede il tasto è la pillola piccola (`piccolo`, 40 px:
+  sotto la regola dei 64 px dei bottoni, che è per i bambini); nella scheda sta
+  nel riquadro dei contatti, accanto ai link del locale. Nel test resta grande.
+- Video dei tutorial: sul telefono si vede la versione 9:16
+  (public/video/<slug>-verticale.mp4, la fa `npm run video`), dal computer la 16:9.
+- Non è un test validato e non fa diagnosi: i testi dicono «può», mai «sei».
+  Il punteggio è un conto fisso; nessuna AI decide o ritocca i numeri.
+- Le risposte restano nel browser (sessionStorage): niente server, niente
+  database, niente statistiche. Salvarle altrove = decisione di Giorgia più
+  informativa nuova.
+- Il questionario ESQ-R-I sugli stati dell'Io (Laghi, Crea, Filipponi, 2020)
+  NON si copia: i diritti d'uso non sono verificati. Niente profili dei
+  bambini. La versione per i collaboratori non si fa qui senza un parere
+  legale (test di personalità e lavoratori).
+
 ## Dove va ogni file (17/11/2026, docs/ARCHITETTURA.md)
 - Prima di creare un file si cerca la sua cartella in `docs/ARCHITETTURA.md`.
   Se non c'è non se ne inventa una: prima si scrive lì la cartella nuova.
@@ -246,18 +315,75 @@ Partidea SRL (dati in lib/contenuti/legal.ts → SOCIETA). Mascotte: Mizi, una p
 Un miglioramento al giorno, piccolo e finito, a rotazione:
 (a) biglietti · (b) guide: migliorare una guida breve esistente (le guide
 NUOVE le scrive solo la routine articoli delle 9:00, mai questa) · (c) giochi ·
-(d) SEO/AEO tecnico. Non toccare content/guide/ né content/piano-editoriale.json.
+(d) SEO/AEO tecnico: un pezzo del primo cantiere aperto di docs/piano-seo.md, col metodo
+della skill seo-geo-aeo-manager. Non toccare content/guide/ né content/piano-editoriale.json.
 Prima di iniziare importa le foto arrivate in «99 Immagini pronte»; se il
 contenuto di domani avrà bisogno di foto, prenotale oggi (`npm run foto:prenota`).
 Prima leggi le note recenti in «0 Bacheca» e le richieste aperte in
 «0 Richieste di Giorgia»: una richiesta aperta, o una nota «Vnn INPUT COMPLETI» di
 ChatGPT senza risposta (vedi «Libri per Amazon KDP»), viene PRIMA della rotazione
 (se è piccola si fa e basta; se è grande, se ne fa un pezzo e lo si dice).
+ATTIVITÀ NUOVE OGNI GIORNO (Giorgia, 23/11/2026: «ho bisogno di aggiungere
+più attività ogni giorno»): almeno 8 schede nuove al giorno, sempre vere e
+verificate. Prima le città nuove (fino a 3, con 2 locali solidi ciascuna); poi,
+per arrivare a 8, attività nuove nelle città GIÀ aperte, partendo dalle più
+grandi con meno schede e dalle categorie della directory (fattorie didattiche,
+teatro, corsi, parchi): lì i locali solidi abbondano. Stesse regole di sempre
+(sito ufficiale, segnali recenti, mai inventare, nome cercato nel file prima
+di aggiungerlo). Se in un giorno non si arriva a 8, si scrive perché.
+CONTATTI E MAIL DI OGNI ATTIVITÀ: vedi la sezione «Registro contatti
+attività» qui sotto. Si fa nello stesso giro, per ogni scheda nuova.
 Il lunedì controlla anche che i quattro documenti base di 3 Risorse siano
 ancora veri: se no, versione nuova con la data. Alla fine lascia una nota
 («AAAA-MM-GG 07:00 · Claude · Miglioramento», docs/bacheca.md).
 Report breve (≤5 righe) salvo novità da mostrare. Diario della rotazione:
 guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
+
+## Registro contatti attività (23/11/2026, richiesta di Giorgia)
+- Ogni attività del sito ha una riga nel foglio PRIVATO su Drive «Registro
+  contatti attività Giocamizi (AAAA-MM-GG)» in 1 Progetti (il più recente: i
+  vecchi vanno in 4 Archivio con «zz_SUPERATO»). Colonne: link della scheda,
+  sito, email, telefono, fonte, e la mail già scritta (oggetto e testo) con il
+  link della scheda, la pagina /come-reclamare-la-scheda e il video
+  /tutorial/come-reclamare-la-scheda. Stato: «Pronta da inviare», «Contatto da
+  trovare», «Senza email: chiamare…»; Giorgia scrive «Inviata» e la data.
+- Email e telefoni stanno SOLO in quel foglio, MAI nel repo né in Bacheca.
+  Si prendono dal sito ufficiale (o dalla pagina social ufficiale) con
+  WebSearch limitato al dominio; mai indovinati. Fonte scritta in colonna.
+- Giro di ogni giorno: (1) scarica il registro più recente come CSV
+  (download_file_content, exportMimeType text/csv); (2) scrivi in un file
+  dello scratchpad i contatti trovati oggi, come JSON
+  `[{link, sito, email, telefono, fonte_email, fonte_telefono, nota}]` (link =
+  indirizzo pieno della scheda): tutte le schede nuove di oggi e almeno 20
+  righe «Contatto da trovare» dell'arretrato; (3) `npx tsx
+  scripts/registro-contatti.ts --registro <csv> --contatti <json> --uscita
+  <csv nuovo>`: tiene le righe e le correzioni di Giorgia, aggiunge le schede
+  nuove del sito con la mail pronta, riempie solo le celle vuote; (4) carica il
+  CSV come foglio nuovo con la data di oggi in 1 Progetti e sposta il
+  precedente in 4 Archivio rinominandolo «zz_SUPERATO — …».
+- Schede arricchite (23/11/2026): 170 descrizioni riscritte dai siti ufficiali
+  (età, spazi, cosa include la festa), siti aggiunti o corretti; prezzi solo con
+  l'anno; personaggi protetti scritti come «feste a tema». La rete
+  dell'ambiente «Giocamizi» è aperta a tutti i siti pubblici (23/11, approvata
+  da Giorgia) per leggere i siti dei locali.
+- Le ricerche web sono circa 200 per turno, condivise anche dagli aiutanti:
+  non lanciare più di 3-4 aiutanti di ricerca insieme.
+- Dal 23/11/2026 (Giorgia: «quelle mail sono tutte sbagliate») anche le 80
+  realtà dell'archivio ex Gmail (righe GM-: cooperative, scuole, blog,
+  riviste) stanno nello stesso registro e partono da Zoho: le 80 bozze Gmail
+  vecchie non si spediscono. Il testo lo fa lo strumento (`--realta` con il
+  JSON tratto dal foglio «archivio-contatti-giocamizi-influencee», una volta
+  sola: poi le righe restano nel registro e si portano avanti da sole).
+- Invio (decisione di Giorgia del 23/11/2026, che sostituisce «le mail non si
+  spediscono mai»): le spedisce Claude dal connettore Zoho, da
+  giorgia@influencee.it con ciao@giocamizi.it in copia, con il testo del
+  registro, al massimo 40 al giorno, solo righe «Pronta da inviare» con email
+  presa da fonte ufficiale. Dopo ogni invio, nel registro: Stato «Inviata» e
+  Data invio. Mai a un'attività segnata «da controllare» (sito fermo da anni,
+  forse chiusa, nome che non corrisponde). Prima del primo invio Giorgia ha
+  visto due mail di prova arrivate a ciao@giocamizi.it.
+  Le 81 bozze Zoho del 31/10 hanno il testo vecchio, senza video: non vanno
+  spedite; si cancellano solo con il sì di Giorgia.
 
 ## Video di Mizi (15/11/2026, docs/video-tutorial.md)
 - Nei video parla SEMPRE Mizi, in prima persona: pinguina-bambina di ~10 anni,
@@ -278,6 +404,11 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   nostro incorporato, passi cliccabili, ?t=, trascrizione, VideoObject con i
   Clip, video in sitemap). Gruppi «partner» e «utenti» come su Drive;
   IN_ARRIVO in lib/contenuti/tutorial.ts = solo testo nell'hub. 12 tutorial fatti il 16/11.
+- Reel promozionali (24/11/2026): motore a parte, `bash scripts/video/reel.sh <slug>`
+  con la scheda in content/video/reel/<slug>.json (registrazioni vere del sito,
+  gancio dal primo fotogramma, UN SOLO strato di testo, tre versioni: con
+  sottotitoli, senza, muto). Regole in docs/video-tutorial.md, «Reel». Primi tre
+  di prova: sfida-piramide, pov-invito, letterina.
 
 ## Giochi: upgrade uno alla volta, voce registrata, album di Mizi (15/11/2026)
 - Metodo e coda in `.claude/skills/game-designer-mizi/SKILL.md` (da leggere prima
@@ -299,6 +430,50 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   una casella e Mizi ci va, una missione per sala apre la porta. Un gioco nuovo
   di questo tipo è un elenco di sale. Niente nemici, tempo o vite. Lo stile dei
   disegni sta in fondo a Esplora.tsx (`STILE`).
+- Giochi che si muovono (20/11/2026): motore `games/_engine/Corsa.tsx` con logica
+  pura in `corsa-logica.ts`. Primo gioco «La corsa nella piramide»
+  (games/corsa-nella-piramide, 6-10 anni, 40º gioco): corridoio a tre strade,
+  si scorre per cambiare strada e si tocca per saltare, cinque piani. Niente
+  vite, tempo o velocità che cresce: un urto fa ripartire piano, al terzo la
+  strada libera si illumina. Un gioco nuovo di questo tipo è un elenco di
+  tratti. Metodo in `.claude/skills/accademia-giochi/SKILL.md`.
+- Voce registrata (22/11/2026): tutto il copione, 113 frasi su 113 (comuni,
+  nucleo, memory, differenze, labirinto, corsa), riascoltate con whisper-1.
+  Gli altri giochi usano ancora la sintesi per le istruzioni: prima vanno
+  scritte nel copione. Motore SceltaMultipla rivisto per il movimento
+  (opzioni che entrano, saltello, dondolio; stili in app/globals.css).
+  Grafica (22/11/2026): nel guscio parla il viso vero di Mizi
+  (public/mizi/mizi-faccia.webp), macchie pastello dietro al gioco, bottoni
+  con spessore, figure con ombra. Con tutta la voce nel copione: abbina i
+  colori, trova la forma, conta fino a 10 (campo `lode` dei round: Mizi dice
+  la cosa toccata). Figure ridisegnate col volume in games/_engine/arte.tsx
+  (colore + ombra + riflesso): forme, secchiello, pesce, palla, mela, fiore,
+  macchina; `tinta` di Disegno cambia il colore principale di una figura.
+- Giochi dei compiti di seconda elementare (22/11/2026, 51 giochi in tutto):
+  i-suoni-difficili, mb-o-mp, maggiore-minore-uguale, numeri-in-ordine,
+  causa-ed-effetto, le-parti-della-pianta, le-foglie; matematica senza
+  disegni: problemi-con-mizi, decine-e-unita, il-numero-prima-e-dopo,
+  piu-e-meno (risposte e limiti per età in games/_engine/numeri.ts: 20 a sei
+  anni, 60 a sette, 100 dagli otto). Competenza nuova «scienze». Nascono dagli ARGOMENTI che Giorgia manda (registro di classe,
+  pagine del libro): gli esercizi e i disegni si rifanno da zero, MAI copiati
+  dal libro, e niente del registro (nomi, classe, scuola) entra nel repo.
+  Disegni: `public/figure/<nome>.webp` con `Figura` (games/_engine/figura.tsx)
+  e il campo `immagine` delle opzioni; fatti con l'API immagini di OpenAI
+  (gpt-image-2, un soggetto, sfondo bianco, nessuna scritta, nessun
+  personaggio protetto), guardati uno per uno: regole in public/figure/LICENZA.txt.
+- Giochi senza connessione (22/11/2026): il bottone «Scarica i giochi»
+  (components/app/GiochiSenzaRete.tsx, in fondo a /giochi e nel Profilo) mette
+  sul telefono tutti i giochi con voce e disegni; logica in lib/giochi/offline.ts,
+  elenco scritto dalla build (scripts/offline-elenco.mjs → public/offline-elenco.json,
+  generato, fuori dal repo), servito da public/sw.js. Niente si scarica da solo:
+  senza quel tocco il service worker lascia passare tutto. Senza rete la pagina
+  del gioco arriva salvata con l'età minima e Giocatore.tsx rilegge «?eta=».
+- «Gli ultimi arrivati» (21/11/2026): `giochiRecenti()` in lib/giochi/novita.ts
+  ordina i giochi vivi per ultima modifica vera (lib/seo/date-pagine.json). Un
+  gioco nuovo o appena migliorato sale da solo in cima al catalogo /giochi
+  (quattro giochi, finché non si sceglie un filtro) e in home (due sul
+  telefono in HomeApp, quattro dal tablet in su). Niente elenchi a mano: i
+  «consigliati per cominciare» restano quelli di IN_VETRINA.
 - Nucleo comune dei giochi (16/11/2026): `games/_engine/nucleo.ts` (`useRound`:
   round, blocco del doppio tocco, punto ai round puliti, aiuto dopo N errori,
   suoni, lodi senza genere, attributi `data-partita`/`data-round`, esito con

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { componenti } from "@/games/componenti";
 import { registraPartita } from "@/lib/giochi/partite";
 import { registraNellAlbum, type EsitoAlbum, type GiocoBreve } from "@/lib/giochi/album";
@@ -16,20 +16,36 @@ import { DopoIlGioco } from "@/components/form/DopoIlGioco";
 export function Giocatore({
   slug,
   titolo,
-  eta,
+  eta: etaDelServer,
+  etaMin,
+  etaMax,
   difficolta,
-  demo,
+  demo: demoDelServer,
   giochi,
 }: {
   slug: string;
   titolo: string;
   eta: number;
+  /** Le età del gioco: servono per rileggere «?eta=» dall'indirizzo. */
+  etaMin: number;
+  etaMax: number;
   difficolta: 1 | 2 | 3;
   demo: boolean;
   /** Tutti i giochi giocabili: la festa finale ne propone uno. */
   giochi: GiocoBreve[];
 }) {
   const Gioco = componenti[slug];
+
+  // Senza connessione la pagina arriva dalla memoria del telefono, salvata con
+  // l'età più piccola (public/sw.js): l'età scelta si rilegge dall'indirizzo.
+  const [eta, setEta] = useState(etaDelServer);
+  const [demo, setDemo] = useState(demoDelServer);
+  useEffect(() => {
+    const domanda = new URLSearchParams(window.location.search);
+    const scelta = Number(domanda.get("eta"));
+    if (domanda.has("eta") && Number.isFinite(scelta) && scelta >= etaMin && scelta <= etaMax) setEta(scelta);
+    if (domanda.get("demo") === "1") setDemo(true);
+  }, [etaMin, etaMax]);
 
   const [finita, setFinita] = useState(false);
   const [esito, setEsito] = useState<EsitoAlbum | null>(null);

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { titoloPagina } from "@/lib/seo/seo";
 import Link from "next/link";
 import { IconaLucide } from "@/components/directory/IconaLucide";
 import { notFound } from "next/navigation";
@@ -24,12 +25,19 @@ export async function generateMetadata({ params }: { params: Promise<{ categoria
   const cat = categoria((await params).categoria);
   if (!cat) return {};
   return {
-    title: `${cat.titolo}: città per città`,
+    title: titoloPagina(`${cat.titolo}: città per città`),
     description: cat.giornata
       ? `${cat.sottotitolo} Cosa c'è per i bambini, quando aprono e cosa controllare prima di partire.`
       : `${cat.sottotitolo} Zone, tipo di spazio e consigli per la festa di compleanno.`,
     alternates: { canonical: `/${cat.slug}` },
   };
+}
+
+/** «una ludoteca», «uno spazio all'aperto», «un parco avventura». */
+function conArticolo(singolare: string) {
+  if (/^(ludoteca|fattoria|associazione|sala)\b/.test(singolare)) return `una ${singolare}`;
+  if (/^(s[^aeiou]|z|gn|ps)/.test(singolare)) return `uno ${singolare}`;
+  return `un ${singolare}`;
 }
 
 const COLORI = ["#F6E3CF", "#FCE1EC", "#E1F3FB", "#EFE6FA", "#FEF3D1", "#E3F4E8"];
@@ -46,12 +54,26 @@ export default async function CategoriaPage({ params }: { params: Promise<{ cate
     return percorsoScheda(unica);
   };
   const regioni = [...new Set(citta.map((c) => REGIONE[c.slug]).filter(Boolean))].sort();
+  // «Vicino a me» (piano SEO, cantiere 6, 26/11/2026): chi cerca «ludoteca vicino
+  // a me» trova subito la frase e le città più grandi come link in vista.
+  const cercata = conArticolo(cat.singolare);
+  const cittaVicine = citta.slice(0, 8);
+  const faq = [
+    ...cat.faq,
+    {
+      domanda: `Come trovo ${cercata} vicino a me?`,
+      risposta: `Scegli la tua città in questa pagina: ${citta.length === 1 ? "c'è" : "ci sono"} ${citta.length} città con ${cat.nome.toLowerCase()}, da ${citta
+        .slice(0, 4)
+        .map((c) => c.citta)
+        .join(", ")}${citta.length > 4 ? " in giù" : ""}. Per ogni posto trovi la zona, cosa offre ai bambini e il link al sito ufficiale. Se la tua città non c'è ancora, guarda quella più vicina.`,
+    },
+  ];
   const evidenza = citta.slice(0, 3).map((c) => schede.find((s) => s.cittaSlug === c.slug)).filter((s) => s !== undefined);
 
   return (
     <>
       <JsonLd data={jsonLdBreadcrumb([{ nome: cat.nome, percorso: `/${cat.slug}` }])} />
-      <JsonLd data={jsonLdFaq(cat.faq)} />
+      <JsonLd data={jsonLdFaq(faq)} />
       <JsonLd
         data={jsonLdElenco(
           cat.titolo,
@@ -94,6 +116,17 @@ export default async function CategoriaPage({ params }: { params: Promise<{ cate
 
       <Contenitore largo className="py-8">
         <InBreve testo={cat.rispostaBreve} />
+        <p className="mt-5 max-w-3xl text-lg text-notte" data-vicino-a-te>
+          <strong>{`Cerchi ${cercata} vicino a te?`}</strong> Scegli la tua città:{" "}
+          {cittaVicine.map((c, i) => (
+            <span key={c.slug}>
+              <Link href={hrefCitta(c.slug)} className="font-bold text-viola underline underline-offset-2">
+                {c.citta}
+              </Link>
+              {i < cittaVicine.length - 1 ? ", " : citta.length > cittaVicine.length ? " e le altre qui sotto." : "."}
+            </span>
+          ))}
+        </p>
 
         <section className="mt-10">
           <TitoloSezione>Le città con più posti</TitoloSezione>
@@ -154,7 +187,7 @@ export default async function CategoriaPage({ params }: { params: Promise<{ cate
           <span className="font-extrabold text-viola">Leggi la guida ›</span>
         </Link>
 
-        <Faq voci={cat.faq} />
+        <Faq voci={faq} />
 
         {CATEGORIE_ATTIVE.length > 1 && (
           <section className="mt-10">

@@ -1,0 +1,116 @@
+{
+  "clip": {
+    "test": {
+      "url": "/genitori/sotto-pressione",
+      "attesaIniziale": 900,
+      "azioni": [
+        {
+          "vedi": "[data-comincia]",
+          "attendi": 1200
+        },
+        {
+          "tocca": "[data-comincia]",
+          "attendi": 1200
+        },
+        {
+          "tocca": "[data-percorso] [role=radio][data-valore='4']",
+          "attendi": 1300
+        },
+        {
+          "tocca": "[data-percorso] [role=radio][data-valore='2']",
+          "attendi": 1300
+        },
+        {
+          "tocca": "[data-percorso] [role=radio][data-valore='5']",
+          "attendi": 1300
+        },
+        {
+          "tocca": "[data-percorso] [role=radio][data-valore='3']",
+          "attendi": 1300
+        },
+        {
+          "tocca": "[data-percorso] [role=radio][data-valore='4']",
+          "attendi": 1300
+        }
+      ],
+      "secondi": 1
+    }
+  },
+  "slug": "test-mamma",
+  "scene": [
+    {
+      "tipo": "gancio",
+      "sopra": "Test",
+      "testo": "Che mamma diventi *quando sei sotto pressione*?",
+      "clip": "test",
+      "da": 3.0,
+      "velocita": 0.1,
+      "ritaglio": {
+        "x": 8,
+        "y": 105,
+        "w": 374,
+        "h": 560
+      },
+      "sottotitoli": false,
+      "voce": "Mamma, ti è mai capitato di arrabbiarti per le scarpe che non si infilano?"
+    },
+    {
+      "tipo": "clip",
+      "testo": "45 domande, *10 minuti*",
+      "clip": "test",
+      "da": 3.4,
+      "velocita": 1.3,
+      "ritaglio": {
+        "x": 8,
+        "y": 105,
+        "w": 374,
+        "h": 560
+      },
+      "voce": "Rispondi d'istinto, una domanda alla volta: non ci sono risposte giuste."
+    },
+    {
+      "tipo": "clip",
+      "testo": "*Non è una diagnosi*: è uno spunto",
+      "clip": "test",
+      "da": 8.6,
+      "velocita": 0.5,
+      "ritaglio": {
+        "x": 8,
+        "y": 105,
+        "w": 374,
+        "h": 560
+      },
+      "voce": "Alla fine scopri le tue reazioni automatiche, e un esercizio per la settimana."
+    },
+    {
+      "tipo": "domanda",
+      "testo": "Quando sei di fretta, tu…",
+      "scelte": [
+        "Alzi la voce",
+        "Fai tutto tu",
+        "Respiri e conti fino a 10"
+      ],
+      "sotto": "Rispondi A, B o C 👇",
+      "sottotitoli": false,
+      "voce": "E tu, quando sei di fretta, cosa fai? Rispondi qui sotto!"
+    },
+    {
+      "tipo": "finale",
+      "sopra": "Gratis, 10 minuti",
+      "url": "giocamizi.it/genitori/sotto-pressione",
+      "sottotitoli": false,
+      "minimo": 1.6,
+      "voce": "Il test lo trovi su giocamizi punto it!"
+    }
+  ],
+  "titolo": "Che mamma diventi sotto pressione? Il test",
+  "formato": "Quiz",
+  "tempoVoce": 1.06,
+  "didascalia": "Le scarpe che non si infilano, il bicchiere rovesciato, il «no» al supermercato… In quei momenti spesso non scegliamo: reagiamo. Il test di Giocamizi ti aiuta a riconoscere la tua reazione più frequente: 45 domande, 10 minuti, e alla fine un esercizio per la settimana. Non è una diagnosi: è uno spunto per conoscerti meglio. Gratis.\n\nE tu, quando sei di fretta, cosa fai? A, B o C 👇\n\n🔗 giocamizi.it/genitori/sotto-pressione\n\n#mammeitaliane #genitori #maternità #giocamizi",
+  "storia": "Sticker «Quiz»: «Quando sei di fretta tu…» Urli / Fai tutto tu / Respiri. Sticker «Link» su giocamizi.it/genitori/sotto-pressione",
+  "aperture": [
+    "Che mamma diventi *quando sei sotto pressione*?",
+    "Le scarpe non si infilano, sei in ritardo: *tu cosa fai?*",
+    "Il test che ogni mamma *dovrebbe fare*"
+  ]
+}

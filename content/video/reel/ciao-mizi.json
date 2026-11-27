@@ -1,0 +1,120 @@
+{
+  "clip": {
+    "catalogo": {
+      "url": "/giochi",
+      "attesaIniziale": 800,
+      "azioni": [
+        {
+          "scorri": 500,
+          "attendi": 1500
+        },
+        {
+          "scorri": 1200,
+          "attendi": 1500
+        },
+        {
+          "scorri": 2000,
+          "attendi": 1500
+        }
+      ],
+      "secondi": 1
+    },
+    "memory": {
+      "url": "/giochi/memory-animali/gioca?eta=5&demo=1",
+      "attesaIniziale": 300,
+      "secondi": 16
+    },
+    "storie": {
+      "url": "/storie",
+      "attesaIniziale": 800,
+      "azioni": [
+        {
+          "scorri": 400,
+          "attendi": 1500
+        },
+        {
+          "scorri": 900,
+          "attendi": 1500
+        }
+      ],
+      "secondi": 1
+    }
+  },
+  "slug": "ciao-mizi",
+  "scene": [
+    {
+      "tipo": "gancio",
+      "sopra": "Ciao!",
+      "testo": "51 giochi per bambini. *Zero pubblicità.*",
+      "clip": "catalogo",
+      "da": 3.4,
+      "velocita": 0.05,
+      "ritaglio": {
+        "x": 8,
+        "y": 215,
+        "w": 374,
+        "h": 470
+      },
+      "sottotitoli": false,
+      "voce": "Ciao, sono Mizi! Ti faccio vedere casa mia in venti secondi."
+    },
+    {
+      "tipo": "clip",
+      "testo": "Giochi che *parlano*: dico io cosa fare",
+      "clip": "memory",
+      "da": 1.0,
+      "velocita": 1.4,
+      "ritaglio": {
+        "x": 8,
+        "y": 335,
+        "w": 374,
+        "h": 300
+      },
+      "voce": "Ci sono giochi per i numeri, le lettere, i colori, e anche il coding."
+    },
+    {
+      "tipo": "clip",
+      "testo": "E con *«Ascolta»* si leggono ad alta voce",
+      "clip": "storie",
+      "da": 1.2,
+      "velocita": 0.4,
+      "ritaglio": {
+        "x": 8,
+        "y": 150,
+        "w": 374,
+        "h": 470
+      },
+      "voce": "Poi ci sono le storie da leggere insieme, in stampatello, minuscolo o corsivo."
+    },
+    {
+      "tipo": "domanda",
+      "testo": "Il tuo bimbo da quale gioco *comincerebbe*?",
+      "scelte": [
+        "Memory degli animali",
+        "Colora con Mizi",
+        "La corsa nella piramide"
+      ],
+      "sotto": "Rispondi A, B o C 👇",
+      "sottotitoli": false,
+      "voce": "E il tuo bimbo da quale gioco comincerebbe? Rispondi qui sotto!"
+    },
+    {
+      "tipo": "finale",
+      "sopra": "Gratis, senza pubblicità",
+      "url": "giocamizi.it",
+      "sottotitoli": false,
+      "minimo": 1.6,
+      "voce": "Ti aspetto su giocamizi punto it!"
+    }
+  ],
+  "titolo": "Ciao, sono Mizi: Giocamizi in 20 secondi",
+  "formato": "Mizi parla",
+  "tempoVoce": 1.08,
+  "didascalia": "Ciao, sono Mizi 🐧 Su Giocamizi ci sono 51 giochi educativi per bambini dai 3 ai 12 anni, storie da leggere insieme, inviti di compleanno e posti per le feste. Tutto gratis, senza pubblicità e senza registrazione.\n\nQuale gioco provate per primo? Rispondete A, B o C 👇\n\n🔗 giocamizi.it\n\n#giochiperbambini #giochieducativi #mammeitaliane #giocamizi",
+  "storia": "Sticker «Quiz»: «Quanti giochi ci sono su Giocamizi?» 15 / 30 / 51 ✅. Sticker «Link» su giocamizi.it",
+  "aperture": [
+    "51 giochi per bambini. *Zero pubblicità.*",
+    "Il sito di giochi che *non ti chiede niente*",
+    "Ciao, sono Mizi: *ti faccio vedere casa mia*"
+  ]
+}

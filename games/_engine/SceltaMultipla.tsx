@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { GameShell } from "@/components/game-shell/GameShell";
 import { Disegno, FacciaMizi, Secchiello, type Emozione, type NomeFigura } from "./arte";
+import { Figura } from "./figura";
 import type { Lingua } from "@/lib/giochi/audio";
 import type { GameProps } from "./tipi";
 import { useRound } from "./nucleo";
@@ -22,6 +23,12 @@ import { useRound } from "./nucleo";
  * Round, punti, stelle, suoni, lodi e aiuto vengono dal nucleo comune
  * (nucleo.ts). Qui restano solo le opzioni da toccare: dopo due errori nello
  * stesso round la risposta giusta dondola, così nessuno resta bloccato.
+ *
+ * Il movimento (22/11/2026, .claude/skills/accademia-giochi): niente compare o
+ * cambia di colpo. Le opzioni di un round nuovo entrano una dopo l'altra, la
+ * giusta fa un saltello, quella sbagliata un dondolio morbido prima di
+ * spegnersi. Si muovono solo `transform` e `opacity`, la spunta non sposta
+ * niente, e con «meno movimento» tutto resta fermo (app/globals.css).
  */
 
 export interface Opzione {
@@ -30,6 +37,8 @@ export interface Opzione {
   etichetta?: string;
   /** Figura del catalogo SVG. */
   disegno?: NomeFigura;
+  /** Un disegno di public/figure (figura.tsx): sta sopra l'etichetta, se c'è. */
+  immagine?: string;
   /** Colore di riempimento: forme geometriche e secchielli. */
   colore?: string;
   /** Come va disegnata l'opzione. */
@@ -53,6 +62,8 @@ export interface Round {
   centro?: ReactNode;
   opzioni: Opzione[];
   correttaId: string;
+  /** Detta alla risposta giusta al posto della lode comune: il nome della cosa toccata («Rosso!»). */
+  lode?: string;
   /** Il trucco da dire (e mostrare) dopo un errore, al posto del solito «Riprova». */
   aiuto?: string;
   /** Colonne solo per questo round: vince sulle colonne del gioco. */
@@ -64,6 +75,8 @@ export interface SceltaMultiplaProps extends GameProps {
   round: Round[];
   /** Colonne della griglia di opzioni; di default si adatta al numero. */
   colonne?: number;
+  /** Chiamata quando si tocca «Ancora»: serve ai giochi che prima fanno scegliere qualcosa (le tabelline). */
+  onRicomincia?: () => void;
 }
 
 export function SceltaMultipla({
@@ -72,6 +85,7 @@ export function SceltaMultipla({
   colonne,
   onProgress,
   onComplete,
+  onRicomincia,
   demo = false,
 }: SceltaMultiplaProps) {
   const totale = round.length;
@@ -90,7 +104,7 @@ export function SceltaMultipla({
       if (inPausa || finito) return;
       if (id === corrente.correttaId) {
         // Il punto vale solo se azzeccata al primo colpo; l'errore non toglie nulla.
-        giusto();
+        giusto(corrente.lode);
         return;
       }
       // Errore: feedback gentile, l'opzione si spegne, si resta nel round.
@@ -98,7 +112,7 @@ export function SceltaMultipla({
       setSbagliateDi({ round: indice, ids: [...sbagliate, id] });
       sbagliato(corrente.aiuto);
     },
-    [inPausa, finito, corrente.correttaId, corrente.aiuto, giusto, sbagliato, sbagliate, indice],
+    [inPausa, finito, corrente.correttaId, corrente.aiuto, corrente.lode, giusto, sbagliato, sbagliate, indice],
   );
 
   // Modalità demo per i reel: risponde giusto da sola, una volta al secondo.
@@ -111,7 +125,8 @@ export function SceltaMultipla({
   const ricomincia = useCallback(() => {
     setSbagliateDi({ round: 0, ids: [] });
     partita.ricomincia();
-  }, [partita]);
+    onRicomincia?.();
+  }, [partita, onRicomincia]);
 
   const colonneEffettive =
     corrente.colonne ??
@@ -131,16 +146,18 @@ export function SceltaMultipla({
     >
       <div data-scelta-multipla {...partita.attributi} className="flex h-full w-full max-w-3xl flex-col items-center justify-center gap-6">
         {corrente.centro && (
-          <div className="flex items-center justify-center">{corrente.centro}</div>
+          <div key={indice} className="centro-entra palco figura-ombra flex items-center justify-center">{corrente.centro}</div>
         )}
 
         <div
           className="grid w-full gap-4"
           style={{ gridTemplateColumns: `repeat(${colonneEffettive}, minmax(0, 1fr))` }}
         >
-          {corrente.opzioni.map((opzione) => (
+          {corrente.opzioni.map((opzione, posto) => (
             <BottoneOpzione
-              key={opzione.id}
+              // La chiave cambia a ogni round: i bottoni rinascono e rientrano in scena.
+              key={`${indice}-${opzione.id}`}
+              posto={posto}
               opzione={opzione}
               stato={
                 azzeccata === opzione.id
@@ -174,11 +191,14 @@ function contenutoVisivo(opzione: Opzione): boolean {
 
 function BottoneOpzione({
   opzione,
+  posto,
   stato,
   aiuto,
   onScegli,
 }: {
   opzione: Opzione;
+  /** Il posto nella griglia: decide dopo quanto entra in scena. */
+  posto: number;
   stato: "libera" | "giusta" | "sbagliata";
   /** Dopo due errori la risposta giusta dondola. */
   aiuto: boolean;
@@ -186,22 +206,30 @@ function BottoneOpzione({
 }) {
   const bordo =
     stato === "giusta"
-      ? "border-verde bg-verde/10 scale-105"
+      ? "border-verde bg-verde/10 opzione-giusta tasto-giusto"
       : stato === "sbagliata"
-        ? "border-crema-scuro bg-white opacity-40"
+        ? "border-crema-scuro bg-white opzione-riprova"
         : aiuto
-          ? "border-giallo bg-giallo/20 opzione-aiuto"
-          : "border-crema-scuro bg-white active:scale-95";
+          ? "border-giallo bg-giallo/20 opzione-aiuto tasto"
+          : "border-crema-scuro bg-white opzione-entra tasto";
 
   const contenuto = useMemo(() => {
     const scala = opzione.scala ?? 1;
     const stile = { width: `${scala * 100}%`, height: `${scala * 100}%` };
 
     if (opzione.tipo === "secchiello" && opzione.colore) {
-      return <Secchiello colore={opzione.colore} className="h-20 w-20" />;
+      return <Secchiello colore={opzione.colore} className="figura-ombra aspect-square w-full max-w-28" />;
     }
     if (opzione.tipo === "faccia" && opzione.emozione) {
-      return <FacciaMizi emozione={opzione.emozione} className="h-20 w-20" />;
+      return <FacciaMizi emozione={opzione.emozione} className="figura-ombra aspect-square w-full max-w-28" />;
+    }
+    if (opzione.immagine) {
+      return (
+        <>
+          <Figura nome={opzione.immagine} alt="" className="aspect-square w-full max-w-36" />
+          {opzione.etichetta && <span className="text-center text-lg font-extrabold leading-snug text-notte">{opzione.etichetta}</span>}
+        </>
+      );
     }
     if (opzione.disegno && opzione.ripeti) {
       return (
@@ -214,7 +242,7 @@ function BottoneOpzione({
     }
     if (opzione.disegno) {
       return (
-        <div className="flex h-20 w-20 items-center justify-center">
+        <div className="figura-ombra flex aspect-square w-full max-w-28 items-center justify-center">
           <div style={stile} className="flex items-center justify-center">
             <Disegno id={opzione.disegno} colore={opzione.colore} />
           </div>
@@ -239,7 +267,9 @@ function BottoneOpzione({
       data-stato={stato}
       data-aiuto-opzione={aiuto ? "si" : undefined}
       aria-label={opzione.descrizione ?? opzione.etichetta ?? opzione.id}
-      className={`flex min-h-24 flex-col items-center justify-center gap-1 rounded-morbido border-4 p-3 transition-all ${bordo}`}
+      // Si animano solo trasformazione, trasparenza e colori: niente che faccia ricalcolare la pagina.
+      className={`relative flex min-h-24 touch-manipulation flex-col items-center justify-center gap-1 rounded-morbido border-4 p-3 transition-[transform,opacity,background-color,border-color] duration-150 ${bordo}`}
+      style={stato === "libera" && !aiuto ? { animationDelay: `${Math.min(posto, 8) * 45}ms` } : undefined}
     >
       {contenuto}
       {/* L'etichetta accompagna una figura solo quando il gioco la chiede:
@@ -247,7 +277,12 @@ function BottoneOpzione({
       {opzione.etichetta && opzione.tipo !== "testo" && !!contenutoVisivo(opzione) && (
         <span className="text-lg font-bold text-notte">{opzione.etichetta}</span>
       )}
-      {stato === "giusta" && <span className="text-2xl" aria-hidden>✓</span>}
+      {/* In un angolo, fuori dal flusso: quando compare il bottone non cambia altezza. */}
+      {stato === "giusta" && (
+        <span className="spunta-entra absolute right-2 top-1 text-2xl" aria-hidden>
+          ✓
+        </span>
+      )}
     </button>
   );
 }

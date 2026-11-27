@@ -6,7 +6,7 @@
  * mai un suono «negativo». «riprova» è un tocco morbido di legno, non un buzz.
  */
 
-export type Suono = "gira" | "coppia" | "riprova" | "livello" | "festa" | "figurina" | "aiuto";
+export type Suono = "gira" | "coppia" | "riprova" | "livello" | "festa" | "figurina" | "aiuto" | "salto" | "gemma" | "cassa";
 
 let contesto: AudioContext | null = null;
 
@@ -44,6 +44,10 @@ const SPARTITI: Record<Suono, (c: AudioContext) => void> = {
   aiuto: (c) => { nota(c, SOL, 0, 0.12, 0.07); nota(c, SOL, 0.16, 0.12, 0.07); },
   livello: (c) => { nota(c, DO, 0, 0.14); nota(c, MI, 0.1, 0.14); nota(c, SOL, 0.2, 0.14); nota(c, DO2, 0.3, 0.35); },
   festa: (c) => [DO, MI, SOL, DO2, SOL, DO2, MI2].forEach((hz, i) => nota(c, hz, i * 0.11, i === 6 ? 0.6 : 0.16)),
+  // Le corse (games/_engine/Corsa.tsx): un saltello, una gemma, una cassa che si apre.
+  salto: (c) => { nota(c, MI, 0, 0.08, 0.06, "triangle"); nota(c, DO2, 0.06, 0.12, 0.06, "triangle"); },
+  gemma: (c) => nota(c, SOL2, 0, 0.09, 0.045, "triangle"),
+  cassa: (c) => { nota(c, 196, 0, 0.08, 0.07, "triangle"); nota(c, 262, 0.06, 0.1, 0.06, "triangle"); },
   figurina: (c) => [DO2, MI2, SOL2].forEach((hz, i) => nota(c, hz, i * 0.07, 0.22, 0.08, "triangle")),
 };
 

@@ -269,7 +269,50 @@ ok("frasi a tema (fattoria, tema nuovo)", await page.locator("button:has-text('C
 {
   const html = await (await fetch(`${BASE}/biglietti/inviti-compleanno-safari`)).text();
   ok("frasi a tema anche nella pagina del tema (safari)", html.includes("Zaino in spalla") && html.includes("Leoni, giraffe e torta"));
+  // 27/11/2026 (piano SEO §7): le pagine delle frasi mostrano tutte le frasi,
+  // divise per tema, e cosa scrivere; il creatore dice «senza scaricare app».
+  const inviti = await (await fetch(`${BASE}/biglietti/frasi-inviti-compleanno-bambini`)).text();
+  const gruppi = (inviti.match(/data-gruppo-frasi/g) ?? []).length;
+  ok("frasi per inviti: un gruppo per tema più le comuni, cosa scrivere, niente segnaposto",
+    gruppi >= 28 && inviti.includes("data-cosa-scrivere") && inviti.includes("Zaino in spalla") && !inviti.includes("{nome}") &&
+    /<title>Frasi per inviti di compleanno: \d+ frasi pronte/.test(inviti), `${gruppi} gruppi`);
+  const auguri = await (await fetch(`${BASE}/biglietti/frasi-auguri-compleanno-bambini`)).text();
+  ok("frasi di auguri: «cosa scrivere» nel titolo grande, senza il Natale",
+    auguri.includes("Cosa scrivere nel biglietto di auguri di compleanno") && auguri.includes("data-cosa-scrivere") && !auguri.includes("Buon Natale Sofia"));
+  const crea = await (await fetch(`${BASE}/biglietti/crea`)).text();
+  ok("creatore: la prima riga dice «senza scaricare app» e porta alle frasi",
+    crea.includes("data-senza-app") && crea.includes("Senza scaricare app") && crea.includes("/biglietti/frasi-inviti-compleanno-bambini"));
 }
+
+// Dal 23/11/2026 anche il biglietto di ringraziamento ha due frasi per ogni tema,
+// firmate col nome e senza genere (niente «venuto», «stato», «invitata»).
+{
+  const { readFileSync } = await import("node:fs");
+  const registro = readFileSync("cards/registry.ts", "utf8");
+  const temiTutti = [...registro.split("export const cardBackgrounds")[0].matchAll(/^  \["([a-z-]+)", "/gm)].map((m) => m[1]);
+  const blocco = registro.split("export const graziePerTema")[1].split("export const phrases =")[0];
+  const perTema = Object.fromEntries([...blocco.matchAll(/^  "?([a-z-]+)"?: \[\n([\s\S]*?)\n  \],/gm)].map((m) => [m[1], [...m[2].matchAll(/"([^"\n]+)",/g)].map((f) => f[1])]));
+  const senza = temiTutti.filter((t) => (perTema[t] ?? []).length < 2);
+  const storte = Object.values(perTema).flat().filter((f) => !f.includes("{nome}") || f.length > 80 || /venut[oa]|\bstat[oa]\b|arrivat[oa]|invitat[oa]|\bbimb|\bbrav/i.test(f));
+  ok("grazie a tema: ogni sfondo ne ha due, corti, col nome e senza genere", temiTutti.length >= 27 && senza.length === 0 && storte.length === 0, `senza: ${senza.join(", ")}; storte: ${storte.join(" | ")}`);
+  const generiche = registro.split("ringraziamento: [")[1].split("]")[0];
+  // «È stato bellissimo» è impersonale e va bene: conta solo chi riceve («essere venuto», «sei stata»).
+  ok("grazie generici senza genere", !/(essere|sei|siete) (venut|stat|arrivat)[oaie]\b/.test(generiche), generiche.trim());
+}
+await page.goto(`${BASE}/biglietti/crea?tipo=ringraziamento&tema=safari`, { waitUntil: "networkidle" });
+await page.locator("[data-vedi-tutto]").tap();
+await page.waitForTimeout(400);
+await page.getByLabel("Nome", { exact: true }).fill("Margherita");
+await page.waitForTimeout(200);
+ok("grazie a tema nel creatore (safari): frase del tema, col nome, niente frasi d'invito",
+  (await page.locator("button:has-text('Un grazie alto come una giraffa! Con affetto, Margherita')").count()) === 1 &&
+  (await page.locator("button:has-text('Zaino in spalla')").count()) === 0);
+await page.goto(`${BASE}/biglietti/crea?tipo=invito&tema=safari`, { waitUntil: "networkidle" });
+await page.locator("[data-vedi-tutto]").tap();
+await page.waitForTimeout(400);
+await page.getByLabel("Nome", { exact: true }).fill("Margherita");
+await page.waitForTimeout(200);
+ok("l'invito a tema non prende le frasi di ringraziamento", (await page.locator("button:has-text('Un grazie alto')").count()) === 0 && (await page.locator("button:has-text('Zaino in spalla')").count()) === 1);
 
 // Tema natale: frase dedicata e i tre adesivi nuovi a catalogo
 await page.goto(`${BASE}/biglietti/crea?tema=natale`, { waitUntil: "networkidle" });
@@ -441,7 +484,14 @@ const byteBustaL = bustaPdfL ? readFileSync(await bustaPdfL.path()) : null;
 ok("busta: PDF A4", byteBustaL && byteBustaL.subarray(0, 5).toString() === "%PDF-");
 ok("letterina: il nome del bambino non è mai uscito dalla pagina", richiesteConNome.length === 0, richiesteConNome.join(", "));
 await page.goto(`${BASE}/natale`, { waitUntil: "networkidle" });
-ok("hub del Natale: cinque schede, ognuna col suo disegno", (await page.locator("[data-scheda-natale] svg").count()) === 5);
+ok("hub del Natale: otto schede (pixel art dal 24/11/2026, Colora il Natale dal 25/11, disegni da colorare dal 26/11), ognuna col suo disegno", (await page.locator("[data-scheda-natale] svg").count()) === 8);
+// Disegni di Natale da colorare (26/11/2026): dieci anteprime che si caricano,
+// dieci PDF e quello con tutti, che sono PDF veri.
+await page.goto(`${BASE}/natale/disegni-da-colorare`, { waitUntil: "networkidle" });
+const anteprime = await page.locator("[data-disegni-natale] img").evaluateAll((im) => im.map((i) => { i.loading = "eager"; return i.src; }));
+const pdfDisegni = await page.locator("[data-scarica-disegno], [data-scarica-tutti]").evaluateAll((a) => a.map((x) => x.href));
+const controlli = await Promise.all([...anteprime, ...pdfDisegni].map(async (u) => { const r = await page.request.get(u); const b = await r.body(); return r.ok() && (u.endsWith(".pdf") ? b.subarray(0, 5).toString() === "%PDF-" : b.length > 1000); }));
+ok("disegni di Natale: dieci anteprime e undici PDF che si aprono", anteprime.length === 10 && pdfDisegni.length === 11 && controlli.every(Boolean), `${anteprime.length} anteprime, ${pdfDisegni.length} PDF, ${controlli.filter((c) => !c).length} non vanno`);
 await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
 ok("home: in stagione c'è il riquadro del Natale", await page.locator("[data-riquadro-natale]").first().isVisible());
 

@@ -13,6 +13,9 @@ const BREVO_API = "https://api.brevo.com/v3";
 export interface ContattoBrevo {
   email: string;
   nomeGenitore?: string;
+  /** Cognome e fascia d'età: solo dal modulo del test per i genitori. */
+  cognome?: string;
+  etaGenitore?: string;
   citta?: string;
   professione?: string;
   etaFiglio?: number;
@@ -39,7 +42,7 @@ const LISTE = { genitori: "Giocamizi · Genitori", insegnanti: "Giocamizi · Ins
 /** Attributi del modulo: se mancano nell'account Brevo li crea il sito. */
 const ATTRIBUTI: [string, "text" | "float" | "date"][] = [
   ["CITTA", "text"], ["PROFESSIONE", "text"], ["ETA_FIGLIO", "float"], ["CLASSE", "text"],
-  ["ORIGINE", "text"], ["CONSENSO_DATA", "date"], ["CONSENSO_FONTE", "text"], ["BENVENUTO", "date"],
+  ["ORIGINE", "text"], ["ETA_GENITORE", "text"], ["CONSENSO_DATA", "date"], ["CONSENSO_FONTE", "text"], ["BENVENUTO", "date"],
 ];
 
 async function api(metodo: "GET" | "POST" | "PUT", percorso: string, body?: unknown) {
@@ -302,6 +305,8 @@ export async function creaContatto(contatto: ContattoBrevo) {
       redirectionUrl: `https://giocamizi.it/iscrizione-confermata?t=${codiceBenvenuto(contatto.email) ?? ""}`,
       attributes: {
         FIRSTNAME: contatto.nomeGenitore,
+        LASTNAME: contatto.cognome,
+        ETA_GENITORE: contatto.etaGenitore,
         CITTA: contatto.citta,
         PROFESSIONE: contatto.professione,
         ETA_FIGLIO: contatto.etaFiglio,
@@ -318,6 +323,8 @@ export async function creaContatto(contatto: ContattoBrevo) {
     attributes: {
       // FIRSTNAME è l'attributo standard già presente nell'account Brevo.
       FIRSTNAME: contatto.nomeGenitore,
+      LASTNAME: contatto.cognome,
+      ETA_GENITORE: contatto.etaGenitore,
       CITTA: contatto.citta,
       PROFESSIONE: contatto.professione,
       ETA_FIGLIO: contatto.etaFiglio,
@@ -332,7 +339,7 @@ export async function creaContatto(contatto: ContattoBrevo) {
   if (!esito.ok && /attribute/i.test(esito.motivo ?? "")) {
     return chiama("/contacts", {
       ...base,
-      attributes: { FIRSTNAME: contatto.nomeGenitore, CITTA: contatto.citta },
+      attributes: { FIRSTNAME: contatto.nomeGenitore, LASTNAME: contatto.cognome, CITTA: contatto.citta },
     });
   }
 

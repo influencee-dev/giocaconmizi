@@ -1,8 +1,10 @@
 import { TestataPagina } from "@/components/vetrina";
 import type { Metadata } from "next";
 import { games } from "@/games/registry";
+import { giochiRecenti } from "@/lib/giochi/novita";
 import { Contenitore } from "@/components/ui";
 import { CatalogoGiochi } from "@/components/giochi/CatalogoGiochi";
+import { GiochiSenzaRete } from "@/components/app/GiochiSenzaRete";
 import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
@@ -34,6 +36,7 @@ export default function GiochiPage() {
       </TestataPagina>
 
       <CatalogoGiochi
+        novita={giochiRecenti(4).map((g) => g.slug)}
         giochi={games.map((g) => ({
           slug: g.slug,
           title: g.title,
@@ -44,6 +47,10 @@ export default function GiochiPage() {
           skill: g.skill,
         }))}
       />
+
+      <div className="mt-10">
+        <GiochiSenzaRete />
+      </div>
     </Contenitore>
   );
 }

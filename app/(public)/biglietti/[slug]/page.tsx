@@ -15,6 +15,7 @@ import {
   temiPer,
   tutteLePagine,
   type Pagina,
+  type Tipo,
 } from "@/lib/biglietti/biglietti";
 import { url } from "@/lib/seo/seo";
 
@@ -52,11 +53,22 @@ function descrivi(pagina: Pagina): {
   const nomi = NOMI_TIPO[pagina.tipo];
 
   if (pagina.genere === "frasi") {
+    // 27/11/2026 (piano SEO §7): «frasi inviti compleanno» e «cosa scrivere
+    // biglietto auguri compleanno». Tutte le frasi nostre, non solo tre.
+    const quante = frasiPerTema(pagina.tipo).reduce((n, g) => n + g.frasi.length, 0);
+    if (pagina.tipo === "invito") {
+      return {
+        h1: "Frasi per inviti di compleanno per bambini",
+        titolo: `Frasi per inviti di compleanno: ${quante} frasi pronte`,
+        descrizione: `${quante} frasi pronte per l'invito di compleanno di tuo figlio, anche a tema, e cosa scrivere sull'invito. Copiale o aprile già scritte nel creatore gratuito.`,
+        risposta: `Qui trovi ${quante} frasi per l'invito di compleanno, brevi e col nome del festeggiato, divise per tema. Sotto c'è cosa scrivere sull'invito oltre alla frase. Ogni gruppo apre il creatore con lo sfondo giusto: aggiungi il nome e mandalo su WhatsApp o stampalo.`,
+      };
+    }
     return {
-      h1: `Frasi per ${nomi.plurale} di compleanno per bambini`,
-      titolo: `Frasi per ${nomi.plurale} di compleanno`,
-      descrizione: `Frasi pronte per ${nomi.plurale} di compleanno per bambini: copiale o usale direttamente nel nostro creatore gratuito.`,
-      risposta: `Ecco le frasi che funzionano meglio per ${nomi.plurale} di compleanno dei bambini. Puoi copiarle oppure aprirle già scritte dentro il creatore, dove basta aggiungere il nome.`,
+      h1: "Cosa scrivere nel biglietto di auguri di compleanno di un bambino",
+      titolo: "Frasi di auguri di compleanno per bambini, pronte",
+      descrizione: `${quante} frasi di auguri di compleanno per bambini, brevi e col nome, e cosa scrivere nel biglietto. Copiale o aprile già scritte nel creatore gratuito.`,
+      risposta: `Nel biglietto di auguri per un bambino basta poco: il suo nome, una frase breve e la firma. Qui trovi ${quante} frasi pronte da copiare, oppure da aprire già scritte nel creatore, dove scegli lo sfondo e lo scarichi.`,
     };
   }
 
@@ -108,6 +120,47 @@ function descrivi(pagina: Pagina): {
 }
 
 const maiuscola = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/**
+ * Le frasi di un tipo divise in gruppi: prima quelle comuni, poi una per tema.
+ * Negli auguri di compleanno il Natale resta fuori (ha la sua pagina).
+ */
+function frasiPerTema(tipo: Tipo): { tema?: string; nome: string; frasi: string[] }[] {
+  const comuni = frasi(tipo, "{nome}", "{eta}");
+  const gruppi: { tema?: string; nome: string; frasi: string[] }[] = [];
+  for (const t of temi) {
+    if (tipo !== "invito" && t.theme === "natale") continue;
+    const tutte = frasi(tipo, "{nome}", "{eta}", t.theme);
+    const sue = tutte.slice(0, tutte.length - comuni.length);
+    if (sue.length) gruppi.push({ tema: t.theme, nome: t.label, frasi: sue });
+  }
+  return [{ nome: "Frasi brevi, per ogni festa", frasi: comuni }, ...gruppi];
+}
+
+/** Il segnaposto diventa un nome d'esempio, così la frase si legge come sarà. */
+const conEsempio = (f: string) => f.replace(/\{nome\}/g, "Sofia").replace(/\{eta\}/g, "6");
+
+const COSA_SCRIVERE: Record<"invito" | "auguri", { titolo: string; voci: string[] }> = {
+  invito: {
+    titolo: "Cosa scrivere sull'invito, oltre alla frase",
+    voci: [
+      "Il nome del festeggiato e quanti anni compie.",
+      "Il giorno, l'ora d'inizio e, se serve, l'ora in cui finisce.",
+      "L'indirizzo preciso del posto, con il nome della sala o del locale.",
+      "A chi confermare e entro quando: un numero per WhatsApp basta.",
+      "Se serve qualcosa: calzini antiscivolo, costume, cambio di vestiti.",
+    ],
+  },
+  auguri: {
+    titolo: "Cosa scrivere nel biglietto di auguri",
+    voci: [
+      "Il nome del bambino, all'inizio: è la prima cosa che cerca.",
+      "Una frase breve, che lui o lei possa leggere da solo se va già a scuola.",
+      "Un augurio per l'anno che comincia: amici, giochi, cose nuove.",
+      "La firma di chi lo manda: per i più piccoli anche un disegno va bene.",
+    ],
+  },
+};
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
@@ -162,6 +215,21 @@ export default async function PaginaBiglietti({ params }: Params) {
         "Sì: usa Salva il link. Riaprendolo ritrovi il biglietto com'era e puoi cambiare solo il nome dell'invitato.",
     },
   ];
+  if (pagina.genere === "frasi" && pagina.tipo === "invito") {
+    faq.unshift({
+      domanda: "Cosa si scrive su un invito di compleanno per bambini?",
+      risposta:
+        "Il nome e gli anni del festeggiato, giorno e ora, l'indirizzo del posto e a chi confermare entro quando. La frase d'invito va in alto ed è meglio corta: una riga col nome del bambino.",
+    });
+  } else if (pagina.genere === "frasi") {
+    faq.unshift({
+      domanda: "Cosa scrivere nel biglietto di auguri di compleanno di un bambino?",
+      risposta:
+        "Il suo nome, una frase breve di auguri e la firma. Se va già a scuola, scegli parole semplici che possa leggere da solo.",
+    });
+  }
+  const gruppiFrasi = pagina.genere === "frasi" ? frasiPerTema(pagina.tipo) : [];
+  const cosaScrivere = pagina.genere === "frasi" && pagina.tipo !== "ringraziamento" ? COSA_SCRIVERE[pagina.tipo] : null;
 
   return (
     <Contenitore className="py-10">
@@ -236,16 +304,56 @@ export default async function PaginaBiglietti({ params }: Params) {
         </div>
       </section>
 
-      <section className="mt-12">
-        <TitoloSezione>Tre frasi pronte</TitoloSezione>
-        <ul className="flex flex-col gap-3">
-          {frasiPronte.map((f) => (
-            <li key={f} className="rounded-[1.4rem] border border-notte/10 bg-white p-4 text-lg text-notte">
-              {f}
-            </li>
-          ))}
-        </ul>
-      </section>
+      {cosaScrivere && (
+        <section className="mt-12" data-cosa-scrivere>
+          <TitoloSezione>{cosaScrivere.titolo}</TitoloSezione>
+          <ul className="flex max-w-2xl list-disc flex-col gap-2 pl-6 text-lg text-notte">
+            {cosaScrivere.voci.map((v) => (
+              <li key={v}>{v}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {gruppiFrasi.length > 0 ? (
+        <section className="mt-12" data-frasi-tutte>
+          <TitoloSezione>Le frasi, divise per tema</TitoloSezione>
+          <p className="mb-6 max-w-2xl text-notte-tenue">
+            Sofia e 6 anni sono un esempio: nel creatore metti il nome e l&apos;età di tuo figlio.
+          </p>
+          <div className="flex flex-col gap-8">
+            {gruppiFrasi.map((g) => (
+              <div key={g.nome} data-gruppo-frasi>
+                <h3 className="mb-3 text-xl font-extrabold text-notte">{g.nome}</h3>
+                <ul className="flex flex-col gap-2">
+                  {g.frasi.map(conEsempio).map((f) => (
+                    <li key={f} className="rounded-[1.4rem] border border-notte/10 bg-white p-4 text-lg text-notte">
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href={linkAlTool({ tipo, tema: g.tema })}
+                  className="mt-3 inline-block font-bold text-viola hover:text-notte"
+                >
+                  {g.tema ? `Crea ${tipo === "invito" ? "l'invito" : "il biglietto"} ${g.nome.toLowerCase()} con queste frasi →` : `Usale nel creatore →`}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <section className="mt-12">
+          <TitoloSezione>Tre frasi pronte</TitoloSezione>
+          <ul className="flex flex-col gap-3">
+            {frasiPronte.map((f) => (
+              <li key={f} className="rounded-[1.4rem] border border-notte/10 bg-white p-4 text-lg text-notte">
+                {f}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {pagina.genere !== "colorare" && tipo !== "ringraziamento" && (
         <section className="mt-12">

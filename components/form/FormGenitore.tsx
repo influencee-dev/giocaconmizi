@@ -12,7 +12,7 @@ import { useState } from "react";
  * - non blocca niente: i giochi restano liberi anche se non lo si compila
  */
 
-export type Origine = "dopo-il-gioco" | "footer" | "biglietti" | "pdf";
+export type Origine = "dopo-il-gioco" | "footer" | "biglietti" | "pdf" | "test-sotto-pressione";
 
 type Stato = { tipo: "fermo" } | { tipo: "invio" } | { tipo: "fatto" } | { tipo: "errore"; messaggio: string };
 

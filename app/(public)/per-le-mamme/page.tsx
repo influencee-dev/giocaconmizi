@@ -1,6 +1,7 @@
 import { TestataPagina } from "@/components/vetrina";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { InvitoTest } from "@/components/genitori/InvitoTest";
 import { Contenitore, TitoloSezione } from "@/components/ui";
 import { FacciaMizi } from "@/games/_engine/arte";
 import { TITOLARE } from "@/lib/contenuti/legal";
@@ -40,6 +41,8 @@ export default function PerLeMammePage() {
           pagamento, e ogni realtà viene verificata una per una prima di entrare.
         </p>
       </TestataPagina>
+
+      <InvitoTest className="mt-6" />
 
       {/* Invito a farsi inserire */}
       <div className="mt-6 flex items-start gap-4 rounded-[1.4rem] border border-notte/10 bg-white p-5">

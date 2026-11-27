@@ -32,12 +32,46 @@ function delGiorno<T>(lista: T[]): T | undefined {
   return lista[giorno % lista.length];
 }
 
-export function HomeApp({ giochi, inVetrina }: { giochi: GiocoBreve[]; inVetrina: string[] }) {
+/** Una guida o un articolo da mostrare nella home dell'app. */
+export interface LetturaBreve {
+  slug: string;
+  titolo: string;
+  minuti: number;
+  /** La foto piccola di testata, se è già arrivata. */
+  foto?: string;
+}
+
+/**
+ * La home dell'app resta com'era: Giorgia (22/11/2026) ha chiesto di
+ * aggiungere SOLO il blocco degli articoli, in fondo. Prima nell'app c'era
+ * solo una casella «Guide» e gli articoli nuovi non si vedevano mai.
+ * L'ordine nell'app è: giochi, location, storie, articoli (le caselle «Per la
+ * mamma» lo seguono già). La barra in basso: Home, Giochi, Feste, Storie, Profilo.
+ *
+ * `recenti`: gli slug degli ultimi arrivati, dal più recente (lib/giochi/novita.ts).
+ * `letture`: gli articoli e le guide più recenti.
+ */
+export function HomeApp({
+  giochi,
+  inVetrina,
+  recenti = [],
+  letture = [],
+}: {
+  giochi: GiocoBreve[];
+  inVetrina: string[];
+  recenti?: string[];
+  letture?: LetturaBreve[];
+}) {
   const { profilo, pronto } = useProfilo();
   const bimbo = bimboAttivo(profilo);
   const adatti = bimbo ? giochi.filter((g) => bimbo.eta >= g.etaMin && bimbo.eta <= g.etaMax) : giochi.filter((g) => inVetrina.includes(g.slug));
   const oggi = delGiorno(adatti.length ? adatti : giochi);
   const carosello = (adatti.length ? adatti : giochi).filter((g) => g.slug !== oggi?.slug).slice(0, 8);
+  // Gli ultimi arrivati: i due più recenti adatti all'età del bimbo, diversi dal gioco di oggi.
+  const ultimi = recenti
+    .map((s) => giochi.find((g) => g.slug === s))
+    .filter((g): g is GiocoBreve => Boolean(g) && g!.slug !== oggi?.slug && (!bimbo || (bimbo.eta >= g!.etaMin && bimbo.eta <= g!.etaMax)))
+    .slice(0, 2);
 
   return (
     <section className="px-4 pt-4 md:hidden" aria-label="La tua giornata su Giocamizi" data-home-app>
@@ -101,6 +135,33 @@ export function HomeApp({ giochi, inVetrina }: { giochi: GiocoBreve[]; inVetrina
         </div>
       )}
 
+      {ultimi.length > 0 && (
+        <div className="mt-5" data-ultimi-arrivati-app>
+          <p className="text-lg font-black text-notte">Gli ultimi arrivati</p>
+          <ul className="mt-2 flex flex-col gap-2">
+            {ultimi.map((g, i) => (
+              <li key={g.slug}>
+                <Link
+                  href={`/giochi/${g.slug}`}
+                  className="flex items-center gap-3 rounded-[1.4rem] bg-white p-3 shadow-[0_8px_20px_-14px_rgba(31,36,48,0.5)]"
+                  data-ultimo-arrivato={g.slug}
+                >
+                  <span className={`flex h-16 min-w-24 shrink-0 items-center justify-center rounded-2xl px-2 ${TONI[(i + 2) % TONI.length]}`}>
+                    <IconaGioco slug={g.slug} skill={g.skill} lato="h-9 w-9" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[17px] font-black leading-tight text-notte [overflow-wrap:anywhere]">{g.titolo}</span>
+                    <span className="block text-sm font-bold text-notte-tenue">
+                      {g.etaMin}–{g.etaMax} anni · {g.minuti} minuti
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {/* Le età (senza profilo) o i giochi scelti per l'età */}
       {!bimbo && (
         <div className="mt-5">
@@ -147,7 +208,7 @@ export function HomeApp({ giochi, inVetrina }: { giochi: GiocoBreve[]; inVetrina
 
       {/* Per la mamma */}
       <p className="mt-5 text-lg font-black text-notte">Per la mamma</p>
-      <div className="mt-2 grid grid-cols-2 gap-3">
+      <div className="mt-2 grid grid-cols-2 gap-3" data-per-la-mamma>
         {[
           { href: "/biglietti", nome: "Inviti", sotto: "per il compleanno", Icona: Gift, tono: "bg-[#FDE8F0]" },
           { href: "/feste", nome: "Feste", sotto: "posti nella tua città", Icona: PartyPopper, tono: "bg-[#FFF3CF]" },
@@ -161,6 +222,42 @@ export function HomeApp({ giochi, inVetrina }: { giochi: GiocoBreve[]; inVetrina
           </Link>
         ))}
       </div>
+
+      {/* Gli ultimi articoli, con la foto: l'unico blocco aggiunto alla home (Giorgia, 22/11/2026). */}
+      {letture.length > 0 && (
+        <div className="mt-6" data-letture-app>
+          <div className="flex items-center justify-between">
+            <p className="text-lg font-black text-notte">Articoli per i genitori</p>
+            <Link href="/guide" className="text-sm font-black text-viola" style={{ minHeight: 0, minWidth: 0 }}>
+              Vedi tutte
+            </Link>
+          </div>
+          <ul className="mt-2 flex flex-col gap-2">
+            {letture.map((l, i) => (
+              <li key={l.slug}>
+                <Link
+                  href={`/guide/${l.slug}`}
+                  className="flex items-center gap-3 rounded-[1.4rem] bg-white p-3 shadow-[0_8px_20px_-14px_rgba(31,36,48,0.5)]"
+                  data-lettura={l.slug}
+                >
+                  {l.foto ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- foto già pronta in tre misure: qui basta la piccola
+                    <img src={l.foto} alt="" width={96} height={64} loading="lazy" decoding="async" className="h-16 w-24 shrink-0 rounded-2xl object-cover" />
+                  ) : (
+                    <span className={`flex h-16 w-24 shrink-0 items-center justify-center rounded-2xl ${TONI[i % TONI.length]}`}>
+                      <BookOpen className="h-7 w-7 text-notte" strokeWidth={2.2} aria-hidden />
+                    </span>
+                  )}
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[16px] font-black leading-tight text-notte [overflow-wrap:anywhere]">{l.titolo}</span>
+                    <span className="mt-0.5 block text-sm font-bold text-notte-tenue">{l.minuti} minuti di lettura</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
 }

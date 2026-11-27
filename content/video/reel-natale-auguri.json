@@ -1,0 +1,93 @@
+{
+  "gruppo": "reel",
+  "reel": true,
+  "voce": "mamma",
+  "regia": [
+    "Apertura: un sospiro complice e divertito, da mamma che sa quanto è piena la lista: \"i biglietti da preparare sono TANTI\", poi elenca \"per i nonni, per la maestra, per gli amici\" in crescendo. \"Ecco un modo SEMPLICE\" con il sollievo di chi porta la soluzione; calca \"INSIEME ai bambini\".",
+    "Spiegazione: tono coinvolgente e pratico; pausa di attesa prima di \"e siete già… a METÀ\", detto con un sorriso soddisfatto.",
+    "Racconto vivace e scandito, come chi mostra i passaggi con le mani: il nome, gli adesivi, la foto; leggera sorpresa su \"si manda su WhatsApp\" e su \"oppure si stampa\".",
+    "Momento tenero: rallenta, voce morbida e commossa su \"il regalo per i nonni lo finiscono i BAMBINI… con i LORO colori\".",
+    "Finale: caldo e festoso, come un abbraccio. \"BUONE FESTE!\" con un grande sorriso."
+  ],
+  "slug": "reel-natale-auguri",
+  "titolo": "Reel · Gli auguri di Natale",
+  "schermate": {
+    "frasi": {
+      "url": "/natale/biglietti-di-natale",
+      "azioni": [],
+      "selettori": [
+        "[data-frasi-brevi]"
+      ]
+    },
+    "crea": {
+      "url": "/biglietti/crea?tipo=auguri&tema=natale&variante=colorato&formato=a6",
+      "azioni": [
+        {
+          "attendi": 800
+        }
+      ],
+      "selettori": [
+        "button:has-text(\"Invia su WhatsApp\")"
+      ]
+    },
+    "colorare": {
+      "url": "/biglietti/crea?tipo=auguri&tema=natale&variante=colorare&formato=a6",
+      "azioni": [
+        {
+          "attendi": 800
+        }
+      ],
+      "selettori": [
+        "button:has-text(\"Invia su WhatsApp\")"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per le mamme",
+      "titolo": "Gli auguri di Natale",
+      "sottotitolo": "Biglietti con frasi pronte, gratis.",
+      "voce": "A dicembre i biglietti da preparare sono tanti: per i nonni, per la maestra, per gli amici. Ecco un modo semplice per farli, anche insieme ai bambini."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Le frasi brevi",
+      "testo": "Divise per nonni, maestra, amici e famiglia.",
+      "schermata": "frasi",
+      "evidenzia": [
+        "[data-frasi-brevi]"
+      ],
+      "voce": "Nella pagina dei biglietti di Natale ci sono le frasi di auguri brevi, divise per chi le riceve. Ne scegliete una e siete già a metà."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Il nome e lo sfondo",
+      "testo": "Poi lo mandi su WhatsApp o lo stampi.",
+      "schermata": "crea",
+      "evidenzia": [
+        "button:has-text(\"Invia su WhatsApp\")"
+      ],
+      "voce": "Nel creatore si scrive il nome di chi lo riceve, si aggiungono adesivi o una foto, e il biglietto si manda su WhatsApp oppure si stampa."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 3,
+      "titolo": "Anche da colorare",
+      "testo": "Contorni neri: lo colorano i bambini.",
+      "schermata": "colorare",
+      "evidenzia": [
+        "button:has-text(\"Invia su WhatsApp\")"
+      ],
+      "voce": "E c'è la versione da colorare: si stampa a contorni neri, e il regalo per i nonni lo finiscono i bambini, con i loro colori."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/natale/biglietti-di-natale",
+      "sotto": "Biglietti di auguri di Natale, gratis.",
+      "voce": "Li trovate su giocamizi punto it, nella pagina di Natale. Buone feste!"
+    }
+  ]
+}

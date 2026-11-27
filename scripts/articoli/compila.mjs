@@ -41,6 +41,39 @@ export const testoPiano = (html) =>
     .replace(/\s+/g, " ")
     .trim();
 
+/**
+ * Le misure di un'immagine nostra (22/11/2026). Senza larghezza e altezza la
+ * pagina «salta» quando la foto arriva; senza le varianti il telefono scarica
+ * la foto grande. Per i file /immagini/<nome>-<larghezza>.webp si leggono le
+ * misure vere dal file e si elencano le varianti di lib/foto/immagini-varianti.json.
+ */
+const VARIANTI = JSON.parse(fs.readFileSync(path.join(RADICE, "lib/foto/immagini-varianti.json"), "utf8"));
+
+function misureWebp(file) {
+  const b = fs.readFileSync(file);
+  if (b.toString("ascii", 0, 4) !== "RIFF" || b.toString("ascii", 8, 12) !== "WEBP") return null;
+  const tipo = b.toString("ascii", 12, 16);
+  if (tipo === "VP8X") return { w: b.readUIntLE(24, 3) + 1, h: b.readUIntLE(27, 3) + 1 };
+  if (tipo === "VP8 ") return { w: b.readUInt16LE(26) & 0x3fff, h: b.readUInt16LE(28) & 0x3fff };
+  if (tipo === "VP8L") {
+    const n = b.readUInt32LE(21);
+    return { w: (n & 0x3fff) + 1, h: ((n >> 14) & 0x3fff) + 1 };
+  }
+  return null;
+}
+
+function misureImmagine(href) {
+  const m = /^\/immagini\/(.+)-(\d+)\.webp$/.exec(href);
+  if (!m) return "";
+  const file = path.join(RADICE, "public", href);
+  const misure = fs.existsSync(file) ? misureWebp(file) : null;
+  const larghezze = VARIANTI[m[1]] ?? [];
+  const serie = larghezze.length
+    ? ` srcset="${larghezze.map((w) => `/immagini/${m[1]}-${w}.webp ${w}w`).join(", ")}" sizes="(min-width: 800px) 760px, 100vw"`
+    : "";
+  return `${misure ? ` width="${misure.w}" height="${misure.h}"` : ""}${serie}`;
+}
+
 const CHIP = {
   si: ["si", "Sì"],
   no: ["no", "No"],
@@ -101,7 +134,7 @@ function creaMarked(indice) {
         return `<a href="${esc(href)}"${title ? ` title="${esc(title)}"` : ""}${esterno ? ' target="_blank" rel="noopener"' : ""}>${testo}</a>`;
       },
       image({ href, title, text }) {
-        return `<figure class="immagine"><img src="${esc(href)}" alt="${esc(text)}" loading="lazy" decoding="async">${title ? `<figcaption>${esc(title)}</figcaption>` : ""}</figure>`;
+        return `<figure class="immagine"><img src="${esc(href)}"${misureImmagine(href)} alt="${esc(text)}" loading="lazy" decoding="async">${title ? `<figcaption>${esc(title)}</figcaption>` : ""}</figure>`;
       },
     },
   });

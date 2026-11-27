@@ -385,6 +385,23 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   ok("vesti Mizi: fino alla festa, senza errori", (await page.locator("[data-festa]").isVisible().catch(() => false)) && erroriJs === prima);
 }
 
+// Colora il Natale (25/11/2026): stesso gioco, quattro disegni di Natale. Il
+// primo è l'albero: il secchiello riempie il piano di sotto, «Fatto» porta al
+// pupazzo di neve.
+{
+  const prima = erroriJs;
+  await page.goto(`${BASE}/giochi/colora-il-natale/gioca`, { waitUntil: "networkidle" });
+  await page.waitForTimeout(800);
+  await page.locator('[data-colore="verde"]').tap();
+  await page.locator('[data-parte="piano-basso"]').dispatchEvent("click");
+  const verde = await page.locator('[data-parte="piano-basso"]').getAttribute("fill");
+  await page.locator("[data-fatto]").tap();
+  await page.waitForTimeout(400);
+  ok("colora il Natale: l'albero si riempie e «Fatto» porta al pupazzo di neve",
+    verde === "#43A047" && (await page.locator('[data-parte="naso"]').count()) === 1 && erroriJs === prima,
+    `fill ${verde}`);
+}
+
 // Colora con Mizi: secchiello, pennello col dito, annulla, salva, sei disegni.
 {
   const prima = erroriJs;
@@ -536,13 +553,16 @@ ok("og:image di una città", await ogServita("/feste/milano"));
     proposte: [...document.querySelectorAll("[data-proposta]")].map((x) => x.getAttribute("data-proposta")),
     sbordo: document.documentElement.scrollWidth - window.innerWidth,
   }));
-  ok("album: 3 figurine prese su 39, coccarda contata, tre giochi nuovi da provare",
-    album.prese === 3 && album.tutte === 39 && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
+  // Le figurine sono una per gioco vivo: il numero si legge dal registro (prima era scritto a mano).
+  const giochiVivi = [...readFileSync("games/registry.ts", "utf8").matchAll(/status: "live"/g)].length;
+  ok(`album: 3 figurine prese su ${giochiVivi}, coccarda contata, tre giochi nuovi da provare`,
+    album.prese === 3 && album.tutte === giochiVivi && album.oggi === "3" && album.coccarde === "1" && album.proposte.length === 3 &&
     !album.proposte.some((s) => ["memory-animali", "conta-fino-a-10", "abbina-i-colori"].includes(s)) && album.sbordo <= 0, JSON.stringify(album));
   await m.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
   await m.waitForTimeout(400);
   ok("catalogo: la fascia dell'album e le stelle sui giochi già finiti",
-    (await m.locator("[data-fascia-album]").getAttribute("data-fascia-album")) === "3" && (await m.locator("[data-stelle-gioco]").count()) === 3);
+    (await m.locator("[data-fascia-album]").getAttribute("data-fascia-album")) === "3" && // Un gioco finito può comparire due volte (in «Gli ultimi arrivati» e nella sua fascia d'età): si contano i giochi, non le card.
+    new Set(await m.locator("[data-stelle-gioco]").evaluateAll((els) => els.map((el) => el.closest("a")?.getAttribute("href")))).size === 3);
 
   // Demo (per i reel): prima si bloccava alla seconda carta. E non riempie l'album.
   const d = await ctx.newPage();
@@ -658,6 +678,9 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   ok("nucleo: chi sbaglia a ogni round prende una stella, mai zero", stelleS === String(stelleAttese), `stelle ${stelleS}`);
   ok("nucleo: la partita finita mette la figurina nell'album", album.giochi?.["abbina-i-colori"]?.stelle === stelleAttese && album.giochi["abbina-i-colori"].volte === 1, JSON.stringify(album.giochi ?? {}));
   ok("nucleo: lodi e incoraggiamenti detti sono quelli del copione", detto.some((t) => nucleo.has(t)) && !detto.some((t) => /Brav[oa]/.test(t)), detto.slice(0, 6).join(" | "));
+  // «Abbina i colori» (22/11/2026): istruzioni e nomi dei colori sono nel copione, quindi registrati.
+  const tuttoIlCopioneA = new Set(Object.values(copione.frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
+  ok("abbina i colori: tutto quello che Mizi dice è nel copione, e alla risposta giusta dice il colore", detto.every((t) => tuttoIlCopioneA.has(t)) && detto.some((t) => (copione.frasi["abbina-i-colori"] ?? []).slice(7).includes(t)), detto.filter((t) => !tuttoIlCopioneA.has(t)).join(" | "));
   // La pagina del gioco mostra la sua figurina: presa (con le stelle) dopo la partita, da prendere prima.
   await s.goto(`${BASE}/giochi/abbina-i-colori`, { waitUntil: "networkidle" });
   const presa = s.locator("[data-figurina-gioco=presa]");
@@ -896,6 +919,243 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   }
   ok("labirinto: da computer Mizi si muove con le frecce", mossaT);
   await ctxT.close();
+}
+
+// «Gli ultimi arrivati» (21/11/2026): home e catalogo mostrano da soli i giochi
+// nuovi o appena migliorati, dal più recente (lib/giochi/novita.ts).
+{
+  const { readFileSync } = await import("node:fs");
+  const date = JSON.parse(readFileSync("lib/seo/date-pagine.json", "utf8"));
+  const registroN = readFileSync("games/registry.ts", "utf8");
+  const viviN = [...registroN.matchAll(/slug: "([^"]+)"[^}]*?status: "live"/g)].map((x) => x[1]);
+  const giornoN = (s) => [date[`games/${s}`], date[`content/games/${s}.md`]].filter(Boolean).sort().at(-1) ?? "";
+  const attesi = viviN.map((s, i) => ({ s, i })).sort((a, b) => giornoN(b.s).localeCompare(giornoN(a.s)) || b.i - a.i).slice(0, 4).map((v) => v.s);
+  const ctxN = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const n = await ctxN.newPage();
+  await n.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
+  const inCatalogo = await n.locator("[data-ultimi-arrivati] a").evaluateAll((els) => els.map((el) => el.getAttribute("href")?.replace("/giochi/", "")));
+  ok("ultimi arrivati: in cima al catalogo i quattro giochi modificati più di recente, in ordine", inCatalogo.join() === attesi.join(), `${inCatalogo.join(" ")} (attesi ${attesi.join(" ")})`);
+  await n.goto(`${BASE}/`, { waitUntil: "networkidle" });
+  const inHome = await n.locator("[data-ultimi-arrivati-app] [data-ultimo-arrivato]").evaluateAll((els) => els.map((el) => el.getAttribute("data-ultimo-arrivato")));
+  ok("ultimi arrivati: sul telefono la home ne mostra due, tra i più recenti", inHome.length === 2 && inHome.every((s) => attesi.includes(s)), inHome.join(" "));
+  await ctxN.close();
+}
+
+// «Trova la forma» (22/11/2026): istruzioni e nomi delle forme nel copione; alla risposta giusta Mizi dice la forma.
+{
+  const { readFileSync } = await import("node:fs");
+  const copioneF = JSON.parse(readFileSync("content/voce-mizi.json", "utf8"));
+  const tuttoF = new Set(Object.values(copioneF.frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
+  const nomiF = (copioneF.frasi["trova-la-forma"] ?? []).slice(7);
+  const ctxF = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxF.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const f = await ctxF.newPage();
+  await f.goto(`${BASE}/giochi/trova-la-forma/gioca?eta=3&demo=1`, { waitUntil: "networkidle" });
+  const festaF = await f.locator("[data-festa]").waitFor({ timeout: 60000 }).then(() => true, () => false);
+  const dettoF = await f.evaluate(() => (window.__voceMizi || []).map((v) => v.testo));
+  ok("trova la forma: tutto quello che Mizi dice è nel copione, e alla risposta giusta dice la forma", festaF && dettoF.length >= 12 && dettoF.every((t) => tuttoF.has(t)) && dettoF.filter((t) => nomiF.includes(t)).length === 6, dettoF.filter((t) => !tuttoF.has(t)).join(" | "));
+  await ctxF.close();
+}
+
+// «Conta fino a 10» (22/11/2026): i pesci si contano toccandoli, uno alla volta, e Mizi dice il numero.
+{
+  const { readFileSync } = await import("node:fs");
+  const copioneN = JSON.parse(readFileSync("content/voce-mizi.json", "utf8"));
+  const tuttoN = new Set(Object.values(copioneN.frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
+  const ctxN = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxN.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const n = await ctxN.newPage();
+  let erroriN = 0;
+  n.on("pageerror", () => erroriN++);
+  await n.goto(`${BASE}/giochi/conta-fino-a-10/gioca?eta=3`, { waitUntil: "networkidle" });
+  const campoN = n.locator("[data-scelta-multipla]");
+  await campoN.waitFor({ timeout: 10000 });
+  let contatiBene = 0, latoPesce = 999;
+  const totaliN = Number(await campoN.getAttribute("data-round-totali"));
+  for (let r = 1; r <= totaliN; r++) {
+    await n.waitForFunction((k) => { const c = document.querySelector("[data-scelta-multipla]"); return c?.getAttribute("data-round") === String(k) && c?.getAttribute("data-partita") === "gioca"; }, r, { timeout: 8000 }).catch(() => {});
+    const pesci = n.locator("[data-pesce]");
+    const quanti = await pesci.count();
+    // La misura vera del bottone (offsetWidth): il riquadro a schermo, mentre il centro entra in scena, è più piccolo.
+    latoPesce = Math.min(latoPesce, await pesci.first().evaluate((el) => el.offsetWidth));
+    for (let i = 0; i < quanti; i++) await pesci.nth(i).tap();
+    // Un secondo tocco sullo stesso pesce non lo conta due volte.
+    await pesci.first().tap();
+    if ((await n.locator("[data-banco]").getAttribute("data-contati")) === String(quanti) && (await pesci.last().getAttribute("data-pesce")) === String(quanti)) contatiBene++;
+    await n.locator(`[data-opzione="${quanti}"]`).tap();
+  }
+  const festaN = await n.locator("[data-festa]").waitFor({ timeout: 8000 }).then(() => true, () => false);
+  const dettoN = await n.evaluate(() => (window.__voceMizi || []).map((v) => v.testo));
+  ok("conta fino a 10: ogni pesce toccato prende il suo numero, una volta sola, in tutti i round", festaN && contatiBene === totaliN && erroriN === 0 && latoPesce >= 56, `${contatiBene} su ${totaliN}, pesce ${latoPesce}px`);
+  ok("conta fino a 10: Mizi conta a voce e dice solo frasi del copione", dettoN.includes("Uno!") && dettoN.includes("Dieci pesci!") && dettoN.every((t) => tuttoN.has(t)), dettoN.filter((t) => !tuttoN.has(t)).join(" | "));
+  await ctxN.close();
+}
+
+// «La corsa nella piramide» (20/11/2026): corsa a tre strade, motore Corsa.tsx.
+// Niente vite e niente tempo: chi sbatte dappertutto arriva in cima lo stesso.
+{
+  const { readFileSync } = await import("node:fs");
+  const copioneC = JSON.parse(readFileSync("content/voce-mizi.json", "utf8"));
+  const frasiC = new Set(copioneC.frasi["corsa-nella-piramide"] ?? []);
+  const tuttoC = new Set(Object.values(copioneC.frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
+  const sorgenteC = readFileSync("games/corsa-nella-piramide/Game.tsx", "utf8") + readFileSync("games/_engine/Corsa.tsx", "utf8").split("const ERRORI_PER_AIUTO")[0];
+  const nelCodiceC = [...sorgenteC.matchAll(/"([^"\n]{2,}[.!])"/g)].map((x) => x[1]).filter((f) => !f.startsWith("@/"));
+  ok("corsa: le frasi del gioco sono identiche a quelle del copione", nelCodiceC.length >= 13 && nelCodiceC.every((f) => frasiC.has(f)), nelCodiceC.filter((f) => !frasiC.has(f)).join(" | "));
+
+  // I comandi: bottoni grandi, frecce della tastiera, il salto.
+  const ctxC = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxC.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const c = await ctxC.newPage();
+  let erroriC = 0;
+  c.on("pageerror", () => erroriC++);
+  await c.goto(`${BASE}/giochi/corsa-nella-piramide/gioca?eta=6`, { waitUntil: "networkidle" });
+  const campoC = c.locator("[data-corsa]");
+  await campoC.waitFor({ timeout: 10000 });
+  const stradaC = (n) => c.waitForFunction((k) => document.querySelector("[data-corsa]")?.getAttribute("data-strada") === k, String(n), { timeout: 3000 }).then(() => true, () => false);
+  await stradaC(0);
+  const latiC = await c.locator("[data-comando]").evaluateAll((els) => els.map((el) => Math.round(Math.min(el.getBoundingClientRect().width, el.getBoundingClientRect().height))));
+  ok("corsa: tre bottoni di almeno 64 px, tutti dentro lo schermo senza scorrere", latiC.length === 3 && Math.min(...latiC) >= 64 &&
+    (await c.locator("[data-comando]").evaluateAll((els) => els.every((el) => el.getBoundingClientRect().bottom <= window.innerHeight))), latiC.join(" "));
+  await c.locator("[data-comando=destra]").tap();
+  const aDestra = await stradaC(1);
+  await c.keyboard.press("ArrowLeft");
+  await c.keyboard.press("ArrowLeft");
+  const aSinistra = await stradaC(-1);
+  await c.locator("[data-comando=salta]").tap();
+  const inAria = await c.waitForFunction(() => document.querySelector("[data-corsa]")?.getAttribute("data-in-aria") === "si", null, { timeout: 2000 }).then(() => true, () => false);
+  ok("corsa: bottoni e frecce cambiano strada, «Salta» fa saltare", aDestra && aSinistra && inAria, `destra ${aDestra} sinistra ${aSinistra} salto ${inAria}`);
+
+  // Da qui non si tocca più niente: Mizi sbatte, riparte, e al terzo urto di un piano scatta l'aiuto.
+  let aiutoVisto = false;
+  const inizioC = Date.now();
+  while (Date.now() - inizioC < 240000 && (await c.locator("[data-festa]").count()) === 0) {
+    if ((await campoC.getAttribute("data-aiuto-attivo")) === "si") aiutoVisto = true;
+    await c.waitForTimeout(500);
+  }
+  const festaC = (await c.locator("[data-festa]").count()) > 0;
+  const stelleC = festaC ? await c.locator("[data-festa] [data-stelle]").first().getAttribute("data-stelle") : null;
+  ok("corsa: senza toccare niente si arriva in cima lo stesso, con l'aiuto e una stella, mai zero", festaC && aiutoVisto && stelleC === "1" && erroriC === 0, `festa ${festaC} aiuto ${aiutoVisto} stelle ${stelleC}`);
+  const dettoC = await c.evaluate(() => (window.__voceMizi || []).map((v) => v.testo));
+  ok("corsa: anche sbattendo Mizi dice solo frasi del copione, senza «sbagliato»", dettoC.length > 10 && dettoC.every((t) => tuttoC.has(t)) && !dettoC.some((t) => /sbagliat|Brav[oa]|perso/i.test(t)), dettoC.filter((t) => !tuttoC.has(t)).join(" | "));
+  await ctxC.close();
+}
+
+{
+  // «Tabelline con Mizi» (21/11/2026). Prima in otto domande sulla tabellina del 7
+  // usciva tre volte «7 × 10»: ora sono dieci, tutte diverse, dalle facili alle
+  // difficili, con quattro risposte e un trucco dopo l'errore.
+  const ctxB = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctxB.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const t = await ctxB.newPage();
+  let erroriT = 0;
+  t.on("pageerror", () => erroriT++);
+  const campoT = t.locator("[data-scelta-multipla]");
+  const inGioco = (n) => t.waitForFunction((r) => { const e = document.querySelector("[data-scelta-multipla]"); return e?.getAttribute("data-round") === String(r) && e.getAttribute("data-partita") === "gioca"; }, n, { timeout: 8000 }).catch(() => {});
+  /** Gioca una partita intera; `sbadato` = a ogni domanda prima una risposta sbagliata. */
+  const partita = async (sbadato) => {
+    await campoT.waitFor({ timeout: 10000 });
+    const totali = Number(await campoT.getAttribute("data-round-totali"));
+    const viste = [];
+    for (let r = 1; r <= totali; r++) {
+      await inGioco(r);
+      const [tab, per] = ((await t.locator("[data-domanda]").getAttribute("data-domanda")) ?? "0x0").split("x").map(Number);
+      const opzioni = (await t.locator("[data-opzione]").evaluateAll((e) => e.map((x) => x.textContent.trim()))).map(Number);
+      let trucco = "";
+      if (sbadato) {
+        await t.locator(`[data-opzione][data-stato=libera]:not([aria-label="Numero ${tab * per}"])`).first().tap();
+        trucco = ((await t.locator("[data-aiuto]").textContent({ timeout: 3000 }).catch(() => "")) ?? "").trim();
+        await t.waitForTimeout(200);
+      }
+      viste.push({ tab, per, opzioni, trucco });
+      await t.locator(`[data-opzione][aria-label="Numero ${tab * per}"]`).tap();
+    }
+    const festa = await t.locator("[data-festa]").waitFor({ timeout: 8000 }).then(() => true, () => false);
+    return { totali, viste, festa };
+  };
+
+  await t.goto(`${BASE}/giochi/tabelline/gioca?eta=8`, { waitUntil: "networkidle" });
+  const scelte = await t.locator("[data-tabellina]").evaluateAll((e) => e.map((x) => ({ quale: x.dataset.tabellina, alto: x.getBoundingClientRect().height })));
+  ok("tabelline: si sceglie fra 2…10 e «tutte insieme», con bottoni grandi", scelte.map((x) => x.quale).join(",") === "2,3,4,5,6,7,8,9,10,mix" && scelte.every((x) => x.alto >= 64));
+  await t.locator('[data-tabellina="7"]').tap();
+  const sette = await partita(true);
+  ok("tabelline del 7: dieci domande, tutte del 7 e tutte diverse", sette.totali === 10 && sette.viste.every((d) => d.tab === 7) && new Set(sette.viste.map((d) => d.per)).size === 10, sette.viste.map((d) => d.per).join(","));
+  const posto = (per) => sette.viste.findIndex((d) => d.per === per);
+  ok("tabelline: prima le facili (per 1, 2, 5, 10), in fondo le difficili (per 6, 7, 8)", [1, 2, 5, 10].every((f) => posto(f) < 4) && [6, 7, 8].every((f) => posto(f) >= 7));
+  ok("tabelline: sempre quattro risposte diverse, con quella giusta", sette.viste.every((d) => d.opzioni.length === 4 && new Set(d.opzioni).size === 4 && d.opzioni.includes(d.tab * d.per) && d.opzioni.every((n) => n > 0)), sette.viste.filter((d) => new Set(d.opzioni).size !== 4).map((d) => `${d.tab}x${d.per}:${d.opzioni}`).join(" "));
+  const nove = sette.viste.find((d) => d.per === 9);
+  ok("tabelline: dopo un errore Mizi mostra un trucco, non il risultato", sette.viste.every((d) => d.trucco.length > 8) && nove?.trucco === "7 per 10 fa 70. Togli un 7." && sette.viste.filter((d) => d.per > 1).every((d) => !new RegExp(`\\b${d.tab * d.per}\\b`).test(d.trucco)), nove?.trucco);
+  const dettoT = (await t.evaluate(() => window.__voceMizi ?? [])).map((x) => x.testo);
+  ok("tabelline: il trucco lo dice anche a voce", dettoT.includes("7 per 10 fa 70. Togli un 7.") && dettoT.includes("Quanto fa 7 per 9?"));
+  ok("tabelline: anche sbagliando a ogni domanda si arriva alla festa, senza errori JS", sette.festa && erroriT === 0);
+
+  // «Ancora» non ripete le stesse domande: riporta alla scelta, col segno sulla tabellina fatta.
+  await t.locator("[data-festa] [data-ancora]").tap();
+  const tornata = await t.locator("[data-scelta-tabellina]").waitFor({ timeout: 5000 }).then(() => true, () => false);
+  ok("tabelline: «Ancora» riporta alla scelta e segna la tabellina fatta", tornata && (await t.locator('[data-tabellina="7"]').getAttribute("data-fatta")) === "si" && (await t.locator('[data-tabellina="8"]').getAttribute("data-fatta")) === null);
+  await ctxB.close();
+
+  // «Tutte insieme» a 7 anni: solo le prime tabelline, dieci coppie diverse, dalla più piccola.
+  const ctxM = await b.newContext({ viewport: { width: 320, height: 568 }, isMobile: true, hasTouch: true });
+  await ctxM.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const m = await ctxM.newPage();
+  await m.goto(`${BASE}/giochi/tabelline/gioca?eta=7`, { waitUntil: "networkidle" });
+  await m.locator('[data-tabellina="mix"]').tap();
+  await m.locator("[data-scelta-multipla]").waitFor({ timeout: 10000 });
+  const misteViste = [];
+  for (let r = 1; r <= 10; r++) {
+    await m.waitForFunction((n) => { const e = document.querySelector("[data-scelta-multipla]"); return e?.getAttribute("data-round") === String(n) && e.getAttribute("data-partita") === "gioca"; }, r, { timeout: 8000 }).catch(() => {});
+    const [tab, per] = ((await m.locator("[data-domanda]").getAttribute("data-domanda")) ?? "0x0").split("x").map(Number);
+    misteViste.push({ tab, per });
+    if (r === 1) {
+      const misure = await m.locator("[data-opzione]").evaluateAll((e) => e.map((x) => Math.round(Math.min(x.getBoundingClientRect().width, x.getBoundingClientRect().height))));
+      ok("tabelline: a 320 px le risposte restano grandi e niente sborda", misure.every((x) => x >= 64) && (await m.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1)), misure.join(","));
+    }
+    await m.locator(`[data-opzione][aria-label="Numero ${tab * per}"]`).tap();
+  }
+  const coppie = new Set(misteViste.map((d) => `${Math.min(d.tab, d.per)}x${Math.max(d.tab, d.per)}`));
+  const prodotti = misteViste.map((d) => d.tab * d.per);
+  ok("tutte insieme a 7 anni: solo le tabelline del 2, 3, 4, 5 e 10", misteViste.every((d) => [2, 3, 4, 5, 10].includes(d.tab)), misteViste.map((d) => d.tab).join(","));
+  ok("tutte insieme: dieci coppie diverse, dalla più piccola alla più grande", coppie.size === 10 && prodotti.every((n, i) => i === 0 || n >= prodotti[i - 1]), prodotti.join(","));
+  await ctxM.close();
+}
+
+// Gli undici giochi della seconda elementare (22/11/2026): ognuno gioca da solo
+// fino alla festa. Tutto quello che Mizi dice è registrato (non le sillabe e i
+// numeri toccati, che restano alla sintesi), i disegni di public/figure si
+// caricano davvero, e nessun bottone è più piccolo di 56 px.
+{
+  const { readFileSync } = await import("node:fs");
+  const copione = new Set(Object.values(JSON.parse(readFileSync("content/voce-mizi.json", "utf8")).frasi).flat().map((f) => (typeof f === "string" ? f : f.testo)));
+  const scuola = ["i-suoni-difficili", "mb-o-mp", "maggiore-minore-uguale", "numeri-in-ordine", "causa-ed-effetto", "le-parti-della-pianta", "le-foglie", "problemi-con-mizi", "decine-e-unita", "il-numero-prima-e-dopo", "piu-e-meno"];
+  const esiti = await Promise.all(scuola.map(async (slug) => {
+    const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+    await ctx.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} window.__voceMizi = []; });
+    const pg = await ctx.newPage();
+    await pg.goto(`${BASE}/giochi/${slug}/gioca?eta=7&demo=1`, { waitUntil: "domcontentloaded" });
+    let figureRotte = 0, figureViste = 0, piccoli = 0;
+    const festa = pg.locator("[data-festa]");
+    for (let giro = 0; giro < 400 && !(await festa.count()); giro++) {
+      const stato = await pg.evaluate(() => ({
+        // Rotto = finito di caricare e vuoto. Un disegno ancora in arrivo non è rotto.
+        figure: [...document.querySelectorAll("[data-figura]")].map((i) => !(i.complete && i.naturalWidth === 0)),
+        bottoni: [...document.querySelectorAll("main [data-opzione], main [data-ascolta]")].map((e) => Math.min(e.offsetWidth, e.offsetHeight)),
+      }));
+      figureViste += stato.figure.length;
+      figureRotte += stato.figure.filter((v) => !v).length;
+      piccoli += stato.bottoni.filter((l) => l > 0 && l < 56).length;
+      await pg.waitForTimeout(300);
+    }
+    const finito = (await festa.count()) > 0;
+    const dette = await pg.evaluate(() => window.__voceMizi);
+    await ctx.close();
+    const frasi = dette.filter((d) => !/^[A-ZÀ-Ù]{1,6}$/.test(d.testo) && !/^\d+$/.test(d.testo));
+    return { slug, finito, figureViste, figureRotte, piccoli, mute: [...new Set(frasi.filter((d) => !d.registrata || !copione.has(d.testo)).map((d) => d.testo))], frasi: frasi.length };
+  }));
+  const male = esiti.filter((e) => !e.finito || e.mute.length || e.frasi < 6);
+  ok("seconda elementare: gli undici giochi arrivano alla festa e ogni frase di Mizi è registrata e nel copione", male.length === 0, male.map((e) => `${e.slug}: ${e.finito ? "" : "non finisce "}${e.mute.slice(0, 3).join(" | ")}`).join(" · "));
+  const conFigure = esiti.filter((e) => ["i-suoni-difficili", "mb-o-mp", "causa-ed-effetto"].includes(e.slug));
+  ok("seconda elementare: i disegni dei giochi si caricano", conFigure.every((e) => e.figureViste > 0 && e.figureRotte === 0), conFigure.map((e) => `${e.slug} ${e.figureViste}/${e.figureRotte}`).join(", "));
+  ok("seconda elementare: nessun bottone sotto i 56 px", esiti.every((e) => e.piccoli === 0), esiti.filter((e) => e.piccoli).map((e) => e.slug).join(", "));
 }
 
 await b.close();

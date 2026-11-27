@@ -15,6 +15,7 @@ import { percorsoRisorsa } from "@/lib/risorse/risorse-educative";
 import { PERCORSO_TUTORIAL, TUTORIAL, percorsoTutorial } from "@/lib/contenuti/tutorial";
 import { categorieAttive, listingRisorse, percorsoCategoriaRisorse, percorsoListingRisorse } from "@/lib/risorse/risorse-categorie";
 import { risorseVisibili } from "@/lib/risorse/risorse-reclamo";
+import { PERCORSO as TEST_GENITORI, PERCORSO_PUBBLICO as TEST_GENITORI_PUBBLICO } from "@/lib/famiglia/sotto-pressione";
 
 /**
  * Sitemap generata dal registry e dai contenuti: un nuovo gioco o una nuova
@@ -56,6 +57,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/natale/letterina-babbo-natale": ["lib/natale/natale.ts", "components/natale/EditorLetterina.tsx"],
     "/natale/biglietti-di-natale": ["cards/registry.ts"],
     "/natale/eventi": ["lib/natale/eventi-natale.ts"],
+    "/natale/disegni-da-colorare": ["lib/natale/disegni-natale.ts"],
     "/guide": [ultimaGuida],
     "/feste": [ultimaCitta],
     "/metodo": ["content/hubs/metodo.md"],
@@ -90,11 +92,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/aggiungi-attivita",
     "/per-insegnanti",
     "/per-le-mamme",
+    // il test per i genitori, solo quando non è in bozza
+    ...(TEST_GENITORI_PUBBLICO ? [TEST_GENITORI.percorso] : []),
     "/risorse-educative-bambini",
     "/natale",
     "/natale/letterina-babbo-natale",
     "/natale/biglietti-di-natale",
     "/natale/eventi",
+    "/natale/disegni-da-colorare",
   ];
 
   const competenze = [

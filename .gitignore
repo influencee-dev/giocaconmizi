@@ -28,3 +28,6 @@ secrets*.json
 
 # foto generate con l'API prima della conversione in WebP
 .foto-generate/
+
+# elenco dei file per giocare senza connessione: lo riscrive ogni build (scripts/offline-elenco.mjs)
+public/offline-elenco.json

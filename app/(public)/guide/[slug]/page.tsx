@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Condividi } from "@/components/ui/Condividi";
+import { titoloPagina } from "@/lib/seo/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { fotoGuida } from "@/lib/foto/foto";
@@ -42,7 +44,7 @@ export async function generateMetadata({
   const voce = guida(slug);
   if (!voce) return {};
   return {
-    title: voce.approfondimento?.titoloSeo ?? voce.titolo,
+    title: titoloPagina(voce.approfondimento?.titoloSeo ?? voce.titolo),
     description: voce.descrizione,
     alternates: { canonical: `/guide/${voce.slug}` },
   };
@@ -108,6 +110,16 @@ export default async function GuidaPage({
         )}
       </p>
 
+      <div className="mt-4">
+        <Condividi
+          percorso={`/guide/${voce.slug}`}
+          titolo={voce.titolo}
+          testo={`Ho trovato questa guida su Giocamizi, scritta da una mamma: «${voce.titolo}». Ti può servire 👇`}
+          campagna="guida"
+          piccolo
+        />
+      </div>
+
       {foto && (
         <figure className="relative mt-6 aspect-video overflow-hidden rounded-morbido bg-crema-scuro" data-foto-guida>
           <Image
@@ -145,6 +157,20 @@ export default async function GuidaPage({
             ))}
           </section>
         ))
+      )}
+
+      {!voce.approfondimento && voce.strumenti && voce.strumenti.length > 0 && (
+        <section className="mt-12" data-strumenti-guida>
+          <TitoloSezione>Gli strumenti gratis per farlo</TitoloSezione>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {voce.strumenti.map((s) => (
+              <Link key={s.href} href={s.href} className="flex flex-col gap-1 rounded-[1.2rem] border-2 border-notte/10 bg-white p-4 hover:border-viola">
+                <span className="font-extrabold text-viola">{s.testo} →</span>
+                <span className="text-sm text-notte-tenue">{s.nota}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
       )}
 
       {correlati.length > 0 && (
@@ -201,6 +227,16 @@ export default async function GuidaPage({
           Tutte le guide
         </Link>
       </section>
+      <div className="mt-10 flex flex-wrap items-center gap-3 border-t-2 border-crema-scuro pt-6">
+        <p className="font-extrabold text-notte">Ti è stata utile? Mandala a un&apos;altra mamma</p>
+        <Condividi
+          percorso={`/guide/${voce.slug}`}
+          titolo={voce.titolo}
+          testo={`Ho trovato questa guida su Giocamizi, scritta da una mamma: «${voce.titolo}». Ti può servire 👇`}
+          campagna="guida"
+          piccolo
+        />
+      </div>
     </Contenitore>
   );
 }

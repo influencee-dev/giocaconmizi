@@ -1,0 +1,191 @@
+{
+  "slug": "pov-invito",
+  "titolo": "POV: sono le 23 e domani c'è la festa",
+  "formato": "POV della mamma",
+  "didascalia": "Sono le 23, domani c'è la festa e l'invito non c'è 😅 Su Giocamizi lo fai dal telefono in un paio di minuti: sfondo, nome, adesivi, e gli invitati confermano su WhatsApp con un tocco. Gratis, senza registrarti.\n\nMandalo alla mamma che organizza sempre tutto all'ultimo 👇\n\n🔗 giocamizi.it/biglietti\n\n#festadicompleanno #invitocompleanno #mammeitaliane #compleannobambini #giocamizi",
+  "storia": "Sticker «Link» su giocamizi.it/biglietti con la scritta «Il tuo invito in 2 minuti». Sticker «Quiz»: «Quando prepari gli inviti?» Un mese prima / Una settimana prima / La sera prima 😅",
+  "aperture": [
+    "POV: sono le 23 e domani c'è la *festa*",
+    "L'invito di compleanno fatto *dal letto*, in 2 minuti",
+    "Mamme ritardatarie, *questo è per voi*"
+  ],
+  "clip": {
+    "editor": {
+      "url": "/biglietti/crea",
+      "attesaIniziale": 900,
+      "azioni": [
+        {
+          "tocca": "[data-avanti]",
+          "attendi": 900
+        },
+        {
+          "tocca": "button[aria-label=\"Dinosauri\"]",
+          "attendi": 1300
+        },
+        {
+          "tocca": "[data-avanti]",
+          "attendi": 900
+        },
+        {
+          "scrivi": "input[placeholder=\"es. Sofia\"]",
+          "testo": "Sofia",
+          "attendi": 300
+        },
+        {
+          "scrivi": "input[placeholder=\"es. 5\"]",
+          "testo": "6",
+          "attendi": 300
+        },
+        {
+          "tocca": "button.text-left.text-sm",
+          "attendi": 500
+        },
+        {
+          "scrivi": "input[placeholder=\"es. sabato 12 aprile\"]",
+          "testo": "sabato 12 aprile",
+          "ritmo": 45,
+          "attendi": 200
+        },
+        {
+          "scrivi": "input[placeholder=\"es. dalle 16 alle 19\"]",
+          "testo": "dalle 16 alle 19",
+          "ritmo": 45,
+          "attendi": 200
+        },
+        {
+          "scrivi": "input[placeholder=\"es. 333 1234567\"]",
+          "testo": "333 0000000",
+          "ritmo": 45,
+          "attendi": 600
+        },
+        {
+          "scorri": 0,
+          "attendi": 600
+        },
+        {
+          "tocca": "[data-avanti]",
+          "attendi": 900
+        },
+        {
+          "tocca": "button[aria-label=\"Aggiungi Dinosauro\"]",
+          "attendi": 700
+        },
+        {
+          "tocca": "button[aria-label=\"Aggiungi Dinosauro\"]",
+          "attendi": 900
+        },
+        {
+          "scorri": 0,
+          "attendi": 1200
+        }
+      ],
+      "secondi": 1
+    },
+    "vedi": {
+      "url": "/biglietti/vedi?b=eyJ0aXBvIjoiaW52aXRvIiwidGVtYSI6ImRpbm9zYXVyaSIsInZhcmlhbnRlIjoiY2hpYXJvIiwibm9tZSI6IlNvZmlhIiwiZXRhIjoiNiIsImZyYXNlIjoiIiwiZGF0YSI6InNhYmF0byAxMiBhcHJpbGUiLCJvcmEiOiJkYWxsZSAxNiBhbGxlIDE5IiwibHVvZ28iOiJWaWEgZGVpIFRpZ2xpIDQiLCJjb25mZXJtYSI6IjMzMyAwMDAwMDAwIiwiZmlybWEiOiIiLCJjb25NaXppIjpmYWxzZSwiY2FyYXR0ZXJlIjoidG9uZG8iLCJzdGlja2VycyI6W3siaWQiOiJkaW5vc2F1cm8iLCJ4IjoxOCwieSI6MTYsInMiOjF9XSwiY29uUXIiOnRydWV9",
+      "attesaIniziale": 800,
+      "azioni": [
+        {
+          "vedi": "button:has-text(\"Confermo, ci saremo!\")",
+          "attendi": 1500
+        }
+      ],
+      "secondi": 1
+    }
+  },
+  "scene": [
+    {
+      "tipo": "gancio",
+      "sopra": "POV",
+      "testo": "Sono le 23 e domani c'è la *festa*. L'invito?",
+      "clip": "vedi",
+      "da": 1.0,
+      "velocita": 0.1,
+      "ritaglio": {
+        "x": 10,
+        "y": 110,
+        "w": 370,
+        "h": 520
+      },
+      "sottotitoli": false,
+      "voce": "Niente panico: l'invito lo facciamo adesso, insieme!"
+    },
+    {
+      "tipo": "clip",
+      "testo": "1 · Scegli lo *sfondo*",
+      "clip": "editor",
+      "da": 1.6,
+      "velocita": 0.6,
+      "ritaglio": {
+        "x": 8,
+        "y": 330,
+        "w": 374,
+        "h": 470
+      },
+      "voce": "Scegli il disegno preferito del festeggiato. Io voto i dinosauri!"
+    },
+    {
+      "tipo": "clip",
+      "testo": "2 · Nome, giorno e *WhatsApp*",
+      "clip": "editor",
+      "da": 6.4,
+      "velocita": 0.7,
+      "ritaglio": {
+        "x": 8,
+        "y": 340,
+        "w": 374,
+        "h": 470
+      },
+      "voce": "Scrivi chi compie gli anni, quando, e il numero per le conferme."
+    },
+    {
+      "tipo": "clip",
+      "testo": "3 · Qualche *adesivo*",
+      "clip": "editor",
+      "da": 13.6,
+      "velocita": 0.45,
+      "ritaglio": {
+        "x": 8,
+        "y": 360,
+        "w": 374,
+        "h": 460
+      },
+      "voce": "Un paio di adesivi, e li sposti col dito dove vuoi."
+    },
+    {
+      "tipo": "clip",
+      "testo": "Gli invitati confermano *con un tocco*",
+      "clip": "vedi",
+      "da": 1.2,
+      "velocita": 0.4,
+      "ritaglio": {
+        "x": 10,
+        "y": 110,
+        "w": 370,
+        "h": 610
+      },
+      "voce": "Chi lo riceve risponde su WhatsApp, con un tocco solo."
+    },
+    {
+      "tipo": "domanda",
+      "testo": "E tu, quando prepari gli inviti?",
+      "scelte": [
+        "Un mese prima",
+        "Una settimana prima",
+        "La sera prima 😅"
+      ],
+      "sotto": "Rispondi nei commenti 👇",
+      "sottotitoli": false,
+      "voce": "E tu, quando prepari gli inviti? Dimmelo nei commenti!"
+    },
+    {
+      "tipo": "finale",
+      "sopra": "Gratis, senza registrarti",
+      "url": "giocamizi.it/biglietti",
+      "sottotitoli": false,
+      "minimo": 1.6,
+      "voce": "Lo trovi gratis su giocamizi punto it!"
+    }
+  ],
+  "tempoVoce": 1.1
+}

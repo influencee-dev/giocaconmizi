@@ -1,0 +1,239 @@
+{
+  "gruppo": "reel",
+  "reel": true,
+  "voce": "mamma",
+  "regia": [
+    "Apertura: atmosfera calda e raccolta, come una coperta sul divano; voce morbida su \"i pomeriggi di dicembre in casa\", poi la sorpresa: \"un gioco NUOVO e TRANQUILLO\", e con un piccolo annuncio \"la pixel art… di Natale\".",
+    "Racconto quasi magico: rallenta su \"riga per riga… e piano piano… SPUNTA il disegno\", poi meraviglia sull'elenco \"l'albero, il regalo, la campanella\".",
+    "Tono giocoso e complice su \"come nella BATTAGLIA NAVALE\"; poi curiosità e meraviglia su \"come sono fatte le immagini sugli schermi\".",
+    "Momento tenero: \"Un'idea in più\" detto come un piccolo segreto; voce morbida e orgogliosa su \"un biglietto di auguri… fatto a MANO\".",
+    "Finale: caldo e festoso. \"BUONE FESTE!\" con un grande sorriso."
+  ],
+  "slug": "reel-natale-pixel-art",
+  "titolo": "Reel · La pixel art di Natale",
+  "schermate": {
+    "piccoli": {
+      "url": "/giochi/pixel-art-di-natale/gioca?eta=5",
+      "azioni": [
+        {
+          "attendi": 1500
+        },
+        {
+          "clicca": "button[aria-label=\"giallo\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella D1\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella E1\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"verde\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella D2\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella E2\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella C3\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella E3\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella F3\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella B4\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella C4\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella D4\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella E4\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella G4\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"rosso\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella D3\"]"
+        },
+        {
+          "attendi": 400
+        }
+      ],
+      "selettori": [
+        "ol"
+      ]
+    },
+    "grandi": {
+      "url": "/giochi/pixel-art-di-natale/gioca?eta=7",
+      "azioni": [
+        {
+          "attendi": 1500
+        },
+        {
+          "clicca": "button[aria-label=\"giallo\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella D1\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella E1\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"verde\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella D2\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella E2\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella C3\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella E3\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella F3\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella B4\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella C4\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella D4\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella E4\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella G4\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"rosso\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella D3\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"verde\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella B5\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella D5\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella E5\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella F5\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella G5\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella A6\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella B6\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella C6\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella D6\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella E6\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella G6\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella H6\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"giallo\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella F4\"]"
+        },
+        {
+          "clicca": "button[aria-label=\"Cella C5\"]"
+        },
+        {
+          "attendi": 400
+        }
+      ],
+      "selettori": [
+        "ol"
+      ]
+    }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Per le mamme",
+      "titolo": "La pixel art di Natale",
+      "sottotitolo": "Un gioco gratis, dai 4 anni.",
+      "voce": "Per i pomeriggi di dicembre in casa, c'è un gioco nuovo e tranquillo: la pixel art di Natale."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Riga per riga",
+      "testo": "Si colora seguendo il codice.",
+      "schermata": "piccoli",
+      "evidenzia": [
+        "ol"
+      ],
+      "voce": "Si colorano i quadretti seguendo il codice, riga per riga, e piano piano spunta il disegno: l'albero, il regalo, la campanella."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Dai sette anni, le coordinate",
+      "testo": "Come nella battaglia navale.",
+      "schermata": "grandi",
+      "evidenzia": [
+        "ol"
+      ],
+      "voce": "Dai sette anni il codice diventa a coordinate, come nella battaglia navale. E intanto si scopre come sono fatte le immagini sugli schermi."
+    },
+    {
+      "tipo": "carta",
+      "passo": 3,
+      "titolo": "Un'idea in più",
+      "testo": "Ricopiatelo su carta.",
+      "carta": {
+        "icona": "matita",
+        "titolo": "Dal telefono alla carta",
+        "sotto": "Foglio a quadretti",
+        "testo": "Finito il disegno, ricopiatelo su un foglio a quadretti: diventa un biglietto di auguri fatto a mano.",
+        "spunta": true
+      },
+      "voce": "Un'idea in più: finito il disegno, ricopiatelo su un foglio a quadretti. Diventa un biglietto di auguri fatto a mano."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/giochi/pixel-art-di-natale",
+      "sotto": "Gratis e senza pubblicità.",
+      "voce": "La trovate su giocamizi punto it, tra i giochi. Buone feste!"
+    }
+  ]
+}

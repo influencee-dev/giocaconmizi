@@ -1,0 +1,873 @@
+{
+  "_leggimi": "Le ricerche su cui lavora il SEO manager di Giocamizi (.claude/skills/seo-geo-aeo-manager). Fonte: Ubersuggest, Italia, italiano, 22/11/2026 (pagina «Ricerca SEO Giocamizi»). volume = ricerche al mese; difficolta = 0-100 (sotto 20 facile). stato: c-e | da-sistemare | manca | fatto. Quando un cantiere chiude una riga: stato «fatto», data e commit in «fatto». npm run seo:copertura controlla che la ricerca compaia davvero nella pagina.",
+  "fonte": {
+    "strumento": "Ubersuggest",
+    "paese": "Italia",
+    "lingua": "italiano",
+    "data": "2026-11-22",
+    "analizzate": 700
+  },
+  "sezioni": {
+    "matematica": "Scuola · matematica",
+    "italiano": "Scuola · italiano",
+    "scienze": "Scuola · scienze e storia",
+    "giochi": "Giochi e disegni",
+    "feste": "Inviti e biglietti",
+    "locali": "Dove andare con i bambini",
+    "natale": "Natale (adesso)",
+    "storie": "Storie e genitori"
+  },
+  "ricerche": [
+    {
+      "ricerca": "tabelline",
+      "volume": 90500,
+      "difficolta": 14,
+      "sezione": "matematica",
+      "pagina": "/giochi/tabelline",
+      "stato": "fatto",
+      "cosa_fare": "Titolo oggi «Tabelline con Mizi»: diventa «Tabelline online: gioco gratis dalla 1 alla 10».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "tabelline dal 1 al 10",
+      "volume": 18100,
+      "difficolta": 22,
+      "sezione": "matematica",
+      "pagina": "/giochi/tabelline",
+      "stato": "da-sistemare",
+      "cosa_fare": "Stessa pagina: la tabella completa scritta in pagina, non solo nel gioco.",
+      "nota": "23/11: già nel titolo; manca ancora la tabella scritta in pagina."
+    },
+    {
+      "ricerca": "tabelline 7",
+      "volume": 18100,
+      "difficolta": 19,
+      "sezione": "matematica",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "Una pagina per tabellina (dal 2 al 10): gioco già filtrato più tabella e trucchi."
+    },
+    {
+      "ricerca": "tabelline del 3",
+      "volume": 9900,
+      "difficolta": 30,
+      "sezione": "matematica",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "Come sopra: «La tabellina del 3»."
+    },
+    {
+      "ricerca": "frazioni",
+      "volume": 9900,
+      "difficolta": 27,
+      "sezione": "matematica",
+      "pagina": "/giochi/pizza-delle-frazioni",
+      "stato": "fatto",
+      "cosa_fare": "Titolo «La pizza delle frazioni»: aggiungere «Frazioni per bambini: gioco online».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "giochi tabelline",
+      "volume": 8100,
+      "difficolta": 19,
+      "sezione": "matematica",
+      "pagina": "/giochi/tabelline",
+      "stato": "fatto",
+      "cosa_fare": "Nel titolo e nella prima frase: «gioco delle tabelline».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "addizioni",
+      "volume": 6600,
+      "difficolta": 16,
+      "sezione": "matematica",
+      "pagina": "/giochi/addizioni-entro-20",
+      "stato": "fatto",
+      "cosa_fare": "Titolo con «Addizioni per bambini: gioco online entro 20».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "sottrazioni",
+      "volume": 3600,
+      "difficolta": 14,
+      "sezione": "matematica",
+      "pagina": "/giochi/piu-e-meno",
+      "stato": "fatto",
+      "cosa_fare": "Titolo «Più e meno»: diventa «Addizioni e sottrazioni: gioco online».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "maggiore minore uguale",
+      "volume": 2400,
+      "difficolta": 19,
+      "sezione": "matematica",
+      "pagina": "/giochi/maggiore-minore-uguale",
+      "stato": "c-e",
+      "cosa_fare": "Il titolo va già bene: servono link da altre pagine."
+    },
+    {
+      "ricerca": "sottrazioni con il cambio",
+      "volume": 1900,
+      "difficolta": 16,
+      "sezione": "matematica",
+      "pagina": "/giochi/piu-e-meno",
+      "stato": "fatto",
+      "cosa_fare": "Citare «con il cambio» nel testo (il gioco lo fa già).",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "addizioni in colonna",
+      "volume": 1900,
+      "difficolta": 14,
+      "sezione": "matematica",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "Non c'è un gioco in colonna: candidato per un gioco nuovo."
+    },
+    {
+      "ricerca": "giochi tabelline online",
+      "volume": 1600,
+      "difficolta": 19,
+      "sezione": "matematica",
+      "pagina": "/giochi/tabelline",
+      "stato": "fatto",
+      "cosa_fare": "Stessa pagina.",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "problemi seconda elementare",
+      "volume": 1600,
+      "difficolta": 21,
+      "sezione": "matematica",
+      "pagina": "/giochi/problemi-con-mizi",
+      "stato": "fatto",
+      "cosa_fare": "Titolo «Problemi con Mizi»: aggiungere «Problemi di seconda elementare».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "esercizi seconda elementare matematica",
+      "volume": 1600,
+      "difficolta": 16,
+      "sezione": "matematica",
+      "pagina": "/compiti-vacanze/seconda-elementare",
+      "stato": "fatto",
+      "cosa_fare": "Pagina nuova «Seconda elementare» che raccoglie i giochi della classe.",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "le pagine delle classi diventano «Esercizi di … elementare: matematica e italiano», tutto l'anno (cantiere 5)"
+      }
+    },
+    {
+      "ricerca": "decine e unità",
+      "volume": 1000,
+      "difficolta": 17,
+      "sezione": "matematica",
+      "pagina": "/giochi/decine-e-unita",
+      "stato": "c-e",
+      "cosa_fare": "Titolo giusto."
+    },
+    {
+      "ricerca": "maggiore minore uguale classe prima",
+      "volume": 1000,
+      "difficolta": 14,
+      "sezione": "matematica",
+      "pagina": "/giochi/maggiore-minore-uguale",
+      "stato": "c-e",
+      "cosa_fare": "Nominare «classe prima» nel testo (a 6 anni il gioco arriva a 20)."
+    },
+    {
+      "ricerca": "esercizi terza elementare matematica",
+      "volume": 1000,
+      "difficolta": 13,
+      "sezione": "matematica",
+      "pagina": "/compiti-vacanze/terza-elementare",
+      "stato": "fatto",
+      "cosa_fare": "Pagina «Terza elementare»: tabelline, frazioni, orologio.",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "le pagine delle classi diventano «Esercizi di … elementare: matematica e italiano», tutto l'anno (cantiere 5)"
+      }
+    },
+    {
+      "ricerca": "numeri in ordine crescente",
+      "volume": 720,
+      "difficolta": 17,
+      "sezione": "matematica",
+      "pagina": "/giochi/numeri-in-ordine",
+      "stato": "fatto",
+      "cosa_fare": "Titolo con «ordine crescente e decrescente».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "doppie parole",
+      "volume": 4400,
+      "difficolta": 15,
+      "sezione": "italiano",
+      "pagina": "/giochi/le-doppie",
+      "stato": "da-sistemare",
+      "cosa_fare": "Aggiungere in pagina un elenco di parole con le doppie, divise per lettera."
+    },
+    {
+      "ricerca": "le parole doppie",
+      "volume": 3600,
+      "difficolta": 17,
+      "sezione": "italiano",
+      "pagina": "/giochi/le-doppie",
+      "stato": "da-sistemare",
+      "cosa_fare": "Stessa pagina."
+    },
+    {
+      "ricerca": "parole con tre doppie",
+      "volume": 3600,
+      "difficolta": 16,
+      "sezione": "italiano",
+      "pagina": "/giochi/le-doppie",
+      "stato": "manca",
+      "cosa_fare": "Un riquadro «Parole con due e tre doppie» (frittella, tavolozza…)."
+    },
+    {
+      "ricerca": "comprensione del testo",
+      "volume": 3600,
+      "difficolta": 31,
+      "sezione": "italiano",
+      "pagina": "/giochi/leggi-e-rispondi",
+      "stato": "fatto",
+      "cosa_fare": "Titolo «Leggi e rispondi»: aggiungere «Comprensione del testo per bambini».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "esercizio con le doppie",
+      "volume": 1900,
+      "difficolta": 15,
+      "sezione": "italiano",
+      "pagina": "/giochi/le-doppie",
+      "stato": "fatto",
+      "cosa_fare": "Nel titolo: «esercizi sulle doppie».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "mb mp parole",
+      "volume": 1600,
+      "difficolta": 22,
+      "sezione": "italiano",
+      "pagina": "/giochi/mb-o-mp",
+      "stato": "da-sistemare",
+      "cosa_fare": "Aggiungere in pagina l'elenco delle parole con MB e MP.",
+      "nota": "23/11: il titolo dice «Parole con MB e MP»; manca l'elenco in pagina."
+    },
+    {
+      "ricerca": "esercizi prima elementare italiano",
+      "volume": 1600,
+      "difficolta": 15,
+      "sezione": "italiano",
+      "pagina": "/compiti-vacanze/prima-elementare",
+      "stato": "fatto",
+      "cosa_fare": "Pagina «Prima elementare».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "le pagine delle classi diventano «Esercizi di … elementare: matematica e italiano», tutto l'anno (cantiere 5)"
+      }
+    },
+    {
+      "ricerca": "le doppie esercizi",
+      "volume": 1600,
+      "difficolta": 13,
+      "sezione": "italiano",
+      "pagina": "/giochi/le-doppie",
+      "stato": "fatto",
+      "cosa_fare": "Stessa pagina.",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "giochi sulle doppie",
+      "volume": 720,
+      "difficolta": 14,
+      "sezione": "italiano",
+      "pagina": "/giochi/le-doppie",
+      "stato": "da-sistemare",
+      "cosa_fare": "Stessa pagina."
+    },
+    {
+      "ricerca": "esercizi seconda elementare italiano",
+      "volume": 720,
+      "difficolta": 14,
+      "sezione": "italiano",
+      "pagina": "/compiti-vacanze/seconda-elementare",
+      "stato": "fatto",
+      "cosa_fare": "Pagina «Seconda elementare».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "le pagine delle classi diventano «Esercizi di … elementare: matematica e italiano», tutto l'anno (cantiere 5)"
+      }
+    },
+    {
+      "ricerca": "imparare a leggere",
+      "volume": 720,
+      "difficolta": 16,
+      "sezione": "italiano",
+      "pagina": "/giochi/unisci-le-sillabe",
+      "stato": "da-sistemare",
+      "cosa_fare": "Una guida breve «Come aiutare a imparare a leggere» con i giochi delle sillabe.",
+      "nota": "23/11: già nel titolo del gioco delle sillabe; manca la guida breve."
+    },
+    {
+      "ricerca": "suoni difficili",
+      "volume": 480,
+      "difficolta": 16,
+      "sezione": "italiano",
+      "pagina": "/giochi/i-suoni-difficili",
+      "stato": "c-e",
+      "cosa_fare": "Titolo giusto: aggiungere l'elenco dei gruppi (BR. PR. STR…)."
+    },
+    {
+      "ricerca": "foglie da colorare",
+      "volume": 2400,
+      "difficolta": 17,
+      "sezione": "scienze",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "Idea: le forme delle foglie anche da colorare."
+    },
+    {
+      "ricerca": "parti della pianta",
+      "volume": 480,
+      "difficolta": 26,
+      "sezione": "scienze",
+      "pagina": "/giochi/le-parti-della-pianta",
+      "stato": "c-e",
+      "cosa_fare": "Titolo giusto."
+    },
+    {
+      "ricerca": "causa ed effetto",
+      "volume": 170,
+      "difficolta": 24,
+      "sezione": "scienze",
+      "pagina": "/giochi/causa-ed-effetto",
+      "stato": "c-e",
+      "cosa_fare": "Titolo giusto."
+    },
+    {
+      "ricerca": "disegni da colorare",
+      "volume": 110000,
+      "difficolta": 21,
+      "sezione": "giochi",
+      "pagina": "/giochi/colora-con-mizi",
+      "stato": "fatto",
+      "cosa_fare": "Titolo «Colora con Mizi»: diventa «Disegni da colorare online per bambini».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "pixel art",
+      "volume": 49500,
+      "difficolta": 36,
+      "sezione": "giochi",
+      "pagina": "/giochi/pixel-art",
+      "stato": "fatto",
+      "cosa_fare": "Titolo «Pixel art»: aggiungere «per bambini, gioco online gratis».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "disegni da colorare da stampare",
+      "volume": 40500,
+      "difficolta": 15,
+      "sezione": "giochi",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "Mancano disegni stampabili: i disegni del gioco si possono offrire anche in PDF."
+    },
+    {
+      "ricerca": "disegni da colorare di natale",
+      "volume": 27100,
+      "difficolta": 16,
+      "sezione": "giochi",
+      "pagina": "/natale/disegni-da-colorare",
+      "stato": "fatto",
+      "cosa_fare": "Disegni di Natale da colorare, nella sezione Natale.",
+      "fatto": {
+        "data": "2026-11-26",
+        "come": "pagina /natale/disegni-da-colorare: dieci disegni di ChatGPT in PDF A4 (uno per disegno e tutti insieme); per colorare dal telefono c'è il gioco «Colora il Natale»"
+      }
+    },
+    {
+      "ricerca": "pixel art natale",
+      "volume": 5400,
+      "difficolta": 19,
+      "sezione": "giochi",
+      "pagina": "/giochi/pixel-art-di-natale",
+      "stato": "fatto",
+      "cosa_fare": "Disegni natalizi dentro il gioco della pixel art.",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "gioco nuovo «Pixel art di Natale» (sei disegni di Natale), titolo per Google nel titoloSeo; scheda nella pagina /natale"
+      }
+    },
+    {
+      "ricerca": "pixel art facile",
+      "volume": 3600,
+      "difficolta": 16,
+      "sezione": "giochi",
+      "pagina": "/giochi/pixel-art",
+      "stato": "fatto",
+      "cosa_fare": "Nominare «facile» nel testo.",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "trova le differenze",
+      "volume": 2900,
+      "difficolta": 22,
+      "sezione": "giochi",
+      "pagina": "/giochi/trova-le-differenze",
+      "stato": "fatto",
+      "cosa_fare": "Titolo con «gioco online gratis per bambini».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "unisci i puntini",
+      "volume": 1600,
+      "difficolta": 19,
+      "sezione": "giochi",
+      "pagina": "/giochi/unisci-i-puntini",
+      "stato": "fatto",
+      "cosa_fare": "Titolo con «gioco online per bambini».",
+      "fatto": {
+        "data": "2026-11-23",
+        "come": "titolo per Google nel campo titoloSeo di content/games/"
+      }
+    },
+    {
+      "ricerca": "unisci i puntini da stampare pdf",
+      "volume": 880,
+      "difficolta": 19,
+      "sezione": "giochi",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "Versione stampabile."
+    },
+    {
+      "ricerca": "inviti compleanno",
+      "volume": 14800,
+      "difficolta": 30,
+      "sezione": "feste",
+      "pagina": "/biglietti",
+      "stato": "c-e",
+      "cosa_fare": "Titolo già buono."
+    },
+    {
+      "ricerca": "biglietto auguri compleanno",
+      "volume": 14800,
+      "difficolta": 24,
+      "sezione": "feste",
+      "pagina": "/biglietti",
+      "stato": "c-e",
+      "cosa_fare": "Titolo già buono."
+    },
+    {
+      "ricerca": "creare inviti compleanno gratis",
+      "volume": 9900,
+      "difficolta": 27,
+      "sezione": "feste",
+      "pagina": "/biglietti/crea",
+      "stato": "c-e",
+      "cosa_fare": "Fatto il 27/11/2026: la prima riga del creatore dice «Senza scaricare app» (piano SEO, cantiere 7)."
+    },
+    {
+      "ricerca": "biglietto auguri compleanno da stampare",
+      "volume": 2900,
+      "difficolta": 26,
+      "sezione": "feste",
+      "pagina": "/biglietti",
+      "stato": "c-e",
+      "cosa_fare": "Nominare «da stampare» nel testo."
+    },
+    {
+      "ricerca": "inviti compleanno digitali",
+      "volume": 1900,
+      "difficolta": 32,
+      "sezione": "feste",
+      "pagina": "/biglietti/crea",
+      "stato": "c-e",
+      "cosa_fare": "Fatto il 27/11/2026: descrizione e prima riga dicono «inviti digitali» e «da mandare su WhatsApp». C'è anche /biglietti/inviti-compleanno-digitali."
+    },
+    {
+      "ricerca": "inviti compleanno online gratis",
+      "volume": 1600,
+      "difficolta": 18,
+      "sezione": "feste",
+      "pagina": "/biglietti/crea",
+      "stato": "c-e",
+      "cosa_fare": "Titolo giusto."
+    },
+    {
+      "ricerca": "frasi inviti compleanno",
+      "volume": 880,
+      "difficolta": 19,
+      "sezione": "feste",
+      "pagina": "/biglietti/frasi-inviti-compleanno-bambini",
+      "stato": "c-e",
+      "cosa_fare": "Fatto il 27/11/2026: la pagina mostra tutte le frasi nostre divise per tema, cosa scrivere sull'invito e porta al creatore."
+    },
+    {
+      "ricerca": "cosa scrivere biglietto auguri compleanno",
+      "volume": 390,
+      "difficolta": 13,
+      "sezione": "feste",
+      "pagina": "/biglietti/frasi-auguri-compleanno-bambini",
+      "stato": "c-e",
+      "cosa_fare": "Fatto il 27/11/2026: H1 «Cosa scrivere nel biglietto di auguri…», l'elenco di cosa scrivere e le frasi pronte."
+    },
+    {
+      "ricerca": "parco avventura",
+      "volume": 27100,
+      "difficolta": 24,
+      "sezione": "locali",
+      "pagina": "/parchi-avventura",
+      "stato": "c-e",
+      "cosa_fare": "Titolo giusto."
+    },
+    {
+      "ricerca": "parco acquatico",
+      "volume": 18100,
+      "difficolta": 15,
+      "sezione": "locali",
+      "pagina": "/parchi-acquatici",
+      "stato": "c-e",
+      "cosa_fare": "Titolo giusto."
+    },
+    {
+      "ricerca": "laser game",
+      "volume": 14800,
+      "difficolta": 31,
+      "sezione": "locali",
+      "pagina": null,
+      "stato": "c-e",
+      "cosa_fare": "Pagina della categoria.",
+      "nota_pagina": "categoria laser game"
+    },
+    {
+      "ricerca": "ludoteca",
+      "volume": 12100,
+      "difficolta": 26,
+      "sezione": "locali",
+      "pagina": "/ludoteche",
+      "stato": "c-e",
+      "cosa_fare": "Titolo giusto."
+    },
+    {
+      "ricerca": "fattoria didattica",
+      "volume": 8100,
+      "difficolta": 18,
+      "sezione": "locali",
+      "pagina": "/fattorie-didattiche",
+      "stato": "c-e",
+      "cosa_fare": "Titolo giusto."
+    },
+    {
+      "ricerca": "parco avventura vicino a me",
+      "volume": 5400,
+      "difficolta": 29,
+      "sezione": "locali",
+      "pagina": "/parchi-avventura",
+      "stato": "c-e",
+      "cosa_fare": "Fatto nel testo il 26/11/2026: frase «Cerchi … vicino a te? Scegli la tua città» con le città più grandi come link e FAQ «Come trovo … vicino a me?». Il titolo resta quello della categoria (piano SEO, cantiere 6)."
+    },
+    {
+      "ricerca": "ludoteca vicino a me",
+      "volume": 4400,
+      "difficolta": 21,
+      "sezione": "locali",
+      "pagina": "/ludoteche",
+      "stato": "c-e",
+      "cosa_fare": "Fatto nel testo il 26/11/2026: frase «Cerchi … vicino a te? Scegli la tua città» con le città più grandi come link e FAQ «Come trovo … vicino a me?». Il titolo resta quello della categoria (piano SEO, cantiere 6)."
+    },
+    {
+      "ricerca": "parco acquatico vicino a me",
+      "volume": 3600,
+      "difficolta": 15,
+      "sezione": "locali",
+      "pagina": "/parchi-acquatici",
+      "stato": "c-e",
+      "cosa_fare": "Fatto nel testo il 26/11/2026: frase «Cerchi … vicino a te? Scegli la tua città» con le città più grandi come link e FAQ «Come trovo … vicino a me?». Il titolo resta quello della categoria (piano SEO, cantiere 6)."
+    },
+    {
+      "ricerca": "fattoria didattica vicino a me",
+      "volume": 2900,
+      "difficolta": 17,
+      "sezione": "locali",
+      "pagina": "/fattorie-didattiche",
+      "stato": "c-e",
+      "cosa_fare": "Fatto nel testo il 26/11/2026: frase «Cerchi … vicino a te? Scegli la tua città» con le città più grandi come link e FAQ «Come trovo … vicino a me?». Il titolo resta quello della categoria (piano SEO, cantiere 6)."
+    },
+    {
+      "ricerca": "scuole paritarie",
+      "volume": 2900,
+      "difficolta": 20,
+      "sezione": "locali",
+      "pagina": "/risorse-educative-bambini",
+      "stato": "c-e",
+      "cosa_fare": "Categoria «scuole paritarie» delle risorse."
+    },
+    {
+      "ricerca": "doposcuola",
+      "volume": 2400,
+      "difficolta": 13,
+      "sezione": "locali",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "La categoria doposcuola esiste ma è vuota: compare alla prima scheda."
+    },
+    {
+      "ricerca": "laser game vicino a me",
+      "volume": 1900,
+      "difficolta": 14,
+      "sezione": "locali",
+      "pagina": null,
+      "stato": "da-sistemare",
+      "cosa_fare": "Come sopra.",
+      "nota_pagina": "categoria laser game"
+    },
+    {
+      "ricerca": "parco giochi al coperto",
+      "volume": 1000,
+      "difficolta": 8,
+      "sezione": "locali",
+      "pagina": "/parchi-giochi-al-coperto",
+      "stato": "c-e",
+      "cosa_fare": "Difficoltà 8: la più facile della ricerca."
+    },
+    {
+      "ricerca": "auguri di natale",
+      "volume": 40500,
+      "difficolta": 24,
+      "sezione": "natale",
+      "pagina": "/natale/biglietti-di-natale",
+      "stato": "fatto",
+      "cosa_fare": "Un biglietto di auguri di Natale con frasi pronte.",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "titolo, H1 e sezione «Frasi di auguri di Natale brevi» in /natale/biglietti-di-natale"
+      }
+    },
+    {
+      "ricerca": "frasi e auguri di natale",
+      "volume": 22200,
+      "difficolta": 18,
+      "sezione": "natale",
+      "pagina": "/natale/biglietti-di-natale",
+      "stato": "fatto",
+      "cosa_fare": "Pagina di frasi di auguri brevi, per bambini e famiglie.",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "sezione di frasi brevi divise per nonni, maestra, amici, famiglia e bambini"
+      }
+    },
+    {
+      "ricerca": "villaggio di babbo natale",
+      "volume": 18100,
+      "difficolta": 14,
+      "sezione": "natale",
+      "pagina": "/natale/eventi",
+      "stato": "fatto",
+      "cosa_fare": "Gli eventi di Natale ci sono già: nominare «villaggi di Babbo Natale» città per città.",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "titolo dell'indice eventi; in ogni città riga e FAQ «C'è un villaggio di Babbo Natale a …?»"
+      }
+    },
+    {
+      "ricerca": "lavoretti di natale",
+      "volume": 18100,
+      "difficolta": 19,
+      "sezione": "natale",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "Guida «Lavoretti di Natale facili con i bambini»."
+    },
+    {
+      "ricerca": "lettera babbo natale",
+      "volume": 14800,
+      "difficolta": 20,
+      "sezione": "natale",
+      "pagina": "/natale/letterina-babbo-natale",
+      "stato": "fatto",
+      "cosa_fare": "Nel titolo anche «lettera», oltre a «letterina».",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "«lettera» nel titolo e nell'H1, «letterina» resta nel titolo"
+      }
+    },
+    {
+      "ricerca": "auguri di natale brevi",
+      "volume": 12100,
+      "difficolta": 17,
+      "sezione": "natale",
+      "pagina": "/natale/biglietti-di-natale",
+      "stato": "fatto",
+      "cosa_fare": "Come «frasi e auguri».",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "sezione «Frasi di auguri di Natale brevi» e FAQ"
+      }
+    },
+    {
+      "ricerca": "babbo natale esiste",
+      "volume": 12100,
+      "difficolta": 16,
+      "sezione": "natale",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "Guida per genitori: come rispondere quando lo chiede."
+    },
+    {
+      "ricerca": "lettera per babbo natale da stampare",
+      "volume": 9900,
+      "difficolta": 27,
+      "sezione": "natale",
+      "pagina": "/natale/letterina-babbo-natale",
+      "stato": "c-e",
+      "cosa_fare": "Già coperta."
+    },
+    {
+      "ricerca": "facili lavoretti di natale",
+      "volume": 8100,
+      "difficolta": 17,
+      "sezione": "natale",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "Stessa guida dei lavoretti."
+    },
+    {
+      "ricerca": "biglietti di natale",
+      "volume": 5400,
+      "difficolta": 25,
+      "sezione": "natale",
+      "pagina": "/natale/biglietti-di-natale",
+      "stato": "fatto",
+      "cosa_fare": "Nominare i biglietti di Natale.",
+      "fatto": {
+        "data": "2026-11-24",
+        "come": "titolo e H1 di /natale/biglietti-di-natale; la pagina dei biglietti ha la voce «Biglietti di Natale» che ci porta"
+      }
+    },
+    {
+      "ricerca": "nome renne babbo natale",
+      "volume": 5400,
+      "difficolta": 15,
+      "sezione": "natale",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "Curiosità dentro una favola di Natale."
+    },
+    {
+      "ricerca": "letterina babbo natale",
+      "volume": 4400,
+      "difficolta": 17,
+      "sezione": "natale",
+      "pagina": "/natale/letterina-babbo-natale",
+      "stato": "c-e",
+      "cosa_fare": "Già coperta."
+    },
+    {
+      "ricerca": "letterina babbo natale da stampare",
+      "volume": 2400,
+      "difficolta": 23,
+      "sezione": "natale",
+      "pagina": "/natale/letterina-babbo-natale",
+      "stato": "c-e",
+      "cosa_fare": "Già coperta."
+    },
+    {
+      "ricerca": "bonus nido 2026",
+      "volume": 60500,
+      "difficolta": 24,
+      "sezione": "storie",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "Fuori dal cuore del sito: da valutare come guida."
+    },
+    {
+      "ricerca": "asilo nido",
+      "volume": 49500,
+      "difficolta": 12,
+      "sezione": "storie",
+      "pagina": null,
+      "stato": "manca",
+      "cosa_fare": "Come sopra."
+    },
+    {
+      "ricerca": "favole della buonanotte",
+      "volume": 12100,
+      "difficolta": 24,
+      "sezione": "storie",
+      "pagina": "/storie",
+      "stato": "da-sistemare",
+      "cosa_fare": "Titolo «Storie per bambini da leggere»: diventa «Favole della buonanotte da leggere»."
+    },
+    {
+      "ricerca": "roblox cos'è",
+      "volume": 2900,
+      "difficolta": 27,
+      "sezione": "storie",
+      "pagina": null,
+      "stato": "c-e",
+      "cosa_fare": "Articolo già pubblicato.",
+      "nota_pagina": "/guide (Roblox)"
+    },
+    {
+      "ricerca": "favole della buonanotte brevi",
+      "volume": 720,
+      "difficolta": 11,
+      "sezione": "storie",
+      "pagina": "/storie",
+      "stato": "da-sistemare",
+      "cosa_fare": "Nominare «brevi» e la durata di lettura."
+    }
+  ]
+}

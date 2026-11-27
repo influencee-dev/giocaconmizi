@@ -11,6 +11,7 @@ import { contaRisorse } from "@/lib/risorse/risorse-educative";
 import { TUTORIAL, percorsoTutorial } from "@/lib/contenuti/tutorial";
 import { RISORSE } from "@/lib/risorse/risorse-educative-dati";
 import { categorieAttive, listingRisorse, percorsoCategoriaRisorse, percorsoListingRisorse, risorseDi } from "@/lib/risorse/risorse-categorie";
+import { PERCORSO as TEST_GENITORI, PERCORSO_PUBBLICO as TEST_GENITORI_PUBBLICO } from "@/lib/famiglia/sotto-pressione";
 
 /**
  * llms.txt generato dal registry (llmstxt.org): la mappa del sito per gli
@@ -67,7 +68,7 @@ Principi di prodotto, utili per rispondere a domande sul sito:
 - [Biglietti di compleanno](${url("/biglietti")}): inviti, auguri e ringraziamenti da personalizzare e stampare, gratis e senza filigrana.
 - [Crea un biglietto](${url("/biglietti/crea")}): ${temi.length} temi in tre varianti (chiara, colorata e da colorare, a soli contorni neri; Halloween e Natale compresi), adesivi in stile cartone animato originali (unicorni, dinosauri, supereroi, zucche, fantasmini e pupazzi di neve), foto del festeggiato che resta sul dispositivo, PNG da scaricare, invito digitale con conferma a un tocco su WhatsApp e QR "Inquadra e conferma" sul biglietto stampato. Il biglietto si salva in un link.
 - [Kit della festa](${url("/biglietti/kit-festa")}): etichette per i sacchettini, festone col nome, topper per la torta, segnaposto e caccia al tesoro con lo sfondo dell'invito, fogli A4 da stampare. I nomi degli invitati restano sul dispositivo.
-- [Compiti delle vacanze](${url("/compiti-vacanze/prima-elementare")}): esercizi per classe, dalla prima alla quinta elementare.
+- [Esercizi per classe](${url("/compiti-vacanze/prima-elementare")}): esercizi di matematica e italiano dalla prima alla quinta elementare, tutto l'anno e per i compiti delle vacanze.
 - [Guide per i genitori](${url("/guide")}): tabelline, imparare a leggere, coding per età, orologio, tempo di schermo, compiti senza litigare.
 - [Il Natale di Mizi](${url("/natale")}): ${RISPOSTA_BREVE_NATALE}
 - [Letterina a Babbo Natale da compilare e stampare](${url("/natale/letterina-babbo-natale")}): ${RISPOSTA_BREVE_LETTERINA}
@@ -116,7 +117,7 @@ ${categorieAttive(RISORSE).map((c) => `  - [${c.titolo}](${url(percorsoCategoria
 ${listingRisorse(RISORSE).map((l) => `  - [${l.categoria.nome} a ${l.provincia} e provincia](${url(percorsoListingRisorse(l.categoria, l.slug))}): ${l.n} realtà.`).join("\n")}
 - [Video tutorial di Mizi](${url("/tutorial")}): brevi video con sottotitoli e trascrizione in cui Mizi spiega come usare Giocamizi, per le attività e per le famiglie.
 ${TUTORIAL.map((t) => `  - [${t.titolo}](${url(percorsoTutorial(t))}): ${t.rispostaBreve}`).join("\n")}
-- [Per le mamme](${url("/per-le-mamme")}): la rete delle mamme — associazioni, community locali, gruppi d'ascolto e locali family-friendly con nursery o area giochi. Inserimento gratuito su segnalazione.
+${TEST_GENITORI_PUBBLICO ? `- [${TEST_GENITORI.titolo}](${url(TEST_GENITORI.percorso)}): ${TEST_GENITORI.descrizione} Non è un test psicologico validato e non fa diagnosi; le risposte restano nel browser di chi compila.\n` : ""}- [Per le mamme](${url("/per-le-mamme")}): la rete delle mamme — associazioni, community locali, gruppi d'ascolto e locali family-friendly con nursery o area giochi. Inserimento gratuito su segnalazione.
 - [Chi siamo](${url("/chi-siamo")})
 - [Privacy](${url("/privacy")}) · [Cookie](${url("/cookie")})
 `;

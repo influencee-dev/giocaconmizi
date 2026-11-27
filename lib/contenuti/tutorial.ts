@@ -49,6 +49,8 @@ export interface Tutorial {
     /** Il testo parlato da Mizi, scena per scena: è la trascrizione. */
     testo: string[];
   };
+  /** La versione 9:16 (dal 23/11/2026): sul telefono il lettore mostra questa. */
+  verticale?: { src: string; poster: string };
   /** I passi del video: bottoni che saltano al punto giusto e «momenti chiave» per Google. */
   capitoli: Capitolo[];
   /** La pagina del sito di cui il video parla. */

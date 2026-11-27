@@ -27,7 +27,7 @@ export const TITOLARE = {
 } as const;
 
 /** Data dell'ultima revisione delle informative (si aggiorna a ogni modifica). */
-export const AGGIORNATA = "18 novembre 2026";
+export const AGGIORNATA = "22 novembre 2026";
 
 export interface VoceRegistro {
   nome: string;
@@ -124,6 +124,26 @@ export const REGISTRO: VoceRegistro[] = [
     quando: "A ogni visita dal telefono",
   },
   {
+    nome: "giocamizi-percorso-genitori",
+    tipo: "sessionStorage",
+    scopo:
+      "Tiene le risposte al percorso per i genitori «sotto pressione» mentre lo compili, per non perderle se la pagina si ricarica, e ricorda (giocamizi-percorso-genitori-dati) che hai già lasciato i tuoi dati, così il profilo si riapre senza chiederli di nuovo. Restano solo nel tuo browser: le risposte non le riceviamo.",
+    durata: "Finché chiudi la scheda, o subito con «Cancella le mie risposte»",
+    necessario: true,
+    chi: "noi",
+    quando: "Quando rispondi alla prima domanda del percorso",
+  },
+  {
+    nome: "giocamizi-novita-chiusa",
+    tipo: "localStorage",
+    scopo:
+      "Ricorda che hai chiuso (o aperto) la novità nella barretta in basso del telefono, così non ricompare per 30 giorni. Contiene solo il nome della novità e la data.",
+    durata: "30 giorni",
+    necessario: true,
+    chi: "noi",
+    quando: "Quando chiudi la novità con la X o tocchi il suo bottone",
+  },
+  {
     nome: "giocamizi-app-chiusa",
     tipo: "localStorage",
     scopo:
@@ -132,6 +152,16 @@ export const REGISTRO: VoceRegistro[] = [
     necessario: true,
     chi: "noi",
     quando: "Quando chiudi la barretta con la X",
+  },
+  {
+    nome: "giocamizi-senza-rete",
+    tipo: "localStorage",
+    scopo:
+      "Ricorda che hai scelto «Scarica i giochi» e quale versione hai sul dispositivo, per aggiornarla quando esce un gioco nuovo. Insieme, nella memoria del browser restano i file dei giochi (pagine, voce di Mizi, disegni): servono a farli funzionare senza connessione. Niente di chi gioca.",
+    durata: "Finché tocchi «Togli i giochi dal telefono» o cancelli i dati del browser",
+    necessario: true,
+    chi: "noi",
+    quando: "Solo se tocchi «Scarica i giochi»",
   },
   {
     nome: "sb-wrkderhcbzlppkveknyd-auth-token",

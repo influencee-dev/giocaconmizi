@@ -42,6 +42,7 @@ export const AREE: { slug: string; nome: string; skills: Skill[] }[] = [
   { slug: "emozioni", nome: "emozioni", skills: ["emozioni"] },
   { slug: "coding", nome: "coding", skills: ["coding"] },
   { slug: "tempo", nome: "orologio", skills: ["tempo"] },
+  { slug: "scienze", nome: "scienze", skills: ["scienze"] },
 ];
 
 function Chip({
@@ -70,9 +71,9 @@ function Chip({
   );
 }
 
-function GrigliaCompatta({ giochi, album }: { giochi: GiocoInCatalogo[]; album: Album }) {
+function GrigliaCompatta({ giochi, album, quattro = false }: { giochi: GiocoInCatalogo[]; album: Album; quattro?: boolean }) {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+    <div className={quattro ? "grid grid-cols-2 gap-3 lg:grid-cols-4" : "grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"}>
       {giochi.map((g) => (
         <CardGioco
           key={g.slug}
@@ -90,7 +91,11 @@ function GrigliaCompatta({ giochi, album }: { giochi: GiocoInCatalogo[]; album: 
   );
 }
 
-export function CatalogoGiochi({ giochi }: { giochi: GiocoInCatalogo[] }) {
+/**
+ * `novita`: gli slug degli ultimi arrivati, dal più recente (lib/giochi/novita.ts).
+ * Stanno in cima al catalogo finché non si sceglie un filtro.
+ */
+export function CatalogoGiochi({ giochi, novita = [] }: { giochi: GiocoInCatalogo[]; novita?: string[] }) {
   const [fascia, setFascia] = useState<number | null>(null);
   const [area, setArea] = useState<string | null>(null);
   // Le stelle dei giochi già finiti (album di Mizi, solo su questo dispositivo).
@@ -111,6 +116,7 @@ export function CatalogoGiochi({ giochi }: { giochi: GiocoInCatalogo[] }) {
       (areaScelta === null || areaScelta.skills.includes(g.skill)),
   );
   const filtroAttivo = fasciaScelta !== null || areaScelta !== null;
+  const ultimi = novita.map((s) => giochi.find((g) => g.slug === s)).filter((g): g is GiocoInCatalogo => Boolean(g));
 
   const sezioni = [
     { titolo: "Dai 3 ai 5 anni", giochi: giochi.filter((g) => g.ageMin <= 5) },
@@ -162,14 +168,23 @@ export function CatalogoGiochi({ giochi }: { giochi: GiocoInCatalogo[] }) {
           )}
         </section>
       ) : (
-        sezioni.map((gruppo) => (
-          <section key={gruppo.titolo} className="mt-8">
-            <h2 className="mb-4 text-2xl font-extrabold text-notte sm:text-3xl">
-              {gruppo.titolo}
-            </h2>
-            <GrigliaCompatta giochi={gruppo.giochi} album={album} />
-          </section>
-        ))
+        <>
+          {ultimi.length > 0 && (
+            <section className="mt-8" data-ultimi-arrivati>
+              <h2 className="text-2xl font-extrabold text-notte sm:text-3xl">Gli ultimi arrivati</h2>
+              <p className="mb-4 mt-1 font-bold text-notte-tenue">Giochi nuovi o appena migliorati.</p>
+              <GrigliaCompatta giochi={ultimi} album={album} quattro />
+            </section>
+          )}
+          {sezioni.map((gruppo) => (
+            <section key={gruppo.titolo} className="mt-8">
+              <h2 className="mb-4 text-2xl font-extrabold text-notte sm:text-3xl">
+                {gruppo.titolo}
+              </h2>
+              <GrigliaCompatta giochi={gruppo.giochi} album={album} />
+            </section>
+          ))}
+        </>
       )}
     </div>
   );

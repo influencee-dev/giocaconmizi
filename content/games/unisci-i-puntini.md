@@ -1,5 +1,6 @@
 ---
 title: "Unisci i puntini"
+titoloSeo: "Unisci i puntini: gioco online per bambini"
 slug: unisci-i-puntini
 ageMin: 5
 ageMax: 7

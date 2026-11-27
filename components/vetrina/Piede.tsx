@@ -28,7 +28,7 @@ export const COLONNE: { titolo: string; voci: [string, string][] }[] = [
       ["/giochi/eta/5-anni", "Giochi per età"],
       ["/storie", "Storie da leggere"],
       ["/coding", "Coding"],
-      ["/compiti-vacanze/prima-elementare", "Compiti delle vacanze"],
+      ["/compiti-vacanze/prima-elementare", "Esercizi per classe"],
     ],
   },
   {

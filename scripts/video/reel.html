@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<!--
+  Il motore dei REEL di Mizi (docs/video-tutorial.md, «Reel»): solo verticale,
+  540×960 disegnato al doppio (1080×1920). Diverso dai tutorial:
+  - il primo fotogramma ha già la frase grande (niente entrate da vuoto);
+  - scene corte e veloci, registrazioni vere del sito (clip/<nome>.webm);
+  - UN SOLO strato di testo per volta: la scritta grande in alto e i
+    sottotitoli della voce non dicono mai la stessa cosa; dove la voce ripete
+    la scritta, la scena ha "sottotitoli": false. Con #senza-sottotitoli non
+    escono proprio (per chi usa i sottotitoli automatici di Instagram);
+  - le zone coperte da Instagram restano libere: in alto 70 px, in basso 200 px,
+    a destra 70 px (dove stanno i bottoni).
+  Tipi di scena: gancio · clip · domanda · mani (il trucco del 9) · finale (breve, sempre l'ultima).
+-->
+<style>
+@font-face { font-family: Nunito; src: url(asset/nunito-600.ttf); font-weight: 600; }
+@font-face { font-family: Nunito; src: url(asset/nunito-800.ttf); font-weight: 800; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 540px; height: 960px; overflow: hidden; background: #FFF3E6; font-family: Nunito, sans-serif; color: #1F2430; }
+#palco { position: absolute; inset: 0; overflow: hidden; }
+.bolla { position: absolute; border-radius: 50%; }
+.scena { position: absolute; inset: 0; will-change: transform, opacity; }
+.grande { position: absolute; left: 30px; right: 70px; top: 86px; font-weight: 800; font-size: 44px; line-height: 1.05; letter-spacing: -0.6px; }
+.grande .evid { background: linear-gradient(transparent 58%, #F9C846 58%); padding: 0 4px; }
+.sopra { display: inline-block; margin-bottom: 12px; background: #C42A6B; color: #fff; font-weight: 800; font-size: 18px; letter-spacing: .08em; text-transform: uppercase; padding: 6px 14px; border-radius: 99px; }
+.schermo { position: absolute; left: 50%; overflow: hidden; border-radius: 30px; background: #1F2430; box-shadow: 0 30px 60px -26px rgba(31,36,48,.6); border: 6px solid #1F2430; }
+.schermo video { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+#sottotitoli { position: absolute; left: 30px; right: 70px; top: 708px; text-align: center; z-index: 5; }
+#sottotitoli span { display: inline; font-weight: 800; font-size: 25px; line-height: 1.45; color: #fff; background: #1F2430; padding: 4px 12px; border-radius: 10px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.senza #sottotitoli { display: none; }
+#marchio { position: absolute; left: 30px; top: 30px; z-index: 4; font-weight: 800; font-size: 17px; color: #7E4FC4; background: #fff; padding: 5px 12px; border-radius: 99px; box-shadow: 0 6px 16px -8px rgba(31,36,48,.4); }
+.viola { position: absolute; inset: 0; background: #7E4FC4; overflow: hidden; color: #fff; }
+.viola .bolla { background: rgba(255,255,255,.12); }
+.carta { position: absolute; left: 30px; right: 70px; background: #fff; border-radius: 28px; box-shadow: 0 30px 60px -28px rgba(31,36,48,.45); padding: 28px; }
+</style>
+</head>
+<body>
+<div id="palco">
+  <div class="bolla" style="width:420px;height:420px;left:-150px;top:-140px;background:#FCE1EC"></div>
+  <div class="bolla" style="width:380px;height:380px;right:-140px;bottom:-120px;background:#E1F3FB"></div>
+  <div class="bolla" style="width:90px;height:90px;right:60px;top:230px;background:#FEF3D1"></div>
+  <div id="scene"></div>
+  <div id="marchio">giocamizi.it</div>
+  <div id="sottotitoli"></div>
+</div>
+<script>
+if (location.hash === '#senza-sottotitoli') document.body.classList.add('senza');
+const SPEC = __SPEC__;
+const VOCI = __VOCI__;
+const ANTICIPO = SPEC.anticipo ?? 0.15, CODA = SPEC.coda ?? 0.25, STACCO = 0.22;
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const out = (x) => 1 - Math.pow(1 - clamp(x), 3);
+const back = (x) => { x = clamp(x); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const tra = (t, a, b) => clamp((t - a) / (b - a));
+const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;');
+// *parola* nella scritta grande = evidenziata in giallo
+const evid = (s) => esc(s).replace(/\*([^*]+)\*/g, '<span class="evid">$1</span>');
+
+// Una registrazione vera dentro uno schermo: ritaglio {x, y, w, h} in px della pagina (larga 390)
+function schermo(sc, top, maxH = 520, maxW = 440) {
+  const r = { x: 0, y: 0, w: 390, h: 844, ...(sc.ritaglio ?? {}) };
+  const s = Math.min(maxW / r.w, maxH / r.h);
+  const w = r.w * s, h = r.h * s;
+  return `<div class="schermo" style="top:${top}px;width:${w + 12}px;height:${h + 12}px;margin-left:${-(w + 12) / 2 - 20}px">
+    <video src="clip/${sc.clip}.mp4" muted playsinline preload="auto" style="width:${390 * s}px;transform:translate(${-r.x * s}px,${-r.y * s}px)"></video></div>`;
+}
+
+const TIPI = {
+  // La frase che ferma il pollice: visibile dal primo fotogramma.
+  gancio: {
+    html: (sc) => `<div>
+      <div class="grande" style="top:${sc.clip ? 86 : 150}px">${sc.sopra ? `<div class="sopra">${esc(sc.sopra)}</div><br>` : ''}${evid(sc.testo)}</div>
+      ${sc.clip ? schermo(sc, 300, 480) : `<img class="mizi" src="asset/mizi-intera.webp" style="position:absolute;left:120px;top:430px;width:300px">`}
+    </div>`,
+    anima(n, t) {
+      const g = n.querySelector('.grande');
+      g.style.transform = `scale(${1 + 0.025 * Math.sin(t * 4)})`; g.style.transformOrigin = '0 50%';
+      const m = n.querySelector('.mizi'); if (m) m.style.transform = `rotate(${Math.sin(t * 3) * 4}deg) translateY(${Math.sin(t * 4) * 6}px)`;
+    },
+  },
+  // Una registrazione vera, con la scritta grande sopra.
+  clip: {
+    html: (sc) => `<div>${sc.testo ? `<div class="grande" style="font-size:${sc.testo.length > 40 ? 34 : 40}px">${evid(sc.testo)}</div>` : ''}${schermo(sc, sc.testo ? 238 : 120, sc.testo ? 440 : 560)}</div>`,
+    anima(n, t) { const g = n.querySelector('.grande'); if (g) { const p = out(tra(t, 0, .3)); g.style.opacity = p; g.style.transform = `translateY(${(1 - p) * 20}px)`; } },
+  },
+  // La domanda per i commenti: grande, in una carta, con la manina che indica giù.
+  domanda: {
+    html: (sc) => `<div>
+      <div class="carta" style="top:190px"><div style="font-weight:800;font-size:40px;line-height:1.08">${evid(sc.testo)}</div>
+        ${sc.sotto ? `<div style="margin-top:16px;font-weight:800;font-size:24px;color:#C42A6B">${esc(sc.sotto)}</div>` : ''}
+        ${(sc.scelte ?? []).map((s, i) => `<div class="scelta" style="margin-top:12px;font-weight:800;font-size:22px;background:#FFF3E6;border-radius:16px;padding:12px 16px">${'ABC'[i]} · ${esc(s)}</div>`).join('')}
+      </div>
+      <img class="mizi" src="asset/mizi-intera.webp" style="position:absolute;left:150px;top:${sc.scelte ? 610 : 520}px;width:${sc.scelte ? 170 : 240}px">
+    </div>`,
+    anima(n, t) {
+      const c = n.querySelector('.carta'); const p = back(tra(t, 0, .45)); c.style.transform = `scale(${0.85 + 0.15 * p})`;
+      n.querySelectorAll('.scelta').forEach((s, i) => { const q = out(tra(t, .3 + i * .18, .6 + i * .18)); s.style.opacity = q; s.style.transform = `translateX(${(1 - q) * 40}px)`; });
+      const m = n.querySelector('.mizi'); m.style.transform = `rotate(${Math.sin(t * 3) * 5}deg)`;
+    },
+  },
+  // Il trucco del 9 con le mani: dieci dita, il dito n si abbassa; con «risultato»
+  // si colorano le dita prima (decine) e dopo (unità) e compare il numero.
+  mani: {
+    html: (sc) => {
+      const dita = Array.from({ length: 10 }, (_, i) => `<div class="dito" data-i="${i + 1}" style="position:absolute;left:${48 + i * 42 + (i >= 5 ? 24 : 0)}px;top:${518 - [150, 175, 190, 175, 120, 120, 175, 190, 175, 150][i]}px;width:32px;height:${[150, 175, 190, 175, 120, 120, 175, 190, 175, 150][i]}px;border-radius:16px 16px 10px 10px;background:#F6E3CF;border:3px solid #1F2430;transform-origin:50% 100%"></div>`).join('');
+      return `<div>
+        <div class="grande" style="font-size:40px">${evid(sc.testo)}</div>
+        <div style="position:absolute;left:40px;top:500px;width:210px;height:110px;border-radius:30px 30px 50px 50px;background:#F6E3CF;border:3px solid #1F2430"></div>
+        <div style="position:absolute;left:274px;top:500px;width:210px;height:110px;border-radius:30px 30px 50px 50px;background:#F6E3CF;border:3px solid #1F2430"></div>
+        ${dita}
+        <div class="numeri" style="position:absolute;left:0;right:40px;top:300px;display:flex;justify-content:center;gap:10px"></div>
+        ${sc.risultato ? `<div class="ris" style="position:absolute;left:0;right:40px;top:620px;text-align:center;font-weight:800;font-size:64px;color:#7E4FC4">${esc(sc.risultato)}</div>` : ''}
+      </div>`;
+    },
+    anima(n, t, sc) {
+      const giu = sc.dito;
+      n.querySelectorAll('.dito').forEach((d) => {
+        const i = Number(d.dataset.i);
+        if (i === giu) { const p = out(tra(t, sc.risultato ? 0 : .6, sc.risultato ? .01 : 1.1)); d.style.transform = `scaleY(${1 - .55 * p})`; d.style.background = '#F28AB2'; }
+        if (sc.risultato) {
+          const q = tra(t, .3, .6);
+          if (i < giu) d.style.background = q > 0 ? '#F9C846' : '#F6E3CF';
+          if (i > giu) d.style.background = q > 0 ? '#8FD3F0' : '#F6E3CF';
+        }
+      });
+      const r = n.querySelector('.ris'); if (r) { const p = back(tra(t, .9, 1.4)); r.style.transform = `scale(${p})`; r.style.opacity = p > 0 ? 1 : 0; }
+    },
+  },
+  // Il finale corto: viola, Mizi, l'indirizzo. Un secondo e mezzo, poi il reel ricomincia.
+  finale: {
+    html: (sc) => `<div><div class="viola">
+      <div class="bolla" style="width:420px;height:420px;left:-140px;bottom:-160px"></div>
+      <div class="bolla" style="width:240px;height:240px;right:-60px;top:-60px"></div>
+      <div class="blocco" style="position:absolute;left:30px;right:70px;top:150px">
+        <div style="font-weight:800;font-size:26px;opacity:.9">${esc(sc.sopra ?? 'Gratis, senza pubblicità')}</div>
+        <div style="margin-top:10px;font-weight:800;font-size:54px;line-height:1">giocamizi.it</div>
+        ${sc.url ? `<div class="pill" style="margin-top:22px;display:inline-block;background:#fff;color:#7E4FC4;font-weight:800;font-size:20px;padding:12px 18px;border-radius:999px">${esc(sc.url)}</div>` : ''}
+      </div>
+      <img class="mizi" src="asset/mizi-intera.webp" style="position:absolute;left:130px;top:430px;width:280px">
+    </div></div>`,
+    anima(n, t) {
+      const m = n.querySelector('.mizi'); const p = back(tra(t, 0, .5));
+      m.style.transform = `scale(${p}) rotate(${Math.sin(t * 3) * 5}deg)`;
+      const b = n.querySelector('.blocco'); const q = out(tra(t, 0, .35)); b.style.opacity = q; b.style.transform = `translateY(${(1 - q) * 24}px)`;
+    },
+  },
+};
+
+const SCENE = SPEC.scene;
+let inizio = 0;
+const TEMPI = SCENE.map((s, i) => {
+  // il gancio parte subito (niente anticipo): il primo fotogramma è già pieno
+  const ant = i === 0 ? 0.05 : ANTICIPO;
+  const d = Math.max(s.minimo ?? 0, VOCI[i] + ant + CODA);
+  const r = { inizio, dur: d, voce: inizio + ant }; inizio += d; return r;
+});
+const DURATA = inizio;
+window.DURATA = DURATA; window.TEMPI = TEMPI;
+const contenitore = document.getElementById('scene');
+const nodi = SCENE.map((s) => { const n = document.createElement('div'); n.className = 'scena'; n.innerHTML = TIPI[s.tipo].html(s); n.style.display = 'none'; contenitore.appendChild(n); return n; });
+
+// sottotitoli: pezzi corti (max 2 righe), in proporzione al tempo della voce
+const PEZZI = SCENE.map((s) => {
+  const parole = String(s.voce).replace(/giocamizi punto it/gi, 'giocamizi.it').split(' '); const pezzi = []; let cur = [];
+  for (const p of parole) { cur.push(p); if (cur.join(' ').length > 30 || /[.:!?,]$/.test(p) && cur.join(' ').length > 12) { pezzi.push(cur.join(' ')); cur = []; } }
+  if (cur.length) pezzi.push(cur.join(' '));
+  const tot = pezzi.reduce((a, p) => a + p.length, 0); let acc = 0;
+  return pezzi.map((p) => { const a = acc / tot; acc += p.length; return { testo: p, da: a, a: acc / tot }; });
+});
+
+// Porta ogni video al suo punto: si aspetta il fotogramma giusto prima dello scatto.
+function cerca(v, sec) {
+  return new Promise((ok) => {
+    if (Math.abs(v.currentTime - sec) < 0.004 && v.readyState >= 2) return ok();
+    const fatto = () => { v.removeEventListener('seeked', fatto); ok(); };
+    v.addEventListener('seeked', fatto); v.currentTime = sec;
+    setTimeout(fatto, 3000);
+  });
+}
+
+window.render = async (t) => {
+  const attese = [];
+  SCENE.forEach((s, i) => {
+    const { inizio: a, dur } = TEMPI[i];
+    const lt = t - a;
+    const vis = lt > -STACCO && lt < dur;
+    const n = nodi[i];
+    n.style.display = vis ? 'block' : 'none';
+    if (!vis) return;
+    // stacco veloce: la scena nuova sale e si allarga un poco (niente scorrimenti lunghi)
+    const p = i === 0 ? 1 : out(tra(lt, -STACCO, 0));
+    n.style.opacity = p; n.style.transform = `translateY(${(1 - p) * 60}px) scale(${0.96 + 0.04 * p})`;
+    n.style.zIndex = i;
+    TIPI[s.tipo].anima(n, Math.max(0, lt), s, VOCI[i]);
+    const v = n.querySelector('video');
+    if (v) attese.push(cerca(v, Math.min((s.da ?? 0) + Math.max(0, lt) * (s.velocita ?? 1), Math.max(0, (v.duration || 999) - 0.05))));
+  });
+  let testo = '';
+  TEMPI.forEach((tm, i) => {
+    if (SCENE[i].sottotitoli === false) return;
+    const f = (t - tm.voce) / VOCI[i];
+    if (f >= 0 && f <= 1.02) testo = (PEZZI[i].find((q) => f >= q.da && f < q.a + .02) || PEZZI[i][PEZZI[i].length - 1]).testo;
+  });
+  document.getElementById('sottotitoli').innerHTML = testo ? `<span>${esc(testo)}</span>` : '';
+  const ora = TEMPI.findIndex((tm) => t >= tm.inizio && t < tm.inizio + tm.dur);
+  document.getElementById('marchio').style.opacity = SCENE[ora]?.tipo === 'finale' ? 0 : 1;
+  await Promise.all(attese);
+};
+</script>
+</body>
+</html>

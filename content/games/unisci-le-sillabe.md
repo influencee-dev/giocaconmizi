@@ -1,5 +1,6 @@
 ---
 title: "Unisci le sillabe"
+titoloSeo: "Imparare a leggere con le sillabe: gioco online"
 slug: unisci-le-sillabe
 ageMin: 5
 ageMax: 7

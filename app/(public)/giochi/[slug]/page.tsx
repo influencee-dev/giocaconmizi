@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { Condividi } from "@/components/ui/Condividi";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { games } from "@/games/registry";
 import { testoGioco } from "@/lib/contenuti/content";
+import { titoloPagina } from "@/lib/seo/seo";
 import { Contenitore, Prosa } from "@/components/ui";
 import { FigurinaDelGioco } from "@/components/giochi/FigurinaDelGioco";
 import {
@@ -29,11 +31,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     testo?.description ??
     `${gioco.title}: gioco educativo gratis per bambini dai ${gioco.ageMin} ai ${gioco.ageMax} anni. Senza pubblicità e senza timer.`;
 
+  // Il titolo per Google nomina quello che la gente cerca; il nome del gioco resta nell'H1.
+  const titolo = testo?.titoloSeo ?? gioco.title;
   return {
-    title: gioco.title,
+    title: titoloPagina(titolo),
     description: descrizione,
     alternates: { canonical: `/giochi/${slug}` },
-    openGraph: { title: gioco.title, description: descrizione },
+    openGraph: { title: titolo, description: descrizione },
   };
 }
 
@@ -86,6 +90,15 @@ export default async function GiocoPage({ params }: Params) {
 
           <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">{gioco.title}</h1>
           <p className="mt-3 text-lg text-notte-tenue">{descrizione}</p>
+          <div className="mt-3">
+            <Condividi
+              percorso={`/giochi/${gioco.slug}`}
+              titolo={gioco.title}
+              testo={`«${gioco.title}»: un gioco gratis per bambini dai ${gioco.ageMin} ai ${gioco.ageMax} anni, senza pubblicità e senza app. Provatelo su Giocamizi 👇`}
+              campagna="gioco"
+              piccolo
+            />
+          </div>
         </div>
 
         <aside className="mt-6 lg:col-start-2 lg:row-span-2 lg:mt-0">

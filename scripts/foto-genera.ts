@@ -8,17 +8,40 @@
  * Stesse foto e stessi prompt del documento su Drive (lib/foto/foto-del-giorno.ts),
  * con l'immagine di Mizi (public/mizi/mizi-intera.webp) come riferimento.
  * Variabili d'ambiente (nell'ambiente cloud «Giocamizi», MAI nel repo):
- *   OPENAI_API_KEY          obbligatoria
+ *   OPENAI_API_KEY          facoltativa nel cloud: lì la chiave vera la aggiunge
+ *                           il proxy di rete (segreto di rete per api.openai.com)
  *   OPENAI_IMAGE_MODEL      facoltativa, predefinito gpt-image-2
  *   OPENAI_IMAGE_QUALITY    facoltativa: low | medium | high (predefinito high)
- * --prova mostra cosa farebbe senza chiamare l'API (niente costi).
- * Esce con 2 se manca la chiave: la routine allora usa solo il documento su Drive.
+ * --prova mostra cosa farebbe e dice se OpenAI risponde, senza generare (niente costi).
+ * Esce con 2 se OpenAI non è raggiungibile o rifiuta la chiave: la routine allora
+ * usa solo il documento su Drive.
+ *
+ * Nel cloud il comando si sistema da solo (dal 22/11/2026): si rilancia una volta
+ * con NODE_USE_ENV_PROXY=1, perché senza quella variabile il fetch di Node non
+ * passa dal proxy e dà «fetch failed». Prima andava ricordato a mano, e due sere
+ * su cinque la riserva non è partita.
  */
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import sharp from "sharp";
 import { fotoDelGiorno, misuraApi, promptFoto, type FotoDaFare } from "../lib/foto/foto-del-giorno";
+
+// Nel cloud tutte le uscite passano da un proxy: Node lo usa solo se la
+// variabile c'è già all'avvio, quindi il comando si rilancia una volta sola.
+const PROXY = Boolean(process.env.HTTPS_PROXY || process.env.https_proxy);
+const CA_CLOUD = "/root/.ccr/ca-bundle.crt";
+if (PROXY && process.env.NODE_USE_ENV_PROXY !== "1") {
+  const r = spawnSync(process.execPath, [path.join("node_modules", "tsx", "dist", "cli.mjs"), ...process.argv.slice(1)], {
+    stdio: "inherit",
+    env: {
+      ...process.env,
+      NODE_USE_ENV_PROXY: "1",
+      ...(!process.env.NODE_EXTRA_CA_CERTS && fs.existsSync(CA_CLOUD) ? { NODE_EXTRA_CA_CERTS: CA_CLOUD } : {}),
+    },
+  });
+  process.exit(r.status ?? 1);
+}
 
 const arg = (nome: string) => {
   const i = process.argv.indexOf(`--${nome}`);
@@ -29,21 +52,29 @@ const quante = Math.max(0, Number(arg("quante") ?? 2));
 const prova = process.argv.includes("--prova");
 const modello = process.env.OPENAI_IMAGE_MODEL?.trim() || "gpt-image-2";
 const qualita = process.env.OPENAI_IMAGE_QUALITY?.trim() || "high";
-const chiave = process.env.OPENAI_API_KEY?.trim();
+// Dietro il proxy la chiave vera la aggiunge lui: basta un segnaposto.
+const chiave = process.env.OPENAI_API_KEY?.trim() || (PROXY ? "proxy-injected" : undefined);
+
+/** Una chiamata che non costa niente: dice subito e chiaro se si può generare. */
+async function accesso(): Promise<string | null> {
+  if (!chiave) return "manca OPENAI_API_KEY nell'ambiente";
+  try {
+    const r = await fetch("https://api.openai.com/v1/models", {
+      headers: { authorization: `Bearer ${chiave}` },
+      signal: AbortSignal.timeout(30_000),
+    });
+    if (r.status === 401 || r.status === 403) return `OpenAI rifiuta la chiave (errore ${r.status}): non è nell'ambiente e il proxy non la aggiunge`;
+    return null;
+  } catch {
+    return "api.openai.com non è raggiungibile da questo ambiente";
+  }
+}
 const CARTELLA = path.join(process.cwd(), ".foto-generate", data);
 
 const { oggi } = fotoDelGiorno(data, quante);
 if (!oggi.length) {
   console.log(`foto:genera ${data}: nessuna foto da fare.`);
   process.exit(0);
-}
-if (prova) {
-  for (const f of oggi) console.log(`PROVA      ${f.nomeFile} · ${misuraApi(f.rapporto)} · ${modello}/${qualita}`);
-  process.exit(0);
-}
-if (!chiave) {
-  console.error("foto:genera: manca OPENAI_API_KEY nell'ambiente. Nessuna foto generata: resta il documento su Drive.");
-  process.exit(2);
 }
 
 async function riferimentoMizi(): Promise<Blob> {
@@ -81,6 +112,16 @@ async function genera(f: FotoDaFare, riferimento: Blob): Promise<Buffer> {
 }
 
 async function principale() {
+  const motivo = await accesso();
+  if (prova) {
+    for (const f of oggi) console.log(`PROVA      ${f.nomeFile} · ${misuraApi(f.rapporto)} · ${modello}/${qualita}`);
+    console.log(motivo ? `PROVA      OpenAI: NO, ${motivo}.` : "PROVA      OpenAI: risponde, la riserva può generare.");
+    return;
+  }
+  if (motivo) {
+    console.error(`foto:genera: ${motivo}. Nessuna foto generata: resta il documento su Drive.`);
+    process.exit(2);
+  }
   fs.mkdirSync(CARTELLA, { recursive: true });
   const riferimento = await riferimentoMizi();
   const fatte: string[] = [];

@@ -31,7 +31,21 @@ ok("iPhone: col banner cookie aperto la barra non c'è", !(await visibile(p)));
 await p.getByRole("region", { name: /Consenso/ }).getByRole("button").first().tap();
 await barra(p).waitFor({ timeout: 4000 }).catch(() => null);
 ok("iPhone: chiuso il banner, la barra compare", await visibile(p));
-ok("iPhone: dice «Scarica Giocamizi sul tuo telefono»", (await barra(p).textContent())?.includes("Scarica Giocamizi sul tuo telefono"));
+// La novità (25/11/2026): prima della barretta per l'app c'è il test per i genitori.
+ok("iPhone: la barra mostra la novità, il test, con il link giusto",
+  (await barra(p).getAttribute("data-novita")) === "test-sotto-pressione" &&
+  (await barra(p).textContent())?.includes("sotto pressione") &&
+  ((await p.locator("[data-apri-novita]").getAttribute("href")) ?? "").startsWith("/genitori/sotto-pressione"));
+await p.goto(BASE + "/genitori/sotto-pressione", { waitUntil: "networkidle" });
+await p.waitForTimeout(500);
+ok("iPhone: nella pagina del test la novità non c'è (c'è la barretta dell'app)", (await barra(p).getAttribute("data-novita").catch(() => null)) === null);
+await p.goto(BASE + "/", { waitUntil: "networkidle" });
+await barra(p).waitFor({ timeout: 4000 }).catch(() => null);
+await p.locator("[data-chiudi-novita]").tap();
+await p.waitForTimeout(300);
+ok("iPhone: chiusa la novità torna «Scarica Giocamizi sul tuo telefono»",
+  (await visibile(p)) && (await barra(p).textContent())?.includes("Scarica Giocamizi sul tuo telefono") &&
+  JSON.parse((await p.evaluate(() => localStorage.getItem("giocamizi-novita-chiusa"))) ?? "{}").id === "test-sotto-pressione");
 await p.locator("[data-installa]").tap();
 ok("iPhone: «Scarica» spiega Condividi → Aggiungi alla schermata Home",
   (await p.getByRole("dialog", { name: /installare/ }).textContent())?.includes("Aggiungi alla schermata Home"));
@@ -54,9 +68,55 @@ await p.waitForTimeout(500);
 ok("iPhone: chiusa resta chiusa (30 giorni)", !(await visibile(p)) && Number(await p.evaluate(() => localStorage.getItem("giocamizi-app-chiusa"))) > 0);
 await iphone.close();
 
+// La novità chiusa RICOMPARE (26/11/2026, richiesta di Giorgia): chiusa due
+// giorni fa torna negli articoli ma non altrove; chiusa quattro giorni fa torna ovunque.
+for (const [giorni, pagina, attesa] of [[2, "/guide/festa-di-compleanno-semplice", true], [2, "/feste", false], [4, "/feste", true]]) {
+  const c = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, userAgent: IPHONE });
+  await c.addInitScript((g) => {
+    localStorage.setItem("mizi.consenso-statistiche", "no");
+    localStorage.setItem("giocamizi-novita-chiusa", JSON.stringify({ id: "test-sotto-pressione", t: Date.now() - g * 24 * 3600 * 1000 }));
+  }, giorni);
+  const q = await c.newPage();
+  await q.goto(BASE + pagina, { waitUntil: "networkidle" });
+  await barra(q).waitFor({ timeout: 4000 }).catch(() => null);
+  const novita = (await barra(q).getAttribute("data-novita").catch(() => null)) === "test-sotto-pressione";
+  ok(`novità chiusa ${giorni} giorni fa: su ${pagina} ${attesa ? "ricompare" : "resta chiusa"}`, novita === attesa);
+  await c.close();
+}
+
+// Il test nelle storie (26/11/2026): l'immagine verticale, il link corto e il tasto.
+{
+  const r = await fetch(`${BASE}/genitori/sotto-pressione/storia`);
+  const png = Buffer.from(await r.arrayBuffer());
+  const lato = png.length > 24 ? [png.readUInt32BE(16), png.readUInt32BE(20)] : [0, 0];
+  ok("storia del test: PNG verticale 1080×1920", r.ok && r.headers.get("content-type")?.includes("png") && lato[0] === 1080 && lato[1] === 1920, lato.join("×"));
+  const corto = await fetch(`${BASE}/test`, { redirect: "manual" });
+  ok("giocamizi.it/test porta al test con la campagna delle storie",
+    [302, 307].includes(corto.status) && (corto.headers.get("location") ?? "").includes("/genitori/sotto-pressione?utm_source=storia"));
+  const c = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, userAgent: IPHONE });
+  await c.grantPermissions(["clipboard-read", "clipboard-write"]).catch(() => null);
+  const q = await c.newPage();
+  await q.addInitScript(() => localStorage.setItem("mizi.consenso-statistiche", "no"));
+  await q.goto(BASE + "/genitori/sotto-pressione", { waitUntil: "networkidle" });
+  const tasto = q.locator("[data-condividi-storia] button").first();
+  const c1 = await tasto.count();
+  if (c1) {
+    const scarico = q.waitForEvent("download", { timeout: 8000 }).catch(() => null);
+    await tasto.tap();
+    await scarico;
+    await q.locator("[data-storia-istruzioni]").waitFor({ timeout: 8000 }).catch(() => null);
+  }
+  ok("pagina del test: «Condividi nelle storie» prepara l'immagine e spiega lo sticker «Link»",
+    c1 > 0 && ((await q.locator("[data-storia-istruzioni]").textContent().catch(() => "")) ?? "").includes("sticker"));
+  await c.close();
+}
+
 // 5. Android senza finestra d'installazione del browser: istruzioni dal menu.
 const android = await b.newContext({ viewport: { width: 360, height: 780 }, isMobile: true, hasTouch: true, userAgent: ANDROID });
-await android.addInitScript(() => localStorage.setItem("mizi.consenso-statistiche", "no"));
+await android.addInitScript(() => {
+  localStorage.setItem("mizi.consenso-statistiche", "no");
+  localStorage.setItem("giocamizi-novita-chiusa", JSON.stringify({ id: "test-sotto-pressione", t: Date.now() }));
+});
 const a = await android.newPage();
 await a.goto(BASE + "/feste", { waitUntil: "networkidle" });
 await barra(a).waitFor({ timeout: 4000 }).catch(() => null);
@@ -230,6 +290,8 @@ const benvenuto = (p) => p.locator("[data-benvenuto]");
 {
   // Accedi: errori detti come li direbbe una persona
   const ctx = await b.newContext(telefono); await ctx.addInitScript(UMANO);
+  // Supabase finto irraggiungibile: la prova non deve mai chiedere un link vero.
+  await ctx.route(/supabase\.co/, (r) => r.abort());
   const p = await ctx.newPage();
   await p.goto(BASE + "/accedi?errore=link-scaduto", { waitUntil: "networkidle" });
   ok("accedi: link scaduto, lo spiega", (await p.locator("form [role=alert]").textContent())?.includes("scaduto"));
@@ -242,6 +304,100 @@ const benvenuto = (p) => p.locator("[data-benvenuto]");
   ok("accedi: se il link non parte lo dice in italiano", /Riprova|manutenzione|aspetta/.test(msg) && !/fetch|error|supabase/i.test(msg), msg);
   ok("accedi: niente barra delle schede", !(await p.locator("[data-barra-schede]").isVisible()));
   await ctx.close();
+}
+
+{
+  // Gli articoli nell'app (22/11/2026). Prima sul telefono c'era solo la casella «Guide»,
+  // e nella pagina delle guide gli articoli nuovi stavano in fondo, dopo tutte le guide brevi.
+  // Senza UMANO: nel browser automatico il benvenuto non compare e non copre la home.
+  const ctx = await b.newContext(telefono); await ctx.addInitScript(() => localStorage.setItem("mizi.consenso-statistiche", "no"));
+  const p = await ctx.newPage();
+  await p.goto(BASE + "/guide", { waitUntil: "networkidle" });
+  const elenco = await p.locator("[data-elenco-guide] [data-guida]").evaluateAll((e) => e.map((x) => ({ slug: x.dataset.guida, foto: Boolean(x.querySelector("img")), articolo: /Articolo/.test(x.textContent) })));
+  ok("guide: in cima all'elenco ci sono gli ultimi articoli, con la foto", elenco.length >= 20 && elenco.slice(0, 2).every((g) => g.articolo && g.foto), elenco.slice(0, 3).map((g) => g.slug).join(", "));
+  ok("guide: nessuno sbordo sul telefono", await p.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1));
+  await p.goto(BASE + "/", { waitUntil: "networkidle" });
+  const letture = await p.locator("[data-letture-app] [data-lettura]").evaluateAll((e) => e.map((x) => ({ slug: x.dataset.lettura, href: x.getAttribute("href"), foto: Boolean(x.querySelector("img")), visibile: x.getBoundingClientRect().width > 0 })));
+  // Giorgia (22/11/2026): la home resta com'era, si aggiunge solo il blocco degli articoli, in fondo.
+  const alto = (sel) => p.locator(sel).first().evaluate((e) => Math.round(e.getBoundingClientRect().top + window.scrollY)).catch(() => -1);
+  const ordine = [await alto("[data-carosello]"), await alto("[data-per-la-mamma]"), await alto("[data-letture-app]")];
+  ok("home dell'app: gli articoli stanno in fondo, dopo i giochi e «Per la mamma»", ordine.every((y) => y > 0) && ordine.every((y, i) => i === 0 || y > ordine[i - 1]), ordine.join(" < "));
+  const caselle = await p.locator("[data-per-la-mamma] a").evaluateAll((e) => e.map((x) => x.getAttribute("href")));
+  ok("home dell'app: «Per la mamma» è rimasta com'era", caselle.join(",") === "/biglietti,/feste,/storie,/guide", caselle.join(","));
+  const barra = await p.locator("[data-barra-schede] a").evaluateAll((e) => e.map((x) => x.textContent.trim()));
+  ok("barra in basso: Home, Giochi, Feste, Storie, Profilo (ordine scelto da Giorgia)", barra.join(",") === "Home,Giochi,Feste,Storie,Profilo", barra.join(","));
+  ok("home dell'app: nessuno sbordo con il blocco degli articoli", await p.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1));
+  ok("home dell'app: gli articoli sono i quattro più recenti, gli stessi in cima alle guide",
+    letture.length === 4 && letture.every((l) => l.visibile && l.href === `/guide/${l.slug}`) && letture.map((l) => l.slug).join() === elenco.slice(0, 4).map((g) => g.slug).join(),
+    letture.map((l) => l.slug).join(", "));
+  ok("home dell'app: le letture hanno la foto quando c'è", letture.filter((l) => l.foto).length >= 2);
+  await p.locator("[data-letture-app] [data-lettura]").first().tap();
+  await p.waitForURL(/\/guide\//, { timeout: 8000 }).catch(() => null);
+  ok("home dell'app: toccando una lettura si apre l'articolo", new URL(p.url()).pathname === `/guide/${letture[0]?.slug}` && (await p.locator("h1").count()) === 1);
+  await ctx.close();
+}
+
+// Giochi senza connessione (22/11/2026): niente si scarica da solo; dopo
+// «Scarica i giochi» il catalogo, la scheda e il gioco si aprono a rete
+// staccata, con l'età scelta, i disegni e la voce; «Togli» rimette tutto com'era.
+{
+  const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await ctx.addInitScript(() => { try { localStorage.setItem("mizi.consenso-statistiche", "no"); localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const p = await ctx.newPage();
+  await p.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
+  await p.waitForFunction(() => navigator.serviceWorker?.controller != null, null, { timeout: 15000 }).catch(() => null);
+  const prima = await p.evaluate(async () => ({ memoria: await caches.has("giocamizi-senza-rete"), stato: localStorage.getItem("giocamizi-senza-rete") }));
+  ok("senza rete: prima del tocco non c'è niente in memoria", prima.memoria === false && prima.stato === null);
+
+  await p.locator("[data-scarica-giochi]").tap();
+  const scaricati = await p.locator("[data-senza-rete=scaricati]").waitFor({ timeout: 240000 }).then(() => true, () => false);
+  const dopo = await p.evaluate(async () => ({ voci: (await (await caches.open("giocamizi-senza-rete")).keys()).length, stato: JSON.parse(localStorage.getItem("giocamizi-senza-rete") ?? "null") }));
+  ok("senza rete: «Scarica i giochi» mette in memoria pagine, codice, voce e disegni", scaricati && dopo.voci > 500 && dopo.stato?.giochi >= 51, `${dopo.voci} voci, ${dopo.stato?.giochi} giochi`);
+
+  await ctx.setOffline(true);
+  await p.goto(`${BASE}/giochi`, { waitUntil: "load" }).catch(() => null);
+  ok("senza rete: il catalogo si apre", (await p.locator("a[href^='/giochi/']").count()) > 50);
+
+  // Dalla scheda si sceglie l'età e si entra nel gioco toccando: la pagina salvata è quella dell'età minima.
+  await p.goto(`${BASE}/giochi/numeri-in-ordine`, { waitUntil: "load" }).catch(() => null);
+  await p.locator("a[href='/giochi/numeri-in-ordine/gioca?eta=7']").first().tap();
+  await p.locator("main button[aria-label^='Numero ']").first().waitFor({ timeout: 15000 }).catch(() => null);
+  await p.waitForTimeout(800);
+  const numeri = await p.locator("main button[aria-label^='Numero ']").evaluateAll((e) => e.map((x) => Number(x.getAttribute("aria-label").replace("Numero ", ""))));
+  ok("senza rete: il gioco parte con l'età scelta (a 7 anni i numeri passano il 20)", new URL(p.url()).searchParams.get("eta") === "7" && numeri.length >= 4 && Math.max(...numeri) > 20, numeri.join(","));
+
+  await p.goto(`${BASE}/giochi/mb-o-mp/gioca?eta=7&demo=1`, { waitUntil: "load" }).catch(() => null);
+  await p.locator("[data-figura]").first().waitFor({ timeout: 15000 }).catch(() => null);
+  await p.waitForTimeout(600);
+  const disegno = await p.evaluate(() => { const i = document.querySelector("[data-figura]"); return Boolean(i && i.complete && i.naturalWidth > 0); });
+  const voce = await p.evaluate(async () => { const m = await caches.open("giocamizi-senza-rete"); const k = (await m.keys()).find((r) => r.url.includes("/voce/")); return k ? (await fetch(k.url)).ok : false; }).catch(() => false);
+  const festa = await p.locator("[data-festa]").waitFor({ timeout: 90000 }).then(() => true, () => false);
+  ok("senza rete: disegni e voce arrivano dalla memoria e la partita finisce", disegno && voce && festa, `disegno ${disegno}, voce ${voce}, festa ${festa}`);
+
+  await p.goto(`${BASE}/feste`, { waitUntil: "load" }).catch(() => null);
+  ok("senza rete: una pagina non scaricata lo dice e rimanda ai giochi", (await p.locator("h1").first().innerText().catch(() => "")).includes("senza connessione") && (await p.locator("a[href='/giochi']").count()) === 1);
+
+  await ctx.setOffline(false);
+  await p.goto(`${BASE}/giochi`, { waitUntil: "networkidle" });
+  await p.locator("[data-togli-giochi]").tap();
+  await p.locator("[data-senza-rete=da-scaricare]").waitFor({ timeout: 10000 }).catch(() => null);
+  const tolti = await p.evaluate(async () => ({ memoria: await caches.has("giocamizi-senza-rete"), stato: localStorage.getItem("giocamizi-senza-rete") }));
+  ok("senza rete: «Togli i giochi dal telefono» cancella memoria e scelta", tolti.memoria === false && tolti.stato === null);
+  await ctx.close();
+}
+
+{
+  // Video dei tutorial (23/11/2026): sul telefono verticale 9:16, dal computer orizzontale 16:9
+  for (const [nome, opz, atteso] of [["telefono", telefono, "verticale"], ["computer", { viewport: { width: 1280, height: 900 } }, "orizzontale"]]) {
+    const ctx = await b.newContext(opz); await ctx.addInitScript(UMANO);
+    const p = await ctx.newPage();
+    await p.goto(BASE + "/tutorial/come-creare-l-invito", { waitUntil: "networkidle" });
+    await p.waitForTimeout(300);
+    const v = await p.locator("video[data-video-tutorial]").evaluate((e) => ({ formato: e.dataset.formato, src: e.querySelector("source")?.getAttribute("src"), w: e.getBoundingClientRect().width, h: e.getBoundingClientRect().height }));
+    const ris = await fetch(BASE + v.src, { method: "HEAD" });
+    ok(`tutorial dal ${nome}: video ${atteso}, il file risponde`, v.formato === atteso && (atteso === "verticale" ? v.h > v.w && v.src.endsWith("-verticale.mp4") : v.w > v.h) && ris.status === 200, JSON.stringify(v));
+    await ctx.close();
+  }
 }
 
 await b.close();

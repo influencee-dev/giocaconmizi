@@ -1,0 +1,12 @@
+Disegni dei giochi (public/figure)
+
+Illustrazioni originali fatte apposta per Giocamizi il 22/11/2026 con l'API
+immagini di OpenAI (modello gpt-image-2), da descrizioni scritte da noi: un
+soggetto per disegno (un treno, una campana, una trottola…), sfondo bianco,
+nessuna scritta, nessun personaggio di libri, film o cartoni.
+
+Ogni disegno è stato guardato prima di entrare qui. Niente è copiato da libri
+di scuola o da altri siti. Le usa games/_engine/figura.tsx.
+
+Un disegno nuovo segue le stesse regole: soggetto comune, niente marchi,
+niente personaggi protetti, niente testo dentro l'immagine; 384×384 px, WebP.

@@ -1,0 +1,81 @@
+{
+  "slug": "colora-con-mizi",
+  "clip": {
+    "gioco": {
+      "url": "/giochi/colora-con-mizi/gioca?eta=6&demo=1",
+      "attesaIniziale": 300,
+      "secondi": 25
+    }
+  },
+  "scene": [
+    {
+      "tipo": "gancio",
+      "sopra": "Da colorare",
+      "testo": "Disegni da colorare *online*, senza stampare",
+      "clip": "gioco",
+      "da": 12.4,
+      "velocita": 0.05,
+      "ritaglio": {
+        "x": 8,
+        "y": 205,
+        "w": 374,
+        "h": 365
+      },
+      "sottotitoli": false,
+      "voce": "Pronti? Oggi coloriamo insieme!"
+    },
+    {
+      "tipo": "clip",
+      "testo": "*12 colori*, e te li dico a voce",
+      "clip": "gioco",
+      "da": 7.0,
+      "velocita": 1.0,
+      "ritaglio": {
+        "x": 8,
+        "y": 205,
+        "w": 374,
+        "h": 440
+      },
+      "voce": "Scegli un colore e tocca il disegno: si riempie da solo. Oppure usi il pennello col dito."
+    },
+    {
+      "tipo": "clip",
+      "testo": "Sei disegni, e alla fine *lo salvi*",
+      "clip": "gioco",
+      "da": 12.5,
+      "velocita": 1.2,
+      "ritaglio": {
+        "x": 8,
+        "y": 205,
+        "w": 374,
+        "h": 365
+      },
+      "voce": "Ci sono la torta, la casa, il pesce, la farfalla e il razzo!"
+    },
+    {
+      "tipo": "domanda",
+      "testo": "Il colore preferito del tuo bimbo?",
+      "sotto": "Scrivilo nei commenti 👇",
+      "sottotitoli": false,
+      "voce": "Qual è il tuo colore preferito? Dimmelo nei commenti!"
+    },
+    {
+      "tipo": "finale",
+      "sopra": "Gratis, senza stampare",
+      "url": "giocamizi.it/giochi/colora-con-mizi",
+      "sottotitoli": false,
+      "minimo": 1.6,
+      "voce": "Ti aspetto su giocamizi punto it!"
+    }
+  ],
+  "titolo": "Disegni da colorare online con Mizi",
+  "formato": "Prima e dopo",
+  "tempoVoce": 1.08,
+  "didascalia": "Disegni da colorare online, senza stampare 🎨 Mizi, la torta, la casa, il pesce, la farfalla e il razzo: si tocca una parte e si riempie, oppure si colora col dito. 12 colori detti a voce, e alla fine si salva il disegno. Gratis, dal telefono o dal tablet, senza pubblicità.\n\nQual è il colore preferito del vostro bimbo? 👇\n\n🔗 giocamizi.it/giochi/colora-con-mizi\n\n#disegnidacolorare #coloriamo #attivitàperbambini #giocamizi",
+  "storia": "Sticker «Sondaggio»: «Pennarelli o tablet?» 🖍️ / 📱. Sticker «Link» su giocamizi.it/giochi/colora-con-mizi",
+  "aperture": [
+    "Disegni da colorare *online*, senza stampare",
+    "Pomeriggio di pioggia? *Si colora col dito*",
+    "Il disegno si *colora da solo*… quasi"
+  ]
+}

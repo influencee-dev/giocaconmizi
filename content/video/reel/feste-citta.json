@@ -1,0 +1,115 @@
+{
+  "clip": {
+    "lista": {
+      "url": "/feste/milano",
+      "attesaIniziale": 900,
+      "azioni": [
+        {
+          "scorri": 600,
+          "attendi": 1500
+        },
+        {
+          "scorri": 1300,
+          "attendi": 1500
+        },
+        {
+          "scorri": 2100,
+          "attendi": 1500
+        }
+      ],
+      "secondi": 1
+    },
+    "scheda": {
+      "url": "/ludoteche/milano/il-nano-gigante",
+      "attesaIniziale": 900,
+      "azioni": [
+        {
+          "scorri": 500,
+          "attendi": 1500
+        },
+        {
+          "scorri": 1100,
+          "attendi": 1500
+        }
+      ],
+      "secondi": 1
+    }
+  },
+  "slug": "feste-citta",
+  "scene": [
+    {
+      "tipo": "gancio",
+      "sopra": "Milano",
+      "testo": "Festa di compleanno a Milano? *11 posti*, zona per zona",
+      "clip": "scheda",
+      "da": 0.5,
+      "velocita": 0.05,
+      "ritaglio": {
+        "x": 8,
+        "y": 100,
+        "w": 374,
+        "h": 460
+      },
+      "sottotitoli": false,
+      "voce": "Dove si festeggia il compleanno? Te lo dico io!"
+    },
+    {
+      "tipo": "clip",
+      "testo": "Ludoteche, sale feste, *parchi al coperto*",
+      "clip": "lista",
+      "da": 3.0,
+      "velocita": 0.6,
+      "ritaglio": {
+        "x": 8,
+        "y": 90,
+        "w": 374,
+        "h": 470
+      },
+      "voce": "In ogni città trovi i posti giusti per la festa, quartiere per quartiere."
+    },
+    {
+      "tipo": "clip",
+      "testo": "Tutto in *una scheda*, senza commissioni",
+      "clip": "scheda",
+      "da": 3.1,
+      "velocita": 0.15,
+      "ritaglio": {
+        "x": 8,
+        "y": 150,
+        "w": 374,
+        "h": 420
+      },
+      "voce": "Ogni scheda ti dice cosa c'è, e le domande da fare prima di prenotare."
+    },
+    {
+      "tipo": "domanda",
+      "testo": "Dove avete festeggiato *l'ultimo compleanno*?",
+      "scelte": [
+        "A casa",
+        "In ludoteca",
+        "Al parco"
+      ],
+      "sotto": "Rispondi nei commenti 👇",
+      "sottotitoli": false,
+      "voce": "E voi, dove avete festeggiato l'ultimo compleanno? Scrivilo qui sotto!"
+    },
+    {
+      "tipo": "finale",
+      "sopra": "Gratis, senza commissioni",
+      "url": "giocamizi.it/feste",
+      "sottotitoli": false,
+      "minimo": 1.6,
+      "voce": "Ti aspetto su giocamizi punto it!"
+    }
+  ],
+  "titolo": "Festa di compleanno a Milano: dove farla",
+  "formato": "Mamma, aiutami",
+  "tempoVoce": 1.08,
+  "didascalia": "Festa di compleanno a Milano? 🎉 Su Giocamizi trovi 11 posti zona per zona: ludoteche, sale feste e parchi giochi al coperto, ognuno con la sua scheda, cosa offre e le domande da fare prima di prenotare. E ci sono tante altre città. Gratis, senza commissioni.\n\nMandalo alla mamma che deve organizzare la prossima festa 👇\n\n🔗 giocamizi.it/feste/milano\n\n#festadicompleanno #milanoconibambini #compleannobambini #giocamizi",
+  "storia": "Sticker «Sondaggio»: «Festa a casa o fuori?» 🏠 / 🎈. Sticker «Link» su giocamizi.it/feste",
+  "aperture": [
+    "Festa di compleanno a Milano? *11 posti*, zona per zona",
+    "Le 5 domande da fare *prima di prenotare* la festa",
+    "Dove festeggiare *senza impazzire*"
+  ]
+}

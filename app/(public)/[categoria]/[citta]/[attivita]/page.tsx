@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { Condividi } from "@/components/ui/Condividi";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SCHEDE, datiCard, haListing, percorsoScheda, scheda, schedeDi } from "@/lib/directory/directory";
 import { chiaveScheda, conModifiche, pubblicate, type DatiModifica } from "@/lib/directory/directory-db";
-import { url, riassunto } from "@/lib/seo/seo";
+import { url, riassunto, titoloScheda } from "@/lib/seo/seo";
 import { Contenitore, Faq, TitoloSezione } from "@/components/ui";
 import { JsonLd, jsonLdBreadcrumb, jsonLdFaq } from "@/components/seo/JsonLd";
 import { Briciole, CtaAttivita, InBreve } from "@/components/directory/Briciole";
@@ -40,7 +41,8 @@ export async function generateMetadata({ params }: P): Promise<Metadata> {
   const s = await trova(params);
   if (!s) return {};
   return {
-    title: `${s.nome}, ${s.tipo} a ${s.citta} (${s.zona})`,
+    // Titolo corto (lib/seo/seo.ts): nome, che cos'è e città stanno in 65 caratteri.
+    title: titoloScheda(s),
     // Nome, tipo e città sono già nel titolo: qui va il racconto del posto,
     // tagliato perché stia intero nei risultati di ricerca (prima arrivava a 500 caratteri).
     // Un racconto molto corto si completa con che cos'è il posto e dove sta.
@@ -55,7 +57,22 @@ const wa = (t: string) => {
   return `https://wa.me/${/^3\d{8,9}$/.test(n) ? `39${n}` : n}`;
 };
 
-function Contatti({ sito, instagram, extra, festa, prezzo }: { sito?: string; instagram?: string; extra: DatiModifica; festa: boolean; prezzo: { prezzo: string; nota?: string } }) {
+function Contatti({
+  sito,
+  instagram,
+  extra,
+  festa,
+  prezzo,
+  condividi,
+}: {
+  sito?: string;
+  instagram?: string;
+  extra: DatiModifica;
+  festa: boolean;
+  prezzo: { prezzo: string; nota?: string };
+  /** La pillola «Condividi», accanto ai link dei social del locale. */
+  condividi: { percorso: string; titolo: string; testo: string };
+}) {
   return (
     <div className="flex flex-col gap-3 rounded-[1.4rem] border border-notte/10 bg-white p-5 shadow-[0_10px_30px_rgba(31,36,48,0.08)]">
       <div>
@@ -100,6 +117,7 @@ function Contatti({ sito, instagram, extra, festa, prezzo }: { sito?: string; in
           </a>
         ) : null,
       )}
+      <Condividi {...condividi} campagna="attivita" etichetta="Condividi la scheda" piccolo />
       {!sito && !instagram && !extra.whatsapp && !extra.telefono && (
         <p className="rounded-xl bg-crema px-4 py-3 text-sm font-bold text-notte">
           I contatti arrivano quando l&apos;attività completa la scheda.
@@ -154,6 +172,11 @@ export default async function SchedaPage({ params }: P) {
     ...(typeof valori.tiktok === "string" && { tiktok: valori.tiktok }),
   };
 
+  const condividiScheda = {
+    percorso: percorsoScheda(s),
+    titolo: `${s.nome}, ${s.citta}`,
+    testo: `${s.nome} a ${s.citta}: ${faFeste ? "per la festa di compleanno" : "per i bambini"} trovi tutte le info sulla scheda di Giocamizi 👇`,
+  };
   return (
     <>
       <Contenitore largo className="pb-28 pt-6 lg:pb-12">
@@ -270,11 +293,11 @@ export default async function SchedaPage({ params }: P) {
             <VideoAttivita valori={{ ...valori, video: (valori.video as string[] | undefined) ?? (s.extra.video ? [s.extra.video] : undefined) }} nome={s.nome} />
             {s.reel && <ReelInstagram url={s.reel} nome={s.nome} />}
             <div className="lg:hidden">
-              <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} festa={faFeste} prezzo={testoPrezzo(prezzo)} />
+              <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} festa={faFeste} prezzo={testoPrezzo(prezzo)} condividi={condividiScheda} />
             </div>
           </div>
           <aside className="hidden lg:sticky lg:top-24 lg:block">
-            <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} festa={faFeste} prezzo={testoPrezzo(prezzo)} />
+            <Contatti sito={s.sito} instagram={s.instagram} extra={contatti} festa={faFeste} prezzo={testoPrezzo(prezzo)} condividi={condividiScheda} />
           </aside>
         </div>
 

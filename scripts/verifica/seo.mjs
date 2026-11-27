@@ -218,6 +218,20 @@ ok(
   const schede = teste.filter((t) => /^\/[a-z-]+\/[a-z-]+\/[a-z0-9-]+$/.test(t.percorso) && !/^\/(giochi|guide|natale|biglietti|storie|tutorial|risorse-educative-bambini|admin|feste)\//.test(t.percorso));
   const lunghe = schede.filter((t) => t.descrizione.length > 160).map((t) => `${t.percorso} (${t.descrizione.length})`);
   ok("schede delle attività: la descrizione sta nei 160 caratteri", schede.length > 200 && lunghe.length === 0, `${schede.length} schede; ${lunghe.slice(0, 3).join(" ")}`);
+
+  // Titoli (dal 22/11/2026). Google mostra circa 60 caratteri: 318 pagine su 761 ne avevano più di 70,
+  // e le schede arrivavano a 150-200 («Nome, tipo lungo a Città (zona) — Giocamizi»).
+  const TITOLO_MAX = 65;
+  const titoliLunghi = schede.filter((t) => t.titolo.length > TITOLO_MAX).map((t) => `${t.percorso} (${t.titolo.length})`);
+  ok("schede delle attività: il titolo sta in 65 caratteri", titoliLunghi.length === 0, titoliLunghi.slice(0, 3).join(" "));
+  const elenchi = teste.filter((t) => /^\/[a-z-]+\/[a-z-]+$/.test(t.percorso) && !/^\/(giochi|guide|natale|biglietti|storie|tutorial|risorse-educative-bambini|admin|feste|genitori)\//.test(t.percorso));
+  const elenchiLunghi = elenchi.filter((t) => t.titolo.length > TITOLO_MAX).map((t) => `${t.percorso} (${t.titolo.length})`);
+  ok("elenchi per città: il titolo sta in 65 caratteri", elenchi.length > 40 && elenchiLunghi.length === 0, `${elenchi.length} elenchi; ${elenchiLunghi.slice(0, 3).join(" ")}`);
+  // Chi supera i 65 col nome del sito in coda esce senza: il nome del sito non deve allungare un titolo già lungo.
+  const conCoda = teste.filter((t) => t.titolo.length > TITOLO_MAX && / — Giocamizi$/.test(t.titolo) && !t.percorso.startsWith("/natale")).map((t) => `${t.percorso} (${t.titolo.length})`);
+  ok("titoli: nelle pagine con la regola nuova il nome del sito non allunga un titolo già lungo", conCoda.length <= 12, `${conCoda.length} pagine, es. ${conCoda.slice(0, 3).join(" ")}`);
+  const oltre70 = teste.filter((t) => t.titolo.length > 70);
+  ok("titoli: oltre i 70 caratteri resta meno del 6% delle pagine", oltre70.length < teste.length * 0.06, `${oltre70.length} su ${teste.length}`);
 }
 
 // 3-quater. «Leggi anche»: le guide gemelle si linkano tra loro (dal 20/11/2026).
@@ -236,6 +250,17 @@ ok(
   }
   ok("guide: quelle sullo stesso tema si linkano in «Leggi anche»", coppie.length >= 10 && sconosciute.length === 0 && mancanti.length === 0,
     `${coppie.length} coppie; sconosciute: ${[...new Set(sconosciute)].join(", ")}; mancanti: ${mancanti.slice(0, 4).join(" | ")}`);
+}
+
+// 3-quinquies. Gli strumenti di una guida (dal 24/11/2026): la guida della festa
+// porta all'invito, al kit, ai posti per città e al biglietto di ringraziamento.
+{
+  const html = await testo("/guide/festa-di-compleanno-semplice");
+  const riquadro = html.split("data-strumenti-guida")[1]?.split("</section>")[0] ?? "";
+  const attesi = ["/biglietti/crea?tipo=invito", "/biglietti/kit-festa", "/feste", "/biglietti/crea?tipo=ringraziamento"];
+  const mancano = attesi.filter((h) => !riquadro.includes(`href="${h.replace(/&/g, "&amp;")}"`));
+  ok("guida della festa: il riquadro porta agli strumenti gratis", riquadro.length > 0 && mancano.length === 0, `mancano: ${mancano.join(", ")}`);
+  ok("guida della festa: niente «bimbo» e il nome giusto del sito", !/\bbimb[oi]\b/i.test(html.split("<main")[1] ?? html) && !html.includes("Gioca con Mizi gli inviti"));
 }
 
 // 3-bis. I dati strutturati di ogni pagina (dal 04/11/2026, scripts/verifica/jsonld.mjs):
@@ -280,6 +305,23 @@ const linkLlms = [...llms.matchAll(/https?:\/\/[^\s)]+/g)].map((m) => m[0])
   .filter((l) => /gioca[a-z]*mizi/i.test(l));
 const llmsFuori = linkLlms.filter((l) => new URL(l).origin !== dominio);
 ok("llms.txt: link sul dominio", linkLlms.length > 0 && llmsFuori.length === 0, `${linkLlms.length} link`);
+
+// 6. Le ricerche già lavorate dal SEO manager (content/seo/parole-chiave.json,
+// stato «fatto») hanno ancora le loro parole nel titolo o nell'H1 della pagina:
+// un titolo riscritto per sbaglio non deve buttare via il lavoro (23/11/2026).
+// «Vicino a me» negli hub (piano SEO, cantiere 6, 26/11/2026): la frase con le
+// città come link e la FAQ, anche nei dati strutturati.
+{
+  const h = await testo("/ludoteche");
+  const frase = h.match(/data-vicino-a-te[^>]*>([\s\S]*?)<\/p>/)?.[1] ?? "";
+  ok("hub: «Cerchi una ludoteca vicino a te?» con almeno tre città come link e la FAQ «vicino a me»",
+    frase.includes("Cerchi una ludoteca vicino a te?") && (frase.match(/href="\/[a-z-]+\/[a-z-]+/g) ?? []).length >= 3 &&
+      h.includes("Come trovo una ludoteca vicino a me?"),
+    frase.slice(0, 160));
+}
+
+const copertura = spawnSync("node", ["scripts/seo-copertura.mjs", "--controlla"], { encoding: "utf8" });
+ok("parole chiave fatte ancora al loro posto", copertura.status === 0, (copertura.stdout + copertura.stderr).trim().split("\n").slice(-3).join(" · "));
 
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("seo") ? 0 : 1);

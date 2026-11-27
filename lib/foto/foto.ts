@@ -43,6 +43,15 @@ export function fotoGuida(slug: string, alt: string): { src: string; larghezza: 
   return null;
 }
 
+/** La stessa foto nella misura più piccola che c'è: per le anteprime (elenco delle guide, home dell'app). */
+export function fotoGuidaPiccola(slug: string): string | undefined {
+  for (const l of [...LARGHEZZE_GUIDA].reverse()) {
+    const nome = `guida-${slug}-${l}.webp`;
+    if (existsSync(join(process.cwd(), "public", "immagini", nome))) return `/immagini/${nome}`;
+  }
+  return undefined;
+}
+
 /**
  * Quali foto vere stanno in quale pagina, per la sitemap delle immagini
  * (Google Immagini). Le foto del piè di pagina, uguali ovunque, restano

@@ -1,0 +1,165 @@
+{
+  "slug": "letterina",
+  "titolo": "La letterina a Babbo Natale fatta dal telefono",
+  "formato": "Prima e dopo",
+  "didascalia": "La letterina a Babbo Natale la scrivete insieme dal telefono: Mizi legge ad alta voce ogni frase, i desideri si scelgono anche a disegni (perfetto per chi non sa ancora scrivere), poi PDF da stampare e busta da colorare 🎅✉️\n\nE dal 20 dicembre c'è la risposta di Babbo Natale da stampare.\n\nSalvalo per la sera della letterina 👇\n\n🔗 giocamizi.it/natale/letterina-babbo-natale\n\n#letterinababbonatale #natalebambini #lavoretti #mammeitaliane #giocamizi",
+  "storia": "Sticker «Link» su giocamizi.it/natale/letterina-babbo-natale. Sticker «Sondaggio»: «Avete già scritto la letterina?» Sì / Stasera!",
+  "aperture": [
+    "La letterina a Babbo Natale, *fatta dal telefono*",
+    "Non sa ancora scrivere? *La letterina si fa coi disegni*",
+    "Dal 20 dicembre arriva *la risposta di Babbo Natale*"
+  ],
+  "clip": {
+    "letterina": {
+      "url": "/natale/letterina-babbo-natale",
+      "attesaIniziale": 900,
+      "azioni": [
+        {
+          "scrivi": "#letterina-nome",
+          "testo": "Sofia",
+          "attendi": 300
+        },
+        {
+          "scrivi": "#letterina-eta",
+          "testo": "6",
+          "attendi": 700
+        },
+        {
+          "tocca": "[data-avanti]",
+          "attendi": 900
+        },
+        {
+          "tocca": "[data-carta-letterina='natale-renne']",
+          "attendi": 1300
+        },
+        {
+          "tocca": "[data-avanti]",
+          "attendi": 900
+        },
+        {
+          "tocca": "[data-avanti]",
+          "attendi": 900
+        },
+        {
+          "tocca": "[data-desiderio-figura='libro']",
+          "attendi": 700
+        },
+        {
+          "tocca": "[data-desiderio-figura='unicorno']",
+          "attendi": 700
+        },
+        {
+          "tocca": "[data-desiderio-figura='tavolozza']",
+          "attendi": 1200
+        },
+        {
+          "tocca": "[data-avanti]",
+          "attendi": 900
+        },
+        {
+          "tocca": "[data-avanti]",
+          "attendi": 1500
+        },
+        {
+          "vedi": "[data-anteprima-letterina]",
+          "attendi": 1500
+        },
+        {
+          "vedi": "[data-foglio-busta]",
+          "attendi": 1800
+        }
+      ],
+      "secondi": 1
+    }
+  },
+  "scene": [
+    {
+      "tipo": "gancio",
+      "sopra": "Natale",
+      "testo": "La letterina a Babbo Natale, *fatta dal telefono*",
+      "clip": "letterina",
+      "da": 15.7,
+      "velocita": 0.12,
+      "ritaglio": {
+        "x": 10,
+        "y": 190,
+        "w": 370,
+        "h": 460
+      },
+      "sottotitoli": false,
+      "voce": "Quest'anno la letterina la scriviamo insieme, io e te!"
+    },
+    {
+      "tipo": "clip",
+      "testo": "1 · Nome ed *età*",
+      "clip": "letterina",
+      "da": 1.0,
+      "velocita": 0.6,
+      "ritaglio": {
+        "x": 10,
+        "y": 250,
+        "w": 370,
+        "h": 420
+      },
+      "voce": "Dimmi come ti chiami e quanti anni hai: le frasi giuste te le preparo io."
+    },
+    {
+      "tipo": "clip",
+      "testo": "2 · La carta da *lettera*",
+      "clip": "letterina",
+      "da": 3.3,
+      "velocita": 0.45,
+      "ritaglio": {
+        "x": 10,
+        "y": 440,
+        "w": 370,
+        "h": 335
+      },
+      "voce": "Poi scegli la carta che ti piace: renne, regali, neve."
+    },
+    {
+      "tipo": "clip",
+      "testo": "3 · I desideri, *anche a disegni*",
+      "clip": "letterina",
+      "da": 8.0,
+      "velocita": 0.8,
+      "ritaglio": {
+        "x": 10,
+        "y": 400,
+        "w": 370,
+        "h": 375
+      },
+      "voce": "Non sai ancora scrivere? Tocca i disegni dei regali che vorresti!"
+    },
+    {
+      "tipo": "clip",
+      "testo": "PDF da stampare e *busta da colorare*",
+      "clip": "letterina",
+      "da": 16.8,
+      "velocita": 0.35,
+      "ritaglio": {
+        "x": 10,
+        "y": 95,
+        "w": 370,
+        "h": 560
+      },
+      "voce": "Poi la stampi, colori la busta, e dal venti dicembre c'è anche la risposta di Babbo Natale."
+    },
+    {
+      "tipo": "domanda",
+      "testo": "Qual è il desiderio *numero 1* del tuo bimbo?",
+      "sotto": "Scrivilo nei commenti 👇",
+      "sottotitoli": false,
+      "voce": "Qual è il primo desiderio della tua letterina? Scrivilo qui sotto!"
+    },
+    {
+      "tipo": "finale",
+      "sopra": "Gratis, senza registrarti",
+      "url": "giocamizi.it/natale",
+      "sottotitoli": false,
+      "minimo": 1.6,
+      "voce": "La trovi gratis su giocamizi punto it!"
+    }
+  ],
+  "tempoVoce": 1.08
+}

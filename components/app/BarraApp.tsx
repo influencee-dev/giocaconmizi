@@ -1,9 +1,11 @@
 "use client";
 
+import { aggiornaSeServe } from "@/lib/giochi/offline";
 import { Download, Share, SquarePlus, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { consensoStatistiche } from "@/components/legal/analytics";
+import Link from "next/link";
 
 /**
  * La barretta «Scarica Giocamizi sul tuo telefono»: fissa in basso, SOLO sul
@@ -16,13 +18,57 @@ import { consensoStatistiche } from "@/components/legal/analytics";
  *   due tocchi (Condividi → Aggiungi alla schermata Home).
  * - Altri browser: le istruzioni dal menu.
  *
- * Non compare: se l'app è già aperta come app, se l'hai chiusa (per 30 giorni,
+ * LA NOVITÀ (25/11/2026, richiesta di Giorgia): al posto dell'invito a
+ * scaricare l'app, la barretta mostra prima la novità del momento (NOVITA qui
+ * sotto: oggi il test per i genitori). Chi la chiude con la X, o è già nella
+ * sua pagina, rivede la barretta «Scarica Giocamizi» di sempre (il tutorial
+ * «Come mettere Giocamizi sul telefono» la racconta). La novità compare anche
+ * dentro l'app installata. Per cambiarla basta cambiare NOVITA: un id nuovo la
+ * fa ricomparire anche a chi aveva chiuso quella vecchia.
+ *
+ * La novità chiusa ritorna dopo un giorno negli articoli e dopo tre giorni
+ * altrove (pausaNovita). La barretta dell'app invece: non compare se l'app è
+ * già aperta come app, se l'hai chiusa (per 30 giorni,
  * ricordato in localStorage, vedi lib/contenuti/legal.ts), finché c'è il banner dei
  * cookie, dentro i giochi e il pannello, e dove la pagina ha già una sua barra
  * fissa in basso ([data-barra-fissa], es. la scheda di un locale).
  */
 
 export const CHIAVE_APP_CHIUSA = "giocamizi-app-chiusa";
+export const CHIAVE_NOVITA_CHIUSA = "giocamizi-novita-chiusa";
+
+/** La novità del momento, nella barretta in basso del telefono. */
+export const NOVITA = {
+  id: "test-sotto-pressione",
+  // Scritta qui e non importata da lib/famiglia/sotto-pressione.ts: quel file ha
+  // tutte le domande del test e finirebbe in ogni pagina. Se il test torna bozza,
+  // mettere attiva: false.
+  attiva: true,
+  titolo: "E tu che mamma diventi sotto pressione?",
+  sotto: "Il test · 10 minuti · gratis",
+  href: "/genitori/sotto-pressione?utm_source=sito&utm_medium=barra-novita&utm_campaign=test-sotto-pressione",
+  bottone: "Fai il test",
+  /** Dove non serve: nella pagina stessa della novità. */
+  nascostaSu: [/^\/genitori\/sotto-pressione/],
+};
+
+/**
+ * La novità chiusa con la X RICOMPARE (26/11/2026, richiesta di Giorgia): dopo
+ * un giorno negli articoli (/guide/…), dove si legge con calma e il test è più
+ * vicino a quello che si sta leggendo, e dopo tre giorni nel resto del sito.
+ */
+const UN_GIORNO = 24 * 60 * 60 * 1000;
+export function pausaNovita(percorso: string): number {
+  return /^\/guide\//.test(percorso) ? UN_GIORNO : 3 * UN_GIORNO;
+}
+function novitaChiusa(percorso: string): boolean {
+  try {
+    const d = JSON.parse(window.localStorage.getItem(CHIAVE_NOVITA_CHIUSA) ?? "null") as { id?: string; t?: number } | null;
+    return !!d && d.id === NOVITA.id && Date.now() - Number(d.t ?? 0) < pausaNovita(percorso);
+  } catch {
+    return false;
+  }
+}
 const TRENTA_GIORNI = 30 * 24 * 60 * 60 * 1000;
 const NASCOSTA = [/^\/giochi\/[^/]+\/gioca/, /^\/admin\//, /^\/la-tua-scheda\//, /^\/biglietti\/crea/, /^\/biglietti\/vedi/, /^\/natale\/letterina-babbo-natale/, /^\/accedi/, /^\/aggiungi-attivita/];
 
@@ -57,6 +103,8 @@ export function BarraApp() {
   const percorso = usePathname() ?? "/";
   const [pronta, setPronta] = useState(false);
   const [chiusa, setChiusa] = useState(true);
+  const [novitaVia, setNovitaVia] = useState(true);
+  const [installata, setInstallata] = useState(false);
   const [banner, setBanner] = useState(true);
   const [altraBarra, setAltraBarra] = useState(false);
   const [richiesta, setRichiesta] = useState<EventoInstallazione | null>(null);
@@ -70,8 +118,11 @@ export function BarraApp() {
         /* senza service worker il sito funziona uguale */
       });
     }
+    // Chi tiene i giochi sul telefono li riceve aggiornati dopo una pubblicazione nuova.
+    const riallinea = window.setTimeout(() => void aggiornaSeServe(), 4000);
     setOs(piattaforma());
     setChiusa(giaApp() || chiusaDaPoco());
+    setInstallata(giaApp());
     setBanner(consensoStatistiche() === null);
     setPronta(true);
 
@@ -85,6 +136,7 @@ export function BarraApp() {
     window.addEventListener("appinstalled", suInstallata);
     window.addEventListener("giocamizi-consenso", suConsenso);
     return () => {
+      window.clearTimeout(riallinea);
       window.removeEventListener("beforeinstallprompt", suRichiesta);
       window.removeEventListener("appinstalled", suInstallata);
       window.removeEventListener("giocamizi-consenso", suConsenso);
@@ -95,10 +147,67 @@ export function BarraApp() {
   useEffect(() => {
     setAltraBarra(document.querySelector("[data-barra-fissa]") !== null);
     setAiuto(false);
+    // A ogni pagina si ricontrolla: la novità chiusa ieri torna negli articoli.
+    setNovitaVia(novitaChiusa(percorso));
   }, [percorso]);
 
-  const visibile = pronta && !chiusa && !banner && !altraBarra && !NASCOSTA.some((r) => r.test(percorso));
+  const posto = pronta && !banner && !altraBarra && !NASCOSTA.some((r) => r.test(percorso));
+  const conNovita = posto && NOVITA.attiva && !novitaVia && !NOVITA.nascostaSu.some((r) => r.test(percorso));
+  const visibile = posto && (conNovita || !chiusa);
   if (!visibile) return null;
+
+  const chiudiNovita = () => {
+    try {
+      window.localStorage.setItem(CHIAVE_NOVITA_CHIUSA, JSON.stringify({ id: NOVITA.id, t: Date.now() }));
+    } catch {
+      /* senza spazio la novità tornerà alla prossima visita */
+    }
+    setNovitaVia(true);
+  };
+
+  if (conNovita)
+    return (
+      <>
+        <div aria-hidden className="h-20 md:hidden" />
+        <div
+          role="region"
+          aria-label="La novità di Giocamizi"
+          style={{ bottom: "var(--barra-schede, 0px)" }}
+          className="fixed inset-x-0 z-30 px-3 pb-3 md:hidden"
+          data-barra-app
+          data-novita={NOVITA.id}
+        >
+          <div className="flex items-center gap-3 rounded-[1.4rem] bg-notte py-2 pl-2 pr-1.5 text-white shadow-[0_14px_40px_-12px_rgba(31,36,48,0.6)]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/mizi/mizi-faccia.webp" alt="" width={44} height={44} className="h-11 w-11 shrink-0 rounded-xl bg-rosa object-cover" />
+            <p className="min-w-0 flex-1 text-sm font-extrabold leading-tight">
+              {NOVITA.titolo}
+              <span className="block text-xs font-bold text-white/70">{NOVITA.sotto}</span>
+            </p>
+            <Link
+              href={NOVITA.href}
+              onClick={chiudiNovita}
+              className="flex shrink-0 items-center rounded-2xl bg-giallo px-3.5 py-2.5 text-sm font-black text-notte"
+              style={{ minHeight: 0 }}
+              data-apri-novita
+            >
+              {NOVITA.bottone}
+            </Link>
+            <button
+              type="button"
+              onClick={chiudiNovita}
+              aria-label="Non ora"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white/70 hover:text-white"
+              style={{ minHeight: 0, minWidth: 0 }}
+              data-chiudi-novita
+            >
+              <X className="h-5 w-5" strokeWidth={2.6} aria-hidden />
+            </button>
+          </div>
+        </div>
+      </>
+    );
+  if (installata) return null;
 
   const chiudi = () => {
     try {

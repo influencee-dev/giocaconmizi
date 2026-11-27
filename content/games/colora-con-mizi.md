@@ -1,5 +1,6 @@
 ---
 title: "Colora con Mizi"
+titoloSeo: "Disegni da colorare online per bambini"
 slug: colora-con-mizi
 ageMin: 3
 ageMax: 8

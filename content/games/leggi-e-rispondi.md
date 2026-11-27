@@ -1,5 +1,6 @@
 ---
 title: "Leggi e rispondi"
+titoloSeo: "Comprensione del testo per bambini: leggi e rispondi"
 slug: leggi-e-rispondi
 ageMin: 6
 ageMax: 8

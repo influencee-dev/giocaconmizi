@@ -23,13 +23,19 @@ degli ultimi 2 giorni prima di iniziare.
 - Stesse foto e stessi prompt del documento su Drive (`lib/foto/foto-del-giorno.ts`):
   tutte le prenotazioni del giorno, poi fino a 2 foto che mancano al sito.
 - Riferimento di Mizi: `public/mizi/mizi-intera.webp`.
-- Chiave `OPENAI_API_KEY` SOLO nelle variabili d'ambiente dell'ambiente cloud
-  «Giocamizi» (claude.ai/code → ingranaggio dell'ambiente). Facoltative:
-  `OPENAI_IMAGE_MODEL` (predefinito gpt-image-2), `OPENAI_IMAGE_QUALITY` (high).
-- Senza chiave esce con codice 2 e non tocca niente: resta il documento su Drive.
+- La chiave di OpenAI sta SOLO nell'ambiente cloud «Giocamizi» (claude.ai/code →
+  ingranaggio dell'ambiente): la aggiunge il proxy di rete, nel repo e nei
+  comandi non compare mai. Facoltative: `OPENAI_IMAGE_MODEL` (predefinito
+  gpt-image-2), `OPENAI_IMAGE_QUALITY` (high).
+- Dal 22/11/2026 il comando si lancia così com'è, `npm run foto:genera -- --data
+  <giorno>`: passa da solo dal proxy. Non servono più chiavi fittizie né
+  variabili scritte a mano (il 17 e il 21/11 la riserva era saltata per quello).
+- Prende tutte le foto prenotate fino a quel giorno e non ancora arrivate: gli
+  arretrati li recupera da solo.
+- Se OpenAI non è raggiungibile o rifiuta la chiave esce con codice 2 e non tocca niente: resta il documento su Drive.
 - Una foto rifiutata o in errore viene saltata e segnalata nel report: si
   rifà a mano dal documento su Drive, oppure si cambia la scena e si riprova.
-- `--prova` mostra cosa genererebbe, senza chiamare l'API.
+- `--prova` mostra cosa genererebbe e dice se OpenAI risponde, senza generare niente.
 - Le foto si guardano prima di pubblicarle: il report elenca i file, e la
   routine controlla che non ci siano scritte, loghi o persone reali.
 
