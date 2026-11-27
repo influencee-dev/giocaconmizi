@@ -269,6 +269,19 @@ ok("frasi a tema (fattoria, tema nuovo)", await page.locator("button:has-text('C
 {
   const html = await (await fetch(`${BASE}/biglietti/inviti-compleanno-safari`)).text();
   ok("frasi a tema anche nella pagina del tema (safari)", html.includes("Zaino in spalla") && html.includes("Leoni, giraffe e torta"));
+  // 27/11/2026 (piano SEO §7): le pagine delle frasi mostrano tutte le frasi,
+  // divise per tema, e cosa scrivere; il creatore dice «senza scaricare app».
+  const inviti = await (await fetch(`${BASE}/biglietti/frasi-inviti-compleanno-bambini`)).text();
+  const gruppi = (inviti.match(/data-gruppo-frasi/g) ?? []).length;
+  ok("frasi per inviti: un gruppo per tema più le comuni, cosa scrivere, niente segnaposto",
+    gruppi >= 28 && inviti.includes("data-cosa-scrivere") && inviti.includes("Zaino in spalla") && !inviti.includes("{nome}") &&
+    /<title>Frasi per inviti di compleanno: \d+ frasi pronte/.test(inviti), `${gruppi} gruppi`);
+  const auguri = await (await fetch(`${BASE}/biglietti/frasi-auguri-compleanno-bambini`)).text();
+  ok("frasi di auguri: «cosa scrivere» nel titolo grande, senza il Natale",
+    auguri.includes("Cosa scrivere nel biglietto di auguri di compleanno") && auguri.includes("data-cosa-scrivere") && !auguri.includes("Buon Natale Sofia"));
+  const crea = await (await fetch(`${BASE}/biglietti/crea`)).text();
+  ok("creatore: la prima riga dice «senza scaricare app» e porta alle frasi",
+    crea.includes("data-senza-app") && crea.includes("Senza scaricare app") && crea.includes("/biglietti/frasi-inviti-compleanno-bambini"));
 }
 
 // Dal 23/11/2026 anche il biglietto di ringraziamento ha due frasi per ogni tema,

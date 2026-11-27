@@ -516,7 +516,7 @@
       "sezione": "feste",
       "pagina": "/biglietti/crea",
       "stato": "c-e",
-      "cosa_fare": "Titolo giusto. In cima ci sono app da scaricare: dirlo nella prima riga («senza scaricare app»)."
+      "cosa_fare": "Fatto il 27/11/2026: la prima riga del creatore dice «Senza scaricare app» (piano SEO, cantiere 7)."
     },
     {
       "ricerca": "biglietto auguri compleanno da stampare",
@@ -533,8 +533,8 @@
       "difficolta": 32,
       "sezione": "feste",
       "pagina": "/biglietti/crea",
-      "stato": "da-sistemare",
-      "cosa_fare": "Nominare «digitali» e «WhatsApp»."
+      "stato": "c-e",
+      "cosa_fare": "Fatto il 27/11/2026: descrizione e prima riga dicono «inviti digitali» e «da mandare su WhatsApp». C'è anche /biglietti/inviti-compleanno-digitali."
     },
     {
       "ricerca": "inviti compleanno online gratis",
@@ -550,18 +550,18 @@
       "volume": 880,
       "difficolta": 19,
       "sezione": "feste",
-      "pagina": null,
-      "stato": "manca",
-      "cosa_fare": "Una pagina di frasi per gli inviti, che porta al creatore."
+      "pagina": "/biglietti/frasi-inviti-compleanno-bambini",
+      "stato": "c-e",
+      "cosa_fare": "Fatto il 27/11/2026: la pagina mostra tutte le frasi nostre divise per tema, cosa scrivere sull'invito e porta al creatore."
     },
     {
       "ricerca": "cosa scrivere biglietto auguri compleanno",
       "volume": 390,
       "difficolta": 13,
       "sezione": "feste",
-      "pagina": null,
-      "stato": "manca",
-      "cosa_fare": "Come sopra."
+      "pagina": "/biglietti/frasi-auguri-compleanno-bambini",
+      "stato": "c-e",
+      "cosa_fare": "Fatto il 27/11/2026: H1 «Cosa scrivere nel biglietto di auguri…», l'elenco di cosa scrivere e le frasi pronte."
     },
     {
       "ricerca": "parco avventura",

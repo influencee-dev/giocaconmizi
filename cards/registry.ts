@@ -297,11 +297,22 @@ export const phrases = {
     "Vieni alla festa di {nome}? Ci saranno giochi, torta e tanti amici.",
     "{nome} ti aspetta per spegnere {eta} candeline insieme!",
     "Una festa senza di te non è una festa: vieni al compleanno di {nome}!",
+    // 27/11/2026: altre quattro frasi d'invito comuni (pagina delle frasi, piano SEO §7)
+    "Segnati la data: {nome} compie {eta} anni e ti aspetta alla sua festa!",
+    "Palloncini pronti e torta in forno: manca solo tu alla festa di {nome}!",
+    "{eta} anni si festeggiano in compagnia: vieni alla festa di {nome}?",
+    "Giochi, musica e torta: {nome} ti invita a festeggiare i suoi {eta} anni!",
   ],
   auguri: [
     "Tanti auguri {nome}! {eta} anni di risate, giochi e abbracci.",
     "Buon compleanno {nome}! Che questo sia un anno pieno di scoperte.",
     "Auguri {nome}: {eta} anni e sei già un piccolo grande campione.",
+    // 27/11/2026: altre cinque frasi di auguri comuni (pagina delle frasi, piano SEO §7)
+    "Buon compleanno {nome}! {eta} candeline e un desiderio per ognuna.",
+    "Tanti auguri {nome}, oggi la festa è tutta per te!",
+    "Auguri {nome}! Che i tuoi {eta} anni siano pieni di amici e cose nuove.",
+    "Buon compleanno {nome}: soffia forte ed esprimi un desiderio!",
+    "Auguri di cuore, {nome}! Un anno in più di sorrisi e avventure.",
   ],
   ringraziamento: [
     "Grazie per aver festeggiato con me! Con affetto, {nome}",

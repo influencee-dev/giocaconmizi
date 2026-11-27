@@ -20,7 +20,7 @@ Stati: **fatto** · **in corso** · **da fare** · **da decidere** (serve una ri
 | 4 | Una pagina per tabellina | tabelline 7 18.100, del 3 9.900 (e le altre) | da fare |
 | 5 | Le pagine delle classi tutto l'anno | esercizi seconda elementare 1.600+720, prima 1.600, terza 1.000 | **fatto** 23/11 |
 | 6 | «Vicino a me» negli hub della directory | parco avventura vicino a me 5.400, ludoteca 4.400, parco acquatico 3.600… | fatto il 26/11/2026 |
-| 7 | Inviti e biglietti: le parole che mancano | inviti digitali 1.900, frasi per inviti 880, cosa scrivere 390 | da fare |
+| 7 | Inviti e biglietti: le parole che mancano | inviti digitali 1.900, frasi per inviti 880, cosa scrivere 390 | fatto il 27/11/2026 |
 | 8 | Storie: «favole della buonanotte» | 12.100 + 720 | da fare |
 | 9 | Stampabili veri (PDF) | disegni da colorare da stampare 40.500, puntini 880 | da fare |
 | 10 | Autorità: bollino per i locali e link dalle scuole | tutte (autorità oggi 1/100) | da fare |
@@ -91,11 +91,18 @@ Gli hub `/parchi-avventura`, `/ludoteche`, `/parchi-acquatici`, `/fattorie-didat
 game: una frase vera in apertura («Cerchi un parco avventura vicino a te? Scegli la città») e
 le città più grandi come link in vista. Il titolo resta quello della categoria.
 
-## 7. Inviti e biglietti
+## 7. Inviti e biglietti · fatto il 27/11/2026
 
 Nel creatore: dire nella prima riga «senza scaricare app» (in cima a Google oggi ci sono solo
 app), «inviti digitali» e «da mandare su WhatsApp», «da stampare». Una pagina «Frasi per gli
 inviti di compleanno» che porta al creatore (frasi nostre, già in `lib/biglietti/`).
+
+Fatto il 27/11/2026. Nel creatore la prima riga dice «Senza scaricare app», «inviti digitali
+da mandare su WhatsApp» e «da stampare», con un link alle frasi. Le due pagine delle frasi
+(`/biglietti/frasi-inviti-compleanno-bambini` e `/biglietti/frasi-auguri-compleanno-bambini`)
+mostrano tutte le frasi nostre divise per tema (prima ne mostravano tre), l'elenco di cosa
+scrivere oltre alla frase e una FAQ; ogni gruppo apre il creatore col tema giusto. Aggiunte
+quattro frasi d'invito e cinque di auguri comuni in `cards/registry.ts`.
 
 ## 8. Storie
 
