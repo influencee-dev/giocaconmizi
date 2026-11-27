@@ -12,8 +12,8 @@
  * Solo fatti già scritti sul sito (Chi siamo, Perché lo facciamo): niente
  * episodi inventati. Tono: niente «bimbi», «magico», «fantastico».
  * La community è su Instagram (decisione di Giorgia del 27/11/2026): le email
- * invitano a scrivere «MIZI» in DM a @giocamizi, e l'automazione dei messaggi
- * (ManyChat o Meta) risponde con l'invito al canale e il gioco del giorno.
+ * invitano a scrivere «MIZI» in DM a @giocamizi, e l'automazione dei messaggi (le
+ * di Meta Business Suite, senza ManyChat) risponde con l'invito al canale e i giochi.
  * Finché COMMUNITY_ATTIVA è false, i riquadri della community non compaiono.
  */
 
