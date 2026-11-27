@@ -188,7 +188,7 @@ await browser.close();
   await pp.locator("[data-pagamento]").waitFor({ timeout: 15000 }).catch(() => null);
   ok("pagamenti: ritorno dopo il pagamento di prova", (await pp.locator('[data-pagamento="ok"]').count()) === 1);
   const sporco = await fetch(`${BASE}/pagamento/annullato?ritorno=https://sito-esterno.example/`).then((r) => r.text());
-  ok("pagamenti: niente ritorno verso siti esterni", !sporco.includes("sito-esterno.example"));
+  ok("pagamenti: niente ritorno verso siti esterni", !/href="https?:\/\/sito-esterno/.test(sporco) && sporco.includes('href="/profilo"'));
   await bp.close();
   // Ricerca con l'AI: gratis per tutti (27/11/2026), tracciata; nella copia di prova risponde senza AI.
   const cercaNo = await fetch(`${BASE}/api/cerca`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ domanda: "" }) });
