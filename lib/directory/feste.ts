@@ -67,6 +67,15 @@
 // Severo (cinque locali, nessuno col sito). Ercolano: solido solo La Fabbrica
 // del Divertimento (via Madonnelle); Valle del Vesuvio fa feste ma senza date
 // recenti: riprovare quando pubblica un evento con l'anno.
+// Il 27/11/2026: Lecco, Crema, Vercelli, Senigallia (nessun locale col sito
+// suo); Lodi, Saronno, Macerata, Jesi, Frosinone (un locale col sito ma senza
+// segnale 2025/2026); Cantù, Ascoli Piceno (solo social); Bassano del Grappa,
+// Merano (parchi in altri comuni); Rovereto (Tana dei Papà, solida, non fa
+// feste). Biella aperta lo stesso giorno, col secondo locale (piscina Rivetti).
+// Rieti: un solo locale solido (La Casa di Mommi e Pippi): si apre col secondo. Nelle città già
+// aperte fanno feste ma senza date recenti: La Giostra di Giocla (Salerno),
+// Disneylandia, Obabaluba, Les Enfants (Siracusa), AttivaMente Lab, Baby Space
+// (Novara), Spazio Bimbi (Treviso): riprovare più avanti.
 // COME SI VERIFICA: i siti dei locali NON si aprono dalle sessioni (la rete
 // ammette solo un elenco di siti). Si leggono con la ricerca web limitata al
 // dominio ufficiale del locale (allowed_domains): è il metodo usato dall'inizio.
@@ -2071,12 +2080,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "piacenza",
     citta: "Piacenza",
-    aggiornata: "2026-11-01",
+    aggiornata: "2026-11-27",
     rispostaBreve: "A Piacenza la festa di compleanno per bambini si fa al coperto in uno spazio gioco come L'isola che ora c'è, in via Beati, pensato per bambini da 1 a 9 anni con aree separate per età e salette per le feste, oppure in fattoria: a Bosco Gerolo, in Val Trebbia, il compleanno comprende merenda e uso del parco, con la visita agli animali o una caccia al tesoro a richiesta. Prima di andare chiamate per conferma, perché lo spazio gioco può essere riservato a una festa privata o aver raggiunto il limite di ingressi; in campagna, invece, chiedete sempre il piano B per la pioggia.",
     intro: "Piacenza ha il vantaggio di avere la campagna e le colline a pochi minuti dalla città. Per il compleanno si può scegliere tra uno spazio gioco al coperto in città, comodo in ogni stagione, e una fattoria in Val Trebbia per chi vuole festeggiare tra animali e prati.",
     locali: [
       { nome: "L'isola che ora c'è", zona: "Piacenza (via Beati)", tipo: "ludoteca e spazio gioco al coperto", descrizione: "Spazio gioco climatizzato a Piacenza, in via Beati 82, per bambini da 1 a 9 anni: un'area per i piccoli fino a 4 anni, aree per i 5-9 anni e un bar per i genitori. I compleanni si fanno da 1 a 8 anni, nelle salette, e la sera si può prenotare tutta la struttura per feste private o pizzate di classe. Su prenotazione ci sono il truccabimbi e il menù per celiaci. Le calzine antiscivolo sono obbligatorie e i passeggini non entrano. Prima di andare conviene mandare un WhatsApp: il locale può essere riservato alle feste.", sito: "https://www.lisolacheorace.it/" },
       { nome: "Bosco Gerolo Valtrebbia", zona: "Rivergaro (Val Trebbia)", tipo: "agriturismo e fattoria didattica", descrizione: "Agriturismo con fattoria didattica, animali, parco giochi e una sala giochi interna. Per il compleanno in fattoria propone un pacchetto merenda con uno spazio dedicato e l'uso del parco; su richiesta si aggiungono la visita alla fattoria dando da mangiare agli animali, una caccia al tesoro o un laboratorio di cucina o sull'orto.", sito: "https://www.boscogerolovaltrebbia.it/" },
+      { nome: "Il Germoglio – Fattoria didattica", zona: "Piacenza, via Bubba 25", tipo: "fattoria didattica", descrizione: "Fattoria didattica della cooperativa sociale Il Germoglio, in via Bubba 25 a Piacenza, dove i gruppi di bambini visitano gli animali e le serre. Accanto ci sono il ristorante «Il Germoglio in Tavola» e una grande area esterna con campo da gioco e tavoli. La pagina «Feste private» propone il compleanno all'aria aperta, in un'area sicura, con un riparo in caso di maltempo; l'ex chiesa di San Giuseppe, ristrutturata nel 2020, ospita feste fino a ottanta persone.", sito: "https://www.ilgermogliopiacenza.it/" },
     ],
     faq: [
       { domanda: "Dove si festeggia un compleanno al coperto a Piacenza?", risposta: "In uno spazio gioco come L'isola che ora c'è, in via Beati: ha aree separate per i più piccoli e per i bambini dai 5 ai 9 anni e salette per le feste. Telefonate prima di andare, perché lo spazio può essere riservato a una festa privata o aver raggiunto il limite di ingressi del giorno." },
@@ -2106,12 +2116,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "arezzo",
     citta: "Arezzo",
-    aggiornata: "2026-11-02",
+    aggiornata: "2026-11-27",
     rispostaBreve: "Ad Arezzo la festa di compleanno per bambini si può fare in uno spazio che affitta le sale e offre l'animazione per le feste private, come Spazio Seme in via del Pantano, il centro artistico accanto alle piscine con due sale che diventano un unico ambiente di circa 220 m², oppure nell'area giochi Moovy Land del centro commerciale Al Magnifico, che ha baby parking e mini club ed è pensata anche per i compleanni. Chiedete prima cosa comprende il prezzo, dall'animazione alla merenda, e prenotate per tempo se puntate al weekend.",
     intro: "Arezzo è una città raccolta, dove il centro storico e i quartieri sono vicini e muoversi con i bambini è facile. Per il compleanno si può scegliere tra un centro artistico con sale ampie e animazione su richiesta e un'area giochi al coperto dentro un centro commerciale, comoda in ogni stagione.",
     locali: [
       { nome: "Spazio Seme", zona: "Arezzo (via del Pantano, accanto alle Piscine Pantano)", tipo: "sala in affitto con animazione", descrizione: "Centro artistico in via del Pantano 36, ad Arezzo, fondato nel 2012. Propone corsi e laboratori per bambini, ragazzi e adulti: teatro, voce e canto, lettura di fiabe, danza, capoeira, yoga e altro. Ha due sale che si uniscono in un unico spazio di 220 metri quadrati, con bar, spazi esterni e spogliatoi attrezzati, e una capienza di 100 posti. Oltre ai corsi offre l'affitto delle sale e l'animazione per feste private: cosa comprende la festa va chiesto direttamente al centro.", sito: "https://www.spazioseme.com/" },
       { nome: "Moovy Land", zona: "Arezzo (centro commerciale Al Magnifico)", tipo: "area giochi al coperto", descrizione: "Il playground per bambini del centro commerciale Al Magnifico, con baby parking e un mini club che propone giochi, attività educative ed eventi. Il centro lo indica come adatto alle feste di compleanno e ai momenti di gioco in sicurezza.", sito: "https://www.almagnifico.it/divertimento/" },
+      { nome: "Casa Museo Ivan Bruschi", zona: "Arezzo, corso Italia 14", tipo: "museo con laboratori per bambini", descrizione: "Casa museo dell'antiquariato della Fondazione Ivan Bruschi, in corso Italia nel centro di Arezzo. Da settembre a dicembre 2026 propone i «Pomeriggi per ragazzi»: quattro sabati alle 16.30 con visite a tema, racconti e laboratori creativi tra le sale, dal percorso a indizi «Il mistero della Casa Museo» del 19 settembre al laboratorio del 19 dicembre per costruire un dono ispirato alla collezione. Per il 2026/2027 ha anche percorsi didattici gratuiti per scuole, famiglie e associazioni, dai 4 ai 18 anni. Visite e gruppi si prenotano.", sito: "https://www.fondazioneivanbruschi.it/", festa: false },
     ],
     faq: [
       { domanda: "Dove si festeggia un compleanno al coperto ad Arezzo?", risposta: "Due formule diverse: le sale di Spazio Seme, in via del Pantano, che si affittano per le feste private con l'animazione, oppure l'area giochi Moovy Land dentro il centro commerciale Al Magnifico, con baby parking e mini club." },
@@ -2177,12 +2188,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "treviso",
     citta: "Treviso",
-    aggiornata: "2026-11-03",
+    aggiornata: "2026-11-27",
     rispostaBreve: "A Treviso la festa di compleanno per bambini si fa soprattutto appena fuori città: al Super Park di Dosson di Casier, un parco giochi al coperto con area bimbi, trampolini e kart, dove avete uno spazio riservato con tavoli e l'accesso a tutte le attrazioni, oppure alla Fattoria di Geronimo di Merlengo, una fattoria didattica dove la festa si fa all'aperto con la visita agli animali e giochi adatti all'età. Al parco la torta va nel frigo apposta e pizza o buffet si aggiungono a parte; alla fattoria le feste si fanno nel weekend e si fermano d'estate.",
     intro: "Attorno a Treviso le feste dei bambini si dividono tra due mondi: il parco giochi al coperto, che funziona con ogni tempo e piace a chi vuole correre e saltare, e la fattoria, per chi preferisce animali, prato e aria aperta. Tutti e due sono a pochi minuti di macchina dalla città.",
     locali: [
       { nome: "Super Park", zona: "Dosson di Casier, alle porte di Treviso", tipo: "parco giochi al coperto con trampolini e kart", descrizione: "Parco giochi al coperto a Dosson di Casier, alle porte di Treviso, aperto il venerdì, il sabato e la domenica. Ha un'area bimbi da 1 a 6 anni di oltre 200 mq con un angolo relax per i genitori e, per i più grandi, trampolini, percorso ninja dai 9 anni, arena Nerf, kart dai 5 ai 16 anni, snow tubing e pattinaggio; d'estate c'è un'area acquatica all'aperto. Per il compleanno c'è uno spazio riservato con tre tavoli, l'accesso a tutte le attrazioni e un frigorifero per la torta; pizza e buffet si aggiungono a richiesta, addobbi esclusi.", sito: "https://superpark.fun/" },
       { nome: "La Fattoria di Geronimo", zona: "Merlengo di Ponzano Veneto, a pochi chilometri da Treviso", tipo: "fattoria didattica, spazi all'aperto", descrizione: "Fattoria didattica riconosciuta dalla Regione Veneto a Merlengo di Ponzano Veneto, con prato, bosco, cavalli, pony, daini, oche e rapaci. È aperta al pubblico solo durante gli eventi che organizza. La festa si fa all'aperto, con spazi coperti se serve, e comprende la visita guidata della fattoria, giochi creativi e animazione adatta all'età; lo staff aiuta a sorvegliare i bambini. Si fa sabato e domenica, con orari diversi secondo la stagione, ed è sospesa da giugno ad agosto per i centri estivi; alla conferma si versa una caparra.", sito: "https://www.ilrifugiodigeronimo.it/" },
+      { nome: "Parco degli Alberi Parlanti", zona: "Treviso, viale Felissent", tipo: "parco a tema con percorsi per bambini", descrizione: "Parco gestito dallo studio di animazione Gli Alcuni in viale Felissent, a Treviso, con percorsi a tema per età diverse: «Grandi Dinosauri e DinoCuccioli» per i bambini dai 3 ai 6 anni, «Dinosauri e animali estinti» dai 7 agli 11, poi «Dal precinema ai cartoon» e «Sognando la Luna». Le visite per le famiglie si fanno il sabato, la domenica e nei festivi, prenotando entro il giorno prima. I minori stanno sempre con un adulto e con il maltempo l'attività può essere annullata. Per le feste di compleanno il sito rimanda alla mail del parco: formule e prezzi si chiedono lì.", sito: "https://live.alcuni.it/home-parco/" },
     ],
     faq: [
       { domanda: "Dove si festeggia un compleanno per bambini a Treviso?", risposta: "Appena fuori città: al Super Park di Dosson di Casier, un parco giochi al coperto con trampolini e kart, o alla Fattoria di Geronimo di Merlengo, per una festa all'aperto con gli animali." },
@@ -2387,12 +2399,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "savona",
     citta: "Savona",
-    aggiornata: "2026-11-08",
+    aggiornata: "2026-11-27",
     rispostaBreve: "A Savona la festa di compleanno per bambini si fa al Bowling Savona, con piste dotate di sponde per i bambini, videogiochi e un'area riservata alle feste; oppure nella sala feste di Capriole sulle Nuvole, vicino al centro storico e alla Darsena, da affittare da sola o con animazione e allestimento a tema. Sono due posti al chiuso, quindi vanno bene anche d'inverno.",
     intro: "A Savona le feste dei bambini si dividono fra il bowling, per una festa di movimento, e la sala feste con le animatrici, per chi preferisce giochi, palloncini e un tema scelto insieme. Tutti e due sono al chiuso. Conviene prenotare con anticipo per il fine settimana.",
     locali: [
       { nome: "Bowling Savona", zona: "Savona, via Trilussa", tipo: "bowling con area feste", descrizione: "Centro bowling in via Trilussa 13 rosso a Savona, a 200 metri dalla stazione. Ha 10 piste con le sponde per i bambini, videogiochi e giochi a punti, 7 biliardi e un servizio bar sempre aperto, con spuntini e panini. Organizza feste di compleanno con la formula B-Party, in un'area riservata e con l'aiuto dello staff. Apre dal lunedì al venerdì dalle 16, nei festivi e prefestivi dalle 14. Prezzi e pacchetti non sono indicati online: chiedeteli quando prenotate.", sito: "https://www.bowlingsavona.it/", instagram: "https://www.instagram.com/bowlingsavona/" },
       { nome: "Capriole sulle Nuvole", zona: "Savona, via Santa Lucia, vicino al centro storico e alla Darsena", tipo: "sala feste con animazione", descrizione: "Agenzia di animazione per bambini con una sala feste in via Santa Lucia 13R, nel centro di Savona, a due passi dalla Darsena. La sala è disponibile tutti i giorni, dal lunedì alla domenica, e ha un'area per il buffet degli adulti. La festa comprende sala e animazione: si scelgono il numero di animatrici, il tema e le attività, come giochi di movimento, trucca bimbi, palloncini e laboratori. L'allestimento si cura da sé o lo prepara l'agenzia, che fa anche feste a tema e noleggia gonfiabili.", sito: "https://capriolesullenuvole.it/", instagram: "https://www.instagram.com/capriole_sulle_nuvole/" },
+      { nome: "Teatro dei Cattivi Maestri", zona: "Savona, Darsena (Officine Solimano, via dei Carpentieri 1)", tipo: "teatro per bambini", descrizione: "Piccolo teatro della compagnia Cattivi Maestri, dentro le Officine Solimano nella Darsena di Savona. La stagione per l'infanzia 2026/27 ha spettacoli la domenica alle 17 da novembre 2026 (8, 15 e 29 novembre, poi dal 17 gennaio 2027). La compagnia produce anche spettacoli suoi per bambini, come «La bella addormentata la racconto io!», con i pupazzi a dito. La sala è piccola: conviene prenotare per messaggio o per email.", sito: "https://www.cattivimaestri.it/", festa: false },
     ],
     faq: [
       { domanda: "C'è un posto al coperto per una festa d'inverno a Savona?", risposta: "Sì, tutti e due: il Bowling Savona ha un'area riservata alle feste accanto alle piste, e la sala di Capriole sulle Nuvole è un locale chiuso in via Santa Lucia, vicino alla Darsena." },
@@ -2611,12 +2624,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "la-spezia",
     citta: "La Spezia",
-    aggiornata: "2026-11-16",
+    aggiornata: "2026-11-27",
     rispostaBreve: "Alla Spezia la festa di compleanno per bambini si fa al coperto: al Padre Dionisio Sporting Club, sui colli, con un'area giochi riscaldata con gonfiabili, playground e parete di arrampicata, oppure da Patapan, a Bragarina, un parco giochi al coperto con tre sale per le feste. Tutti e due vanno bene in ogni stagione: chiedete per tempo date libere e cosa comprende il prezzo.",
     intro: "Alla Spezia gli spazi privati per le feste dei bambini sono pochi ma al coperto, quindi buoni anche d'inverno. Qui trovate un parco giochi dentro un centro sportivo sui colli, con ristorante e parcheggio, e un parco giochi al chiuso nel quartiere di Bragarina.",
     locali: [
       { nome: "Padre Dionisio Sporting Club", zona: "La Spezia, via dei Colli", tipo: "parco giochi al coperto con gonfiabili e feste di compleanno", sito: "https://www.padredionisiosportingclub.it/", descrizione: "Centro sportivo in via dei Colli 132, sulle colline della Spezia con vista sul golfo. Oltre a due campi da padel e un campo da calcio a 5, ha un parco giochi coperto e riscaldato con gonfiabili, playground, parete di arrampicata, area kids, palco per la baby dance e biliardini, più un'area giochi esterna. Ci sono bar, ristorante pizzeria e parcheggio, ed è aperto tutto l'anno. Per i compleanni c'è un menù base con focacce, pizza, bevande e apparecchiatura a buffet: il prezzo si controlla col centro." },
       { nome: "Patapan", zona: "La Spezia, Bragarina (via Sardegna)", tipo: "parco giochi al coperto con sale feste", sito: "https://www.patapanlaspezia.it/", descrizione: "Parco giochi al coperto nel quartiere di Bragarina, aperto nel 2016. Il sito parla di un playground di 200 mq su due livelli, con percorsi di gioco e sensoriali, e di tre sale per le feste di compleanno, riscaldate e climatizzate. Su richiesta ci sono giornate a tema con truccabimbi, baby dance e animazione. I bambini devono essere accompagnati da un adulto; orari e disponibilità si chiedono direttamente al parco." },
+      { nome: "CAMeC – laboratori per bambini", zona: "La Spezia, piazza Cesare Battisti 1", tipo: "museo con laboratori per bambini", descrizione: "Museo civico d'arte moderna e contemporanea in piazza Cesare Battisti, nel centro della Spezia. Partecipa a «Divertiamoci imparando», il calendario di laboratori per bambini e famiglie dei Musei civici e delle biblioteche della città, con il programma 2026 pubblicato sul sito. I laboratori si prenotano alla reception del museo. Propone anche un laboratorio per le feste di compleanno, ispirato all'arte contemporanea: modalità e costi si chiedono al museo.", sito: "https://camec.museilaspezia.it/" },
     ],
     faq: [
       { domanda: "Dove si fa una festa di compleanno per bambini alla Spezia?", risposta: "Al coperto, in uno dei due parchi giochi che organizzano compleanni: il Padre Dionisio Sporting Club in via dei Colli, con gonfiabili e parete di arrampicata, oppure Patapan a Bragarina, con tre sale per le feste." },
@@ -2684,12 +2698,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "pavia",
     citta: "Pavia",
-    aggiornata: "2026-11-18",
+    aggiornata: "2026-11-27",
     rispostaBreve: "A Pavia la festa di compleanno per bambini si fa da SpazioGioco, una ludoteca in via Allende che la domenica si affitta per le feste dei bambini fino a 6 anni, oppure, da marzo a ottobre, al Parco Giochi Minerva di viale Cesare Battisti, un parco di gonfiabili all'aperto che riserva un'area per la festa. Chiedete per tempo le date libere.",
     intro: "A Pavia città trovate due soluzioni molto diverse: una ludoteca gestita da un'associazione, piccola e pensata per i più piccoli, da affittare e allestire da soli, e un parco di gonfiabili all'aperto per la bella stagione.",
     locali: [
       { nome: "SpazioGioco Pavia", zona: "Pavia, via Allende", tipo: "ludoteca da affittare per le feste", sito: "https://www.spaziogiocopavia.it/", descrizione: "Ludoteca senza scopo di lucro in via Allende, a Pavia, gestita da un circolo ARCI. La domenica la ludoteca si affitta per i compleanni: è pensata per bambini da 0 a 6 anni e ospita al massimo 25 persone, adulti compresi. Si affitta solo lo spazio: organizzazione, merenda e pulizia finale sono a carico della famiglia. Alla prenotazione si versa una caparra, restituita se la sala torna pulita. Non serve la tessera ARCI; il prezzo si chiede alla ludoteca." },
       { nome: "Parco Giochi Minerva", zona: "Pavia, viale Cesare Battisti", tipo: "parco divertimenti all'aperto con gonfiabili e feste di compleanno", sito: "https://www.parcogiochiminerva.it/", descrizione: "Parco di gonfiabili all'aperto in viale Cesare Battisti, accanto al centro commerciale Minerva. Il sito lo dà aperto da marzo a ottobre, tutti i giorni, mattina e pomeriggio, chiuso solo con il maltempo. Per i compleanni riserva un'area privata con addobbi a tema e giochi senza limiti di tempo. I prezzi non sono pubblicati: si chiedono al parco. D'inverno è chiuso." },
+      { nome: "Teatro Fraschini – Teatro Ragazzi", zona: "Pavia, corso Strada Nuova 136 e Politeama", tipo: "teatro per bambini", descrizione: "Il Teatro Fraschini di Pavia ha una rassegna Teatro Ragazzi pensata per i bambini, con spettacoli di solito il sabato pomeriggio, divisi per età e quasi tutti al Cinema Teatro Politeama. La stagione 2026/27 comprende «Biancaneve Show» (7 novembre 2026), «La conta di Natale» (5 dicembre), «Il Minotauro» (16 gennaio 2027), «Storia d'amore e alberi» (13 febbraio) e «Le peripezie di Pinco Pallino» (22 maggio 2027, al Fraschini). I biglietti si comprano in biglietteria o online.", sito: "https://www.teatrofraschini.it/", festa: false },
     ],
     faq: [
       { domanda: "Dove si fa una festa di compleanno per bambini a Pavia?", risposta: "Da SpazioGioco, la ludoteca di via Allende che la domenica si affitta per le feste dei bambini fino a 6 anni, oppure, da marzo a ottobre, al Parco Giochi Minerva di viale Cesare Battisti, con i gonfiabili all'aperto." },
@@ -2786,6 +2801,24 @@ export const CITTA_FESTE: CittaFeste[] = [
       { domanda: "Quanto costa la festa?", risposta: "Nessuno dei due pubblica i prezzi: si chiedono alla struttura, con il numero degli invitati." },
       { domanda: "Che cosa è compreso?", risposta: "Da Mi Ci Porti il sito elenca sala riservata, frigo per le bevande, addobbi, tavoli e sedie, inviti, musica e pulizia. Per Allegropolis chiedete che cosa comprende il pacchetto." },
       { domanda: "Vanno bene anche d'inverno o se piove?", risposta: "Sì: tutti e due sono al chiuso." },
+      { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
+    ],
+  },
+  {
+    slug: "biella",
+    citta: "Biella",
+    aggiornata: "2026-11-27",
+    rispostaBreve: "A Biella la festa di compleanno per bambini si fa da Cappuccetto Giallo, in centro tra via Vescovado e via Losana: una libreria per ragazzi con uno spazio a parte per laboratori e feste, anche serali dai 6 anni. Chi vuole una festa in acqua può farla alla piscina Rivetti di viale Macallè, la domenica pomeriggio con giochi guidati dagli animatori.",
+    intro: "Biella ha due posti con il loro sito ufficiale dove festeggiare il compleanno dei bambini: uno spazio in centro con libri, laboratori e una sala per le feste, e la piscina comunale, per chi sa già stare in acqua o ha voglia di provarci.",
+    locali: [
+      { nome: "Cappuccetto Giallo", zona: "Biella, via Vescovado angolo via Losana", tipo: "ludoteca con libreria per ragazzi", descrizione: "Spazio per bambini nel centro di Biella, in via Vescovado angolo via Losana, che riunisce una libreria per ragazzi, un piccolo angolo di giocattoli, una caffetteria e un'area nursery. A parte c'è uno spazio per laboratori, corsi e feste di compleanno; il calendario propone laboratori il sabato divisi per età e d'estate c'è un campus. La festa del pomeriggio dura due ore e mezza e comprende inviti digitali, torta decorata, merenda, bevande e un laboratorio di animazione a scelta; per chi ha almeno 6 anni c'è anche il Night Party dalle 19 alle 22.", sito: "https://www.cappuccettogiallo.it/" },
+      { nome: "In Sport Biella – piscina Rivetti", zona: "Biella, viale Macallè 23", tipo: "piscina con feste di compleanno", descrizione: "Centro sportivo «Massimo Rivetti», gestito da In Sport: una piscina coperta da 50 metri divisibile in due vasche, una vasca didattica per i bambini e, all'aperto, una vasca da 33 metri. Ha corsi di nuoto per bambini (Cuccioli con il genitore, Baby, Ragazzi dai 6 ai 15 anni) e un corso multisportivo per i 7-12 anni il sabato. Organizza feste di compleanno la domenica pomeriggio, con giochi in acqua guidati da animatori.", sito: "https://www.insportsrl.it/biella/" },
+    ],
+    faq: [
+      { domanda: "Dove si fa una festa di compleanno per bambini a Biella?", risposta: "In centro da Cappuccetto Giallo, che ha uno spazio per feste e laboratori accanto alla libreria per ragazzi, oppure alla piscina Rivetti di viale Macallè, con giochi in acqua la domenica pomeriggio." },
+      { domanda: "Quanto costa la festa?", risposta: "Nessuno dei due pubblica prezzi con l'anno: chiedeteli al momento della prenotazione, con il numero degli invitati." },
+      { domanda: "Che cosa è compreso da Cappuccetto Giallo?", risposta: "Secondo il sito, la festa del pomeriggio dura due ore e mezza e comprende inviti digitali, torta decorata, merenda, bevande e un laboratorio di animazione a scelta. Dai 6 anni c'è anche la festa serale, dalle 19 alle 22." },
+      { domanda: "Vanno bene anche d'inverno?", risposta: "Sì: lo spazio di Cappuccetto Giallo è al chiuso e la piscina Rivetti ha la vasca coperta." },
       { domanda: "Come raccolgo le conferme?", risposta: "Scadenza chiara nell'invito e conferma a un tocco: con l'invito digitale di Gioca con Mizi la conferma parte da WhatsApp già scritta, e sul biglietto stampato c'è il QR «Inquadra e conferma»." },
     ],
   },

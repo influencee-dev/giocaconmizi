@@ -326,9 +326,9 @@ export default async function PaginaBiglietti({ params }: Params) {
               <div key={g.nome} data-gruppo-frasi>
                 <h3 className="mb-3 text-xl font-extrabold text-notte">{g.nome}</h3>
                 <ul className="flex flex-col gap-2">
-                  {g.frasi.map((f) => (
+                  {g.frasi.map(conEsempio).map((f) => (
                     <li key={f} className="rounded-[1.4rem] border border-notte/10 bg-white p-4 text-lg text-notte">
-                      {conEsempio(f)}
+                      {f}
                     </li>
                   ))}
                 </ul>
