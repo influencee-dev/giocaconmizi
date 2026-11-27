@@ -42,5 +42,13 @@
     "Perché la stella non si accendeva?",
     "Chi ti fa compagnia quando hai un po' paura?",
     "Tu a chi porteresti una lucina?"
-  ]
+  ],
+  "vetrina": {
+    "pubblico": true,
+    "copertina": "/immagini/libro-mizi-e-la-stella-copertina-960.webp",
+    "alt": "Copertina del libro «Mizi e la stella che non voleva accendersi»: la pinguina Mizi, un capibara, un axolotl e una renna guardano una stellina che brilla sopra un villaggio innevato",
+    "tema": "Natale",
+    "eta": "3-7 anni",
+    "amazon": ""
+  }
 }

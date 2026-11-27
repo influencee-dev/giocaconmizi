@@ -31,7 +31,7 @@ Nella radice restano solo i file di configurazione (`package.json`, `next.config
 | `lib/risorse/` | La directory delle risorse educative | `risorse-categorie.ts`, `risorse-educative.ts`, `risorse-educative-dati.ts`, `risorse-reclamo.ts`, `risorse-anteprime.ts` |
 | `lib/natale/` | Il Natale di Mizi | `natale.ts`, `natale-esporta.ts`, `eventi-natale.ts` |
 | `lib/biglietti/` | Inviti e kit della festa | `biglietti.ts`, `condivisione.ts`, `esempi.ts` |
-| `lib/contenuti/` | Guide, articoli, tutorial, note legali | `guide.ts` (guide brevi), `content.ts` (lettura di `content/`), `approfondimenti.json` (generato), `tutorial.ts`, `tutorial-dati.json` (generato), `legal.ts` |
+| `lib/contenuti/` | Guide, articoli, tutorial, note legali | `guide.ts` (guide brevi), `content.ts` (lettura di `content/`), `approfondimenti.json` (generato), `tutorial.ts`, `tutorial-dati.json` (generato), `legal.ts`, `libri.ts` (i libri di Mizi nella vetrina /libri, letti da `content/libri/`) |
 | `lib/foto/` | Le foto del sito | `foto.ts`, `foto-dati.ts`, `foto-del-giorno.ts`, `foto-in-arrivo.ts`, `caricatore-immagini.ts`, `immagini-varianti.json` (generato) |
 | `lib/email/` | Email | `brevo.ts`, `brevo-conferma.ts`, `brevo-benvenuto.ts`, `email-servizio.ts` |
 | `lib/seo/` | Motori di ricerca | `seo.ts`, `date-pagine.ts`, `date-pagine.json` (generato), `og.tsx`, `gsc.ts`, `precarico.ts` |

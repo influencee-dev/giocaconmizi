@@ -19,6 +19,7 @@ Claude lancia `npm run libro -- vnn` e consegna interno, copertina e report; Gio
 | REVIEW | Claude, dopo `npm run libro` senza problemi | i due PDF sono in «03 BOZZE_REVIEW» con il report |
 | APPROVATO | Giorgia | ha guardato i due PDF e ha detto sì |
 | PRINT_READY | Giorgia | ha visto l'anteprima KDP e la copia di prova |
+| IN VENDITA | Claude, quando Giorgia manda il link Amazon | link in `vetrina.amazon` della scheda: sulla pagina /libri compare «Compralo su Amazon» |
 
 Uno stato non si deduce: sta scritto nel titolo dell'ultima nota di Bacheca su quel volume.
 
@@ -73,6 +74,20 @@ npm run libro -- v02 --lavoro <cartella>
   scheda, tavole ≥ 300 dpi, misure della copertina e del dorso, fronte ≥ 300 dpi, peso dei file,
   testo di quarta che non arriva sulla foto.
 - PDF e immagini dei libri non entrano nel repo (è pubblico): restano nella cartella di lavoro e su Drive.
+
+## La vetrina sul sito (/libri)
+
+I libri si comprano **solo su Amazon** (decisione di Giorgia del 27/11/2026): il sito non vende libri né PDF.
+La pagina `/libri` (`app/(public)/libri/page.tsx`, dati da `lib/contenuti/libri.ts`) mostra ogni volume con
+`vetrina.pubblico: true` nella sua scheda: copertina, quarta, formato, e il pulsante verso Amazon.
+
+- Copertina per il sito: il fronte rifilato della copertina approvata, in WebP nelle larghezze 480, 640, 800,
+  960 e 1440, in `public/immagini/libro-<slug>-copertina-<larghezza>.webp`. È l'unica immagine di un libro che
+  va nel repo: è la stessa che si vede su Amazon.
+- Finché `vetrina.amazon` è vuoto il libro risulta «In arrivo su Amazon». Quando Giorgia manda il link della
+  pagina Amazon, lo si scrive lì (solo indirizzi https://www.amazon.…/), si verifica e si pubblica.
+- Un volume nuovo entra nella vetrina aggiungendo la sua scheda a `SCHEDE` in `lib/contenuti/libri.ts`
+  e mettendo `vetrina.pubblico: true`.
 
 ## Il libro tipo
 

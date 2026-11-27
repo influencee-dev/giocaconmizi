@@ -42,5 +42,13 @@
     "Prima domanda per i grandi?",
     "Seconda domanda?",
     "Terza domanda?"
-  ]
+  ],
+  "vetrina": {
+    "pubblico": false,
+    "copertina": "/immagini/libro-<slug>-copertina-960.webp",
+    "alt": "Descrizione della copertina per chi non vede l'immagine",
+    "tema": "Educativo o nome dell'evento",
+    "eta": "3-7 anni",
+    "amazon": ""
+  }
 }

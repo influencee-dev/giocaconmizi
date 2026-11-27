@@ -599,7 +599,11 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
 - Parte da sola: se in «0 Bacheca» c'è una nota «… · ChatGPT · Vnn INPUT COMPLETI» senza risposta di
   Claude, chi lavora (anche la routine delle 7:00) segue i passi di `docs/libri-kdp.md` e chiude con la
   nota «Vnn REVIEW» o «Vnn FERMO». Viene prima della rotazione, come una richiesta di Giorgia.
-- PDF e immagini dei libri non si mettono nel repo (è pubblico): cartella di lavoro e Drive.
+- PDF e immagini dei libri non si mettono nel repo (è pubblico): cartella di lavoro e Drive. Eccezione: la
+  copertina in WebP per la vetrina `/libri`, che è pubblica comunque.
+- Si comprano SOLO su Amazon (Giorgia, 27/11/2026): `/libri` presenta i volumi (`vetrina` nella scheda) e
+  mostra «Compralo su Amazon» quando c'è il link vero, altrimenti «In arrivo su Amazon». Il sito non vende
+  libri né PDF.
 - Stile fisso: firma «Un libro di Giorgia Palazzo e Domiziana Bonaccorso», titolo in Londrina Solid,
   testi in Roboto, interno in Poppins, foto e storia sulla quarta. Si cambia solo su decisione di Giorgia.
 - I vecchi `content/libretti/` (cinque libretti a colori per il sito) sono un'impostazione precedente:
