@@ -320,6 +320,74 @@
   ]
  },
  {
+  "slug": "ciao-sono-mizi",
+  "gruppo": "utenti",
+  "titolo": "Ciao, sono Mizi: cos'è Giocamizi in un minuto",
+  "ordine": 0,
+  "descrizione": "Mizi ti fa fare il giro di Giocamizi: giochi educativi, inviti per le feste, posti dove festeggiare, storie e guide per i genitori.",
+  "rispostaBreve": "Giocamizi è un sito gratuito per bambini dai 3 ai 12 anni e per i loro genitori: giochi educativi senza pubblicità e senza timer, inviti per le feste da creare e condividere, posti dove festeggiare città per città, storie da leggere e guide per i genitori. Si usa dal browser, anche sul telefono come un'app.",
+  "verticale": {
+   "src": "/video/ciao-sono-mizi-verticale.mp4",
+   "poster": "/video/ciao-sono-mizi-verticale.webp"
+  },
+  "video": {
+   "src": "/video/ciao-sono-mizi.mp4",
+   "poster": "/video/ciao-sono-mizi.webp",
+   "sottotitoli": "/video/ciao-sono-mizi.vtt",
+   "durata": "PT1M2S",
+   "secondi": 62,
+   "caricato": "2026-11-27",
+   "testo": [
+    "Ciao, sono Mizi! Sono una pinguina, e questa è casa mia: Giocamizi. Ti faccio fare il giro, giuro che ci mettiamo un minuto.",
+    "Si apre dal browser, anche sul telefono. È tutto gratis e non c'è pubblicità: nemmeno quella che spunta proprio quando stai vincendo.",
+    "Prima di tutto i giochi: più di cinquanta, divisi per età. Lettere, numeri, forme, logica, coding. Niente timer e niente classifiche: si gioca e basta.",
+    "Arriva un compleanno? Qui crei l'invito e lo mandi su WhatsApp, e lì trovi i posti dove festeggiare, città per città.",
+    "Poi ci sono le storie da leggere insieme, e le guide per i grandi: risposte brevi e chiare, senza prediche. Promesso.",
+    "Ecco, questa è Giocamizi. Ti aspetto su giocamizi.it. Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 11,
+    "titolo": "1 · Tutto gratis, dal browser"
+   },
+   {
+    "da": 22,
+    "titolo": "2 · I giochi"
+   },
+   {
+    "da": 36,
+    "titolo": "3 · Inviti e posti per la festa"
+   },
+   {
+    "da": 45,
+    "titolo": "4 · Storie e guide"
+   }
+  ],
+  "pagina": {
+   "href": "/",
+   "testo": "Vai alla home di Giocamizi"
+  },
+  "faq": [
+   {
+    "domanda": "Giocamizi è gratis?",
+    "risposta": "Sì: giochi, inviti, storie e guide sono gratis, senza pubblicità."
+   },
+   {
+    "domanda": "Serve scaricare un'app?",
+    "risposta": "No: si usa dal browser. Se vuoi, sul telefono puoi aggiungerla alla schermata Home come un'app."
+   },
+   {
+    "domanda": "Per che età è?",
+    "risposta": "I giochi sono per bambini dai 3 ai 12 anni; inviti, feste e guide sono per i genitori."
+   }
+  ]
+ },
+ {
   "slug": "come-creare-l-invito",
   "gruppo": "utenti",
   "titolo": "Come creare l'invito di compleanno con la conferma su WhatsApp",
