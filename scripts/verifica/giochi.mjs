@@ -1164,6 +1164,56 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   ok("seconda elementare: nessun bottone sotto i 56 px", esiti.every((e) => e.piccoli === 0), esiti.filter((e) => e.piccoli).map((e) => e.slug).join(", "));
 }
 
+
+// Giro di tutti i giochi del 27/11/2026.
+// 1) Il motore «metti in ordine» (puzzle, sillabe, numeri, robot, sequenze, suoni):
+//    due dita nello stesso istante su due pezzi ne facevano sparire uno e la
+//    partita non si finiva più; chi sbagliava sempre non riceveva mai aiuto.
+//    Il bambino sbadato tocca a caso (ogni tanto due pezzi insieme) e segue il
+//    pezzo che dondola quando arriva: deve arrivare alla festa.
+{
+  for (const slug of ["puzzle-facile", "numeri-in-ordine"]) {
+    const ctx = await b.newContext({ viewport: { width: 390, height: 664 }, isMobile: true, hasTouch: true });
+    await ctx.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+    const pg = await ctx.newPage();
+    const prima = erroriJs;
+    pg.on("pageerror", () => erroriJs++);
+    await pg.goto(`${BASE}/giochi/${slug}/gioca?eta=6`, { waitUntil: "networkidle" });
+    let tocchi = 0, aiutiVisti = 0;
+    const t0 = Date.now();
+    while (Date.now() - t0 < 150000 && !(await pg.locator("[data-festa]").isVisible().catch(() => false))) {
+      const aiuto = pg.locator('[data-aiuto-pezzo="si"]');
+      if (await aiuto.count()) { aiutiVisti++; await aiuto.first().tap(); }
+      else if (tocchi % 5 === 2) await pg.evaluate(() => { const e = [...document.querySelectorAll("[data-pezzo]")]; e[0]?.click(); e[1]?.click(); });
+      else { const pezzi = await pg.locator("[data-pezzo]").all(); if (pezzi.length) await pezzi[Math.floor(Math.random() * pezzi.length)].tap(); }
+      tocchi++;
+      await pg.waitForTimeout(250);
+    }
+    ok(`${slug}: lo sbadato con due dita arriva alla festa, con l'aiuto del pezzo che dondola`,
+      (await pg.locator("[data-festa]").isVisible().catch(() => false)) && aiutiVisti > 0 && erroriJs === prima, `${tocchi} tocchi, ${aiutiVisti} aiuti`);
+    await ctx.close();
+  }
+}
+
+// 2) Sul telefono con le barre del browser aperte (390×664) le risposte dei
+//    giochi a risposta stanno in vista senza scorrere: prima le ultime due
+//    finivano sotto il bordo e a tre anni non si sa che si può scorrere.
+{
+  const ctx = await b.newContext({ viewport: { width: 390, height: 664 }, isMobile: true, hasTouch: true });
+  await ctx.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const pg = await ctx.newPage();
+  const fuori = [];
+  for (const slug of ["abbina-i-colori", "trova-la-forma", "le-parti-della-pianta", "l-orologio", "salvadanaio", "puzzle-facile", "labirinto-a-blocchi", "colora-con-mizi"]) {
+    await pg.goto(`${BASE}/giochi/${slug}/gioca?eta=6`, { waitUntil: "networkidle" });
+    await pg.waitForTimeout(900);
+    const sotto = await pg.evaluate(() => [...document.querySelectorAll("[data-campo-di-gioco] button")]
+      .filter((e) => e.offsetWidth > 0 && e.getBoundingClientRect().bottom > innerHeight + 1 && !e.disabled).length);
+    if (sotto) fuori.push(`${slug} (${sotto})`);
+  }
+  ok("telefono 390×664: nei giochi a risposta e nei laboratori principali tutti i tasti sono in vista", fuori.length === 0, fuori.join(", "));
+  await ctx.close();
+}
+
 await b.close();
 if (servito) process.kill(-servito.pid);
 process.exit(chiudi("giochi") ? 0 : 1);
