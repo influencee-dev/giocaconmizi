@@ -60,7 +60,7 @@ I file segnati «generato» li scrive uno script: non si modificano a mano.
 
 ## `components/`: una cartella per zona
 
-`app` (l'app installata), `biglietti`, `condivisione` (il passaparola tra mamme, dal 27/11/2026), `directory`, `feste`, `form`, `game-shell` (il guscio comune dei giochi, con la festa finale), `genitori` (i percorsi per gli adulti, dal 20/11/2026: non sono guide né giochi), `giochi` (catalogo e album), `guide`, `legal`, `mappa`, `natale`, `risorse`, `seo`, `storie`, `tutorial`, `ui` (bottoni e contenitori di base), `vetrina` (testata, menu, piede), `font-switcher`, `progress`.
+`app` (l'app installata), `biglietti`, `directory`, `feste`, `form`, `game-shell` (il guscio comune dei giochi, con la festa finale), `genitori` (i percorsi per gli adulti, dal 20/11/2026: non sono guide né giochi), `giochi` (catalogo e album), `guide`, `legal`, `mappa`, `natale`, `risorse`, `seo`, `storie`, `tutorial`, `ui` (bottoni e contenitori di base), `vetrina` (testata, menu, piede), `font-switcher`, `progress`.
 
 Tre file restano sciolti perché li usano tutte le zone: `icone.tsx`, `illustrazioni.tsx`, `decor.tsx`.
 
