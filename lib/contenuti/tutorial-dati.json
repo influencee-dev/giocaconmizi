@@ -997,6 +997,74 @@
   ]
  },
  {
+  "slug": "la-letterina-a-babbo-natale",
+  "gruppo": "utenti",
+  "titolo": "Come scrivere la letterina a Babbo Natale con Mizi",
+  "ordine": 9,
+  "descrizione": "Mizi accompagna il tuo bimbo passo passo nella letterina a Babbo Natale: carta, prima frase, desideri, saluto, e poi stampa e busta da colorare.",
+  "rispostaBreve": "Su Giocamizi la letterina a Babbo Natale si scrive in sei passi guidati da Mizi, che legge ogni frase ad alta voce: chi scrive, la carta, la frase per cominciare, i desideri (toccando un disegno o scrivendoli), il saluto. Alla fine la letterina si stampa o si scarica in PDF, e c'è la busta da colorare. È gratis e non serve registrarsi.",
+  "verticale": {
+   "src": "/video/la-letterina-a-babbo-natale-verticale.mp4",
+   "poster": "/video/la-letterina-a-babbo-natale-verticale.webp"
+  },
+  "video": {
+   "src": "/video/la-letterina-a-babbo-natale.mp4",
+   "poster": "/video/la-letterina-a-babbo-natale.webp",
+   "sottotitoli": "/video/la-letterina-a-babbo-natale.vtt",
+   "durata": "PT1M5S",
+   "secondi": 65,
+   "caricato": "2026-11-27",
+   "testo": [
+    "Ciao, sono Mizi! Quest'anno la letterina a Babbo Natale la scriviamo insieme. Anche se non sai ancora scrivere: ci penso io.",
+    "Sono sei passi, e ogni volta ti dico cosa fare, ad alta voce. Prima mi dici quanti anni hai e, se vuoi, il tuo nome. Poi tocca «Avanti».",
+    "Adesso scegli la carta da lettera: neve, regali, dolci, renne. Tocca quella che ti piace di più.",
+    "Poi la frase per cominciare, e arriviamo alla parte importante: i desideri. Tocchi un disegno, oppure li scrivi tu. Babbo Natale apprezza anche quelli ragionevoli.",
+    "Scegli come salutare, ed è pronta! Chiedi a un grande di stamparla o di scaricare il PDF. Poi c'è la busta da colorare.",
+    "La letterina ti aspetta su giocamizi.it, nella pagina del Natale. Buon Natale, ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 11,
+    "titolo": "1 · Ti guido io"
+   },
+   {
+    "da": 24,
+    "titolo": "2 · Scegli la carta"
+   },
+   {
+    "da": 32,
+    "titolo": "3 · I desideri"
+   },
+   {
+    "da": 46,
+    "titolo": "4 · Stampa e busta"
+   }
+  ],
+  "pagina": {
+   "href": "/natale/letterina-babbo-natale",
+   "testo": "Scrivi la letterina con Mizi"
+  },
+  "faq": [
+   {
+    "domanda": "Serve saper scrivere?",
+    "risposta": "No: le frasi e i desideri si scelgono toccando, e Mizi li legge ad alta voce. Chi sa scrivere può anche scriverli da sé."
+   },
+   {
+    "domanda": "Come si stampa?",
+    "risposta": "All'ultimo passo ci sono «Stampa» e il PDF da scaricare; poi c'è la busta da stampare e colorare."
+   },
+   {
+    "domanda": "È gratis?",
+    "risposta": "Sì, ed è senza registrazione."
+   }
+  ]
+ },
+ {
   "slug": "gli-eventi-di-natale",
   "gruppo": "utenti",
   "titolo": "Gli eventi di Natale per bambini nella tua città",
