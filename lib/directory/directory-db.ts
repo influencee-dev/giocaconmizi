@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { unstable_cache } from "next/cache";
 import { SUPABASE_ANON_KEY, SUPABASE_URL, supabaseConfigurato } from "@/lib/supabase/config";
 import type { Scheda } from "@/lib/directory/directory";
 import type { SchedaEstesa } from "@/lib/directory/scheda-campi";
@@ -54,7 +55,35 @@ function conSchedeGiorgia(m: Map<string, Pubblicata>, giorgia: { chiave: string;
 }
 
 /** Le risposte dei locali che Giorgia ha accettato, per chiave scheda. */
+/**
+ * Etichetta della cache delle risposte pubblicate. Le pagine della directory
+ * sono ISR (10 minuti): la lettura del database passa da unstable_cache, così
+ * il fetch «no-store» del client non le rende dinamiche a ogni visita.
+ * Una decisione nel pannello svuota la cache con revalidateTag(TAG_DIRECTORY).
+ */
+export const TAG_DIRECTORY = "directory";
+
+/** Il database non ha risposto: si lancia, così il vuoto non resta in cache per 10 minuti. */
+class DatabaseMuto extends Error {}
+
+const pubblicateInCache = unstable_cache(
+  async () => [...(await pubblicateDirette(true))],
+  ["dir-pubblicate"],
+  { revalidate: 600, tags: [TAG_DIRECTORY] },
+);
+
+/** Le risposte accettate (più le schede preparate da Giorgia), lette al massimo ogni 10 minuti. */
 export async function pubblicate(): Promise<Map<string, Pubblicata>> {
+  if (process.env.GIOCAMIZI_ADMIN_PROVA && !process.env.VERCEL) return pubblicateDirette(false);
+  try {
+    return new Map(await pubblicateInCache());
+  } catch {
+    // Database in pausa o lento: le schede restano quelle di lib/directory/feste.ts.
+    return new Map();
+  }
+}
+
+async function pubblicateDirette(lancia: boolean): Promise<Map<string, Pubblicata>> {
   // Nel server delle verifiche una risorsa risulta reclamata, per provarne la pagina propria.
   if (process.env.GIOCAMIZI_ADMIN_PROVA && !process.env.VERCEL) {
     return conSchedeGiorgia(
@@ -69,13 +98,17 @@ export async function pubblicate(): Promise<Map<string, Pubblicata>> {
   if (!client) return new Map();
   try {
     const [r, g] = await Promise.all([client.rpc("dir_pubblicate"), client.rpc("dir_pubblicate_giorgia")]);
-    if (r.error || !Array.isArray(r.data)) return new Map();
+    if (r.error || !Array.isArray(r.data)) {
+      if (lancia) throw new DatabaseMuto(r.error?.message ?? "risposta vuota");
+      return new Map();
+    }
     const m = new Map<string, Pubblicata>(
       r.data.map((x: { chiave: string; tipo: Pubblicata["tipo"]; dati: DatiModifica }) => [x.chiave, { tipo: x.tipo, dati: x.dati ?? {}, fonte: "attivita" as const }]),
     );
     // Se l'SQL delle schede preparate non è ancora incollato, g.error: si va avanti senza.
     return conSchedeGiorgia(m, !g.error && Array.isArray(g.data) ? (g.data as { chiave: string; dati: SchedaEstesa }[]) : []);
-  } catch {
+  } catch (e) {
+    if (lancia) throw e;
     return new Map();
   }
 }

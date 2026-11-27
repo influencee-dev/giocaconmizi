@@ -1,9 +1,9 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { adminValido } from "@/lib/directory/admin";
 import { SCHEDE, percorsoScheda } from "@/lib/directory/directory";
-import { SCHEDA_ESTESA_PROVA, adminSalvaScheda } from "@/lib/directory/directory-db";
+import { SCHEDA_ESTESA_PROVA, TAG_DIRECTORY, adminSalvaScheda } from "@/lib/directory/directory-db";
 import { fornitoreAi, leggiFonti, proponiScheda, type EsitoFonte, type Proposta } from "@/lib/directory/import-ai";
 import { validaScheda, type SchedaEstesa } from "@/lib/directory/scheda-campi";
 
@@ -77,6 +77,7 @@ export async function salva(codice: string, chiave: string, scheda: SchedaEstesa
   const r = await adminSalvaScheda(codice, chiave, pulita, pubblica);
   if (!r.ok) return { stato: "errore", messaggio: r.errore };
   const href = percorsoScheda(s);
+  revalidateTag(TAG_DIRECTORY);
   revalidatePath(href);
   revalidatePath(`/admin/${codice}/importa`);
   return {

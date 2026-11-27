@@ -1,4 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
+import { unstable_cache } from "next/cache";
+
+export const TAG_POSIZIONI = "posizioni";
 import { SUPABASE_ANON_KEY, SUPABASE_URL, supabaseConfigurato } from "@/lib/supabase/config";
 import { CENTRO_CITTA } from "@/lib/directory/coordinate-citta";
 
@@ -25,14 +28,23 @@ function db() {
   });
 }
 
+/** Letta al massimo ogni 10 minuti (come le pagine ISR della directory); un errore non resta in cache. */
+const posizioniInCache = unstable_cache(
+  async (): Promise<[string, Posizione][]> => {
+    const client = db();
+    if (!client) return [];
+    const { data, error } = await client.rpc("dir_posizioni");
+    if (error || !data) throw new Error(error?.message ?? "posizioni non lette");
+    return (data as (Posizione & { chiave: string })[]).map((p) => [p.chiave, { lat: p.lat, lng: p.lng, precisione: p.precisione }]);
+  },
+  ["dir-posizioni"],
+  { revalidate: 600, tags: [TAG_POSIZIONI] },
+);
+
 /** Tutte le posizioni, per chiave "città/slug". Mappa vuota se il DB non risponde. */
 export async function posizioni(): Promise<Map<string, Posizione>> {
-  const client = db();
-  if (!client) return new Map();
   try {
-    const { data, error } = await client.rpc("dir_posizioni");
-    if (error || !data) return new Map();
-    return new Map((data as (Posizione & { chiave: string })[]).map((p) => [p.chiave, { lat: p.lat, lng: p.lng, precisione: p.precisione }]));
+    return new Map(await posizioniInCache());
   } catch {
     return new Map();
   }

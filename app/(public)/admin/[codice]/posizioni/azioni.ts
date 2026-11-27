@@ -1,6 +1,7 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { TAG_POSIZIONI } from "@/lib/directory/posizioni";
 import { adminValido } from "@/lib/directory/admin";
 import { SCHEDE } from "@/lib/directory/directory";
 import { chiaveScheda, conModifiche, pubblicate } from "@/lib/directory/directory-db";
@@ -26,6 +27,7 @@ export async function calcolaPosizioni(codice: string) {
     });
     if (trovata) await salvaPosizione(codice, chiaveScheda(s), trovata);
   }
+  revalidateTag(TAG_POSIZIONI);
   revalidatePath(`/admin/${codice}/posizioni`);
 }
 
@@ -39,5 +41,6 @@ export async function correggiPosizione(codice: string, chiave: string, modulo: 
     const [lat, lng] = testo.split(/[,;\s]+/).map(Number);
     if (Number.isFinite(lat) && Number.isFinite(lng)) await salvaPosizione(codice, chiave, { lat, lng, precisione: "manuale" });
   }
+  revalidateTag(TAG_POSIZIONI);
   revalidatePath(`/admin/${codice}/posizioni`);
 }
