@@ -190,6 +190,18 @@ await browser.close();
   const sporco = await fetch(`${BASE}/pagamento/annullato?ritorno=https://sito-esterno.example/`).then((r) => r.text());
   ok("pagamenti: niente ritorno verso siti esterni", !sporco.includes("sito-esterno.example"));
   await bp.close();
+  // Ricerca con l'AI: gratis per tutti (27/11/2026), tracciata; nella copia di prova risponde senza AI.
+  const cercaNo = await fetch(`${BASE}/api/cerca`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ domanda: "" }) });
+  ok("cerca con l'AI: domanda vuota rifiutata", cercaNo.status === 400);
+  const bc2 = await apriBrowser();
+  const pc2 = await bc2.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  await pc2.goto(`${BASE}/cerca`, { waitUntil: "networkidle" });
+  await pc2.locator("#domanda-ai").fill("ludoteca per una festa a Milano");
+  await pc2.getByRole("button", { name: "Cerca" }).tap();
+  await pc2.locator("[data-risultati-ai], [data-errore-ricerca]").first().waitFor({ timeout: 30000 }).catch(() => null);
+  ok("cerca con l'AI: risponde con pagine del sito", (await pc2.locator('[data-risultati-ai] a[href^="/"]').count()) > 0);
+  await bc2.close();
+  ok("ricerche AI nel pannello: senza codice → non disponibile", (await fetch(`${BASE}/admin/codice-sbagliato-000000/ricerche-ai`).then((r) => r.text())).includes("Pannello non disponibile"));
   const importaNo = await fetch(`${BASE}/admin/codice-sbagliato-000000/importa`).then((r) => r.text());
   ok("importa con l'AI: senza codice → pannello non disponibile", importaNo.includes("Pannello non disponibile"));
   const bi = await apriBrowser();

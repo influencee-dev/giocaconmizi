@@ -155,3 +155,34 @@ grant execute on function public.ai_stato_mamma() to authenticated;
 grant execute on function public.ai_consuma_ricerca() to authenticated;
 grant execute on function public.ai_crediti_attivita(text) to anon, authenticated;
 grant execute on function public.ai_usa_credito_attivita(text) to anon, authenticated;
+
+-- Tracciamento (decisione di Giorgia del 27/11/2026: «per ora gratis per tutti, ma tracciamolo»).
+-- Ogni uso dell'AI: cosa si è chiesto e com'è andata. Mai chi l'ha chiesto
+-- (né id né email né IP): solo se era una mamma collegata. Lo scrive solo il server.
+create table if not exists public.ai_ricerche (
+  id bigint generated always as identity primary key,
+  quando timestamptz not null default now(),
+  tipo text not null default 'ricerca' check (tipo in ('ricerca', 'scheda')),
+  domanda text not null,
+  risultati integer not null default 0,
+  collegata boolean not null default false,
+  esito text not null default 'ok'
+);
+create index if not exists ai_ricerche_quando on public.ai_ricerche (quando desc);
+alter table public.ai_ricerche enable row level security;
+revoke all on public.ai_ricerche from anon, authenticated;
+
+-- Pannello di Giorgia: i numeri e le ultime domande.
+create or replace function public.ai_admin_ricerche(p_codice text)
+returns table (quando timestamptz, tipo text, domanda text, risultati integer, collegata boolean, esito text)
+language plpgsql security definer
+set search_path = ''
+as $$
+begin
+  if not exists (select 1 from public.dir_admin where token_hash = public.dir_impronta(p_codice)) then
+    raise exception 'non autorizzato';
+  end if;
+  return query select r.quando, r.tipo, r.domanda, r.risultati, r.collegata, r.esito
+    from public.ai_ricerche r order by r.quando desc limit 300;
+end $$;
+grant execute on function public.ai_admin_ricerche(text) to anon, authenticated;

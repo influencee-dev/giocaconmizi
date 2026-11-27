@@ -51,7 +51,7 @@ for (const f of file("lib")) ko(`«lib/${f}» è sciolto in lib/: va in una cart
 for (const c of cartelle("lib")) if (!LIB[c]) ko(`cartella «lib/${c}/» non prevista: gli argomenti di lib sono ${Object.keys(LIB).join(", ")}.`);
 
 // 3. components/: una cartella per zona del sito, più tre file condivisi da tutti.
-const COMPONENTI = [
+const COMPONENTI = ["cerca", 
   "app", "biglietti", "directory", "feste", "font-switcher", "form", "game-shell", "genitori", "giochi", "guide", "legal", "mappa",
   "natale", "progress", "risorse", "seo", "storie", "tutorial", "ui", "vetrina",
 ];

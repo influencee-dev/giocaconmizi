@@ -238,27 +238,30 @@ export const nomeChiaveAi = () => ({ gateway: "AI_GATEWAY_API_KEY", gemini: "GEM
 
 type RispostaAi = { campi: { id: string; valore_json: string; fonte: string; citazione: string }[]; note: string };
 
-/** Lo stesso schema nel formato di Gemini (tipi in maiuscolo, niente additionalProperties). */
-const SCHEMA_GEMINI = {
-  type: "OBJECT",
-  properties: {
-    campi: {
-      type: "ARRAY",
-      items: {
-        type: "OBJECT",
-        properties: {
-          id: { type: "STRING" },
-          valore_json: { type: "STRING", description: SCHEMA_RISPOSTA.properties.campi.items.properties.valore_json.description },
-          fonte: { type: "STRING", description: SCHEMA_RISPOSTA.properties.campi.items.properties.fonte.description },
-          citazione: { type: "STRING", description: SCHEMA_RISPOSTA.properties.campi.items.properties.citazione.description },
-        },
-        required: ["id", "valore_json", "fonte", "citazione"],
-      },
-    },
-    note: { type: "STRING", description: SCHEMA_RISPOSTA.properties.note.description },
-  },
-  required: ["campi", "note"],
-};
+const PROMEMORIA_SCHEDA = 'Rispondi SOLO con un oggetto JSON con le chiavi "campi" (array di {"id","valore_json","fonte","citazione"}) e "note".';
+
+/** Uno schema JSON nel formato di Gemini: tipi in maiuscolo, niente additionalProperties. */
+function aGemini(s: unknown): unknown {
+  if (Array.isArray(s)) return s.map(aGemini);
+  if (!s || typeof s !== "object") return s;
+  const fuori: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(s)) {
+    if (k === "additionalProperties") continue;
+    fuori[k] = k === "type" && typeof v === "string" ? v.toUpperCase() : aGemini(v);
+  }
+  return fuori;
+}
+
+/**
+ * Una domanda all'AI scelta in fornitoreAi() con risposta JSON secondo uno schema.
+ * La usano l'importazione delle schede e la ricerca delle famiglie (lib/contenuti/ricerca-ai.ts).
+ */
+export async function chiediAiJson<T>(system: string, utente: string, schema: object, promemoria: string): Promise<T> {
+  const f = fornitoreAi();
+  if (f === "claude") return chiediClaude<T>(system, utente, schema);
+  if (f === "gemini") return chiediGemini<T>(system, utente, [], schema, promemoria);
+  return chiediGateway<T>(system, utente, schema, promemoria);
+}
 
 /** Toglie l'eventuale recinto ```json … ``` attorno alla risposta. */
 const soloJson = (s: string) => s.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
@@ -269,7 +272,7 @@ const soloJson = (s: string) => s.trim().replace(/^```(?:json)?\s*/i, "").replac
  * In quel caso lo schema rigido non si può usare insieme allo strumento, quindi
  * chiediamo il JSON nel testo e lo controlliamo noi (validaScheda fa il resto).
  */
-async function chiediGemini(system: string, utente: string, linkDaLeggere: string[]): Promise<RispostaAi> {
+async function chiediGemini<T = RispostaAi>(system: string, utente: string, linkDaLeggere: string[], schema: object = SCHEMA_RISPOSTA, promemoria = PROMEMORIA_SCHEDA): Promise<T> {
   const chiave = process.env.GEMINI_API_KEY;
   if (!chiave) throw new Error("Manca la chiave GEMINI_API_KEY su Vercel: l'importazione con l'AI non è ancora attiva.");
   const modello = process.env.GEMINI_MODELLO || "gemini-flash-latest";
@@ -282,7 +285,7 @@ async function chiediGemini(system: string, utente: string, linkDaLeggere: strin
         parts: [
           {
             text: conLink
-              ? `${utente}\n\nLeggi anche questi link con lo strumento URL context (sono fonti come le altre):\n${linkDaLeggere.join("\n")}\n\nRispondi SOLO con un oggetto JSON con le chiavi "campi" (array di {"id","valore_json","fonte","citazione"}) e "note".`
+              ? `${utente}\n\nLeggi anche questi link con lo strumento URL context (sono fonti come le altre):\n${linkDaLeggere.join("\n")}\n\n${promemoria}`
               : utente,
           },
         ],
@@ -292,7 +295,7 @@ async function chiediGemini(system: string, utente: string, linkDaLeggere: strin
     generationConfig: {
       temperature: 0.1,
       maxOutputTokens: 16000,
-      ...(conLink ? {} : { responseMimeType: "application/json", responseSchema: SCHEMA_GEMINI }),
+      ...(conLink ? {} : { responseMimeType: "application/json", responseSchema: aGemini(schema) }),
     },
   };
   const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(modello)}:generateContent`, {
@@ -317,7 +320,7 @@ async function chiediGemini(system: string, utente: string, linkDaLeggere: strin
   if (c?.finishReason === "MAX_TOKENS") throw new Error("Le fonti erano troppo lunghe: prova con meno link.");
   const testo = (c?.content?.parts ?? []).map((x) => x.text ?? "").join("");
   try {
-    return JSON.parse(soloJson(testo)) as RispostaAi;
+    return JSON.parse(soloJson(testo)) as T;
   } catch {
     throw new Error("La risposta dell'AI non era leggibile: riprova.");
   }
@@ -328,7 +331,7 @@ async function chiediGemini(system: string, utente: string, linkDaLeggere: strin
  * Vercel non serve una chiave: si usa il token OIDC del progetto. Modello
  * cambiabile con AI_GATEWAY_MODELLO.
  */
-async function chiediGateway(system: string, utente: string): Promise<RispostaAi> {
+async function chiediGateway<T = RispostaAi>(system: string, utente: string, schema: object = SCHEMA_RISPOSTA, promemoria = PROMEMORIA_SCHEDA): Promise<T> {
   let token = process.env.AI_GATEWAY_API_KEY;
   if (!token) {
     try {
@@ -348,10 +351,10 @@ async function chiediGateway(system: string, utente: string): Promise<RispostaAi
         max_tokens: 16000,
         messages: [
           { role: "system", content: system },
-          { role: "user", content: `${utente}\n\nRispondi SOLO con un oggetto JSON con le chiavi "campi" (array di {"id","valore_json","fonte","citazione"}) e "note".` },
+          { role: "user", content: `${utente}\n\n${promemoria}` },
         ],
         ...(conSchema
-          ? { response_format: { type: "json_schema", json_schema: { name: "scheda", strict: true, schema: SCHEMA_RISPOSTA } } }
+          ? { response_format: { type: "json_schema", json_schema: { name: "risposta", strict: true, schema } } }
           : {}),
       }),
       signal: AbortSignal.timeout(120_000),
@@ -373,14 +376,14 @@ async function chiediGateway(system: string, utente: string): Promise<RispostaAi
   const c = dati.choices?.[0];
   if (c?.finish_reason === "length") throw new Error("Le fonti erano troppo lunghe: prova con meno link.");
   try {
-    return JSON.parse(soloJson(c?.message?.content ?? "")) as RispostaAi;
+    return JSON.parse(soloJson(c?.message?.content ?? "")) as T;
   } catch {
     throw new Error("La risposta dell'AI non era leggibile: riprova.");
   }
 }
 
 /** Claude (Anthropic), a pagamento: si attiva con AI_IMPORT=claude e ANTHROPIC_API_KEY. */
-async function chiediClaude(system: string, utente: string): Promise<RispostaAi> {
+async function chiediClaude<T = RispostaAi>(system: string, utente: string, schema: object = SCHEMA_RISPOSTA): Promise<T> {
   if (!process.env.ANTHROPIC_API_KEY) throw new Error("Manca la chiave ANTHROPIC_API_KEY su Vercel: l'importazione con l'AI non è ancora attiva.");
   const client = new Anthropic();
   const risposta = await client.beta.messages.create({
@@ -391,13 +394,13 @@ async function chiediClaude(system: string, utente: string): Promise<RispostaAi>
     fallbacks: "default",
     system,
     messages: [{ role: "user", content: utente }],
-    output_config: { effort: "medium", format: { type: "json_schema", schema: SCHEMA_RISPOSTA } },
+    output_config: { effort: "medium", format: { type: "json_schema", schema: schema as Record<string, unknown> } },
   });
   if (risposta.stop_reason === "refusal") throw new Error("L'AI non ha voluto elaborare queste fonti.");
   if (risposta.stop_reason === "max_tokens") throw new Error("Le fonti erano troppo lunghe: prova con meno link.");
   const testo = risposta.content.flatMap((b) => (b.type === "text" ? [b.text] : [])).join("");
   try {
-    return JSON.parse(testo) as RispostaAi;
+    return JSON.parse(testo) as T;
   } catch {
     throw new Error("La risposta dell'AI non era leggibile: riprova.");
   }
