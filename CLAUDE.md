@@ -439,8 +439,13 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   tratti. Metodo in `.claude/skills/accademia-giochi/SKILL.md`.
 - Voce registrata (22/11/2026): tutto il copione, 113 frasi su 113 (comuni,
   nucleo, memory, differenze, labirinto, corsa), riascoltate con whisper-1.
-  Gli altri giochi usano ancora la sintesi per le istruzioni: prima vanno
-  scritte nel copione. Motore SceltaMultipla rivisto per il movimento
+  Dal 27/11/2026 (Giorgia: «controlla soprattutto i giochi ancora con voci
+  robot») TUTTI i giochi: 1.214 frasi registrate, ricavate dal codice di ogni
+  gioco, riascoltate (whisper-1, per le sillabe gpt-4o-transcribe). La batteria
+  giochi fallisce se in partita un gioco parla con la sintesi del telefono:
+  una frase nuova nel codice = una riga nel copione + `npm run voce`.
+  voce-genera.ts manda alla voce i numeri in parole e le maiuscole in minuscolo
+  (l'id resta quello del testo vero). Motore SceltaMultipla rivisto per il movimento
   (opzioni che entrano, saltello, dondolio; stili in app/globals.css).
   Grafica (22/11/2026): nel guscio parla il viso vero di Mizi
   (public/mizi/mizi-faccia.webp), macchie pastello dietro al gioco, bottoni

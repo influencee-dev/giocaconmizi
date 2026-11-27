@@ -21,6 +21,8 @@ export interface Pezzo {
   etichetta?: string;
   contenuto?: ReactNode;
   descrizione?: string;
+  /** Cosa dice Mizi quando il pezzo si tocca, se non è l'etichetta (es. un'icona). */
+  voce?: string;
   /**
    * Valore ai fini della correttezza: due pezzi con lo stesso valore sono
    * intercambiabili. Serve quando la soluzione contiene pezzi identici alla
@@ -104,7 +106,8 @@ export function Ordina({ titolo, round, age, onProgress, onComplete, demo = fals
       const nuoviScelti = [...scelti, pezzo];
       setScelti(nuoviScelti);
       setDisponibili((precedenti) => precedenti.filter((p) => p.id !== pezzo.id));
-      if (pezzo.etichetta) parla(pezzo.etichetta);
+      const daDire = pezzo.voce ?? pezzo.etichetta;
+      if (daDire) parla(daDire);
       if (nuoviScelti.length === corrente.soluzione.length) {
         window.setTimeout(() => completa(nuoviScelti), 500);
       }
