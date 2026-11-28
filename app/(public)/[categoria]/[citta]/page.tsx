@@ -16,7 +16,9 @@ import { CENTRO_CITTA } from "@/lib/directory/coordinate-citta";
 
 /** Listing categoria + città, la pagina che conta per la SEO locale (Figma 01–03). */
 
-export const dynamicParams = false;
+// Niente dynamicParams = false: con la rigenerazione (revalidatePath/Tag) Next 15 risponde 404
+// (NoFallbackError) anche agli indirizzi veri. Gli indirizzi che non esistono li ferma notFound().
+export const dynamicParams = true;
 export const revalidate = 600;
 
 export function generateStaticParams() {

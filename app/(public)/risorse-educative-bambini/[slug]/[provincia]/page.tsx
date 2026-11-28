@@ -27,7 +27,9 @@ import {
  */
 
 export const revalidate = 600;
-export const dynamicParams = false;
+// Niente dynamicParams = false: con la rigenerazione (revalidatePath/Tag) Next 15 risponde 404
+// (NoFallbackError) anche agli indirizzi veri. Gli indirizzi che non esistono li ferma notFound().
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return listingRisorse(RISORSE).map((l) => ({ slug: l.categoria.slug, provincia: l.slug }));

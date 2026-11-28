@@ -14,7 +14,9 @@ import { Illustrazione } from "@/components/directory/Illustrazione";
 
 /** Pagina categoria nazionale della directory (Figma 07–09). */
 
-export const dynamicParams = false;
+// Niente dynamicParams = false: con la rigenerazione (revalidatePath/Tag) Next 15 risponde 404
+// (NoFallbackError) anche agli indirizzi veri. Gli indirizzi che non esistono li ferma notFound().
+export const dynamicParams = true;
 export const revalidate = 600;
 
 export function generateStaticParams() {
