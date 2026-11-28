@@ -538,18 +538,18 @@ const GUIDE_BREVI: Guida[] = [
     titolo: "Compiti a casa senza litigare: cosa funziona davvero",
     titoloBreve: "I compiti",
     descrizione:
-      "Perché i compiti diventano una guerra e come uscirne: il momento giusto, il ruolo del genitore (che non è fare i compiti), la tecnica dei pezzi piccoli e quando preoccuparsi.",
+      "Perché i compiti diventano una guerra e come uscirne: il momento giusto, il ruolo del genitore (che non è fare i compiti), i pezzi piccoli, i compiti delle vacanze di Natale e quando preoccuparsi.",
     rispostaBreve:
       "I litigi sui compiti calano quando cambiano tre cose: un orario fisso deciso insieme (non \"quando ti va\" né \"subito appena torni\"), il genitore vicino ma non addosso (presente all'inizio e alla fine, non su ogni esercizio), e i compiti lunghi spezzati in pezzi da 10-15 minuti con pause vere. Il genitore non è l'insegnante: se un compito è troppo difficile, la cosa giusta è scriverlo all'insegnante, non finirlo al posto del bambino.",
     etaMin: 6,
     etaMax: 11,
-    minutiLettura: 6,
-    aggiornata: "2026-09-26",
+    minutiLettura: 7,
+    aggiornata: "2026-11-28",
     sezioni: [
       {
         titolo: "Questo sito è nato dai compiti di un'estate",
         paragrafi: [
-          "Lo diciamo subito: Gioca con Mizi esiste perché nell'estate 2026 Domiziana non aveva voglia di fare i compiti, e sua mamma, Giorgia, per spronarla ha iniziato a giocarci insieme. Questa guida parte da lì.",
+          "Lo diciamo subito: Giocamizi esiste perché nell'estate 2026 Domiziana non aveva voglia di fare i compiti, e sua mamma, Giorgia, per spronarla ha iniziato a giocarci insieme. Questa guida parte da lì.",
         ],
       },
       {
@@ -571,6 +571,15 @@ const GUIDE_BREVI: Guida[] = [
         paragrafi: [
           "L'attenzione di un bambino di prima o seconda regge 10-15 minuti su un compito; in quarta o quinta 20-25. Oltre, il rendimento crolla e il nervosismo sale. Quindi: si spezza. Dieci minuti di matematica, cinque di pausa (movimento, non schermi: lo schermo non è una pausa, è un altro impegno per il cervello), poi la lettura.",
           "Per i più riluttanti funziona partire dal compito più facile: tre esercizi fatti in cinque minuti accendono il motore, e il compito odiato si affronta a motore caldo. E l'esercizio ripetitivo — tabelline, sillabe, calcoli a mente — si può spostare sul gioco: dieci minuti su un buon gioco valgono una scheda, con la metà della fatica emotiva.",
+        ],
+      },
+      {
+        // 28/11/2026 (routine delle 7:00, guide brevi): il pezzo che serve a dicembre.
+        titolo: "I compiti delle vacanze di Natale",
+        paragrafi: [
+          "Le vacanze di Natale sono corte e piene: feste, parenti, giorni che saltano. Lasciare tutti i compiti alla fine non funziona, e nemmeno farli tutti nei primi due giorni: il bambino arriva al rientro dopo due settimane senza aprire un libro. La via di mezzo è dividerli subito, il primo giorno di vacanza, in tante porzioni uguali: si contano i giorni «normali» (senza il 24, il 25, il 31 e il 1°) e si spalma il lavoro lì sopra.",
+          "Meglio la mattina, dopo colazione: venti-trenta minuti per i più piccoli, un'ora al massimo per quarta e quinta, e poi la giornata è libera. È la stessa regola dell'orario fisso del resto dell'anno: deciso una volta, non contrattato ogni giorno.",
+          "Tenete da parte gli ultimi tre o quattro giorni prima del rientro per ripassare con calma e preparare lo zaino, così la sera prima non diventa una corsa. E contate come compito anche la lettura libera: un libro scelto da lui, letto sul divano, allena più di una scheda fatta controvoglia.",
         ],
       },
       {
@@ -597,12 +606,23 @@ const GUIDE_BREVI: Guida[] = [
           "Meglio di no: segnalate al massimo che c'è qualcosa da ricontrollare. Gli errori servono all'insegnante per capire cosa riprendere in classe; un quaderno perfetto corretto dal genitore nasconde l'informazione.",
       },
       {
+        domanda: "Come organizzare i compiti delle vacanze di Natale?",
+        risposta:
+          "Il primo giorno di vacanza si dividono in porzioni uguali sui giorni normali, saltando il 24, il 25, il 31 e il 1°. Una porzione al giorno, la mattina, poi la giornata è libera; gli ultimi tre o quattro giorni prima del rientro servono a ripassare con calma.",
+      },
+      {
         domanda: "Quanto devono durare i compiti alle elementari?",
         risposta:
           "Un riferimento diffuso è 10 minuti per anno di scuola: 10-20 minuti in prima e seconda, fino a 50-60 in quinta. Se i tempi reali sono sistematicamente il doppio o il triplo, parlatene con l'insegnante.",
       },
     ],
-    giochi: ["tabelline", "unisci-le-sillabe", "leggi-e-rispondi", "l-orologio"],
+    giochi: ["tabelline", "unisci-le-sillabe", "leggi-e-rispondi", "l-orologio", "problemi-con-mizi"],
+    strumenti: [
+      { testo: "Esercizi di prima elementare", href: "/compiti-vacanze/prima-elementare", nota: "Matematica e italiano come giochi, per ripassare nelle vacanze." },
+      { testo: "Esercizi di seconda elementare", href: "/compiti-vacanze/seconda-elementare", nota: "I giochi fatti dagli argomenti di seconda, divisi per materia." },
+      { testo: "Esercizi di terza elementare", href: "/compiti-vacanze/terza-elementare", nota: "Tabelline, problemi, ortografia: dieci minuti al giorno." },
+      { testo: "Giochi per età", href: "/giochi", nota: "Tutti i giochi gratis e senza pubblicità, dai 3 ai 12 anni." },
+    ],
     foto: {
       scena:
         "Tavolo del soggiorno al pomeriggio. Un bambino di circa 9 anni fa i compiti tranquillo, con una piccola clessidra accanto al quaderno; il papà legge un libro a poca distanza, disponibile ma senza stare addosso. Luce calda, merenda su un piattino. Mizi è appoggiata alla pila dei libri. I quaderni non hanno testo leggibile.",
