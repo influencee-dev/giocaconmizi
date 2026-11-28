@@ -303,7 +303,7 @@ function Regolatore({
         type="button"
         onClick={() => onCambia(Math.max(min, valore - passo))}
         aria-label={`Meno ${etichetta}`}
-        className="h-10 w-10 rounded-full bg-crema text-xl font-extrabold text-notte"
+        className="h-11 w-11 touch-manipulation rounded-full bg-crema text-xl font-extrabold text-notte"
         style={{ minHeight: "2.5rem", minWidth: "2.5rem" }}
       >
         −
@@ -313,7 +313,7 @@ function Regolatore({
         type="button"
         onClick={() => onCambia(Math.min(max, valore + passo))}
         aria-label={`Più ${etichetta}`}
-        className="h-10 w-10 rounded-full bg-crema text-xl font-extrabold text-notte"
+        className="h-11 w-11 touch-manipulation rounded-full bg-crema text-xl font-extrabold text-notte"
         style={{ minHeight: "2.5rem", minWidth: "2.5rem" }}
       >
         +

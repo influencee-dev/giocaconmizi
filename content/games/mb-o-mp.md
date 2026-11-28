@@ -23,6 +23,13 @@ Un disegno e una parola con un buco: ta__uro, ca__ana, o__rello. Il bambino tocc
 - Ripetete insieme la regola come una filastrocca: «prima di B e P, la M sta lì».
 - Scrivete su un foglio tre parole viste nel gioco: una partita vale più se poi la mano le scrive.
 
+## Parole con MB e MP
+
+Prima di B e di P si scrive sempre la M. Qualche parola da leggere e da scrivere insieme:
+
+- **Con MB:** bambino, bambola, gamba, ombrello, tamburo, ambulanza, bomba
+- **Con MP:** campo, campana, lampada, lampone, pompiere, tempo, sempre, compito
+
 ## Domande frequenti
 
 **Qual è la regola di MB e MP?**

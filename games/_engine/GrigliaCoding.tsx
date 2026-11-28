@@ -200,10 +200,11 @@ export function GrigliaCoding({
       stelle={3}
       onAncora={ricomincia}
     >
-      <div className="flex h-full w-full max-w-md flex-col items-center justify-center gap-4">
-        {/* La griglia */}
+      <div className="flex h-full w-full max-w-md flex-col items-center justify-center gap-4 basso:gap-2">
+        {/* La griglia: sugli schermi bassi non supera un terzo dell'altezza, così
+            programma, comandi e «Via» restano in vista senza scorrere. */}
         <div
-          className="grid w-full gap-1 rounded-morbido bg-white p-2"
+          className="grid w-full gap-1 rounded-morbido bg-white p-2 basso:max-w-[33dvh] basso:p-1.5"
           style={{ gridTemplateColumns: `repeat(${livello.lato}, minmax(0, 1fr))` }}
         >
           {celle.map(([x, y]) => {
@@ -236,12 +237,12 @@ export function GrigliaCoding({
         </div>
 
         {/* Il programma composto */}
-        <div className="flex min-h-14 w-full flex-wrap items-center justify-center gap-1 rounded-morbido border-4 border-dashed border-crema-scuro bg-white/60 p-2">
+        <div className="flex min-h-14 w-full flex-wrap items-center justify-center gap-1 rounded-morbido border-4 border-dashed border-crema-scuro bg-white/60 p-2 basso:min-h-12 basso:p-1.5">
           {programma.length === 0 ? (
             <span className="text-notte-tenue">Il programma è vuoto</span>
           ) : (
             programma.map((c, i) => (
-              <span key={i} className="rounded bg-viola px-2 py-1 text-lg font-bold text-white">
+              <span key={i} className="rounded bg-viola px-2 py-1 text-lg font-bold text-white basso:py-0.5 basso:text-base">
                 {ETICHETTE[c]}
               </span>
             ))
@@ -251,7 +252,7 @@ export function GrigliaCoding({
           )}
         </div>
 
-        <p className="text-sm font-bold text-notte-tenue">
+        <p className="text-sm font-bold leading-none text-notte-tenue">
           {programma.length} / {massimo} comandi
         </p>
 
@@ -264,7 +265,7 @@ export function GrigliaCoding({
               onClick={() => aggiungi(comando)}
               disabled={inEsecuzione || programma.length >= massimo}
               aria-label={NOMI[comando]}
-              className="rounded-morbido border-4 border-crema-scuro bg-white px-4 py-3 text-xl font-extrabold text-notte disabled:opacity-40"
+              className="min-h-12 touch-manipulation rounded-morbido border-4 border-crema-scuro bg-white px-4 py-3 text-xl font-extrabold text-notte disabled:opacity-40 basso:px-3 basso:py-1.5 basso:text-lg"
             >
               {ETICHETTE[comando]}
             </button>
@@ -276,7 +277,7 @@ export function GrigliaCoding({
             type="button"
             onClick={esegui}
             disabled={inEsecuzione || programma.length === 0}
-            className="rounded-bolla bg-rosa px-8 py-4 text-xl font-extrabold text-white disabled:opacity-40"
+            className="min-h-12 touch-manipulation rounded-bolla bg-rosa-forte px-8 py-4 text-xl font-extrabold text-white disabled:opacity-40 basso:py-2.5"
           >
             ▶ Via
           </button>
@@ -284,7 +285,7 @@ export function GrigliaCoding({
             type="button"
             onClick={reimposta}
             disabled={inEsecuzione}
-            className="rounded-bolla border-2 border-crema-scuro bg-white px-6 py-4 text-lg font-bold text-notte-tenue disabled:opacity-40"
+            className="min-h-12 touch-manipulation rounded-bolla border-2 border-crema-scuro bg-white px-6 py-4 text-lg font-bold text-notte-tenue disabled:opacity-40 basso:py-2.5"
           >
             Cancella
           </button>

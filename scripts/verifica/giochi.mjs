@@ -613,22 +613,28 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   const registro = readFileSync("games/registry.ts", "utf8");
   const vivi = [...registro.matchAll(/slug: "([^"]+)"[^}]*?ageMin: (\d+)[^}]*?status: "live"/g)].map((x) => ({ slug: x[1], eta: Number(x[2]) }));
   const fermi = [];
+  // Voce robot (27/11/2026, Giorgia: «controlla soprattutto i giochi ancora con
+  // voci robot»): ogni frase detta in partita deve avere la sua registrazione.
+  const robot = [];
   const coda = [...vivi];
   await Promise.all(Array.from({ length: 6 }, async () => {
     while (coda.length) {
       const g = coda.shift();
       const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
-      await ctx.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+      await ctx.addInitScript(() => { window.__voceMizi = []; try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
       const pg = await ctx.newPage();
       let rotto = 0;
       pg.on("pageerror", () => rotto++);
       await pg.goto(`${BASE}/giochi/${g.slug}/gioca?eta=${g.eta}&demo=1`, { waitUntil: "domcontentloaded" });
       const festa = await pg.locator("[data-festa]").waitFor({ timeout: 120000 }).then(() => true, () => false);
       if (!festa || rotto) fermi.push(`${g.slug}${rotto ? " (errore JS)" : ""}`);
+      const senzaFile = await pg.evaluate(() => (window.__voceMizi || []).filter((v) => !v.registrata).map((v) => v.testo)).catch(() => []);
+      for (const t of new Set(senzaFile)) robot.push(`${g.slug}: «${t}»`);
       await ctx.close();
     }
   }));
   ok(`tutti i ${vivi.length} giochi del registro arrivano da soli alla festa`, vivi.length >= 38 && fermi.length === 0, fermi.join(", "));
+  ok("voce: in partita nessun gioco parla con la sintesi del telefono (ogni frase è nel copione e registrata)", robot.length === 0, robot.slice(0, 8).join(" | "));
 
   const copione = JSON.parse(readFileSync("content/voce-mizi.json", "utf8"));
   const nucleo = new Set(copione.frasi.nucleo ?? []);
@@ -1156,6 +1162,56 @@ ok("og:image di una città", await ogServita("/feste/milano"));
   const conFigure = esiti.filter((e) => ["i-suoni-difficili", "mb-o-mp", "causa-ed-effetto"].includes(e.slug));
   ok("seconda elementare: i disegni dei giochi si caricano", conFigure.every((e) => e.figureViste > 0 && e.figureRotte === 0), conFigure.map((e) => `${e.slug} ${e.figureViste}/${e.figureRotte}`).join(", "));
   ok("seconda elementare: nessun bottone sotto i 56 px", esiti.every((e) => e.piccoli === 0), esiti.filter((e) => e.piccoli).map((e) => e.slug).join(", "));
+}
+
+
+// Giro di tutti i giochi del 27/11/2026.
+// 1) Il motore «metti in ordine» (puzzle, sillabe, numeri, robot, sequenze, suoni):
+//    due dita nello stesso istante su due pezzi ne facevano sparire uno e la
+//    partita non si finiva più; chi sbagliava sempre non riceveva mai aiuto.
+//    Il bambino sbadato tocca a caso (ogni tanto due pezzi insieme) e segue il
+//    pezzo che dondola quando arriva: deve arrivare alla festa.
+{
+  for (const slug of ["puzzle-facile", "numeri-in-ordine"]) {
+    const ctx = await b.newContext({ viewport: { width: 390, height: 664 }, isMobile: true, hasTouch: true });
+    await ctx.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+    const pg = await ctx.newPage();
+    const prima = erroriJs;
+    pg.on("pageerror", () => erroriJs++);
+    await pg.goto(`${BASE}/giochi/${slug}/gioca?eta=6`, { waitUntil: "networkidle" });
+    let tocchi = 0, aiutiVisti = 0;
+    const t0 = Date.now();
+    while (Date.now() - t0 < 150000 && !(await pg.locator("[data-festa]").isVisible().catch(() => false))) {
+      const aiuto = pg.locator('[data-aiuto-pezzo="si"]');
+      if (await aiuto.count()) { aiutiVisti++; await aiuto.first().tap(); }
+      else if (tocchi % 5 === 2) await pg.evaluate(() => { const e = [...document.querySelectorAll("[data-pezzo]")]; e[0]?.click(); e[1]?.click(); });
+      else { const pezzi = await pg.locator("[data-pezzo]").all(); if (pezzi.length) await pezzi[Math.floor(Math.random() * pezzi.length)].tap(); }
+      tocchi++;
+      await pg.waitForTimeout(250);
+    }
+    ok(`${slug}: lo sbadato con due dita arriva alla festa, con l'aiuto del pezzo che dondola`,
+      (await pg.locator("[data-festa]").isVisible().catch(() => false)) && aiutiVisti > 0 && erroriJs === prima, `${tocchi} tocchi, ${aiutiVisti} aiuti`);
+    await ctx.close();
+  }
+}
+
+// 2) Sul telefono con le barre del browser aperte (390×664) le risposte dei
+//    giochi a risposta stanno in vista senza scorrere: prima le ultime due
+//    finivano sotto il bordo e a tre anni non si sa che si può scorrere.
+{
+  const ctx = await b.newContext({ viewport: { width: 390, height: 664 }, isMobile: true, hasTouch: true });
+  await ctx.addInitScript(() => { try { localStorage.setItem("mizi.form-proposto-2", "1"); } catch {} });
+  const pg = await ctx.newPage();
+  const fuori = [];
+  for (const slug of ["abbina-i-colori", "trova-la-forma", "le-parti-della-pianta", "l-orologio", "salvadanaio", "puzzle-facile", "labirinto-a-blocchi", "colora-con-mizi"]) {
+    await pg.goto(`${BASE}/giochi/${slug}/gioca?eta=6`, { waitUntil: "networkidle" });
+    await pg.waitForTimeout(900);
+    const sotto = await pg.evaluate(() => [...document.querySelectorAll("[data-campo-di-gioco] button")]
+      .filter((e) => e.offsetWidth > 0 && e.getBoundingClientRect().bottom > innerHeight + 1 && !e.disabled).length);
+    if (sotto) fuori.push(`${slug} (${sotto})`);
+  }
+  ok("telefono 390×664: nei giochi a risposta e nei laboratori principali tutti i tasti sono in vista", fuori.length === 0, fuori.join(", "));
+  await ctx.close();
 }
 
 await b.close();

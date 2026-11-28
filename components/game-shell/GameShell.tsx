@@ -74,7 +74,7 @@ export function GameShell({
     // z-50: lo schermo di gioco copre tutto, banner informativo compreso —
     // l'avviso è per i genitori, non deve comparire sopra un gioco.
     <div className="fixed inset-0 z-50 flex flex-col bg-crema">
-      <header className="flex items-center justify-between gap-3 px-4 py-3">
+      <header className="flex items-center justify-between gap-3 px-4 py-3 basso:py-1">
         <Link
           href="/giochi"
           aria-label="Esci dal gioco"
@@ -109,22 +109,24 @@ export function GameShell({
         type="button"
         onClick={ripeti}
         aria-label="Ripeti l'istruzione a voce"
-        className="mx-4 flex items-center gap-3 text-left"
+        className="mx-4 flex items-center gap-3 text-left basso:gap-2"
       >
         {/* Il viso vero di Mizi (public/mizi), non la faccina stilizzata: è lei che parla. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/mizi/mizi-faccia.webp" alt="" aria-hidden width={64} height={64} className="h-16 w-16 shrink-0 rounded-full shadow-sm" />
-        <span className="fumetto relative flex-1 rounded-morbido border-2 border-crema-scuro bg-white px-4 py-3">
-          <span className="block text-lg font-extrabold leading-snug text-notte">
+        <img src="/mizi/mizi-faccia.webp" alt="" aria-hidden width={64} height={64} className="h-16 w-16 shrink-0 rounded-full shadow-sm basso:h-11 basso:w-11" />
+        <span className="fumetto relative flex-1 rounded-morbido border-2 border-crema-scuro bg-white px-4 py-3 basso:px-3 basso:py-1.5">
+          <span className="block text-lg font-extrabold leading-snug text-notte basso:text-base basso:leading-tight">
             {istruzione}
           </span>
         </span>
       </button>
 
       {/* Se il gioco è più alto dello schermo si scorre: un bottone
-          irraggiungibile è un gioco che "non funziona". */}
+          irraggiungibile è un gioco che "non funziona". Sugli schermi bassi
+          (variante `basso`, app/globals.css: il telefono con le barre del
+          browser) barra, fumetto e margini si stringono: lo spazio va al gioco. */}
       {/* Non un secondo <main>: la pagina ne ha già uno. */}
-      <div className="campo-gioco flex-1 overflow-y-auto p-4" data-campo-di-gioco>
+      <div className="campo-gioco flex-1 overflow-y-auto p-4 basso:p-2.5" data-campo-di-gioco>
         <div className="flex min-h-full items-center justify-center">{children}</div>
       </div>
 

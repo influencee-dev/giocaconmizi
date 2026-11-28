@@ -92,7 +92,8 @@ function DisegnoMoneta({ valore, lato = 64 }: { valore: Moneta; lato?: number })
   );
 }
 
-const LODI = ["Giusto! Mizi ha comprato", "Perfetto! Ecco", "Evviva! Pagato", "Esatto! Tutto tuo"];
+// Lodi che vanno bene con ogni oggetto, maschile o femminile («Tutto tuo la palla» no).
+const LODI = ["Giusto! Mizi ha comprato", "Perfetto! Ecco", "Evviva! Hai pagato", "Esatto! Ora Mizi ha"];
 
 export default function Game({ onProgress, onComplete, demo = false }: GameProps) {
   const round = useMemo(() => {

@@ -320,7 +320,8 @@ della skill seo-geo-aeo-manager. Non toccare content/guide/ né content/piano-ed
 Prima di iniziare importa le foto arrivate in «99 Immagini pronte»; se il
 contenuto di domani avrà bisogno di foto, prenotale oggi (`npm run foto:prenota`).
 Prima leggi le note recenti in «0 Bacheca» e le richieste aperte in
-«0 Richieste di Giorgia»: una richiesta aperta viene PRIMA della rotazione
+«0 Richieste di Giorgia»: una richiesta aperta, o una nota «Vnn INPUT COMPLETI» di
+ChatGPT senza risposta (vedi «Libri per Amazon KDP»), viene PRIMA della rotazione
 (se è piccola si fa e basta; se è grande, se ne fa un pezzo e lo si dice).
 ATTIVITÀ NUOVE OGNI GIORNO (Giorgia, 23/11/2026: «ho bisogno di aggiungere
 più attività ogni giorno»): almeno 8 schede nuove al giorno, sempre vere e
@@ -438,8 +439,13 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   tratti. Metodo in `.claude/skills/accademia-giochi/SKILL.md`.
 - Voce registrata (22/11/2026): tutto il copione, 113 frasi su 113 (comuni,
   nucleo, memory, differenze, labirinto, corsa), riascoltate con whisper-1.
-  Gli altri giochi usano ancora la sintesi per le istruzioni: prima vanno
-  scritte nel copione. Motore SceltaMultipla rivisto per il movimento
+  Dal 27/11/2026 (Giorgia: «controlla soprattutto i giochi ancora con voci
+  robot») TUTTI i giochi: 1.214 frasi registrate, ricavate dal codice di ogni
+  gioco, riascoltate (whisper-1, per le sillabe gpt-4o-transcribe). La batteria
+  giochi fallisce se in partita un gioco parla con la sintesi del telefono:
+  una frase nuova nel codice = una riga nel copione + `npm run voce`.
+  voce-genera.ts manda alla voce i numeri in parole e le maiuscole in minuscolo
+  (l'id resta quello del testo vero). Motore SceltaMultipla rivisto per il movimento
   (opzioni che entrano, saltello, dondolio; stili in app/globals.css).
   Grafica (22/11/2026): nel guscio parla il viso vero di Mizi
   (public/mizi/mizi-faccia.webp), macchie pastello dietro al gioco, bottoni
@@ -584,6 +590,29 @@ guardare gli ultimi commit (`git log --oneline -10`) per non ripetersi.
   "00 PROMPT UNICO · Foto sito Giocamizi" su Drive). I WebP vanno in
   `public/immagini/<file>-<larghezza>.webp`; finché mancano si vede Mizi
   su fondo pastello. Brand: "Giocamizi" (tagline Gioca con Mizi).
+
+## Libri per Amazon KDP (22/11/2026, docs/libri-kdp.md)
+- Collana di libri da colorare (8,5 × 8,5 pollici, 32 pagine, interno B/N, copertina a colori). Fonte unica su
+  Drive: 1 Progetti → «02 Editoria Giocamizi · Amazon e Libretti» (standard globale, cartelle V01, V02…).
+  Master delle storie in `docs/libri-master-storia.md` (ogni volume parte da uno spunto educativo o da un
+  evento), brief per ChatGPT in `docs/libri-brief-chatgpt.md`, procedura in `docs/libri-kdp.md`: leggerli
+  PRIMA di toccare un libro.
+- Un volume = una scheda `content/libri/<codice>.json` (modello: `_modello.json`; dati comuni a tutti i
+  volumi in `_collana.json`) + `npm run libro -- <codice>`: fa interno, copertina, ingrandimento, controlli
+  e report in `/tmp/libri/<codice>/out`. Si ferma da solo se manca un file o un dato non è definitivo:
+  un arresto non si aggira, si scrive in Bacheca «Vnn FERMO».
+- Parte da sola: se in «0 Bacheca» c'è una nota «… · ChatGPT · Vnn INPUT COMPLETI» senza risposta di
+  Claude, chi lavora (anche la routine delle 7:00) segue i passi di `docs/libri-kdp.md` e chiude con la
+  nota «Vnn REVIEW» o «Vnn FERMO». Viene prima della rotazione, come una richiesta di Giorgia.
+- PDF e immagini dei libri non si mettono nel repo (è pubblico): cartella di lavoro e Drive. Eccezione: la
+  copertina in WebP per la vetrina `/libri`, che è pubblica comunque.
+- Si comprano SOLO su Amazon (Giorgia, 27/11/2026): `/libri` presenta i volumi (`vetrina` nella scheda) e
+  mostra «Compralo su Amazon» quando c'è il link vero, altrimenti «In arrivo su Amazon». Il sito non vende
+  libri né PDF.
+- Stile fisso: firma «Un libro di Giorgia Palazzo e Domiziana Bonaccorso», titolo in Londrina Solid,
+  testi in Roboto, interno in Poppins, foto e storia sulla quarta. Si cambia solo su decisione di Giorgia.
+- I vecchi `content/libretti/` (cinque libretti a colori per il sito) sono un'impostazione precedente:
+  restano come testi, ma per i libri vale la collana KDP.
 
 ## In attesa (cose ferme lato Giorgia)
 - Immagini AI di Mizi per gli 11 slot in `public/mizi/` (lib/foto/immagini.ts)

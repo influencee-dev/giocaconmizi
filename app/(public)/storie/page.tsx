@@ -1,6 +1,7 @@
 import { TestataPagina } from "@/components/vetrina";
 import { ScenaStorie } from "@/components/illustrazioni";
 import type { Metadata } from "next";
+import { titoloPagina } from "@/lib/seo/seo";
 import Link from "next/link";
 import { tutteLeStorie } from "@/lib/contenuti/content";
 import { Contenitore, Griglia, TitoloSezione } from "@/components/ui";
@@ -8,9 +9,9 @@ import { JsonLd, jsonLdBreadcrumb, jsonLdElenco } from "@/components/seo/JsonLd"
 import { CardStoria } from "@/components/storie/CardStoria";
 
 export const metadata: Metadata = {
-  title: "Storie per bambini da leggere",
+  title: titoloPagina("Favole della buonanotte brevi: storie per bambini da leggere"),
   description:
-    "Storie brevi per bambini da leggere in stampatello, minuscolo o corsivo. Gratis, con il pulsante Ascolta.",
+    "Favole della buonanotte e storie brevi per bambini, da 2 a 7 minuti, in stampatello, minuscolo o corsivo. Gratis, con il pulsante Ascolta.",
   alternates: { canonical: "/storie" },
 };
 
@@ -22,23 +23,26 @@ const caratteri = [
 
 export default function StoriePage() {
   const storie = tutteLeStorie();
+  const minimo = Math.min(...storie.map((s) => s.minutes));
+  const massimo = Math.max(...storie.map((s) => s.minutes));
 
   return (
     <Contenitore largo className="pb-10 pt-8">
       <JsonLd data={jsonLdBreadcrumb([{ nome: "Storie", percorso: "/storie" }])} />
       <JsonLd
         data={jsonLdElenco(
-          "Storie per bambini da leggere — Gioca con Mizi",
+          "Favole della buonanotte e storie per bambini da leggere — Gioca con Mizi",
           storie.map((s) => ({ nome: s.title, percorso: `/storie/${s.slug}` })),
         )}
       />
       <TestataPagina occhiello="Da leggere insieme" tono="viola" foto="S-01" ripiego={<ScenaStorie />}>
         <h1 className="text-3xl font-extrabold text-notte sm:text-4xl">
-          Storie da leggere
+          Favole della buonanotte e storie da leggere
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-notte-tenue">
-          Un testo, tre caratteri: stampatello maiuscolo per chi inizia, minuscolo
-          per la prima elementare, corsivo per la seconda. Con il pulsante Ascolta.
+          {storie.length} storie brevi per bambini, da {minimo} a {massimo} minuti di lettura, da
+          leggere anche prima di dormire. Un testo, tre caratteri: stampatello maiuscolo per chi
+          inizia, minuscolo per la prima elementare, corsivo per la seconda. Con il pulsante Ascolta.
         </p>
       </TestataPagina>
 

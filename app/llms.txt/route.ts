@@ -118,6 +118,7 @@ ${listingRisorse(RISORSE).map((l) => `  - [${l.categoria.nome} a ${l.provincia} 
 - [Video tutorial di Mizi](${url("/tutorial")}): brevi video con sottotitoli e trascrizione in cui Mizi spiega come usare Giocamizi, per le attività e per le famiglie.
 ${TUTORIAL.map((t) => `  - [${t.titolo}](${url(percorsoTutorial(t))}): ${t.rispostaBreve}`).join("\n")}
 ${TEST_GENITORI_PUBBLICO ? `- [${TEST_GENITORI.titolo}](${url(TEST_GENITORI.percorso)}): ${TEST_GENITORI.descrizione} Non è un test psicologico validato e non fa diagnosi; le risposte restano nel browser di chi compila.\n` : ""}- [Per le mamme](${url("/per-le-mamme")}): la rete delle mamme — associazioni, community locali, gruppi d'ascolto e locali family-friendly con nursery o area giochi. Inserimento gratuito su segnalazione.
+- [I libri di Mizi](${url("/libri")}): albi illustrati da leggere e colorare per bambini dai 3 ai 7 anni, con una storia di Mizi in 12 scene, attività e domande per i grandi. Si comprano solo su Amazon, in versione cartacea.
 - [Chi siamo](${url("/chi-siamo")})
 - [Privacy](${url("/privacy")}) · [Cookie](${url("/cookie")})
 `;

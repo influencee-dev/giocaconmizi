@@ -76,6 +76,15 @@
 // aperte fanno feste ma senza date recenti: La Giostra di Giocla (Salerno),
 // Disneylandia, Obabaluba, Les Enfants (Siracusa), AttivaMente Lab, Baby Space
 // (Novara), Spazio Bimbi (Treviso): riprovare più avanti.
+// Il 28/11/2026: Campi Bisenzio (solido solo Hidron, via di Gramignano, con
+// listino compleanni 2026: si apre col secondo locale); Cologno Monzese (Il
+// Passatempo, Giungla Park, Divertilandia: siti senza date 2025/2026); Empoli
+// (Jungle Empoli senza date; Festilandia è a Vinci); Mazara del Vallo, Monopoli
+// (un locale, senza date); Paderno Dugnano, Aversa, Campobasso, Acireale,
+// Chioggia (solo social o elenchi); Sesto Fiorentino, Rivoli, Sassuolo (nessun
+// locale in città); Imperia (parco a Pontedassio); Cascina (già sotto Pisa).
+// Rieti: ancora un solo locale. Da provare: Vibo Valentia, Nuoro, Gorizia,
+// Belluno, Sondrio.
 // COME SI VERIFICA: i siti dei locali NON si aprono dalle sessioni (la rete
 // ammette solo un elenco di siti). Si leggono con la ricerca web limitata al
 // dominio ufficiale del locale (allowed_domains): è il metodo usato dall'inizio.
@@ -2206,12 +2215,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "como",
     citta: "Como",
-    aggiornata: "2026-11-03",
+    aggiornata: "2026-11-28",
     rispostaBreve: "A Como la festa di compleanno per bambini più semplice da organizzare è al Kids Park, un parco giochi al coperto di circa 1.000 m² dentro il centro Driver, con playground su due piani e un'area per i bimbi da 1 a 3 anni: la sala è riservata per 3 ore e la tavola viene apparecchiata, ma dall'esterno si può portare solo la torta. Tra Como e Varese, a Binago, c'è anche Il Villaggio di Piedone, con un pacchetto che comprende sala privata decorata, merenda, torta e accesso ai giochi.",
     intro: "A Como i compleanni dei bambini si fanno soprattutto nei parchi giochi al coperto, che con il clima del lago sono una sicurezza in ogni stagione. In città c'è un grande parco con sale per le feste; poco fuori, verso Varese, un altro parco propone pacchetti con merenda e torta già compresi.",
     locali: [
       { nome: "Kids Park Como", zona: "Como, dentro il centro Driver (via Pasquale Paoli)", tipo: "parco giochi al coperto", descrizione: "Parco giochi al coperto di circa 1.000 mq dentro il centro Driver, a Como, per bambini fino a 12 anni. Ci sono grandi playground a percorsi, una discesa con i gommoni, moto e macchinine elettriche in pista, un'area per i calci di rigore e uno spazio per i bimbi da 1 a 3 anni. Per il compleanno la sala è riservata per 3 ore con la tavola apparecchiata; cibo e bevande si ordinano al parco, da fuori si porta solo la torta. Calze antiscivolo obbligatorie e almeno un adulto accompagnatore.", sito: "https://www.kidsparkcomo.it/" },
       { nome: "Il Villaggio di Piedone", zona: "Binago, tra Como e Varese", tipo: "parco giochi al coperto con gonfiabili", descrizione: "Parco giochi al coperto in via Luigi Boffi, a Binago, tra Como e Varese, per bambini da 0 a 14 anni, aperto dal venerdì alla domenica. C'è un playground alto 7 metri con percorsi, ponti tibetani, scivoli e cannoni ad aria, due gonfiabili, una pista per tricicli e un'area per i bimbi fino a 3 anni. La festa più scelta comprende sala privata addobbata, torta di compleanno, merenda e tutti i giochi; si fanno anche feste a tema e giropizza il sabato sera. Calze antiscivolo obbligatorie per i bambini. Ci sono bar, ristorante e parcheggio gratuito.", sito: "https://ilvillaggiodipiedone.com/" },
+      { nome: "Teatro Sociale di Como", zona: "Como, centro storico", tipo: "teatro per bambini", descrizione: "Teatro storico nel centro di Como, sede di AsLiCo, che ogni anno ha una Stagione Famiglie con spettacoli la domenica pomeriggio. Nella stagione 2026/27 ci sono Winnie the Pooh dai 3 anni, Pinocchio dai 5 anni per i 200 anni dalla nascita di Collodi, Electric Dream su Alessandro Volta dagli 8 anni e due recite per famiglie del progetto Opera domani. Per Pinocchio, nel 2026, i biglietti partono da 8 €. Ci sono anche il concerto partecipativo «Coccole» per i bambini da 0 a 3 anni e una visita al teatro per i 6-10 anni.", sito: "https://teatrosocialecomo.it/", festa: false },
     ],
     faq: [
       { domanda: "Dove si festeggia un compleanno per bambini a Como?", risposta: "In città al Kids Park Como, dentro il centro Driver, con sala riservata per 3 ore; poco fuori, a Binago, al Villaggio di Piedone, con un pacchetto che comprende sala, merenda e torta." },
@@ -2240,12 +2250,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "lucca",
     citta: "Lucca",
-    aggiornata: "2026-11-04",
+    aggiornata: "2026-11-28",
     rispostaBreve: "A Lucca la festa di compleanno per bambini si fa spesso in pizzeria o al ristorante con l'area giochi: da Mara Meo, a Lammari, c'è un locale feste con stanza riservata e buffet nel pomeriggio, con le pulizie comprese, mentre al Ristorante La Corte di Santa Maria a Colle si festeggia in un gazebo affacciato sull'area giochi, con buffet di pizza. Chiedete sempre cosa comprende il pacchetto e le regole sulla torta.",
     intro: "A Lucca e dintorni il compleanno dei bambini si fa soprattutto dove si mangia bene e si gioca intorno: pizzerie e ristoranti con una stanza o un gazebo per la festa, spazi all'aperto e un buffet pensato per i bambini. Sono a pochi minuti dal centro, verso Capannori e verso le colline.",
     locali: [
       { nome: "Mara Meo", zona: "Lammari (Capannori), alle porte di Lucca", tipo: "pizzeria con sala feste", descrizione: "Pizzeria a Lammari, nel comune di Capannori, alle porte di Lucca, con altri due locali a Lucca e a Coreglia. Organizza feste di compleanno pomeridiane per bambini con stanza riservata, buffet, torta e pulizie comprese: tre pacchetti fino a 15 bambini, con un supplemento per ogni bambino in più; il più grande include il campino per calcio, pallavolo o giochi. L'animazione con giochi di squadra, baby dance e laboratori si aggiunge a parte. I prodotti sono certificati AIC e AILI. Alla prenotazione si chiede un acconto.", sito: "https://www.marameo-lucca.it/" },
       { nome: "Ristorante La Corte", zona: "Santa Maria a Colle, Lucca", tipo: "ristorante, spazi all'aperto con giochi", descrizione: "Ristorante di cucina toscana a Santa Maria a Colle, vicino a Lucca, in un ampio parco verde. Le feste di compleanno dei bambini si fanno nel gazebo che si affaccia sull'area giochi: parco giochi per i più piccoli, campo da calcio e scivolo gonfiabile per i più grandi. Le feste si fanno nei giorni feriali o in date da concordare. Per i ragazzi dai 12 ai 17 anni c'è la pizzata serale con giro pizza e bibite, e il ristorante può occuparsi della torta. Il listino dei pacchetti si chiede al ristorante.", sito: "https://www.ristorantelacortedadino.com/" },
+      { nome: "Teatro del Giglio Giacomo Puccini", zona: "Lucca, piazza del Giglio", tipo: "teatro per bambini", descrizione: "Teatro di tradizione nel centro storico di Lucca, con una stagione per ragazzi e famiglie accanto al cartellone «Teatro e Scuola». Nella stagione 2025/26 ha messo in scena spettacoli pomeridiani come «Pimpa - Il musical a pois» e «Piccolo Orso e la Montagna di ghiaccio»; il programma mescola prosa, teatro musicale e circo. Gli spettacoli per le classi hanno repliche al mattino e si prenotano con il modulo online. Il teatro ha anche un coro di voci bianche, con audizioni a settembre.", sito: "https://www.teatrodelgigliogiacomopuccini.it/it/", festa: false },
     ],
     faq: [
       { domanda: "Dove si festeggia un compleanno per bambini a Lucca?", risposta: "In pizzeria o al ristorante con l'area giochi: da Mara Meo a Lammari, con stanza riservata e buffet, o al Ristorante La Corte di Santa Maria a Colle, con il gazebo sull'area giochi all'aperto." },
@@ -2452,12 +2463,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "imola",
     citta: "Imola",
-    aggiornata: "2026-11-10",
+    aggiornata: "2026-11-28",
     rispostaBreve: "A Imola la festa di compleanno per bambini si fa da Coccolandia, un parco giochi al coperto con gonfiabile, tappeti elastici e salette per le feste, oppure al museo con «Buon compleanno al Museo» dei Musei civici, per bambini dai 6 ai 12 anni. Per il museo bisogna prenotare almeno 15 giorni prima: conviene muoversi presto.",
     intro: "A Imola ci sono due proposte al coperto adatte a ogni stagione: il parco giochi per i più piccoli e il laboratorio al museo per chi va già a scuola. Conviene prenotare con anticipo per il fine settimana.",
     locali: [
       { nome: "Coccolandia Imola", zona: "Imola, via Calamelli", tipo: "parco giochi al coperto con salette per le feste", descrizione: "Associazione con un parco giochi al chiuso in via Calamelli, a Imola. Per i bambini da 1 a 12 anni ci sono un gonfiabile grande, un playground, quattro tappeti elastici e un campetto multigioco; per quelli da 1 a 3 anni un'area baby con gonfiabile e playground. È aperto tutti i giorni dalle 15.30 alle 19. Per i compleanni ci sono salette con accesso all'area giochi: il personale allestisce la sala con il tema e i colori scelti, fornisce le stoviglie e la pulizia finale è compresa.", sito: "https://www.coccolandiaimola.it", instagram: "https://www.instagram.com/coccolandiaimola/" },
       { nome: "Imola Musei, Buon compleanno al Museo", zona: "Imola, centro storico", tipo: "museo con laboratorio per feste di compleanno", descrizione: "Festa di compleanno nei musei civici di Imola, al Museo San Domenico (via Sacchi 4) o a Palazzo Tozzoni (via Garibaldi 18), per bambini dai 6 ai 12 anni. Si sceglie tra diverse proposte e un operatore didattico guida i giochi; si possono invitare fino a 24 amici. Si festeggia il venerdì, il sabato o la domenica pomeriggio e la festa dura due ore. Nelle proposte 2026 il costo è di 110 euro fino a 17 partecipanti e di 150 euro da 18 a 25. Si prenota almeno 15 giorni prima, per email o per telefono.", sito: "https://imolamusei.it/", },
+      { nome: "Teatro dell'Osservanza – Favole", zona: "Imola, via Venturini", tipo: "teatro per bambini", descrizione: "Al Teatro dell'Osservanza, in via Venturini a Imola, il Teatro Stignani organizza con Accademia Perduta/Romagna Teatri la rassegna «Favole all'Osservanza». La stagione 2026/27 va dal 22 novembre 2026 al 21 marzo 2027, con 8 spettacoli per tutte le età, di domenica. Nella stagione 2025/26 il biglietto era unico, a 5 €, per tutte le età e tutti i settori. I biglietti si comprano online su Vivaticket o alla biglietteria dell'Osservanza nei giorni di spettacolo.", sito: "https://www.teatrostignani.it/", festa: false },
     ],
     faq: [
       { domanda: "C'è un posto al coperto per una festa d'inverno a Imola?", risposta: "Sì, tutti e due: Coccolandia è un parco giochi al chiuso con gonfiabile, tappeti elastici e salette per le feste, e anche la festa dei Musei civici si fa al coperto, nelle sale del museo." },
@@ -2502,12 +2514,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "altamura",
     citta: "Altamura",
-    aggiornata: "2026-11-11",
+    aggiornata: "2026-11-28",
     rispostaBreve: "Ad Altamura la festa di compleanno per bambini si fa all'Agorateca, la biblioteca di comunità di via Stefano Lorusso, tra letture ad alta voce e laboratori creativi, oppure alla Favola, in via Monte Rosa, che è ludoteca, parco giochi e sala per compleanni. All'Agorateca le feste si tengono soprattutto nel fine settimana: prenotate con qualche settimana di anticipo.",
     intro: "Ad Altamura si può scegliere tra una festa con libri e laboratori e una festa in ludoteca con giochi e spazio per correre. Conviene prenotare con anticipo per il fine settimana.",
     locali: [
       { nome: "Agorateca", zona: "Altamura, via Stefano Lorusso", tipo: "biblioteca di comunità con laboratori e feste di compleanno", descrizione: "Biblioteca di comunità in via Stefano Lorusso, ad Altamura, con giardino e orto urbano e letture ad alta voce per i più piccoli curate dai volontari. Per i compleanni offre uno spazio interno ed esterno dove passare il pomeriggio tra letture ad alta voce e laboratori creativi. Gli allestimenti usano materiali naturali e sostenibili, con festoni, stoviglie e inviti su carta riciclata, e ai genitori si chiede il tema preferito del festeggiato. Torta e merenda le preparano le famiglie.", sito: "https://www.agorateca.it", instagram: "https://www.instagram.com/agoratecaaltamura/" },
       { nome: "La Favola", zona: "Altamura, via Monte Rosa", tipo: "ludoteca con parco giochi e sala feste", descrizione: "Si presenta come ludoteca, parco giochi e sala per le feste di compleanno, e ogni estate organizza anche un campo estivo per bambini. Spazi e formule della festa si concordano direttamente con la struttura." },
+      { nome: "MUDIMA – Museo Diocesano", zona: "Altamura, centro storico", tipo: "museo con laboratori per bambini", descrizione: "Museo diocesano nel centro storico di Altamura, legato alla storia della Cattedrale. Per l'anno scolastico 2025/2026 propone alle scuole visite guidate, percorsi tematici e laboratori creativi. Per le famiglie organizza appuntamenti come «Famiglie al museo» e visite guidate la domenica pomeriggio, e c'è il laboratorio creativo «Arte per crescere» per i più piccoli, il venerdì dalle 17 alle 18, con posti limitati e prenotazione su WhatsApp. Il calendario aggiornato è sul sito.", sito: "https://museodiocesano.org/", festa: false },
     ],
     faq: [
       { domanda: "C'è un posto al coperto per una festa d'inverno ad Altamura?", risposta: "L'Agorateca ha uno spazio interno, oltre a quello esterno, dove fare letture e laboratori anche nei mesi freddi. Anche La Favola è una ludoteca: chiedete quali spazi sono al chiuso quando prenotate." },
@@ -2588,12 +2601,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "forli",
     citta: "Forlì",
-    aggiornata: "2026-11-15",
+    aggiornata: "2026-11-28",
     rispostaBreve: "A Forlì la festa di compleanno per bambini si fa al coperto da Happyland, il parco giochi dietro il Palafiera di via Punta di Ferro, con gonfiabili e attrazioni per bambini da 0 a 10 anni. Nella bella stagione c'è anche Gommolandia, la città gonfiabile all'aperto nel Parco Urbano Franco Agosto, con sconti per le feste di compleanno.",
     intro: "A Forlì le feste per bambini si dividono tra il grande parco giochi al coperto vicino alla Fiera, buono tutto l'anno, e i gonfiabili all'aperto del Parco Urbano, per la primavera e l'estate. Qui trovate tutti e due, con quello che dicono le fonti.",
     locali: [
       { nome: "Happyland", zona: "Forlì, via Punta di Ferro, dietro il Palafiera", tipo: "parco giochi al coperto con gonfiabili e area per i più piccoli", sito: "https://www.happylandforli.it/", descrizione: "Parco giochi al coperto in via Punta di Ferro, dietro il Palafiera di Forlì, aperto nel 2008: circa 1.500 m² di giochi per bambini da 0 a 10 anni, in un open space dove i genitori li vedono giocare. C'è un'area per i bimbi fino a 3 anni con piscina di palline, un gonfiabile e pavimento imbottito, oltre a un'area ristoro e un ampio parcheggio gratuito. Apre da settembre a giugno, escluso lunedì e martedì, dalle 15.30 alle 19.20. Per il compleanno c'è una saletta riservata con tavolo, 20 posti e inviti; minimo 10 bambini." },
       { nome: "Gommolandia", zona: "Forlì, Parco Urbano Franco Agosto, viale dell'Appennino", tipo: "parco giochi gonfiabile all'aperto nel parco urbano", descrizione: "Una città gonfiabile all'aperto dentro il Parco Urbano Franco Agosto, la più conosciuta di Forlì. È aperta tutti i giorni nella bella stagione, tempo permettendo, con l'orario estivo fino a sera, e fa sconti speciali per le feste di compleanno e per le scolaresche. Essendo all'aperto, va bene da primavera a fine estate." },
+      { nome: "Teatro Il Piccolo", zona: "Forlì, via Cerchia", tipo: "teatro per bambini", descrizione: "Teatro di via Cerchia, a Forlì, gestito dal Comune insieme ad Accademia Perduta/Romagna Teatri, compagnia che dal 1987 lavora soprattutto sul teatro per ragazzi e famiglie. La domenica pomeriggio ospita la rassegna «Favole», pensata per andare a teatro con i figli; nei giorni feriali c'è il cartellone Teatro Scuola per le classi. Ogni spettacolo indica l'età consigliata. Il programma 2026/27 è sul sito di Accademia Perduta.", sito: "https://accademiaperduta.it/", festa: false },
     ],
     faq: [
       { domanda: "Dove si fa una festa di compleanno d'inverno a Forlì?", risposta: "Al coperto da Happyland, il parco giochi dietro il Palafiera di via Punta di Ferro, con gonfiabili e attrazioni per bambini fino a 10 anni. Gommolandia invece è all'aperto: va bene nella bella stagione." },
@@ -2643,12 +2657,13 @@ export const CITTA_FESTE: CittaFeste[] = [
   {
     slug: "catanzaro",
     citta: "Catanzaro",
-    aggiornata: "2026-11-17",
+    aggiornata: "2026-11-28",
     rispostaBreve: "A Catanzaro la festa di compleanno per bambini si fa al coperto: da A Casa di Topolino, in viale Lucrezia della Valle, un'area giochi con playground e una sala feste di circa 450 mq, oppure alla Bacchetta Magica, in via dei Conti Ruffo, mille metri quadrati tra parco giochi, ludoteca e baby parking. Chiedete per tempo le date libere e fatevi scrivere cosa comprende il prezzo.",
     intro: "A Catanzaro gli spazi dove festeggiare un compleanno con molti bambini sono al chiuso, quindi vanno bene tutto l'anno. Qui trovate due parchi giochi al coperto con il loro sito ufficiale: uno ha anche il laser game per chi ha già otto anni, l'altro una ludoteca per i più piccoli.",
     locali: [
       { nome: "A Casa di Topolino", zona: "Catanzaro, viale Lucrezia della Valle", tipo: "area giochi al coperto con ludoteca e sala feste", sito: "https://www.acasaditopolino.com/", descrizione: "Ludoteca e area giochi al coperto in viale Lucrezia della Valle 56, a Catanzaro. Nel playground ci sono scivoli, ponte tibetano, trampolini e giochi di gruppo. Per i compleanni c'è una sala feste di circa 450 mq con zona ristoro: durante la festa la sala è riservata e entrano solo gli invitati. Il locale offre buffet, animazione, mascotte, trucca bimbi e allestimenti. C'è anche un'arena di laser game di 500 mq per i più grandi. Prezzi e orari si chiedono al locale." },
       { nome: "La Bacchetta Magica Catanzaro", zona: "Catanzaro, via dei Conti Ruffo", tipo: "parco giochi al coperto con ludoteca e baby parking", sito: "https://www.labacchettamagica.com/catanzaro", descrizione: "Parco giochi al coperto in via dei Conti Ruffo, a Catanzaro, della rete La Bacchetta Magica. La pagina della sede parla di 1000 mq con parco giochi, ludoteca e baby parking e invita a festeggiarci il compleanno dei bambini. Gli orari pubblicati sono tutti i giorni dalle 9 alle 13.30 e dalle 15.30 alle 21, ma altri elenchi riportano orari diversi: prima di andare conviene telefonare. Il prezzo della festa e cosa comprende si chiedono al locale." },
+      { nome: "Cinema Teatro Comunale", zona: "Catanzaro, corso Mazzini", tipo: "teatro per bambini", descrizione: "Cinema e teatro in corso Mazzini, a Catanzaro, che ogni anno programma la rassegna Teatro KIDS per le famiglie. La stagione 2026/27 porta in scena Pinocchio, Robin Hood, Rapunzel e Anastasia, con musica dal vivo e oltre 40 artisti sul palco. C'è l'abbonamento alla rassegna, con posti assegnati, e alcuni spettacoli hanno anche una replica al mattino per le scuole. Biglietti e abbonamenti si comprano sul sito o al telefono.", sito: "https://www.ilcomunalecz.it/", festa: false },
     ],
     faq: [
       { domanda: "Dove si fa una festa di compleanno per bambini a Catanzaro?", risposta: "Al coperto, in uno dei due parchi giochi che organizzano compleanni: A Casa di Topolino in viale Lucrezia della Valle, con una sala feste di circa 450 mq, oppure La Bacchetta Magica in via dei Conti Ruffo, con 1000 mq tra parco giochi e ludoteca." },
