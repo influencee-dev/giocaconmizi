@@ -320,6 +320,74 @@
   ]
  },
  {
+  "slug": "ciao-sono-mizi",
+  "gruppo": "utenti",
+  "titolo": "Ciao, sono Mizi: cos'è Giocamizi in un minuto",
+  "ordine": 0,
+  "descrizione": "Mizi ti fa fare il giro di Giocamizi: giochi educativi, inviti per le feste, posti dove festeggiare, storie e guide per i genitori.",
+  "rispostaBreve": "Giocamizi è un sito gratuito per bambini dai 3 ai 12 anni e per i loro genitori: giochi educativi senza pubblicità e senza timer, inviti per le feste da creare e condividere, posti dove festeggiare città per città, storie da leggere e guide per i genitori. Si usa dal browser, anche sul telefono come un'app.",
+  "verticale": {
+   "src": "/video/ciao-sono-mizi-verticale.mp4",
+   "poster": "/video/ciao-sono-mizi-verticale.webp"
+  },
+  "video": {
+   "src": "/video/ciao-sono-mizi.mp4",
+   "poster": "/video/ciao-sono-mizi.webp",
+   "sottotitoli": "/video/ciao-sono-mizi.vtt",
+   "durata": "PT1M2S",
+   "secondi": 62,
+   "caricato": "2026-11-27",
+   "testo": [
+    "Ciao, sono Mizi! Sono una pinguina, e questa è casa mia: Giocamizi. Ti faccio fare il giro, giuro che ci mettiamo un minuto.",
+    "Si apre dal browser, anche sul telefono. È tutto gratis e non c'è pubblicità: nemmeno quella che spunta proprio quando stai vincendo.",
+    "Prima di tutto i giochi: più di cinquanta, divisi per età. Lettere, numeri, forme, logica, coding. Niente timer e niente classifiche: si gioca e basta.",
+    "Arriva un compleanno? Qui crei l'invito e lo mandi su WhatsApp, e lì trovi i posti dove festeggiare, città per città.",
+    "Poi ci sono le storie da leggere insieme, e le guide per i grandi: risposte brevi e chiare, senza prediche. Promesso.",
+    "Ecco, questa è Giocamizi. Ti aspetto su giocamizi.it. Ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 11,
+    "titolo": "1 · Tutto gratis, dal browser"
+   },
+   {
+    "da": 22,
+    "titolo": "2 · I giochi"
+   },
+   {
+    "da": 36,
+    "titolo": "3 · Inviti e posti per la festa"
+   },
+   {
+    "da": 45,
+    "titolo": "4 · Storie e guide"
+   }
+  ],
+  "pagina": {
+   "href": "/",
+   "testo": "Vai alla home di Giocamizi"
+  },
+  "faq": [
+   {
+    "domanda": "Giocamizi è gratis?",
+    "risposta": "Sì: giochi, inviti, storie e guide sono gratis, senza pubblicità."
+   },
+   {
+    "domanda": "Serve scaricare un'app?",
+    "risposta": "No: si usa dal browser. Se vuoi, sul telefono puoi aggiungerla alla schermata Home come un'app."
+   },
+   {
+    "domanda": "Per che età è?",
+    "risposta": "I giochi sono per bambini dai 3 ai 12 anni; inviti, feste e guide sono per i genitori."
+   }
+  ]
+ },
+ {
   "slug": "come-creare-l-invito",
   "gruppo": "utenti",
   "titolo": "Come creare l'invito di compleanno con la conferma su WhatsApp",
@@ -925,6 +993,133 @@
    {
     "domanda": "Serve un account?",
     "risposta": "No, il profilo vive sul telefono."
+   }
+  ]
+ },
+ {
+  "slug": "la-letterina-a-babbo-natale",
+  "gruppo": "utenti",
+  "titolo": "Come scrivere la letterina a Babbo Natale con Mizi",
+  "ordine": 9,
+  "descrizione": "Mizi accompagna il tuo bimbo passo passo nella letterina a Babbo Natale: carta, prima frase, desideri, saluto, e poi stampa e busta da colorare.",
+  "rispostaBreve": "Su Giocamizi la letterina a Babbo Natale si scrive in sei passi guidati da Mizi, che legge ogni frase ad alta voce: chi scrive, la carta, la frase per cominciare, i desideri (toccando un disegno o scrivendoli), il saluto. Alla fine la letterina si stampa o si scarica in PDF, e c'è la busta da colorare. È gratis e non serve registrarsi.",
+  "verticale": {
+   "src": "/video/la-letterina-a-babbo-natale-verticale.mp4",
+   "poster": "/video/la-letterina-a-babbo-natale-verticale.webp"
+  },
+  "video": {
+   "src": "/video/la-letterina-a-babbo-natale.mp4",
+   "poster": "/video/la-letterina-a-babbo-natale.webp",
+   "sottotitoli": "/video/la-letterina-a-babbo-natale.vtt",
+   "durata": "PT1M5S",
+   "secondi": 65,
+   "caricato": "2026-11-27",
+   "testo": [
+    "Ciao, sono Mizi! Quest'anno la letterina a Babbo Natale la scriviamo insieme. Anche se non sai ancora scrivere: ci penso io.",
+    "Sono sei passi, e ogni volta ti dico cosa fare, ad alta voce. Prima mi dici quanti anni hai e, se vuoi, il tuo nome. Poi tocca «Avanti».",
+    "Adesso scegli la carta da lettera: neve, regali, dolci, renne. Tocca quella che ti piace di più.",
+    "Poi la frase per cominciare, e arriviamo alla parte importante: i desideri. Tocchi un disegno, oppure li scrivi tu. Babbo Natale apprezza anche quelli ragionevoli.",
+    "Scegli come salutare, ed è pronta! Chiedi a un grande di stamparla o di scaricare il PDF. Poi c'è la busta da colorare.",
+    "La letterina ti aspetta su giocamizi.it, nella pagina del Natale. Buon Natale, ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 11,
+    "titolo": "1 · Ti guido io"
+   },
+   {
+    "da": 24,
+    "titolo": "2 · Scegli la carta"
+   },
+   {
+    "da": 32,
+    "titolo": "3 · I desideri"
+   },
+   {
+    "da": 46,
+    "titolo": "4 · Stampa e busta"
+   }
+  ],
+  "pagina": {
+   "href": "/natale/letterina-babbo-natale",
+   "testo": "Scrivi la letterina con Mizi"
+  },
+  "faq": [
+   {
+    "domanda": "Serve saper scrivere?",
+    "risposta": "No: le frasi e i desideri si scelgono toccando, e Mizi li legge ad alta voce. Chi sa scrivere può anche scriverli da sé."
+   },
+   {
+    "domanda": "Come si stampa?",
+    "risposta": "All'ultimo passo ci sono «Stampa» e il PDF da scaricare; poi c'è la busta da stampare e colorare."
+   },
+   {
+    "domanda": "È gratis?",
+    "risposta": "Sì, ed è senza registrazione."
+   }
+  ]
+ },
+ {
+  "slug": "gli-eventi-di-natale",
+  "gruppo": "utenti",
+  "titolo": "Gli eventi di Natale per bambini nella tua città",
+  "ordine": 10,
+  "descrizione": "Mizi ti mostra dove trovare villaggi di Babbo Natale, mercatini, laboratori e piste di pattinaggio per bambini, città per città.",
+  "rispostaBreve": "Su Giocamizi gli eventi di Natale per bambini sono raccolti città per città nella pagina «Eventi di Natale»: villaggi e case di Babbo Natale, mercatini, laboratori, spettacoli, piste di pattinaggio. Per ogni evento ci sono le date, il luogo e il link al sito ufficiale; le date si controllano sulle fonti ufficiali e gli eventi finiti spariscono da soli.",
+  "verticale": {
+   "src": "/video/gli-eventi-di-natale-verticale.mp4",
+   "poster": "/video/gli-eventi-di-natale-verticale.webp"
+  },
+  "video": {
+   "src": "/video/gli-eventi-di-natale.mp4",
+   "poster": "/video/gli-eventi-di-natale.webp",
+   "sottotitoli": "/video/gli-eventi-di-natale.vtt",
+   "durata": "PT0M55S",
+   "secondi": 55,
+   "caricato": "2026-11-27",
+   "testo": [
+    "Ciao, sono Mizi! Per una pinguina il Natale è la stagione perfetta. Ti faccio vedere dove trovare gli eventi per bambini nella tua città.",
+    "Apri la pagina Eventi di Natale e tocca la tua città.",
+    "Trovi i villaggi di Babbo Natale, i mercatini, i laboratori, le piste di pattinaggio. Per ognuno ci sono le date, il posto e il link al sito ufficiale.",
+    "Le date le controlliamo sulle fonti ufficiali, e quando un evento finisce sparisce da solo. Prima di partire, però, dai un'occhiata al sito dell'evento: il freddo lo reggo io, le code no.",
+    "Tutti gli eventi di Natale ti aspettano su giocamizi.it. Buone feste, ciao ciao!"
+   ]
+  },
+  "capitoli": [
+   {
+    "da": 0,
+    "titolo": "Ciao, sono Mizi"
+   },
+   {
+    "da": 13,
+    "titolo": "1 · Scegli la città"
+   },
+   {
+    "da": 18,
+    "titolo": "2 · Villaggi, mercatini, laboratori"
+   },
+   {
+    "da": 31,
+    "titolo": "3 · Date controllate"
+   }
+  ],
+  "pagina": {
+   "href": "/natale/eventi",
+   "testo": "Gli eventi di Natale, città per città"
+  },
+  "faq": [
+   {
+    "domanda": "Gli eventi sono verificati?",
+    "risposta": "Sì: solo eventi dell'edizione in corso con le date prese dal sito dell'organizzatore, del comune o da un giornale locale. Prima di andare conviene comunque ricontrollare sul sito ufficiale."
+   },
+   {
+    "domanda": "La mia città non c'è: perché?",
+    "risposta": "Una città compare quando ha almeno tre eventi verificati. Ne aggiungiamo man mano."
    }
   ]
  }

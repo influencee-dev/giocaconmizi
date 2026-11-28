@@ -1,0 +1,58 @@
+{
+  "slug": "gli-eventi-di-natale",
+  "titolo": "Gli eventi di Natale per bambini nella tua città",
+  "gruppo": "utenti",
+  "ordine": 10,
+  "descrizione": "Mizi ti mostra dove trovare villaggi di Babbo Natale, mercatini, laboratori e piste di pattinaggio per bambini, città per città.",
+  "rispostaBreve": "Su Giocamizi gli eventi di Natale per bambini sono raccolti città per città nella pagina «Eventi di Natale»: villaggi e case di Babbo Natale, mercatini, laboratori, spettacoli, piste di pattinaggio. Per ogni evento ci sono le date, il luogo e il link al sito ufficiale; le date si controllano sulle fonti ufficiali e gli eventi finiti spariscono da soli.",
+  "pagina": { "href": "/natale/eventi", "testo": "Gli eventi di Natale, città per città" },
+  "faq": [
+    { "domanda": "Gli eventi sono verificati?", "risposta": "Sì: solo eventi dell'edizione in corso con le date prese dal sito dell'organizzatore, del comune o da un giornale locale. Prima di andare conviene comunque ricontrollare sul sito ufficiale." },
+    { "domanda": "La mia città non c'è: perché?", "risposta": "Una città compare quando ha almeno tre eventi verificati. Ne aggiungiamo man mano." }
+  ],
+  "schermate": {
+    "elenco": { "url": "/natale/eventi", "selettori": ["h1", "a[href=\"/natale/eventi/milano\"]"] },
+    "citta": { "url": "/natale/eventi/milano", "selettori": ["h1"] }
+  },
+  "scene": [
+    {
+      "tipo": "intro",
+      "etichetta": "Il Natale di Mizi",
+      "titolo": "Gli eventi di Natale per bambini",
+      "sottotitolo": "Città per città.",
+      "voce": "Ciao, sono Mizi! Per una pinguina il Natale è la stagione perfetta. Ti faccio vedere dove trovare gli eventi per bambini nella tua città."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 1,
+      "titolo": "Scegli la città",
+      "testo": "Una pagina per ogni città.",
+      "schermata": "elenco",
+      "evidenzia": ["a[href=\"/natale/eventi/milano\"]"],
+      "voce": "Apri la pagina Eventi di Natale e tocca la tua città."
+    },
+    {
+      "tipo": "telefono",
+      "passo": 2,
+      "titolo": "Villaggi, mercatini, laboratori",
+      "testo": "Con le date, il luogo e il sito ufficiale.",
+      "schermata": "citta",
+      "evidenzia": ["h1"],
+      "voce": "Trovi i villaggi di Babbo Natale, i mercatini, i laboratori, le piste di pattinaggio. Per ognuno ci sono le date, il posto e il link al sito ufficiale."
+    },
+    {
+      "tipo": "carta",
+      "passo": 3,
+      "titolo": "Date controllate",
+      "testo": "Gli eventi finiti spariscono da soli.",
+      "carta": { "icona": "orologio", "titolo": "Solo date vere", "testo": "Le prendiamo dalle fonti ufficiali. Prima di partire, ricontrolla sul sito dell'evento.", "spunta": true },
+      "voce": "Le date le controlliamo sulle fonti ufficiali, e quando un evento finisce sparisce da solo. Prima di partire, però, dai un'occhiata al sito dell'evento: il freddo lo reggo io, le code no."
+    },
+    {
+      "tipo": "finale",
+      "url": "giocamizi.it/natale/eventi",
+      "sotto": "Città per città.",
+      "voce": "Tutti gli eventi di Natale ti aspettano su giocamizi punto it. Buone feste, ciao ciao!"
+    }
+  ]
+}

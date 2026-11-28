@@ -70,7 +70,7 @@
   "app/(public)/storie/page.tsx": "2026-11-27",
   "app/(public)/storie/stampatello/page.tsx": "2026-08-23",
   "app/(public)/termini-attivita/page.tsx": "2026-11-08",
-  "app/(public)/tutorial/[slug]/page.tsx": "2026-11-22",
+  "app/(public)/tutorial/[slug]/page.tsx": "2026-11-27",
   "app/(public)/tutorial/page.tsx": "2026-11-16",
   "cards/registry.ts": "2026-11-27",
   "content/games/abbina-i-colori.md": "2026-08-23",

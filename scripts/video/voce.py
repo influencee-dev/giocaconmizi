@@ -40,22 +40,45 @@ norm = lambda w: re.sub(r"[^a-z0-9]", "", unicodedata.normalize("NFD", w.lower()
 # La voce a volte si ferma prima della fine (26/11/2026: tre reel su quattro senza
 # «Buone feste!»). Si controlla che le ultime parole del testo ci siano davvero nella
 # trascrizione; se mancano si registra di nuovo, fino a tre volte.
+# Dal 27/11/2026 (sette prove su sette senza «Buone feste!») dopo l'ultima frase si
+# registra anche una CODA di sicurezza: se il modello taglia la fine, taglia quella.
+# La coda poi non si usa: l'ultima frase si chiude sull'ultima parola vera.
+CODA = "Fine del video."
 fine_testo = norm("".join(testi[-1].replace("giocamizi punto it", "giocamizi").split()[-2:]))
 for prova in range(3):
     if not os.path.exists(intera):
         curl(["https://api.openai.com/v1/audio/speech", "-H", "Authorization: Bearer proxy-injected", "-H", "Content-Type: application/json",
-              "-d", json.dumps({"model": "gpt-4o-mini-tts", "voice": VOCE, "input": "\n\n".join(testi), "instructions": ISTR, "response_format": "wav"})], intera)
+              "-d", json.dumps({"model": "gpt-4o-mini-tts", "voice": VOCE, "input": "\n\n".join(testi + [CODA]), "instructions": ISTR, "response_format": "wav"})], intera)
     if not os.path.exists(parole_json):
         open(parole_json, "w").write(curl(["https://api.openai.com/v1/audio/transcriptions", "-H", "Authorization: Bearer proxy-injected",
             "-F", f"file=@{intera}", "-F", "model=whisper-1", "-F", "language=it", "-F", "response_format=verbose_json", "-F", "timestamp_granularities[]=word"]))
     tr = json.load(open(parole_json))
-    coda = "".join(norm(w["word"]) for w in tr["words"][-8:])
-    if fine_testo in coda or difflib.SequenceMatcher(None, coda[-len(fine_testo):], fine_testo).ratio() >= 0.8: break
+    coda = "".join(norm(w["word"]) for w in tr["words"][-12:])
+    # whisper a volte storpia («giocanizzi»): basta un pezzo molto simile tra le ultime parole
+    # (non solo in fondo: in fondo adesso c'è la coda)
+    n = len(fine_testo)
+    if fine_testo in coda or max((difflib.SequenceMatcher(None, coda[i:i + n], fine_testo).ratio() for i in range(max(1, len(coda) - n + 1))), default=0) >= 0.8: break
     print(f"la voce si è fermata prima della fine (manca «{testi[-1].split()[-2:]}»): registro di nuovo")
     os.remove(intera); os.remove(parole_json)
 else:
     raise SystemExit("la voce si ferma prima della fine anche dopo tre registrazioni: controllare")
 parole = [p for p in ((norm(w["word"]), w["start"], w["end"]) for w in tr["words"]) if p[0]]
+# dove finisce il testo vero: le ultime due parole dell'ultima frase, cercate dalla fine
+fine_vera = inizio_coda = None
+for j in range(len(parole) - 1, -1, -1):
+    seguito = "".join(p[0] for p in parole[j:j + 3])
+    if seguito.startswith(fine_testo) or difflib.SequenceMatcher(None, seguito[:len(fine_testo)], fine_testo).ratio() >= 0.8:
+        k, lette = j, parole[j][0]
+        while len(lette) < len(fine_testo) - 1 and k + 1 < len(parole):
+            k += 1; lette += parole[k][0]
+        # «giocamizi punto it» si cerca come «giocamizi»: il «punto it» va tenuto
+        while testi[-1].rstrip(" !.").endswith("punto it") and k + 1 < len(parole) and parole[k + 1][0] in ("punto", "it", "puntoit"):
+            k += 1
+        fine_vera = parole[k][2]
+        inizio_coda = parole[k + 1][1] if k + 1 < len(parole) else None
+        break
+if fine_vera is None: raise SystemExit("non trovo la fine del testo nella registrazione: controllare")
+parole = [p for p in parole if p[1] < fine_vera]
 dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", intera], capture_output=True, text=True).stdout)
 inizi = [0.0]; k = 0
 def cerca(parole_frase, k):
@@ -84,12 +107,14 @@ for f in testi[1:]:
     if trovato is None: raise SystemExit(f"frase non trovata nella registrazione: {f[:50]}")
     k = trovato + 1; inizi.append(parole[trovato][1])
 for n, a in enumerate(inizi):
-    fine_frase = inizi[n + 1] if n + 1 < len(inizi) else dur + 1
+    fine_frase = inizi[n + 1] if n + 1 < len(inizi) else fine_vera
     b = max(p[2] for p in parole if p[1] < fine_frase)
     # whisper a volte dà alla prima parola un inizio troppo tardi (durata zero: «Scegli» → «egli»):
     # si parte fino a 0,4 s prima, ma mai prima della fine della frase precedente
     fine_prima = max([p[2] for p in parole if p[2] <= a - 0.02], default=0)
-    a, b = max(0, fine_prima + 0.05, a - 0.4) if n else 0, min(dur, b + 0.25)
+    # l'ultima frase si ferma a metà del silenzio prima della coda, mai dentro la coda
+    tetto = dur if n + 1 < len(inizi) else min(dur, fine_vera + 0.25, (fine_vera + inizio_coda) / 2 if inizio_coda else dur)
+    a, b = max(0, fine_prima + 0.05, a - 0.4) if n else 0, min(tetto, b + 0.25)
     # Il taglio si fa DENTRO il filtro e poi si riparte da zero (asetpts): così la
     # dissolvenza finale conta dall'inizio della frase. Prima (fino al 16/11/2026)
     # contava dall'inizio della registrazione e azzerava tutte le frasi dopo la prima.
