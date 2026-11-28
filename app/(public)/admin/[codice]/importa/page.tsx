@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SCHEDE, percorsoScheda } from "@/lib/directory/directory";
 import { adminSchedeGiorgia } from "@/lib/directory/directory-db";
 import { adminValido } from "@/lib/directory/admin";
-import { chiaveAiPresente, fornitoreAi, nomeChiaveAi } from "@/lib/directory/import-ai";
+import { chiaveAiPresente, nomeAi, nomeChiaveAi } from "@/lib/directory/import-ai";
 import { Contenitore } from "@/components/ui";
 import { MenuAdmin } from "../MenuAdmin";
 import { NonDisponibile } from "../NonDisponibile";
@@ -41,7 +41,7 @@ export default async function AdminImporta({ params }: { params: Promise<{ codic
       <h1 className="text-3xl font-extrabold text-notte">Importa con l&apos;AI</h1>
       <p className="mt-2 max-w-2xl text-notte-tenue">
         L&apos;AI legge il sito ufficiale e i post pubblici di un locale e propone i campi della scheda, con la frase della fonte accanto.
-        Prende solo fatti scritti: quello che non trova resta «da chiedere». Nessuna foto viene presa. AI in uso: {fornitoreAi() === "gemini" ? "Gemini di Google (piano gratuito)" : "Claude di Anthropic"}.
+        Prende solo fatti scritti: quello che non trova resta «da chiedere». Nessuna foto viene presa. AI in uso: {nomeAi()}.
       </p>
       {!chiaveAttiva && (
         <p className="mt-4 rounded-xl bg-[#FFF3CF] px-4 py-3 text-sm font-bold text-[#7A5A00]" data-manca-chiave>

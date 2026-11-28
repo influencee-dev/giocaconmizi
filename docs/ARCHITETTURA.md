@@ -37,6 +37,7 @@ Nella radice restano solo i file di configurazione (`package.json`, `next.config
 | `lib/seo/` | Motori di ricerca | `seo.ts`, `date-pagine.ts`, `date-pagine.json` (generato), `og.tsx`, `gsc.ts`, `precarico.ts` |
 | `lib/famiglia/` | Il profilo della famiglia nell'app e i percorsi di riflessione per i genitori | `profilo.ts`, `sotto-pressione.ts` (domande, calcolo e letture del percorso «sotto pressione») |
 | `lib/social/` | Slide e testi per Instagram | `post.ts`, `instagram.ts`, `disegna.tsx` |
+| `lib/pagamenti/` | I contributi pagati con Stripe (ricerca AI delle mamme, compilazione AI delle schede), dal 27/11/2026 | `stripe.ts`, `contributi.ts`, `accesso-ai.ts` (la ricerca stessa è in `lib/contenuti/ricerca-ai.ts`) |
 | `lib/protezione/` | Limiti e difese contro gli abusi | `limiti.ts` |
 | `lib/supabase/` | Collegamenti al database | |
 
@@ -60,7 +61,7 @@ I file segnati «generato» li scrive uno script: non si modificano a mano.
 
 ## `components/`: una cartella per zona
 
-`app` (l'app installata), `biglietti`, `directory`, `feste`, `form`, `game-shell` (il guscio comune dei giochi, con la festa finale), `genitori` (i percorsi per gli adulti, dal 20/11/2026: non sono guide né giochi), `giochi` (catalogo e album), `guide`, `legal`, `mappa`, `natale`, `risorse`, `seo`, `storie`, `tutorial`, `ui` (bottoni e contenitori di base), `vetrina` (testata, menu, piede), `font-switcher`, `progress`.
+`app` (l'app installata), `biglietti`, `cerca` (la ricerca con l'AI, dal 27/11/2026), `directory`, `feste`, `form`, `game-shell` (il guscio comune dei giochi, con la festa finale), `genitori` (i percorsi per gli adulti, dal 20/11/2026: non sono guide né giochi), `giochi` (catalogo e album), `guide`, `legal`, `mappa`, `natale`, `risorse`, `seo`, `storie`, `tutorial`, `ui` (bottoni e contenitori di base), `vetrina` (testata, menu, piede), `font-switcher`, `progress`.
 
 Tre file restano sciolti perché li usano tutte le zone: `icone.tsx`, `illustrazioni.tsx`, `decor.tsx`.
 

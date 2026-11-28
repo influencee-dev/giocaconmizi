@@ -22,7 +22,9 @@ import { BadgeCheck, Camera } from "lucide-react";
 
 /** La scheda di un'attività (Figma 04–06). */
 
-export const dynamicParams = false;
+// Niente dynamicParams = false: con la rigenerazione (revalidatePath/Tag) Next 15 risponde 404
+// (NoFallbackError) anche agli indirizzi veri. Gli indirizzi che non esistono li ferma notFound().
+export const dynamicParams = true;
 // Le risposte approvate dei locali arrivano dal database: rigenerazione ogni 10 minuti.
 export const revalidate = 600;
 

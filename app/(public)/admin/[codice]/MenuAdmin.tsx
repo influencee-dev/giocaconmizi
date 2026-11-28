@@ -4,6 +4,7 @@ import Link from "next/link";
 const VOCI = [
   { percorso: "/schede", nome: "Schede" },
   { percorso: "/importa", nome: "Importa con l'AI" },
+  { percorso: "/ricerche-ai", nome: "Ricerche AI" },
   { percorso: "", nome: "Risposte dei locali" },
   { percorso: "/candidature", nome: "Candidature" },
   { percorso: "/risorse", nome: "Risorse" },

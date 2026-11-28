@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath, revalidateTag } from "next/cache";
+import { TAG_DIRECTORY } from "@/lib/directory/directory-db";
 import { after } from "next/server";
 import { SCHEDE, percorsoScheda } from "@/lib/directory/directory";
 import { adminDati, adminEsito } from "@/lib/directory/directory-db";
@@ -19,6 +20,7 @@ export async function decidi(scelta: "accettata" | "rifiutata", form: FormData) 
   if (ok) {
     // Le risorse educative leggono le risposte da una cache di 10 minuti: si svuota subito.
     revalidateTag(TAG_RECLAMO);
+    revalidateTag(TAG_DIRECTORY);
     revalidatePath("/", "layout");
     revalidatePath("/sitemap.xml");
     revalidatePath("/llms-full.txt");

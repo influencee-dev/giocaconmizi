@@ -60,6 +60,7 @@ export const COLONNE: { titolo: string; voci: [string, string][] }[] = [
   {
     titolo: "Giocamizi",
     voci: [
+      ["/cerca", "Cerca con l'AI"],
       ["/chi-siamo", "Chi siamo"],
       ["/libri", "I libri di Mizi"],
       ["/aggiungi-attivita", "Aggiungi la tua attività"],

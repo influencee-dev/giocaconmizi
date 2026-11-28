@@ -40,6 +40,7 @@ const LIB = {
   foto: "registro delle foto, prenotazioni, misure, caricatore delle immagini",
   giochi: "album di Mizi, voce, suoni, conto delle partite",
   natale: "letterina, biglietti ed eventi di Natale",
+  pagamenti: "contributi con Stripe: ricerca AI delle mamme, compilazione AI delle schede",
   protezione: "limiti e difese contro gli abusi",
   risorse: "la directory delle risorse educative",
   seo: "dominio, date delle pagine, immagini di anteprima, Search Console",
@@ -50,7 +51,7 @@ for (const f of file("lib")) ko(`«lib/${f}» è sciolto in lib/: va in una cart
 for (const c of cartelle("lib")) if (!LIB[c]) ko(`cartella «lib/${c}/» non prevista: gli argomenti di lib sono ${Object.keys(LIB).join(", ")}.`);
 
 // 3. components/: una cartella per zona del sito, più tre file condivisi da tutti.
-const COMPONENTI = [
+const COMPONENTI = ["cerca", 
   "app", "biglietti", "directory", "feste", "font-switcher", "form", "game-shell", "genitori", "giochi", "guide", "legal", "mappa",
   "natale", "progress", "risorse", "seo", "storie", "tutorial", "ui", "vetrina",
 ];
