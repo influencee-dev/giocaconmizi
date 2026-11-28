@@ -321,6 +321,14 @@ ok("llms.txt: link sul dominio", linkLlms.length > 0 && llmsFuori.length === 0, 
 }
 
 const copertura = spawnSync("node", ["scripts/seo-copertura.mjs", "--controlla"], { encoding: "utf8" });
+// 28/11/2026 (routine delle 7:00): la guida dei compiti ha il pezzo sulle vacanze
+// di Natale, la FAQ in JSON-LD e i link agli esercizi per classe.
+{
+  const html = await testo("/guide/compiti-senza-litigare");
+  ok("guida compiti: sezione e FAQ sulle vacanze di Natale, link agli esercizi per classe",
+    html.includes("I compiti delle vacanze di Natale") && html.includes("Come organizzare i compiti delle vacanze di Natale?") &&
+    html.includes('href="/compiti-vacanze/seconda-elementare"'));
+}
 ok("parole chiave fatte ancora al loro posto", copertura.status === 0, (copertura.stdout + copertura.stderr).trim().split("\n").slice(-3).join(" · "));
 
 if (servito) process.kill(-servito.pid);
