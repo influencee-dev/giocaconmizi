@@ -51,6 +51,13 @@ const nextConfig: NextConfig = {
     ],
     "/admin/[codice]/social": ["./public/immagini/guida-*.webp"],
   },
+  // I video (tutorial e reel) si servono come file statici e nessuna funzione li
+  // legge: senza questa esclusione il tracciamento, che vede letture di public/ con
+  // percorsi calcolati, li copiava dentro ogni funzione (233 MB su 250 il 28/11/2026)
+  // e Vercel le spezzava oltre il limite di 12 funzioni del piano Hobby.
+  outputFileTracingExcludes: {
+    "**": ["./public/video/**"],
+  },
   async redirects() {
     // L'indirizzo canonico è uno solo: gli alias vecchi del progetto Vercel
     // reindirizzano lì in modo permanente (SEO + niente doppioni).
