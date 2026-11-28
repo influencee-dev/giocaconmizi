@@ -31,5 +31,5 @@ quindi va sempre applicata dopo.
 | File | Quando | Note |
 |---|---|---|
 | 0001_schema_iniziale.sql | 23/08/2026 | ripreso dal registro di Supabase |
-| 0002_permessi.sql | — | dopo il deploy di `lib/supabase/servizio.ts` |
-| 0003_indici_e_scadenze.sql | — | |
+| 0002_permessi.sql | 28/11/2026 | dopo il deploy di `lib/supabase/servizio.ts` (commit 019554d); provata: la chiave pubblica riceve «permission denied» |
+| 0003_indici_e_scadenze.sql | 28/11/2026 | 5 indici e la scadenza di 12 mesi delle ricerche AI |
