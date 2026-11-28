@@ -1,6 +1,5 @@
+import { dbServizio } from "@/lib/supabase/servizio";
 import type { Metadata } from "next";
-import { createClient } from "@supabase/supabase-js";
-import { SUPABASE_ANON_KEY, SUPABASE_URL, supabaseConfigurato } from "@/lib/supabase/config";
 import { adminValido } from "@/lib/directory/admin";
 import { Contenitore } from "@/components/ui";
 import { MenuAdmin } from "../MenuAdmin";
@@ -17,8 +16,8 @@ export default async function RicercheAi({ params }: { params: Promise<{ codice:
   const { codice } = await params;
   if (!(await adminValido(codice))) return <NonDisponibile />;
   let righe: Riga[] = [];
-  if (supabaseConfigurato) {
-    const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, { auth: { persistSession: false } });
+  const db = dbServizio();
+  if (db) {
     const { data } = await db.rpc("ai_admin_ricerche", { p_codice: codice });
     righe = Array.isArray(data) ? data : [];
   }

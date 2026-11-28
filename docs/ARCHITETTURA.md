@@ -17,7 +17,8 @@ Il progetto cresce a pezzi e da più chat insieme. Per questo la regola è una s
 | `public/` | File serviti così come sono: foto, icone, voce registrata, video. | Sorgenti. |
 | `assets/` | Materiali di lavoro non serviti dal sito (musiche e grafiche social). | File usati dalle pagine: quelli vanno in `public/`. |
 | `scripts/` | Strumenti da riga di comando. Le prove automatiche sono in `scripts/verifica/`; gli strumenti dei libri per Amazon in `scripts/libri/` (procedura in `docs/libri-kdp.md`). | Codice usato dal sito mentre gira. |
-| `supabase/` | Le tabelle del database, in SQL. | |
+| `supabase/` | Le tabelle del database, in SQL: un file per argomento (descrizione leggibile). | |
+| `supabase/migrazioni/` | Le modifiche al database numerate, una per file, mai riscritte (LEGGIMI.md: ordine e regole). | |
 | `docs/` | Documenti di progetto e procedure. | Codice. |
 
 Nella radice restano solo i file di configurazione (`package.json`, `next.config.ts`, `middleware.ts`, `CLAUDE.md`…). Uno script non va mai nella radice.
@@ -39,7 +40,7 @@ Nella radice restano solo i file di configurazione (`package.json`, `next.config
 | `lib/social/` | Slide e testi per Instagram | `post.ts`, `instagram.ts`, `disegna.tsx` |
 | `lib/pagamenti/` | I contributi pagati con Stripe (ricerca AI delle mamme, compilazione AI delle schede), dal 27/11/2026 | `stripe.ts`, `contributi.ts`, `accesso-ai.ts` (la ricerca stessa è in `lib/contenuti/ricerca-ai.ts`) |
 | `lib/protezione/` | Limiti e difese contro gli abusi | `limiti.ts` |
-| `lib/supabase/` | Collegamenti al database | |
+| `lib/supabase/` | Collegamenti al database: `client.ts` (browser), `server.ts` (sessione della mamma), `servizio.ts` (il server con la chiave di servizio, l'unico per directory, pannello e pagamenti) | `createClient` fuori da qui (lo ferma la verifica struttura) |
 
 I file segnati «generato» li scrive uno script: non si modificano a mano.
 

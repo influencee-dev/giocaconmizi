@@ -1,6 +1,5 @@
+import { chiaveServizioPresente, dbServizio } from "@/lib/supabase/servizio";
 import Stripe from "stripe";
-import { createClient } from "@supabase/supabase-js";
-import { SUPABASE_URL } from "@/lib/supabase/config";
 import { CONTRIBUTI, eTipoContributo, type TipoContributo } from "./contributi";
 
 /**
@@ -84,12 +83,6 @@ export async function creaPagamento(d: DatiSessione): Promise<{ url: string } | 
   }
 }
 
-function dbServizio() {
-  const chiave = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!chiave) return null;
-  return createClient(SUPABASE_URL, chiave, { auth: { persistSession: false, autoRefreshToken: false } });
-}
-
 /** Registra un pagamento riuscito e apre l'accesso. Vero se registrato (o già registrato prima). */
 export async function registraSessione(sessione: Stripe.Checkout.Session): Promise<boolean> {
   if (sessione.payment_status !== "paid") return false;
@@ -100,7 +93,7 @@ export async function registraSessione(sessione: Stripe.Checkout.Session): Promi
     console.error("[stripe] importo inatteso", sessione.id, sessione.amount_total, sessione.currency);
     return false;
   }
-  const db = dbServizio();
+  const db = chiaveServizioPresente() ? dbServizio() : null;
   if (!db) {
     console.error("[stripe] manca SUPABASE_SERVICE_ROLE_KEY: pagamento non registrato", sessione.id);
     return false;

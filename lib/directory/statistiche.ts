@@ -1,5 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
-import { SUPABASE_ANON_KEY, SUPABASE_URL, supabaseConfigurato } from "@/lib/supabase/config";
+import { dbServizio } from "@/lib/supabase/servizio";
 
 /**
  * I contatori delle schede (supabase/backoffice.sql): viste e clic sui
@@ -26,13 +25,7 @@ export interface Riga {
   conteggio: number;
 }
 
-function db() {
-  if (!supabaseConfigurato) return null;
-  return createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    auth: { persistSession: false, autoRefreshToken: false },
-    global: { fetch: (url, init) => fetch(url, { ...init, signal: AbortSignal.timeout(4000), cache: "no-store" }) },
-  });
-}
+const db = dbServizio;
 
 export async function conta(chiave: string, evento: Evento): Promise<boolean> {
   const client = db();

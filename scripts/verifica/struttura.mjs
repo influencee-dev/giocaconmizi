@@ -107,6 +107,27 @@ for (const c of ["app", "components", "games", "lib", "scripts", "content", "doc
   giro(c);
 }
 
+// 8. Database (lotto 1 dell'architettura, 28/11/2026): un client Supabase si crea solo in
+// lib/supabase/ (dbServizio per il server), e nessuna migrazione riapre qualcosa alla chiave pubblica.
+for (const c of ["app", "components", "games", "lib"]) {
+  const giro = (dir) => {
+    for (const v of voci(dir)) {
+      const p = `${dir}/${v.name}`;
+      if (v.isDirectory()) giro(p);
+      else if (/\.(ts|tsx)$/.test(v.name) && !p.startsWith("lib/supabase/") && /from "@supabase\/(supabase-js|ssr)"/.test(readFileSync(p, "utf8")) && /\bcreate(Server|Browser)?Client\(/.test(readFileSync(p, "utf8")))
+        ko(`«${p}» crea un client Supabase: si usa quello di lib/supabase/ (dbServizio sul server).`);
+    }
+  };
+  giro(c);
+}
+if (existsSync("supabase/migrazioni")) {
+  for (const f of file("supabase/migrazioni")) {
+    const n = Number(f.slice(0, 4));
+    if (/\.sql$/.test(f) && n > 2 && /\bto\s+(public|anon)\b/i.test(readFileSync(`supabase/migrazioni/${f}`, "utf8").replace(/--.*$/gm, "")))
+      ko(`«supabase/migrazioni/${f}» apre qualcosa alla chiave pubblica (to anon / to public): le funzioni le chiama il server.`);
+  }
+}
+
 if (problemi.length) {
   console.log(problemi.map((p) => `FUORI POSTO  ${p}`).join("\n"));
   console.log(`struttura: ${problemi.length} PROBLEMI (la mappa è docs/ARCHITETTURA.md)`);

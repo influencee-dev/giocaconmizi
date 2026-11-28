@@ -1,5 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
-import { SUPABASE_URL } from "@/lib/supabase/config";
+import { chiaveServizioPresente, dbServizio } from "@/lib/supabase/servizio";
 import { SCHEDE, percorsoScheda } from "@/lib/directory/directory";
 import { GUIDE } from "@/lib/contenuti/guide";
 import { tutteLeStorie } from "@/lib/contenuti/content";
@@ -166,10 +165,9 @@ Tono: diretto e concreto, in italiano, senza aggettivi promozionali. Il testo de
  * Non blocca mai la ricerca: se il database non risponde, si va avanti.
  */
 export async function tracciaRicerca(t: { domanda: string; risultati: number; collegata: boolean; esito: string }) {
-  const chiave = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!chiave) return;
+  const db = chiaveServizioPresente() ? dbServizio() : null;
+  if (!db) return;
   try {
-    const db = createClient(SUPABASE_URL, chiave, { auth: { persistSession: false, autoRefreshToken: false } });
     await db.from("ai_ricerche").insert({
       domanda: t.domanda.slice(0, 300),
       risultati: t.risultati,

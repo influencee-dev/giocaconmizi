@@ -168,8 +168,11 @@ Scelte confermate da Giorgia con tre risposte a scelta, dopo due letture sbaglia
 - Area attività (fase 1): `/la-tua-scheda/[codice]` (link personale: il
   locale approva, modifica o chiede di togliere la scheda) e
   `/admin/[codice]` (Giorgia decide). Database in `supabase/directory.sql`,
-  incollato a mano da Giorgia nel SQL Editor: il sito usa solo la chiave
-  pubblica e funzioni RPC; nel DB solo impronte SHA-256 dei codici. I
+  incollato a mano da Giorgia nel SQL Editor. Dal 28/11/2026 le funzioni RPC
+  le chiama SOLO il server con la chiave di servizio (`dbServizio()` in
+  lib/supabase/servizio.ts): la chiave pubblica non esegue più niente in public.
+  Ogni modifica nuova al database è un file numerato in `supabase/migrazioni/`
+  (LEGGIMI.md lì: ordine e regole). Nel DB solo impronte SHA-256 dei codici. I
   codici veri non vanno MAI nel repo. Le pagine pubbliche leggono le
   risposte accettate con `pubblicate()` (lib/directory/directory-db.ts) e si
   rigenerano ogni 10 minuti o subito dopo una decisione.

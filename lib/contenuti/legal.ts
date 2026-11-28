@@ -27,7 +27,7 @@ export const TITOLARE = {
 } as const;
 
 /** Data dell'ultima revisione delle informative (si aggiorna a ogni modifica). */
-export const AGGIORNATA = "22 novembre 2026";
+export const AGGIORNATA = "28 novembre 2026";
 
 export interface VoceRegistro {
   nome: string;
@@ -213,7 +213,8 @@ export const FORNITORI = [
   },
   {
     nome: "Supabase",
-    scopo: "Conserva gli account dell'area genitori (email, progressi, fascia d'età dei bambini).",
+    scopo:
+      "Conserva gli account dell'area genitori (email, progressi, fascia d'età dei bambini), le richieste e le candidature delle attività e le domande fatte alla ricerca con l'AI: queste ultime senza sapere chi le ha scritte, cancellate da sole dopo 12 mesi.",
     dove: "Unione Europea (Francoforte, eu-central-1)",
   },
   {
@@ -231,7 +232,7 @@ export const FORNITORI = [
   {
     nome: "Google Ireland Ltd. (Gemini API)",
     scopo:
-      "Solo nel pannello di Giorgia: legge le pagine pubbliche del sito e dei social di un'attività (testi già pubblici, nessun dato di famiglie o bambini) e propone i campi della scheda, che Giorgia controlla prima di pubblicarli. Può arrivarci direttamente o tramite l'AI Gateway di Vercel (che fa da passaggio, già nostro fornitore di hosting). Con il piano gratuito diretto Google può usare questi testi pubblici per migliorare i suoi servizi.",
+      "Due usi. Nella ricerca con l'AI (/cerca) riceve la domanda che scrivi e l'elenco delle pagine del sito che c'entrano, e le mette in ordine: non riceve chi sei, e la pagina chiede di non scrivere nomi, indirizzi o dati dei bambini. Nel pannello di Giorgia legge le pagine pubbliche del sito e dei social di un'attività (testi già pubblici) e propone i campi della scheda, che Giorgia controlla prima di pubblicarli. Può arrivarci direttamente o tramite l'AI Gateway di Vercel (che fa da passaggio, già nostro fornitore di hosting). Con il piano gratuito diretto Google può usare questi testi per migliorare i suoi servizi.",
     dove: "Irlanda; possibili trasferimenti verso Google LLC (USA) coperti dal Data Privacy Framework UE-USA",
   },
   {

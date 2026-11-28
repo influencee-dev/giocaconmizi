@@ -1,5 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
-import { SUPABASE_ANON_KEY, SUPABASE_URL, supabaseConfigurato } from "@/lib/supabase/config";
+import { dbServizio } from "@/lib/supabase/servizio";
 
 /**
  * Il controllo del codice del pannello di Giorgia (/admin/[codice]).
@@ -14,12 +13,9 @@ export async function adminValido(codice: string | null | undefined): Promise<bo
   if (!codice || codice.length < 12) return false;
   const prova = process.env.GIOCAMIZI_ADMIN_PROVA;
   if (prova && !process.env.VERCEL && codice === prova) return true;
-  if (!supabaseConfigurato) return false;
   try {
-    const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-      auth: { persistSession: false, autoRefreshToken: false },
-      global: { fetch: (url, init) => fetch(url, { ...init, signal: AbortSignal.timeout(4000), cache: "no-store" }) },
-    });
+    const client = dbServizio();
+    if (!client) return false;
     const { error } = await client.rpc("dir_admin_inviti", { p_codice: codice });
     return !error;
   } catch {

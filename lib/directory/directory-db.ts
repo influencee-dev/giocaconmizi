@@ -1,6 +1,5 @@
-import { createClient } from "@supabase/supabase-js";
+import { dbServizio } from "@/lib/supabase/servizio";
 import { unstable_cache } from "next/cache";
-import { SUPABASE_ANON_KEY, SUPABASE_URL, supabaseConfigurato } from "@/lib/supabase/config";
 import type { Scheda } from "@/lib/directory/directory";
 import type { SchedaEstesa } from "@/lib/directory/scheda-campi";
 
@@ -12,15 +11,7 @@ import type { SchedaEstesa } from "@/lib/directory/scheda-campi";
  * sito pubblico non si rompe: le schede restano quelle di lib/directory/feste.ts.
  */
 
-const ATTESA_MS = 4000;
-
-function db() {
-  if (!supabaseConfigurato) return null;
-  return createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    auth: { persistSession: false, autoRefreshToken: false },
-    global: { fetch: (url, init) => fetch(url, { ...init, signal: AbortSignal.timeout(ATTESA_MS), cache: "no-store" }) },
-  });
-}
+const db = dbServizio;
 
 /** La chiave stabile di una scheda nel database: "città/slug". */
 export const chiaveScheda = (s: Pick<Scheda, "cittaSlug" | "slug">) => `${s.cittaSlug}/${s.slug}`;

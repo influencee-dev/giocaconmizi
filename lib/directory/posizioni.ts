@@ -1,8 +1,7 @@
-import { createClient } from "@supabase/supabase-js";
+import { dbServizio } from "@/lib/supabase/servizio";
 import { unstable_cache } from "next/cache";
 
 export const TAG_POSIZIONI = "posizioni";
-import { SUPABASE_ANON_KEY, SUPABASE_URL, supabaseConfigurato } from "@/lib/supabase/config";
 import { CENTRO_CITTA } from "@/lib/directory/coordinate-citta";
 
 /**
@@ -20,13 +19,7 @@ export interface Posizione {
   precisione: Precisione;
 }
 
-function db() {
-  if (!supabaseConfigurato) return null;
-  return createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    auth: { persistSession: false, autoRefreshToken: false },
-    global: { fetch: (url, init) => fetch(url, { ...init, signal: AbortSignal.timeout(4000), cache: "no-store" }) },
-  });
-}
+const db = dbServizio;
 
 /** Letta al massimo ogni 10 minuti (come le pagine ISR della directory); un errore non resta in cache. */
 const posizioniInCache = unstable_cache(
