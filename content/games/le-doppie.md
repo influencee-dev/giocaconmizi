@@ -23,6 +23,30 @@ Una frase con un buco e due parole quasi uguali: pala o palla, sete o sette, not
 - Battete le mani sulle sillabe: nella doppia la consonante si sente in tutte e due (pal-la, non-no).
 - Inventate voi altre coppie durante la giornata: «vuoi la pala o la palla?», «hai sete o hai sette anni?».
 
+## Parole con le doppie, lettera per lettera
+
+Un elenco da leggere ad alta voce, allungando la consonante doppia:
+
+- **BB:** babbo, gobba, nebbia, rabbia
+- **CC:** bocca, tacco, sacco, ricco
+- **DD:** freddo, addio, addizione
+- **FF:** baffi, caffè, buffo
+- **GG:** oggi, maggio, pioggia, leggere
+- **LL:** palla, gallina, stella, collo
+- **MM:** mamma, gomma, fiamma
+- **NN:** nonno, panna, gonna, nonna
+- **PP:** pappa, tappo, zuppa, coppa
+- **RR:** carro, terra, ferro, burro
+- **SS:** sasso, rosso, cassa, tosse
+- **TT:** gatto, letto, latte, tetto
+- **VV:** avviso, ovvio, avvocato
+- **ZZ:** pizza, pozzo, tazza, mazzo
+
+## Parole con due e tre doppie
+
+- **Due doppie:** pappagallo (PP e LL), cappello (PP e LL), caffettiera (FF e TT), carrozza (RR e ZZ), battello (TT e LL), pennello (NN e LL), mozzarella (ZZ e LL)
+- **Tre doppie:** carrozzella (RR, ZZ e LL), attaccapanni (TT, CC e NN)
+
 ## Domande frequenti
 
 **Perché i bambini sbagliano le doppie?**
